@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost/xtest251/" />
+<title>EditEvent</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">EditEvent</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/xtest251/modules/extcal/admin/event.php</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='xo-content']/fieldset[1]/fieldset[2]/table/tbody/tr[2]/td[5]/a[1]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>event_title</td>
+	<td>Event1Edited</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>event_desc</td>
+	<td>This is our first Event, and now it's being edited</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>document.forms[0].elements['rrule_freq'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rrule_weekly_interval</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>rrule_weekly_bydays1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>form_submit</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

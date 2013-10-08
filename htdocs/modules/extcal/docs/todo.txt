@@ -1,0 +1,23 @@
+To do list
+=============
+ - probleme de date dans la version anglaise
+ 
+
+ - Ajouter une purge des évennements par selecion de annees categories, ... a rapprocher du point précédent peut etre.
+
+ - modifie le message apres clonage d'un evenement "evenement supprimé avec succes".
+ 
+ - Ajouter un effet lightbox sur l'image du slidesow
+ Par contre quand on clique sur l'image dans un événement cela affiche l'image sur une nouvelle page : il n'y a pas effet "Ligth Box". Est-ce dû à mon xoops neuf(2.5.1). Y a-t-il une manip particulière à faire ? Ou est-ce prévu pour une prochaine version ?
+ 
+ - pourquoi n'avez vous pas prévu les notifications, en terme d'inscription (OUI je serai présent / NON je ne serai pas ), et désinscription ( passage d'un oui à un non, ou vice versa)
+
+
+
+ - inclure, un envoi de mail auto, la veille de l'évenement à des utilitateurs 
+   qui aurait coché l'option ?
+
+
+
+
+

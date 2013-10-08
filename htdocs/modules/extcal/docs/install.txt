@@ -1,0 +1,25 @@
+INSTALL/UNISTALL
+=================
+
+Important: Mise à jour version 2.25 et supérieure
+===================================================
+A partir de la version 2.25, des fichiers ont été renommés, ajoutés ou supprimés.
+Le modèle de données n'a pas été modifie.
+Le module nécéssite le framework 'moduleadmin' téléchargeable à cette adresse:
+http://xoops.svn.sourceforge.net/viewvc/xoops/XoopsModules/extcal/branches/mamba/?view=tar
+
+
+Pour mettre a jour le module:
+
+- Installer le framework moduleadmin si il ne l'est pas déjà
+- Ne pas désinstaller le module pour ne pas perdre les données actuelles (sauf si vous voulez réinitialiser les données))
+- Supprimer complétement le dossier 'extcal' du répertoire 'modules'
+- Copier le dossier extcal version 2.25 ou plus dans le répertoire 'modules'
+- Mettre à jour le modules extcal dans les options de xoops.
+- N'oubliez pas de paramétrer les nouvelles options dans les préférences du module.
+
+-------------------------------------------------------------
+pour une première installation:
+Installer le module selon la procédure standard de xoops;
+
+ http://xoops.svn.sourceforge.net/viewvc/xoops/XoopsModules/extcal/branches/mamba/?view=tar

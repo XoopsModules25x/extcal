@@ -1,0 +1,13 @@
+LANGUAGE DIFFERENCES
+=====================
+
+Below are language differences from a version to next version.
+
+modinfo.php:
+---------------------
+define('_MI_EXTCAL_EMAIL_MODE_DESC', 'Select Email Format that you want to use');
+define('_MI_EXTCAL_SHOW_OTHEROPTIONS', 'Other Options');
+
+blocks.php
+---------------------
+define('_MB_EXTCAL_UPCOMING_DAYS','# of Days to Include in Search');
