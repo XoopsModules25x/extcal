@@ -18,30 +18,36 @@
 **/
 
 //----------------------------------------------------
-class extcal_2_34{
+class extcal_2_34
+{
 //----------------------------------------------------
 
-function __construct(& $module, $options){
+    /**
+     * @param $module
+     * @param $options
+     */
+    function __construct(& $module, $options)
+{
 global $xoopsDB;
 
   $this->alterTable_etablissement();
 
 }
 //----------------------------------------------------
-function alterTable_etablissement(){
+function alterTable_etablissement()
+{
 global $xoopsDB;
   $tbl = $xoopsDB->prefix('extcal_etablissement');
-  
+
 $sql = <<<__sql__
-ALTER TABLE `{$tbl}` 
+ALTER TABLE `{$tbl}`
  CHANGE `desc` `description` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
 __sql__;
 
-  $xoopsDB->queryF($sql);  
-//echo "<hr>{$sql}<hr>";  
+  $xoopsDB->queryF($sql);
+//echo "<hr>{$sql}<hr>";
 }
 //----------------------------------------------------
 
 //-----------------------------------------------------------------
 }   // fin de la classe
-?>

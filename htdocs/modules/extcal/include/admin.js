@@ -19,9 +19,9 @@ function toggle(id) {
 }
 
 var iconClose = new Image();
-iconClose.src = '../images/icons/plus.gif';
+iconClose.src = '../assets/images/icons/plus.gif';
 var iconOpen = new Image();
-iconOpen.src = '../images/icons/minus.gif';
+iconOpen.src = '../assets/images/icons/minus.gif';
 
 function toggleIcon(iconName) {
     if (document.images[iconName].src == window.iconOpen.src) {

@@ -12,7 +12,7 @@ $start = getmicrotime();
 // Switch to PEAR::Date engine
 define('CALENDAR_ENGINE', 'PearDate');
 
-if (!@include 'Calendar'.DIRECTORY_SEPARATOR.'Calendar.php') {
+if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT','../../');
 }
 require_once CALENDAR_ROOT.'Month/Weekdays.php';

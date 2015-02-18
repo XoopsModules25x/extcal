@@ -7,7 +7,7 @@ if ( version_compare(phpversion(), "5.0.0", ">") ) {
         - remove @ before include below to see why');
 }
 
-if (!@include('SOAP'.DIRECTORY_SEPARATOR.'Client.php')) {
+if (!@include('SOAP/Client.php')) {
     die('You must have PEAR::SOAP installed');
 }
 
@@ -26,7 +26,7 @@ echo ( '<pre>'.$wsdl->generateProxyCode().'</pre>' );
 
 $calendarClient = $wsdl->getProxy();
 
-$month = $calendarClient->getMonth((int)$_GET['y'],(int)$_GET['m']);
+$month = $calendarClient->getMonth((int) $_GET['y'],(int) $_GET['m']);
 
 if ( PEAR::isError($month) ) {
     die ( $month->toString() );
@@ -45,11 +45,11 @@ if ( PEAR::isError($month) ) {
 <th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th><th>S</th>
 </tr>
 <?php
-foreach ( $month->days as $day ) {
+foreach ($month->days as $day) {
 
     if ( $day->isFirst === 1 )
         echo ( "<tr>\n" );
-    if ( $day->isEmpty === 1 ) {
+    if ($day->isEmpty === 1) {
         echo ( "<td></td>" );
     } else {
         echo ( "<td>".$day->day."</td>" );

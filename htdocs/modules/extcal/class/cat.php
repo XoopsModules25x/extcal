@@ -1,14 +1,14 @@
 <?php
 
-
-if (!defined("XOOPS_ROOT_PATH")) {
-    die("XOOPS root path not defined");
-}
+// defined("XOOPS_ROOT_PATH") || exit("XOOPS root path not defined");
 
 include_once XOOPS_ROOT_PATH . '/modules/extcal/class/ExtcalPersistableObjectHandler.php';
 include_once XOOPS_ROOT_PATH . '/modules/extcal/class/perm.php';
 include_once XOOPS_ROOT_PATH . '/modules/extcal/class/time.php';
 
+/**
+ * Class ExtcalCat
+ */
 class ExtcalCat extends XoopsObject
 {
 
@@ -26,17 +26,28 @@ class ExtcalCat extends XoopsObject
 
 }
 
+/**
+ * Class ExtcalCatHandler
+ */
 class ExtcalCatHandler extends ExtcalPersistableObjectHandler
 {
 
     var $_extcalPerm;
 
-    function ExtcalCatHandler(&$db)
+    /**
+     * @param $db
+     */
+    function __construct(&$db)
     {
         $this->_extcalPerm = ExtcalPerm::getHandler();
-        $this->ExtcalPersistableObjectHandler($db, 'extcal_cat', _EXTCAL_CLN_CAT, 'cat_id');
+        parent::__construct($db, 'extcal_cat', _EXTCAL_CLN_CAT, 'cat_id');
     }
 
+    /**
+     * @param $data
+     *
+     * @return bool
+     */
     function createCat($data)
     {
         $cat = $this->create();
@@ -47,7 +58,7 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
 
         // Retriving permission mask
         $groupPermissionHandler =& xoops_gethandler('groupperm');
-        $moduleId = $GLOBALS['xoopsModule']->getVar('mid');
+        $moduleId               = $GLOBALS['xoopsModule']->getVar('mid');
 
         $criteria = new CriteriaCompo();
         $criteria->add(new Criteria('gperm_name', 'extcal_perm_mask'));
@@ -56,7 +67,7 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
 
         // Retriving group list
         $memberHandler =& xoops_gethandler('member');
-        $glist = $memberHandler->getGroupList();
+        $glist         = $memberHandler->getGroupList();
 
         // Applying permission mask
         foreach (
@@ -83,13 +94,23 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
         return true;
     }
 
+    /**
+     * @param $catId
+     * @param $data
+     *
+     * @return bool
+     */
     function modifyCat($catId, $data)
     {
         $cat = $this->get($catId);
         $cat->setVars($data);
+
         return $this->insert($cat);
     }
 
+    /**
+     * @param $catId
+     */
     function deleteCat($catId)
     {
         /* TODO :
@@ -99,6 +120,12 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
     }
 
     // Return one cat selected by his id
+    /**
+     * @param      $catId
+     * @param bool $skipPerm
+     *
+     * @return bool
+     */
     function getCat($catId, $skipPerm = false)
     {
         $criteriaCompo = new CriteriaCompo();
@@ -114,15 +141,28 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
         }
     }
 
+    /**
+     * @param        $user
+     * @param string $perm
+     *
+     * @return array
+     */
     function getAllCat($user, $perm = 'extcal_cat_view')
     {
         $criteriaCompo = new CriteriaCompo();
         if ($perm != 'all') {
             $this->_addCatPermCriteria($criteriaCompo, $user, $perm);
         }
+
         return $this->getObjects($criteriaCompo);
     }
 
+    /**
+     * @param        $user
+     * @param string $perm
+     *
+     * @return array
+     */
     function getAllCatById($user, $perm = 'all')
     {
         $criteriaCompo = new CriteriaCompo();
@@ -132,16 +172,22 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
 
         $t = $this->objectToArray($this->getObjects($criteriaCompo));
         $r = array();
-        while (list($k,$v) = each ($t)){
-          $r[$v['cat_id']] = $v;
-          }
+        while (list($k, $v) = each($t)) {
+            $r[$v['cat_id']] = $v;
+        }
+
         return $r;
     }
-    
+
+    /**
+     * @param        $criteria
+     * @param        $user
+     * @param string $perm
+     */
     function _addCatPermCriteria(&$criteria, &$user, $perm = 'extcal_cat_view')
     {
         $authorizedAccessCats = $this->_extcalPerm->getAuthorizedCat($user, 'extcal_cat_view');
-        $count = count($authorizedAccessCats);
+        $count                = count($authorizedAccessCats);
         if ($count > 0) {
             $in = '(' . $authorizedAccessCats[0];
             array_shift($authorizedAccessCats);
@@ -157,12 +203,14 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
         }
     }
 
+    /**
+     * @param $xoopsUser
+     *
+     * @return bool
+     */
     function haveSubmitRight(&$xoopsUser)
     {
-        return
-            count($this->_extcalPerm->getAuthorizedCat($xoopsUser, 'extcal_cat_submit'))
-                > 0;
+        return count($this->_extcalPerm->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) > 0;
     }
 
 }
-?>

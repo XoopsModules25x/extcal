@@ -3,13 +3,15 @@
 * Description: generating elements of a form with PEAR::Calendar, using
 * selections as well as validating the submission
 */
-function getmicrotime(){
+function getmicrotime()
+{
     list($usec, $sec) = explode(" ",microtime());
-    return ((float)$usec + (float)$sec);
+
+    return ((float) $usec + (float) $sec);
 }
 $start = getmicrotime();
 
-if ( !@include 'Calendar/Calendar.php' ) {
+if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT','../../');
 }
 require_once CALENDAR_ROOT.'Year.php';

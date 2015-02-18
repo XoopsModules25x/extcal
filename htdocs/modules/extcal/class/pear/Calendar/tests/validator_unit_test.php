@@ -1,19 +1,25 @@
 <?php
 // $Id: validator_unit_test.php 1645 2011-12-30 20:03:00Z jjdai $
 
-require_once('simple_include.php');
-require_once('calendar_include.php');
+require_once 'simple_include.php';
+require_once 'calendar_include.php';
 
 Mock::generate('Calendar_Engine_Interface','Mock_Calendar_Engine');
 Mock::generate('Calendar_Second','Mock_Calendar_Second');
 
-class TestOfValidator extends UnitTestCase {
+/**
+ * Class TestOfValidator
+ */
+class TestOfValidator extends UnitTestCase
+{
     var $mockengine;
     var $mockcal;
-    function TestOfValidator() {
+    function TestOfValidator()
+    {
         $this->UnitTestCase('Test of Validator');
     }
-    function setUp() {
+    function setUp()
+    {
         $this->mockengine = new Mock_Calendar_Engine($this);
         $this->mockengine->setReturnValue('getMinYears',1970);
         $this->mockengine->setReturnValue('getMaxYears',2037);
@@ -25,101 +31,121 @@ class TestOfValidator extends UnitTestCase {
         $this->mockcal = new Mock_Calendar_Second($this);
         $this->mockcal->setReturnValue('getEngine',$this->mockengine);
     }
-    function tearDown() {
+    function tearDown()
+    {
         unset ($this->mockengine);
         unset ($this->mocksecond);
     }
-    function testIsValidYear() {
+    function testIsValidYear()
+    {
         $this->mockcal->setReturnValue('thisYear',2000);
         $Validator = new Calendar_Validator($this->mockcal);
         $this->assertTrue($Validator->isValidYear());
     }
-    function testIsValidYearTooSmall() {
+    function testIsValidYearTooSmall()
+    {
         $this->mockcal->setReturnValue('thisYear',1969);
         $Validator = new Calendar_Validator($this->mockcal);
         $this->assertFalse($Validator->isValidYear());
     }
-    function testIsValidYearTooLarge() {
+    function testIsValidYearTooLarge()
+    {
         $this->mockcal->setReturnValue('thisYear',2038);
         $Validator = new Calendar_Validator($this->mockcal);
         $this->assertFalse($Validator->isValidYear());
     }
-    function testIsValidMonth() {
+    function testIsValidMonth()
+    {
         $this->mockcal->setReturnValue('thisMonth',10);
         $Validator = new Calendar_Validator($this->mockcal);
         $this->assertTrue($Validator->isValidMonth());
     }
-    function testIsValidMonthTooSmall() {
+    function testIsValidMonthTooSmall()
+    {
         $this->mockcal->setReturnValue('thisMonth',0);
         $Validator = new Calendar_Validator($this->mockcal);
         $this->assertFalse($Validator->isValidMonth());
     }
-    function testIsValidMonthTooLarge() {
+    function testIsValidMonthTooLarge()
+    {
         $this->mockcal->setReturnValue('thisMonth',13);
         $Validator = new Calendar_Validator($this->mockcal);
         $this->assertFalse($Validator->isValidMonth());
     }
-    function testIsValidDay() {
+    function testIsValidDay()
+    {
         $this->mockcal->setReturnValue('thisDay',10);
         $Validator = new Calendar_Validator($this->mockcal);
         $this->assertTrue($Validator->isValidDay());
     }
-    function testIsValidDayTooSmall() {
+    function testIsValidDayTooSmall()
+    {
         $this->mockcal->setReturnValue('thisDay',0);
         $Validator = new Calendar_Validator($this->mockcal);
         $this->assertFalse($Validator->isValidDay());
     }
-    function testIsValidDayTooLarge() {
+    function testIsValidDayTooLarge()
+    {
         $this->mockcal->setReturnValue('thisDay',31);
         $Validator = new Calendar_Validator($this->mockcal);
         $this->assertFalse($Validator->isValidDay());
     }
-    function testIsValidHour() {
+    function testIsValidHour()
+    {
         $this->mockcal->setReturnValue('thisHour',10);
         $Validator = new Calendar_Validator($this->mockcal);
         $this->assertTrue($Validator->isValidHour());
     }
-    function testIsValidHourTooSmall() {
+    function testIsValidHourTooSmall()
+    {
         $this->mockcal->setReturnValue('thisHour',-1);
         $Validator = new Calendar_Validator($this->mockcal);
         $this->assertFalse($Validator->isValidHour());
     }
-    function testIsValidHourTooLarge() {
+    function testIsValidHourTooLarge()
+    {
         $this->mockcal->setReturnValue('thisHour',24);
         $Validator = new Calendar_Validator($this->mockcal);
         $this->assertFalse($Validator->isValidHour());
     }
-    function testIsValidMinute() {
+    function testIsValidMinute()
+    {
         $this->mockcal->setReturnValue('thisMinute',30);
         $Validator = new Calendar_Validator($this->mockcal);
         $this->assertTrue($Validator->isValidMinute());
     }
-    function testIsValidMinuteTooSmall() {
+    function testIsValidMinuteTooSmall()
+    {
         $this->mockcal->setReturnValue('thisMinute',-1);
         $Validator = new Calendar_Validator($this->mockcal);
         $this->assertFalse($Validator->isValidMinute());
     }
-    function testIsValidMinuteTooLarge() {
+    function testIsValidMinuteTooLarge()
+    {
         $this->mockcal->setReturnValue('thisMinute',_EXTCAL_TS_MINUTE);
         $Validator = new Calendar_Validator($this->mockcal);
         $this->assertFalse($Validator->isValidMinute());
     }
-    function testIsValidSecond() {
+    function testIsValidSecond()
+    {
         $this->mockcal->setReturnValue('thisSecond',30);
         $Validator = new Calendar_Validator($this->mockcal);
         $this->assertTrue($Validator->isValidSecond());
     }
-    function testIsValidSecondTooSmall() {
+    function testIsValidSecondTooSmall()
+    {
         $this->mockcal->setReturnValue('thisSecond',-1);
         $Validator = new Calendar_Validator($this->mockcal);
         $this->assertFalse($Validator->isValidSecond());
     }
-    function testIsValidSecondTooLarge() {
+    function testIsValidSecondTooLarge()
+    {
         $this->mockcal->setReturnValue('thisSecond',_EXTCAL_TS_MINUTE);
         $Validator = new Calendar_Validator($this->mockcal);
         $this->assertFalse($Validator->isValidSecond());
     }
-    function testIsValid() {
+    function testIsValid()
+    {
         $this->mockcal->setReturnValue('thisYear',2000);
         $this->mockcal->setReturnValue('thisMonth',5);
         $this->mockcal->setReturnValue('thisDay',15);
@@ -129,7 +155,8 @@ class TestOfValidator extends UnitTestCase {
         $Validator = new Calendar_Validator($this->mockcal);
         $this->assertTrue($Validator->isValid());
     }
-    function testIsValidAllWrong() {
+    function testIsValidAllWrong()
+    {
         $this->mockcal->setReturnValue('thisYear',2038);
         $this->mockcal->setReturnValue('thisMonth',13);
         $this->mockcal->setReturnValue('thisDay',31);
@@ -141,60 +168,73 @@ class TestOfValidator extends UnitTestCase {
         $this->assertFalse($Validator->isValid());
         $i = 0;
         while ( $Validator->fetch() ) {
-            $i++;
+            ++$i;
         }
         $this->assertEqual($i,6);
     }
 }
 
-class TestOfValidatorLive extends UnitTestCase {
-    function TestOfValidatorLive() {
+/**
+ * Class TestOfValidatorLive
+ */
+class TestOfValidatorLive extends UnitTestCase
+{
+    function TestOfValidatorLive()
+    {
         $this->UnitTestCase('Test of Validator Live');
     }
-    function testYear() {
+    function testYear()
+    {
         $Unit = new Calendar_Year(2038);
         $Validator = & $Unit->getValidator();
         $this->assertFalse($Validator->isValidYear());
     }
-    function testMonth() {
+    function testMonth()
+    {
         $Unit = new Calendar_Month(2000,13);
         $Validator = & $Unit->getValidator();
         $this->assertFalse($Validator->isValidMonth());
     }
 /*
-    function testWeek() {
+    function testWeek()
+    {
         $Unit = new Calendar_Week(2000,12,7);
         $Validator = & $Unit->getValidator();
         $this->assertFalse($Validator->isValidWeek());
     }
 */
-    function testDay() {
+    function testDay()
+    {
         $Unit = new Calendar_Day(2000,12,32);
         $Validator = & $Unit->getValidator();
         $this->assertFalse($Validator->isValidDay());
     }
-    function testHour() {
+    function testHour()
+    {
         $Unit = new Calendar_Hour(2000,12,20,24);
         $Validator = & $Unit->getValidator();
         $this->assertFalse($Validator->isValidHour());
     }
-    function testMinute() {
+    function testMinute()
+    {
         $Unit = new Calendar_Minute(2000,12,20,23,_EXTCAL_TS_MINUTE);
         $Validator = & $Unit->getValidator();
         $this->assertFalse($Validator->isValidMinute());
     }
-    function testSecond() {
+    function testSecond()
+    {
         $Unit = new Calendar_Second(2000,12,20,23,59,_EXTCAL_TS_MINUTE);
         $Validator = & $Unit->getValidator();
         $this->assertFalse($Validator->isValidSecond());
     }
-    function testAllBad() {
+    function testAllBad()
+    {
         $Unit = new Calendar_Second(2000,13,32,24,_EXTCAL_TS_MINUTE,_EXTCAL_TS_MINUTE);
         $this->assertFalse($Unit->isValid());
         $Validator = & $Unit->getValidator();
         $i = 0;
         while ( $Validator->fetch() ) {
-            $i++;
+            ++$i;
         }
         $this->assertEqual($i,5);
     }
@@ -207,4 +247,3 @@ if (!defined('TEST_RUNNING')) {
     $test = new TestOfValidatorLive();
     $test->run(new HtmlReporter());
 }
-?>

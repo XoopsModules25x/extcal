@@ -3,7 +3,7 @@
 * Description: demonstrates a decorator used to "attach a payload" to a selection
 * to make it available when iterating over calendar children
 */
-if ( !@include 'Calendar/Calendar.php' ) {
+if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT','../../');
 }
 require_once CALENDAR_ROOT.'Day.php';
@@ -11,15 +11,30 @@ require_once CALENDAR_ROOT.'Hour.php';
 require_once CALENDAR_ROOT.'Decorator.php';
 
 // Decorator to "attach" functionality to selected hours
-class DiaryEvent extends Calendar_Decorator {
+/**
+ * Class DiaryEvent
+ */
+class DiaryEvent extends Calendar_Decorator
+{
     var $entry;
-    function DiaryEvent($calendar) {
+
+    /**
+     * @param $calendar
+     */
+    function DiaryEvent($calendar)
+    {
         Calendar_Decorator::Calendar_Decorator($calendar);
     }
-    function setEntry($entry) {
+
+    /**
+     * @param $entry
+     */
+    function setEntry($entry)
+    {
         $this->entry = $entry;
     }
-    function getEntry() {
+    function getEntry()
+    {
         return $this->entry;
     }
 }
@@ -49,7 +64,7 @@ $result = array (
 $selection = array();
 
 // Loop through the "database result"
-foreach ( $result as $row ) {
+foreach ($result as $row) {
     $Hour = new Calendar_Hour(2000,1,1,1); // Create Hour with dummy values
     $Hour->setTimeStamp($row['eventtime']); // Set the real time with setTimeStamp
 
@@ -86,7 +101,7 @@ while ( $Hour = & $Day->fetch() ) {
     $minute = $Hour->thisMinute();
 
     // Office hours only...
-    if ( $hour >= 8 && $hour <= 18 ) {
+    if ($hour >= 8 && $hour <= 18) {
         echo ( "<tr>\n" );
         echo ( "<td>$hour:$minute</td>\n" );
 

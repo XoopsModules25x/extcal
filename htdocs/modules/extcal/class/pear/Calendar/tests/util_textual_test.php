@@ -1,18 +1,24 @@
 <?php
 // $Id: util_textual_test.php 1511 2011-09-01 20:56:07Z jjdai $
 
-require_once('simple_include.php');
-require_once('calendar_include.php');
+require_once 'simple_include.php';
+require_once 'calendar_include.php';
 
-require_once('./decorator_test.php');
+require_once './decorator_test.php';
 
-class TestOfUtilTextual extends UnitTestCase {
+/**
+ * Class TestOfUtilTextual
+ */
+class TestOfUtilTextual extends UnitTestCase
+{
     var $mockengine;
     var $mockcal;
-    function TestOfUtilTextual() {
+    function TestOfUtilTextual()
+    {
         $this->UnitTestCase('Test of Calendar_Util_Textual');
     }
-    function setUp() {
+    function setUp()
+    {
         $this->mockengine = new Mock_Calendar_Engine($this);
         $this->mockcal = new Mock_Calendar_Second($this);
         $this->mockcal->setReturnValue('prevYear',2002);
@@ -36,11 +42,13 @@ class TestOfUtilTextual extends UnitTestCase {
         $this->mockcal->setReturnValue('getEngine',$this->mockengine);
         $this->mockcal->setReturnValue('getTimestamp',12345);
     }
-    function tearDown() {
+    function tearDown()
+    {
         unset ( $this->engine );
         unset ( $this->mockcal );
-    }    
-    function testMonthNamesLong() {
+    }
+    function testMonthNamesLong()
+    {
         $monthNames = array(
             1=>'January',
             2=>'February',
@@ -57,7 +65,8 @@ class TestOfUtilTextual extends UnitTestCase {
         );
         $this->assertEqual($monthNames,Calendar_Util_Textual::monthNames());
     }
-    function testMonthNamesShort() {
+    function testMonthNamesShort()
+    {
         $monthNames = array(
             1=>'Jan',
             2=>'Feb',
@@ -74,7 +83,8 @@ class TestOfUtilTextual extends UnitTestCase {
         );
         $this->assertEqual($monthNames,Calendar_Util_Textual::monthNames('short'));
     }
-    function testMonthNamesTwo() {
+    function testMonthNamesTwo()
+    {
         $monthNames = array(
             1=>'Ja',
             2=>'Fe',
@@ -91,7 +101,8 @@ class TestOfUtilTextual extends UnitTestCase {
         );
         $this->assertEqual($monthNames,Calendar_Util_Textual::monthNames('two'));
     }
-    function testMonthNamesOne() {
+    function testMonthNamesOne()
+    {
         $monthNames = array(
             1=>'J',
             2=>'F',
@@ -108,7 +119,8 @@ class TestOfUtilTextual extends UnitTestCase {
         );
         $this->assertEqual($monthNames,Calendar_Util_Textual::monthNames('one'));
     }
-    function testWeekdayNamesLong() {
+    function testWeekdayNamesLong()
+    {
         $weekdayNames = array(
             0=>'Sunday',
             1=>'Monday',
@@ -120,7 +132,8 @@ class TestOfUtilTextual extends UnitTestCase {
         );
         $this->assertEqual($weekdayNames,Calendar_Util_Textual::weekdayNames());
     }
-    function testWeekdayNamesShort() {
+    function testWeekdayNamesShort()
+    {
         $weekdayNames = array(
             0=>'Sun',
             1=>'Mon',
@@ -132,7 +145,8 @@ class TestOfUtilTextual extends UnitTestCase {
         );
         $this->assertEqual($weekdayNames,Calendar_Util_Textual::weekdayNames('short'));
     }
-    function testWeekdayNamesTwo() {
+    function testWeekdayNamesTwo()
+    {
         $weekdayNames = array(
             0=>'Su',
             1=>'Mo',
@@ -144,7 +158,8 @@ class TestOfUtilTextual extends UnitTestCase {
         );
         $this->assertEqual($weekdayNames,Calendar_Util_Textual::weekdayNames('two'));
     }
-    function testWeekdayNamesOne() {
+    function testWeekdayNamesOne()
+    {
         $weekdayNames = array(
             0=>'S',
             1=>'M',
@@ -156,19 +171,24 @@ class TestOfUtilTextual extends UnitTestCase {
         );
         $this->assertEqual($weekdayNames,Calendar_Util_Textual::weekdayNames('one'));
     }
-    function testPrevMonthNameShort() {
+    function testPrevMonthNameShort()
+    {
         $this->assertEqual('Sep',Calendar_Util_Textual::prevMonthName($this->mockcal,'short'));
     }
-    function testThisMonthNameShort() {
+    function testThisMonthNameShort()
+    {
         $this->assertEqual('Oct',Calendar_Util_Textual::thisMonthName($this->mockcal,'short'));
     }
-    function testNextMonthNameShort() {
+    function testNextMonthNameShort()
+    {
         $this->assertEqual('Nov',Calendar_Util_Textual::nextMonthName($this->mockcal,'short'));
     }
-    function testThisDayNameShort() {
+    function testThisDayNameShort()
+    {
         $this->assertEqual('Wed',Calendar_Util_Textual::thisDayName($this->mockcal,'short'));
     }
-    function testOrderedWeekdaysShort() {
+    function testOrderedWeekdaysShort()
+    {
         $weekdayNames = array(
             0=>'Sun',
             1=>'Mon',
@@ -193,4 +213,3 @@ if (!defined('TEST_RUNNING')) {
     $test = new TestOfUtilTextual();
     $test->run(new HtmlReporter());
 }
-?>

@@ -42,7 +42,7 @@
  * @ignore
  */
 if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
+    define('CALENDAR_ROOT', 'Calendar/');
 }
 
 /**
@@ -92,6 +92,7 @@ class Calendar_Decorator_Wrapper extends Calendar_Decorator
         } else {
             $ret = false;
         }
+
         return $ret;
     }
 
@@ -109,7 +110,7 @@ class Calendar_Decorator_Wrapper extends Calendar_Decorator
         foreach ($children as $key => $Calendar) {
             $children[$key] = new $decorator($Calendar);
         }
+
         return $children;
     }
 }
-?>

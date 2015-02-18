@@ -41,7 +41,7 @@
  * @ignore
  */
 if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
+    define('CALENDAR_ROOT', 'Calendar/');
 }
 
 /**
@@ -135,6 +135,7 @@ class Calendar_Month_Weekdays extends Calendar_Month
         $this->shiftDays();
         $this->buildEmptyDaysAfter();
         $this->setWeekMarkers();
+
         return true;
     }
 
@@ -144,10 +145,10 @@ class Calendar_Month_Weekdays extends Calendar_Month
      * @return void
      * @access private
      */
-    function buildEmptyDaysBefore()
+    static function buildEmptyDaysBefore()
     {
         $eBefore = $this->tableHelper->getEmptyDaysBefore();
-        for ($i=0; $i < $eBefore; $i++) {
+        for ($i=0; $i < $eBefore; ++$i) {
             $stamp = $this->cE->dateToStamp($this->year, $this->month, -$i);
             $Day = new Calendar_Day(
                                 $this->cE->stampToYear($stamp),
@@ -165,7 +166,7 @@ class Calendar_Month_Weekdays extends Calendar_Month
      * @return void
      * @access private
      */
-    function shiftDays()
+    static function shiftDays()
     {
         if (isset($this->children[0])) {
             array_unshift($this->children, null);
@@ -179,11 +180,11 @@ class Calendar_Month_Weekdays extends Calendar_Month
      * @return void
      * @access private
      */
-    function buildEmptyDaysAfter()
+    static function buildEmptyDaysAfter()
     {
         $eAfter = $this->tableHelper->getEmptyDaysAfter();
         $sDOM   = $this->tableHelper->getNumTableDaysInMonth();
-        for ($i=1; $i <= $sDOM-$eAfter; $i++) {
+        for ($i=1; $i <= $sDOM-$eAfter; ++$i) {
             $Day = new Calendar_Day($this->year, $this->month+1, $i);
             $Day->setEmpty();
             $Day->adjust();
@@ -198,7 +199,7 @@ class Calendar_Month_Weekdays extends Calendar_Month
      * @return void
      * @access private
      */
-    function setWeekMarkers()
+    static function setWeekMarkers()
     {
         $dIW = $this->cE->getDaysInWeek(
             $this->thisYear(),
@@ -212,4 +213,3 @@ class Calendar_Month_Weekdays extends Calendar_Month
         }
     }
 }
-?>

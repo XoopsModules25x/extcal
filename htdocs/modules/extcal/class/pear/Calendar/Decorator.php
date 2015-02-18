@@ -331,6 +331,7 @@ class Calendar_Decorator
     function & getValidator()
     {
         $validator = $this->calendar->getValidator();
+
         return $validator;
     }
 
@@ -344,6 +345,7 @@ class Calendar_Decorator
     function & getEngine()
     {
         $engine = $this->calendar->getEngine();
+
         return $engine;
     }
 
@@ -443,6 +445,7 @@ class Calendar_Decorator
                 'Cannot call prevWeek on Calendar object of type: '.
                 get_class($this->calendar), 133, PEAR_ERROR_TRIGGER,
                 E_USER_NOTICE, 'Calendar_Decorator::prevWeek()');
+
             return false;
         }
     }
@@ -465,6 +468,7 @@ class Calendar_Decorator
                 'Cannot call thisWeek on Calendar object of type: '.
                 get_class($this->calendar), 133, PEAR_ERROR_TRIGGER,
                 E_USER_NOTICE, 'Calendar_Decorator::thisWeek()');
+
             return false;
         }
     }
@@ -487,6 +491,7 @@ class Calendar_Decorator
                 'Cannot call thisWeek on Calendar object of type: '.
                 get_class($this->calendar), 133, PEAR_ERROR_TRIGGER,
                 E_USER_NOTICE, 'Calendar_Decorator::nextWeek()');
+
             return false;
         }
     }
@@ -647,4 +652,3 @@ class Calendar_Decorator
         return $this->calendar->nextSecond($format);
     }
 }
-?>

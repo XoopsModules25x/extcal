@@ -1,7 +1,7 @@
 <?php
 
-include '../../mainfile.php';
-include_once ('include/constantes.php');
+include dirname(dirname(__DIR__)) . '/mainfile.php';
+include_once __DIR__ . '/include/constantes.php';
 
 if (!isset($_GET['file'])) {
     $fileId = 0;
@@ -20,4 +20,3 @@ header(
 );
 
 readfile(XOOPS_ROOT_PATH . "/uploads/extcal/" . $file->getVar('file_name'));
-?>

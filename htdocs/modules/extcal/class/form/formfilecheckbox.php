@@ -1,8 +1,16 @@
 <?php
 
+/**
+ * Class ExtcalFormFileCheckBox
+ */
 class ExtcalFormFileCheckBox extends XoopsFormCheckBox
 {
 
+    /**
+     * @param      $caption
+     * @param      $name
+     * @param null $value
+     */
     function ExtcalFormFileCheckBox($caption, $name, $value = null)
     {
         $this->XoopsFormCheckBox($caption, $name, $value);
@@ -11,7 +19,7 @@ class ExtcalFormFileCheckBox extends XoopsFormCheckBox
     /**
      * prepare HTML for output
      *
-     * @return    string
+     * @return string
      */
     function render()
     {
@@ -23,18 +31,15 @@ class ExtcalFormFileCheckBox extends XoopsFormCheckBox
             $this->setName($newname);
         }
         foreach (
-            $this->getOptions() as $value
-            => $name
+            $this->getOptions() as $value => $name
         ) {
             $ret
-                .=
-                "<input type='checkbox' name='" . $this->getName() . "' value='"
-                    . $value . "'";
+                .= "<input type='checkbox' name='" . $this->getName() . "' value='" . $value . "'";
             $ret .= " checked='checked'";
             $ret .= $this->getExtra() . " />" . $name . "<br />\n";
         }
+
         return $ret;
     }
 
 }
-?>

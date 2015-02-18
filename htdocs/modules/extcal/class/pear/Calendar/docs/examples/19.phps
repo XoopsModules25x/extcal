@@ -2,7 +2,7 @@
 /**
 * Description: demonstrates using the Weekday decorator
 */
-if (!@include 'Calendar'.DIRECTORY_SEPARATOR.'Calendar.php') {
+if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 require_once CALENDAR_ROOT.'Day.php';

@@ -1,14 +1,13 @@
 <?php
 
+// defined("XOOPS_ROOT_PATH") || exit("XOOPS root path not defined");
 
-if (!defined("XOOPS_ROOT_PATH")) {
-    die("XOOPS root path not defined");
-}
-
-include_once XOOPS_ROOT_PATH
-    . '/modules/extcal/class/ExtcalPersistableObjectHandler.php';
+include_once XOOPS_ROOT_PATH . '/modules/extcal/class/ExtcalPersistableObjectHandler.php';
 include_once XOOPS_ROOT_PATH . '/class/uploader.php';
 
+/**
+ * Class ExtcalFile
+ */
 class ExtcalFile extends XoopsObject
 {
 
@@ -28,22 +27,32 @@ class ExtcalFile extends XoopsObject
 
 }
 
+/**
+ * Class ExtcalFileHandler
+ */
 class ExtcalFileHandler extends ExtcalPersistableObjectHandler
 {
 
-    function ExtcalFileHandler(&$db)
+    /**
+     * @param $db
+     */
+    function __construct(&$db)
     {
-        $this->ExtcalPersistableObjectHandler($db, 'extcal_file', _EXTCAL_CLN_FILE, 'file_id');
+        parent::__construct($db, 'extcal_file', _EXTCAL_CLN_FILE, 'file_id');
     }
 
+    /**
+     * @param $eventId
+     *
+     * @return bool
+     */
     function createFile($eventId)
     {
 
-        $userId = ($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getVar('uid')
-            : 0;
+        $userId = ($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getVar('uid') : 0;
 
         $allowedMimeType = array();
-        $mimeType = include(XOOPS_ROOT_PATH . '/include/mimetypes.inc.php');
+        $mimeType        = include(XOOPS_ROOT_PATH . '/include/mimetypes.inc.php');
         foreach (
             $GLOBALS['xoopsModuleConfig']['allowed_file_extention'] as $fileExt
         ) {
@@ -51,7 +60,8 @@ class ExtcalFileHandler extends ExtcalPersistableObjectHandler
         }
 
         $uploader = new XoopsMediaUploader(
-            XOOPS_ROOT_PATH . '/uploads/extcal', $allowedMimeType, 3145728);
+            XOOPS_ROOT_PATH . '/uploads/extcal', $allowedMimeType, 3145728
+        );
         $uploader->setPrefix($userId . '-' . $eventId . '_');
         if ($uploader->fetchMedia('event_file')) {
             if (!$uploader->upload()) {
@@ -62,20 +72,36 @@ class ExtcalFileHandler extends ExtcalPersistableObjectHandler
         }
 
         $data = array(
-            'file_name' => $uploader->getSavedFileName(), 'file_nicename' => $uploader->getMediaName(), 'file_mimetype' => $uploader->getMediaType(), 'file_size' => $_FILES['event_file']['size'], 'file_date' => time(), 'file_approved' => 1, 'event_id' => $eventId, 'uid' => $userId
+            'file_name'     => $uploader->getSavedFileName(),
+            'file_nicename' => $uploader->getMediaName(),
+            'file_mimetype' => $uploader->getMediaType(),
+            'file_size'     => $_FILES['event_file']['size'],
+            'file_date'     => time(),
+            'file_approved' => 1,
+            'event_id'      => $eventId,
+            'uid'           => $userId
         );
 
         $file = $this->create();
         $file->setVars($data);
+
         return $this->insert($file);
     }
 
+    /**
+     * @param $file
+     */
     function deleteFile(&$file)
     {
         $this->_deleteFile($file);
         $this->delete($file->getVar('file_id'));
     }
 
+    /**
+     * @param $eventId
+     *
+     * @return array
+     */
     function getEventFiles($eventId)
     {
         $criteria = new CriteriaCompo();
@@ -85,6 +111,9 @@ class ExtcalFileHandler extends ExtcalPersistableObjectHandler
         return $this->getObjects($criteria);
     }
 
+    /**
+     * @param $eventId
+     */
     function updateEventFile($eventId)
     {
         $criteria = new CriteriaCompo();
@@ -94,7 +123,7 @@ class ExtcalFileHandler extends ExtcalPersistableObjectHandler
         if (isset($_POST['filetokeep'])) {
             if (is_array($_POST['filetokeep'])) {
                 $count = count($_POST['filetokeep']);
-                $in = '(' . $_POST['filetokeep'][0];
+                $in    = '(' . $_POST['filetokeep'][0];
                 array_shift($_POST['filetokeep']);
                 foreach (
                     $_POST['filetokeep'] as $elmt
@@ -116,20 +145,31 @@ class ExtcalFileHandler extends ExtcalPersistableObjectHandler
         }
     }
 
+    /**
+     * @param $fileId
+     *
+     * @return mixed
+     */
     function getFile($fileId)
     {
         return $this->get($fileId);
     }
 
+    /**
+     * @param $files
+     */
     function formatFilesSize(&$files)
     {
         for (
-            $i = 0; $i < count($files); $i++
+            $i = 0; $i < count($files); ++$i
         ) {
             $this->formatFileSize($files[$i]);
         }
     }
 
+    /**
+     * @param $file
+     */
     function formatFileSize(&$file)
     {
         if ($file['file_size'] > 1000) {
@@ -140,18 +180,18 @@ class ExtcalFileHandler extends ExtcalPersistableObjectHandler
         }
     }
 
+    /**
+     * @param $file
+     */
     function _deleteFile(&$file)
     {
         if (file_exists(
             XOOPS_ROOT_PATH . "/uploads/extcal/" . $file->getVar('file_name')
-        )
-        ) {
+        )) {
             unlink(
-                XOOPS_ROOT_PATH . "/uploads/extcal/"
-                    . $file->getVar('file_name')
+                XOOPS_ROOT_PATH . "/uploads/extcal/" . $file->getVar('file_name')
             );
         }
     }
 
 }
-?>

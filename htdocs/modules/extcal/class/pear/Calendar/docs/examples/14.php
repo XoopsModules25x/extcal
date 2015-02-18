@@ -3,16 +3,18 @@
 * Description: same as 3.php, but using the PEAR::Date engine
 * Note: make sure PEAR::Date is a stable release!!!
 */
-function getmicrotime(){
+function getmicrotime()
+{
     list($usec, $sec) = explode(" ",microtime());
-    return ((float)$usec + (float)$sec);
+
+    return ((float) $usec + (float) $sec);
 }
 $start = getmicrotime();
 
 // Switch to PEAR::Date engine
 define('CALENDAR_ENGINE', 'PearDate');
 
-if (!@include 'Calendar'.DIRECTORY_SEPARATOR.'Calendar.php') {
+if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT','../../');
 }
 require_once CALENDAR_ROOT.'Month/Weekdays.php';
@@ -53,9 +55,9 @@ table {
     background-color: silver;
 }
 caption {
-    font-family: verdana;
+    font-family: verdana, sans-serif;
     font-size: 12px;
-    background-color: while;
+    background-color: white;
 }
 .prevMonth {
     font-size: 10px;
@@ -66,13 +68,13 @@ caption {
     text-align: right;
 }
 th {
-    font-family: verdana;
+    font-family: verdana, sans-serif;
     font-size: 11px;
     color: navy;
     text-align: right;
 }
 td {
-    font-family: verdana;
+    font-family: verdana, sans-serif;
     font-size: 11px;
     text-align: right;
 }
@@ -112,7 +114,7 @@ while ($day = $month->fetch()) {
 
     if ($day->isSelected()) {
        echo '<td class="selected">'.$day->thisDay().'</td>'."\n";
-    } else if ($day->isEmpty()) {
+    } elseif ($day->isEmpty()) {
         echo '<td>&nbsp;</td>'."\n";
     } else {
         echo '<td><a href="'.$link.'">'.$day->thisDay().'</a></td>'."\n";

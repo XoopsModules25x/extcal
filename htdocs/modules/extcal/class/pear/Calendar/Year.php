@@ -41,7 +41,7 @@
  * @ignore
  */
 if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
+    define('CALENDAR_ROOT', 'Calendar/');
 }
 
 /**
@@ -52,7 +52,7 @@ require_once CALENDAR_ROOT.'Calendar.php';
 /**
  * Represents a Year and builds Months<br>
  * <code>
- * require_once 'Calendar'.DIRECTORY_SEPARATOR.'Year.php';
+ * require_once 'Calendar/Year.php';
  * $Year = new Calendar_Year(2003, 10, 21); // 21st Oct 2003
  * $Year->build(); // Build Calendar_Month objects
  * while ($Month = & $Year->fetch()) {
@@ -107,12 +107,13 @@ class Calendar_Year extends Calendar
         include_once CALENDAR_ROOT.'Factory.php';
         $this->firstDay = $this->defineFirstDayOfWeek($firstDay);
         $monthsInYear   = $this->cE->getMonthsInYear($this->thisYear());
-        for ($i=1; $i <= $monthsInYear; $i++) {
+        for ($i=1; $i <= $monthsInYear; ++$i) {
             $this->children[$i] = Calendar_Factory::create('Month', $this->year, $i);
         }
         if (count($sDates) > 0) {
             $this->setSelection($sDates);
         }
+
         return true;
     }
 
@@ -124,7 +125,7 @@ class Calendar_Year extends Calendar
      * @return void
      * @access private
      */
-    function setSelection($sDates) 
+    function setSelection($sDates)
     {
         foreach ($sDates as $sDate) {
             if ($this->year == $sDate->thisYear()) {
@@ -137,4 +138,3 @@ class Calendar_Year extends Calendar
         }
     }
 }
-?>

@@ -42,7 +42,7 @@
  * @ignore
  */
 if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
+    define('CALENDAR_ROOT', 'Calendar/');
 }
 
 /**
@@ -53,7 +53,7 @@ require_once CALENDAR_ROOT.'Decorator.php';
 /**
  * Load the Uri utility
  */
-require_once CALENDAR_ROOT.'Util'.DIRECTORY_SEPARATOR.'Uri.php';
+require_once CALENDAR_ROOT.'Util/Uri.php';
 
 /**
  * Decorator to help with building HTML links for navigating the calendar<br />
@@ -180,4 +180,3 @@ class Calendar_Decorator_Uri extends Calendar_Decorator
         return $this->Uri->next($this, $method);
     }
 }
-?>

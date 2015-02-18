@@ -41,7 +41,7 @@
  * @ignore
  */
 if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
+    define('CALENDAR_ROOT', 'Calendar/');
 }
 
 /**
@@ -83,7 +83,6 @@ class Calendar_Day extends Calendar
      */
     var $last = false;
 
-
     /**
      * Used for tabular calendars
      * @access private
@@ -118,13 +117,14 @@ class Calendar_Day extends Calendar
         include_once CALENDAR_ROOT.'Hour.php';
 
         $hID = $this->cE->getHoursInDay($this->year, $this->month, $this->day);
-        for ($i=0; $i < $hID; $i++) {
+        for ($i=0; $i < $hID; ++$i) {
             $this->children[$i] =
                 new Calendar_Hour($this->year, $this->month, $this->day, $i);
         }
         if (count($sDates) > 0) {
             $this->setSelection($sDates);
         }
+
         return true;
     }
 
@@ -143,7 +143,7 @@ class Calendar_Day extends Calendar
                 && $this->month == $sDate->thisMonth()
                 && $this->day == $sDate->thisDay())
             {
-                $key = (int)$sDate->thisHour();
+                $key = (int) $sDate->thisHour();
                 if (isset($this->children[$key])) {
                     $sDate->setSelected();
                     $this->children[$key] = $sDate;
@@ -187,7 +187,7 @@ class Calendar_Day extends Calendar
      * @return boolean
      * @access public
      */
-    function isFirst() 
+    function isFirst()
     {
         return $this->first;
     }
@@ -229,4 +229,3 @@ class Calendar_Day extends Calendar
         return $this->empty;
     }
 }
-?>

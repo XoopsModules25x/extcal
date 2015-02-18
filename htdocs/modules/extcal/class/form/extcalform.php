@@ -5,13 +5,16 @@ include XOOPS_ROOT_PATH . '/modules/extcal/class/form/formrecurrules.php';
 include XOOPS_ROOT_PATH . '/modules/extcal/class/form/formfilecheckbox.php';
 include XOOPS_ROOT_PATH . '/modules/extcal/class/form/formrrulecheckbox.php';
 
+/**
+ * Class ExtcalThemeForm
+ */
 class ExtcalThemeForm extends XoopsThemeForm
 {
 
     /**
      * create HTML to output the form as a theme-enabled table with validation.
      *
-     * @return    string
+     * @return string
      */
     function render()
     {
@@ -32,7 +35,7 @@ class ExtcalThemeForm extends XoopsThemeForm
         $ret .= "var endDateArray = endDateString.split(pattern);\n";
         $ret .= "var endDate = new Date(endDateArray[0], endDateArray[2], endDateArray[1]);\n";
 
-        $ret .= "if((startDate.getTime() + startTimeSelect.options[startTimeSelect.selectedIndex].value) > (endDate.getTime() + endTimeSelect.options[endTimeSelect.selectedIndex].value)) {\n";
+        $ret .= "if ((startDate.getTime() + startTimeSelect.options[startTimeSelect.selectedIndex].value) > (endDate.getTime() + endTimeSelect.options[endTimeSelect.selectedIndex].value)) {\n";
         $ret .= "endDateInput.value = startDateInput.value;\n";
         $ret .= "endTimeSelect.selectedIndex = startTimeSelect.selectedIndex;\n";
         $ret .= "}\n";
@@ -46,4 +49,3 @@ class ExtcalThemeForm extends XoopsThemeForm
     }
 
 }
-?>

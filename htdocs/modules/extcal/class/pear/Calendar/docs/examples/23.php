@@ -3,23 +3,23 @@
 * Description: demonstrates using the Textual util
 */
 
-if (!@include 'Calendar'.DIRECTORY_SEPARATOR.'Calendar.php') {
+if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 require_once CALENDAR_ROOT.'Day.php';
-require_once CALENDAR_ROOT.'Month'.DIRECTORY_SEPARATOR.'Weekdays.php';
-require_once CALENDAR_ROOT.'Util'.DIRECTORY_SEPARATOR.'Textual.php';
+require_once CALENDAR_ROOT.'Month/Weekdays.php';
+require_once CALENDAR_ROOT.'Util/Textual.php';
 
 // Could change language like this
 // setlocale (LC_TIME, "de_DE"); // Unix based (probably)
 // setlocale (LC_TIME, "ge"); // Windows
 
 echo "<hr>Calling: Calendar_Util_Textual::monthNames('long');<pre>";
-print_r(Calendar_Util_Textual::monthNames('long'));
+//print_r(Calendar_Util_Textual::monthNames('long'));
 echo '</pre>';
 
 echo "<hr>Calling: Calendar_Util_Textual::weekdayNames('two');<pre>";
-print_r(Calendar_Util_Textual::weekdayNames('two'));
+//print_r(Calendar_Util_Textual::weekdayNames('two'));
 echo '</pre>';
 
 echo "<hr>Creating: new Calendar_Day(date('Y'), date('n'), date('d'));<br />";

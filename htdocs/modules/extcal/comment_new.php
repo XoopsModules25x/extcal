@@ -25,7 +25,7 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 
-include '../../mainfile.php';
+include dirname(dirname(__DIR__)) . '/mainfile.php';
 $com_itemid = isset($_GET['com_itemid']) ? intval($_GET['com_itemid']) : 0;
 if ($com_itemid > 0) {
     // Get link title
@@ -38,4 +38,3 @@ if ($com_itemid > 0) {
     $com_replytext = $row['event_desc'];
     include XOOPS_ROOT_PATH . '/include/comment_new.php';
 }
-?>

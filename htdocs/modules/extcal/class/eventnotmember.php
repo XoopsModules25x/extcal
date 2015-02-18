@@ -1,12 +1,12 @@
 <?php
 
-if (!defined("XOOPS_ROOT_PATH")) {
-    die("XOOPS root path not defined");
-}
+// defined("XOOPS_ROOT_PATH") || exit("XOOPS root path not defined");
 
-include_once XOOPS_ROOT_PATH
-    . '/modules/extcal/class/ExtcalPersistableObjectHandler.php';
+include_once XOOPS_ROOT_PATH . '/modules/extcal/class/ExtcalPersistableObjectHandler.php';
 
+/**
+ * Class ExtcalEventnotmember
+ */
 class ExtcalEventnotmember extends XoopsObject
 {
 
@@ -19,14 +19,23 @@ class ExtcalEventnotmember extends XoopsObject
 
 }
 
+/**
+ * Class ExtcalEventnotmemberHandler
+ */
 class ExtcalEventnotmemberHandler extends ExtcalPersistableObjectHandler
 {
 
-    function ExtcalEventnotmemberHandler(&$db)
+    /**
+     * @param $db
+     */
+    function __construct(&$db)
     {
-        $this->ExtcalPersistableObjectHandler($db, 'extcal_eventnotmember', _EXTCAL_CLN_NOT_MEMBER, array('event_id', 'uid'));
+        parent::__construct($db, 'extcal_eventnotmember', _EXTCAL_CLN_NOT_MEMBER, array('event_id', 'uid'));
     }
 
+    /**
+     * @param $varArr
+     */
     function createEventnotmember($varArr)
     {
         $eventnotmember = $this->create();
@@ -40,16 +49,26 @@ class ExtcalEventnotmemberHandler extends ExtcalPersistableObjectHandler
         }
     }
 
+    /**
+     * @param $key
+     *
+     * @return bool
+     */
     function deleteEventnotmember($key)
     {
         return $this->delete($key, true);
     }
 
+    /**
+     * @param $eventId
+     *
+     * @return mixed
+     */
     function getMembers($eventId)
     {
-        $memberHandler = xoops_gethandler('member');
+        $memberHandler  = xoops_gethandler('member');
         $eventNotMember = $this->getObjects(new Criteria('event_id', $eventId));
-        $count = count($eventNotMember);
+        $count          = count($eventNotMember);
         if ($count > 0) {
             $in = '(' . $eventNotMember[0]->getVar('uid');
             array_shift($eventNotMember);
@@ -63,14 +82,20 @@ class ExtcalEventnotmemberHandler extends ExtcalPersistableObjectHandler
         } else {
             $criteria = new Criteria('uid', '(0)', 'IN');
         }
+
         return $memberHandler->getUsers($criteria, true);
     }
 
+    /**
+     * @param $eventId
+     *
+     * @return int
+     */
     function getNbMember($eventId)
     {
         $criteria = new Criteria('event_id', $eventId);
+
         return $this->getCount($criteria);
     }
 
 }
-?>

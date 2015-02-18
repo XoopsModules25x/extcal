@@ -7,7 +7,7 @@ if ( version_compare(phpversion(), "5.0.0", ">") ) {
         - remove @ before include below to see why');
 }
 
-if (!@include('SOAP'.DIRECTORY_SEPARATOR.'Client.php')) {
+if (!@include('SOAP/Client.php')) {
     die('You must have PEAR::SOAP installed');
 }
 

@@ -41,7 +41,7 @@
  * @ignore
  */
 if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
+    define('CALENDAR_ROOT', 'Calendar/');
 }
 
 /**
@@ -98,12 +98,13 @@ class Calendar_Month extends Calendar
     {
         include_once CALENDAR_ROOT.'Day.php';
         $daysInMonth = $this->cE->getDaysInMonth($this->year, $this->month);
-        for ($i=1; $i<=$daysInMonth; $i++) {
+        for ($i=1; $i<=$daysInMonth; ++$i) {
             $this->children[$i] = new Calendar_Day($this->year, $this->month, $i);
         }
         if (count($sDates) > 0) {
             $this->setSelection($sDates);
         }
+
         return true;
     }
 
@@ -135,4 +136,3 @@ class Calendar_Month extends Calendar
         }
     }
 }
-?>

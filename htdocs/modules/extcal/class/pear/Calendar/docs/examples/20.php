@@ -7,7 +7,7 @@
 //if you use ISO-8601 dates, switch to PearDate engine
 define('CALENDAR_ENGINE', 'PearDate');
 
-if ( !@include 'Calendar/Calendar.php' ) {
+if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT','../../');
 }
 
@@ -16,29 +16,48 @@ require_once CALENDAR_ROOT . 'Day.php';
 require_once CALENDAR_ROOT . 'Decorator.php';
 
 // accepts multiple entries
+/**
+ * Class DiaryEvent
+ */
 class DiaryEvent extends Calendar_Decorator
 {
     var $entries = array();
 
-    function DiaryEvent($calendar) {
+    /**
+     * @param $calendar
+     */
+    function DiaryEvent($calendar)
+    {
         Calendar_Decorator::Calendar_Decorator($calendar);
     }
 
-    function addEntry($entry) {
+    /**
+     * @param $entry
+     */
+    function addEntry($entry)
+    {
         $this->entries[] = $entry;
     }
 
-    function getEntry() {
+    /**
+     * @return bool
+     */
+    function getEntry()
+    {
         $entry = each($this->entries);
         if ($entry) {
             return $entry['value'];
         } else {
             reset($this->entries);
+
             return false;
         }
     }
 }
 
+/**
+ * Class MonthPayload_Decorator
+ */
 class MonthPayload_Decorator extends Calendar_Decorator
 {
     //Calendar engine
@@ -49,6 +68,11 @@ class MonthPayload_Decorator extends Calendar_Decorator
     var $month;
     var $firstDay = false;
 
+    /**
+     * @param array $events
+     *
+     * @return bool
+     */
     function build($events=array())
     {
         require_once CALENDAR_ROOT . 'Day.php';
@@ -60,7 +84,7 @@ class MonthPayload_Decorator extends Calendar_Decorator
         $this->month = $this->thisMonth();
 
         $daysInMonth = $this->cE->getDaysInMonth($this->year, $this->month);
-        for ($i=1; $i<=$daysInMonth; $i++) {
+        for ($i=1; $i<=$daysInMonth; ++$i) {
             $Day = new Calendar_Day(2000,1,1); // Create Day with dummy values
             $Day->setTimeStamp($this->cE->dateToStamp($this->year, $this->month, $i));
             $this->children[$i] = new DiaryEvent($Day);
@@ -72,13 +96,17 @@ class MonthPayload_Decorator extends Calendar_Decorator
         Calendar_Month_Weekdays::shiftDays();
         Calendar_Month_Weekdays::buildEmptyDaysAfter();
         Calendar_Month_Weekdays::setWeekMarkers();
+
         return true;
     }
 
+    /**
+     * @param $events
+     */
     function setSelection($events)
     {
         $daysInMonth = $this->cE->getDaysInMonth($this->year, $this->month);
-        for ($i=1; $i<=$daysInMonth; $i++) {
+        for ($i=1; $i<=$daysInMonth; ++$i) {
             $stamp1 = $this->cE->dateToStamp($this->year, $this->month, $i);
             $stamp2 = $this->cE->dateToStamp($this->year, $this->month, $i+1);
             foreach ($events as $event) {
@@ -93,6 +121,9 @@ class MonthPayload_Decorator extends Calendar_Decorator
         }
     }
 
+    /**
+     * @return bool
+     */
     function fetch()
     {
         $child = each($this->children);
@@ -100,6 +131,7 @@ class MonthPayload_Decorator extends Calendar_Decorator
             return $child['value'];
         } else {
             reset($this->children);
+
             return false;
         }
     }
@@ -127,8 +159,6 @@ $events[] = array(
     'desc'  => 'Holidays!'
 );
 
-
-
 $Month = new Calendar_Month_Weekdays(2004, 6);
 $MonthDecorator = new MonthPayload_Decorator($Month);
 $MonthDecorator->build($events);
@@ -143,12 +173,12 @@ table {
     border-collapse: collapse;
 }
 caption {
-    font-family: verdana;
+    font-family: verdana, sans-serif;
     font-size: 14pt;
     padding-bottom: 4pt;
 }
 th {
-    font-family: verdana;
+    font-family: verdana, sans-serif;
     font-size: 11px;
     text-align: center;
     background-color: #e7e3e7;
@@ -157,7 +187,7 @@ th {
     border: 1px solid #ccc;
 }
 td {
-    font-family: verdana;
+    font-family: verdana, sans-serif;
     font-size: 11px;
     text-align: left;
     vertical-align: top;

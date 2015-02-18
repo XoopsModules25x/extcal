@@ -10,13 +10,22 @@ require_once CALENDAR_ROOT.'Month.php';
 require_once CALENDAR_ROOT.'Decorator.php'; // Not really needed but added to help this make sense
 require_once CALENDAR_ROOT.'Decorator/Wrapper.php';
 
+/**
+ * Class MyBoldDecorator
+ */
 class MyBoldDecorator extends Calendar_Decorator
 {
+    /**
+     * @param $Calendar
+     */
     function MyBoldDecorator(&$Calendar)
     {
         parent::Calendar_Decorator($Calendar);
     }
 
+    /**
+     * @return string
+     */
     function thisDay()
     {
         return '<b>'.parent::thisDay().'</b>';
@@ -33,4 +42,3 @@ echo '<i>Day numbers are rendered in bold</i><br /> <br />';
 while ($DecoratedDay = $Wrapper->fetch('MyBoldDecorator')) {
     echo $DecoratedDay->thisDay().'<br />';
 }
-?>

@@ -42,7 +42,7 @@
  * @ignore
  */
 if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
+    define('CALENDAR_ROOT', 'Calendar/');
 }
 
 /**
@@ -101,9 +101,9 @@ class Calendar_Decorator_Weekday extends Calendar_Decorator
      * @return void
      * @access public
      */
-    function setFirstDay($firstDay) 
+    function setFirstDay($firstDay)
     {
-        $this->firstDay = (int)$firstDay;
+        $this->firstDay = (int) $firstDay;
     }
 
     /**
@@ -125,6 +125,7 @@ class Calendar_Decorator_Weekday extends Calendar_Decorator
             $Day->thisDay()
         );
         $day = $this->adjustWeekScale($day);
+
         return $this->returnValue('Day', $format, $ts, $day);
     }
 
@@ -145,6 +146,7 @@ class Calendar_Decorator_Weekday extends Calendar_Decorator
             $this->calendar->day
         );
         $day = $this->adjustWeekScale($day);
+
         return $this->returnValue('Day', $format, $ts, $day);
     }
 
@@ -167,6 +169,7 @@ class Calendar_Decorator_Weekday extends Calendar_Decorator
             $Day->thisDay()
         );
         $day = $this->adjustWeekScale($day);
+
         return $this->returnValue('Day', $format, $ts, $day);
     }
 
@@ -178,7 +181,7 @@ class Calendar_Decorator_Weekday extends Calendar_Decorator
      * @return int day of week adjusted to first day
      * @access private
      */
-    function adjustWeekScale($dayOfWeek) 
+    function adjustWeekScale($dayOfWeek)
     {
         $dayOfWeek = $dayOfWeek - $this->firstDay;
         if ($dayOfWeek >= 0) {
@@ -192,4 +195,3 @@ class Calendar_Decorator_Weekday extends Calendar_Decorator
         }
     }
 }
-?>

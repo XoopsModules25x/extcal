@@ -3,12 +3,12 @@
 * Description: demonstrates using the Textual decorator
 */
 
-if (!@include 'Calendar'.DIRECTORY_SEPARATOR.'Calendar.php') {
+if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 require_once CALENDAR_ROOT.'Day.php';
-require_once CALENDAR_ROOT.'Month'.DIRECTORY_SEPARATOR.'Weekdays.php';
-require_once CALENDAR_ROOT.'Decorator'.DIRECTORY_SEPARATOR.'Textual.php';
+require_once CALENDAR_ROOT.'Month/Weekdays.php';
+require_once CALENDAR_ROOT.'Decorator/Textual.php';
 
 // Could change language like this
 // setlocale (LC_TIME, "de_DE"); // Unix based (probably)

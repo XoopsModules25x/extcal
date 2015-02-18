@@ -11,15 +11,15 @@
  *
  * @copyright    The XOOPS Project (http://www.xoops.org)
  * @license      GNU GPL (http://www.gnu.org/licenses/gpl-2.0.html/)
- * @package    extCal
+ * @package      extCal
  * @since        2.5.0
- * @author     Mage, Mamba
- * @version    $Id $
+ * @author       Mage, Mamba
+ * @version      $Id $
  **/
 
-include '../../../include/cp_header.php';
-include '../../../class/xoopsformloader.php';
-include 'admin_header.php';
+include_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+include dirname(dirname(dirname(__DIR__))) . '/class/xoopsformloader.php';
+include_once __DIR__ . '/admin_header.php';
 
 xoops_cp_header();
 
@@ -27,7 +27,4 @@ $aboutAdmin = new ModuleAdmin();
 echo $aboutAdmin->addNavigation('about.php');
 echo $aboutAdmin->renderabout('6KJ7RW5DR3VTJ', false);
 
-include 'admin_footer.php';
-
-
-?>
+include_once __DIR__ . '/admin_footer.php';
