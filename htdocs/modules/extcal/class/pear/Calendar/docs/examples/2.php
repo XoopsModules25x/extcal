@@ -3,16 +3,18 @@
 * Description: Demonstrates building a calendar for a month using the Week class
 * Uses UnixTs engine
 */
-function getmicrotime(){
+function getmicrotime()
+{
     list($usec, $sec) = explode(" ",microtime());
-    return ((float)$usec + (float)$sec);
+
+    return ((float) $usec + (float) $sec);
 }
 $start = getmicrotime();
 
 // Force UnixTs engine (default setting)
 define('CALENDAR_ENGINE','UnixTS');
 
-if (!@include 'Calendar'.DIRECTORY_SEPARATOR.'Calendar.php') {
+if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 require_once CALENDAR_ROOT.'Month/Weeks.php';
@@ -54,7 +56,7 @@ table {
 caption {
     font-family: verdana;
     font-size: 12px;
-    background-color: while;
+    background-color: white;
 }
 .prevMonth {
     font-size: 10px;
@@ -116,7 +118,7 @@ while ($Week = $Month->fetch()) {
         if ($Day->isSelected()) {
             echo '<td class="selected">'.$Day->thisDay().'</td>'."\n";
         // Check to see if day is empty
-        } else if ($Day->isEmpty()) {
+        } elseif ($Day->isEmpty()) {
             echo '<td class="empty">'.$Day->thisDay().'</td>'."\n";
         } else {
             echo '<td><a href="'.$link.'">'.$Day->thisDay().'</a></td>'."\n";

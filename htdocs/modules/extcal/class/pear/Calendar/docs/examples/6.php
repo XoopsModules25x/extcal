@@ -4,13 +4,15 @@
 * Note this is done the stupid way - a giant if/else for WML or HTML
 * could be greatly simplified with some HTML/WML rendering classes...
 */
-function getmicrotime(){
+function getmicrotime()
+{
     list($usec, $sec) = explode(" ",microtime());
-    return ((float)$usec + (float)$sec);
+
+    return ((float) $usec + (float) $sec);
 }
 $start = getmicrotime();
 
-if ( !@include 'Calendar/Calendar.php' ) {
+if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT','../../');
 }
 require_once CALENDAR_ROOT.'Month/Weekdays.php';
@@ -71,7 +73,7 @@ while ( $Day = $Month->fetch() ) {
     }
     if ( $Day->isEmpty() ) {
         echo ( "<td></td>\n" );
-    } else if ( $Day->isSelected() ) {
+    } elseif ( $Day->isSelected() ) {
         echo ( "<td><anchor><strong><u>".$Day->thisDay()."</u></strong>\n<go href=\"".$_SERVER['PHP_SELF']."?viewday=true&amp;y=".
             $Day->thisYear()."&amp;m=".$Day->thisMonth()."&amp;d=".$Day->thisDay().
             "&amp;mime=wml\" />\n</anchor></td>\n" );
@@ -165,7 +167,7 @@ while ( $Day = $Month->fetch() ) {
     }
     if ( $Day->isEmpty() ) {
         echo ( "<td></td>\n" );
-    } else if ( $Day->isSelected() ) {
+    } elseif ( $Day->isSelected() ) {
         echo ( "<td><a href=\"".$_SERVER['PHP_SELF']."?viewday=true&amp;y=".
             $Day->thisYear()."&amp;m=".$Day->thisMonth()."&amp;d=".$Day->thisDay().
             "&amp;wml\"><strong><u>".$Day->thisDay()."</u></strong></a></td>\n" );
@@ -201,10 +203,8 @@ echo ( "?y=".$Month->thisYear()."&amp;m=".
 }
 ?>
 
-
 <?php echo ( '<p><b>Took: '.(getmicrotime()-$start).' seconds</b></p>' ); ?>
 </body>
 </html>
 <?php
 }
-?>

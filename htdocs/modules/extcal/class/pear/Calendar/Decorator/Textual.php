@@ -42,7 +42,7 @@
  * @ignore
  */
 if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
+    define('CALENDAR_ROOT', 'Calendar/');
 }
 
 /**
@@ -53,7 +53,7 @@ require_once CALENDAR_ROOT.'Decorator.php';
 /**
  * Load the Uri utility
  */
-require_once CALENDAR_ROOT.'Util'.DIRECTORY_SEPARATOR.'Textual.php';
+require_once CALENDAR_ROOT.'Util/Textual.php';
 
 /**
  * Decorator to help with fetching textual representations of months and
@@ -205,4 +205,3 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
         return Calendar_Util_Textual::orderedWeekdays($this->calendar, $format);
     }
 }
-?>

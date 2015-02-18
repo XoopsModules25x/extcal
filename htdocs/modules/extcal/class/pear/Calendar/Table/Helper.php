@@ -149,7 +149,7 @@ class Calendar_Table_Helper
         foreach ($weekDays as $day) {
             if ($begin) {
                 $endDays[] = $day;
-            } else if ($day === $this->firstDay) {
+            } elseif ($day === $this->firstDay) {
                 $begin = true;
                 $endDays[] = $day;
             } else {
@@ -188,7 +188,7 @@ class Calendar_Table_Helper
                 $this->calendar->thisDay()
             )
         );
-        for ($i=1; $i < $this->numWeeks; $i++) {
+        for ($i=1; $i < $this->numWeeks; ++$i) {
             $this->daysOfMonth =
                 array_merge($this->daysOfMonth, $this->daysOfWeek);
         }
@@ -278,6 +278,7 @@ class Calendar_Table_Helper
     function getEmptyDaysAfterOffset()
     {
         $eAfter = $this->getEmptyDaysAfter();
+
         return $eAfter - (
             $this->cE->getDaysInWeek(
                 $this->calendar->thisYear(),
@@ -310,7 +311,7 @@ class Calendar_Table_Helper
                     $this->calendar->thisDay()
                 ) - $firstDay + $dow);
         }
+
         return $this->cE->dateToStamp($y, $m, $d);
     }
 }
-?>

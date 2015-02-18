@@ -2,7 +2,7 @@
 /**
  **/
 
-defined('XOOPS_ROOT_PATH') or die('Restricted access');
+// defined('XOOPS_ROOT_PATH') || die('XOOPS Root Path not defined');
 
 xoops_load('XoopsForm');
 
@@ -15,46 +15,40 @@ class XoopsTableForm extends XoopsForm
 {
 
     /**
-     * ad the balise html "table" to render 
+     * ad the balise html "table" to render
      *
      * @var boolean
      */
     var $_addBaliseTable = '';
 
-
-
-
-
-
-
     /**
      * Gets the "value" attribute of a form element
      *
-     * @param string $name the "name" attribute of a form element
-     * @param bool $encode To sanitizer the text?
+     * @param $addBaliseTable
+     *
+     * @internal param string $name the "name" attribute of a form element
+     * @internal param bool $encode To sanitizer the text?
+     *
      * @return string the "value" attribute assigned to a form element, null if not set
      */
     function setAddBaliseTable($addBaliseTable)
     {
         $this->_addBaliseTable = $addBaliseTable;
+
         return;
     }
-    
+
     /**
      * gets the "value" attribute of all form elements
      *
-     * @param bool $encode To sanitizer the text?
+     * @internal param bool $encode To sanitizer the text?
+     *
      * @return array array of name/value pairs assigned to form elements
      */
     function getAddBaliseTable()
     {
         return $this->_addBaliseTable;
     }
-
-
-
-
-
 
     /**
      * Insert an empty row in the table to serve as a seperator.
@@ -89,27 +83,26 @@ class XoopsTableForm extends XoopsForm
      * @return string
      */
 
-function render(){
+    function render()
+    {
+        $addBaliseTable = $this->_addBaliseTable;
+        $title          = $this->getTitle();
+        $ret            = '';
 
-        $addBaliseTable = $this->_addBaliseTable; 
-        $title = $this->getTitle();
-        $ret = '';
-
-        if($addBaliseTable){
-          $ret .= '<table width="100%" class="outer" cellspacing="1"> ';
+        if ($addBaliseTable) {
+            $ret .= '<table width="100%" class="outer" cellspacing="1"> ';
         }
 
-        if ($title <> '' ){
-          $ret .= '<tr><th colspan="2">' . $title . '</th></tr>';
+        if ($title <> '') {
+            $ret .= '<tr><th colspan="2">' . $title . '</th></tr>';
         }
-        
-        
+
         $hidden = '';
-        $class = 'even';
+        $class  = 'even';
         foreach ($this->getElements() as $ele) {
             if (!is_object($ele)) {
                 $ret .= $ele;
-            } else if (!$ele->isHidden()) {
+            } elseif (!$ele->isHidden()) {
                 if (!$ele->getNocolspan()) {
                     $ret .= '<tr valign="top" align="left"><td class="head">';
                     if (($caption = $ele->getCaption()) != '') {
@@ -137,15 +130,14 @@ function render(){
             }
         }
 
-        if($addBaliseTable){   
-          $ret .= '</table>';
+        if ($addBaliseTable) {
+            $ret .= '</table>';
         }
-        
-        $ret .= NWLINE . ' ' . $hidden  . NWLINE;
-        
+
+        $ret .= NWLINE . ' ' . $hidden . NWLINE;
+
         return $ret;
-  
-}
+
+    }
 
 } // fin de la classe
-?>

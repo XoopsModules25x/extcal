@@ -5,15 +5,17 @@
 * switches the calculation "engine"
 * Note: make sure PEAR::Date is a stable release!!!
 */
-function getmicrotime(){
+function getmicrotime()
+{
     list($usec, $sec) = explode(" ",microtime());
-    return ((float)$usec + (float)$sec);
+
+    return ((float) $usec + (float) $sec);
 }
 
 // Switch to PEAR::Date engine
 define('CALENDAR_ENGINE','PearDate');
 
-if ( !@include 'Calendar/Calendar.php' ) {
+if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT','../../');
 }
 
@@ -24,7 +26,7 @@ if (!isset($_GET['h'])) $_GET['h'] = 12;
 if (!isset($_GET['i'])) $_GET['i'] = 34;
 if (!isset($_GET['s'])) $_GET['s'] = 46;
 
-switch ( @$_GET['view'] ) {
+switch (@$_GET['view']) {
     default:
         $_GET['view'] = 'calendar_year';
     case 'calendar_year':
@@ -75,7 +77,7 @@ while ( $e = $c->fetch() ) {
     if ( ($i % 10) == 0 ) {
         echo ( '<br>' );
     }
-    $i++;
+    ++$i;
 }
 echo ( '<p><b>Took: '.(getmicrotime()-$start).' seconds</b></p>' );
 
@@ -93,7 +95,6 @@ while ( $e = $c->fetch() ) {
     if ( ($i % 10) == 0 ) {
         echo ( '<br>' );
     }
-    $i++;
+    ++$i;
 }
 echo ( '<p><b>Took: '.(getmicrotime()-$start).' seconds</b></p>' );
-?>

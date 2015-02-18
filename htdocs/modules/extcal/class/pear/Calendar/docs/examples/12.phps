@@ -107,7 +107,7 @@ while ( $Month = $Year->fetch() ) {
     }
     echo ( "</table>\n</td>\n" );
 
-    $i++;
+    ++$i;
 }
 ?>
 </table>

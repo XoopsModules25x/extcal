@@ -1,19 +1,26 @@
 <?php
 // $Id: second_test.php 1511 2011-09-01 20:56:07Z jjdai $
 
-require_once('simple_include.php');
-require_once('calendar_include.php');
+require_once 'simple_include.php';
+require_once 'calendar_include.php';
 
-require_once('./calendar_test.php');
+require_once './calendar_test.php';
 
-class TestOfSecond extends TestOfCalendar {
-    function TestOfSecond() {
+/**
+ * Class TestOfSecond
+ */
+class TestOfSecond extends TestOfCalendar
+{
+    function TestOfSecond()
+    {
         $this->UnitTestCase('Test of Second');
     }
-    function setUp() {
+    function setUp()
+    {
         $this->cal = new Calendar_Second(2003,10,25,13,32,43);
     }
-    function testPrevDay_Array () {
+    function testPrevDay_Array ()
+    {
         $this->assertEqual(
             array(
                 'year'   => 2003,
@@ -31,4 +38,3 @@ if (!defined('TEST_RUNNING')) {
     $test = new TestOfSecond();
     $test->run(new HtmlReporter());
 }
-?>

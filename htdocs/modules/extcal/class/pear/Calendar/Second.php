@@ -41,7 +41,7 @@
  * @ignore
  */
 if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
+    define('CALENDAR_ROOT', 'Calendar/');
 }
 
 /**
@@ -119,4 +119,3 @@ class Calendar_Second extends Calendar
         return null;
     }
 }
-?>

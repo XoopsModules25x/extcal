@@ -6,25 +6,22 @@ if (isset($_POST['step'])) {
     $step = 'default';
 }
 
-include '../../../include/cp_header.php';
-include 'function.php';
+include_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+include __DIR__ . '/function.php';
 
 // Change this variable if you use a cloned version of eXtGallery
 $localModuleDir = 'extcal';
 
-$moduleName = 'extcal';
-$versionFile = 'http://www.zoullou.net/extcal.version';
+$moduleName     = 'extcal';
+$versionFile    = 'http://www.zoullou.net/extcal.version';
 $downloadServer = 'http://downloads.sourceforge.net/zoullou/';
 
 $lastVersion = @file_get_contents($versionFile);
 $lastVersionString
-    = substr($lastVersion, 0, 1) . '.' . substr($lastVersion, 1, 1) . '.'
-    . substr($lastVersion, 2, 1);
+                = substr($lastVersion, 0, 1) . '.' . substr($lastVersion, 1, 1) . '.' . substr($lastVersion, 2, 1);
 $moduleFileName = $moduleName . '-' . $lastVersionString . '.tar.gz';
 $langFileName
-    =
-    $moduleName . '-lang-' . $lastVersionString . '_' . $xoopsConfig['language']
-        . '.tar.gz';
+                = $moduleName . '-lang-' . $lastVersionString . '_' . $xoopsConfig['language'] . '.tar.gz';
 
 switch ($step) {
 
@@ -46,7 +43,8 @@ switch ($step) {
             break;
         }
         $localHandle = @fopen(
-            XOOPS_ROOT_PATH . '/uploads/' . $moduleFileName, 'w+'
+            XOOPS_ROOT_PATH . '/uploads/' . $moduleFileName,
+            'w+'
         );
 
         // Downlad module archive
@@ -65,7 +63,8 @@ switch ($step) {
                 printf(_AM_EXTCAL_LG_FILE_DONT_EXIST, $downloadServer, $langFileName);
             } else {
                 $localHandle = @fopen(
-                    XOOPS_ROOT_PATH . '/uploads/' . $langFileName, 'w+'
+                    XOOPS_ROOT_PATH . '/uploads/' . $langFileName,
+                    'w+'
                 );
                 // Download language archive
                 if ($handle) {
@@ -99,7 +98,7 @@ switch ($step) {
         }
 
         $gPcltarLibDir = XOOPS_ROOT_PATH . '/modules/' . $localModuleDir . '/class';
-        include "../class/pcltar.lib.php";
+        include dirname(__DIR__) . '/class/pcltar.lib.php';
 
         //TrOn(5);
 
@@ -138,8 +137,9 @@ switch ($step) {
 
         xoops_confirm(
             array('dirname' => $localModuleDir, 'op' => 'update_ok', 'fct' => 'modulesadmin'),
-            XOOPS_URL
-                . '/modules/system/admin.php', _AM_EXTCAL_INSTALL_DONE, _AM_EXTCAL_UPDATE
+            XOOPS_URL . '/modules/system/admin.php',
+            _AM_EXTCAL_INSTALL_DONE,
+            _AM_EXTCAL_UPDATE
         );
 
         xoops_cp_footer();
@@ -153,4 +153,3 @@ switch ($step) {
 
         break;
 }
-?>

@@ -6,24 +6,30 @@
 * hit for extra method calls. For this example some simple functions could help
 * format the month while the days are accessed via the normal Month object
 */
-if ( !@include 'Calendar/Calendar.php' ) {
+if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT','../../');
 }
 require_once CALENDAR_ROOT.'Month/Weekdays.php';
 require_once CALENDAR_ROOT.'Decorator.php';
 
 // Decorate a Month with methods to improve formatting
-class MonthDecorator extends Calendar_Decorator {
+/**
+ * Class MonthDecorator
+ */
+class MonthDecorator extends Calendar_Decorator
+{
     /**
     * @param Calendar_Month
     */
-    function MonthDecorator(& $Month) {
+    function MonthDecorator(& $Month)
+    {
         parent::Calendar_Decorator($Month);
     }
     /**
     * Override the prevMonth method to format the output
     */
-    function prevMonth() {
+    function prevMonth()
+    {
         $prevStamp = parent::prevMonth(TRUE);
         // Build the URL for the previous month
         return $_SERVER['PHP_SELF'].'?y='.date('Y',$prevStamp).
@@ -32,7 +38,8 @@ class MonthDecorator extends Calendar_Decorator {
     /**
     * Override the thisMonth method to format the output
     */
-    function thisMonth() {
+    function thisMonth()
+    {
         $thisStamp = parent::thisMonth(TRUE);
         // A human readable string from this month
         return date('F Y',$thisStamp);
@@ -40,7 +47,8 @@ class MonthDecorator extends Calendar_Decorator {
     /**
     * Override the nextMonth method to format the output
     */
-    function nextMonth() {
+    function nextMonth()
+    {
         $nextStamp = parent::nextMonth(TRUE);
         // Build the URL for next month
         return $_SERVER['PHP_SELF'].'?y='.date('Y',$nextStamp).

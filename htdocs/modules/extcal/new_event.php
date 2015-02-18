@@ -1,14 +1,14 @@
 <?php
 
-include_once  ('../../mainfile.php');
-include_once ('include/constantes.php');
-include_once ('header.php');
+include dirname(dirname(__DIR__)) . '/mainfile.php';
+include_once __DIR__ . '/include/constantes.php';
+include_once __DIR__ . '/header.php';
 
 // Getting eXtCal object's handler
 $eventHandler = xoops_getmodulehandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
 
 $permHandler = ExtcalPerm::getHandler();
-$xoopsUser = $xoopsUser ? $xoopsUser : null;
+$xoopsUser   = $xoopsUser ? $xoopsUser : null;
 if (count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) > 0
 ) {
 
@@ -27,4 +27,3 @@ if (count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) > 0
 } else {
     redirect_header("index.php", 3);
 }
-?>

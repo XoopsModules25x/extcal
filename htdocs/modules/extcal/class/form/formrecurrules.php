@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class ExtcalFormRecurRules
+ */
 class ExtcalFormRecurRules extends XoopsFormElement
 {
 
@@ -15,7 +18,9 @@ class ExtcalFormRecurRules extends XoopsFormElement
     var $_rrule_yearly_bymonths = '';
     var $_rrule_yearly_byday = '';
 
-
+    /**
+     * @param $values
+     */
     function ExtcalFormRecurRules($values)
     {
         if (isset($values['rrule_freq'])) {
@@ -53,7 +58,7 @@ class ExtcalFormRecurRules extends XoopsFormElement
     /**
      * prepare HTML for output
      *
-     * @return    string
+     * @return string
      */
     function render()
     {
@@ -62,8 +67,7 @@ class ExtcalFormRecurRules extends XoopsFormElement
         $formObject = new XoopsFormRadio('', 'rrule_freq', $this->_rrule_freq);
         $formObject->addOption('none', _MD_EXTCAL_NO_RECCUR_EVENT);
         $ret .= $formObject->render();
-        $ret .= "<br /><br /><fieldset><legend>" . _MD_EXTCAL_RECCUR_POLICY
-            . "</legend><fieldset><legend>";
+        $ret .= "<br /><br /><fieldset><legend>" . _MD_EXTCAL_RECCUR_POLICY . "</legend><fieldset><legend>";
 
         $formObject = new XoopsFormRadio('', 'rrule_freq', $this->_rrule_freq);
         $formObject->addOption('daily', _MD_EXTCAL_DAILY);
@@ -145,8 +149,7 @@ class ExtcalFormRecurRules extends XoopsFormElement
 
         $formObject = new XoopsFormText('', 'rrule_bymonthday', 3, 2, $this->_rrule_bymonthday);
         $ret .= $formObject->render();
-        $ret .= " " . _MD_EXTCAL_DAY_NUM_MONTH
-            . "</fieldset><br /><fieldset><legend>";
+        $ret .= " " . _MD_EXTCAL_DAY_NUM_MONTH . "</fieldset><br /><fieldset><legend>";
 
         $formObject = new XoopsFormRadio('', 'rrule_freq', $this->_rrule_freq);
         $formObject->addOption('yearly', _MD_EXTCAL_YEARLY);
@@ -217,4 +220,3 @@ class ExtcalFormRecurRules extends XoopsFormElement
     }
 
 }
-?>

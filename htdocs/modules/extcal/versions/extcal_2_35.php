@@ -18,34 +18,35 @@
 **/
 
 //----------------------------------------------------
-class extcal_2_35{
+class extcal_2_35
+{
 //----------------------------------------------------
 
-function __construct(& $module, $options){
+    /**
+     * @param $module
+     * @param $options
+     */
+    function __construct(& $module, $options)
+{
 global $xoopsDB;
-  
+
   $this->alterTable_event();
-
-
 
 }
 //----------------------------------------------------
-function alterTable_event(){
+function alterTable_event()
+{
 global $xoopsDB;
   $tbl = $xoopsDB->prefix('extcal_event');
-  
+
 $sql = <<<__sql__
-ALTER TABLE `{$tbl}` 
+ALTER TABLE `{$tbl}`
  CHANGE `event_etablissement` `event_etablissement` INT( 5 ) NOT NULL DEFAULT '0';
 __sql__;
 
-  $xoopsDB->queryF($sql);  
+  $xoopsDB->queryF($sql);
 
-
-  
 }
-
 
 //-----------------------------------------------------------------
 }   // fin de la classe
-?>

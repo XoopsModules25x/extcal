@@ -1,19 +1,26 @@
 <?php
 // $Id: day_test.php 1511 2011-09-01 20:56:07Z jjdai $
 
-require_once('simple_include.php');
-require_once('calendar_include.php');
+require_once 'simple_include.php';
+require_once 'calendar_include.php';
 
-require_once('./calendar_test.php');
+require_once './calendar_test.php';
 
-class TestOfDay extends TestOfCalendar {
-    function TestOfDay() {
+/**
+ * Class TestOfDay
+ */
+class TestOfDay extends TestOfCalendar
+{
+    function TestOfDay()
+    {
         $this->UnitTestCase('Test of Day');
     }
-    function setUp() {
+    function setUp()
+    {
         $this->cal = new Calendar_Day(2003,10,25);
     }
-    function testPrevDay_Array () {
+    function testPrevDay_Array ()
+    {
         $this->assertEqual(
             array(
                 'year'   => 2003,
@@ -24,66 +31,85 @@ class TestOfDay extends TestOfCalendar {
                 'second' => 0),
             $this->cal->prevDay('array'));
     }
-    function testPrevHour () {
+    function testPrevHour ()
+    {
         $this->assertEqual(23,$this->cal->prevHour());
     }
-    function testThisHour () {
+    function testThisHour ()
+    {
         $this->assertEqual(0,$this->cal->thisHour());
     }
-    function testNextHour () {
+    function testNextHour ()
+    {
         $this->assertEqual(1,$this->cal->nextHour());
     }
-    function testPrevMinute () {
+    function testPrevMinute ()
+    {
         $this->assertEqual(59,$this->cal->prevMinute());
     }
-    function testThisMinute () {
+    function testThisMinute ()
+    {
         $this->assertEqual(0,$this->cal->thisMinute());
     }
-    function testNextMinute () {
+    function testNextMinute ()
+    {
         $this->assertEqual(1,$this->cal->nextMinute());
     }
-    function testPrevSecond () {
+    function testPrevSecond ()
+    {
         $this->assertEqual(59,$this->cal->prevSecond());
     }
-    function testThisSecond () {
+    function testThisSecond ()
+    {
         $this->assertEqual(0,$this->cal->thisSecond());
     }
-    function testNextSecond () {
+    function testNextSecond ()
+    {
         $this->assertEqual(1,$this->cal->nextSecond());
     }
-    function testGetTimeStamp() {
+    function testGetTimeStamp()
+    {
         $stamp = mktime(0,0,0,10,25,2003);
         $this->assertEqual($stamp,$this->cal->getTimeStamp());
     }
 }
 
-class TestOfDayBuild extends TestOfDay {
-    function TestOfDayBuild() {
+/**
+ * Class TestOfDayBuild
+ */
+class TestOfDayBuild extends TestOfDay
+{
+    function TestOfDayBuild()
+    {
         $this->UnitTestCase('Test of Day::build()');
     }
-    function testSize() {
+    function testSize()
+    {
         $this->cal->build();
         $this->assertEqual(24,$this->cal->size());
     }
-    function testFetch() {
+    function testFetch()
+    {
         $this->cal->build();
         $i=0;
         while ( $Child = $this->cal->fetch() ) {
-            $i++;
+            ++$i;
         }
         $this->assertEqual(24,$i);
     }
-    function testFetchAll() {
+    function testFetchAll()
+    {
         $this->cal->build();
         $children = array();
         $i = 0;
         while ( $Child = $this->cal->fetch() ) {
             $children[$i]=$Child;
-            $i++;
+            ++$i;
         }
         $this->assertEqual($children,$this->cal->fetchAll());
     }
-    function testSelection() {
+    function testSelection()
+    {
         require_once(CALENDAR_ROOT . 'Hour.php');
         $selection = array(new Calendar_Hour(2003,10,25,13));
         $this->cal->build($selection);
@@ -91,7 +117,7 @@ class TestOfDayBuild extends TestOfDay {
         while ( $Child = $this->cal->fetch() ) {
             if ( $i == 13 )
                 break;
-            $i++;
+            ++$i;
         }
         $this->assertTrue($Child->isSelected());
     }
@@ -104,4 +130,3 @@ if (!defined('TEST_RUNNING')) {
     $test = new TestOfDayBuild();
     $test->run(new HtmlReporter());
 }
-?>

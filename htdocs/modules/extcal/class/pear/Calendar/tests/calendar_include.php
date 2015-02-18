@@ -1,6 +1,6 @@
 <?php
 // $Id: calendar_include.php 1511 2011-09-01 20:56:07Z jjdai $
-if ( !@include 'Calendar/Calendar.php' ) {
+if (!@include 'Calendar/Calendar.php') {
     @define('CALENDAR_ROOT','../');
 }
 require_once(CALENDAR_ROOT . 'Year.php');
@@ -25,4 +25,3 @@ require_once(CALENDAR_ROOT . 'Decorator/Weekday.php');
 require_once(CALENDAR_ROOT . 'Decorator/Wrapper.php');
 require_once(CALENDAR_ROOT . 'Util/Uri.php');
 require_once(CALENDAR_ROOT . 'Util/Textual.php');
-?>

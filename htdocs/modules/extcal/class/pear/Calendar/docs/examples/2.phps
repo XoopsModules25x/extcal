@@ -12,7 +12,7 @@ $start = getmicrotime();
 // Force UnixTs engine (default setting)
 define('CALENDAR_ENGINE','UnixTS');
 
-if (!@include 'Calendar'.DIRECTORY_SEPARATOR.'Calendar.php') {
+if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 require_once CALENDAR_ROOT.'Month/Weeks.php';

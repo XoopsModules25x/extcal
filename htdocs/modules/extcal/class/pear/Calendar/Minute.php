@@ -41,7 +41,7 @@
  * @ignore
  */
 if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
+    define('CALENDAR_ROOT', 'Calendar/');
 }
 
 /**
@@ -52,7 +52,7 @@ require_once CALENDAR_ROOT.'Calendar.php';
 /**
  * Represents a Minute and builds Seconds
  * <code>
- * require_once 'Calendar'.DIRECTORY_SEPARATOR.'Minute.php';
+ * require_once 'Calendar/Minute.php';
  * $Minute = new Calendar_Minute(2003, 10, 21, 15, 31); // Oct 21st 2003, 3:31pm
  * $Minute->build(); // Build Calendar_Second objects
  * while ($Second = & $Minute->fetch()) {
@@ -99,13 +99,14 @@ class Calendar_Minute extends Calendar
         include_once CALENDAR_ROOT.'Second.php';
         $sIM = $this->cE->getSecondsInMinute($this->year, $this->month,
                 $this->day, $this->hour, $this->minute);
-        for ($i=0; $i < $sIM; $i++) {
+        for ($i=0; $i < $sIM; ++$i) {
             $this->children[$i] = new Calendar_Second($this->year, $this->month,
                 $this->day, $this->hour, $this->minute, $i);
         }
         if (count($sDates) > 0) {
             $this->setSelection($sDates);
         }
+
         return true;
     }
 
@@ -126,7 +127,7 @@ class Calendar_Minute extends Calendar
                 && $this->hour == $sDate->thisHour()
                 && $this->minute == $sDate->thisMinute())
             {
-                $key = (int)$sDate->thisSecond();
+                $key = (int) $sDate->thisSecond();
                 if (isset($this->children[$key])) {
                     $sDate->setSelected();
                     $this->children[$key] = $sDate;
@@ -135,4 +136,3 @@ class Calendar_Minute extends Calendar
         }
     }
 }
-?>

@@ -3,13 +3,15 @@
 * Description: Performs same behaviour as 2.php but uses Month::buildWeekDays()
 * and is faster
 */
-function getmicrotime(){
+function getmicrotime()
+{
     list($usec, $sec) = explode(" ",microtime());
-    return ((float)$usec + (float)$sec);
+
+    return ((float) $usec + (float) $sec);
 }
 $start = getmicrotime();
 
-if ( !@include 'Calendar/Calendar.php' ) {
+if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT','../../');
 }
 require_once CALENDAR_ROOT.'Month/Weekdays.php';
@@ -39,7 +41,7 @@ table {
 caption {
     font-family: verdana;
     font-size: 12px;
-    background-color: while;
+    background-color: white;
 }
 .prevMonth {
     font-size: 10px;
@@ -106,7 +108,7 @@ while ( $Day = $Month->fetch() ) {
 
     if ( $Day->isSelected() ) {
        echo ( "<td class=\"selected\">".$Day->thisDay()."</td>\n" );
-    } else if ( $Day->isEmpty() ) {
+    } elseif ( $Day->isEmpty() ) {
         echo ( "<td>&nbsp;</td>\n" );
     } else {
         echo ( "<td><a href=\"".$link."\">".$Day->thisDay()."</a></td>\n" );

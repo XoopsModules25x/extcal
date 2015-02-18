@@ -2,9 +2,11 @@
 /**
 * Description: a complete year with numeric week numbers
 */
-function getmicrotime(){
+function getmicrotime()
+{
     list($usec, $sec) = explode(" ",microtime());
-    return ((float)$usec + (float)$sec);
+
+    return ((float) $usec + (float) $sec);
 }
 $start = getmicrotime();
 
@@ -88,8 +90,8 @@ th, td {
 <a href="?year=<?php echo $Year->prevYear(); ?>&week_type=<?php echo $_GET['week_type']; ?>"><<</a>
 </div>
 <div id="week_type">
-<a href="?year=<?php echo $Year->thisYear(); ?>&week_type=n_in_year">Weeks by Year</a> : 
-<a href="?year=<?php echo $Year->thisYear(); ?>&week_type=n_in_month">Weeks by Month</a> 
+<a href="?year=<?php echo $Year->thisYear(); ?>&week_type=n_in_year">Weeks by Year</a> :
+<a href="?year=<?php echo $Year->thisYear(); ?>&week_type=n_in_month">Weeks by Month</a>
 </div>
 </caption>
 <?php
@@ -130,7 +132,7 @@ while ($Month = $Year->fetch()) {
     }
     echo "</table>\n</td>\n";
 
-    $i++;
+    ++$i;
 }
 ?>
 </table>

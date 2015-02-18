@@ -68,7 +68,7 @@ while ( $e = $c->fetch() ) {
     if ( ($i % 10) == 0 ) {
         echo ( '<br>' );
     }
-    $i++;
+    ++$i;
 }
 echo ( '<p><b>Took: '.(getmicrotime()-$start).' seconds</b></p>' );
 
@@ -86,7 +86,7 @@ while ( $e = $c->fetch() ) {
     if ( ($i % 10) == 0 ) {
         echo ( '<br>' );
     }
-    $i++;
+    ++$i;
 }
 echo ( '<p><b>Took: '.(getmicrotime()-$start).' seconds</b></p>' );
 ?>

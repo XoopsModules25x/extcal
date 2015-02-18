@@ -42,7 +42,7 @@
  * @ignore
  */
 if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
+    define('CALENDAR_ROOT', 'Calendar/');
 }
 
 /**
@@ -91,12 +91,13 @@ class Calendar_Factory
      * @access public
      * @static
      */
-    function create($type, $y = 2000, $m = 1, $d = 1, $h = 0, $i = 0, $s = 0)
+    static function create($type, $y = 2000, $m = 1, $d = 1, $h = 0, $i = 0, $s = 0)
     {
         $firstDay = defined('CALENDAR_FIRST_DAY_OF_WEEK') ? CALENDAR_FIRST_DAY_OF_WEEK : 1;
         switch ($type) {
         case 'Day':
             include_once CALENDAR_ROOT.'Day.php';
+
             return new Calendar_Day($y, $m, $d);
         case 'Month':
             // Set default state for which month type to build
@@ -118,26 +119,33 @@ class Calendar_Factory
                 $class = 'Calendar_Month';
                 break;
             }
+
             return new $class($y, $m, $firstDay);
         case 'Week':
             include_once CALENDAR_ROOT.'Week.php';
+
             return new Calendar_Week($y, $m, $d, $firstDay);
         case 'Hour':
             include_once CALENDAR_ROOT.'Hour.php';
+
             return new Calendar_Hour($y, $m, $d, $h);
         case 'Minute':
             include_once CALENDAR_ROOT.'Minute.php';
+
             return new Calendar_Minute($y, $m, $d, $h, $i);
         case 'Second':
             include_once CALENDAR_ROOT.'Second.php';
+
             return new Calendar_Second($y, $m, $d, $h, $i, $s);
         case 'Year':
             include_once CALENDAR_ROOT.'Year.php';
+
             return new Calendar_Year($y);
         default:
             include_once 'PEAR.php';
             PEAR::raiseError('Calendar_Factory::create() unrecognised type: '.$type,
                 null, PEAR_ERROR_TRIGGER, E_USER_NOTICE, 'Calendar_Factory::create()');
+
             return false;
         }
     }
@@ -152,7 +160,7 @@ class Calendar_Factory
      * @access public
      * @static
      */
-    function & createByTimestamp($type, $stamp)
+    static function & createByTimestamp($type, $stamp)
     {
         $cE  = & Calendar_Engine_Factory::getEngine();
         $y   = $cE->stampToYear($stamp);
@@ -162,7 +170,7 @@ class Calendar_Factory
         $i   = $cE->stampToMinute($stamp);
         $s   = $cE->stampToSecond($stamp);
         $cal = Calendar_Factory::create($type, $y, $m, $d, $h, $i, $s);
+
         return $cal;
     }
 }
-?>

@@ -2,13 +2,15 @@
 /**
 * Description: a complete year
 */
-function getmicrotime(){
+function getmicrotime()
+{
     list($usec, $sec) = explode(" ",microtime());
-    return ((float)$usec + (float)$sec);
+
+    return ((float) $usec + (float) $sec);
 }
 $start = getmicrotime();
 
-if ( !@include 'Calendar/Calendar.php' ) {
+if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT','../../');
 }
 
@@ -74,7 +76,7 @@ th, td {
 $i = 0;
 while ( $Month = $Year->fetch() ) {
 
-    switch ( $i ) {
+    switch ($i) {
         case 0:
             echo ( "<tr>\n" );
             break;
@@ -107,7 +109,7 @@ while ( $Month = $Year->fetch() ) {
     }
     echo ( "</table>\n</td>\n" );
 
-    $i++;
+    ++$i;
 }
 ?>
 </table>

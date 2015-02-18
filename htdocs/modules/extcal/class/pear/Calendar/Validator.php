@@ -111,6 +111,7 @@ class Calendar_Validator
                 $valid = false;
             }
         }
+
         return $valid;
     }
 
@@ -127,14 +128,17 @@ class Calendar_Validator
         if ($min > $y) {
             $this->errors[] = new Calendar_Validation_Error(
                 'Year', $y, CALENDAR_VALUE_TOOSMALL.$min);
+
             return false;
         }
         $max = $this->cE->getMaxYears();
         if ($y > $max) {
             $this->errors[] = new Calendar_Validation_Error(
                 'Year', $y, CALENDAR_VALUE_TOOLARGE.$max);
+
             return false;
         }
+
         return true;
     }
 
@@ -151,14 +155,17 @@ class Calendar_Validator
         if ($min > $m) {
             $this->errors[] = new Calendar_Validation_Error(
                 'Month', $m, CALENDAR_VALUE_TOOSMALL.$min);
+
             return false;
         }
         $max = $this->cE->getMonthsInYear($this->calendar->thisYear());
         if ($m > $max) {
             $this->errors[] = new Calendar_Validation_Error(
                 'Month', $m, CALENDAR_VALUE_TOOLARGE.$max);
+
             return false;
         }
+
         return true;
     }
 
@@ -175,17 +182,20 @@ class Calendar_Validator
         if ($min > $d) {
             $this->errors[] = new Calendar_Validation_Error(
                 'Day', $d, CALENDAR_VALUE_TOOSMALL.$min);
+
             return false;
         }
         $max = $this->cE->getDaysInMonth(
-            $this->calendar->thisYear(), 
+            $this->calendar->thisYear(),
             $this->calendar->thisMonth()
         );
         if ($d > $max) {
             $this->errors[] = new Calendar_Validation_Error(
                 'Day', $d, CALENDAR_VALUE_TOOLARGE.$max);
+
             return false;
         }
+
         return true;
     }
 
@@ -202,14 +212,17 @@ class Calendar_Validator
         if ($min > $h) {
             $this->errors[] = new Calendar_Validation_Error(
                 'Hour', $h, CALENDAR_VALUE_TOOSMALL.$min);
+
             return false;
         }
         $max = ($this->cE->getHoursInDay($this->calendar->thisDay())-1);
         if ($h > $max) {
             $this->errors[] = new Calendar_Validation_Error(
                 'Hour', $h, CALENDAR_VALUE_TOOLARGE.$max);
+
             return false;
         }
+
         return true;
     }
 
@@ -226,14 +239,17 @@ class Calendar_Validator
         if ($min > $i) {
             $this->errors[] = new Calendar_Validation_Error(
                 'Minute', $i, CALENDAR_VALUE_TOOSMALL.$min);
+
             return false;
         }
         $max = ($this->cE->getMinutesInHour($this->calendar->thisHour())-1);
         if ($i > $max) {
             $this->errors[] = new Calendar_Validation_Error(
                 'Minute', $i, CALENDAR_VALUE_TOOLARGE.$max);
+
             return false;
         }
+
         return true;
     }
 
@@ -250,14 +266,17 @@ class Calendar_Validator
         if ($min > $s) {
             $this->errors[] = new Calendar_Validation_Error(
                 'Second', $s, CALENDAR_VALUE_TOOSMALL.$min);
+
             return false;
         }
         $max = ($this->cE->getSecondsInMinute($this->calendar->thisMinute())-1);
         if ($s > $max) {
             $this->errors[] = new Calendar_Validation_Error(
                 'Second', $s, CALENDAR_VALUE_TOOLARGE.$max);
+
             return false;
         }
+
         return true;
     }
 
@@ -274,6 +293,7 @@ class Calendar_Validator
             return $error['value'];
         } else {
             reset($this->errors);
+
             return false;
         }
     }
@@ -374,4 +394,3 @@ class Calendar_Validation_Error
         return $this->unit.' = '.$this->value.' ['.$this->message.']';
     }
 }
-?>

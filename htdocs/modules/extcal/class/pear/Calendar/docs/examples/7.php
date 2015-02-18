@@ -2,14 +2,17 @@
 /**
 * Description: a SOAP Calendar Server
 */
-if (!@include('SOAP'.DIRECTORY_SEPARATOR.'Server.php')) {
+if (!@include('SOAP/Server.php')) {
     die('You must have PEAR::SOAP installed');
 }
 
-if (!@include 'Calendar'.DIRECTORY_SEPARATOR.'Calendar.php') {
+if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 
+/**
+ * Class Calendar_Server
+ */
 class Calendar_Server
 {
     var $__dispatch_map = array();
@@ -33,6 +36,11 @@ class Calendar_Server
                 'day'     => 'int' );
     }
 
+    /**
+     * @param $methodname
+     *
+     * @return null
+     */
     function __dispatch($methodname)
     {
         if (isset($this->__dispatch_map[$methodname]))
@@ -40,9 +48,15 @@ class Calendar_Server
         return NULL;
     }
 
+    /**
+     * @param $year
+     * @param $month
+     *
+     * @return array
+     */
     function getMonth($year, $month)
     {
-        require_once(CALENDAR_ROOT.'Month'.DIRECTORY_SEPARATOR.'Weekdays.php');
+        require_once(CALENDAR_ROOT.'Month/Weekdays.php');
         $Month = new Calendar_Month_Weekdays($year,$month);
         if (!$Month->isValid()) {
             $V = & $Month->getValidator();
@@ -50,6 +64,7 @@ class Calendar_Server
             while ($error = $V->fetch()) {
                 $errorMsg .= $error->toString()."\n";
             }
+
             return new SOAP_Fault($errorMsg, 'Client');
         } else {
             $monthname = date('F Y', $Month->getTimeStamp());
@@ -57,13 +72,14 @@ class Calendar_Server
             $Month->build();
             while ($Day = & $Month->fetch()) {
                 $day = array(
-                    'isFirst' => (int)$Day->isFirst(),
-                    'isLast'  => (int)$Day->isLast(),
-                    'isEmpty' => (int)$Day->isEmpty(),
-                    'day'     => (int)$Day->thisDay(),
+                    'isFirst' => (int) $Day->isFirst(),
+                    'isLast'  => (int) $Day->isLast(),
+                    'isEmpty' => (int) $Day->isEmpty(),
+                    'day'     => (int) $Day->thisDay(),
                     );
                 $days[] = $day;
             }
+
             return array('monthname' => $monthname, 'days' => $days);
         }
     }
@@ -77,7 +93,7 @@ $server->addObjectMap($calendar, 'urn:PEAR_SOAP_Calendar');
 if (strtoupper($_SERVER['REQUEST_METHOD'])=='POST') {
     $server->service($GLOBALS['HTTP_RAW_POST_DATA']);
 } else {
-    require_once 'SOAP'.DIRECTORY_SEPARATOR.'Disco.php';
+    require_once 'SOAP/Disco.php';
     $disco = new SOAP_DISCO_Server($server, "PEAR_SOAP_Calendar");
     if (isset($_SERVER['QUERY_STRING']) &&
         strcasecmp($_SERVER['QUERY_STRING'], 'wsdl')==0) {
@@ -89,4 +105,3 @@ if (strtoupper($_SERVER['REQUEST_METHOD'])=='POST') {
     }
     exit;
 }
-?>

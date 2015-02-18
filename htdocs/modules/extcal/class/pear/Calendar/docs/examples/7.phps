@@ -2,11 +2,11 @@
 /**
 * Description: a SOAP Calendar Server
 */
-if (!@include('SOAP'.DIRECTORY_SEPARATOR.'Server.php')) {
+if (!@include('SOAP/Server.php')) {
     die('You must have PEAR::SOAP installed');
 }
 
-if (!@include 'Calendar'.DIRECTORY_SEPARATOR.'Calendar.php') {
+if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 
@@ -42,7 +42,7 @@ class Calendar_Server
 
     function getMonth($year, $month)
     {
-        require_once(CALENDAR_ROOT.'Month'.DIRECTORY_SEPARATOR.'Weekdays.php');
+        require_once(CALENDAR_ROOT.'Month/Weekdays.php');
         $Month = new Calendar_Month_Weekdays($year,$month);
         if (!$Month->isValid()) {
             $V = & $Month->getValidator();
@@ -77,7 +77,7 @@ $server->addObjectMap($calendar, 'urn:PEAR_SOAP_Calendar');
 if (strtoupper($_SERVER['REQUEST_METHOD'])=='POST') {
     $server->service($GLOBALS['HTTP_RAW_POST_DATA']);
 } else {
-    require_once 'SOAP'.DIRECTORY_SEPARATOR.'Disco.php';
+    require_once 'SOAP/Disco.php';
     $disco = new SOAP_DISCO_Server($server, "PEAR_SOAP_Calendar");
     if (isset($_SERVER['QUERY_STRING']) &&
         strcasecmp($_SERVER['QUERY_STRING'], 'wsdl')==0) {

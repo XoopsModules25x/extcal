@@ -42,7 +42,7 @@
  * @ignore
  */
 if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
+    define('CALENDAR_ROOT', 'Calendar/');
 }
 
 /**
@@ -58,7 +58,7 @@ require_once CALENDAR_ROOT.'Month.php';
 /**
  * Represents a Month and builds Weeks
  * <code>
- * require_once 'Calendar'.DIRECTORY_SEPARATOR.'Month'.DIRECTORY_SEPARATOR.'Weeks.php';
+ * require_once 'Calendar/Month/Weeks.php';
  * $Month = new Calendar_Month_Weeks(2003, 10); // Oct 2003
  * $Month->build(); // Build Calendar_Day objects
  * while ($Week = & $Month->fetch()) {
@@ -120,7 +120,7 @@ class Calendar_Month_Weeks extends Calendar_Month
         $this->tableHelper = new Calendar_Table_Helper($this, $this->firstDay);
         include_once CALENDAR_ROOT.'Week.php';
         $numWeeks = $this->tableHelper->getNumWeeks();
-        for ($i=1, $d=1; $i<=$numWeeks; $i++,
+        for ($i=1, $d=1; $i<=$numWeeks; ++$i,
             $d+=$this->cE->getDaysInWeek(
                 $this->thisYear(),
                 $this->thisMonth(),
@@ -138,6 +138,7 @@ class Calendar_Month_Weeks extends Calendar_Month
         if (count($sDates) > 0) {
             $this->setSelection($sDates);
         }
+
         return true;
     }
 
@@ -163,4 +164,3 @@ class Calendar_Month_Weeks extends Calendar_Month
         }
     }
 }
-?>

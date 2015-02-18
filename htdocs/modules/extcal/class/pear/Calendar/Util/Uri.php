@@ -116,7 +116,7 @@ class Calendar_Util_Uri
      * @return void
      * @access public
      */
-    function setFragments($y, $m=null, $d=null, $h=null, $i=null, $s=null) 
+    function setFragments($y, $m=null, $d=null, $h=null, $i=null, $s=null)
     {
         if (!is_null($y)) $this->uris['Year']   = $y;
         if (!is_null($m)) $this->uris['Month']  = $m;
@@ -139,6 +139,7 @@ class Calendar_Util_Uri
     {
         $method = 'prev'.$unit;
         $stamp  = $Calendar->{$method}('timestamp');
+
         return $this->buildUriString($Calendar, $method, $stamp);
     }
 
@@ -155,6 +156,7 @@ class Calendar_Util_Uri
     {
         $method = 'this'.$unit;
         $stamp  = $Calendar->{$method}('timestamp');
+
         return $this->buildUriString($Calendar, $method, $stamp);
     }
 
@@ -171,6 +173,7 @@ class Calendar_Util_Uri
     {
         $method = 'next'.$unit;
         $stamp  = $Calendar->{$method}('timestamp');
+
         return $this->buildUriString($Calendar, $method, $stamp);
     }
 
@@ -198,7 +201,7 @@ class Calendar_Util_Uri
             $uriString .= $cE->{$call}($stamp);
             $separator = $this->separator;
         }
+
         return $uriString;
     }
 }
-?>

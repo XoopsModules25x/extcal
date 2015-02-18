@@ -60,7 +60,7 @@ class MonthPayload_Decorator extends Calendar_Decorator
         $this->month = $this->thisMonth();
 
         $daysInMonth = $this->cE->getDaysInMonth($this->year, $this->month);
-        for ($i=1; $i<=$daysInMonth; $i++) {
+        for ($i=1; $i<=$daysInMonth; ++$i) {
             $Day = new Calendar_Day(2000,1,1); // Create Day with dummy values
             $Day->setTimeStamp($this->cE->dateToStamp($this->year, $this->month, $i));
             $this->children[$i] = new DiaryEvent($Day);
@@ -78,7 +78,7 @@ class MonthPayload_Decorator extends Calendar_Decorator
     function setSelection($events)
     {
         $daysInMonth = $this->cE->getDaysInMonth($this->year, $this->month);
-        for ($i=1; $i<=$daysInMonth; $i++) {
+        for ($i=1; $i<=$daysInMonth; ++$i) {
             $stamp1 = $this->cE->dateToStamp($this->year, $this->month, $i);
             $stamp2 = $this->cE->dateToStamp($this->year, $this->month, $i+1);
             foreach ($events as $event) {

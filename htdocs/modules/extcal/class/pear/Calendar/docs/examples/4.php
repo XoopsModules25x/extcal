@@ -2,13 +2,15 @@
 /**
 * Description: shows how to perform validation with PEAR::Calendar
 */
-function getmicrotime(){
+function getmicrotime()
+{
     list($usec, $sec) = explode(' ', microtime());
-    return ((float)$usec + (float)$sec);
+
+    return ((float) $usec + (float) $sec);
 }
 $start = getmicrotime();
 
-if ( !@include 'Calendar/Calendar.php' ) {
+if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 require_once CALENDAR_ROOT.'Second.php';
@@ -46,4 +48,4 @@ Second: <input type="text" name="s" value="_EXTCAL_TS_MINUTE"><br />
 </form>
 <p><b>Note:</b> Error messages can be controlled with the constants <code>CALENDAR_VALUE_TOOSMALL</code> and <code>CALENDAR_VALUE_TOOLARGE</code> - see <code>Calendar_Validator.php</code></p>
 
-<?php echo '<p><b>Took: '.(getmicrotime()-$start).' seconds</b></p>'; ?>
+<?php echo '<p><b>Took: '.(getmicrotime()-$start).' seconds</b></p>';
