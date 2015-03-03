@@ -162,5 +162,4 @@ $lang = array(
 $xoopsTpl->assign('lang', $lang);
 $xoopsTpl->assign('view', "month");
 
-
 include XOOPS_ROOT_PATH . '/footer.php';

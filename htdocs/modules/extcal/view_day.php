@@ -136,7 +136,6 @@ if ($xoopsUser) {
 $xoTheme->addScript('browse.php?modules/extcal/assets/js/highslide.js');
 $xoTheme->addStylesheet('browse.php?modules/extcal/assets/js/highslide.css');
 
-
 //mb missing for xBootstrap templates by Angelo
 $lang = array(
     'start' => _MD_EXTCAL_START,

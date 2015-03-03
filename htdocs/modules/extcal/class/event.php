@@ -1208,7 +1208,6 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         // Add this extra to allow file upload
         $form->setExtra('enctype="multipart/form-data"');
 
-
         //-----------------------------------------------
         // Title
         $form->addElement(new XoopsFormText(_MD_EXTCAL_TITLE, 'event_title', 80, 255, $title), true);
@@ -1236,7 +1235,6 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         $criteria             = new CriteriaCompo();
         $criteria->setSort('nom');
         $criteria->setOrder('ASC');
-
 
         //$lstEtablissement = $etablissementHandler->getList($criteria);
         $etablissement_arr = $etablissementHandler->getAll($criteria);
@@ -1322,7 +1320,6 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
             $addressEditor = new XoopsFormDhtmlTextArea(_MD_EXTCAL_DESCRIPTION, 'event_address', $event_address, '100%', '100%');
         }
         $form->addElement($addressEditor);
-
 
         // Recurence form
         $form->addElement(new ExtcalFormRecurRules($reccurOptions));
@@ -1769,7 +1766,6 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
                 }
 
                 break;
-
 
             case 'yearly':
 
@@ -2467,7 +2463,6 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
             );
         }
 
-
         $ret = array();
         while ($myrow = $xoopsDB->fetchArray($result)) {
             $myrow['cat']['cat_name']        = $myrow['cat_name'];
@@ -2481,9 +2476,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
         return $ret;
 
-
     }
-
 
 //-----------------------------------------------------------
     /**
@@ -2520,7 +2513,6 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         //echo "<hr>{$andor}-{$limit}-{$offset}-{$userId}-{$user}<br>{$criteresPlus}";
         $tEvent = $xoopsDB->prefix("extcal_event") . ' AS te';
         $tCat   = $xoopsDB->prefix("extcal_cat") . ' AS tc';
-
 
         $sql = "SELECT te.*, tc.cat_name , tc.cat_color, " . "year(FROM_UNIXTIME(event_start)) AS year," . "month(FROM_UNIXTIME(event_start)) AS month," . "day(FROM_UNIXTIME(event_start)) AS day"
             . " FROM {$tEvent}, {$tCat}";
@@ -2585,7 +2577,6 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
             ) {
                 $t[] = sprintf($flt, $tFields[$h]);
             }
-
 
             $filtre = implode(" OR ", $t);
             $filtre = str_replace('#', '%', $filtre);
@@ -2662,7 +2653,6 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
     }
 
-
     /**
      * @param        $queryarray
      * @param        $andor
@@ -2726,7 +2716,6 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
             $sql .= ") ";
             */
 
-
             $tFields = array('event_title', 'event_desc', 'event_contact', 'event_address', 'cat_name');
             $t       = array();
             for (
@@ -2744,12 +2733,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
                 $t[] = sprintf($flt, $tFields[$h]);
             }
 
-
             $filtre = implode(" OR ", $t);
             $filtre = str_replace('#', '%', $filtre);
             $sql .= " AND ($filtre)";
         }
-
 
         if ($criteresPlus != '') {
             $sql .= ' AND ' . $criteresPlus;

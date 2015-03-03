@@ -210,7 +210,6 @@ function bExtcalMinicalShow($options)
     $horloge['width']    = $options[12] . 'px';
     $horloge['height']   = $options[13] . 'px';
 
-
     $ret = array(
         'imageParam'   => $imageParam,
         'displayLink'  => $displayLink,
@@ -316,7 +315,6 @@ function bExtcalMinicalEdit($options)
         1  => _MB_EXTCAL_NEXT
     );
 
-
     $k           = 7;
     $xfValue[$k] = new XoopsFormSelect(_MB_EXTCAL_DISPLAY_MONTH, "options[{$k}]", $options[$k], 1, false);
     $xfValue[$k]->addOptionArray($t);
@@ -382,7 +380,6 @@ function bExtcalMinicalEdit($options)
 
 //    return extcal_buildHtmlArray($xfValue, _OPTIONS);
 }
-
 
 /**************************************************************************/
 /**
@@ -542,7 +539,6 @@ function bExtcalMinicalAddEventToArray(
 // echo "event id = {$event['event_id']} - weight = {$weight}<br>color = {$color}<br><pre>{$t}</pre><hr>";
 
 }
-
 
 /**
  * @param $options

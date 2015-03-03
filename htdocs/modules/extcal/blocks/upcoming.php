@@ -57,7 +57,6 @@ function bExtcalUpcomingShow($options)
     $month = date('n', $dayTS);
     $day   = date('j', $dayTS);
 
-
     // Retriving events and formatting them
     //$events = $eventHandler->objectToArray($eventHandler->getEventWeek($day, $month, $year, $cat), array('cat_id'));
     $criteres = array(
@@ -72,7 +71,6 @@ function bExtcalUpcomingShow($options)
         'nbDays'       => $nbDays
     );
     $events   = $eventHandler->getEventsOnPeriode($criteres);
-
 
     //----------------------------
 
@@ -104,7 +102,6 @@ function bExtcalUpcomingEdit($options)
     $form .= _MB_EXTCAL_TITLE_LENGTH . " : <input name=\"options[1]\" size=\"5\" maxlength=\"255\" value=\"" . $options[1] . "\" type=\"text\" /><br />";
 
     $form .= _MB_EXTCAL_UPCOMING_DAYS . " : <input name=\"options[2]\" size=\"5\" maxlength=\"255\" value=\"" . $options[2] . "\" type=\"text\" /><br />";
-
 
     array_shift($options);
     array_shift($options);

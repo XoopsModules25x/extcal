@@ -25,5 +25,6 @@ function extcal_notify_iteminfo($category, $itemId)
 
         return $item;
     }
+
 return null;
 }

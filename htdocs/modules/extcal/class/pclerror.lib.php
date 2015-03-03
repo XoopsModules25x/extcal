@@ -47,7 +47,6 @@ if (!defined("PCLERROR_LIB")) {
     $g_pcl_error_string = "";
     $g_pcl_error_code   = 1;
 
-
     // --------------------------------------------------------------------------------
     // Function : PclErrorLog()
     // Description :

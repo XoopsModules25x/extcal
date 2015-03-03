@@ -332,7 +332,6 @@ switch ($op) {
         echo '<img src=' . $pathIcon16 . '/edit.png' . ' ' . 'style=vertical-align:middle;/>&nbsp;&nbsp;' . _AM_EXTCAL_INFO_EDIT . '<br />';
         echo '<img src=' . $pathIcon16 . '/delete.png' . ' ' . 'style=vertical-align:middle;/>&nbsp;&nbsp;' . _AM_EXTCAL_INFO_DELETE . '<br />';
 
-
         echo '</fieldset><br />';
 
         echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _MD_EXTCAL_SUBMITED_EVENT . '</legend>';
@@ -370,7 +369,6 @@ switch ($op) {
 
                 echo '<td>' . '<a href=event.php?op=modify&amp;event_id=' . $event['event_id'] . '>' . $event['event_title'] . '</a>' . '</td>';
 
-
 //                 if ($event['event_isrecur']) {
 //                     echo '<td>' . $event['formated_reccur_rule'] . '</td>';
 //                 } else {
@@ -386,13 +384,11 @@ switch ($op) {
                 }
                 echo '<td>' . $event['formated_reccur_rule'] . '</td>';
 
-
                 echo '<td style="width:10%; text-align:center;">';
                 echo '<a href=event.php?op=modify&amp;event_id=' . $event['event_id'] . "><img src='" . $pathIcon16 . "/edit.png' title='" . _AM_EXTCAL_ICONE_EDIT . "' /></a>&nbsp;&nbsp;";
                 echo '<a href=event.php?op=delete&amp;event_id=' . $event['event_id'] . "><img src='" . $pathIcon16 . "/delete.png' title='" . _AM_EXTCAL_ICONE_DELETE . "' /></a>&nbsp;&nbsp;";
                 echo '<a href=event.php?op=clone&amp;event_id=' . $event['event_id'] . "><img src='" . $pathIcon16 . "/editcopy.png' title='" . _AM_EXTCAL_ICONE_CLONE . "' /></a>";
                 echo '</td>';
-
 
                 echo '</tr>';
             }
