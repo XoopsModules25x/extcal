@@ -32,7 +32,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
      * @param string $classname Name of Class, this handler is managing
      * @param string $keyname   Name of the property, holding the key
      *
-     * @param bool   $idenfierName
+     * @param bool $idenfierName
      *
      * @return void
      */
@@ -82,8 +82,8 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
     /**
      * retrieve an object
      *
-     * @param  mixed $id       ID of the object - or array of ids for joint keys. Joint keys MUST be given in the same order as in the constructor
-     * @param  bool  $asObject whether to return an object or an array
+     * @param mixed $id       ID of the object - or array of ids for joint keys. Joint keys MUST be given in the same order as in the constructor
+     * @param bool  $asObject whether to return an object or an array
      *
      * @return mixed reference to the object, FALSE if failed
      */
@@ -146,8 +146,8 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
     /**
      * Convert a database resultset to a returnable array
      *
-     * @param object $result  database resultset
-     * @param bool   $idAsKey - should NOT be used with joint keys
+     * @param object $result   database resultset
+     * @param bool   $idAsKey  - should NOT be used with joint keys
      * @param bool   $asObject
      *
      * @return array
@@ -241,9 +241,9 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
     /**
      * count objects matching a condition
      *
-     * @param  object $criteria {@link CriteriaElement} to match
+     * @param object $criteria {@link CriteriaElement} to match
      *
-     * @return int    count of objects
+     * @return int count of objects
      */
     function getCount($criteria = null)
     {
@@ -283,10 +283,10 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
     /**
      * delete an object from the database
      *
-     * @param  mixed $id id of the object to delete
-     * @param  bool  $force
+     * @param mixed $id    id of the object to delete
+     * @param bool  $force
      *
-     * @return bool  FALSE if failed.
+     * @return bool FALSE if failed.
      */
     function delete($id, $force = false)
     {
@@ -317,11 +317,11 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
     /**
      * insert a new object in the database
      *
-     * @param  object $obj         reference to the object
-     * @param  bool   $force       whether to force the query execution despite security settings
-     * @param  bool   $checkObject check if the object is dirty and clean the attributes
+     * @param object $obj         reference to the object
+     * @param bool   $force       whether to force the query execution despite security settings
+     * @param bool   $checkObject check if the object is dirty and clean the attributes
      *
-     * @return bool   FALSE if failed, TRUE if already present and unchanged or successful
+     * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
 
     function insert(&$obj, $force = false, $checkObject = true)
@@ -420,7 +420,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
      * @param string $fieldvalue Value to write
      * @param object $criteria   {@link CriteriaElement}
      *
-     * @param bool   $force
+     * @param bool $force
      *
      * @return bool
      */
@@ -487,7 +487,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
     /**
      * delete all objects meeting the conditions
      *
-     * @param  object $criteria {@link CriteriaElement} with conditions to meet
+     * @param object $criteria {@link CriteriaElement} with conditions to meet
      *
      * @return bool
      */

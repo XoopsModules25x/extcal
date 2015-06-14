@@ -43,7 +43,6 @@ class ColorTools
         $plafondBleu = 255
     ) {
 
-
         $t10 = ColorTools::hexa2rgbA($colorHexa);
 
         $t10[1] = ColorTools::bornerValeur($t10[1] + $incrementRouge, $plancherRouge, $plafondRouge);
@@ -55,7 +54,6 @@ class ColorTools
         return $newColorHexa;
 
     }
-
 
     /**************************************************************
      * Eclairci une couleur
@@ -82,7 +80,6 @@ class ColorTools
                 $max = $t10[$h];
             }
         }
-
 
         $increment = $plafond - $max;
 
@@ -128,7 +125,6 @@ class ColorTools
         $tMin = Array('', $plancher, $plancher, $plancher);
         $tMax = Array('', $plafond, $plafond, $plafond);
 
-
         $t10 = ColorTools::hexa2rgbA($colorHexa);
         $max = 255;
 
@@ -161,7 +157,6 @@ class ColorTools
         return $colorHexa;
 
     }
-
 
     /**************************************************************
      * Renvoi une couleur RGB en hexa a partir du tableau passe en parametr

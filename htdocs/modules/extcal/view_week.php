@@ -163,5 +163,4 @@ $lang = array(
 $xoopsTpl->assign('lang', $lang);
 $xoopsTpl->assign('view', "week");
 
-
 include XOOPS_ROOT_PATH . '/footer.php';

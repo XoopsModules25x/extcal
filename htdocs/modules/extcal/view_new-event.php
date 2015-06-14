@@ -65,4 +65,3 @@ if (count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) > 0
 } else {
     redirect_header("index.php", 3);
 }
-

@@ -712,7 +712,6 @@ $modversion['blocks'][$i]['options']     = "5|25|0";
 $modversion['blocks'][$i]['edit_func']   = "bExtcalUpcomingByCategoryEdit";
 $modversion['blocks'][$i]['template']    = 'extcal_block_upcomingByCategory.tpl';
 
-
 //---------------------------------------------------------
 // Notifications
 $modversion['hasNotification']             = 1;

@@ -12,7 +12,6 @@ include_once __DIR__ . '/header.php';
 //needed to save the state of the form, so we don't show on the first time the list of available events
 $num_tries = (isset($_POST["num_tries"])) ? $_POST["num_tries"] + 1 : 0;
 
-
 /* ========================================================================== */
 /***************************************************************/
 /*  ajout des elements de recherche                            */
@@ -27,7 +26,6 @@ $orderby1  = isset($_POST['orderby1']) ? $_POST['orderby1'] : 'cat_name ASC';
 $orderby2  = isset($_POST['orderby2']) ? $_POST['orderby2'] : 'event_title ASC';
 $orderby3  = isset($_POST['orderby3']) ? $_POST['orderby3'] : '';
 /* ========================================================================== */
-
 
 //$orderby = isset($_GET['orderby']) ? intval($_GET['orderby']) : 0;
 
@@ -48,11 +46,9 @@ $search['orderby1'] = getListOrderBy('orderby1', '', $orderby1, false)->render()
 $search['orderby2'] = getListOrderBy('orderby2', '', $orderby2, true)->render();
 $search['orderby3'] = getListOrderBy('orderby3', '', $orderby3, true)->render();
 
-
 //echoArray($search,true);
 $xoopsTpl->assign('search', $search);
 /***************************************************************/
-
 
 // $form = new XoopsSimpleForm('', 'navigSelectBox', $params['file'], 'get');
 // // $form->addElement(getListYears($year,$xoopsModuleConfig['agenda_nb_years_before'],$xoopsModuleConfig['agenda_nb_years_after'], true));
@@ -80,7 +76,6 @@ $user    = '';
 $events = $eventHandler->getSearchEvent2($year, $month, $day, $cat, $searchExp, $andor, $orderBy, $userId, $user);
 
 $eventHandler->serverTimeToUserTimes($events);
-
 
 // Formating date
 $eventHandler->formatEventsDate($events, $xoopsModuleConfig['event_date_year']);
@@ -117,12 +112,10 @@ if ($cat > 0) {
     $criteria->add(new Criteria('cat_id', $cat));
 }
 
-
 //$criteria = new criteria('event_isrecur', 1);
 
 $recurrents = $eventHandler->getAllEvents($criteria, false);
 $catHandler = xoops_getmodulehandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-
 
 //=========================================
 for ($h = 0, $count = count($recurrents); $h < $count; ++$h) {
@@ -197,7 +190,6 @@ $xoopsTpl->assign('year', $year);
 $xoopsTpl->assign('month', $month);
 
 $xoopsTpl->assign('num_tries', $num_tries);
-
 
 //---------------------------------------------------------------
 if ($xoopsUser) {

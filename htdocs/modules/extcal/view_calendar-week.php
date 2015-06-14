@@ -176,7 +176,6 @@ $tNavBar = getNavBarTabs($params['view']);
 $xoopsTpl->assign('tNavBar', $tNavBar);
 $xoopsTpl->assign('list_position', $xoopsModuleConfig['list_position']);
 
-
 //mb missing for xBootstrap templates by Angelo
 //mb missing for xBootstrap templates by Angelo
 $lang = array(
@@ -197,6 +196,5 @@ $lang = array(
 // Assigning language data to the template
 $xoopsTpl->assign('lang', $lang);
 $xoopsTpl->assign('view', "calweek");
-
 
 include XOOPS_ROOT_PATH . '/footer.php';

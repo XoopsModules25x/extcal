@@ -45,6 +45,7 @@ class Calendar_Server
     {
         if (isset($this->__dispatch_map[$methodname]))
             return $this->__dispatch_map[$methodname];
+
         return NULL;
     }
 
