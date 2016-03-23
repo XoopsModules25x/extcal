@@ -1,27 +1,27 @@
-2.39 Beta 1             NOT RELEASED
+2.39 Beta 1             2016-03-21
 ===================================
 - moved all images, CSS, and JS files to /assets (mamba)
 - renamed .html Smarty templates to .tpl (mamba)
 - some changes to make it compatible with Angelo's templates for xBootstrap (mamba)
 - updates for PHP7, XOOPS 2.5.8 (mamba)
 
-2.38 Beta 1             2013/08/21
+2.38 Beta 1             2013-08-21
 ===================================
 - added editor selection in Preferences for Admin and User (mamba)
 - added checks if event was added/modified successfully (mamba)
 
-2.37 Final              2013/07/10
+2.37 Final              2013-07-10
 ===================================
 - small changes for PHP 5.4
 - fixed: removed today's events from "upcoming" block (chefry/mamba)
 
-2.37 RC6                2013/04/20
+2.37 RC6                2013-04-20
 ===================================
 - modification of the English language files for Transifex (cesagonchu)
 - fixed: missing argument 6 for agenda_getCanevas() (cesagonchu)
 - fixed: missing phone column (Sabahan/Mamba)
 
-2.37 RC5                2013/01/29
+2.37 RC5                2013-01-29
 ===================================
 - fixed: missing edit/delete icons for Admin in year/month/week/day view (mamba)
 - fixed: missing print icons in week/day views (jcweb/mamba)
@@ -30,7 +30,7 @@
 - added: recurring events in "Upcoming events" block (sabahan/mamba)
 - changed time interval in Admin from 10 minutes to 15 minutes (playsome)
 
-2.37 RC4                2013/01/02
+2.37 RC4                2013-01-02
 ===================================
 - fixed: removed list of events when showing first time the Search form (sabahan/mamba)
 - fixed: if we disable tooltips , event title will be missing in from the calendar (sabahan/mamba)
@@ -40,7 +40,7 @@
 - fixed: Agenda view reflects now start and end time set in Preferences (jcweb/mamba)
 
 
-2.37 RC3                2013/01/01
+2.37 RC3                2013-01-01
 ===================================
 - fixed: bug in setting recurring events for a x-day of the month, when 1st of the month is on the following day of the week.
   E.g. if you select 3rd Thursday, and the first day of the month is on Friday, extCal would set the event on the 2nd Thursday
@@ -48,7 +48,7 @@
 - fixed: if not auto-approved, event is set as pending (sabahan/mamba)
 - fixed: redirect after updating or creating an event (sabahan/mamba)
 
-2.37 RC2                2012/12/22
+2.37 RC2                2012-12-22
 ===================================
 - fixed: attachment bug (JammerPro/mamba)
 - fixed: past events not being visible consistently, when selected by user in Preferences (mamba)
@@ -61,7 +61,7 @@
 - fixed: removed double edit icons (sabahan/mamba)
 - fixed: removed Contact info from Print, if empty (sabahan/mamba)
 
-2.37 Beta 4             2012/04/02
+2.37 Beta 4             2012-04-02
 ===================================
 - small code cleanups (mamba)
 -
@@ -74,19 +74,19 @@
 - Mis à jour des constantes de langue
 - Patch de mise à jour des tables
 
-2.36 (JJD.fr)               2012/01/31
+2.36 (JJD.fr)               2012-01-31
 ===================================
 - Fixed display
 - Replacement of infobulle by another model more pro
 
-2.35 (JJD.fr)               2012/01/21
+2.35 (JJD.fr)               2012-01-21
 ===================================
 - Réintrégation file update extcal_2_34.php omitted in the previous version
 - Fixed zoom in on photos to certeines
 - Fixed default value of 0 in the table event_etablissement event
 - Intancciation of extcalConfig <=> xoopsModuleConfig for blocks
 
-2.34 (JJD.fr)               2012/01/06
+2.34 (JJD.fr)               2012-01-06
 ===================================
   - Fixed handling of images of events and the establishment
   - Fixed the RSS feed
