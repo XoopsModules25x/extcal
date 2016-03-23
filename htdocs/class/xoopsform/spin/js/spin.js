@@ -5,19 +5,19 @@
 //  ------------------------------------------------------------------------ //
 /******************************************************************************
 
- 
-Copyright (C) 2007 Jean-Jacques DELALANDRE 
-Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes de la Licence Publique Générale GNU publiée par la Free Software Foundation (version 2 ou bien toute autre version ultérieure choisie par vous). 
 
-Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE, ni explicite ni implicite, y compris les garanties de commercialisation ou d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU pour plus de détails. 
+Copyright (C) 2007 Jean-Jacques DELALANDRE
+Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes de la Licence Publique GÃ©nÃ©rale GNU publiÃ©e par la Free Software Foundation (version 2 ou bien toute autre version ultÃ©rieure choisie par vous).
 
-Vous devez avoir reçu une copie de la Licence Publique Générale GNU en même temps que ce programme ; si ce n'est pas le cas, écrivez à la Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, +tats-Unis. 
+Ce programme est distribuÃ© car potentiellement utile, mais SANS AUCUNE GARANTIE, ni explicite ni implicite, y compris les garanties de commercialisation ou d'adaptation dans un but spÃ©cifique. Reportez-vous Ã  la Licence Publique GÃ©nÃ©rale GNU pour plus de dÃ©tails.
 
-Création avril 2006
-Dernière modification : septembre 2007
+Vous devez avoir reÃ§u une copie de la Licence Publique GÃ©nÃ©rale GNU en mÃªme temps que ce programme ; si ce n'est pas le cas, Ã©crivez Ã  la Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, +tats-Unis.
+
+CrÃ©ation avril 2006
+DerniÃ¨re modification : septembre 2007
 ******************************************************************************/
 
-var spinIdTimer           = 0;   
+var spinIdTimer           = 0;
 var spinPrefixe           = "";
 var spinPrefixe2          = "";
 var spinSmallIncrement    = 0;
@@ -35,29 +35,29 @@ var spinImgName           = "";
 function spinStart(prefixe, prefixe2, smallIncrement, largeIncrement, delai, newImg) {
 
     spinPrefixe           = prefixe;
-    spinPrefixe2          = prefixe2;    
+    spinPrefixe2          = prefixe2;
     spinSmallIncrement    = smallIncrement;
     spinLargeIncrement    = largeIncrement;
-    spinIncrement         = spinSmallIncrement;    
-    spinCompteur          = 0;    
-    
+    spinIncrement         = spinSmallIncrement;
+    spinCompteur          = 0;
+
     spinDoIncrement( );
-    //alert ("onSpinStart" + "-" + prefixe + "-" + smallIncrement + "-" + largeIncrement);    
+    //alert ("onSpinStart" + "-" + prefixe + "-" + smallIncrement + "-" + largeIncrement);
     if (spinIncrement > 0){
       spinSens = 1;
       i=0
     }else{
-      spinSens = -1;      
+      spinSens = -1;
       i=1
     };
-    
+
     spinImgName = prefixe2 + "_img"+i;
- 
-    obImg = document.getElementsByName(spinImgName);    
-    spinImg = obImg[0].src ;  
+
+    obImg = document.getElementsByName(spinImgName);
+    spinImg = obImg[0].src ;
     obImg[0].src = newImg;
-    
-    spinIdTimer = setInterval ("spinTimer()", delai);    
+
+    spinIdTimer = setInterval ("spinTimer()", delai);
 }
 
 /****************************************************************************
@@ -65,12 +65,12 @@ function spinStart(prefixe, prefixe2, smallIncrement, largeIncrement, delai, new
  ***************************************************************************/
 function spinStop() {
 
-    clearInterval (spinIdTimer);   
+    clearInterval (spinIdTimer);
 
-    if (spinImg != "") {      
-      obImg = document.getElementsByName(spinImgName);    
-      //alert (spinImgName + " - " + spinImg);      
-      obImg[0].src = spinImg;      
+    if (spinImg != "") {
+      obImg = document.getElementsByName(spinImgName);
+      //alert (spinImgName + " - " + spinImg);
+      obImg[0].src = spinImg;
     }
 }
 
@@ -87,10 +87,10 @@ function spinTimer() {
 function spinDoIncrement() {
 
     obMin = document.getElementsByName(spinPrefixe2 + "_min");
-    obMax = document.getElementsByName(spinPrefixe2 + "_max");    
-    obInc = document.getElementsByName(spinPrefixe2 + "_increment");    
+    obMax = document.getElementsByName(spinPrefixe2 + "_max");
+    obInc = document.getElementsByName(spinPrefixe2 + "_increment");
     obVal = document.getElementsByName(spinPrefixe );
-    
+
     newValue = (1*(obVal[0].value)) + spinIncrement ;
 
     if (newValue < 1 * obMin[0].value){
@@ -98,10 +98,10 @@ function spinDoIncrement() {
       spinStop();
     }else if (newValue > 1*obMax[0].value){
       newValue = 1*obMax[0].value;
-      spinStop();      
+      spinStop();
     }
-        
-    obVal[0].value = newValue;   
+
+    obVal[0].value = newValue;
     spinCompteur++;
     if (spinCompteur > 10){
       spinIncrement = spinLargeIncrement;
@@ -111,22 +111,22 @@ function spinDoIncrement() {
 /****************************************************************************
  *
  ***************************************************************************/
-function spinSetValue(prefixe, prefixe2, suffixe, newValue, delai, newImg) {  
-    
+function spinSetValue(prefixe, prefixe2, suffixe, newValue, delai, newImg) {
+
     spinPrefixe           = prefixe;
-    spinPrefixe2          = prefixe2;    
-    
+    spinPrefixe2          = prefixe2;
+
     spinImgName = prefixe2 + "_img" + suffixe;
- 
-    obImg = document.getElementsByName(spinImgName);    
-    spinImg = obImg[0].src ;  
+
+    obImg = document.getElementsByName(spinImgName);
+    spinImg = obImg[0].src ;
     obImg[0].src = newImg;
-    
+
     obVal = document.getElementsByName(prefixe);
-    obVal[0].value = newValue;   
-   
-    spinIdTimer = setInterval ("spinStop ()", delai);    
-   
+    obVal[0].value = newValue;
+
+    spinIdTimer = setInterval ("spinStop ()", delai);
+
 }
 
 
