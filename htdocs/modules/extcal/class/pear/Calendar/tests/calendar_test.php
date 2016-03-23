@@ -9,145 +9,165 @@ require_once 'calendar_include.php';
  */
 class TestOfCalendar extends UnitTestCase
 {
-    var $cal;
+    public $cal;
 
     /**
      * @param string $name
      */
-    function TestOfCalendar($name='Test of Calendar')
+    public function __construct($name = 'Test of Calendar')
     {
-        $this->UnitTestCase($name);
+        parent::__construct($name);
     }
-    function setUp()
+
+    public function setUp()
     {
-        $this->cal = new Calendar(2003,10,25,13,32,43);
+        $this->cal = new Calendar(2003, 10, 25, 13, 32, 43);
     }
-    function tearDown()
+
+    public function tearDown()
     {
         unset($this->cal);
     }
-    function testPrevYear ()
+
+    public function testPrevYear()
     {
-        $this->assertEqual(2002,$this->cal->prevYear());
+        $this->assertEqual(2002, $this->cal->prevYear());
     }
-    function testPrevYear_Array ()
+
+    public function testPrevYear_Array()
     {
-        $this->assertEqual(
-            array(
-                'year'   => 2002,
-                'month'  => 1,
-                'day'    => 1,
-                'hour'   => 0,
-                'minute' => 0,
-                'second' => 0),
-            $this->cal->prevYear('array'));
+        $this->assertEqual(array(
+                               'year'   => 2002,
+                               'month'  => 1,
+                               'day'    => 1,
+                               'hour'   => 0,
+                               'minute' => 0,
+                               'second' => 0), $this->cal->prevYear('array'));
     }
-    function testThisYear ()
+
+    public function testThisYear()
     {
-        $this->assertEqual(2003,$this->cal->thisYear());
+        $this->assertEqual(2003, $this->cal->thisYear());
     }
-    function testNextYear ()
+
+    public function testNextYear()
     {
-        $this->assertEqual(2004,$this->cal->nextYear());
+        $this->assertEqual(2004, $this->cal->nextYear());
     }
-    function testPrevMonth ()
+
+    public function testPrevMonth()
     {
-        $this->assertEqual(9,$this->cal->prevMonth());
+        $this->assertEqual(9, $this->cal->prevMonth());
     }
-    function testPrevMonth_Array ()
+
+    public function testPrevMonth_Array()
     {
-        $this->assertEqual(
-            array(
-                'year'   => 2003,
-                'month'  => 9,
-                'day'    => 1,
-                'hour'   => 0,
-                'minute' => 0,
-                'second' => 0),
-            $this->cal->prevMonth('array'));
+        $this->assertEqual(array(
+                               'year'   => 2003,
+                               'month'  => 9,
+                               'day'    => 1,
+                               'hour'   => 0,
+                               'minute' => 0,
+                               'second' => 0), $this->cal->prevMonth('array'));
     }
-    function testThisMonth ()
+
+    public function testThisMonth()
     {
-        $this->assertEqual(10,$this->cal->thisMonth());
+        $this->assertEqual(10, $this->cal->thisMonth());
     }
-    function testNextMonth ()
+
+    public function testNextMonth()
     {
-        $this->assertEqual(11,$this->cal->nextMonth());
+        $this->assertEqual(11, $this->cal->nextMonth());
     }
-    function testPrevDay ()
+
+    public function testPrevDay()
     {
-        $this->assertEqual(24,$this->cal->prevDay());
+        $this->assertEqual(24, $this->cal->prevDay());
     }
-    function testPrevDay_Array ()
+
+    public function testPrevDay_Array()
     {
-        $this->assertEqual(
-            array(
-                'year'   => 2003,
-                'month'  => 10,
-                'day'    => 24,
-                'hour'   => 0,
-                'minute' => 0,
-                'second' => 0),
-            $this->cal->prevDay('array'));
+        $this->assertEqual(array(
+                               'year'   => 2003,
+                               'month'  => 10,
+                               'day'    => 24,
+                               'hour'   => 0,
+                               'minute' => 0,
+                               'second' => 0), $this->cal->prevDay('array'));
     }
-    function testThisDay ()
+
+    public function testThisDay()
     {
-        $this->assertEqual(25,$this->cal->thisDay());
+        $this->assertEqual(25, $this->cal->thisDay());
     }
-    function testNextDay ()
+
+    public function testNextDay()
     {
-        $this->assertEqual(26,$this->cal->nextDay());
+        $this->assertEqual(26, $this->cal->nextDay());
     }
-    function testPrevHour ()
+
+    public function testPrevHour()
     {
-        $this->assertEqual(12,$this->cal->prevHour());
+        $this->assertEqual(12, $this->cal->prevHour());
     }
-    function testThisHour ()
+
+    public function testThisHour()
     {
-        $this->assertEqual(13,$this->cal->thisHour());
+        $this->assertEqual(13, $this->cal->thisHour());
     }
-    function testNextHour ()
+
+    public function testNextHour()
     {
-        $this->assertEqual(14,$this->cal->nextHour());
+        $this->assertEqual(14, $this->cal->nextHour());
     }
-    function testPrevMinute ()
+
+    public function testPrevMinute()
     {
-        $this->assertEqual(31,$this->cal->prevMinute());
+        $this->assertEqual(31, $this->cal->prevMinute());
     }
-    function testThisMinute ()
+
+    public function testThisMinute()
     {
-        $this->assertEqual(32,$this->cal->thisMinute());
+        $this->assertEqual(32, $this->cal->thisMinute());
     }
-    function testNextMinute ()
+
+    public function testNextMinute()
     {
-        $this->assertEqual(33,$this->cal->nextMinute());
+        $this->assertEqual(33, $this->cal->nextMinute());
     }
-    function testPrevSecond ()
+
+    public function testPrevSecond()
     {
-        $this->assertEqual(42,$this->cal->prevSecond());
+        $this->assertEqual(42, $this->cal->prevSecond());
     }
-    function testThisSecond ()
+
+    public function testThisSecond()
     {
-        $this->assertEqual(43,$this->cal->thisSecond());
+        $this->assertEqual(43, $this->cal->thisSecond());
     }
-    function testNextSecond ()
+
+    public function testNextSecond()
     {
-        $this->assertEqual(44,$this->cal->nextSecond());
+        $this->assertEqual(44, $this->cal->nextSecond());
     }
-    function testSetTimeStamp()
+
+    public function testSetTimeStamp()
     {
-        $stamp = mktime(13,32,43,10,25,2003);
-        $this->cal->setTimeStamp($stamp);
-        $this->assertEqual($stamp,$this->cal->getTimeStamp());
+        $stamp = mktime(13, 32, 43, 10, 25, 2003);
+        $this->cal->setTimestamp($stamp);
+        $this->assertEqual($stamp, $this->cal->getTimestamp());
     }
-    function testGetTimeStamp()
+
+    public function testGetTimeStamp()
     {
-        $stamp = mktime(13,32,43,10,25,2003);
-        $this->assertEqual($stamp,$this->cal->getTimeStamp());
+        $stamp = mktime(13, 32, 43, 10, 25, 2003);
+        $this->assertEqual($stamp, $this->cal->getTimestamp());
     }
-    function testIsToday()
+
+    public function testIsToday()
     {
-        $stamp = mktime();
+        $stamp = time();
         $this->cal->setTimestamp($stamp);
         $this->assertTrue($this->cal->isToday());
 

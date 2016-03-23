@@ -29,7 +29,7 @@
                     <{$event.event_title}>
                 </a>
 
-                <div style="float:right;margin-right:4px;text-align:right"><{$event.formated_event_end}>
+                <div style="float:right;margin-right:4px;text-align:right;"><{$event.formated_event_end}>
                     <div style="float:right; margin-left:5px;">
 
                         <{include file="db:extcal_buttons_event.tpl"}>
@@ -41,7 +41,7 @@
                 </div>
 
 
-                <div style="margin-left:148px;margin-top:4px">
+                <div style="margin-left:148px;margin-top:4px;">
 
 
                 </div>
@@ -54,25 +54,25 @@
                 <{if $event.event_picture1}>
                     <div class="highslide-gallery">
                         <a href="<{$xoops_url}>/uploads/extcal/<{$event.event_picture1}>" class="highslide" onclick="return hs.expand(this)">
-                            <img align="left" style="margin-right:10px" src="<{$xoops_url}>/uploads/extcal/<{$event.event_picture1}>" height="150px"/>
+                            <img align="left" style="margin-right:10px;" src="<{$xoops_url}>/uploads/extcal/<{$event.event_picture1}>" height="150px"/>
                         </a>
 
                         <div class="highslide-heading"></div>
                     </div>
                 <{elseif $smarty.const._EXTCAL_SHOW_NO_PICTURE}>
-                    <img align=left style="margin-right:6px" src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="150px"/>
+                    <img align=left style="margin-right:6px;" src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180"/>
                 <{/if}>
 
                 <{if $event.event_picture2}>
                     <div class="highslide-gallery">
                         <a href="<{$xoops_url}>/uploads/extcal/<{$event.event_picture2}>" class="highslide" onclick="return hs.expand(this)">
-                            <img align="left" style="margin-right:10px" src="<{$xoops_url}>/uploads/extcal/<{$event.event_picture2}>" height="150px"/>
+                            <img align="left" style="margin-right:10px;" src="<{$xoops_url}>/uploads/extcal/<{$event.event_picture2}>" height="150px"/>
                         </a>
 
                         <div class="highslide-heading"></div>
                     </div>
                 <{elseif $smarty.const._EXTCAL_SHOW_NO_PICTURE}>
-                    <img align=left style="margin-right:6px" src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="150px"/>
+                    <img align=left style="margin-right:6px;" src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180"/>
                 <{/if}>
 
                 <!-- ------------------------------------ -->
@@ -86,4 +86,4 @@
 <div style="text-align:right;"><a
             href="<{$xoops_url}>/modules/extcal/rss.php?cat=<{$selectedCat}>"><img
                 src="assets/images/icons/rss.gif" alt="RSS Feed"/></a></div>
-<{include file='db:system_notification_select.html'}>
+<{include file='db:system_notification_select.tpl'}>

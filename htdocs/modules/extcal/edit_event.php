@@ -8,12 +8,10 @@ include __DIR__ . '/class/perm.php';
 include_once __DIR__ . '/include/constantes.php';
 
 $permHandler = ExtcalPerm::getHandler();
-$xoopsUser   = $xoopsUser ? $xoopsUser : null;
+$xoopsUser   = $xoopsUser ?: null;
 
-if (count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) == 0
-    && count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_edit')) == 0
-) {
-    redirect_header("index.php", 3);
+if (count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) == 0 && count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_edit')) == 0) {
+    redirect_header('index.php', 3);
     exit;
 }
 
@@ -29,7 +27,7 @@ $xoTheme->addStylesheet('modules/extcal/assets/css/infobulle.css');
 if (!isset($_GET['event'])) {
     $eventId = 0;
 } else {
-    $eventId = intval($_GET['event']);
+    $eventId = (int)$_GET['event'];
 }
 if (!isset($_GET['action'])) {
     $action = 'edit';
@@ -38,7 +36,7 @@ if (!isset($_GET['action'])) {
 }
 
 // Getting eXtCal object's handler
-$eventHandler = xoops_getmodulehandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
+$eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
 
 include XOOPS_ROOT_PATH . '/header.php';
 

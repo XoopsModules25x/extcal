@@ -9,9 +9,12 @@ require_once 'calendar_include.php';
  */
 class UtilTests extends GroupTest
 {
-    function UtilTests()
+    /**
+     * UtilTests constructor.
+     */
+    public function __construct()
     {
-        $this->GroupTest('Util Tests');
+        parent::__construct('Util Tests');
         $this->addTestFile('util_uri_test.php');
         $this->addTestFile('util_textual_test.php');
     }

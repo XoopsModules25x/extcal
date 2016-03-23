@@ -48,7 +48,7 @@ if (!defined('CALENDAR_ROOT')) {
 /**
  * Load Calendar base class
  */
-require_once CALENDAR_ROOT.'Calendar.php';
+require_once CALENDAR_ROOT . 'Calendar.php';
 
 /**
  * Contains a factory method to return a Singleton instance of a class
@@ -72,7 +72,7 @@ require_once CALENDAR_ROOT.'Calendar.php';
  * @copyright 2003-2007 Harry Fuecks, Lorenzo Alberton
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @link      http://pear.php.net/package/Calendar
- * @access protected
+ * @access    protected
  */
 class Calendar_Factory
 {
@@ -80,89 +80,88 @@ class Calendar_Factory
      * Creates a calendar object given the type and units
      *
      * @param string $type class of calendar object to create
-     * @param int    $y    year
-     * @param int    $m    month
-     * @param int    $d    day
-     * @param int    $h    hour
-     * @param int    $i    minute
-     * @param int    $s    second
+     * @param int $y       year
+     * @param int $m       month
+     * @param int $d       day
+     * @param int $h       hour
+     * @param int $i       minute
+     * @param int $s       second
      *
      * @return object subclass of Calendar
      * @access public
      * @static
      */
-    static function create($type, $y = 2000, $m = 1, $d = 1, $h = 0, $i = 0, $s = 0)
+    public static function create($type, $y = 2000, $m = 1, $d = 1, $h = 0, $i = 0, $s = 0)
     {
         $firstDay = defined('CALENDAR_FIRST_DAY_OF_WEEK') ? CALENDAR_FIRST_DAY_OF_WEEK : 1;
         switch ($type) {
-        case 'Day':
-            include_once CALENDAR_ROOT.'Day.php';
+            case 'Day':
+                include_once CALENDAR_ROOT . 'Day.php';
 
-            return new Calendar_Day($y, $m, $d);
-        case 'Month':
-            // Set default state for which month type to build
-            if (!defined('CALENDAR_MONTH_STATE')) {
-                define('CALENDAR_MONTH_STATE', CALENDAR_USE_MONTH);
-            }
-            switch (CALENDAR_MONTH_STATE) {
-            case CALENDAR_USE_MONTH_WEEKDAYS:
-                include_once CALENDAR_ROOT.'Month/Weekdays.php';
-                $class = 'Calendar_Month_Weekdays';
-                break;
-            case CALENDAR_USE_MONTH_WEEKS:
-                include_once CALENDAR_ROOT.'Month/Weeks.php';
-                $class = 'Calendar_Month_Weeks';
-                break;
-            case CALENDAR_USE_MONTH:
+                return new Calendar_Day($y, $m, $d);
+            case 'Month':
+                // Set default state for which month type to build
+                if (!defined('CALENDAR_MONTH_STATE')) {
+                    define('CALENDAR_MONTH_STATE', CALENDAR_USE_MONTH);
+                }
+                switch (CALENDAR_MONTH_STATE) {
+                    case CALENDAR_USE_MONTH_WEEKDAYS:
+                        include_once CALENDAR_ROOT . 'Month/Weekdays.php';
+                        $class = 'Calendar_Month_Weekdays';
+                        break;
+                    case CALENDAR_USE_MONTH_WEEKS:
+                        include_once CALENDAR_ROOT . 'Month/Weeks.php';
+                        $class = 'Calendar_Month_Weeks';
+                        break;
+                    case CALENDAR_USE_MONTH:
+                    default:
+                        include_once CALENDAR_ROOT . 'Month.php';
+                        $class = 'Calendar_Month';
+                        break;
+                }
+
+                return new $class($y, $m, $firstDay);
+            case 'Week':
+                include_once CALENDAR_ROOT . 'Week.php';
+
+                return new Calendar_Week($y, $m, $d, $firstDay);
+            case 'Hour':
+                include_once CALENDAR_ROOT . 'Hour.php';
+
+                return new Calendar_Hour($y, $m, $d, $h);
+            case 'Minute':
+                include_once CALENDAR_ROOT . 'Minute.php';
+
+                return new Calendar_Minute($y, $m, $d, $h, $i);
+            case 'Second':
+                include_once CALENDAR_ROOT . 'Second.php';
+
+                return new Calendar_Second($y, $m, $d, $h, $i, $s);
+            case 'Year':
+                include_once CALENDAR_ROOT . 'Year.php';
+
+                return new Calendar_Year($y);
             default:
-                include_once CALENDAR_ROOT.'Month.php';
-                $class = 'Calendar_Month';
-                break;
-            }
+                include_once 'PEAR.php';
+                PEAR::raiseError('Calendar_Factory::create() unrecognised type: ' . $type, null, PEAR_ERROR_TRIGGER, E_USER_NOTICE, 'Calendar_Factory::create()');
 
-            return new $class($y, $m, $firstDay);
-        case 'Week':
-            include_once CALENDAR_ROOT.'Week.php';
-
-            return new Calendar_Week($y, $m, $d, $firstDay);
-        case 'Hour':
-            include_once CALENDAR_ROOT.'Hour.php';
-
-            return new Calendar_Hour($y, $m, $d, $h);
-        case 'Minute':
-            include_once CALENDAR_ROOT.'Minute.php';
-
-            return new Calendar_Minute($y, $m, $d, $h, $i);
-        case 'Second':
-            include_once CALENDAR_ROOT.'Second.php';
-
-            return new Calendar_Second($y, $m, $d, $h, $i, $s);
-        case 'Year':
-            include_once CALENDAR_ROOT.'Year.php';
-
-            return new Calendar_Year($y);
-        default:
-            include_once 'PEAR.php';
-            PEAR::raiseError('Calendar_Factory::create() unrecognised type: '.$type,
-                null, PEAR_ERROR_TRIGGER, E_USER_NOTICE, 'Calendar_Factory::create()');
-
-            return false;
+                return false;
         }
     }
 
     /**
      * Creates an instance of a calendar object, given a type and timestamp
      *
-     * @param string $type  type of object to create
-     * @param mixed  $stamp timestamp (depending on Calendar engine being used)
+     * @param string $type type of object to create
+     * @param mixed $stamp timestamp (depending on Calendar engine being used)
      *
      * @return object subclass of Calendar
      * @access public
      * @static
      */
-    static function & createByTimestamp($type, $stamp)
+    public static function & createByTimestamp($type, $stamp)
     {
-        $cE  = & Calendar_Engine_Factory::getEngine();
+        $cE  = &Calendar_Engine_Factory::getEngine();
         $y   = $cE->stampToYear($stamp);
         $m   = $cE->stampToMonth($stamp);
         $d   = $cE->stampToDay($stamp);

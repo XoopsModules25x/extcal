@@ -47,7 +47,7 @@ if (!defined('CALENDAR_ROOT')) {
 /**
  * Load Calendar base class
  */
-require_once CALENDAR_ROOT.'Calendar.php';
+require_once CALENDAR_ROOT . 'Calendar.php';
 
 /**
  * Represents a Year and builds Months<br>
@@ -55,7 +55,7 @@ require_once CALENDAR_ROOT.'Calendar.php';
  * require_once 'Calendar/Year.php';
  * $Year = new Calendar_Year(2003, 10, 21); // 21st Oct 2003
  * $Year->build(); // Build Calendar_Month objects
- * while ($Month = & $Year->fetch()) {
+ * while ($Month = $Year->fetch()) {
  *     echo $Month->thisMonth().'<br />';
  * }
  * </code>
@@ -77,9 +77,9 @@ class Calendar_Year extends Calendar
      *
      * @access public
      */
-    function Calendar_Year($y)
+    public function __construct($y)
     {
-        parent::Calendar($y);
+        parent::__construct($y);
     }
 
     /**
@@ -96,18 +96,18 @@ class Calendar_Year extends Calendar
      *
      * @param array $sDates   (optional) array of Calendar_Month objects
      *                        representing selected dates
-     * @param int   $firstDay (optional) first day of week
+     * @param int $firstDay   (optional) first day of week
      *                        (e.g. 0 for Sunday, 2 for Tuesday etc.)
      *
      * @return boolean
      * @access public
      */
-    function build($sDates = array(), $firstDay = null)
+    public function build($sDates = array(), $firstDay = null)
     {
-        include_once CALENDAR_ROOT.'Factory.php';
+        include_once CALENDAR_ROOT . 'Factory.php';
         $this->firstDay = $this->defineFirstDayOfWeek($firstDay);
         $monthsInYear   = $this->cE->getMonthsInYear($this->thisYear());
-        for ($i=1; $i <= $monthsInYear; ++$i) {
+        for ($i = 1; $i <= $monthsInYear; ++$i) {
             $this->children[$i] = Calendar_Factory::create('Month', $this->year, $i);
         }
         if (count($sDates) > 0) {
@@ -125,7 +125,7 @@ class Calendar_Year extends Calendar
      * @return void
      * @access private
      */
-    function setSelection($sDates)
+    public function setSelection($sDates)
     {
         foreach ($sDates as $sDate) {
             if ($this->year == $sDate->thisYear()) {

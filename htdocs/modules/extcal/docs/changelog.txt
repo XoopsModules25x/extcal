@@ -1,8 +1,9 @@
-2.38 RC 1             NOT RELEASED
+2.39 Beta 1             NOT RELEASED
 ===================================
 - moved all images, CSS, and JS files to /assets (mamba)
 - renamed .html Smarty templates to .tpl (mamba)
 - some changes to make it compatible with Angelo's templates for xBootstrap (mamba)
+- updates for PHP7, XOOPS 2.5.8 (mamba)
 
 2.38 Beta 1             2013/08/21
 ===================================
@@ -16,8 +17,8 @@
 
 2.37 RC6                2013/04/20
 ===================================
-- modification of the English language files for Transifex (cesag)
-- fixed: missing argument 6 for agenda_getCanevas() (cesag)
+- modification of the English language files for Transifex (cesagonchu)
+- fixed: missing argument 6 for agenda_getCanevas() (cesagonchu)
 - fixed: missing phone column (Sabahan/Mamba)
 
 2.37 RC5                2013/01/29

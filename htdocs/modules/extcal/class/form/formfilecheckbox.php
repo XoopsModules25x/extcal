@@ -5,15 +5,15 @@
  */
 class ExtcalFormFileCheckBox extends XoopsFormCheckBox
 {
-
     /**
      * @param      $caption
      * @param      $name
      * @param null $value
+     * @return ExtcalFormFileCheckBox
      */
-    function ExtcalFormFileCheckBox($caption, $name, $value = null)
+    public function __construct($caption, $name, $value = null)
     {
-        $this->XoopsFormCheckBox($caption, $name, $value);
+        parent::__construct($caption, $name, $value);
     }
 
     /**
@@ -21,25 +21,19 @@ class ExtcalFormFileCheckBox extends XoopsFormCheckBox
      *
      * @return string
      */
-    function render()
+    public function render()
     {
-        $ret = "";
-        if (count($this->getOptions()) > 1
-            && substr($this->getName(), -2, 2) != "[]"
-        ) {
-            $newname = $this->getName() . "[]";
+        $ret = '';
+        if (count($this->getOptions()) > 1 && substr($this->getName(), -2, 2) !== '[]') {
+            $newname = $this->getName() . '[]';
             $this->setName($newname);
         }
-        foreach (
-            $this->getOptions() as $value => $name
-        ) {
-            $ret
-                .= "<input type='checkbox' name='" . $this->getName() . "' value='" . $value . "'";
+        foreach ($this->getOptions() as $value => $name) {
+            $ret .= "<input type='checkbox' name='" . $this->getName() . "' value='" . $value . "'";
             $ret .= " checked='checked'";
-            $ret .= $this->getExtra() . " />" . $name . "<br />\n";
+            $ret .= $this->getExtra() . ' />' . $name . "<br />\n";
         }
 
         return $ret;
     }
-
 }

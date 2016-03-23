@@ -45,7 +45,7 @@ if ( isset($_POST['update']) ) {
         }
     } else {
         echo ('<p>Validation success.</p>' );
-        echo ( '<p>New timestamp is: '.$Second->getTimeStamp().' which could be used to update a database, for example');
+        echo ( '<p>New timestamp is: '.$Second->getTimestamp().' which could be used to update a database, for example');
     }
 } else {
 $Year = new Calendar_Year($_POST['y']);

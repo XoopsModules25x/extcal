@@ -48,7 +48,7 @@ if (!defined('CALENDAR_ROOT')) {
 /**
  * Load Calendar decorator base class
  */
-require_once CALENDAR_ROOT.'Decorator.php';
+require_once CALENDAR_ROOT . 'Decorator.php';
 
 /**
  * Decorator to help with wrapping built children in another decorator
@@ -71,9 +71,9 @@ class Calendar_Decorator_Wrapper extends Calendar_Decorator
      *
      * @access public
      */
-    function Calendar_Decorator_Wrapper(&$Calendar)
+    public function __construct(&$Calendar)
     {
-        parent::Calendar_Decorator($Calendar);
+        parent::__construct($Calendar);
     }
 
     /**
@@ -84,13 +84,12 @@ class Calendar_Decorator_Wrapper extends Calendar_Decorator
      * @return object instance of named decorator
      * @access public
      */
-    function & fetch($decorator)
+    public function & fetch($decorator)
     {
         $Calendar = parent::fetch();
+        $ret      = false;
         if ($Calendar) {
             $ret = new $decorator($Calendar);
-        } else {
-            $ret = false;
         }
 
         return $ret;
@@ -104,7 +103,7 @@ class Calendar_Decorator_Wrapper extends Calendar_Decorator
      * @return array
      * @access public
      */
-    function fetchAll($decorator)
+    public function fetchAll($decorator)
     {
         $children = parent::fetchAll();
         foreach ($children as $key => $Calendar) {

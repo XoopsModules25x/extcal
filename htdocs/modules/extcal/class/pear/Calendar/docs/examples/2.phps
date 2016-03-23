@@ -88,7 +88,7 @@ td {
 <h2>Build with Calendar_Month_Weeks::build() then Calendar_Week::build()</h2>
 <table class="calendar">
 <caption>
-<?php echo date('F Y', $Month->getTimeStamp()); ?>
+<?php echo date('F Y', $Month->getTimestamp()); ?>
 </caption>
 <tr>
 <th>M</th>

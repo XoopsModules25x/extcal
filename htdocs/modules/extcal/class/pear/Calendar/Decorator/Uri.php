@@ -48,12 +48,12 @@ if (!defined('CALENDAR_ROOT')) {
 /**
  * Load Calendar decorator base class
  */
-require_once CALENDAR_ROOT.'Decorator.php';
+require_once CALENDAR_ROOT . 'Decorator.php';
 
 /**
  * Load the Uri utility
  */
-require_once CALENDAR_ROOT.'Util/Uri.php';
+require_once CALENDAR_ROOT . 'Util/Uri.php';
 
 /**
  * Decorator to help with building HTML links for navigating the calendar<br />
@@ -78,12 +78,11 @@ require_once CALENDAR_ROOT.'Util/Uri.php';
  */
 class Calendar_Decorator_Uri extends Calendar_Decorator
 {
-
     /**
      * @var Calendar_Util_Uri
      * @access private
      */
-    var $Uri;
+    public $Uri;
 
     /**
      * Constructs Calendar_Decorator_Uri
@@ -92,9 +91,9 @@ class Calendar_Decorator_Uri extends Calendar_Decorator
      *
      * @access public
      */
-    function Calendar_Decorator_Uri(&$Calendar)
+    public function __construct(&$Calendar)
     {
-        parent::Calendar_Decorator($Calendar);
+        parent::__construct($Calendar);
     }
 
     /**
@@ -110,7 +109,7 @@ class Calendar_Decorator_Uri extends Calendar_Decorator
      * @return void
      * @access public
      */
-    function setFragments($y, $m = null, $d = null, $h = null, $i = null, $s = null)
+    public function setFragments($y, $m = null, $d = null, $h = null, $i = null, $s = null)
     {
         $this->Uri = new Calendar_Util_Uri($y, $m, $d, $h, $i, $s);
     }
@@ -123,7 +122,7 @@ class Calendar_Decorator_Uri extends Calendar_Decorator
      * @return void
      * @access public
      */
-    function setSeparator($separator)
+    public function setSeparator($separator)
     {
         $this->Uri->separator = $separator;
     }
@@ -136,7 +135,7 @@ class Calendar_Decorator_Uri extends Calendar_Decorator
      * @return void
      * @access public
      */
-    function setScalar($state = true)
+    public function setScalar($state = true)
     {
         $this->Uri->scalar = $state;
     }
@@ -149,7 +148,7 @@ class Calendar_Decorator_Uri extends Calendar_Decorator
      * @return string
      * @access public
      */
-    function prev($method)
+    public function prev($method)
     {
         return $this->Uri->prev($this, $method);
     }
@@ -162,7 +161,7 @@ class Calendar_Decorator_Uri extends Calendar_Decorator
      * @return string
      * @access public
      */
-    function this($method)
+    public function this($method)
     {
         return $this->Uri->this($this, $method);
     }
@@ -175,7 +174,7 @@ class Calendar_Decorator_Uri extends Calendar_Decorator
      * @return string
      * @access public
      */
-    function next($method)
+    public function next($method)
     {
         return $this->Uri->next($this, $method);
     }

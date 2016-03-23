@@ -14,4 +14,4 @@
         <img src="assets/images/icons/rss.gif" alt="RSS Feed"/>
     </a></div>
 
-<{include file='db:system_notification_select.html'}>
+<{include file='db:system_notification_select.tpl'}>

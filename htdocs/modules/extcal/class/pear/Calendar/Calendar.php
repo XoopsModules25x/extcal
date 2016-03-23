@@ -54,9 +54,9 @@ if (!defined('CALENDAR_ENGINE')) {
 /**
  * Define Calendar Month states
  */
-define('CALENDAR_USE_MONTH',          1);
+define('CALENDAR_USE_MONTH', 1);
 define('CALENDAR_USE_MONTH_WEEKDAYS', 2);
-define('CALENDAR_USE_MONTH_WEEKS',    3);
+define('CALENDAR_USE_MONTH_WEEKS', 3);
 
 /**
  * Contains a factory method to return a Singleton instance of a class
@@ -83,21 +83,21 @@ class Calendar_Engine_Factory
      * @return object instance of a calendar calculation engine
      * @access protected
      */
-    static function & getEngine()
+    public static function & getEngine()
     {
         static $engine = false;
         switch (CALENDAR_ENGINE) {
-        case 'PearDate':
-            $class = 'Calendar_Engine_PearDate';
-            break;
-        case 'UnixTS':
-        default:
-            $class = 'Calendar_Engine_UnixTS';
-            break;
+            case 'PearDate':
+                $class = 'Calendar_Engine_PearDate';
+                break;
+            case 'UnixTS':
+            default:
+                $class = 'Calendar_Engine_UnixTS';
+                break;
         }
         if (!$engine) {
             if (!class_exists($class)) {
-                include_once CALENDAR_ROOT.'Engine'. '/' .CALENDAR_ENGINE.'.php';
+                include_once CALENDAR_ROOT . 'Engine' . '/' . CALENDAR_ENGINE . '.php';
             }
             $engine = new $class;
         }
@@ -125,7 +125,7 @@ class Calendar
      * @var object
      * @access private
      */
-    var $cE;
+    public $cE;
 
     /**
      * Instance of Calendar_Validator (lazy initialized when isValid() or
@@ -133,56 +133,56 @@ class Calendar
      * @var Calendar_Validator
      * @access private
      */
-    var $validator;
+    public $validator;
 
     /**
      * Year for this calendar object e.g. 2003
      * @access private
      * @var int
      */
-    var $year;
+    public $year;
 
     /**
      * Month for this calendar object e.g. 9
      * @access private
      * @var int
      */
-    var $month;
+    public $month;
 
     /**
      * Day of month for this calendar object e.g. 23
      * @access private
      * @var int
      */
-    var $day;
+    public $day;
 
     /**
      * Hour of day for this calendar object e.g. 13
      * @access private
      * @var int
      */
-    var $hour;
+    public $hour;
 
     /**
      * Minute of hour this calendar object e.g. 46
      * @access private
      * @var int
      */
-    var $minute;
+    public $minute;
 
     /**
      * Second of minute this calendar object e.g. 34
      * @access private
      * @var int
      */
-    var $second;
+    public $second;
 
     /**
      * Marks this calendar object as selected (e.g. 'today')
      * @access private
      * @var boolean
      */
-    var $selected = false;
+    public $selected = false;
 
     /**
      * Collection of child calendar objects created from subclasses
@@ -190,7 +190,7 @@ class Calendar
      * @access private
      * @var array
      */
-    var $children = array();
+    public $children = array();
 
     /**
      * Constructs the Calendar
@@ -204,19 +204,19 @@ class Calendar
      *
      * @access protected
      */
-    function Calendar($y = 2000, $m = 1, $d = 1, $h = 0, $i = 0, $s = 0)
+    public function __construct($y = 2000, $m = 1, $d = 1, $h = 0, $i = 0, $s = 0)
     {
         static $cE = null;
         if (!isset($cE)) {
-            $cE = & Calendar_Engine_Factory::getEngine();
+            $cE = Calendar_Engine_Factory::getEngine();
         }
-        $this->cE     = & $cE;
-        $this->year   = (int) $y;
-        $this->month  = (int) $m;
-        $this->day    = (int) $d;
-        $this->hour   = (int) $h;
-        $this->minute = (int) $i;
-        $this->second = (int) $s;
+        $this->cE     = &$cE;
+        $this->year   = (int)$y;
+        $this->month  = (int)$m;
+        $this->day    = (int)$d;
+        $this->hour   = (int)$h;
+        $this->minute = (int)$i;
+        $this->second = (int)$s;
     }
 
     /**
@@ -228,7 +228,7 @@ class Calendar
      * @return void
      * @access public
      */
-    function setTimestamp($ts)
+    public function setTimestamp($ts)
     {
         $this->year   = $this->cE->stampToYear($ts);
         $this->month  = $this->cE->stampToMonth($ts);
@@ -245,11 +245,9 @@ class Calendar
      * @return int|string timestamp
      * @access public
      */
-    function getTimestamp()
+    public function getTimestamp()
     {
-        return $this->cE->dateToStamp(
-            $this->year, $this->month, $this->day,
-            $this->hour, $this->minute, $this->second);
+        return $this->cE->dateToStamp($this->year, $this->month, $this->day, $this->hour, $this->minute, $this->second);
     }
 
     /**
@@ -260,7 +258,7 @@ class Calendar
      * @return void
      * @access public
      */
-    function setSelected($state = true)
+    public function setSelected($state = true)
     {
         $this->selected = $state;
     }
@@ -271,7 +269,7 @@ class Calendar
      * @return boolean
      * @access public
      */
-    function isSelected()
+    public function isSelected()
     {
         return $this->selected;
     }
@@ -282,9 +280,9 @@ class Calendar
      * @return boolean
      * @access public
      */
-    function isToday()
+    public function isToday()
     {
-        return $this->cE->isToday($this->getTimeStamp());
+        return $this->cE->isToday($this->getTimestamp());
     }
 
     /**
@@ -293,9 +291,9 @@ class Calendar
      * @return void
      * @access public
      */
-    function adjust()
+    public function adjust()
     {
-        $stamp        = $this->getTimeStamp();
+        $stamp        = $this->getTimestamp();
         $this->year   = $this->cE->stampToYear($stamp);
         $this->month  = $this->cE->stampToMonth($stamp);
         $this->day    = $this->cE->stampToDay($stamp);
@@ -312,10 +310,10 @@ class Calendar
      * @return array
      * @access public
      */
-    function toArray($stamp=null)
+    public function toArray($stamp = null)
     {
         if (is_null($stamp)) {
-            $stamp = $this->getTimeStamp();
+            $stamp = $this->getTimestamp();
         }
 
         return array(
@@ -324,8 +322,7 @@ class Calendar
             'day'    => $this->cE->stampToDay($stamp),
             'hour'   => $this->cE->stampToHour($stamp),
             'minute' => $this->cE->stampToMinute($stamp),
-            'second' => $this->cE->stampToSecond($stamp)
-        );
+            'second' => $this->cE->stampToSecond($stamp));
     }
 
     /**
@@ -333,29 +330,29 @@ class Calendar
      *
      * @param string $returnType type of date object that return value represents
      * @param string $format     ['int' | 'array' | 'timestamp' | 'object']
-     * @param mixed  $stamp      timestamp (depending on Calendar engine being used)
-     * @param int    $default    default value (i.e. give me the answer quick)
+     * @param mixed $stamp       timestamp (depending on Calendar engine being used)
+     * @param int $default       default value (i.e. give me the answer quick)
      *
      * @return mixed
      * @access private
      */
-    function returnValue($returnType, $format, $stamp, $default)
+    public function returnValue($returnType, $format, $stamp, $default)
     {
         switch (strtolower($format)) {
-        case 'int':
-            return $default;
-        case 'array':
-            return $this->toArray($stamp);
-            break;
-        case 'object':
-            include_once CALENDAR_ROOT.'Factory.php';
+            case 'int':
+                return $default;
+            case 'array':
+                return $this->toArray($stamp);
+                break;
+            case 'object':
+                include_once CALENDAR_ROOT . 'Factory.php';
 
-            return Calendar_Factory::createByTimestamp($returnType, $stamp);
-            break;
-        case 'timestamp':
-        default:
-            return $stamp;
-            break;
+                return Calendar_Factory::createByTimestamp($returnType, $stamp);
+                break;
+            case 'timestamp':
+            default:
+                return $stamp;
+                break;
         }
     }
 
@@ -369,11 +366,10 @@ class Calendar
      * @access public
      * @abstract
      */
-    function build($sDates = array())
+    public function build($sDates = array())
     {
         include_once 'PEAR.php';
-        PEAR::raiseError('Calendar::build is abstract', null, PEAR_ERROR_TRIGGER,
-            E_USER_NOTICE, 'Calendar::build()');
+        PEAR::raiseError('Calendar::build is abstract', null, PEAR_ERROR_TRIGGER, E_USER_NOTICE, 'Calendar::build()');
 
         return false;
     }
@@ -387,12 +383,10 @@ class Calendar
      * @access public
      * @abstract
      */
-    function setSelection($sDates)
+    public function setSelection($sDates)
     {
         include_once 'PEAR.php';
-        PEAR::raiseError(
-            'Calendar::setSelection is abstract', null, PEAR_ERROR_TRIGGER,
-            E_USER_NOTICE, 'Calendar::setSelection()');
+        PEAR::raiseError('Calendar::setSelection is abstract', null, PEAR_ERROR_TRIGGER, E_USER_NOTICE, 'Calendar::setSelection()');
 
         return false;
     }
@@ -406,7 +400,7 @@ class Calendar
      * @return mixed either an object subclass of Calendar or false
      * @access public
      */
-    function fetch()
+    public function fetch()
     {
         $child = each($this->children);
         if ($child) {
@@ -424,7 +418,7 @@ class Calendar
      * @return array
      * @access public
      */
-    function fetchAll()
+    public function fetchAll()
     {
         return $this->children;
     }
@@ -435,7 +429,7 @@ class Calendar
      * @return int
      * @access public
      */
-    function size()
+    public function size()
     {
         return count($this->children);
     }
@@ -447,9 +441,9 @@ class Calendar
      * @return boolean
      * @access public
      */
-    function isValid()
+    public function isValid()
     {
-        $validator = & $this->getValidator();
+        $validator = $this->getValidator();
 
         return $validator->isValid();
     }
@@ -460,10 +454,10 @@ class Calendar
      * @return Calendar_Validator
      * @access public
      */
-    function & getValidator()
+    public function & getValidator()
     {
         if (!isset($this->validator)) {
-            include_once CALENDAR_ROOT.'Validator.php';
+            include_once CALENDAR_ROOT . 'Validator.php';
             $this->validator = new Calendar_Validator($this);
         }
 
@@ -477,7 +471,7 @@ class Calendar
      * @return object implementing Calendar_Engine_Inteface
      * @access protected
      */
-    function & getEngine()
+    public function & getEngine()
     {
         return $this->cE;
     }
@@ -494,23 +488,18 @@ class Calendar
      *                        the $firstDay parameter is set to a different value
      * @access protected
      */
-    function defineFirstDayOfWeek($firstDay = null)
+    public function defineFirstDayOfWeek($firstDay = null)
     {
         if (defined('CALENDAR_FIRST_DAY_OF_WEEK')) {
-            if (!is_null($firstDay) && ($firstDay != CALENDAR_FIRST_DAY_OF_WEEK)) {
-                $msg = 'CALENDAR_FIRST_DAY_OF_WEEK constant already defined.'
-                  .' The $firstDay parameter will be ignored.';
+            if (($firstDay != CALENDAR_FIRST_DAY_OF_WEEK) && !is_null($firstDay)) {
+                $msg = 'CALENDAR_FIRST_DAY_OF_WEEK constant already defined.' . ' The $firstDay parameter will be ignored.';
                 trigger_error($msg, E_USER_WARNING);
             }
 
             return CALENDAR_FIRST_DAY_OF_WEEK;
         }
         if (is_null($firstDay)) {
-            $firstDay = $this->cE->getFirstDayOfWeek(
-                $this->thisYear(),
-                $this->thisMonth(),
-                $this->thisDay()
-            );
+            $firstDay = $this->cE->getFirstDayOfWeek($this->thisYear(), $this->thisMonth(), $this->thisDay());
         }
         define('CALENDAR_FIRST_DAY_OF_WEEK', $firstDay);
 
@@ -525,11 +514,11 @@ class Calendar
      * @return int e.g. 2002 or timestamp
      * @access public
      */
-    function prevYear($format = 'int')
+    public function prevYear($format = 'int')
     {
-        $ts = $this->cE->dateToStamp($this->year-1, 1, 1, 0, 0, 0);
+        $ts = $this->cE->dateToStamp($this->year - 1, 1, 1, 0, 0, 0);
 
-        return $this->returnValue('Year', $format, $ts, $this->year-1);
+        return $this->returnValue('Year', $format, $ts, $this->year - 1);
     }
 
     /**
@@ -540,7 +529,7 @@ class Calendar
      * @return int e.g. 2003 or timestamp
      * @access public
      */
-    function thisYear($format = 'int')
+    public function thisYear($format = 'int')
     {
         $ts = $this->cE->dateToStamp($this->year, 1, 1, 0, 0, 0);
 
@@ -555,11 +544,11 @@ class Calendar
      * @return int e.g. 2004 or timestamp
      * @access public
      */
-    function nextYear($format = 'int')
+    public function nextYear($format = 'int')
     {
-        $ts = $this->cE->dateToStamp($this->year+1, 1, 1, 0, 0, 0);
+        $ts = $this->cE->dateToStamp($this->year + 1, 1, 1, 0, 0, 0);
 
-        return $this->returnValue('Year', $format, $ts, $this->year+1);
+        return $this->returnValue('Year', $format, $ts, $this->year + 1);
     }
 
     /**
@@ -570,9 +559,9 @@ class Calendar
      * @return int e.g. 4 or Unix timestamp
      * @access public
      */
-    function prevMonth($format = 'int')
+    public function prevMonth($format = 'int')
     {
-        $ts = $this->cE->dateToStamp($this->year, $this->month-1, 1, 0, 0, 0);
+        $ts = $this->cE->dateToStamp($this->year, $this->month - 1, 1, 0, 0, 0);
 
         return $this->returnValue('Month', $format, $ts, $this->cE->stampToMonth($ts));
     }
@@ -585,7 +574,7 @@ class Calendar
      * @return int e.g. 5 or timestamp
      * @access public
      */
-    function thisMonth($format = 'int')
+    public function thisMonth($format = 'int')
     {
         $ts = $this->cE->dateToStamp($this->year, $this->month, 1, 0, 0, 0);
 
@@ -600,9 +589,9 @@ class Calendar
      * @return int e.g. 6 or timestamp
      * @access public
      */
-    function nextMonth($format = 'int')
+    public function nextMonth($format = 'int')
     {
-        $ts = $this->cE->dateToStamp($this->year, $this->month+1, 1, 0, 0, 0);
+        $ts = $this->cE->dateToStamp($this->year, $this->month + 1, 1, 0, 0, 0);
 
         return $this->returnValue('Month', $format, $ts, $this->cE->stampToMonth($ts));
     }
@@ -615,10 +604,9 @@ class Calendar
      * @return int e.g. 10 or timestamp
      * @access public
      */
-    function prevDay($format = 'int')
+    public function prevDay($format = 'int')
     {
-        $ts = $this->cE->dateToStamp(
-            $this->year, $this->month, $this->day-1, 0, 0, 0);
+        $ts = $this->cE->dateToStamp($this->year, $this->month, $this->day - 1, 0, 0, 0);
 
         return $this->returnValue('Day', $format, $ts, $this->cE->stampToDay($ts));
     }
@@ -631,10 +619,9 @@ class Calendar
      * @return int e.g. 11 or timestamp
      * @access public
      */
-    function thisDay($format = 'int')
+    public function thisDay($format = 'int')
     {
-        $ts = $this->cE->dateToStamp(
-            $this->year, $this->month, $this->day, 0, 0, 0);
+        $ts = $this->cE->dateToStamp($this->year, $this->month, $this->day, 0, 0, 0);
 
         return $this->returnValue('Day', $format, $ts, $this->day);
     }
@@ -647,10 +634,9 @@ class Calendar
      * @return int e.g. 12 or timestamp
      * @access public
      */
-    function nextDay($format = 'int')
+    public function nextDay($format = 'int')
     {
-        $ts = $this->cE->dateToStamp(
-            $this->year, $this->month, $this->day+1, 0, 0, 0);
+        $ts = $this->cE->dateToStamp($this->year, $this->month, $this->day + 1, 0, 0, 0);
 
         return $this->returnValue('Day', $format, $ts, $this->cE->stampToDay($ts));
     }
@@ -663,10 +649,9 @@ class Calendar
      * @return int e.g. 13 or timestamp
      * @access public
      */
-    function prevHour($format = 'int')
+    public function prevHour($format = 'int')
     {
-        $ts = $this->cE->dateToStamp(
-            $this->year, $this->month, $this->day, $this->hour-1, 0, 0);
+        $ts = $this->cE->dateToStamp($this->year, $this->month, $this->day, $this->hour - 1, 0, 0);
 
         return $this->returnValue('Hour', $format, $ts, $this->cE->stampToHour($ts));
     }
@@ -679,10 +664,9 @@ class Calendar
      * @return int e.g. 14 or timestamp
      * @access public
      */
-    function thisHour($format = 'int')
+    public function thisHour($format = 'int')
     {
-        $ts = $this->cE->dateToStamp(
-            $this->year, $this->month, $this->day, $this->hour, 0, 0);
+        $ts = $this->cE->dateToStamp($this->year, $this->month, $this->day, $this->hour, 0, 0);
 
         return $this->returnValue('Hour', $format, $ts, $this->hour);
     }
@@ -695,10 +679,9 @@ class Calendar
      * @return int e.g. 14 or timestamp
      * @access public
      */
-    function nextHour($format = 'int')
+    public function nextHour($format = 'int')
     {
-        $ts = $this->cE->dateToStamp(
-            $this->year, $this->month, $this->day, $this->hour+1, 0, 0);
+        $ts = $this->cE->dateToStamp($this->year, $this->month, $this->day, $this->hour + 1, 0, 0);
 
         return $this->returnValue('Hour', $format, $ts, $this->cE->stampToHour($ts));
     }
@@ -711,11 +694,9 @@ class Calendar
      * @return int e.g. 23 or timestamp
      * @access public
      */
-    function prevMinute($format = 'int')
+    public function prevMinute($format = 'int')
     {
-        $ts = $this->cE->dateToStamp(
-            $this->year, $this->month, $this->day,
-            $this->hour, $this->minute-1, 0);
+        $ts = $this->cE->dateToStamp($this->year, $this->month, $this->day, $this->hour, $this->minute - 1, 0);
 
         return $this->returnValue('Minute', $format, $ts, $this->cE->stampToMinute($ts));
     }
@@ -728,28 +709,24 @@ class Calendar
      * @return int e.g. 24 or timestamp
      * @access public
      */
-    function thisMinute($format = 'int')
+    public function thisMinute($format = 'int')
     {
-        $ts = $this->cE->dateToStamp(
-            $this->year, $this->month, $this->day,
-            $this->hour, $this->minute, 0);
+        $ts = $this->cE->dateToStamp($this->year, $this->month, $this->day, $this->hour, $this->minute, 0);
 
         return $this->returnValue('Minute', $format, $ts, $this->minute);
     }
 
     /**
-    * Returns the value for the next minute
-    *
+     * Returns the value for the next minute
+     *
      * @param string $format return value format ['int'|'timestamp'|'object'|'array']
      *
      * @return int e.g. 25 or timestamp
      * @access public
      */
-    function nextMinute($format = 'int')
+    public function nextMinute($format = 'int')
     {
-        $ts = $this->cE->dateToStamp(
-            $this->year, $this->month, $this->day,
-            $this->hour, $this->minute+1, 0);
+        $ts = $this->cE->dateToStamp($this->year, $this->month, $this->day, $this->hour, $this->minute + 1, 0);
 
         return $this->returnValue('Minute', $format, $ts, $this->cE->stampToMinute($ts));
     }
@@ -762,11 +739,9 @@ class Calendar
      * @return int e.g. 43 or timestamp
      * @access public
      */
-    function prevSecond($format = 'int')
+    public function prevSecond($format = 'int')
     {
-        $ts = $this->cE->dateToStamp(
-            $this->year, $this->month, $this->day,
-            $this->hour, $this->minute, $this->second-1);
+        $ts = $this->cE->dateToStamp($this->year, $this->month, $this->day, $this->hour, $this->minute, $this->second - 1);
 
         return $this->returnValue('Second', $format, $ts, $this->cE->stampToSecond($ts));
     }
@@ -774,16 +749,14 @@ class Calendar
     /**
      * Returns the value for this second
      *
-    * @param string $format return value format ['int'|'timestamp'|'object'|'array']
-    *
+     * @param string $format return value format ['int'|'timestamp'|'object'|'array']
+     *
      * @return int e.g. 44 or timestamp
      * @access public
      */
-    function thisSecond($format = 'int')
+    public function thisSecond($format = 'int')
     {
-        $ts = $this->cE->dateToStamp(
-            $this->year, $this->month, $this->day,
-            $this->hour, $this->minute, $this->second);
+        $ts = $this->cE->dateToStamp($this->year, $this->month, $this->day, $this->hour, $this->minute, $this->second);
 
         return $this->returnValue('Second', $format, $ts, $this->second);
     }
@@ -796,11 +769,9 @@ class Calendar
      * @return int e.g. 45 or timestamp
      * @access public
      */
-    function nextSecond($format = 'int')
+    public function nextSecond($format = 'int')
     {
-        $ts = $this->cE->dateToStamp(
-            $this->year, $this->month, $this->day,
-            $this->hour, $this->minute, $this->second+1);
+        $ts = $this->cE->dateToStamp($this->year, $this->month, $this->day, $this->hour, $this->minute, $this->second + 1);
 
         return $this->returnValue('Second', $format, $ts, $this->cE->stampToSecond($ts));
     }

@@ -3,18 +3,18 @@
 include dirname(dirname(__DIR__)) . '/mainfile.php';
 include_once __DIR__ . '/include/constantes.php';
 
-include_once XOOPS_ROOT_PATH . "/language/" . $xoopsConfig['language'] . "/calendar.php";
+include_once XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/calendar.php';
 
 if (!isset($_GET['event'])) {
     $eventId = 0;
 } else {
-    $eventId = intval($_GET['event']);
+    $eventId = (int)$_GET['event'];
 }
-$eventHandler = xoops_getmodulehandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
+$eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
 $event        = $eventHandler->objectToArray($eventHandler->getEvent($eventId), array('cat_id'));
 
 //adding location
-$locationHandler = xoops_getmodulehandler('etablissement', _EXTCAL_MODULE);
+$locationHandler = xoops_getModuleHandler('etablissement', _EXTCAL_MODULE);
 if ($event['event_etablissement'] > 0) {
     $location = $locationHandler->objectToArray($locationHandler->getEtablissement($event['event_etablissement'], true));
 }
@@ -79,9 +79,9 @@ if ($event['event_contact'] != '') {
 if ($event['event_etablissement'] = 0) {
     echo '<tr>' . "\n";
 
-//    echo($location['nom']);
-//    var_dump($location);
-//    var_dump($event);
+    //    echo($location['nom']);
+    //    var_dump($location);
+    //    var_dump($event);
 
     echo '<td style="border:1px solid black;">' . "\n";
     echo '<b>' . _MD_EXTCAL_ETABLISSEMENT . '</b>' . "\n";
@@ -132,7 +132,7 @@ if ($event['event_etablissement'] = 0) {
 }
 //show images
 
-if (($event['event_picture1'] != '') || ($event['event_picture1'] != '')) {
+if (($event['event_picture1'] != '') || ($event['event_picture2'] != '')) {
     echo '<tr>' . "\n";
     if ($event['event_picture1'] != '') {
         echo '<td style="border:1px solid black;">' . "\n";

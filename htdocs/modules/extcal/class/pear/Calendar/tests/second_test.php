@@ -11,25 +11,28 @@ require_once './calendar_test.php';
  */
 class TestOfSecond extends TestOfCalendar
 {
-    function TestOfSecond()
+    /**
+     * TestOfSecond constructor.
+     */
+    public function __construct()
     {
         $this->UnitTestCase('Test of Second');
     }
-    function setUp()
+
+    public function setUp()
     {
-        $this->cal = new Calendar_Second(2003,10,25,13,32,43);
+        $this->cal = new Calendar_Second(2003, 10, 25, 13, 32, 43);
     }
-    function testPrevDay_Array ()
+
+    public function testPrevDay_Array()
     {
-        $this->assertEqual(
-            array(
-                'year'   => 2003,
-                'month'  => 10,
-                'day'    => 24,
-                'hour'   => 0,
-                'minute' => 0,
-                'second' => 0),
-            $this->cal->prevDay('array'));
+        $this->assertEqual(array(
+                               'year'   => 2003,
+                               'month'  => 10,
+                               'day'    => 24,
+                               'hour'   => 0,
+                               'minute' => 0,
+                               'second' => 0), $this->cal->prevDay('array'));
     }
 }
 

@@ -9,7 +9,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright    The XOOPS Project (http://www.xoops.org)
+ * @copyright    XOOPS Project (http://xoops.org)
  * @license      GNU GPL (http://www.gnu.org/licenses/gpl-2.0.html/)
  * @package      extCal
  * @since        2.5.0
@@ -24,7 +24,7 @@ include_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 
 $aboutAdmin = new ModuleAdmin();
-echo $aboutAdmin->addNavigation('about.php');
+echo $aboutAdmin->addNavigation(basename(__FILE__));
 echo $aboutAdmin->renderabout('6KJ7RW5DR3VTJ', false);
 
 include_once __DIR__ . '/admin_footer.php';

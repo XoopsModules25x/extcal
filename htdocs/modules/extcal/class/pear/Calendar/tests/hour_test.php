@@ -11,54 +11,64 @@ require_once './calendar_test.php';
  */
 class TestOfHour extends TestOfCalendar
 {
-    function TestOfHour()
+    /**
+     * TestOfHour constructor.
+     */
+    public function __construct()
     {
         $this->UnitTestCase('Test of Hour');
     }
-    function setUp()
+
+    public function setUp()
     {
-        $this->cal = new Calendar_Hour(2003,10,25,13);
+        $this->cal = new Calendar_Hour(2003, 10, 25, 13);
     }
-    function testPrevDay_Array ()
+
+    public function testPrevDay_Array()
     {
-        $this->assertEqual(
-            array(
-                'year'   => 2003,
-                'month'  => 10,
-                'day'    => 24,
-                'hour'   => 0,
-                'minute' => 0,
-                'second' => 0),
-            $this->cal->prevDay('array'));
+        $this->assertEqual(array(
+                               'year'   => 2003,
+                               'month'  => 10,
+                               'day'    => 24,
+                               'hour'   => 0,
+                               'minute' => 0,
+                               'second' => 0), $this->cal->prevDay('array'));
     }
-    function testPrevMinute ()
+
+    public function testPrevMinute()
     {
-        $this->assertEqual(59,$this->cal->prevMinute());
+        $this->assertEqual(59, $this->cal->prevMinute());
     }
-    function testThisMinute ()
+
+    public function testThisMinute()
     {
-        $this->assertEqual(0,$this->cal->thisMinute());
+        $this->assertEqual(0, $this->cal->thisMinute());
     }
-    function testNextMinute ()
+
+    public function testNextMinute()
     {
-        $this->assertEqual(1,$this->cal->nextMinute());
+        $this->assertEqual(1, $this->cal->nextMinute());
     }
-    function testPrevSecond ()
+
+    public function testPrevSecond()
     {
-        $this->assertEqual(59,$this->cal->prevSecond());
+        $this->assertEqual(59, $this->cal->prevSecond());
     }
-    function testThisSecond ()
+
+    public function testThisSecond()
     {
-        $this->assertEqual(0,$this->cal->thisSecond());
+        $this->assertEqual(0, $this->cal->thisSecond());
     }
-    function testNextSecond ()
+
+    public function testNextSecond()
     {
-        $this->assertEqual(1,$this->cal->nextSecond());
+        $this->assertEqual(1, $this->cal->nextSecond());
     }
-    function testGetTimeStamp()
+
+    public function testGetTimeStamp()
     {
-        $stamp = mktime(13,0,0,10,25,2003);
-        $this->assertEqual($stamp,$this->cal->getTimeStamp());
+        $stamp = mktime(13, 0, 0, 10, 25, 2003);
+        $this->assertEqual($stamp, $this->cal->getTimestamp());
     }
 }
 
@@ -67,44 +77,52 @@ class TestOfHour extends TestOfCalendar
  */
 class TestOfHourBuild extends TestOfHour
 {
-    function TestOfHourBuild()
+    /**
+     * TestOfHourBuild constructor.
+     */
+    public function __construct()
     {
         $this->UnitTestCase('Test of Hour::build()');
     }
-    function testSize()
+
+    public function testSize()
     {
         $this->cal->build();
-        $this->assertEqual(_EXTCAL_TS_MINUTE,$this->cal->size());
+        $this->assertEqual(_EXTCAL_TS_MINUTE, $this->cal->size());
     }
-    function testFetch()
+
+    public function testFetch()
     {
         $this->cal->build();
-        $i=0;
-        while ( $Child = $this->cal->fetch() ) {
+        $i = 0;
+        while ($Child = $this->cal->fetch()) {
             ++$i;
         }
-        $this->assertEqual(_EXTCAL_TS_MINUTE,$i);
+        $this->assertEqual(_EXTCAL_TS_MINUTE, $i);
     }
-    function testFetchAll()
+
+    public function testFetchAll()
     {
         $this->cal->build();
         $children = array();
-        $i = 0;
-        while ( $Child = $this->cal->fetch() ) {
-            $children[$i]=$Child;
+        $i        = 0;
+        while ($Child = $this->cal->fetch()) {
+            $children[$i] = $Child;
             ++$i;
         }
-        $this->assertEqual($children,$this->cal->fetchAll());
+        $this->assertEqual($children, $this->cal->fetchAll());
     }
-    function testSelection()
+
+    public function testSelection()
     {
         require_once(CALENDAR_ROOT . 'Minute.php');
-        $selection = array(new Calendar_Minute(2003,10,25,13,32));
+        $selection = array(new Calendar_Minute(2003, 10, 25, 13, 32));
         $this->cal->build($selection);
         $i = 0;
-        while ( $Child = $this->cal->fetch() ) {
-            if ( $i == 32 )
+        while ($Child = $this->cal->fetch()) {
+            if ($i == 32) {
                 break;
+            }
             ++$i;
         }
         $this->assertTrue($Child->isSelected());

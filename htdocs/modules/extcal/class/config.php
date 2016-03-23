@@ -1,6 +1,6 @@
 <?php
 
-// defined("XOOPS_ROOT_PATH") || exit("XOOPS root path not defined");
+// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 /**
  * Class ExtcalConfig
@@ -11,7 +11,7 @@ class ExtcalConfig
     /**
      * @return ExtcalConfig
      */
-    static function &getHandler()
+    public static function &getHandler()
     {
         static $configHandler;
         if (!isset($configHandler[0])) {
@@ -21,23 +21,25 @@ class ExtcalConfig
         return $configHandler[0];
     }
 
-    function getModuleConfig()
+    /**
+     * @return mixed
+     */
+    public function getModuleConfig()
     {
         global $xoopsModule;
         static $moduleConfig;
         $dirname = (isset($xoopsModule) ? $xoopsModule->getVar('dirname') : 'system');
-        if ($dirname == 'extcal') {
+        if ($dirname === 'extcal') {
             $moduleConfig = $GLOBALS['xoopsModuleConfig'];
         } else {
             if (!isset($moduleConfig)) {
-                $moduleHandler =& xoops_gethandler('module');
+                $moduleHandler = xoops_getHandler('module');
                 $module        = $moduleHandler->getByDirname('extcal');
-                $configHandler =& xoops_gethandler('config');
-                $moduleConfig  = $configHandler->getConfigList($module->getVar("mid"));
+                $configHandler = xoops_getHandler('config');
+                $moduleConfig  = $configHandler->getConfigList($module->getVar('mid'));
             }
         }
 
         return $moduleConfig;
     }
-
 }

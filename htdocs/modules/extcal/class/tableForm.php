@@ -19,7 +19,7 @@ class XoopsTableForm extends XoopsForm
      *
      * @var boolean
      */
-    var $_addBaliseTable = '';
+    public $_addBaliseTable = '';
 
     /**
      * Gets the "value" attribute of a form element
@@ -31,11 +31,9 @@ class XoopsTableForm extends XoopsForm
      *
      * @return string the "value" attribute assigned to a form element, null if not set
      */
-    function setAddBaliseTable($addBaliseTable)
+    public function setAddBaliseTable($addBaliseTable)
     {
         $this->_addBaliseTable = $addBaliseTable;
-
-        return;
     }
 
     /**
@@ -45,7 +43,7 @@ class XoopsTableForm extends XoopsForm
      *
      * @return array array of name/value pairs assigned to form elements
      */
-    function getAddBaliseTable()
+    public function getAddBaliseTable()
     {
         return $this->_addBaliseTable;
     }
@@ -56,7 +54,7 @@ class XoopsTableForm extends XoopsForm
      * @param string $extra HTML to be displayed in the empty row.
      * @param string $class CSS class name for <td> tag
      */
-    function insertBreak($extra = '', $class = '')
+    public function insertBreak($extra = '', $class = '')
     {
         $class = ($class != '') ? " class='" . preg_replace('/[^A-Za-z0-9\s\s_-]/i', '', $class) . "'" : '';
         // Fix for $extra tag not showing
@@ -83,7 +81,7 @@ class XoopsTableForm extends XoopsForm
      * @return string
      */
 
-    function render()
+    public function render()
     {
         $addBaliseTable = $this->_addBaliseTable;
         $title          = $this->getTitle();
@@ -137,7 +135,5 @@ class XoopsTableForm extends XoopsForm
         $ret .= NWLINE . ' ' . $hidden . NWLINE;
 
         return $ret;
-
     }
-
 } // fin de la classe

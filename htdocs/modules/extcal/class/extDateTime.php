@@ -5,5 +5,4 @@
  */
 class extDateTime extends DateTime
 {
-
 }

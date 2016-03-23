@@ -80,7 +80,7 @@ $Month->build($selectedDays);
 <h2>Built with Calendar_Month_Weekday::build()</h2>
 <table class="calendar">
 <caption>
-<?php echo ( date('F Y',$Month->getTimeStamp())); ?>
+<?php echo ( date('F Y',$Month->getTimestamp())); ?>
 </caption>
 <tr>
 <th>M</th>

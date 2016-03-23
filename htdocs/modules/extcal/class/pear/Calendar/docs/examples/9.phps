@@ -12,5 +12,5 @@ $Day = new Calendar_Day(2003,10,23);
 setlocale (LC_TIME, "de_DE"); // Unix based (probably)
 // setlocale (LC_TIME, "ge"); // Windows
 
-echo ( strftime('%A %d %B %Y',$Day->getTimeStamp()));
+echo ( strftime('%A %d %B %Y',$Day->getTimestamp()));
 ?>
