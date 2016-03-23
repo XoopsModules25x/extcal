@@ -52,7 +52,7 @@ class Calendar_Server
             }
             return new SOAP_Fault($errorMsg, 'Client');
         } else {
-            $monthname = date('F Y', $Month->getTimeStamp());
+            $monthname = date('F Y', $Month->getTimestamp());
             $days = array();
             $Month->build();
             while ($Day = & $Month->fetch()) {

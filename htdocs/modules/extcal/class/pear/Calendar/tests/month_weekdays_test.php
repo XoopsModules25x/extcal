@@ -11,78 +11,94 @@ require_once './calendar_test.php';
  */
 class TestOfMonthWeekdays extends TestOfCalendar
 {
-    function TestOfMonthWeekdays()
+    /**
+     * TestOfMonthWeekdays constructor.
+     */
+    public function __construct()
     {
         $this->UnitTestCase('Test of Month Weekdays');
     }
-    function setUp()
+
+    public function setUp()
     {
         $this->cal = new Calendar_Month_Weekdays(2003, 10);
     }
-    function testPrevDay ()
+
+    public function testPrevDay()
     {
-        $this->assertEqual(30,$this->cal->prevDay());
+        $this->assertEqual(30, $this->cal->prevDay());
     }
-    function testPrevDay_Array ()
+
+    public function testPrevDay_Array()
     {
-        $this->assertEqual(
-            array(
-                'year'   => 2003,
-                'month'  => 9,
-                'day'    => 30,
-                'hour'   => 0,
-                'minute' => 0,
-                'second' => 0),
-            $this->cal->prevDay('array'));
+        $this->assertEqual(array(
+                               'year'   => 2003,
+                               'month'  => 9,
+                               'day'    => 30,
+                               'hour'   => 0,
+                               'minute' => 0,
+                               'second' => 0), $this->cal->prevDay('array'));
     }
-    function testThisDay ()
+
+    public function testThisDay()
     {
         $this->assertEqual(1, $this->cal->thisDay());
     }
-    function testNextDay ()
+
+    public function testNextDay()
     {
         $this->assertEqual(2, $this->cal->nextDay());
     }
-    function testPrevHour ()
+
+    public function testPrevHour()
     {
         $this->assertEqual(23, $this->cal->prevHour());
     }
-    function testThisHour ()
+
+    public function testThisHour()
     {
         $this->assertEqual(0, $this->cal->thisHour());
     }
-    function testNextHour ()
+
+    public function testNextHour()
     {
         $this->assertEqual(1, $this->cal->nextHour());
     }
-    function testPrevMinute ()
+
+    public function testPrevMinute()
     {
         $this->assertEqual(59, $this->cal->prevMinute());
     }
-    function testThisMinute ()
+
+    public function testThisMinute()
     {
         $this->assertEqual(0, $this->cal->thisMinute());
     }
-    function testNextMinute ()
+
+    public function testNextMinute()
     {
         $this->assertEqual(1, $this->cal->nextMinute());
     }
-    function testPrevSecond ()
+
+    public function testPrevSecond()
     {
         $this->assertEqual(59, $this->cal->prevSecond());
     }
-    function testThisSecond ()
+
+    public function testThisSecond()
     {
         $this->assertEqual(0, $this->cal->thisSecond());
     }
-    function testNextSecond ()
+
+    public function testNextSecond()
     {
         $this->assertEqual(1, $this->cal->nextSecond());
     }
-    function testGetTimeStamp()
+
+    public function testGetTimeStamp()
     {
         $stamp = mktime(0, 0, 0, 10, 1, 2003);
-        $this->assertEqual($stamp, $this->cal->getTimeStamp());
+        $this->assertEqual($stamp, $this->cal->getTimestamp());
     }
 }
 
@@ -91,43 +107,50 @@ class TestOfMonthWeekdays extends TestOfCalendar
  */
 class TestOfMonthWeekdaysBuild extends TestOfMonthWeekdays
 {
-    function TestOfMonthWeekdaysBuild()
+    /**
+     * TestOfMonthWeekdaysBuild constructor.
+     */
+    public function __construct()
     {
         $this->UnitTestCase('Test of Month_Weekdays::build()');
     }
-    function testSize()
+
+    public function testSize()
     {
         $this->cal->build();
         $this->assertEqual(35, $this->cal->size());
     }
-    function testFetch()
+
+    public function testFetch()
     {
         $this->cal->build();
-        $i=0;
+        $i = 0;
         while ($Child = $this->cal->fetch()) {
             ++$i;
         }
         $this->assertEqual(35, $i);
     }
-    function testFetchAll()
+
+    public function testFetchAll()
     {
         $this->cal->build();
         $children = array();
-        $i = 1;
+        $i        = 1;
         while ($Child = $this->cal->fetch()) {
             $children[$i] = $Child;
             ++$i;
         }
-        $this->assertEqual($children,$this->cal->fetchAll());
+        $this->assertEqual($children, $this->cal->fetchAll());
     }
-    function testSelection()
+
+    public function testSelection()
     {
         include_once CALENDAR_ROOT . 'Day.php';
         $selection = array(new Calendar_Day(2003, 10, 25));
         $this->cal->build($selection);
         $daysInPrevMonth = (0 == CALENDAR_FIRST_DAY_OF_WEEK) ? 3 : 2;
-        $end = 25 + $daysInPrevMonth;
-        $i = 1;
+        $end             = 25 + $daysInPrevMonth;
+        $i               = 1;
         while ($Child = $this->cal->fetch()) {
             if ($i == $end) {
                 break;
@@ -137,7 +160,8 @@ class TestOfMonthWeekdaysBuild extends TestOfMonthWeekdays
         $this->assertTrue($Child->isSelected());
         $this->assertEqual(25, $Child->day);
     }
-    function testEmptyCount()
+
+    public function testEmptyCount()
     {
         $this->cal->build();
         $empty = 0;
@@ -148,9 +172,10 @@ class TestOfMonthWeekdaysBuild extends TestOfMonthWeekdays
         }
         $this->assertEqual(4, $empty);
     }
-    function testEmptyCount2()
+
+    public function testEmptyCount2()
     {
-        $this->cal = new Calendar_Month_Weekdays(2010,3);
+        $this->cal = new Calendar_Month_Weekdays(2010, 3);
         $this->cal->build();
         $empty = 0;
         while ($Child = $this->cal->fetch()) {
@@ -160,9 +185,10 @@ class TestOfMonthWeekdaysBuild extends TestOfMonthWeekdays
         }
         $this->assertEqual(4, $empty);
     }
-    function testEmptyCount3()
+
+    public function testEmptyCount3()
     {
-        $this->cal = new Calendar_Month_Weekdays(2010,6);
+        $this->cal = new Calendar_Month_Weekdays(2010, 6);
         $this->cal->build();
         $empty = 0;
         while ($Child = $this->cal->fetch()) {
@@ -172,35 +198,40 @@ class TestOfMonthWeekdaysBuild extends TestOfMonthWeekdays
         }
         $this->assertEqual(5, $empty);
     }
-    function testEmptyDaysBefore_AfterAdjust()
+
+    public function testEmptyDaysBefore_AfterAdjust()
     {
         $this->cal = new Calendar_Month_Weekdays(2004, 0);
         $this->cal->build();
         $expected = (CALENDAR_FIRST_DAY_OF_WEEK == 0) ? 1 : 0;
         $this->assertEqual($expected, $this->cal->tableHelper->getEmptyDaysBefore());
     }
-    function testEmptyDaysBefore()
+
+    public function testEmptyDaysBefore()
     {
         $this->cal = new Calendar_Month_Weekdays(2010, 3);
         $this->cal->build();
         $expected = (CALENDAR_FIRST_DAY_OF_WEEK == 0) ? 1 : 0;
         $this->assertEqual($expected, $this->cal->tableHelper->getEmptyDaysBefore());
     }
-    function testEmptyDaysBefore2()
+
+    public function testEmptyDaysBefore2()
     {
         $this->cal = new Calendar_Month_Weekdays(2010, 6);
         $this->cal->build();
         $expected = (CALENDAR_FIRST_DAY_OF_WEEK == 0) ? 2 : 1;
         $this->assertEqual($expected, $this->cal->tableHelper->getEmptyDaysBefore());
     }
-    function testEmptyDaysAfter()
+
+    public function testEmptyDaysAfter()
     {
         $this->cal = new Calendar_Month_Weekdays(2010, 3);
         $this->cal->build();
         $expected = (CALENDAR_FIRST_DAY_OF_WEEK == 0) ? 30 : 31;
         $this->assertEqual($expected, $this->cal->tableHelper->getEmptyDaysAfter());
     }
-    function testEmptyDaysAfter2()
+
+    public function testEmptyDaysAfter2()
     {
         $this->cal = new Calendar_Month_Weekdays(2010, 6);
         $this->cal->build();

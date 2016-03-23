@@ -9,20 +9,20 @@ function xoops_module_install_extcal(&$xoopsModule)
 {
 
     // Create eXtCal upload directory
-    $dir = XOOPS_ROOT_PATH . "/uploads/extcal";
+    $dir = XOOPS_ROOT_PATH . '/uploads/extcal';
     if (!is_dir($dir)) {
         mkdir($dir);
         mkdir($dir . '/etablissement');
 
         // Copy index.html files on uploads folders
-        $indexFile = XOOPS_ROOT_PATH . "/modules/extcal/include/index.html";
-        copy($indexFile, $dir . "/index.html");
-        copy($indexFile, $dir . "/etablissement/index.html");
+        $indexFile = XOOPS_ROOT_PATH . '/modules/extcal/include/index.html';
+        copy($indexFile, $dir . '/index.html');
+        copy($indexFile, $dir . '/etablissement/index.html');
     }
 
     $moduleId               = $xoopsModule->getVar('mid');
-    $groupPermissionHandler =& xoops_gethandler('groupperm');
-    $configHandler          =& xoops_gethandler('config');
+    $groupPermissionHandler = xoops_getHandler('groupperm');
+    $configHandler          = xoops_getHandler('config');
 
     /**
      * Default public category permission mask

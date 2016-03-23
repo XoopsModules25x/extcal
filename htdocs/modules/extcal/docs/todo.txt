@@ -1,23 +1,34 @@
 To do list
 =============
  - probleme de date dans la version anglaise
- 
 
  - Ajouter une purge des évennements par selecion de annees categories, ... a rapprocher du point précédent peut etre.
 
  - modifie le message apres clonage d'un evenement "evenement supprimé avec succes".
- 
+
  - Ajouter un effet lightbox sur l'image du slidesow
  Par contre quand on clique sur l'image dans un événement cela affiche l'image sur une nouvelle page : il n'y a pas effet "Ligth Box". Est-ce dû à mon xoops neuf(2.5.1). Y a-t-il une manip particulière à faire ? Ou est-ce prévu pour une prochaine version ?
- 
+
  - pourquoi n'avez vous pas prévu les notifications, en terme d'inscription (OUI je serai présent / NON je ne serai pas ), et désinscription ( passage d'un oui à un non, ou vice versa)
 
-
-
- - inclure, un envoi de mail auto, la veille de l'évenement à des utilitateurs 
+ - inclure, un envoi de mail auto, la veille de l'évenement à des utilitateurs
    qui aurait coché l'option ?
 
 
+- Date problem in the English version
+
+- Add a purge of events by selecion of year categories, ... was closer to the previous point can be.
+
+- Modifies the message after cloning an event "event deleted successfully."
+
+- Add a lightbox effect on the image of slidesow
+  By cons when you click on the image in an event that displays the image on a new page: no effect "Ligth Box".
+  Is this due to my new XOOPS (2.5.1). Are there any particular manipulation to do? Or is it planned for a future release?
+
+- Why did not you set notifications in terms of registration (YES I will be / NO I will not be), and unsubscribe (passage of a yes to a no, or vice versa)
+
+- Include a self sending email, the day before the event to utilitateurs
+    that would have checked the option?
 
 
 

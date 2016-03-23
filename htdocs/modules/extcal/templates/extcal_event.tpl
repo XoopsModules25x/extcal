@@ -35,34 +35,33 @@
             <{if $event.event_picture1}>
                 <div class="highslide-gallery">
                     <a href="<{$xoops_url}>/uploads/extcal/<{$event.event_picture1}>" class="highslide" onclick="return hs.expand(this)">
-                        <img align="left" style="margin-right:10px" src="<{$xoops_url}>/uploads/extcal/<{$event.event_picture1}>" height="150px"/>
+                        <img align="left" style="margin-right:10px;" src="<{$xoops_url}>/uploads/extcal/<{$event.event_picture1}>" height="150px"/>
                     </a>
 
                     <div class="highslide-heading"></div>
                 </div>
             <{elseif $smarty.const._EXTCAL_SHOW_NO_PICTURE}>
-                <img align=left style="margin-right:6px" src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="150px"/>
+                <img align=left style="margin-right:6px;" src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180"/>
             <{/if}>
 
             <{if $event.event_picture2}>
                 <div class="highslide-gallery">
                     <a href="<{$xoops_url}>/uploads/extcal/<{$event.event_picture2}>" class="highslide" onclick="return hs.expand(this)">
-                        <img align="left" style="margin-right:10px" src="<{$xoops_url}>/uploads/extcal/<{$event.event_picture2}>" height="150px"/>
+                        <img align="left" style="margin-right:10px;" src="<{$xoops_url}>/uploads/extcal/<{$event.event_picture2}>" height="150px"/>
                     </a>
 
                     <div class="highslide-heading"></div>
                 </div>
             <{elseif $smarty.const._EXTCAL_SHOW_NO_PICTURE}>
-                <img align=left style="margin-right:6px" src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="150px"/>
+                <img align=left style="margin-right:6px;" src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180"/>
             <{/if}>
 
 
-
-            <div style="font-size:20px;font-weight:bold;width:280px;overflow:hidden"><u><{$event.event_title}></u></div>
-            <div style="margin-right:5px"><br/><u><strong><{$smarty.const._MD_EXTCAL_ETABLISSEMENT_DATE}> </strong></u><br/><{$event.formated_event_start}><br/><br/>
+            <div style="font-size:20px;font-weight:bold;width:280px;overflow:hidden;"><u><{$event.event_title}></u></div>
+            <div style="margin-right:5px;"><br/><span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_ETABLISSEMENT_DATE}> </strong></span><br/><{$event.formated_event_start}><br/><br/>
 
                 <{if $event.event_desc != ''}>
-                    <u><strong><{$smarty.const._MD_EXTCAL_ETABLISSEMENT_DESCRIPTION}> :</strong></u>
+                    <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_ETABLISSEMENT_DESCRIPTION}> :</strong></span>
                     <br/>
                     <{$event_desc}>
                     <br/>
@@ -70,16 +69,16 @@
                 <{/if}>
 
                 <{if $event.event_address != ''}>
-                    <u><strong><{$smarty.const._MD_EXTCAL_ETABLISSEMENT_ADRESSE}> :</strong></u>
+                    <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_ETABLISSEMENT_ADRESSE}> :</strong></span>
                     <br/>
                     <{$event_address}>
                     <br/>
                     <br/>
                 <{/if}>
                 <!--<span style="font-size:0.8em;"><{$smarty.const._MD_EXTCAL_POSTED_BY}> <a href="<{$xoops_url}>/userinfo.php?uid=<{$event.user.uid}>"><{$event.user.uname}></a> <{$smarty.const._MD_EXTCAL_ON}> <{$event.formated_event_submitdate}></span>
-			<p>
-				<{$event.event_desc}>
-			</p>-->
+            <p>
+                <{$event.event_desc}>
+            </p>-->
 
         </td>
     </tr>
@@ -89,9 +88,9 @@
     <table border="0" width="100%" class="outer">
         <tr>
             <td width="_EXTCAL_TS_MINUTE%" class="odd">
-                <u><strong><{$smarty.const._MD_EXTCAL_ETABLISSEMENT_LIEU}></strong></u><br/>
+                <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_ETABLISSEMENT_LIEU}></strong></span><br/>
                 <a href="./etablissement.php?etablissement_id=<{$event.event_etablissement}>">
-                    <span style="font-size:14px"><{$etablissement.nom.value}></span>
+                    <span style="font-size:14px;"><{$etablissement.nom.value}></span>
                 </a>
                 <br/>
                 <{if $etablissement.adresse.value}><{$etablissement.adresse.value}><br/><{/if}>
@@ -112,13 +111,13 @@
                 <{if $etablissement.logo.value}>
                     <div class="highslide-gallery">
                         <a href="<{$xoops_url}>/uploads/extcal/etablissement/<{$etablissement.logo.value}>" class="highslide" onclick="return hs.expand(this)">
-                            <img align="left" style="margin-right:10px" src="<{$xoops_url}>/uploads/extcal/etablissement/<{$etablissement.logo.value}>" height="150px"/>
+                            <img align="left" style="margin-right:10px;" src="<{$xoops_url}>/uploads/extcal/etablissement/<{$etablissement.logo.value}>" height="150px"/>
                         </a>
 
                         <div class="highslide-heading"></div>
                     </div>
                 <{elseif $smarty.const._EXTCAL_SHOW_NO_PICTURE}>
-                    <img align=left style="margin-right:6px" src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="150px"/>
+                    <img align=left style="margin-right:6px;" src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180"/>
                 <{/if}>
             </td>
         </tr>
@@ -131,7 +130,7 @@
         <td width="50%" class="odd" colspan='2'>
 
             <{if $event.event_organisateur}>
-                <u><strong><{$smarty.const._MD_EXTCAL_ORGANISATEUR}></strong></u>
+                <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_ORGANISATEUR}></strong></span>
                 <br/>
                 <{$event.event_organisateur}>
                 <br/>
@@ -147,15 +146,15 @@
 
         <{if $event.event_price}>
             <td width="50%" class="odd"><br/>
-                <u><strong><{$smarty.const._MD_EXTCAL_ETABLISSEMENT_TARIFS}> :</strong></u><br/>
+                <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_ETABLISSEMENT_TARIFS}> :</strong></span><br/>
                 <{$event.event_price}>
                 <{$smarty.const._MD_EXTCAL_DEVISE2}>
             </td>
         <{/if}>
 
         <td class="odd"><br/>
-            <u><strong><{$smarty.const._MD_EXTCAL_START}></strong></u> <{$event.formated_event_start}><br/>
-            <u><strong><{$smarty.const._MD_EXTCAL_END}></strong></u> <{$event.formated_event_end}><br/>
+            <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_START}></strong></span> <{$event.formated_event_start}><br/>
+            <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_END}></strong></span> <{$event.formated_event_end}><br/>
         </td>
     </tr>
 </table>
@@ -203,14 +202,14 @@
     <{if false}>
         <tr>
             <td colspan="3" class="even">
-                <{$smarty.const._MD_EXTCAL_STATUS}>  : <{$status}>
+                <{$smarty.const._MD_EXTCAL_STATUS}> : <{$status}>
                 <input type="submit" value="<{$smarty.const._MD_EXTCAL_VALIDATE}>"/>
             </td>
         </tr>
     <{/if}>
 
 
-    <div id="map" align="center" style="visibility: hidden"><br/>
+    <div id="map" align="center" style="visibility: hidden;"><br/>
         <{$map}>
     </div>
 </table>
@@ -232,13 +231,13 @@
 <div style="margin-top: 10px;">
     <!-- start comments loop -->
     <{if $comment_mode == "flat"}>
-        <{include file="db:system_comments_flat.html"}>
+        <{include file="db:system_comments_flat.tpl"}>
     <{elseif $comment_mode == "thread"}>
-        <{include file="db:system_comments_thread.html"}>
+        <{include file="db:system_comments_thread.tpl"}>
     <{elseif $comment_mode == "nest"}>
-        <{include file="db:system_comments_nest.html"}>
+        <{include file="db:system_comments_nest.tpl"}>
     <{/if}>
     <!-- end comments loop -->
 </div>
-<{include file='db:system_notification_select.html'}>
+<{include file='db:system_notification_select.tpl'}>
 

@@ -20,46 +20,43 @@
 // Include xoops admin header
 include_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 include_once XOOPS_ROOT_PATH . '/modules/extcal/class/ExtcalPersistableObjectHandler.php';
-include_once(XOOPS_ROOT_PATH . "/kernel/module.php");
-include_once XOOPS_ROOT_PATH . "/class/xoopsformloader.php";
-include_once XOOPS_ROOT_PATH . "/class/tree.php";
-include_once XOOPS_ROOT_PATH . "/class/xoopslists.php";
-include_once XOOPS_ROOT_PATH . "/modules/extcal/class/etablissement.php";
-include_once XOOPS_ROOT_PATH . "/modules/extcal/include/constantes.php";
+include_once(XOOPS_ROOT_PATH . '/kernel/module.php');
+include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+include_once XOOPS_ROOT_PATH . '/class/tree.php';
+include_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
+include_once XOOPS_ROOT_PATH . '/modules/extcal/class/etablissement.php';
+include_once XOOPS_ROOT_PATH . '/modules/extcal/include/constantes.php';
 include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
-include_once(XOOPS_ROOT_PATH . "/class/uploader.php");
+include_once(XOOPS_ROOT_PATH . '/class/uploader.php');
 include_once __DIR__ . '/admin_header.php';
 
 //include_once("functions.php");
 //include_once("../include/functions.php");
 
 if ($xoopsUser) {
-    $xoopsModule = XoopsModule::getByDirname("extcal");
+    $xoopsModule = XoopsModule::getByDirname('extcal');
     if (!$xoopsUser->isAdmin($xoopsModule->mid())) {
-        redirect_header(XOOPS_URL . "/", 3, _NOPERM);
-        exit();
+        redirect_header(XOOPS_URL . '/', 3, _NOPERM);
     }
 } else {
-    redirect_header(XOOPS_URL . "/", 3, _NOPERM);
-    exit();
+    redirect_header(XOOPS_URL . '/', 3, _NOPERM);
 }
 
 // Include language file
 xoops_loadLanguage('admin', 'system');
 xoops_loadLanguage('admin', $xoopsModule->getVar('dirname', 'e'));
 xoops_loadLanguage('modinfo', $xoopsModule->getVar('dirname', 'e'));
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 
 //appel des class
-$etablissementHandler = xoops_getmodulehandler(_EXTCAL_CLS_ETABLISSEMENT, _EXTCAL_MODULE);
+$etablissementHandler = xoops_getModuleHandler(_EXTCAL_CLS_ETABLISSEMENT, _EXTCAL_MODULE);
 
 xoops_cp_header();
 
+$op = 'liste';
 if (isset($_REQUEST['op'])) {
     $op = $_REQUEST['op'];
-} else {
-    $op = 'liste';
 }
 
 //appel du menu admin
@@ -73,12 +70,12 @@ if (isset($_REQUEST['op'])) {
 //Les valeurs de op qui vont permettre d'aller dans les differentes parties de la page
 switch ($op) {
     // Vue liste
-    case "liste":
+    case 'liste':
 
         // @author   JJDAI
         //***************************************************************************************
         $etablissementAdmin = new ModuleAdmin();
-        echo $etablissementAdmin->addNavigation('etablissement.php');
+        echo $etablissementAdmin->addNavigation(basename(__FILE__));
         //***************************************************************************************
 
         $criteria = new CriteriaCompo();
@@ -118,7 +115,7 @@ switch ($op) {
             echo '</tr>';
             $class = 'odd';
             foreach (array_keys($etablissement_arr) as $i) {
-                $class                   = ($class == 'even') ? 'odd' : 'even';
+                $class                   = ($class === 'even') ? 'odd' : 'even';
                 $etablissement_id        = $etablissement_arr[$i]->getVar('id');
                 $etablissement_nom       = $etablissement_arr[$i]->getVar('nom');
                 $etablissement_adresse   = $etablissement_arr[$i]->getVar('adresse');
@@ -131,10 +128,8 @@ switch ($op) {
                 echo '<td align="center"><b>' . $etablissement_city . '</td>';
                 echo '<td align="center"><b>' . $etablissement_telephone . '</td>';
                 echo '<td align="center" width="15%">';
-                echo '<a href="etablissement.php?op=edit_etablissement&etablissement_id=' . $etablissement_id . '"><img src=' . $pathIcon16 . '/edit.png alt="' . _AM_EXTCAL_ETABLISSEMENT_FORM_EDIT
-                    . '" title="' . _AM_EXTCAL_ETABLISSEMENT_FORM_EDIT . '"></a> ';
-                echo '<a href="etablissement.php?op=delete_etablissement&etablissement_id=' . $etablissement_id . '"><img src=' . $pathIcon16 . '/delete.png alt="'
-                    . _AM_EXTCAL_ETABLISSEMENT_FORM_DELETE . '" title="' . _AM_EXTCAL_ETABLISSEMENT_FORM_DELETE . '"></a> ';
+                echo '<a href="etablissement.php?op=edit_etablissement&etablissement_id=' . $etablissement_id . '"><img src=' . $pathIcon16 . '/edit.png alt="' . _AM_EXTCAL_ETABLISSEMENT_FORM_EDIT . '" title="' . _AM_EXTCAL_ETABLISSEMENT_FORM_EDIT . '"></a> ';
+                echo '<a href="etablissement.php?op=delete_etablissement&etablissement_id=' . $etablissement_id . '"><img src=' . $pathIcon16 . '/delete.png alt="' . _AM_EXTCAL_ETABLISSEMENT_FORM_DELETE . '" title="' . _AM_EXTCAL_ETABLISSEMENT_FORM_DELETE . '"></a> ';
                 echo '</td>';
             }
             echo '</table><br />';
@@ -144,13 +139,13 @@ switch ($op) {
         }
 
         // Affichage du formulaire
-        $obj  =& $etablissementHandler->create();
+        $obj  = $etablissementHandler->create();
         $form = $obj->getForm(false);
         break;
 
     // permet de suprimmer le rapport de téléchargment brisé
-    case "delete_etablissement":
-        $obj =& $etablissementHandler->get($_REQUEST['etablissement_id']);
+    case 'delete_etablissement':
+        $obj = $etablissementHandler->get($_REQUEST['etablissement_id']);
         if (isset($_REQUEST['ok']) && $_REQUEST['ok'] == 1) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('etablissement.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -163,57 +158,57 @@ switch ($op) {
         }
         break;
 
-    case "edit_etablissement":
+    case 'edit_etablissement':
         // @author   JJDAI
         //***************************************************************************************
         $etablissementAdmin = new ModuleAdmin();
-        echo $etablissementAdmin->addNavigation('etablissement.php');
+        echo $etablissementAdmin->addNavigation(basename(__FILE__));
         //***************************************************************************************
         //Affichage du formulaire de création des téléchargements
         $obj  = $etablissementHandler->get($_REQUEST['etablissement_id']);
         $form = $obj->getForm(false);
         break;
 
-    case "save_etablissement":
-        if (!$GLOBALS["xoopsSecurity"]->check()) {
-            redirect_header("etablissement.php", 3, implode(",", $GLOBALS["xoopsSecurity"]->getErrors()));
+    case 'save_etablissement':
+        if (!$GLOBALS['xoopsSecurity']->check()) {
+            redirect_header('etablissement.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
-        if (isset($_REQUEST["etablissement_id"])) {
-            $obj =& $etablissementHandler->get($_REQUEST["etablissement_id"]);
+        if (isset($_REQUEST['etablissement_id'])) {
+            $obj =& $etablissementHandler->get($_REQUEST['etablissement_id']);
         } else {
             $obj =& $etablissementHandler->create();
         }
 
-        $obj->setVar("nom", $_REQUEST["nom"]);
-        $obj->setVar("description", $_REQUEST["description"]);
-        $obj->setVar("categorie", $_REQUEST["categorie"]);
-        $obj->setVar("adresse", $_REQUEST["adresse"]);
-        $obj->setVar("adresse2", $_REQUEST["adresse2"]);
-        $obj->setVar("cp", $_REQUEST["cp"]);
-        $obj->setVar("ville", $_REQUEST["ville"]);
-        $obj->setVar("tel_fixe", $_REQUEST["tel_fixe"]);
-        $obj->setVar("tel_portable", $_REQUEST["tel_portable"]);
-        $obj->setVar("mail", $_REQUEST["mail"]);
-        $obj->setVar("site", $_REQUEST["site"]);
-        $obj->setVar("horaires", $_REQUEST["horaires"]);
-        $obj->setVar("divers", $_REQUEST["divers"]);
-        $obj->setVar("tarifs", $_REQUEST["tarifs"]);
-        $obj->setVar("map", $_REQUEST["map"]);
+        $obj->setVar('nom', $_REQUEST['nom']);
+        $obj->setVar('description', $_REQUEST['description']);
+        $obj->setVar('categorie', $_REQUEST['categorie']);
+        $obj->setVar('adresse', $_REQUEST['adresse']);
+        $obj->setVar('adresse2', $_REQUEST['adresse2']);
+        $obj->setVar('cp', $_REQUEST['cp']);
+        $obj->setVar('ville', $_REQUEST['ville']);
+        $obj->setVar('tel_fixe', $_REQUEST['tel_fixe']);
+        $obj->setVar('tel_portable', $_REQUEST['tel_portable']);
+        $obj->setVar('mail', $_REQUEST['mail']);
+        $obj->setVar('site', $_REQUEST['site']);
+        $obj->setVar('horaires', $_REQUEST['horaires']);
+        $obj->setVar('divers', $_REQUEST['divers']);
+        $obj->setVar('tarifs', $_REQUEST['tarifs']);
+        $obj->setVar('map', $_REQUEST['map']);
 
         //Logo
         $uploaddir_etablissement = XOOPS_ROOT_PATH . '/uploads/extcal/etablissement/';
         $uploadurl_etablissement = XOOPS_URL . '/uploads/extcal/etablissement/';
 
         $delimg = @$_REQUEST['delimg'];
-        $delimg = isset($delimg) ? intval($delimg) : 0;
-        if (!empty($_REQUEST['xoops_upload_file'][0]) && $delimg == 0) {
+        $delimg = isset($delimg) ? (int)$delimg : 0;
+        if ($delimg == 0 && !empty($_REQUEST['xoops_upload_file'][0])) {
             $upload = new XoopsMediaUploader($uploaddir_etablissement, array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png'), 3145728, null, null);
             if ($upload->fetchMedia($_REQUEST['xoops_upload_file'][0])) {
                 $upload->setPrefix('etablissement_');
                 $upload->fetchMedia($_REQUEST['xoops_upload_file'][0]);
                 if (!$upload->upload()) {
                     $errors = $upload->getErrors();
-                    redirect_header("javascript:history.go(-1)", 3, $errors);
+                    redirect_header('javascript:history.go(-1)', 3, $errors);
                 } else {
                     $logo = $upload->getSavedFileName();
                 }
@@ -222,22 +217,22 @@ switch ($op) {
             }
         } else {
             $logo              = '';
-            $url_etablissement = XOOPS_ROOT_PATH . "/uploads/extcal/etablissement/" . $_REQUEST['file'];
+            $url_etablissement = XOOPS_ROOT_PATH . '/uploads/extcal/etablissement/' . $_REQUEST['file'];
             if (is_file($url_etablissement)) {
                 chmod($url_etablissement, 0777);
                 unlink($url_etablissement);
             }
         }
-        $obj->setVar("logo", $logo);
+        $obj->setVar('logo', $logo);
 
         if ($etablissementHandler->insert($obj)) {
         }
 
         //include_once("../include/forms.php");
         echo $obj->getHtmlErrors();
-        $form =& $obj->getForm(false, 0);
-//echo "<hr>exit <<<<<<<<<<<<<<<<<<<<";exit;
-        redirect_header("etablissement.php", 2, _AM_EXTCAL_FORMOK);
+        $form = $obj->getForm(false, 0);
+        //echo "<hr>exit <<<<<<<<<<<<<<<<<<<<";exit;
+        redirect_header('etablissement.php', 2, _AM_EXTCAL_FORMOK);
 
         break;
 }

@@ -14,12 +14,13 @@
 
     <{foreach item=cat from=$cats}>
 
-        <{if ++$i is odd by 1}>
-            <{assign var='colour' value=even}>
-        <{else}>
-            <{assign var='colour' value=odd}>
-        <{/if}>
-        <tr class="<{$colour}>">
+        <{*<{if $i++ is odd by 1}>*}>
+        <{*<{assign var='colour' value=even}>*}>
+        <{*<{else}>*}>
+        <{*<{assign var='colour' value=odd}>*}>
+        <{*<{/if}>*}>
+        <{*<tr class="<{$colour}>">*}>
+        <tr class="<{cycle values = "even,odd"}>">
 
             <td align='center'>
                 <{$cat.cat_id}>
@@ -54,8 +55,8 @@
 </table>
 <!--
 <form name="frmCatNew" id="frmCatNew" action="cat.php?op=new&id=0" method="post">
-	<fieldset>
-		<div class="txtcenter"><input type="submit" value="<{$smarty.const._ADD}>" name="B1" title="<{$smarty.const._ADD}>"></div>
-	</fieldset>-->
+    <fieldset>
+        <div class="txtcenter"><input type="submit" value="<{$smarty.const._ADD}>" name="B1" title="<{$smarty.const._ADD}>"></div>
+    </fieldset>-->
 </form>
 

@@ -48,12 +48,12 @@ if (!defined('CALENDAR_ROOT')) {
 /**
  * Load Calendar decorator base class
  */
-require_once CALENDAR_ROOT.'Decorator.php';
+require_once CALENDAR_ROOT . 'Decorator.php';
 
 /**
  * Load the Uri utility
  */
-require_once CALENDAR_ROOT.'Util/Textual.php';
+require_once CALENDAR_ROOT . 'Util/Textual.php';
 
 /**
  * Decorator to help with fetching textual representations of months and
@@ -75,13 +75,13 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
     /**
      * Constructs Calendar_Decorator_Textual
      *
-     * @param object &$Calendar subclass of Calendar
+     * @param object $Calendar subclass of Calendar
      *
      * @access public
      */
-    function Calendar_Decorator_Textual(&$Calendar)
+    public function __construct(&$Calendar)
     {
-        parent::Calendar_Decorator($Calendar);
+        parent::__construct($Calendar);
     }
 
     /**
@@ -93,7 +93,7 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
      * @access public
      * @static
      */
-    function monthNames($format = 'long')
+    public function monthNames($format = 'long')
     {
         return Calendar_Util_Textual::monthNames($format);
     }
@@ -107,7 +107,7 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
      * @access public
      * @static
      */
-    function weekdayNames($format = 'long')
+    public function weekdayNames($format = 'long')
     {
         return Calendar_Util_Textual::weekdayNames($format);
     }
@@ -120,7 +120,7 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
      * @return string
      * @access public
      */
-    function prevMonthName($format = 'long')
+    public function prevMonthName($format = 'long')
     {
         return Calendar_Util_Textual::prevMonthName($this->calendar, $format);
     }
@@ -133,7 +133,7 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
      * @return string
      * @access public
      */
-    function thisMonthName($format = 'long')
+    public function thisMonthName($format = 'long')
     {
         return Calendar_Util_Textual::thisMonthName($this->calendar, $format);
     }
@@ -146,7 +146,7 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
      * @return string
      * @access public
      */
-    function nextMonthName($format = 'long')
+    public function nextMonthName($format = 'long')
     {
         return Calendar_Util_Textual::nextMonthName($this->calendar, $format);
     }
@@ -159,7 +159,7 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
      * @return string
      * @access public
      */
-    function prevDayName($format = 'long')
+    public function prevDayName($format = 'long')
     {
         return Calendar_Util_Textual::prevDayName($this->calendar, $format);
     }
@@ -172,7 +172,7 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
      * @return string
      * @access public
      */
-    function thisDayName($format = 'long')
+    public function thisDayName($format = 'long')
     {
         return Calendar_Util_Textual::thisDayName($this->calendar, $format);
     }
@@ -185,7 +185,7 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
      * @return string
      * @access public
      */
-    function nextDayName($format = 'long')
+    public function nextDayName($format = 'long')
     {
         return Calendar_Util_Textual::nextDayName($this->calendar, $format);
     }
@@ -200,7 +200,7 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
      * @return array ordered array of week day names
      * @access public
      */
-    function orderedWeekdays($format = 'long')
+    public function orderedWeekdays($format = 'long')
     {
         return Calendar_Util_Textual::orderedWeekdays($this->calendar, $format);
     }

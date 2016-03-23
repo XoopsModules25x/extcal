@@ -35,7 +35,7 @@ if ( isset($_GET['mime']) && $_GET['mime']=='wml' ) {
 <?php
 if ( isset($_GET['viewday']) ) {
 ?>
-<p><strong>Viewing <?php echo ( date('l, jS of F, Y',$Day->getTimeStamp()) ); ?></strong></p>
+<p><strong>Viewing <?php echo ( date('l, jS of F, Y',$Day->getTimestamp()) ); ?></strong></p>
 <p>
 <anchor>
 Back to Month View
@@ -50,7 +50,7 @@ echo ( "?y=".$Day->thisYear()."&amp;m=".
     $Day->build();
     while ( $Hour = & $Day->fetch() ) {
         echo ( "<tr>\n" );
-        echo ( "<td>".date('g a',$Hour->getTimeStamp())."</td><td>Free time!</td>\n" );
+        echo ( "<td>".date('g a',$Hour->getTimestamp())."</td><td>Free time!</td>\n" );
         echo ( "</tr>\n" );
     }
 ?>
@@ -58,7 +58,7 @@ echo ( "?y=".$Day->thisYear()."&amp;m=".
 <?php
 } else {
 ?>
-<p><strong><?php echo ( date('F Y',$Month->getTimeStamp()) ); ?></strong></p>
+<p><strong><?php echo ( date('F Y',$Month->getTimestamp()) ); ?></strong></p>
 <table>
 <tr>
 <td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td><td>S</td>
@@ -131,7 +131,7 @@ plugin: <a href="http://wmlbrowser.mozdev.org">wmlbrowser.mozdev.org</a></p>
 <?php
 if ( isset($_GET['viewday']) ) {
 ?>
-<p><strong>Viewing <?php echo ( date('l, jS of F, Y',$Day->getTimeStamp()) ); ?></strong></p>
+<p><strong>Viewing <?php echo ( date('l, jS of F, Y',$Day->getTimestamp()) ); ?></strong></p>
 <p>
 <anchor>
 <a href="<?php
@@ -144,7 +144,7 @@ echo ( "?y=".$Day->thisYear()."&amp;m=".
     $Day->build();
     while ( $Hour = & $Day->fetch() ) {
         echo ( "<tr>\n" );
-        echo ( "<td>".date('g a',$Hour->getTimeStamp())."</td><td>Free time!</td>\n" );
+        echo ( "<td>".date('g a',$Hour->getTimestamp())."</td><td>Free time!</td>\n" );
         echo ( "</tr>\n" );
     }
 ?>
@@ -152,7 +152,7 @@ echo ( "?y=".$Day->thisYear()."&amp;m=".
 <?php
 } else {
 ?>
-<p><strong><?php echo ( date('F Y',$Month->getTimeStamp()) ); ?></strong></p>
+<p><strong><?php echo ( date('F Y',$Month->getTimestamp()) ); ?></strong></p>
 <table>
 <tr>
 <td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td><td>S</td>

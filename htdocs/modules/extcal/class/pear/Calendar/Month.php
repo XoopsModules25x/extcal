@@ -47,7 +47,7 @@ if (!defined('CALENDAR_ROOT')) {
 /**
  * Load Calendar base class
  */
-require_once CALENDAR_ROOT.'Calendar.php';
+require_once CALENDAR_ROOT . 'Calendar.php';
 
 /**
  * Represents a Month and builds Days
@@ -55,7 +55,7 @@ require_once CALENDAR_ROOT.'Calendar.php';
  * require_once 'Calendar/Month.php';
  * $Month = new Calendar_Month(2003, 10); // Oct 2003
  * $Month->build(); // Build Calendar_Day objects
- * while ($Day = & $Month->fetch()) {
+ * while ($Day = $Month->fetch()) {
  *     echo $Day->thisDay().'<br />';
  * }
  * </code>
@@ -79,9 +79,9 @@ class Calendar_Month extends Calendar
      *
      * @access public
      */
-    function Calendar_Month($y, $m, $firstDay=null)
+    public function __construct($y, $m, $firstDay = null)
     {
-        parent::Calendar($y, $m);
+        parent::__construct($y, $m);
         $this->firstDay = $this->defineFirstDayOfWeek($firstDay);
     }
 
@@ -94,11 +94,11 @@ class Calendar_Month extends Calendar
      * @return boolean
      * @access public
      */
-    function build($sDates = array())
+    public function build($sDates = array())
     {
-        include_once CALENDAR_ROOT.'Day.php';
+        include_once CALENDAR_ROOT . 'Day.php';
         $daysInMonth = $this->cE->getDaysInMonth($this->year, $this->month);
-        for ($i=1; $i<=$daysInMonth; ++$i) {
+        for ($i = 1; $i <= $daysInMonth; ++$i) {
             $this->children[$i] = new Calendar_Day($this->year, $this->month, $i);
         }
         if (count($sDates) > 0) {
@@ -116,17 +116,15 @@ class Calendar_Month extends Calendar
      * @return void
      * @access private
      */
-    function setSelection($sDates)
+    public function setSelection($sDates)
     {
         foreach ($sDates as $sDate) {
-            if ($this->year == $sDate->thisYear()
-                && $this->month == $sDate->thisMonth()
-            ) {
+            if ($this->year == $sDate->thisYear() && $this->month == $sDate->thisMonth()) {
                 $key = $sDate->thisDay();
                 if (isset($this->children[$key])) {
                     $sDate->setSelected();
                     $class = strtolower(get_class($sDate));
-                    if ($class == 'calendar_day' || $class == 'calendar_decorator') {
+                    if ($class === 'calendar_day' || $class === 'calendar_decorator') {
                         $sDate->setFirst($this->children[$key]->isFirst());
                         $sDate->setLast($this->children[$key]->isLast());
                     }

@@ -13,16 +13,16 @@ include XOOPS_ROOT_PATH . '/include/comment_view.php';
 if (!isset($_GET['event'])) {
     $eventId = 0;
 } else {
-    $eventId = intval($_GET['event']);
+    $eventId = (int)$_GET['event'];
 }
-$eventHandler          = xoops_getmodulehandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
-$fileHandler           = xoops_getmodulehandler(_EXTCAL_CLS_FILE, _EXTCAL_MODULE);
-$eventMemberHandler    = xoops_getmodulehandler(_EXTCAL_CLS_MEMBER, _EXTCAL_MODULE);
-$eventNotMemberHandler = xoops_getmodulehandler(_EXTCAL_CLS_NOT_MEMBER, _EXTCAL_MODULE);
+$eventHandler          = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
+$fileHandler           = xoops_getModuleHandler(_EXTCAL_CLS_FILE, _EXTCAL_MODULE);
+$eventMemberHandler    = xoops_getModuleHandler(_EXTCAL_CLS_MEMBER, _EXTCAL_MODULE);
+$eventNotMemberHandler = xoops_getModuleHandler(_EXTCAL_CLS_NOT_MEMBER, _EXTCAL_MODULE);
 $permHandler           = ExtcalPerm::getHandler();
-include_once XOOPS_ROOT_PATH . "/modules/extcal/class/etablissement.php";
-include_once XOOPS_ROOT_PATH . "/modules/extcal/include/functions.php";
-$myts =& MyTextSanitizer::getInstance(); // MyTextSanitizer object
+include_once XOOPS_ROOT_PATH . '/modules/extcal/class/etablissement.php';
+include_once XOOPS_ROOT_PATH . '/modules/extcal/include/functions.php';
+$myts = MyTextSanitizer::getInstance(); // MyTextSanitizer object
 
 if (!function_exists('clear_unicodeslashes')) {
     /**
@@ -50,8 +50,8 @@ if (!$eventObj) {
 $event = $eventHandler->objectToArray($eventObj, array('cat_id', 'event_submitter'));
 $eventHandler->serverTimeToUserTime($event);
 
-$configHandler =& xoops_gethandler('config');
-$extcalConfig  = $configHandler->getConfigList($module->getVar("mid"));
+$configHandler = xoops_getHandler('config');
+$extcalConfig  = $configHandler->getConfigList($module->getVar('mid'));
 
 // Adding formated date for start and end event
 $eventHandler->formatEventDate($event, $extcalConfig['event_date_event']);
@@ -79,7 +79,7 @@ $xoopsTpl->assign('event_attachement', $eventFiles);
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 
 // Etablissement
-$etablissementHandler = xoops_getmodulehandler(_EXTCAL_CLS_ETABLISSEMENT, _EXTCAL_MODULE);
+$etablissementHandler = xoops_getModuleHandler(_EXTCAL_CLS_ETABLISSEMENT, _EXTCAL_MODULE);
 $etablissementObj     = $etablissementHandler->get($event['event_etablissement']);
 //$etablissement = $etablissementHandler->objectToArray($etablissementObj);
 $etablissement = $etablissementObj->vars;
@@ -101,9 +101,7 @@ if ($extcalConfig['whos_going']) {
 
     $nbUser = 0;
     // Making a list with members and counting regitered user's
-    foreach (
-        $members as $k => $v
-    ) {
+    foreach ($members as $k => $v) {
         ++$nbUser;
         $eventmember['member']['userList'][] = array('uid' => $k, 'uname' => $v->getVar('uname'));
     }
@@ -125,15 +123,11 @@ if ($extcalConfig['whos_going']) {
             $eventmember['member']['joinevent_mode'] = 'add';
 
             // If this event is full
-            if ($event['event_nbmember'] != 0
-                && $eventMemberHandler->getNbMember($eventId) >= $event['event_nbmember']
-            ) {
+            if ($event['event_nbmember'] != 0 && $eventMemberHandler->getNbMember($eventId) >= $event['event_nbmember']) {
                 $eventmember['member']['disabled'] = ' disabled="disabled"';
             }
         }
-
     }
-
 }
 
 // ### For Who's not Going function ###
@@ -149,9 +143,7 @@ if ($extcalConfig['whosnot_going']) {
 
     $nbUser = 0;
     // Making a list with not members
-    foreach (
-        $notmembers as $k => $v
-    ) {
+    foreach ($notmembers as $k => $v) {
         ++$nbUser;
         $eventmember['notmember']['userList'][] = array('uid' => $k, 'uname' => $v->getVar('uname'));
     }
@@ -173,7 +165,6 @@ if ($extcalConfig['whosnot_going']) {
             $eventmember['notmember']['joinevent_mode'] = 'add';
         }
     }
-
 }
 
 // If who's going or not going function is enabled
@@ -184,9 +175,7 @@ if ($extcalConfig['whos_going'] || $extcalConfig['whosnot_going']) {
 // Checking user perm
 if ($xoopsUser) {
     $xoopsTpl->assign('isAdmin', $xoopsUser->isAdmin());
-    $canEdit
-        = $permHandler->isAllowed($xoopsUser, 'extcal_cat_edit', $event['cat']['cat_id'])
-        && $xoopsUser->getVar('uid') == $event['user']['uid'];
+    $canEdit = $permHandler->isAllowed($xoopsUser, 'extcal_cat_edit', $event['cat']['cat_id']) && $xoopsUser->getVar('uid') == $event['user']['uid'];
     $xoopsTpl->assign('canEdit', $canEdit);
 } else {
     $xoopsTpl->assign('isAdmin', false);
@@ -219,4 +208,4 @@ $xoTheme->addStylesheet('browse.php?modules/extcal/assets/js/highslide.css');
 
 //function XoopsFormDhtmlTextArea($caption, $name, $value = "", $rows = 5, $cols = 50, $hiddentext = "xoopsHiddenText", $options = array());
 
-include(XOOPS_ROOT_PATH . "/footer.php");
+include(XOOPS_ROOT_PATH . '/footer.php');

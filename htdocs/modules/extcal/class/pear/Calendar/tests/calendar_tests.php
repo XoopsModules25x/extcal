@@ -9,9 +9,12 @@ require_once 'calendar_include.php';
  */
 class CalendarTests extends GroupTest
 {
-    function CalendarTests()
+    /**
+     * CalendarTests constructor.
+     */
+    public function __construct()
     {
-        $this->GroupTest('Calendar Tests');
+        parent::__construct('Calendar Tests');
         $this->addTestFile('calendar_test.php');
         $this->addTestFile('year_test.php');
         $this->addTestFile('month_test.php');

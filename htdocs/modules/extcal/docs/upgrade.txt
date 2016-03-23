@@ -1,3 +1,4 @@
 How to upgrade :
+========================
 
 Overwrite all module files by new ones and update the module in the module admin panel.

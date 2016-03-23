@@ -51,7 +51,7 @@ $selection = array();
 // Loop through the "database result"
 foreach ( $result as $row ) {
     $Hour = new Calendar_Hour(2000,1,1,1); // Create Hour with dummy values
-    $Hour->setTimeStamp($row['eventtime']); // Set the real time with setTimeStamp
+    $Hour->setTimestamp($row['eventtime']); // Set the real time with setTimestamp
 
     // Create the decorator, passing it the Hour
     $DiaryEvent = new DiaryEvent($Hour);

@@ -22,47 +22,50 @@
 /* style pour les infobulle des pages agenda */
 
 a.infobulle {
-   position: relative;
-   color: black;
-   text-decoration: none;
-   border-bottom: 1px gray dotted; /* On souligne le texte. */
-   font-weight:600;
+    position: relative;
+    color: black;
+    text-decoration: none;
+    border-bottom: 1px gray dotted; /* On souligne le texte. */
+    font-weight: 600;
 }
+
 a.infobulle span {
-   display: none; /* On masque l'infobulle. */
+    display: none; /* On masque l'infobulle. */
 
 }
+
 a.infobulle:hover {
-   background: none; /* Correction d'un bug d'Internet Explorer. */
-   z-index: 1500; /* On définit une valeur pour l'ordre d'affichage. */
+    background: none; /* Correction d'un bug d'Internet Explorer. */
+    z-index: 1500; /* On définit une valeur pour l'ordre d'affichage. */
 
-   cursor: help; /* On change le curseur par défaut par un curseur d'aide. */
+    cursor: help; /* On change le curseur par défaut par un curseur d'aide. */
 }
+
 a.infobulle:hover span[infoBulle_zone1] {
-   display: inline; /* On affiche l'infobulle. */
-   position: absolute;
+    display: inline; /* On affiche l'infobulle. */
+    position: absolute;
 
-   white-space: nowrap; /* On change la valeur de la propriété white-space pour qu'il n'y ait pas de retour à la ligne non désiré. */
+    white-space: nowrap; /* On change la valeur de la propriété white-space pour qu'il n'y ait pas de retour à la ligne non désiré. */
 
-   top: 5px; /* On positionne notre infobulle. */
-   left: -15px;
+    top: 5px; /* On positionne notre infobulle. */
+    left: -15px;
 
-   background: white;
+    background: white;
 
-   color: green;
-   padding: 3px;
+    color: green;
+    padding: 3px;
 
-   border: 1px solid green;
-   border-left: 4px solid green;
+    border: 1px solid green;
+    border-left: 4px solid green;
 
-   font-size: 11px; /* On définit les propriétés de texte pour toutes les balises. */
-   font-family: Tahoma, Verdana, Arial, serif;
+    font-size: 11px; /* On définit les propriétés de texte pour toutes les balises. */
+    font-family: Tahoma, Verdana, Arial, serif;
 }
 
 a.infobulle:hover span[infoBulle_zone2] {
-   left: 90px;
+    left: 90px;
 }
 
 a.infobulle:hover span[infoBulle_zone3] {
-   top: 190px; /* On positionne notre infobulle. */
+    top: 190px; /* On positionne notre infobulle. */
 }

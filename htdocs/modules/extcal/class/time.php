@@ -1,14 +1,12 @@
 <?php
 
-// defined("XOOPS_ROOT_PATH") || exit("XOOPS root path not defined");
+// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once XOOPS_ROOT_PATH . "/language/" . $GLOBALS['xoopsConfig']['language'] . "/calendar.php";
-if (file_exists(
-    XOOPS_ROOT_PATH . "/modules/extcal/language/" . $GLOBALS['xoopsConfig']['language'] . "/main.php"
-)) {
-    include_once XOOPS_ROOT_PATH . "/modules/extcal/language/" . $GLOBALS['xoopsConfig']['language'] . "/main.php";
+include_once XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/calendar.php';
+if (file_exists(XOOPS_ROOT_PATH . '/modules/extcal/language/' . $GLOBALS['xoopsConfig']['language'] . '/main.php')) {
+    include_once XOOPS_ROOT_PATH . '/modules/extcal/language/' . $GLOBALS['xoopsConfig']['language'] . '/main.php';
 } else {
-    include_once XOOPS_ROOT_PATH . "/modules/extcal/language/english/main.php";
+    include_once XOOPS_ROOT_PATH . '/modules/extcal/language/english/main.php';
 }
 
 /**
@@ -20,7 +18,7 @@ class ExtcalTime
     /**
      * @return ExtcalTime
      */
-    static function &getHandler()
+    public static function getHandler()
     {
         static $timeHandler;
         if (!isset($timeHandler)) {
@@ -35,11 +33,11 @@ class ExtcalTime
      *
      * @return mixed
      */
-    function _getUserTimeZone($user)
+    public function _getUserTimeZone($user)
     {
         global $xoopsConfig;
 
-        return ($user) ? $user->timezone() : $xoopsConfig['default_TZ'];
+        return $user ? $user->timezone() : $xoopsConfig['default_TZ'];
     }
 
     /**
@@ -47,7 +45,7 @@ class ExtcalTime
      *
      * @return mixed
      */
-    function getMonthName($id)
+    public function getMonthName($id)
     {
         $monthName = array(
             '1'  => _CAL_JANUARY,
@@ -61,8 +59,7 @@ class ExtcalTime
             '9'  => _CAL_SEPTEMBER,
             '10' => _CAL_OCTOBER,
             '11' => _CAL_NOVEMBER,
-            '12' => _CAL_DECEMBER
-        );
+            '12' => _CAL_DECEMBER);
 
         return $monthName[$id];
     }
@@ -72,7 +69,7 @@ class ExtcalTime
      *
      * @return mixed
      */
-    function getDayName($id)
+    public function getDayName($id)
     {
         $dayName = array(
             _CAL_SUNDAY,
@@ -81,8 +78,7 @@ class ExtcalTime
             _CAL_WEDNESDAY,
             _CAL_THURSDAY,
             _CAL_FRIDAY,
-            _CAL_SATURDAY
-        );
+            _CAL_SATURDAY);
 
         return $dayName[$id];
     }
@@ -93,7 +89,7 @@ class ExtcalTime
      *
      * @return mixed
      */
-    function getFormatedDate($format, $timestamp)
+    public function getFormatedDate($format, $timestamp)
     {
         $patterns     = array(
             '/January/',
@@ -133,8 +129,7 @@ class ExtcalTime
             '/Wed /',
             '/Thu /',
             '/Fri /',
-            '/Sat /'
-        );
+            '/Sat /');
         $replacements = array(
             _CAL_JANUARY,
             _CAL_FEBRUARY,
@@ -173,8 +168,7 @@ class ExtcalTime
             substr(_CAL_WEDNESDAY, 0, 3) . ' ',
             substr(_CAL_THURSDAY, 0, 3) . ' ',
             substr(_CAL_FRIDAY, 0, 3) . ' ',
-            substr(_CAL_SATURDAY, 0, 3) . ' '
-        );
+            substr(_CAL_SATURDAY, 0, 3) . ' ');
 
         return preg_replace($patterns, $replacements, date($format, $timestamp));
     }
@@ -184,9 +178,8 @@ class ExtcalTime
      *
      * @return string
      */
-    function getFormatedReccurRule($event_recur_rules)
+    public function getFormatedReccurRule($event_recur_rules)
     {
-
         $eventOptions = explode('|', $event_recur_rules);
 
         switch ($eventOptions[0]) {
@@ -207,10 +200,8 @@ class ExtcalTime
                 array_shift($eventOptions);
                 array_shift($eventOptions);
                 $day = '';
-                foreach (
-                    $eventOptions as $option
-                ) {
-                    $day .= " " . $daysName[$option] . ", ";
+                foreach ($eventOptions as $option) {
+                    $day .= ' ' . $daysName[$option] . ', ';
                 }
                 $ret = sprintf(_MD_EXTCAL_RR_WEEKLY, $day, $interval);
 
@@ -255,11 +246,10 @@ class ExtcalTime
                     '-1TH' => _MD_EXTCAL_LAST_TH,
                     '-1FR' => _MD_EXTCAL_LAST_FR,
                     '-1SA' => _MD_EXTCAL_LAST_SA,
-                    '-1SU' => _MD_EXTCAL_LAST_SU
-                );
+                    '-1SU' => _MD_EXTCAL_LAST_SU);
 
                 $interval = $eventOptions[1];
-                if (substr($eventOptions[2], 0, 2) == 'MD') {
+                if (0 === strpos($eventOptions[2], 'MD')) {
                     return sprintf(_MD_EXTCAL_RR_MONTHLY, substr($eventOptions[2], 2), $interval);
                 } else {
                     return sprintf(_MD_EXTCAL_RR_MONTHLY, $monthDays[$eventOptions[2]], $interval);
@@ -304,8 +294,7 @@ class ExtcalTime
                     '-1TH' => _MD_EXTCAL_LAST_TH,
                     '-1FR' => _MD_EXTCAL_LAST_FR,
                     '-1SA' => _MD_EXTCAL_LAST_SA,
-                    '-1SU' => _MD_EXTCAL_LAST_SU
-                );
+                    '-1SU' => _MD_EXTCAL_LAST_SU);
 
                 $monthName = array(
                     1  => _CAL_JANUARY,
@@ -319,8 +308,7 @@ class ExtcalTime
                     9  => _CAL_SEPTEMBER,
                     10 => _CAL_OCTOBER,
                     11 => _CAL_NOVEMBER,
-                    12 => _CAL_DECEMBER
-                );
+                    12 => _CAL_DECEMBER);
 
                 $interval = $eventOptions[1];
                 $day      = $eventOptions[2];
@@ -328,15 +316,12 @@ class ExtcalTime
                 array_shift($eventOptions);
                 array_shift($eventOptions);
                 $month = '';
-                foreach (
-                    $eventOptions as $option
-                ) {
-                    $month .= " " . $monthName[$option] . ", ";
+                foreach ($eventOptions as $option) {
+                    $month .= ' ' . $monthName[$option] . ', ';
                 }
+                $dayString = $day;
                 if (array_key_exists($day, $monthDays)) {
                     $dayString = $monthDays[$day];
-                } else {
-                    $dayString = $day;
                 }
                 $ret = sprintf(_MD_EXTCAL_RR_YEARLY, $month, $dayString, $interval);
 
@@ -345,7 +330,6 @@ class ExtcalTime
                 break;
 
         }
-
+        return false;
     }
-
 }

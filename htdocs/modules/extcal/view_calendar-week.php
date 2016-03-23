@@ -7,20 +7,20 @@ $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
 include_once __DIR__ . '/header.php';
 
 /* ========================================================================== */
-$year  = isset($_GET['year']) ? intval($_GET['year']) : date('Y');
-$month = isset($_GET['month']) ? intval($_GET['month']) : date('n');
-$day   = isset($_GET['day']) ? intval($_GET['day']) : date('j');
-$cat   = isset($_GET['cat']) ? intval($_GET['cat']) : 0;
+$year  = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
+$month = isset($_GET['month']) ? (int)$_GET['month'] : date('n');
+$day   = isset($_GET['day']) ? (int)$_GET['day'] : date('j');
+$cat   = isset($_GET['cat']) ? (int)$_GET['cat'] : 0;
 /* ========================================================================== */
 
 // Validate the date (day, month and year)
 $dayTS = mktime(0, 0, 0, $month, $day, $year);
 //$offset = date('w', $dayTS) - $xoopsModuleConfig['week_start_day'];
 $offset = date('w', $dayTS) + 7 - $xoopsModuleConfig['week_start_day'] < 7 ? date('w', $dayTS) + 7 - $xoopsModuleConfig['week_start_day'] : 0;
-$dayTS  = $dayTS - ($offset * _EXTCAL_TS_DAY);
-$year   = date('Y', $dayTS);
-$month  = date('n', $dayTS);
-$day    = date('j', $dayTS);
+$dayTS -= ($offset * _EXTCAL_TS_DAY);
+$year  = date('Y', $dayTS);
+$month = date('n', $dayTS);
+$day   = date('j', $dayTS);
 
 //echo $dayTS . '   dayTS-2 <br />';
 //echo gmdate("Y-m-d\TH:i:s\Z", $dayTS). '   dayTS-2 <br />';
@@ -30,7 +30,7 @@ $form->addElement(getListYears($year, $xoopsModuleConfig['agenda_nb_years_before
 $form->addElement(getListMonths($month));
 $form->addElement(getListDays($day));
 $form->addElement(getListCategories($cat));
-$form->addElement(new XoopsFormButton("", "form_submit", _SEND, "submit"));
+$form->addElement(new XoopsFormButton('', 'form_submit', _SEND, 'submit'));
 
 // Assigning the form to the template
 $form->assign($xoopsTpl);
@@ -45,8 +45,7 @@ $criteres = array(
     'month'        => $month,
     'year'         => $year,
     'cat'          => $cat,
-    'externalKeys' => 'cat_id'
-);
+    'externalKeys' => 'cat_id');
 $events   = $eventHandler->getEventsOnPeriode($criteres);
 /**********************************************************************/
 //$eventsArray = $events;
@@ -66,18 +65,18 @@ $endWeek   = $startWeek + _EXTCAL_TS_WEEK - 1;
 $eventsArray = array();
 foreach ($events as $event) {
     $eventHandler->addEventToCalArray($event, $eventsArray, $startWeek, $endWeek);
-//     if (!$event['event_isrecur']) {
-//         // Formating date
-//         $eventHandler->formatEventDate($event, $xoopsModuleConfig['event_date_week']);
-//         $eventHandler->addEventToCalArray($event, $eventsArray, $startWeek, $endWeek);
-//     } else {
-//         $recurEvents = $eventHandler->getRecurEventToDisplay($event, $startWeek, $endWeek);
-//         // Formating date
-//         $eventHandler->formatEventsDate($recurEvents, $xoopsModuleConfig['event_date_week']);
-//         foreach ($recurEvents as $recurEvent) {
-//             $eventHandler->addEventToCalArray($recurEvent, $eventsArray, $startWeek, $endWeek);
-//         }
-//     }
+    //     if (!$event['event_isrecur']) {
+    //         // Formating date
+    //         $eventHandler->formatEventDate($event, $xoopsModuleConfig['event_date_week']);
+    //         $eventHandler->addEventToCalArray($event, $eventsArray, $startWeek, $endWeek);
+    //     } else {
+    //         $recurEvents = $eventHandler->getRecurEventToDisplay($event, $startWeek, $endWeek);
+    //         // Formating date
+    //         $eventHandler->formatEventsDate($recurEvents, $xoopsModuleConfig['event_date_week']);
+    //         foreach ($recurEvents as $recurEvent) {
+    //             $eventHandler->addEventToCalArray($recurEvent, $eventsArray, $startWeek, $endWeek);
+    //         }
+    //     }
 }
 
 /*
@@ -85,12 +84,7 @@ foreach ($events as $event) {
 */
 // Flag current day
 $selectedDays = array(
-    new Calendar_Day(
-        date('Y', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($xoopsUser))),
-        date('n', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($xoopsUser))),
-        date('j', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($xoopsUser)))
-    )
-);
+    new Calendar_Day(date('Y', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($xoopsUser))), date('n', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($xoopsUser))), date('j', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($xoopsUser)))));
 
 // Build calendar object
 $weekCalObj  = new Calendar_Week($year, $month, $day, $xoopsModuleConfig['week_start_day']);
@@ -106,9 +100,8 @@ while ($dayCalObj = $weekCalObj->fetch()) {
         'dayNumber'  => $dayCalObj->thisDay(),
         'month'      => $dayCalObj->thisMonth(),
         'year'       => $dayCalObj->thisYear(),
-        'isSelected' => $dayCalObj->isSelected()
-    );
-    if (@ count($eventsArray[$dayCalObj->thisDay()]) > 0 && !$dayCalObj->isEmpty()) {
+        'isSelected' => $dayCalObj->isSelected());
+    if (!$dayCalObj->isEmpty() && @count($eventsArray[$dayCalObj->thisDay()]) > 0) {
         $week[$cellId]['events'] = $eventsArray[$dayCalObj->thisDay()];
     } else {
         $week[$cellId]['events'] = '';
@@ -140,23 +133,16 @@ $monthNames = Calendar_Util_Textual::monthNames();
 $navig = array(
     'prev' => array(
         'uri'  => 'year=' . $pWeekCalObj->thisYear() . '&amp;month=' . $pWeekCalObj->thisMonth() . '&amp;day=' . $pWeekCalObj->thisDay(),
-        'name' => $extcalTimeHandler->getFormatedDate($xoopsModuleConfig['nav_date_week'], $pWeekCalObj->getTimestamp())
-    ),
+        'name' => $extcalTimeHandler->getFormatedDate($xoopsModuleConfig['nav_date_week'], $pWeekCalObj->getTimestamp())),
     'this' => array(
         'uri'  => 'year=' . $weekCalObj->thisYear() . '&amp;month=' . $weekCalObj->thisMonth() . '&amp;day=' . $weekCalObj->thisDay(),
-        'name' => $extcalTimeHandler->getFormatedDate($xoopsModuleConfig['nav_date_week'], $weekCalObj->getTimestamp())
-    ),
+        'name' => $extcalTimeHandler->getFormatedDate($xoopsModuleConfig['nav_date_week'], $weekCalObj->getTimestamp())),
     'next' => array(
         'uri'  => 'year=' . $nWeekCalObj->thisYear() . '&amp;month=' . $nWeekCalObj->thisMonth() . '&amp;day=' . $nWeekCalObj->thisDay(),
-        'name' => $extcalTimeHandler->getFormatedDate($xoopsModuleConfig['nav_date_week'], $nWeekCalObj->getTimestamp())
-    )
-);
+        'name' => $extcalTimeHandler->getFormatedDate($xoopsModuleConfig['nav_date_week'], $nWeekCalObj->getTimestamp())));
 
 // Title of the page
-$xoopsTpl->assign(
-    'xoops_pagetitle',
-    $xoopsModule->getVar('name') . ' ' . $navig['this']['name']
-);
+$xoopsTpl->assign('xoops_pagetitle', $xoopsModule->getVar('name') . ' ' . $navig['this']['name']);
 
 // Assigning navig data to the template
 $xoopsTpl->assign('navig', $navig);
@@ -177,24 +163,22 @@ $xoopsTpl->assign('tNavBar', $tNavBar);
 $xoopsTpl->assign('list_position', $xoopsModuleConfig['list_position']);
 
 //mb missing for xBootstrap templates by Angelo
-//mb missing for xBootstrap templates by Angelo
 $lang = array(
-    'start' => _MD_EXTCAL_START,
-    'end' => _MD_EXTCAL_END,
-    'calmonth' => _MD_EXTCAL_NAV_CALMONTH,
-    'calweek' => _MD_EXTCAL_NAV_CALWEEK,
-    'year' => _MD_EXTCAL_NAV_YEAR,
-    'month' => _MD_EXTCAL_NAV_MONTH,
-    'week' => _MD_EXTCAL_NAV_WEEK,
-    'day' => _MD_EXTCAL_NAV_DAY,
+    'start'      => _MD_EXTCAL_START,
+    'end'        => _MD_EXTCAL_END,
+    'calmonth'   => _MD_EXTCAL_NAV_CALMONTH,
+    'calweek'    => _MD_EXTCAL_NAV_CALWEEK,
+    'year'       => _MD_EXTCAL_NAV_YEAR,
+    'month'      => _MD_EXTCAL_NAV_MONTH,
+    'week'       => _MD_EXTCAL_NAV_WEEK,
+    'day'        => _MD_EXTCAL_NAV_DAY,
     'agendaweek' => _MD_EXTCAL_NAV_AGENDA_WEEK,
-    'agendaday' => _MD_EXTCAL_NAV_AGENDA_DAY,
-    'search' => _MD_EXTCAL_NAV_SEARCH,
-    'newevent' => _MD_EXTCAL_NAV_NEW_EVENT
-);
+    'agendaday'  => _MD_EXTCAL_NAV_AGENDA_DAY,
+    'search'     => _MD_EXTCAL_NAV_SEARCH,
+    'newevent'   => _MD_EXTCAL_NAV_NEW_EVENT);
 
 // Assigning language data to the template
 $xoopsTpl->assign('lang', $lang);
-$xoopsTpl->assign('view', "calweek");
+$xoopsTpl->assign('view', 'calweek');
 
 include XOOPS_ROOT_PATH . '/footer.php';

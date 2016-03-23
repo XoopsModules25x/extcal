@@ -19,14 +19,15 @@ require_once _EXTCAL_PEAR_CALENDAR_ROOT . '/Day.php';
 
 //------------------------------------------------------
 // Getting eXtCal object's handler
-$catHandler        = xoops_getmodulehandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-$eventHandler      = xoops_getmodulehandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
+$catHandler        = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+$eventHandler      = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
 $extcalTimeHandler = ExtcalTime::getHandler();
 $permHandler       = ExtcalPerm::getHandler();
-$xoopsUser         = $xoopsUser ? $xoopsUser : null;
+$xoopsUser         = $xoopsUser ?: null;
 //------------------------------------------------------
 // Tooltips include
 $xoTheme->addScript('modules/extcal/include/ToolTips.js');
 $xoTheme->addStylesheet('modules/extcal/assets/css/infobulle.css');
 
 //////////////////////////////////////////////////////////////
+

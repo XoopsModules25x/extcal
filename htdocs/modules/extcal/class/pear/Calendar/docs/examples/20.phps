@@ -62,7 +62,7 @@ class MonthPayload_Decorator extends Calendar_Decorator
         $daysInMonth = $this->cE->getDaysInMonth($this->year, $this->month);
         for ($i=1; $i<=$daysInMonth; ++$i) {
             $Day = new Calendar_Day(2000,1,1); // Create Day with dummy values
-            $Day->setTimeStamp($this->cE->dateToStamp($this->year, $this->month, $i));
+            $Day->setTimestamp($this->cE->dateToStamp($this->year, $this->month, $i));
             $this->children[$i] = new DiaryEvent($Day);
         }
         if (count($events) > 0) {

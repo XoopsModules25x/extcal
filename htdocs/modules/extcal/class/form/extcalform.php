@@ -10,13 +10,12 @@ include XOOPS_ROOT_PATH . '/modules/extcal/class/form/formrrulecheckbox.php';
  */
 class ExtcalThemeForm extends XoopsThemeForm
 {
-
     /**
      * create HTML to output the form as a theme-enabled table with validation.
      *
      * @return string
      */
-    function render()
+    public function render()
     {
         $ret = "\n<script type=\"text/javascript\">\n";
         $ret .= "function validDate(startDateInput, startTimeSelect, endDateInput, endTimeSelect) {\n";
@@ -47,5 +46,4 @@ class ExtcalThemeForm extends XoopsThemeForm
 
         return $ret;
     }
-
 }
