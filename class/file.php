@@ -90,7 +90,7 @@ class ExtcalFileHandler extends ExtcalPersistableObjectHandler
     public function deleteFile(&$file)
     {
         $this->_deleteFile($file);
-        $this->delete($file->getVar('file_id'));
+        $this->deleteById($file->getVar('file_id'));
     }
 
     /**
