@@ -30,8 +30,18 @@ class colorTools
      *
      * @return string
      */
-    public function modifierCouleur($colorHexa, $incrementRouge, $incrementVert, $incrementBleu, $plancherRouge = 0, $plafondRouge = 255, $plancherVert = 0, $plafondVert = 255, $plancherBleu = 0, $plafondBleu = 255)
-    {
+    public function modifierCouleur(
+        $colorHexa,
+        $incrementRouge,
+        $incrementVert,
+        $incrementBleu,
+        $plancherRouge = 0,
+        $plafondRouge = 255,
+        $plancherVert = 0,
+        $plafondVert = 255,
+        $plancherBleu = 0,
+        $plafondBleu = 255
+    ) {
         $t10 = static::hexa2rgbA($colorHexa);
 
         $t10[1] = static::bornerValeur($t10[1] + $incrementRouge, $plancherRouge, $plafondRouge);
@@ -92,6 +102,7 @@ class colorTools
         // ext_echoArray($t10);
 
         $newColorHexa = static::getHexaColorFromA($t10);
+
         // echo "colorHexa = {$newColorHexa}-{$colorHexa}<br>";
         return $newColorHexa;
     }
@@ -159,9 +170,9 @@ class colorTools
         $tHex = array('', '', '', '');
 
         $tHex[0] = $aColors[0];
-        $tHex[1] = substr('00'.dechex($aColors[1]), -2);
-        $tHex[2] = substr('00'.dechex($aColors[2]), -2);
-        $tHex[3] = substr('00'.dechex($aColors[3]), -2);
+        $tHex[1] = substr('00' . dechex($aColors[1]), -2);
+        $tHex[2] = substr('00' . dechex($aColors[2]), -2);
+        $tHex[3] = substr('00' . dechex($aColors[3]), -2);
 
         $colorHexa = implode('', $tHex);
 
@@ -201,10 +212,10 @@ class colorTools
         $t = array('', '', '', '');
 
         if (0 === strpos($colorHexa, '#')) {
-            $t[0] = '#';
+            $t[0]      = '#';
             $offsetCar = 1;
         } else {
-            $t[0] = '';
+            $t[0]      = '';
             $offsetCar = 0;
         }
 
@@ -227,10 +238,10 @@ class colorTools
      */
     public function hexa2rgb($colorHexa, &$r, &$v, &$b, &$diese)
     {
-        $t = static::hexa2rgbA($colorHexa);
-        $r = $t[1];
-        $v = $t[2];
-        $v = $t[3];
+        $t     = static::hexa2rgbA($colorHexa);
+        $r     = $t[1];
+        $v     = $t[2];
+        $v     = $t[3];
         $diese = $t[0];
 
         return true;
