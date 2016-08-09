@@ -3,6 +3,7 @@
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 $moduleDirName = basename(dirname(__DIR__));
+/** @var XoopsModuleHandler $moduleHandler */
 $moduleHandler = xoops_getHandler('module');
 $module        = $moduleHandler->getByDirname($moduleDirName);
 $pathIcon32    = '../../' . $module->getInfo('sysicons32');

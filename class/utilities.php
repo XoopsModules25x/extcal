@@ -341,7 +341,7 @@ class ExtcalUtilities
     {
         global $$tsName;
         $ts = $$tsName;
-        ext_echoTSU($ts, $tsName, $msg = '');
+        static::ext_echoTSU($ts, $tsName, $msg = '');
     }
 
     /*****************************************************************/
@@ -468,7 +468,7 @@ class ExtcalUtilities
      *
      * @return string
      */
-    public static function eclaircirCouleur($color, $plancher, $plafond)
+    public static function getLighterColor($color, $plancher, $plafond)
     {
         include_once __DIR__.'/colorTools.php';
 

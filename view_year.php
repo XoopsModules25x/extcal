@@ -21,7 +21,7 @@ $xoTheme->addStylesheet('modules/extcal/assets/css/infobulle.css');
 $form = new XoopsSimpleForm('', 'navigSelectBox', $params['file'], 'get');
 $form->addElement(getListYears($year, $xoopsModuleConfig['agenda_nb_years_before'], $xoopsModuleConfig['agenda_nb_years_after']));
 
-$form->addElement(getListCategories($cat));
+$form->addElement(ExtcalUtilities::getListCategories($cat));
 $form->addElement(new XoopsFormButton('', 'form_submit', _SEND, 'submit'));
 
 // Assigning the form to the template

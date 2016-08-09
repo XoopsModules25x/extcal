@@ -17,7 +17,7 @@
  **/
 include_once __DIR__.'/../../../class/uploader.php';
 require __DIR__.'/../../../class/mail/phpmailer/class.phpmailer.php'; // First we require the PHPMailer libary in our script
-include_once __DIR__.'/functions.php';
+include_once __DIR__.'/../class/utilities.php';
 include_once __DIR__.'/constantes.php';
 include_once __DIR__.'/../../../class/template.php';
 
@@ -252,8 +252,8 @@ function extcal_SendMail(
     $xoopsMailer->send($bEcho);
 
     if ($bEcho) {
-        ext_echo($xoopsMailer->getSuccess());
-        ext_echo($xoopsMailer->getErrors());
+        ExtcalUtilities::ext_echo($xoopsMailer->getSuccess());
+        ExtcalUtilities::ext_echo($xoopsMailer->getErrors());
     }
     /*
 

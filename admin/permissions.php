@@ -111,7 +111,7 @@ switch ($step) {
         echo '</div></fieldset><br>';
 
         // Retriving category list for Group perm form
-        $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+        // $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
         $cats = $catHandler->getAllCat($xoopsUser, 'all');
 
         /*

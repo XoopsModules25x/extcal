@@ -4,7 +4,7 @@ include dirname(dirname(__DIR__)).'/mainfile.php';
 
 include_once __DIR__.'/include/constantes.php';
 include_once __DIR__.'/include/mail_fnc.php';
-include_once __DIR__.'/include/functions.php';
+include_once __DIR__.'/class/utilities.php';
 
 /*
 ext_echoArray($_POST);

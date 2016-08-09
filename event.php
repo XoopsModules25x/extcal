@@ -21,7 +21,7 @@ $eventMemberHandler = xoops_getModuleHandler(_EXTCAL_CLS_MEMBER, _EXTCAL_MODULE)
 $eventNotMemberHandler = xoops_getModuleHandler(_EXTCAL_CLS_NOT_MEMBER, _EXTCAL_MODULE);
 $permHandler = ExtcalPerm::getHandler();
 include_once __DIR__.'/class/etablissement.php';
-include_once __DIR__.'/include/functions.php';
+include_once __DIR__.'/class/utilities.php';
 $myts = MyTextSanitizer::getInstance(); // MyTextSanitizer object
 
 if (!function_exists('clear_unicodeslashes')) {

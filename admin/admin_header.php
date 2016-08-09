@@ -43,3 +43,10 @@ $pathIcon16      = $GLOBALS['xoops']->url('www/' . $GLOBALS['xoopsModule']->getI
 $pathIcon32      = $GLOBALS['xoops']->url('www/' . $GLOBALS['xoopsModule']->getInfo('sysicons32'));
 $xoopsModuleAdminPath = $GLOBALS['xoops']->path('www/' . $GLOBALS['xoopsModule']->getInfo('dirmoduleadmin'));
 require_once $xoopsModuleAdminPath.'/moduleadmin.php';
+
+/** @var ExtcalCatHandler $catHandler */
+$catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+/** @var ExtcalEventHandler $eventHandler */
+$eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
+/** @var ExtcalEventmemberHandler $eventMemberHandler */
+$eventMemberHandler = xoops_getModuleHandler(_EXTCAL_CLS_MEMBER, _EXTCAL_MODULE);

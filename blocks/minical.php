@@ -2,7 +2,7 @@
 
 global $extcalConfig, $xoopsUser;
 include_once __DIR__.'/../include/constantes.php';
-include_once __DIR__.'/../include/functions.php';
+include_once __DIR__.'/../class/utilities.php';
 include_once __DIR__.'/../class/tableForm.php';
 //---------------------------------------------------------------------------
 /**

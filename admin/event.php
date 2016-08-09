@@ -5,7 +5,7 @@ include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
 include_once XOOPS_ROOT_PATH.'/class/pagenav.php';
 include_once dirname(__DIR__).'/class/form/extcalform.php';
 include_once __DIR__.'/admin_header.php';
-include_once __DIR__.'/../include/functions.php';
+include_once __DIR__.'/../class/utilities.php';
 
 $gepeto = array_merge($_GET, $_POST);
 while (list($k, $v) = each($gepeto)) {
@@ -22,6 +22,7 @@ if (!isset($op)) {
  */
 function deleteEvents($ids)
 {
+    /** @var ExtcalEventHandler $eventHandler */
     $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
     $criteria = new Criteria('event_id', "($ids)", 'IN');
 
@@ -71,7 +72,7 @@ switch ($op) {
 
         //exit;
         ///////////////////////////////////////////////////////////////////////////////
-        extcal_loadImg($_REQUEST, $event_picture1, $event_picture2);
+        ExtcalUtilities::extcal_loadImg($_REQUEST, $event_picture1, $event_picture2);
         ///////////////////////////////////////////////////////////////////////////////
         $data = array(
             'event_title' => $_POST['event_title'],
@@ -107,6 +108,7 @@ switch ($op) {
             // New event
         } else {
             $notificationHandler = xoops_getHandler('notification');
+            /** @var ExtcalCatHandler $catHandler */
             $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
 
             $data['event_submitter'] = $xoopsUser ? $xoopsUser->getVar('uid') : 0;

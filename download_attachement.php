@@ -8,7 +8,7 @@ if (!isset($_GET['file'])) {
 } else {
     $fileId = (int) $_GET['file'];
 }
-
+/** @var ExtcalFileHandler $fileHandler */
 $fileHandler = xoops_getModuleHandler(_EXTCAL_CLS_FILE, _EXTCAL_MODULE);
 
 $file = $fileHandler->getFile($fileId);

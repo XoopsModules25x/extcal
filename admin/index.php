@@ -33,13 +33,9 @@ if (isset($_GET['fct'])) {
 }
 
 switch ($op) {
-
     case 'notification':
-
         switch ($fct) {
-
             case 'send':
-
                 if (!$GLOBALS['xoopsSecurity']->check()) {
                     redirect_header('index.php', 3, _NOPERM.'<br>'.implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
                 }
@@ -48,9 +44,9 @@ switch ($op) {
 
                 $myts = MyTextSanitizer::getInstance();
                 $xoopsMailer =& getMailer();
-                $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-                $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
-                $eventMemberHandler = xoops_getModuleHandler(_EXTCAL_CLS_MEMBER, _EXTCAL_MODULE);
+//                $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+//                $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
+//                $eventMemberHandler = xoops_getModuleHandler(_EXTCAL_CLS_MEMBER, _EXTCAL_MODULE);
                 $extcalTime = ExtcalTime::getHandler();
                 $extcalConfig = ExtcalConfig::getHandler();
                 $xoopsModuleConfig = $extcalConfig->getModuleConfig();
@@ -87,9 +83,7 @@ switch ($op) {
 
             case 'default':
             default:
-
                 xoops_cp_header();
-
                 $fromemail = !empty($xoopsConfig['adminmail']) ? $xoopsConfig['adminmail'] : $xoopsUser->getVar('email', 'E');
                 $subjectCaption = _AM_EXTCAL_SUBJECT."<br><br><span style='font-size:x-small;font-weight:bold;'>"._AM_EXTCAL_USEFUL_TAGS
                                   ."</span><br><span style='font-size:x-small;font-weight:normal;'>"._AM_EXTCAL_MAILTAGS6.'<br>'._AM_EXTCAL_MAILTAGS2.'</span>&nbsp;&nbsp;&nbsp;';
@@ -119,9 +113,7 @@ switch ($op) {
                 xoops_cp_footer();
 
                 break;
-
         }
-
         break;
 
     default:
@@ -130,8 +122,8 @@ switch ($op) {
         //***************************************************************************************
         xoops_cp_header();
         //        include_once XOOPS_ROOT_PATH . "/modules/extcal/class/admin.php";
-        $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-        $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
+//        $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+//        $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
         $indexAdmin = new ModuleAdmin();
         $indexAdmin->addInfoBox(_MI_EXTCAL_DASHBOARD);
         $indexAdmin->addInfoBoxLine(_MI_EXTCAL_DASHBOARD, '<infolabel>'._AM_EXTCAL_INDEX_CATEGORIES.'</infolabel>', $catHandler->getCount(), 'Green');
