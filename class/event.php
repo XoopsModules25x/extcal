@@ -8,6 +8,7 @@ include_once XOOPS_ROOT_PATH . '/modules/extcal/class/time.php';
 include_once XOOPS_ROOT_PATH . '/modules/extcal/class/config.php';
 include_once XOOPS_ROOT_PATH . '/modules/extcal/class/extDateTime.php';
 
+include_once(XOOPS_ROOT_PATH . '/modules/extcal/include/functions.php');
 include_once XOOPS_ROOT_PATH . '/modules/extcal/include/constantes.php';
 
 /**
@@ -155,7 +156,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
            - Delete comment
            - Delete notifications
           */
-        $this->delete($eventId, true);
+        $this->deleteById($eventId, true);
     }
 
     /**

@@ -220,7 +220,7 @@ function bExtcalMinicalShow($options)
  */
 function bExtcalMinicalEdit($options)
 {
-    include_once(XOOPS_ROOT_PATH . '/class/xoopsform/spin/formspin.php');
+    include_once(__DIR__ . '/../class/form/spin/formspin.php');
     global $xoopsUser;
 
     //  $t = print_r(get_defined_vars(),true);
@@ -263,23 +263,23 @@ function bExtcalMinicalEdit($options)
     $form->addElement($xfValue[$k], false);
     //---------------------------------------------------------------------
     $k           = 2;
-    $xfValue[$k] = new XoopsFormSpin(_MB_EXTCAL_SS_WIDTH, "options[{$k}]", $options[$k], 100, 250, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
+    $xfValue[$k] = new ExtcalFormSpin(_MB_EXTCAL_SS_WIDTH, "options[{$k}]", $options[$k], 100, 250, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
     $form->addElement($xfValue[$k], false);
     //---------------------------------------------------------------------
     $k           = 3;
-    $xfValue[$k] = new XoopsFormSpin(_MB_EXTCAL_SS_HEIGHT, "options[{$k}]", $options[$k], 100, 250, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
+    $xfValue[$k] = new ExtcalFormSpin(_MB_EXTCAL_SS_HEIGHT, "options[{$k}]", $options[$k], 100, 250, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
     $form->addElement($xfValue[$k], false);
     //---------------------------------------------------------------------
     $k           = 4;
-    $xfValue[$k] = new XoopsFormSpin(_MB_EXTCAL_SS_TRANS_TIME, "options[{$k}]", $options[$k], 0, 12, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
+    $xfValue[$k] = new ExtcalFormSpin(_MB_EXTCAL_SS_TRANS_TIME, "options[{$k}]", $options[$k], 0, 12, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
     $form->addElement($xfValue[$k], false);
     //---------------------------------------------------------------------
     $k           = 5;
-    $xfValue[$k] = new XoopsFormSpin(_MB_EXTCAL_SS_PAUSE_TIME, "options[{$k}]", $options[$k], 0, 12, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
+    $xfValue[$k] = new ExtcalFormSpin(_MB_EXTCAL_SS_PAUSE_TIME, "options[{$k}]", $options[$k], 0, 12, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
     $form->addElement($xfValue[$k], false);
     //---------------------------------------------------------------------
     $k           = 6;
-    $xfValue[$k] = new XoopsFormSpin(_MB_EXTCAL_SS_NB_PHOTOS, "options[{$k}]", $options[$k], 0, 50, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
+    $xfValue[$k] = new ExtcalFormSpin(_MB_EXTCAL_SS_NB_PHOTOS, "options[{$k}]", $options[$k], 0, 50, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
     $form->addElement($xfValue[$k], false);
     //=====================================================================
     $form->insertBreak('<center><b>' . _MB_EXTCAL_OPT_SHOW . '</b></center>', 'head');
@@ -332,11 +332,11 @@ function bExtcalMinicalEdit($options)
 
     //---------------------------------------------------------------------
     $k           = 12;
-    $xfValue[$k] = new XoopsFormSpin(_MB_EXTCAL_WIDTH, "options[{$k}]", $options[$k], 50, 250, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
+    $xfValue[$k] = new ExtcalFormSpin(_MB_EXTCAL_WIDTH, "options[{$k}]", $options[$k], 50, 250, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
     $form->addElement($xfValue[$k], false);
     //---------------------------------------------------------------------
     $k           = 13;
-    $xfValue[$k] = new XoopsFormSpin(_MB_EXTCAL_HEIGHT, "options[{$k}]", $options[$k], 50, 250, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
+    $xfValue[$k] = new ExtcalFormSpin(_MB_EXTCAL_HEIGHT, "options[{$k}]", $options[$k], 50, 250, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
     $form->addElement($xfValue[$k], false);
     //---------------------------------------------------------------------
     //=====================================================================

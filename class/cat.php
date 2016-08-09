@@ -110,7 +110,7 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
         /* TODO :
            - Delete all events in this category
           */
-        $this->delete($catId);
+        $this->deleteById($catId);
     }
 
     // Return one cat selected by his id

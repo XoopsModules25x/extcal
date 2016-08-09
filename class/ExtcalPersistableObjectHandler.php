@@ -267,14 +267,14 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
     }
 
     /**
-     * delete an object from the database
+     * delete an object from the database by id
      *
      * @param mixed $id id of the object to delete
      * @param bool $force
      *
      * @return bool FALSE if failed.
      */
-    public function delete($id, $force = false) //delete(XoopsObject $object, $force = false)
+    public function deleteById($id, $force = false) //delete(XoopsObject $object, $force = false)
     {
         if (is_array($this->keyName)) {
             $clause = array();
@@ -530,7 +530,8 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
                             } else {
                                 $handler = xoops_getModuleHandler($externalKey['className'], 'extcal');
                             }
-                            $cached[$externalKey['keyName']][$ret[$i][$key]] = $this->objectToArrayWithoutExternalKey($handler->$externalKey['getMethodeName']($ret[$i][$key], true), $format);
+                            $getMethod = $externalKey['getMethodeName'];
+                            $cached[$externalKey['keyName']][$ret[$i][$key]] = $this->objectToArrayWithoutExternalKey($handler->$getMethod($ret[$i][$key], true), $format);
                         }
                         $ret[$i][$externalKey['keyName']] = $cached[$externalKey['keyName']][$ret[$i][$key]];
                     }
@@ -554,7 +555,8 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
                         } else {
                             $handler = xoops_getModuleHandler($externalKey['className'], 'extcal');
                         }
-                        $cached[$externalKey['keyName']][$ret[$key]] = $this->objectToArrayWithoutExternalKey($handler->$externalKey['getMethodeName']($ret[$key], true), $format);
+                        $getMethod = $externalKey['getMethodeName'];
+                        $cached[$externalKey['keyName']][$ret[$key]] = $this->objectToArrayWithoutExternalKey($handler->$getMethod($ret[$key], true), $format);
                     }
                     $ret[$externalKey['keyName']] = $cached[$externalKey['keyName']][$ret[$key]];
                 }

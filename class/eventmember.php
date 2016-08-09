@@ -44,7 +44,7 @@ class ExtcalEventmemberHandler extends ExtcalPersistableObjectHandler
         $eventmember->setVars($varArr);
         if ($this->insert($eventmember, true)) {
             $eventNotMemberHandler = xoops_getModuleHandler(_EXTCAL_CLS_NOT_MEMBER, _EXTCAL_MODULE);
-            $eventNotMemberHandler->delete(array($varArr['event_id'], $varArr['uid']));
+            $eventNotMemberHandler->deleteById(array($varArr['event_id'], $varArr['uid']));
         }
     }
 
@@ -55,7 +55,7 @@ class ExtcalEventmemberHandler extends ExtcalPersistableObjectHandler
      */
     public function deleteEventmember($key)
     {
-        return $this->delete($key, true);
+        return $this->deleteById($key, true);
     }
 
     /**

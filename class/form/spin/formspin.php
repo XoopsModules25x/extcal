@@ -1,6 +1,6 @@
 <?php
 /**
- * XoopsFormSpin element  -  Spin bytton
+ * ExtcalFormSpin element  -  Spin button
  *
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -15,7 +15,7 @@
  * @subpackage      form
  * @since           2.0.0
  * @author          Jean-Jacques DELALANDRE <JJD@kiolo.com>
- * @version         XoopsFormSpin v 1.2
+ * @version         ExtcalFormSpin v 1.2
  */
 
 defined('XOOPS_ROOT_PATH') or die('Restricted access');
@@ -30,17 +30,10 @@ xoops_load('XoopsFormElement');
  * @access      public
  */
 
-/*----------------------------------------------------------*/
-/* set here the folder of the clas relative at the root     */
-/*----------------------------------------------------------*/
-define('_SPIN_FOLDER', '/class/xoopsform/spin/');
-
-/*----------------------------------------------------------*/
-
 /**
- * Class XoopsFormSpin
+ * Class ExtcalFormSpin
  */
-class XoopsFormSpin extends XoopsFormElement
+class ExtcalFormSpin extends XoopsFormElement
 {
 
     /**
@@ -49,7 +42,7 @@ class XoopsFormSpin extends XoopsFormElement
      * @var integer
      * @access private
      */
-    public $_value = 0;
+    protected $_value = 0;
 
     /**
      * Value minimum
@@ -57,7 +50,7 @@ class XoopsFormSpin extends XoopsFormElement
      * @var integer
      * @access private
      */
-    public $_min = 0;
+    protected $_min = 0;
 
     /**
      * Value maximum
@@ -65,7 +58,7 @@ class XoopsFormSpin extends XoopsFormElement
      * @var integer
      * @access private
      */
-    public $_max = 100;
+    protected $_max = 100;
 
     /**
      * Small increment
@@ -73,7 +66,7 @@ class XoopsFormSpin extends XoopsFormElement
      * @var integer
      * @access private
      */
-    public $_smallIncrement = 1;
+    protected $_smallIncrement = 1;
 
     /**
      * Large increment
@@ -81,7 +74,7 @@ class XoopsFormSpin extends XoopsFormElement
      * @var integer
      * @access private
      */
-    public $_largeIncrement = 10;
+    protected $_largeIncrement = 10;
 
     /**
      *  unite for information on value
@@ -89,7 +82,7 @@ class XoopsFormSpin extends XoopsFormElement
      * @var string
      * @access private
      */
-    public $_unite = '';
+    protected $_unite = '';
 
     /**
      * Folder of arrow image
@@ -97,7 +90,7 @@ class XoopsFormSpin extends XoopsFormElement
      * @var string
      * @access private
      */
-    public $_imgFolder = 'default';
+    protected $_imgFolder = 'default';
 
     /**
      * size of input text in nb car
@@ -105,7 +98,7 @@ class XoopsFormSpin extends XoopsFormElement
      * @var integer
      * @access private
      */
-    public $_size = 2;
+    protected $_size = 2;
 
     /**
      *  minMaxVisible show buttons to go minimum and maximum
@@ -113,7 +106,7 @@ class XoopsFormSpin extends XoopsFormElement
      * @var integer
      * @access private
      */
-    public $_minMaxVisible = true;
+    protected $_minMaxVisible = true;
 
     /**
      *  tyleBordure ;  style CSS of frame control
@@ -121,7 +114,7 @@ class XoopsFormSpin extends XoopsFormElement
      * @var string
      * @access private
      */
-    public $_styleBordure = 'color: #FFFFFF; background-color: #CCCCCC; line-height: 100%;border-width:1px; border-style: solid; border-color: #000000; margin-top: 0; margin-bottom: 0; padding: 0';
+    protected $_styleBordure = 'color: #FFFFFF; background-color: #CCCCCC; line-height: 100%;border-width:1px; border-style: solid; border-color: #000000; margin-top: 0; margin-bottom: 0; padding: 0';
 
     /**
      *  tyleText : style CSS of input text
@@ -129,7 +122,7 @@ class XoopsFormSpin extends XoopsFormElement
      * @var string
      * @access private
      */
-    public $_styleText = 'color: #000000; text-align: right; margin-left: 1; margin-right: 2; padding-right: 8';
+    protected $_styleText = 'color: #000000; text-align: right; margin-left: 1; margin-right: 2; padding-right: 8';
 
     /**
      * Allow loading of javascript
@@ -137,7 +130,7 @@ class XoopsFormSpin extends XoopsFormElement
      * @var bool
      * @access private
      */
-    public $_loadJS = true;
+    protected $_loadJS = true;
 
     /*---------------------------------------------------------------*/
     /**
@@ -489,7 +482,7 @@ class XoopsFormSpin extends XoopsFormElement
      *************************************************************************/
     public function getFolder()
     {
-        $sSpinFolder = XOOPS_URL . _SPIN_FOLDER;
+        $sSpinFolder = $GLOBALS['xoops']->url('modules/extcal/class/form/spin/');
 
         return $sSpinFolder;
     }
