@@ -1,42 +1,42 @@
 <?php
 
 // defined('XOOPS_ROOT_PATH') || die('XOOPS Root Path not defined');
-//include_once('include/constantes.php');
-include_once(XOOPS_ROOT_PATH . '/modules/extcal/include/constantes.php');
-include_once(XOOPS_ROOT_PATH . '/modules/extcal/include/agenda_fnc.php');
-include_once(XOOPS_ROOT_PATH . '/modules/extcal/class/config.php');
+include_once __DIR__ . '/include/constantes.php';
+include_once __DIR__ . '/include/agenda_fnc.php';
+include_once __DIR__ . '/class/config.php';
 //$loc_de = setlocale (LC_ALL, 'french');
 
 //echo "local :" .  setlocale(LC_TIME, $xoopsConfig['language'])."</ br>";
 setlocale(LC_TIME, $xoopsConfig['language']);
 
 //***************************************************************************************
-$modversion['name']        = _MI_EXTCAL_NAME;
-$modversion['version']     = '2.39';
-$modversion['description'] = _MI_EXTCAL_DESC;
-$modversion['credits']     = 'Zoullou';
-$modversion['author']      = 'Zoullou, Mage, Mamba, JJ Delalandre (JJDai)';
-$modversion['nickname']    = '';
-$modversion['website']     = '';
-$modversion['license']     = 'GPL see LICENSE';
-$modversion['license_url'] = 'www.gnu.org/licenses/gpl-2.0.html/';
-$modversion['official']    = 0;
-$modversion['image']       = 'assets/images/extcal_logo.png';
-$modversion['dirname']     = basename(__DIR__);
-//$modversion['status_version']   = 'Beta 4';
+$modversion['name']             = _MI_EXTCAL_NAME;
+$modversion['version']          = '2.39';
+$modversion['description']      = _MI_EXTCAL_DESC;
+$modversion['credits']          = 'Zoullou';
+$modversion['author']           = 'Zoullou, Mage, Mamba, JJ Delalandre (JJDai)';
+$modversion['nickname']         = '';
+$modversion['website']          = '';
+$modversion['license']          = 'GPL see LICENSE';
+$modversion['license_url']      = 'www.gnu.org/licenses/gpl-2.0.html/';
+$modversion['official']         = 0;
+$modversion['image']            = 'assets/images/logoModule.png';
+$modversion['dirname']          = basename(__DIR__);
 $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
 $modversion['onInstall']        = 'include/install_function.php';
 $modversion['onUpdate']         = 'include/update_function.php';
 $modversion['system_menu']      = 1;
 $modversion['help']             = 'page=help';
-$modversion['dirmoduleadmin']   = '/Frameworks/moduleclasses/moduleadmin';
-$modversion['icons16']          = '../../Frameworks/moduleclasses/icons/16';
-$modversion['icons32']          = '../../Frameworks/moduleclasses/icons/32';
+$modversion['dirmoduleadmin']   = 'Frameworks/moduleclasses/moduleadmin';
+$modversion['sysicons16']       = 'Frameworks/moduleclasses/icons/16';
+$modversion['sysicons32']       = 'Frameworks/moduleclasses/icons/32';
+$modversion['modicons16']       = 'assets/images/icons/16';
+$modversion['modicons32']       = 'assets/images/icons/32';
 //***************************************************************************************
 
 //about
-$modversion['module_status']       = 'Beta 2';
-$modversion['release_date']        = '2016/08/08';
+$modversion['module_status']       = 'RC 1';
+$modversion['release_date']        = '2016/08/09';
 $modversion['module_website_url']  = 'www.xoops.org/';
 $modversion['module_website_name'] = 'XOOPS';
 $modversion['min_php']             = '5.5';
@@ -53,7 +53,9 @@ $modversion['adminmenu']  = 'admin/menu.php';
 $modversion['hasMain'] = 1;
 $i                     = 0;
 
-if (isset($GLOBALS['xoopsModule']) && $GLOBALS['xoopsModule']->getVar('dirname') === 'extcal') {
+if (isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule'])
+    && $GLOBALS['xoopsModule']->getVar('dirname') === 'extcal'
+) {
     /*
         $user = isset($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser'] : null;
         $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
@@ -108,9 +110,10 @@ $modversion['config'][$i]['default']     = array(
     _EXTCAL_NAV_AGENDA_WEEK,
     _EXTCAL_NAV_AGENDA_DAY,
     _EXTCAL_NAV_SEARCH,
-    _EXTCAL_NAV_NEW_EVENT);
+    _EXTCAL_NAV_NEW_EVENT,
+);
 // $t = print_r($modversion['config'][$i]['default'],true);
-// echo _EXTCAL_NAV_CALMONTH . "<br /><pre>{$t}</pre>";
+// echo _EXTCAL_NAV_CALMONTH . "<br><pre>{$t}</pre>";
 $modversion['config'][$i]['options'] = array(
     '_MI_EXTCAL_NAV_CALMONTH'    => _EXTCAL_NAV_CALMONTH,
     '_MI_EXTCAL_NAV_CALWEEK'     => _EXTCAL_NAV_CALWEEK,
@@ -121,7 +124,8 @@ $modversion['config'][$i]['options'] = array(
     '_MI_EXTCAL_NAV_AGENDA_WEEK' => _EXTCAL_NAV_AGENDA_WEEK,
     '_MI_EXTCAL_NAV_AGENDA_DAY'  => _EXTCAL_NAV_AGENDA_DAY,
     '_MI_EXTCAL_NAV_SEARCH'      => _EXTCAL_NAV_SEARCH,
-    '_MI_EXTCAL_NAV_NEW_EVENT'   => _EXTCAL_NAV_NEW_EVENT);
+    '_MI_EXTCAL_NAV_NEW_EVENT'   => _EXTCAL_NAV_NEW_EVENT,
+);
 //-----------------------------------------------------------------------------
 ++$i;
 $modversion['config'][$i]['name']        = 'weight_tabs';
@@ -150,7 +154,8 @@ $modversion['config'][$i]['options']     = array(
     '_MI_EXTCAL_NAV_AGENDA_WEEK' => _EXTCAL_FILE_AGENDA_WEEK,
     '_MI_EXTCAL_NAV_AGENDA_DAY'  => _EXTCAL_FILE_AGENDA_DAY,
     '_MI_EXTCAL_NAV_SEARCH'      => _EXTCAL_FILE_SEARCH,
-    '_MI_EXTCAL_NAV_NEW_EVENT'   => _EXTCAL_FILE_NEW_EVENT);
+    '_MI_EXTCAL_NAV_NEW_EVENT'   => _EXTCAL_FILE_NEW_EVENT,
+);
 
 ++$i;
 $modversion['config'][$i]['name']        = 'week_start_day';
@@ -166,7 +171,8 @@ $modversion['config'][$i]['options']     = array(
     '_MI_EXTCAL_DAY_WEDNESDAY' => 3,
     '_MI_EXTCAL_DAY_THURSDAY'  => 4,
     '_MI_EXTCAL_DAY_FRIDAY'    => 5,
-    '_MI_EXTCAL_DAY_SATURDAY'  => 6);
+    '_MI_EXTCAL_DAY_SATURDAY'  => 6,
+);
 ++$i;
 $modversion['config'][$i]['name']        = 'list_position';
 $modversion['config'][$i]['title']       = '_MI_EXTCAL_LIST_POS';
@@ -176,11 +182,12 @@ $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = 1;
 $modversion['config'][$i]['options']     = array(
     '_MI_EXTCAL_BEFORE' => 0,
-    '_MI_EXTCAL_AFTER'  => 1);
+    '_MI_EXTCAL_AFTER'  => 1,
+);
 
 xoops_load('XoopsEditorHandler');
-$editor_handler = XoopsEditorHandler::getInstance();
-$editorList     = array_flip($editor_handler->getList());
+$editorHandler = XoopsEditorHandler::getInstance();
+$editorList    = array_flip($editorHandler->getList());
 
 ++$i;
 $modversion['config'][$i]['name']        = 'editorAdmin';
@@ -237,7 +244,8 @@ $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = 1;
 $modversion['config'][$i]['options']     = array(
     '_MI_EXTCAL_ASCENDING'  => 'ASC',
-    '_MI_EXTCAL_DESCENDING' => 'DESC');
+    '_MI_EXTCAL_DESCENDING' => 'DESC',
+);
 ++$i;
 $modversion['config'][$i]['name']        = 'event_date_year';
 $modversion['config'][$i]['title']       = '_MI_EXTCAL_EY_DATE_PATTERN';
@@ -419,7 +427,8 @@ $modversion['config'][$i]['options']     = array(
     'xlt'   => 'xlt',
     'xpm'   => 'xpm',
     'xsl'   => 'xsl',
-    'zip'   => 'zip');
+    'zip'   => 'zip',
+);
 ++$i;
 $modversion['config'][$i]['name']        = 'allow_html';
 $modversion['config'][$i]['title']       = '_MI_EXTCAL_HTML';
@@ -534,7 +543,8 @@ $modversion['config'][$i]['default']     = 0;
 $modversion['config'][$i]['options']     = array(
     '_MI_EXTCAL_EMAIL_MODE_NONE' => 0,
     '_MI_EXTCAL_EMAIL_MODE_TEXT' => 1,
-    '_MI_EXTCAL_EMAIL_MODE_HTML' => 2);
+    '_MI_EXTCAL_EMAIL_MODE_HTML' => 2,
+);
 
 ++$i;
 $modversion['config'][$i]['name']        = 'pear_path';

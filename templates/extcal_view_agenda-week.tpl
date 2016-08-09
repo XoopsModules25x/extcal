@@ -10,8 +10,7 @@
         </td>
         <td class="even" style="width:33%;"><span style="font-weight:bold;"><{$navig.this.name}></span>
         </td>
-        <td class="even" style="width:33%;"><a
-                    href="<{$xoops_url}>/modules/extcal/<{$params.file}>?<{$navig.next.uri}>"><{$navig.next.name}>&nbsp;&nbsp;&gt;&gt;</a>
+        <td class="even" style="width:33%;"><a href="<{$xoops_url}>/modules/extcal/<{$params.file}>?<{$navig.next.uri}>"><{$navig.next.name}>&nbsp;&nbsp;&gt;&gt;</a>
         </td>
     </tr>
 
@@ -34,8 +33,9 @@
 
                 </th>
                 <{foreach item=jour from=$trancheHeure.jours}>
-                    <th class='<{$trancheHeure.class}>' style="border: 1px solid #808080;" width='<{$params.colJourWidth}>%'>
-                        <{$jour.jour}><br/>
+                    <th class='<{$trancheHeure.class}>' style="border: 1px solid #808080;"
+                        width='<{$params.colJourWidth}>%'>
+                        <{$jour.jour}><br>
                         <{$jour.caption}>
                     </th>
                 <{/foreach}>
@@ -60,7 +60,6 @@
 
 <{include file="db:extcal_categorie.tpl"}>
 
-<div style="text-align:right;"><a
-            href="<{$xoops_url}>/modules/extcal/rss.php?cat=<{$selectedCat}>"><img
+<div style="text-align:right;"><a href="<{$xoops_url}>/modules/extcal/rss.php?cat=<{$selectedCat}>"><img
                 src="assets/images/icons/rss.gif" alt="RSS Feed"/></a></div>
 <{include file='db:system_notification_select.tpl'}>

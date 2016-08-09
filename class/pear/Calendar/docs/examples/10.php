@@ -4,57 +4,61 @@
  * on the month while still allowing the days to be accessed via the decorator
  * In practice you _wouldn't_ do this - each decorator comes with a performance
  * hit for extra method calls. For this example some simple functions could help
- * format the month while the days are accessed via the normal Month object
+ * format the month while the days are accessed via the normal Month object.
  */
 if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
-require_once CALENDAR_ROOT . 'Month/Weekdays.php';
-require_once CALENDAR_ROOT . 'Decorator.php';
+require_once CALENDAR_ROOT.'Month/Weekdays.php';
+require_once CALENDAR_ROOT.'Decorator.php';
 
 // Decorate a Month with methods to improve formatting
 /**
- * Class MonthDecorator
+ * Class MonthDecorator.
  */
 class MonthDecorator extends Calendar_Decorator
 {
     /**
      * @param object $Month
+     *
      * @internal param $Calendar_Month
      */
-    public function __construct(& $Month)
+    public function __construct(&$Month)
     {
         parent::__construct($Month);
     }
 
     /**
-     * Override the prevMonth method to format the output
+     * Override the prevMonth method to format the output.
      */
     public function prevMonth()
     {
         $prevStamp = parent::prevMonth(true);
+
         // Build the URL for the previous month
-        return $_SERVER['PHP_SELF'] . '?y=' . date('Y', $prevStamp) . '&m=' . date('n', $prevStamp) . '&d=' . date('j', $prevStamp);
+        return $_SERVER['PHP_SELF'].'?y='.date('Y', $prevStamp).'&m='.date('n', $prevStamp).'&d='.date('j', $prevStamp);
     }
 
     /**
-     * Override the thisMonth method to format the output
+     * Override the thisMonth method to format the output.
      */
     public function thisMonth()
     {
         $thisStamp = parent::thisMonth(true);
+
         // A human readable string from this month
         return date('F Y', $thisStamp);
     }
 
     /**
-     * Override the nextMonth method to format the output
+     * Override the nextMonth method to format the output.
      */
     public function nextMonth()
     {
         $nextStamp = parent::nextMonth(true);
+
         // Build the URL for next month
-        return $_SERVER['PHP_SELF'] . '?y=' . date('Y', $nextStamp) . '&m=' . date('n', $nextStamp) . '&d=' . date('j', $nextStamp);
+        return $_SERVER['PHP_SELF'].'?y='.date('Y', $nextStamp).'&m='.date('n', $nextStamp).'&d='.date('j', $nextStamp);
     }
 }
 
@@ -81,26 +85,26 @@ $MonthDecorator->build();
 <body>
 <h1>A Simple Decorator</h1>
 <table>
-    <caption><?php echo($MonthDecorator->thisMonth()); ?></caption>
+    <caption><?php echo $MonthDecorator->thisMonth(); ?></caption>
     <?php
     while ($Day = $MonthDecorator->fetch()) {
         if ($Day->isFirst()) {
-            echo("\n<tr>\n");
+            echo "\n<tr>\n";
         }
         if ($Day->isEmpty()) {
-            echo('<td>&nbsp;</td>');
+            echo '<td>&nbsp;</td>';
         } else {
-            echo('<td>' . $Day->thisDay() . '</td>');
+            echo '<td>'.$Day->thisDay().'</td>';
         }
         if ($Day->isLast()) {
-            echo("\n</tr>\n");
+            echo "\n</tr>\n";
         }
     }
     ?>
     <tr>
-        <td><a href="<?php echo($MonthDecorator->prevMonth()); ?>">Prev</a></td>
+        <td><a href="<?php echo $MonthDecorator->prevMonth(); ?>">Prev</a></td>
         <td colspan="5">&nbsp;</td>
-        <td><a href="<?php echo($MonthDecorator->nextMonth()); ?>">Next</a></td>
+        <td><a href="<?php echo $MonthDecorator->nextMonth(); ?>">Next</a></td>
     </tr>
 </table>
 </body>

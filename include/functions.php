@@ -1,7 +1,7 @@
 <?php
 /**
  * classGenerator
- * walls_watermarks
+ * walls_watermarks.
  *
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -15,8 +15,7 @@
  * L'utilisation de ce formulaire d'adminitration suppose
  * que la classe correspondante de la table a été générées avec classGenerator
  **/
-
-include_once XOOPS_ROOT_PATH . '/class/uploader.php';
+include_once XOOPS_ROOT_PATH.'/class/uploader.php';
 
 /**
  * @param $eventId
@@ -26,9 +25,9 @@ include_once XOOPS_ROOT_PATH . '/class/uploader.php';
 function extcal_getEvent($eventId)
 {
     $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
-    $event        = $eventHandler->getEvent($eventId);
-    $t            = $event->getVars();
-    $data         = array();
+    $event = $eventHandler->getEvent($eventId);
+    $t = $event->getVars();
+    $data = array();
     while (list($key, $val) = each($t)) {
         $data[$key] = $val['value'];
     }
@@ -44,14 +43,21 @@ function extcal_getEvent($eventId)
 function extcal_loadImg(&$REQUEST, &$event_picture1, &$event_picture2)
 {
     ///////////////////////////////////////////////////////////////////////////////
-    $uploaddir_event = XOOPS_ROOT_PATH . '/uploads/extcal/';
-    $uploadurl_event = XOOPS_URL . '/uploads/extcal/';
+    $uploaddir_event = XOOPS_ROOT_PATH.'/uploads/extcal/';
+    $uploadurl_event = XOOPS_URL.'/uploads/extcal/';
     //$picture = '';
     for ($j = 1; $j < 3; ++$j) {
-        $delimg = @$REQUEST['delimg_' . $j . ''];
-        $delimg = isset($delimg) ? (int)$delimg : 0;
+        $delimg = @$REQUEST['delimg_'.$j.''];
+        $delimg = isset($delimg) ? (int) $delimg : 0;
         if (0 == $delimg && !empty($REQUEST['xoops_upload_file'][$j])) {
-            $upload = new XoopsMediaUploader($uploaddir_event, array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png', 'image/jpg'), 3145728, null, null);
+            $upload = new XoopsMediaUploader($uploaddir_event, array(
+                'image/gif',
+                'image/jpeg',
+                'image/pjpeg',
+                'image/x-png',
+                'image/png',
+                'image/jpg',
+            ), 3145728, null, null);
             if ($upload->fetchMedia($REQUEST['xoops_upload_file'][$j])) {
                 $upload->setPrefix('event_');
                 $upload->fetchMedia($REQUEST['xoops_upload_file'][$j]);
@@ -65,15 +71,15 @@ function extcal_loadImg(&$REQUEST, &$event_picture1, &$event_picture2)
                         $event_picture2 = $upload->getSavedFileName();
                     }
                 }
-            } elseif (!empty($REQUEST['file' . $j])) {
+            } elseif (!empty($REQUEST['file'.$j])) {
                 if ($j == 1) {
-                    $event_picture1 = $REQUEST['file' . $j];
+                    $event_picture1 = $REQUEST['file'.$j];
                 } elseif ($j == 2) {
-                    $event_picture2 = $REQUEST['file' . $j];
+                    $event_picture2 = $REQUEST['file'.$j];
                 }
             }
         } else {
-            $url_event = XOOPS_ROOT_PATH . '/uploads/extcal/' . $REQUEST['file' . $j];
+            $url_event = XOOPS_ROOT_PATH.'/uploads/extcal/'.$REQUEST['file'.$j];
             if ($j == 1) {
                 $event_picture1 = '';
             } elseif ($j == 2) {
@@ -92,8 +98,8 @@ function extcal_loadImg(&$REQUEST, &$event_picture1, &$event_picture2)
 /*******************************************************************
  *
  ******************************************************************
- * @param $cat
- * @param bool $addNone
+ * @param        $cat
+ * @param bool   $addNone
  * @param string $name
  * @return XoopsFormSelect
  */
@@ -103,7 +109,7 @@ function getListCategories($cat, $addNone = true, $name = 'cat')
     // Category selectbox
     $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
 
-    $catsList  = $catHandler->getAllCat($xoopsUser);
+    $catsList = $catHandler->getAllCat($xoopsUser);
     $catSelect = new XoopsFormSelect('', $name, $cat);
     if ($addNone) {
         $catSelect->addOption(0, ' ');
@@ -120,7 +126,7 @@ function getListCategories($cat, $addNone = true, $name = 'cat')
  *
  ******************************************************************
  * @param string $name
- * @param $cat
+ * @param        $cat
  * @return array
  */
 function getCheckeCategories($name = 'cat', $cat)
@@ -130,15 +136,16 @@ function getCheckeCategories($name = 'cat', $cat)
     //<option style="background-color:#00FFFF;">VARCHAR</option>
 
     $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-    $catsList   = $catHandler->getAllCat($xoopsUser);
+    $catsList = $catHandler->getAllCat($xoopsUser);
 
     $t = array();
     foreach ($catsList as $catList) {
-        $cat_id    = $catList->getVar('cat_id');
-        $name      = $catList->getVar('cat_name');
+        $cat_id = $catList->getVar('cat_id');
+        $name = $catList->getVar('cat_name');
         $cat_color = $catList->getVar('cat_color');
-        $checked   = in_array($cat_id, $cat) ? 'checked' : '';
-        $cat       = '' . "<div style='float:left; margin-left:5px;'>" . "<input type='checkbox' name='{$name}[{$cat_id}]' value='1' {$checked}>" . "<div style='absolute:left;height:12px; width:6px; background-color:#{$cat_color}; border:1px solid black; float:left; margin-right:5px;' ></div>" . " {$name}" . '</div>';
+        $checked = in_array($cat_id, $cat) ? 'checked' : '';
+        $cat = ''."<div style='float:left; margin-left:5px;'>"."<input type='checkbox' name='{$name}[{$cat_id}]' value='1' {$checked}>"
+                     ."<div style='absolute:left;height:12px; width:6px; background-color:#{$cat_color}; border:1px solid black; float:left; margin-right:5px;' ></div>"." {$name}".'</div>';
 
         $t[] = $cat;
     }
@@ -151,8 +158,8 @@ function getCheckeCategories($name = 'cat', $cat)
  ******************************************************************
  * @param string $name
  * @param string $caption
- * @param $defaut
- * @param bool $addNone
+ * @param        $defaut
+ * @param bool   $addNone
  * @return XoopsFormSelect
  */
 function getListOrderBy($name = 'orderby', $caption = '', $defaut, $addNone = false)
@@ -164,17 +171,17 @@ function getListOrderBy($name = 'orderby', $caption = '', $defaut, $addNone = fa
         $select->addOption('', '');
     }
 
-    $select->addOption('year ASC', _MD_EXTCAL_YEAR . ' ' . _MD_EXTCAL_ORDER_BY_ASC);
-    $select->addOption('year DESC', _MD_EXTCAL_YEAR . ' ' . _MD_EXTCAL_ORDER_BY_DESC);
+    $select->addOption('year ASC', _MD_EXTCAL_YEAR.' '._MD_EXTCAL_ORDER_BY_ASC);
+    $select->addOption('year DESC', _MD_EXTCAL_YEAR.' '._MD_EXTCAL_ORDER_BY_DESC);
 
-    $select->addOption('month ASC', _MD_EXTCAL_MONTH . ' ' . _MD_EXTCAL_ORDER_BY_ASC);
-    $select->addOption('month DESC', _MD_EXTCAL_MONTH . ' ' . _MD_EXTCAL_ORDER_BY_DESC);
+    $select->addOption('month ASC', _MD_EXTCAL_MONTH.' '._MD_EXTCAL_ORDER_BY_ASC);
+    $select->addOption('month DESC', _MD_EXTCAL_MONTH.' '._MD_EXTCAL_ORDER_BY_DESC);
 
-    $select->addOption('event_title ASC', _MD_EXTCAL_ALPHA . ' ' . _MD_EXTCAL_ORDER_BY_ASC);
-    $select->addOption('event_title DESC', _MD_EXTCAL_ALPHA . ' ' . _MD_EXTCAL_ORDER_BY_DESC);
+    $select->addOption('event_title ASC', _MD_EXTCAL_ALPHA.' '._MD_EXTCAL_ORDER_BY_ASC);
+    $select->addOption('event_title DESC', _MD_EXTCAL_ALPHA.' '._MD_EXTCAL_ORDER_BY_DESC);
 
-    $select->addOption('cat_name ASC', _MD_EXTCAL_CATEGORY . ' ' . _MD_EXTCAL_ORDER_BY_ASC);
-    $select->addOption('cat_name DESC', _MD_EXTCAL_CATEGORY . ' ' . _MD_EXTCAL_ORDER_BY_DESC);
+    $select->addOption('cat_name ASC', _MD_EXTCAL_CATEGORY.' '._MD_EXTCAL_ORDER_BY_ASC);
+    $select->addOption('cat_name DESC', _MD_EXTCAL_CATEGORY.' '._MD_EXTCAL_ORDER_BY_DESC);
 
     return $select;
 }
@@ -184,7 +191,7 @@ function getListOrderBy($name = 'orderby', $caption = '', $defaut, $addNone = fa
  ******************************************************************
  * @param string $name
  * @param string $caption
- * @param $defaut
+ * @param        $defaut
  * @return XoopsFormSelect
  */
 function getListAndOr($name = 'andor', $caption = '', $defaut)
@@ -202,10 +209,10 @@ function getListAndOr($name = 'andor', $caption = '', $defaut)
 /*******************************************************************
  *
  ******************************************************************
- * @param $name
- * @param $caption
- * @param $defaut
- * @param $options
+ * @param        $name
+ * @param        $caption
+ * @param        $defaut
+ * @param        $options
  * @param string $sep
  * @return XoopsFormSelect
  */
@@ -228,9 +235,9 @@ function getList($name, $caption, $defaut, $options, $sep = ';')
 /*******************************************************************
  *
  ******************************************************************
- * @param $ts
- * @param $startMonth
- * @param $endMonth
+ * @param        $ts
+ * @param        $startMonth
+ * @param        $endMonth
  * @param string $mode
  * @return DateTime
  */
@@ -249,7 +256,7 @@ function getDateBetweenDates($ts, $startMonth, $endMonth, $mode = 'w')
     //echo $end->format("d/m/Y à H\hi:s").'<br>'; // 03/10/2007 à 19h39:53
     //echo "<hr>";
     $interval = DateInterval::createFromDateString('next sunday');
-    $period   = new DatePeriod($begin, $interval, $end);
+    $period = new DatePeriod($begin, $interval, $end);
     //echoDateArray($period);
 
     //echo "<hr>{$interval}";
@@ -288,7 +295,7 @@ Sunday 2009-12-06 00:00:00
 function echoDateArray($period)
 {
     foreach ($period as $dt) {
-        echo $dt->format("l Y-m-d H:i:s\n") . '<br>';
+        echo $dt->format("l Y-m-d H:i:s\n").'<br>';
     }
 }
 
@@ -304,7 +311,7 @@ function ext_echoArray($t, $msg = '')
     }
 
     $txt = print_r($t, true);
-    echo '<pre>Number of items: ' . count($t) . "<br>{$txt}</pre>";
+    echo '<pre>Number of items: '.count($t)."<br>{$txt}</pre>";
 }
 
 /*****************************************************************/
@@ -317,7 +324,7 @@ function ext_echo($line, $msg = '')
     if ($msg != '') {
         echo "<hr>{$msg}<hr>";
     }
-    echo $line . '<br>';
+    echo $line.'<br>';
 }
 
 /*****************************************************************/
@@ -344,7 +351,7 @@ function ext_echoTSU($ts, $tsName, $msg = '')
         echo "<hr>{$msg}<hr>";
     }
 
-    echo 'date --->' . $tsName . ' = ' . $ts . ' - ' . date('d-m-Y H:m:s', $ts) . '<br>';
+    echo 'date --->'.$tsName.' = '.$ts.' - '.date('d-m-Y H:m:s', $ts).'<br>';
 }
 
 /*****************************************************************/
@@ -380,7 +387,7 @@ function ext_convert_date($date, $sep = '-')
 function ext_DateAdd($givendate, $day = 0, $mth = 0, $yr = 0)
 {
     //$cd = strtotime($givendate);
-    $cd      = $givendate;
+    $cd = $givendate;
     $newdate = date('Y-m-d h:i:s', mktime(date('h', $cd), date('i', $cd), date('s', $cd), date('m', $cd) + $mth, date('d', $cd) + $day, date('Y', $cd) + $yr));
 
     return strtotime($newdate);
@@ -396,12 +403,12 @@ function ext_DateAdd($givendate, $day = 0, $mth = 0, $yr = 0)
 function ext_DateAdd2($date, $number, $interval = 'd')
 {
     $date_time_array = getdate($date);
-    $hours           = $date_time_array['hours'];
-    $minutes         = $date_time_array['minutes'];
-    $seconds         = $date_time_array['seconds'];
-    $month           = $date_time_array['mon'];
-    $day             = $date_time_array['mday'];
-    $year            = $date_time_array['year'];
+    $hours = $date_time_array['hours'];
+    $minutes = $date_time_array['minutes'];
+    $seconds = $date_time_array['seconds'];
+    $month = $date_time_array['mon'];
+    $day = $date_time_array['mday'];
+    $year = $date_time_array['year'];
 
     switch ($interval) {
 
@@ -458,7 +465,7 @@ function ext_DateAdd2($date, $number, $interval = 'd')
  */
 function eclaircirCouleur($color, $plancher, $plafond)
 {
-    include_once(XOOPS_ROOT_PATH . '/modules/extcal/class/colorTools.php');
+    include_once __DIR__.'/../class/colorTools.php';
 
     //$ct = new ColorTools();
     //return $ct->eclaircir($color,$plancher,$plafond);

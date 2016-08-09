@@ -1,8 +1,9 @@
 <?php
+
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 
 /**
- * Contains the Calendar_Util_Textual class
+ * Contains the Calendar_Util_Textual class.
  *
  * PHP versions 4 and 5
  *
@@ -28,22 +29,21 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @category  Date and Time
- * @package   Calendar
+ *
  * @author    Harry Fuecks <hfuecks@phppatterns.com>
  * @author    Lorenzo Alberton <l.alberton@quipo.it>
  * @copyright 2003-2007 Harry Fuecks, Lorenzo Alberton
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
- * @version   CVS: $Id: Textual.php 1511 2011-09-01 20:56:07Z jjdai $
+ *
  * @link      http://pear.php.net/package/Calendar
  */
 
 /**
- * @package Calendar
- * @version $Id: Textual.php 1511 2011-09-01 20:56:07Z jjdai $
  */
 
 /**
- * Allows Calendar include path to be redefined
+ * Allows Calendar include path to be redefined.
+ *
  * @ignore
  */
 if (!defined('CALENDAR_ROOT')) {
@@ -51,42 +51,41 @@ if (!defined('CALENDAR_ROOT')) {
 }
 
 /**
- * Load Calendar decorator base class
+ * Load Calendar decorator base class.
  */
-require_once CALENDAR_ROOT . 'Decorator.php';
+require_once CALENDAR_ROOT.'Decorator.php';
 
 /**
  * Static utlities to help with fetching textual representations of months and
  * days of the week.
  *
  * @category  Date and Time
- * @package   Calendar
+ *
  * @author    Harry Fuecks <hfuecks@phppatterns.com>
  * @author    Lorenzo Alberton <l.alberton@quipo.it>
  * @copyright 2003-2007 Harry Fuecks, Lorenzo Alberton
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
+ *
  * @link      http://pear.php.net/package/Calendar
- * @access    public
  */
 class Calendar_Util_Textual
 {
-
     /**
-     * Returns an array of 12 month names (first index = 1)
+     * Returns an array of 12 month names (first index = 1).
      *
      * @param string $format (optional) format of returned months (one|two|short|long)
      *
      * @return array
-     * @access public
      * @static
      */
     public static function monthNames($format = 'long')
     {
         $formats = array(
-            'one'   => '%b',
-            'two'   => '%b',
+            'one' => '%b',
+            'two' => '%b',
             'short' => '%b',
-            'long'  => '%B');
+            'long' => '%B',
+        );
         if (!array_key_exists($format, $formats)) {
             $format = 'long';
         }
@@ -109,28 +108,28 @@ class Calendar_Util_Textual
     }
 
     /**
-     * Returns an array of 7 week day names (first index = 0)
+     * Returns an array of 7 week day names (first index = 0).
      *
      * @param string $format (optional) format of returned days (one,two,short or long)
      *
      * @return array
-     * @access public
      * @static
      */
     public static function weekdayNames($format = 'long')
     {
         $formats = array(
-            'one'   => '%a',
-            'two'   => '%a',
+            'one' => '%a',
+            'two' => '%a',
             'short' => '%a',
-            'long'  => '%A');
+            'long' => '%A',
+        );
         if (!array_key_exists($format, $formats)) {
             $format = 'long';
         }
         $days = array();
         for ($i = 0; $i <= 6; ++$i) {
             $stamp = mktime(0, 0, 0, 11, $i + 2, 2003);
-            $day   = strftime($formats[$format], $stamp);
+            $day = strftime($formats[$format], $stamp);
             switch ($format) {
                 case 'one':
                     $day = substr($day, 0, 1);
@@ -146,73 +145,69 @@ class Calendar_Util_Textual
     }
 
     /**
-     * Returns textual representation of the previous month of the decorated calendar object
+     * Returns textual representation of the previous month of the decorated calendar object.
      *
      * @param object $Calendar subclass of Calendar e.g. Calendar_Month
      * @param string $format   (optional) format of returned months (one,two,short or long)
      *
      * @return string
-     * @access public
      * @static
      */
     public static function prevMonthName($Calendar, $format = 'long')
     {
-        $months = Calendar_Util_Textual::monthNames($format);
+        $months = self::monthNames($format);
 
         return $months[$Calendar->prevMonth()];
     }
 
     /**
-     * Returns textual representation of the month of the decorated calendar object
+     * Returns textual representation of the month of the decorated calendar object.
      *
      * @param object $Calendar subclass of Calendar e.g. Calendar_Month
      * @param string $format   (optional) format of returned months (one,two,short or long)
      *
      * @return string
-     * @access public
      * @static
      */
     public static function thisMonthName($Calendar, $format = 'long')
     {
-        $months = Calendar_Util_Textual::monthNames($format);
+        $months = self::monthNames($format);
 
         return $months[$Calendar->thisMonth()];
     }
 
     /**
-     * Returns textual representation of the next month of the decorated calendar object
+     * Returns textual representation of the next month of the decorated calendar object.
      *
      * @param object $Calendar subclass of Calendar e.g. Calendar_Month
      * @param string $format   (optional) format of returned months (one,two,short or long)
      *
      * @return string
-     * @access public
      * @static
      */
     public static function nextMonthName($Calendar, $format = 'long')
     {
-        $months = Calendar_Util_Textual::monthNames($format);
+        $months = self::monthNames($format);
 
         return $months[$Calendar->nextMonth()];
     }
 
     /**
      * Returns textual representation of the previous day of week of the decorated calendar object
-     * <b>Note:</b> Requires PEAR::Date
+     * <b>Note:</b> Requires PEAR::Date.
      *
      * @param object $Calendar subclass of Calendar e.g. Calendar_Month
      * @param string $format   (optional) format of returned months (one,two,short or long)
      *
      * @return string
-     * @access public
      * @static
      */
     public static function prevDayName($Calendar, $format = 'long')
     {
-        $days  = Calendar_Util_Textual::weekdayNames($format);
+        $days = self::weekdayNames($format);
         $stamp = $Calendar->prevDay('timestamp');
-        $cE    = $Calendar->getEngine();
-        include_once 'Date/Calc.php';
+        $cE = $Calendar->getEngine();
+        include_once __DIR__.'/Date/Calc.php';
         $day = Date_Calc::dayOfWeek($cE->stampToDay($stamp), $cE->stampToMonth($stamp), $cE->stampToYear($stamp));
 
         return $days[$day];
@@ -220,40 +215,38 @@ class Calendar_Util_Textual
 
     /**
      * Returns textual representation of the day of week of the decorated calendar object
-     * <b>Note:</b> Requires PEAR::Date
+     * <b>Note:</b> Requires PEAR::Date.
      *
      * @param object $Calendar subclass of Calendar e.g. Calendar_Month
      * @param string $format   (optional) format of returned months (one,two,short or long)
      *
      * @return string
-     * @access public
      * @static
      */
     public static function thisDayName($Calendar, $format = 'long')
     {
-        $days = Calendar_Util_Textual::weekdayNames($format);
-        include_once 'Date/Calc.php';
+        $days = self::weekdayNames($format);
+        include_once __DIR__.'/Date/Calc.php';
         $day = Date_Calc::dayOfWeek($Calendar->thisDay(), $Calendar->thisMonth(), $Calendar->thisYear());
 
         return $days[$day];
     }
 
     /**
-     * Returns textual representation of the next day of week of the decorated calendar object
+     * Returns textual representation of the next day of week of the decorated calendar object.
      *
      * @param object $Calendar subclass of Calendar e.g. Calendar_Month
      * @param string $format   (optional) format of returned months (one,two,short or long)
      *
      * @return string
-     * @access public
      * @static
      */
     public static function nextDayName($Calendar, $format = 'long')
     {
-        $days  = Calendar_Util_Textual::weekdayNames($format);
+        $days = self::weekdayNames($format);
         $stamp = $Calendar->nextDay('timestamp');
-        $cE    = $Calendar->getEngine();
-        include_once 'Date/Calc.php';
+        $cE = $Calendar->getEngine();
+        include_once __DIR__.'/Date/Calc.php';
         $day = Date_Calc::dayOfWeek($cE->stampToDay($stamp), $cE->stampToMonth($stamp), $cE->stampToYear($stamp));
 
         return $days[$day];
@@ -262,18 +255,17 @@ class Calendar_Util_Textual
     /**
      * Returns the days of the week using the order defined in the decorated
      * calendar object. Only useful for Calendar_Month_Weekdays, Calendar_Month_Weeks
-     * and Calendar_Week. Otherwise the returned array will begin on Sunday
+     * and Calendar_Week. Otherwise the returned array will begin on Sunday.
      *
      * @param object $Calendar subclass of Calendar e.g. Calendar_Month
      * @param string $format   (optional) format of returned months (one,two,short or long)
      *
      * @return array ordered array of week day names
-     * @access public
      * @static
      */
     public static function orderedWeekdays($Calendar, $format = 'long')
     {
-        $days = Calendar_Util_Textual::weekdayNames($format);
+        $days = self::weekdayNames($format);
 
         if (isset($Calendar->tableHelper)) {
             $ordereddays = $Calendar->tableHelper->getDaysOfWeek();
@@ -296,8 +288,8 @@ class Calendar_Util_Textual
         }
 
         $ordereddays = array_flip($ordereddays);
-        $i           = 0;
-        $returndays  = array();
+        $i = 0;
+        $returndays = array();
         foreach ($ordereddays as $key => $value) {
             $returndays[$i] = $days[$key];
             ++$i;

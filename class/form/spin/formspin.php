@@ -1,6 +1,6 @@
 <?php
 /**
- * ExtcalFormSpin element  -  Spin button
+ * ExtcalFormSpin element  -  Spin button.
  *
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -11,145 +11,130 @@
  *
  * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
- * @package         kernel
- * @subpackage      form
+ *
  * @since           2.0.0
+ *
  * @author          Jean-Jacques DELALANDRE <JJD@kiolo.com>
+ *
  * @version         ExtcalFormSpin v 1.2
  */
-
 defined('XOOPS_ROOT_PATH') or die('Restricted access');
 
 xoops_load('XoopsFormElement');
 
 /**
- * A select field
+ * A select field.
  *
  * @author      Jean-Jacques DELALANDRE <jjd@kiolo.com>
  * @copyright   JJD http:xoops.kiolo.com
- * @access      public
  */
 
 /**
- * Class ExtcalFormSpin
+ * Class ExtcalFormSpin.
  */
 class ExtcalFormSpin extends XoopsFormElement
 {
-
     /**
-     * Value
+     * Value.
      *
-     * @var integer
-     * @access private
+     * @var int
      */
     protected $_value = 0;
 
     /**
-     * Value minimum
+     * Value minimum.
      *
-     * @var integer
-     * @access private
+     * @var int
      */
     protected $_min = 0;
 
     /**
-     * Value maximum
+     * Value maximum.
      *
-     * @var integer
-     * @access private
+     * @var int
      */
     protected $_max = 100;
 
     /**
-     * Small increment
+     * Small increment.
      *
-     * @var integer
-     * @access private
+     * @var int
      */
     protected $_smallIncrement = 1;
 
     /**
-     * Large increment
+     * Large increment.
      *
-     * @var integer
-     * @access private
+     * @var int
      */
     protected $_largeIncrement = 10;
 
     /**
-     *  unite for information on value
+     *  unite for information on value.
      *
      * @var string
-     * @access private
      */
     protected $_unite = '';
 
     /**
-     * Folder of arrow image
+     * Folder of arrow image.
      *
      * @var string
-     * @access private
      */
     protected $_imgFolder = 'default';
 
     /**
-     * size of input text in nb car
+     * size of input text in nb car.
      *
-     * @var integer
-     * @access private
+     * @var int
      */
     protected $_size = 2;
 
     /**
-     *  minMaxVisible show buttons to go minimum and maximum
+     *  minMaxVisible show buttons to go minimum and maximum.
      *
-     * @var integer
-     * @access private
+     * @var int
      */
     protected $_minMaxVisible = true;
 
     /**
-     *  tyleBordure ;  style CSS of frame control
+     *  tyleBordure ;  style CSS of frame control.
      *
      * @var string
-     * @access private
      */
     protected $_styleBordure = 'color: #FFFFFF; background-color: #CCCCCC; line-height: 100%;border-width:1px; border-style: solid; border-color: #000000; margin-top: 0; margin-bottom: 0; padding: 0';
 
     /**
-     *  tyleText : style CSS of input text
+     *  tyleText : style CSS of input text.
      *
      * @var string
-     * @access private
      */
     protected $_styleText = 'color: #000000; text-align: right; margin-left: 1; margin-right: 2; padding-right: 8';
 
     /**
-     * Allow loading of javascript
+     * Allow loading of javascript.
      *
      * @var bool
-     * @access private
      */
     protected $_loadJS = true;
 
     /*---------------------------------------------------------------*/
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param string $caption      Caption
-     * @param string $name         "name" attribute
-     * @param int $value           Pre-selected value.
-     * @param int $min             value
-     * @param int $max             value
-     * @param int $smallIncrement  Increment when click on button
-     * @param int $largeIncrement  Increment when click on button
-     * @param int $size            Number caractere of inputtext
-     * @param string $unite        of the value
-     * @param string $imgFolder    of image gif for button
-     * @param string $styleText    style CSs of text
-     * @param string $styleBordure style CSs of frame
-     * @param bool $minMaxVisible  show min and mas buttons
-     *
+     * @param string $caption        Caption
+     * @param string $name           "name" attribute
+     * @param int    $value          Pre-selected value.
+     * @param int    $min            value
+     * @param int    $max            value
+     * @param int    $smallIncrement Increment when click on button
+     * @param int    $largeIncrement Increment when click on button
+     * @param int    $size           Number caractere of inputtext
+     * @param string $unite          of the value
+     * @param string $imgFolder      of image gif for button
+     * @param string $styleText      style CSs of text
+     * @param string $styleBordure   style CSs of frame
+     * @param bool   $minMaxVisible  show min and mas buttons
      */
     public function __construct($caption, $name, $value = 0, $min = 0, $max = 100, $smallIncrement = 1, $largeIncrement = 10, $size = 5, $unite = '', $imgFolder = 'default', $styleText = '', $styleBordure = '', $minMaxVisible = true)
     {
@@ -170,7 +155,7 @@ class ExtcalFormSpin extends XoopsFormElement
 
     /*-----------------------------------------------------------------*/
     /**
-     * Get the values
+     * Get the values.
      */
     public function getValue()
     {
@@ -178,7 +163,7 @@ class ExtcalFormSpin extends XoopsFormElement
     }
 
     /**
-     * Set the value
+     * Set the value.
      *
      * @param  $value int
      */
@@ -189,7 +174,7 @@ class ExtcalFormSpin extends XoopsFormElement
 
     /*-----------------------------------------------------------------*/
     /**
-     * Get the min value
+     * Get the min value.
      */
     public function getMin()
     {
@@ -197,17 +182,17 @@ class ExtcalFormSpin extends XoopsFormElement
     }
 
     /**
-     * Set the min value
+     * Set the min value.
      *
      * @param  $min int
      */
     public function setMin($min)
     {
-        $this->_min = (int)$min;
+        $this->_min = (int) $min;
     }
     /*-----------------------------------------------------------------*/
     /**
-     * Get the max value - must be more great then min
+     * Get the max value - must be more great then min.
      */
     public function getMax()
     {
@@ -215,18 +200,18 @@ class ExtcalFormSpin extends XoopsFormElement
     }
 
     /**
-     * Set the max value - must be more great then min
+     * Set the max value - must be more great then min.
      *
      * @param  $max int
      */
     public function setMax($max)
     {
-        $this->_max = (int)$max;
+        $this->_max = (int) $max;
     }
 
     /*-----------------------------------------------------------------*/
     /**
-     * Get the small increment when click a short time on up down nutton
+     * Get the small increment when click a short time on up down nutton.
      */
     public function getSmallIncrement()
     {
@@ -235,14 +220,15 @@ class ExtcalFormSpin extends XoopsFormElement
 
     /**
      * Set the small increment when click a short time on up down nutton
-     * must be  " > 0 "
+     * must be  " > 0 ".
      *
      * @param $smallIncrement
+     *
      * @internal param int $value
      */
     public function setSmallIncrement($smallIncrement)
     {
-        $this->_smallIncrement = (int)$smallIncrement;
+        $this->_smallIncrement = (int) $smallIncrement;
         if ($this->_smallIncrement == 0) {
             $this->_smallIncrement = 1;
         }
@@ -250,7 +236,7 @@ class ExtcalFormSpin extends XoopsFormElement
 
     /*-----------------------------------------------------------------*/
     /**
-     * Get the large increment when click a long time on up down nutton
+     * Get the large increment when click a long time on up down nutton.
      */
     public function getLargeIncrement()
     {
@@ -258,13 +244,13 @@ class ExtcalFormSpin extends XoopsFormElement
     }
 
     /**
-     * Set the large increment when click a long time on up down nutton
+     * Set the large increment when click a long time on up down nutton.
      *
      * @param  $largeIncrement int
      */
     public function setLargeIncrement($largeIncrement)
     {
-        $this->_largeIncrement = (int)$largeIncrement;
+        $this->_largeIncrement = (int) $largeIncrement;
         if ($this->_largeIncrement == 0) {
             $this->_largeIncrement = 10;
         }
@@ -272,7 +258,7 @@ class ExtcalFormSpin extends XoopsFormElement
 
     /*-----------------------------------------------------------------*/
     /**
-     * Get the size in nb car of the input text for the value
+     * Get the size in nb car of the input text for the value.
      */
     public function getSize()
     {
@@ -281,7 +267,7 @@ class ExtcalFormSpin extends XoopsFormElement
 
     /**
      * Set the size in nb car of the input text for the value
-     * must be 2 car min
+     * must be 2 car min.
      *
      * @param  $size mixed
      */
@@ -298,7 +284,7 @@ class ExtcalFormSpin extends XoopsFormElement
      * @return string
      */
     public function getImgFolder()
-        /**
+        /*
          * Get the shortname of the folder images
          */
     {
@@ -306,19 +292,19 @@ class ExtcalFormSpin extends XoopsFormElement
     }
 
     /**
-     * Set the shortname of the folder images
+     * Set the shortname of the folder images.
      *
      * @param  $folder string
      */
     public function setImgFolder($folder)
     {
-        if ($folder <> '') {
+        if ($folder != '') {
             $this->_imgFolder = $folder;
         }
     }
     /*-----------------------------------------------------------------*/
     /**
-     * Get the label of unites between value and buttons
+     * Get the label of unites between value and buttons.
      */
     public function getUnite()
     {
@@ -326,7 +312,7 @@ class ExtcalFormSpin extends XoopsFormElement
     }
 
     /**
-     * Set the label of unites between value and buttons
+     * Set the label of unites between value and buttons.
      *
      * @param  $unite string
      */
@@ -336,7 +322,7 @@ class ExtcalFormSpin extends XoopsFormElement
     }
     /*-----------------------------------------------------------------*/
     /**
-     * Get the style CSS of the text
+     * Get the style CSS of the text.
      */
     public function getStyleText()
     {
@@ -344,19 +330,19 @@ class ExtcalFormSpin extends XoopsFormElement
     }
 
     /**
-     * Set the style CSS of the text
+     * Set the style CSS of the text.
      *
      * @param  $style string
      */
     public function setStyleText($style)
     {
-        if ($style <> '') {
+        if ($style != '') {
             $this->_styleText = $style;
         }
     }
     /*-----------------------------------------------------------------*/
     /**
-     * Get the style CSS of the frame
+     * Get the style CSS of the frame.
      */
     public function getStyleBordure()
     {
@@ -364,19 +350,19 @@ class ExtcalFormSpin extends XoopsFormElement
     }
 
     /**
-     * Set the style CSS of the frame
+     * Set the style CSS of the frame.
      *
      * @param  $style string
      */
     public function setStyleBordure($style)
     {
-        if ($style <> '') {
+        if ($style != '') {
             $this->_styleBordure = $style;
         }
     }
     /*-----------------------------------------------------------------*/
     /**
-     * Get MinMaxVisible : show the button to go min and max value
+     * Get MinMaxVisible : show the button to go min and max value.
      */
     public function getMinMaxVisible()
     {
@@ -384,7 +370,7 @@ class ExtcalFormSpin extends XoopsFormElement
     }
 
     /**
-     * Set  MinMaxVisible : show the button to go min and max value
+     * Set  MinMaxVisible : show the button to go min and max value.
      *
      * @param  $visible bool
      */
@@ -395,36 +381,36 @@ class ExtcalFormSpin extends XoopsFormElement
     /**********************************************************************/
 
     /**
-     * Prepare HTML for output
+     * Prepare HTML for output.
      *
      * @return string HTML
      */
     public function render()
     {
         $sSpinFolder = $this->getFolder();
-        $sFolderImg  = "{$sSpinFolder}/images/{$this->getImgFolder()}/";
+        $sFolderImg = "{$sSpinFolder}/images/{$this->getImgFolder()}/";
 
-        $prefixe  = $this->getName();
-        $prefixe2 = 'spin' . $prefixe;
+        $prefixe = $this->getName();
+        $prefixe2 = 'spin'.$prefixe;
 
         $smallIncrement = $this->getSmallIncrement();
         $largeIncrement = $this->getLargeIncrement();
 
         /*----------------------------------------------*/
-        $delai        = 200;
+        $delai = 200;
         $onMouseDown1 = "spinStart(\"{$prefixe}\", \"{$prefixe2}\",  {$smallIncrement},  {$largeIncrement}, {$delai}, \"{$sFolderImg}spinUp1.gif\");";
         $onMouseDown2 = "spinStart(\"{$prefixe}\", \"{$prefixe2}\", -{$smallIncrement}, -{$largeIncrement}, {$delai}, \"{$sFolderImg}spinDown1.gif\");";
 
         $onMouseUp = 'spinStop();';
         //----------------------------------------------------------------
         $styleBordure = $this->htmlAddAttribut('style', $this->getStyleBordure());
-        $styleText    = $this->htmlAddAttribut('style', $this->getStyleText());
-        $styleArrow   = "style=\"display: table-cell;vertical-align: middle; text-align: center; line-height: 100%; font-size: 7 pt; margin-top: 0; margin-bottom: 0; padding: 0\"";
+        $styleText = $this->htmlAddAttribut('style', $this->getStyleText());
+        $styleArrow = 'style="display: table-cell;vertical-align: middle; text-align: center; line-height: 100%; font-size: 7 pt; margin-top: 0; margin-bottom: 0; padding: 0"';
         //----------------------------------------------------------------
         $t = array();
 
         if ($this->_loadJS) {
-            $js  = $sSpinFolder . '/js/spin.js';
+            $js = $sSpinFolder.'/js/spin.js';
             $t[] = "<script src='{$js}' type='text/javascript'></script>";
         }
 
@@ -441,15 +427,15 @@ class ExtcalFormSpin extends XoopsFormElement
         $t[] = '    </td>';
 
         $unite = $this->getUnite();
-        if ($unite <> '') {
+        if ($unite != '') {
             $t[] = "    <td style='display: table-cell;vertical-align: middle; '>&nbsp;{$unite}&nbsp;</td>";
         }
         //-------------------------------------------------------
         if ($this->getMinMaxVisible()) {
             $onMouseDownMin = "spinSetValue(\"{$prefixe}\", \"{$prefixe2}\",  \"Min\", {$this->getMin()}, {$delai}, \"{$sFolderImg}spinMin1.gif\");";
-            $t[]            = "    <td width='63%' align='center' {$styleArrow}>";
-            $t[]            = "      <img border='0' name='{$prefixe2}_imgMin' src='{$sFolderImg}spinMin0.gif'   onmousedown='{$onMouseDownMin}'><br>";
-            $t[]            = '    </td>';
+            $t[] = "    <td width='63%' align='center' {$styleArrow}>";
+            $t[] = "      <img border='0' name='{$prefixe2}_imgMin' src='{$sFolderImg}spinMin0.gif'   onmousedown='{$onMouseDownMin}'><br>";
+            $t[] = '    </td>';
         }
         //-------------------------------------------------------
         $t[] = "    <td width='63%' align='center' {$styleArrow}>";
@@ -462,14 +448,14 @@ class ExtcalFormSpin extends XoopsFormElement
         //-------------------------------------------------------
         if ($this->getMinMaxVisible()) {
             $onMouseDownMax = "spinSetValue(\"{$prefixe}\", \"{$prefixe2}\",  \"Max\", {$this->getMax()}, {$delai}, \"{$sFolderImg}spinMax1.gif\");";
-            $t[]            = "    <td width='63%' align='center' {$styleArrow}>";
-            $t[]            = "      <img border='0' name='{$prefixe2}_imgMax' src='{$sFolderImg}spinMax0.gif'   onmousedown='{$onMouseDownMax}'><br>";
-            $t[]            = '    </td>';
+            $t[] = "    <td width='63%' align='center' {$styleArrow}>";
+            $t[] = "      <img border='0' name='{$prefixe2}_imgMax' src='{$sFolderImg}spinMax0.gif'   onmousedown='{$onMouseDownMax}'><br>";
+            $t[] = '    </td>';
         }
         //-------------------------------------------------------
 
         $t[] = '  </tr>';
-        $t[] = '</table>' . "\n";
+        $t[] = '</table>'."\n";
         $t[] = '</div>';
         //-------------------------------------------
         $html = implode("\n", $t);
@@ -502,10 +488,11 @@ class ExtcalFormSpin extends XoopsFormElement
             $value = $default;
         }
 
-        if ($value <> '') {
-            if (substr($value, 0, strlen($attribut)) <> $attribut) {
+        if ($value != '') {
+            if (substr($value, 0, strlen($attribut)) != $attribut) {
                 $r = "{$attribut}=\"{$value}\"";
             }
+
             return $r;
         }
 

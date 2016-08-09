@@ -1,8 +1,9 @@
 <?php
+
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 
 /**
- * Contains the Calendar_Minute class
+ * Contains the Calendar_Minute class.
  *
  * PHP versions 4 and 5
  *
@@ -28,16 +29,17 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @category  Date and Time
- * @package   Calendar
+ *
  * @author    Harry Fuecks <hfuecks@phppatterns.com>
  * @copyright 2003-2007 Harry Fuecks
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
- * @version   CVS: $Id: Minute.php 1511 2011-09-01 20:56:07Z jjdai $
+ *
  * @link      http://pear.php.net/package/Calendar
  */
 
 /**
- * Allows Calendar include path to be redefined
+ * Allows Calendar include path to be redefined.
+ *
  * @ignore
  */
 if (!defined('CALENDAR_ROOT')) {
@@ -45,41 +47,39 @@ if (!defined('CALENDAR_ROOT')) {
 }
 
 /**
- * Load Calendar base class
+ * Load Calendar base class.
  */
-require_once CALENDAR_ROOT . 'Calendar.php';
+require_once CALENDAR_ROOT.'Calendar.php';
 
 /**
  * Represents a Minute and builds Seconds
  * <code>
- * require_once 'Calendar/Minute.php';
+ * require_once __DIR__ . '/Calendar/Minute.php';
  * $Minute = new Calendar_Minute(2003, 10, 21, 15, 31); // Oct 21st 2003, 3:31pm
  * $Minute->build(); // Build Calendar_Second objects
  * while ($Second = $Minute->fetch()) {
- *     echo $Second->thisSecond().'<br />';
+ *     echo $Second->thisSecond().'<br>';
  * }
- * </code>
+ * </code>.
  *
  * @category  Date and Time
- * @package   Calendar
+ *
  * @author    Harry Fuecks <hfuecks@phppatterns.com>
  * @copyright 2003-2007 Harry Fuecks
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
+ *
  * @link      http://pear.php.net/package/Calendar
- * @access    public
  */
 class Calendar_Minute extends Calendar
 {
     /**
-     * Constructs Minute
+     * Constructs Minute.
      *
      * @param int $y year e.g. 2003
      * @param int $m month e.g. 5
      * @param int $d day e.g. 11
      * @param int $h hour e.g. 13
      * @param int $i minute e.g. 31
-     *
-     * @access public
      */
     public function __construct($y, $m, $d, $h, $i)
     {
@@ -87,16 +87,15 @@ class Calendar_Minute extends Calendar
     }
 
     /**
-     * Builds the Calendar_Second objects
+     * Builds the Calendar_Second objects.
      *
      * @param array $sDates (optional) Calendar_Second objects representing selected dates
      *
-     * @return boolean
-     * @access public
+     * @return bool
      */
     public function build($sDates = array())
     {
-        include_once CALENDAR_ROOT . 'Second.php';
+        include_once CALENDAR_ROOT.'Second.php';
         $sIM = $this->cE->getSecondsInMinute($this->year, $this->month, $this->day, $this->hour, $this->minute);
         for ($i = 0; $i < $sIM; ++$i) {
             $this->children[$i] = new Calendar_Second($this->year, $this->month, $this->day, $this->hour, $this->minute, $i);
@@ -109,18 +108,20 @@ class Calendar_Minute extends Calendar
     }
 
     /**
-     * Called from build()
+     * Called from build().
      *
      * @param array $sDates Calendar_Second objects representing selected dates
-     *
-     * @return void
-     * @access private
      */
     public function setSelection($sDates)
     {
         foreach ($sDates as $sDate) {
-            if ($this->year == $sDate->thisYear() && $this->month == $sDate->thisMonth() && $this->day == $sDate->thisDay() && $this->hour == $sDate->thisHour() && $this->minute == $sDate->thisMinute()) {
-                $key = (int)$sDate->thisSecond();
+            if ($this->year == $sDate->thisYear()
+                && $this->month == $sDate->thisMonth()
+                && $this->day == $sDate->thisDay()
+                && $this->hour == $sDate->thisHour()
+                && $this->minute == $sDate->thisMinute()
+            ) {
+                $key = (int) $sDate->thisSecond();
                 if (isset($this->children[$key])) {
                     $sDate->setSelected();
                     $this->children[$key] = $sDate;

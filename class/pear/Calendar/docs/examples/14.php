@@ -7,7 +7,7 @@ function getmicrotime()
 {
     list($usec, $sec) = explode(' ', microtime());
 
-    return ((float)$usec + (float)$sec);
+    return (float) $usec + (float) $sec;
 }
 
 $start = getmicrotime();
@@ -18,8 +18,8 @@ define('CALENDAR_ENGINE', 'PearDate');
 if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
-require_once CALENDAR_ROOT . 'Month/Weekdays.php';
-require_once CALENDAR_ROOT . 'Day.php';
+require_once CALENDAR_ROOT.'Month/Weekdays.php';
+require_once CALENDAR_ROOT.'Day.php';
 
 // Initialize GET variables if not set
 if (!isset($_GET['y'])) {
@@ -39,16 +39,17 @@ $month = new Calendar_Month_Weekdays($_GET['y'], $_GET['m']);
 // Used for Week::build() below
 $selectedDays = array(
     new Calendar_Day($_GET['y'], $_GET['m'], $_GET['d']),
-    new Calendar_Day($_GET['y'], 12, 25));
+    new Calendar_Day($_GET['y'], 12, 25),
+);
 
 // Build the days in the month
 $month->build($selectedDays);
 
 // Construct strings for next/previous links
 $PMonth = $month->prevMonth('object'); // Get previous month as object
-$prev   = $_SERVER['PHP_SELF'] . '?y=' . $PMonth->thisYear() . '&m=' . $PMonth->thisMonth() . '&d=' . $PMonth->thisDay();
+$prev = $_SERVER['PHP_SELF'].'?y='.$PMonth->thisYear().'&m='.$PMonth->thisMonth().'&d='.$PMonth->thisDay();
 $NMonth = $month->nextMonth('object');
-$next   = $_SERVER['PHP_SELF'] . '?y=' . $NMonth->thisYear() . '&m=' . $NMonth->thisMonth() . '&d=' . $NMonth->thisDay();
+$next = $_SERVER['PHP_SELF'].'?y='.$NMonth->thisYear().'&m='.$NMonth->thisMonth().'&d='.$NMonth->thisDay();
 
 $thisDate = new Date($month->thisMonth('timestamp'));
 ?>
@@ -115,7 +116,7 @@ $thisDate = new Date($month->thisMonth('timestamp'));
     <?php
     while ($day = $month->fetch()) {
         // Build a link string for each day
-        $link = $_SERVER['PHP_SELF'] . '?y=' . $day->thisYear() . '&m=' . $day->thisMonth() . '&d=' . $day->thisDay();
+        $link = $_SERVER['PHP_SELF'].'?y='.$day->thisYear().'&m='.$day->thisMonth().'&d='.$day->thisDay();
 
         // isFirst() to find start of week
         if ($day->isFirst()) {
@@ -123,11 +124,11 @@ $thisDate = new Date($month->thisMonth('timestamp'));
         }
 
         if ($day->isSelected()) {
-            echo '<td class="selected">' . $day->thisDay() . '</td>' . "\n";
+            echo '<td class="selected">'.$day->thisDay().'</td>'."\n";
         } elseif ($day->isEmpty()) {
-            echo '<td>&nbsp;</td>' . "\n";
+            echo '<td>&nbsp;</td>'."\n";
         } else {
-            echo '<td><a href="' . $link . '">' . $day->thisDay() . '</a></td>' . "\n";
+            echo '<td><a href="'.$link.'">'.$day->thisDay().'</a></td>'."\n";
         }
 
         // isLast() to find end of week
@@ -147,7 +148,7 @@ $thisDate = new Date($month->thisMonth('timestamp'));
     </tr>
 </table>
 <?php
-echo '<p><b>Took: ' . (getmicrotime() - $start) . ' seconds</b></p>';
+echo '<p><b>Took: '.(getmicrotime() - $start).' seconds</b></p>';
 ?>
 </body>
 </html>

@@ -1,11 +1,11 @@
 <?php
-// $Id: calendar_tests.php 1511 2011-09-01 20:56:07Z jjdai $
+//
 
-require_once 'simple_include.php';
-require_once 'calendar_include.php';
+require_once __DIR__.'/simple_include.php';
+require_once __DIR__.'/calendar_include.php';
 
 /**
- * Class CalendarTests
+ * Class CalendarTests.
  */
 class CalendarTests extends GroupTest
 {

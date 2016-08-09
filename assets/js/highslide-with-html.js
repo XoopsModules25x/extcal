@@ -619,8 +619,13 @@ if (!hs) {
             if (exp.iframe) {
                 if (!exp.releaseMask) exp.releaseMask = hs.createElement('div', null,
                     {
-                        position: 'absolute', width: exp.x.size + 'px', height: exp.y.size + 'px',
-                        left: exp.x.cb + 'px', top: exp.y.cb + 'px', zIndex: 4, background: (hs.ieLt9 ? 'white' : 'none'),
+                        position: 'absolute',
+                        width: exp.x.size + 'px',
+                        height: exp.y.size + 'px',
+                        left: exp.x.cb + 'px',
+                        top: exp.y.cb + 'px',
+                        zIndex: 4,
+                        background: (hs.ieLt9 ? 'white' : 'none'),
                         opacity: 0.01
                     },
                     exp.wrapper, true);
@@ -980,7 +985,12 @@ if (!hs) {
                 if (pos[i]) {
                     if (this.hasAlphaImageLoader) {
                         var w = (i == 1 || i == 7) ? '100%' : this.graphic.width + 'px';
-                        var div = hs.createElement('div', null, {width: '100%', height: '100%', position: 'relative', overflow: 'hidden'}, this.td[i], true);
+                        var div = hs.createElement('div', null, {
+                            width: '100%',
+                            height: '100%',
+                            position: 'relative',
+                            overflow: 'hidden'
+                        }, this.td[i], true);
                         hs.createElement('div', null, {
                                 filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale, src='" + this.graphic.src + "')",
                                 position: 'absolute',

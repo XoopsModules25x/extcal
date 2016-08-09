@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @param      $xoopsModule
- * @param null $oldVersion
+ * @param XoopsModule $xoopsModule
+ * @param null        $oldVersion
  *
  * @return bool
  */
-function xoops_module_update_extcal(&$xoopsModule, $oldVersion = null)
+function xoops_module_update_extcal(XoopsModule $xoopsModule, $oldVersion = null)
 {
     $newVersion = $xoopsModule->getVar('version') * 100;
     if ($newVersion == $oldVersion) {
@@ -15,23 +15,23 @@ function xoops_module_update_extcal(&$xoopsModule, $oldVersion = null)
 
     //----------------------------------------------------------
     // Create eXtCal upload directory
-    $indexFile = XOOPS_ROOT_PATH . '/modules/extcal/include/index.html';
+    $indexFile = __DIR__.'/index.html';
 
-    $dir = XOOPS_ROOT_PATH . '/uploads/extcal';
+    $dir = XOOPS_ROOT_PATH.'/uploads/extcal';
     if (!is_dir($dir)) {
         mkdir($dir, 0777);
-        copy($indexFile, $dir . '/index.html');
+        copy($indexFile, $dir.'/index.html');
     }
 
-    $dir = XOOPS_ROOT_PATH . '/uploads/extcal/etablissement';
+    $dir = XOOPS_ROOT_PATH.'/uploads/extcal/etablissement';
     if (!is_dir($dir)) {
         mkdir($dir, 0777);
-        copy($indexFile, $dir . '/index.html');
+        copy($indexFile, $dir.'/index.html');
     }
     //------------------------------------------------------------
 
-    $fld = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/versions/';
-    $cls = "extcal_%1\$s";
+    $fld = XOOPS_ROOT_PATH.'/modules/'.$xoopsModule->getVar('dirname').'/versions/';
+    $cls = 'extcal_%1$s';
 
     $version = array(
         '2_04' => 204,
@@ -42,16 +42,17 @@ function xoops_module_update_extcal(&$xoopsModule, $oldVersion = null)
         '2_33' => 233,
         '2_34' => 234,
         '2_35' => 235,
-        '2_37' => 237);
+        '2_37' => 237,
+    );
 
     while (list($key, $val) = each($version)) {
         if ($oldVersion < $val) {
             $name = sprintf($cls, $key);
-            $f    = $fld . $name . '.php';
+            $f = $fld.$name.'.php';
             //ext_echo ("<hr>{$f}<hr>");
             if (is_readable($f)) {
-                echo "mise à jour version : {$key} = {$val}<br />";
-                include_once($f);
+                echo "mise à jour version : {$key} = {$val}<br>";
+                include_once $f;
                 $cl = new $name($xoopsModule, array('oldVersion' => $oldVersion));
             }
         }

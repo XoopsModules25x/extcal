@@ -1,8 +1,9 @@
 <?php
+
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 
 /**
- * Contains the Calendar_Decorator_Wrapper class
+ * Contains the Calendar_Decorator_Wrapper class.
  *
  * PHP versions 4 and 5
  *
@@ -28,17 +29,18 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @category  Date and Time
- * @package   Calendar
+ *
  * @author    Harry Fuecks <hfuecks@phppatterns.com>
  * @author    Lorenzo Alberton <l.alberton@quipo.it>
  * @copyright 2003-2007 Harry Fuecks, Lorenzo Alberton
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
- * @version   CVS: $Id: Textual.php 1511 2011-09-01 20:56:07Z jjdai $
+ *
  * @link      http://pear.php.net/package/Calendar
  */
 
 /**
- * Allows Calendar include path to be redefined
+ * Allows Calendar include path to be redefined.
+ *
  * @ignore
  */
 if (!defined('CALENDAR_ROOT')) {
@@ -46,38 +48,36 @@ if (!defined('CALENDAR_ROOT')) {
 }
 
 /**
- * Load Calendar decorator base class
+ * Load Calendar decorator base class.
  */
-require_once CALENDAR_ROOT . 'Decorator.php';
+require_once CALENDAR_ROOT.'Decorator.php';
 
 /**
- * Load the Uri utility
+ * Load the Uri utility.
  */
-require_once CALENDAR_ROOT . 'Util/Textual.php';
+require_once CALENDAR_ROOT.'Util/Textual.php';
 
 /**
  * Decorator to help with fetching textual representations of months and
  * days of the week.
  * <b>Note:</b> for performance you should prefer Calendar_Util_Textual unless you
- * have a specific need to use a decorator
+ * have a specific need to use a decorator.
  *
  * @category  Date and Time
- * @package   Calendar
+ *
  * @author    Harry Fuecks <hfuecks@phppatterns.com>
  * @author    Lorenzo Alberton <l.alberton@quipo.it>
  * @copyright 2003-2007 Harry Fuecks, Lorenzo Alberton
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
+ *
  * @link      http://pear.php.net/package/Calendar
- * @access    public
  */
 class Calendar_Decorator_Textual extends Calendar_Decorator
 {
     /**
-     * Constructs Calendar_Decorator_Textual
+     * Constructs Calendar_Decorator_Textual.
      *
      * @param object $Calendar subclass of Calendar
-     *
-     * @access public
      */
     public function __construct(&$Calendar)
     {
@@ -85,12 +85,11 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
     }
 
     /**
-     * Returns an array of 12 month names (first index = 1)
+     * Returns an array of 12 month names (first index = 1).
      *
      * @param string $format (optional) format of returned months (one|two|short|long)
      *
      * @return array
-     * @access public
      * @static
      */
     public function monthNames($format = 'long')
@@ -99,12 +98,11 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
     }
 
     /**
-     * Returns an array of 7 week day names (first index = 0)
+     * Returns an array of 7 week day names (first index = 0).
      *
      * @param string $format (optional) format of returned days (one|two|short|long)
      *
      * @return array
-     * @access public
      * @static
      */
     public function weekdayNames($format = 'long')
@@ -113,12 +111,11 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
     }
 
     /**
-     * Returns textual representation of the previous month of the decorated calendar object
+     * Returns textual representation of the previous month of the decorated calendar object.
      *
      * @param string $format (optional) format of returned months (one|two|short|long)
      *
      * @return string
-     * @access public
      */
     public function prevMonthName($format = 'long')
     {
@@ -126,12 +123,11 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
     }
 
     /**
-     * Returns textual representation of the month of the decorated calendar object
+     * Returns textual representation of the month of the decorated calendar object.
      *
      * @param string $format (optional) format of returned months (one|two|short|long)
      *
      * @return string
-     * @access public
      */
     public function thisMonthName($format = 'long')
     {
@@ -139,12 +135,11 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
     }
 
     /**
-     * Returns textual representation of the next month of the decorated calendar object
+     * Returns textual representation of the next month of the decorated calendar object.
      *
      * @param string $format (optional) format of returned months (one|two|short|long)
      *
      * @return string
-     * @access public
      */
     public function nextMonthName($format = 'long')
     {
@@ -152,12 +147,11 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
     }
 
     /**
-     * Returns textual representation of the previous day of week of the decorated calendar object
+     * Returns textual representation of the previous day of week of the decorated calendar object.
      *
      * @param string $format (optional) format of returned months (one|two|short|long)
      *
      * @return string
-     * @access public
      */
     public function prevDayName($format = 'long')
     {
@@ -165,12 +159,11 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
     }
 
     /**
-     * Returns textual representation of the day of week of the decorated calendar object
+     * Returns textual representation of the day of week of the decorated calendar object.
      *
      * @param string $format (optional) format of returned months (one|two|short|long)
      *
      * @return string
-     * @access public
      */
     public function thisDayName($format = 'long')
     {
@@ -178,12 +171,11 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
     }
 
     /**
-     * Returns textual representation of the next day of week of the decorated calendar object
+     * Returns textual representation of the next day of week of the decorated calendar object.
      *
      * @param string $format (optional) format of returned months (one|two|short|long)
      *
      * @return string
-     * @access public
      */
     public function nextDayName($format = 'long')
     {
@@ -193,12 +185,11 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
     /**
      * Returns the days of the week using the order defined in the decorated
      * calendar object. Only useful for Calendar_Month_Weekdays, Calendar_Month_Weeks
-     * and Calendar_Week. Otherwise the returned array will begin on Sunday
+     * and Calendar_Week. Otherwise the returned array will begin on Sunday.
      *
      * @param string $format (optional) format of returned months (one|two|short|long)
      *
      * @return array ordered array of week day names
-     * @access public
      */
     public function orderedWeekdays($format = 'long')
     {

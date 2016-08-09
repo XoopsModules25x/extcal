@@ -1,11 +1,11 @@
 <?php
-// $Id: unixts_engine_test.php 1645 2011-12-30 20:03:00Z jjdai $
+//
 
-require_once 'simple_include.php';
-require_once 'calendar_include.php';
+require_once __DIR__.'/simple_include.php';
+require_once __DIR__.'/calendar_include.php';
 
 /**
- * Class TestOfUnixTsEngine
+ * Class TestOfUnixTsEngine.
  */
 class TestOfUnixTsEngine extends UnitTestCase
 {

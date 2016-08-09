@@ -1,11 +1,11 @@
 <?php
-// $Id: validator_tests.php 1511 2011-09-01 20:56:07Z jjdai $
+//
 
-require_once 'simple_include.php';
-require_once 'calendar_include.php';
+require_once __DIR__.'/simple_include.php';
+require_once __DIR__.'/calendar_include.php';
 
 /**
- * Class ValidatorTests
+ * Class ValidatorTests.
  */
 class ValidatorTests extends GroupTest
 {

@@ -2,12 +2,12 @@
 //Kraven 30
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once XOOPS_ROOT_PATH . '/kernel/object.php';
+include_once XOOPS_ROOT_PATH.'/kernel/object.php';
 
 //class ExtcalEvent extends XoopsObject
 //class extcal_etablissement extends XoopsObject
 /**
- * Class ExtcalEtablissement
+ * Class ExtcalEtablissement.
  */
 class ExtcalEtablissement extends XoopsObject
 {
@@ -51,7 +51,7 @@ class ExtcalEtablissement extends XoopsObject
 
         $title = $this->isNew() ? sprintf(_MD_EXTCAL_ETABLISSEMENT_ADD) : sprintf(_MD_EXTCAL_ETABLISSEMENT_EDIT);
 
-        include_once(XOOPS_ROOT_PATH . '/class/xoopsformloader.php');
+        include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
 
         $form = new XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
@@ -70,7 +70,7 @@ class ExtcalEtablissement extends XoopsObject
         $form->addElement(new XoopsFormTextArea(_MD_EXTCAL_ETABLISSEMENT_HORAIRES, 'horaires', $this->getVar('horaires'), 3, 40));
         $form->addElement(new XoopsFormTextArea(_MD_EXTCAL_ETABLISSEMENT_DIVERS, 'divers', $this->getVar('divers'), 5, 40));
         //$form->addElement(new XoopsFormTextArea(_MD_EXTCAL_ETABLISSEMENT_TARIFS, 'tarifs', $this->getVar("tarifs"), 5, 40));
-        $form->addElement(new XoopsFormText(_MD_EXTCAL_ETABLISSEMENT_TARIFS . ' ( ' . _MD_EXTCAL_DEVISE2 . ' )', 'tarifs', 20, 20, $this->getVar('tarifs')), false);
+        $form->addElement(new XoopsFormText(_MD_EXTCAL_ETABLISSEMENT_TARIFS.' ( '._MD_EXTCAL_DEVISE2.' )', 'tarifs', 20, 20, $this->getVar('tarifs')), false);
 
         //$form->addElement(new XoopsFormTextArea(_MD_EXTCAL_ETABLISSEMENT_MAP, 'map', $this->getVar("map"), 5, 40));
         $form->addElement(new XoopsFormText(_MD_EXTCAL_ETABLISSEMENT_MAP, 'map', 150, 255, $this->getVar('map')), false);
@@ -78,7 +78,7 @@ class ExtcalEtablissement extends XoopsObject
         //Logo
         $file_tray = new XoopsFormElementTray(sprintf(_MD_EXTCAL_FORM_IMG, 2), '');
         if ($this->getVar('logo') != '') {
-            $file_tray->addElement(new XoopsFormLabel('', "<img src='" . XOOPS_URL . '/uploads/extcal/etablissement/' . $this->getVar('logo') . "' name='image' id='image' alt=''/><br /><br />"));
+            $file_tray->addElement(new XoopsFormLabel('', "<img src='".XOOPS_URL.'/uploads/extcal/etablissement/'.$this->getVar('logo')."' name='image' id='image' alt=''/><br><br>"));
             $check_del_img = new XoopsFormCheckBox('', 'delimg');
             $check_del_img->addOption(1, _MD_EXTCAL_DEL_IMG);
             $file_tray->addElement($check_del_img);
@@ -89,8 +89,8 @@ class ExtcalEtablissement extends XoopsObject
         }
         $file_img->setExtra("size ='40'");
         $file_tray->addElement($file_img);
-        $msg        = sprintf(_MD_EXTCAL_IMG_CONFIG, (int)(3145728 / 1000), 500, 500);
-        $file_label = new XoopsFormLabel('', '<br />' . $msg);
+        $msg = sprintf(_MD_EXTCAL_IMG_CONFIG, (int) (3145728 / 1000), 500, 500);
+        $file_label = new XoopsFormLabel('', '<br>'.$msg);
         $file_tray->addElement($file_label);
         $form->addElement($file_tray);
         $form->addElement(new XoopsFormHidden('file', $this->getVar('logo')));
@@ -107,7 +107,7 @@ class ExtcalEtablissement extends XoopsObject
 /**************************************************************************/
 
 /**
- * Class ExtcalEtablissementHandler
+ * Class ExtcalEtablissementHandler.
  */
 class ExtcalEtablissementHandler extends ExtcalPersistableObjectHandler
 {
@@ -135,7 +135,7 @@ class ExtcalEtablissementHandler extends ExtcalPersistableObjectHandler
         if (!$skipPerm) {
             $this->_addCatPermCriteria($criteriaCompo, $user);
         }
-        $ret =& $this->getObjects($criteriaCompo);
+        $ret = &$this->getObjects($criteriaCompo);
         if (isset($ret[0])) {
             return $ret[0];
         } else {
@@ -145,13 +145,20 @@ class ExtcalEtablissementHandler extends ExtcalPersistableObjectHandler
 
     /**
      * @param CriteriaElement $criteria
-     * @param bool $asObject
+     * @param null            $fields
+     * @param bool            $asObject
+     * @param bool            $id_as_key
      *
      * @return array
      */
-    public function &getAll(CriteriaElement $criteria = null, $fields = null, $asObject = true, $id_as_key = true) //getAll($criteria = null, $asObject = false)
+    public function &getAll(
+        CriteriaElement $criteria = null,
+        $fields = null,
+        $asObject = true,
+        $id_as_key = true
+    ) //getAll($criteria = null, $asObject = false)
     {
-        $rst =& $this->getObjects($criteria, $asObject);
+        $rst = &$this->getObjects($criteria, $asObject);
         if ($asObject) {
             return $rst;
         } else {

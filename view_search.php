@@ -1,12 +1,13 @@
 <?php
 
-include dirname(dirname(__DIR__)) . '/mainfile.php';
-include_once __DIR__ . '/include/constantes.php';
-$params                                  = array(
+include dirname(dirname(__DIR__)).'/mainfile.php';
+include_once __DIR__.'/include/constantes.php';
+$params = array(
     'view' => _EXTCAL_NAV_SEARCH,
-    'file' => _EXTCAL_FILE_SEARCH);
+    'file' => _EXTCAL_FILE_SEARCH,
+);
 $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
-include_once __DIR__ . '/header.php';
+include_once __DIR__.'/header.php';
 
 //needed to save the state of the form, so we don't show on the first time the list of available events
 $num_tries = isset($_POST['num_tries']) ? $_POST['num_tries'] + 1 : 0;
@@ -16,27 +17,27 @@ $num_tries = isset($_POST['num_tries']) ? $_POST['num_tries'] + 1 : 0;
 /*  ajout des elements de recherche                            */
 /***************************************************************/
 $searchExp = isset($_POST['searchExp']) ? $_POST['searchExp'] : '';
-$andor     = isset($_POST['andor']) ? $_POST['andor'] : '';
-$year      = isset($_POST['year']) ? (int)$_POST['year'] : date('Y');
-$month     = isset($_POST['month']) ? (int)$_POST['month'] : date('n');
-$day       = isset($_POST['day']) ? (int)$_POST['day'] : 0;
-$cat       = isset($_POST['cat']) ? (int)$_POST['cat'] : 0;
-$orderby1  = isset($_POST['orderby1']) ? $_POST['orderby1'] : 'cat_name ASC';
-$orderby2  = isset($_POST['orderby2']) ? $_POST['orderby2'] : 'event_title ASC';
-$orderby3  = isset($_POST['orderby3']) ? $_POST['orderby3'] : '';
+$andor = isset($_POST['andor']) ? $_POST['andor'] : '';
+$year = isset($_POST['year']) ? (int) $_POST['year'] : date('Y');
+$month = isset($_POST['month']) ? (int) $_POST['month'] : date('n');
+$day = isset($_POST['day']) ? (int) $_POST['day'] : 0;
+$cat = isset($_POST['cat']) ? (int) $_POST['cat'] : 0;
+$orderby1 = isset($_POST['orderby1']) ? $_POST['orderby1'] : 'cat_name ASC';
+$orderby2 = isset($_POST['orderby2']) ? $_POST['orderby2'] : 'event_title ASC';
+$orderby3 = isset($_POST['orderby3']) ? $_POST['orderby3'] : '';
 /* ========================================================================== */
 
 //$orderby = isset($_GET['orderby']) ? (int)($_GET['orderby']) : 0;
 
 //---------------------------------------------------------------
-$search              = array();
-$exp                 = new XoopsFormText(_MD_EXTCAL_EXPRESSION, 'searchExp', 80, 80, $searchExp);
+$search = array();
+$exp = new XoopsFormText(_MD_EXTCAL_EXPRESSION, 'searchExp', 80, 80, $searchExp);
 $search['searchExp'] = $exp->render();
-$search['andor']     = getListAndOr('andor', '', $andor)->render();
+$search['andor'] = getListAndOr('andor', '', $andor)->render();
 //$search['year']  = getListYears($year,$xoopsModuleConfig['agenda_nb_years_before'],$xoopsModuleConfig['agenda_nb_years_after'], true)->render();
-$search['year']  = getListYears($year, 2, 5, true)->render();
+$search['year'] = getListYears($year, 2, 5, true)->render();
 $search['month'] = getListMonths($month, true)->render();
-$search['day']   = getListDays($day, true)->render();
+$search['day'] = getListDays($day, true)->render();
 
 //$search['cat']   = implode('', getCheckeCategories());
 $search['cat'] = getListCategories($cat, true, 'cat')->render();
@@ -67,9 +68,10 @@ $xoopsTpl->assign('search', $search);
 $orderBy = array(
     $orderby1,
     $orderby2,
-    $orderby3);
-$userId  = 0;
-$user    = '';
+    $orderby3,
+);
+$userId = 0;
+$user = '';
 //get all events for the date
 $events = $eventHandler->getSearchEvent2($year, $month, $day, $cat, $searchExp, $andor, $orderBy, $userId, $user);
 
@@ -79,9 +81,9 @@ $eventHandler->serverTimeToUserTimes($events);
 $eventHandler->formatEventsDate($events, $xoopsModuleConfig['event_date_year']);
 
 // Treatment for recurring event
-$startMonth     = mktime(0, 0, 0, $month, 1, $year);
+$startMonth = mktime(0, 0, 0, $month, 1, $year);
 $daysInTheMonth = cal_days_in_month(CAL_GREGORIAN, $month, $year);
-$endMonth       = mktime(23, 59, 59, $month, $daysInTheMonth, $year);
+$endMonth = mktime(23, 59, 59, $month, $daysInTheMonth, $year);
 
 //$startMonth = mktime(0, 0, 0, 1, 1, 2011);
 //$endMonth   = mktime(23, 59, 59, 12, 31, 2011);
@@ -133,14 +135,14 @@ for ($h = 0, $count = count($recurrents); $h < $count; ++$h) {
     // Formating date
     $eventHandler->formatEventsDate($recurEvents, $xoopsModuleConfig['event_date_week']);
     foreach ($recurEvents as $val) {
-        $val['cat']['cat_name']        = $categoryObject->vars['cat_name']['value'];
-        $val['cat']['cat_color']       = $categoryObject->vars['cat_color']['value'];
+        $val['cat']['cat_name'] = $categoryObject->vars['cat_name']['value'];
+        $val['cat']['cat_color'] = $categoryObject->vars['cat_color']['value'];
         $val['cat']['cat_light_color'] = eclaircirCouleur($categoryObject->vars['cat_color']['value'], _EXTCAL_INFOBULLE_RGB_MIN, _EXTCAL_INFOBULLE_RGB_MAX);
-        $recurEventsArray[]            = $val;
+        $recurEventsArray[] = $val;
     }
 }
 
-$eventsArray = array_merge((array)$eventsArray, (array)$recurEventsArray);
+$eventsArray = array_merge((array) $eventsArray, (array) $recurEventsArray);
 
 // Sort event array by event start
 //usort($eventsArray, "orderEvents");
@@ -214,20 +216,21 @@ $xoopsTpl->assign('list_position', -1);
 
 //mb missing for xBootstrap templates by Angelo
 $lang = array(
-    'start'      => _MD_EXTCAL_START,
-    'end'        => _MD_EXTCAL_END,
-    'calmonth'   => _MD_EXTCAL_NAV_CALMONTH,
-    'calweek'    => _MD_EXTCAL_NAV_CALWEEK,
-    'year'       => _MD_EXTCAL_NAV_YEAR,
-    'month'      => _MD_EXTCAL_NAV_MONTH,
-    'week'       => _MD_EXTCAL_NAV_WEEK,
-    'day'        => _MD_EXTCAL_NAV_DAY,
+    'start' => _MD_EXTCAL_START,
+    'end' => _MD_EXTCAL_END,
+    'calmonth' => _MD_EXTCAL_NAV_CALMONTH,
+    'calweek' => _MD_EXTCAL_NAV_CALWEEK,
+    'year' => _MD_EXTCAL_NAV_YEAR,
+    'month' => _MD_EXTCAL_NAV_MONTH,
+    'week' => _MD_EXTCAL_NAV_WEEK,
+    'day' => _MD_EXTCAL_NAV_DAY,
     'agendaweek' => _MD_EXTCAL_NAV_AGENDA_WEEK,
-    'agendaday'  => _MD_EXTCAL_NAV_AGENDA_DAY,
-    'search'     => _MD_EXTCAL_NAV_SEARCH,
-    'newevent'   => _MD_EXTCAL_NAV_NEW_EVENT);
+    'agendaday' => _MD_EXTCAL_NAV_AGENDA_DAY,
+    'search' => _MD_EXTCAL_NAV_SEARCH,
+    'newevent' => _MD_EXTCAL_NAV_NEW_EVENT,
+);
 // Assigning language data to the template
 $xoopsTpl->assign('lang', $lang);
 $xoopsTpl->assign('view', 'search');
 
-include XOOPS_ROOT_PATH . '/footer.php';
+include XOOPS_ROOT_PATH.'/footer.php';

@@ -1,18 +1,18 @@
 <?php
 /**
  * Description: demonstrates a decorator used to "attach a payload" to a selection
- * to make it available when iterating over calendar children
+ * to make it available when iterating over calendar children.
  */
 if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
-require_once CALENDAR_ROOT . 'Day.php';
-require_once CALENDAR_ROOT . 'Hour.php';
-require_once CALENDAR_ROOT . 'Decorator.php';
+require_once CALENDAR_ROOT.'Day.php';
+require_once CALENDAR_ROOT.'Hour.php';
+require_once CALENDAR_ROOT.'Decorator.php';
 
 // Decorator to "attach" functionality to selected hours
 /**
- * Class DiaryEvent
+ * Class DiaryEvent.
  */
 class DiaryEvent extends Calendar_Decorator
 {
@@ -53,15 +53,16 @@ $sql = "
         FROM
             diary
         WHERE
-            eventtime >= '" . $Day->thisDay(true) . "'
+            eventtime >= '".$Day->thisDay(true)."'
         AND
-            eventtime < '" . $Day->nextDay(true) . "';";
+            eventtime < '".$Day->nextDay(true)."';";
 
 // An array simulating data from a database
 $result = array(
     array('eventtime' => mktime(9, 0, 0, 10, 24, 2003), 'entry' => 'Meeting with sales team'),
     array('eventtime' => mktime(11, 0, 0, 10, 24, 2003), 'entry' => 'Conference call with Widget Inc.'),
-    array('eventtime' => mktime(15, 0, 0, 10, 24, 2003), 'entry' => 'Presentation to board of directors'));
+    array('eventtime' => mktime(15, 0, 0, 10, 24, 2003), 'entry' => 'Presentation to board of directors'),
+);
 
 // An array to place selected hours in
 $selection = array();
@@ -92,35 +93,36 @@ $Day->build($selection);
 <body>
 <h1>Passing a Selection "Payload" using a Decorator</h1>
 <table>
-    <caption style="font-weight: bold;">Your Schedule for <b>Your Schedule for <?php echo(date('D nS F Y', $Day->thisDay(true))); ?></b></caption>
+    <caption style="font-weight: bold;">Your Schedule for <b>Your Schedule for <?php echo date('D nS F Y', $Day->thisDay(true)); ?></b>
+    </caption>
     <tr>
         <th width="5%">Time</th>
         <th>Entry</th>
     </tr>
     <?php
     while ($Hour = $Day->fetch()) {
-        $hour   = $Hour->thisHour();
+        $hour = $Hour->thisHour();
         $minute = $Hour->thisMinute();
 
         // Office hours only...
         if ($hour >= 8 && $hour <= 18) {
-            echo("<tr>\n");
-            echo("<td>$hour:$minute</td>\n");
+            echo "<tr>\n";
+            echo "<td>$hour:$minute</td>\n";
 
             // If the hour is selected, call the decorator method...
             if ($Hour->isSelected()) {
-                echo("<td bgcolor=\"silver\">" . $Hour->getEntry() . "</td>\n");
+                echo '<td bgcolor="silver">'.$Hour->getEntry()."</td>\n";
             } else {
-                echo("<td>&nbsp;</td>\n");
+                echo "<td>&nbsp;</td>\n";
             }
-            echo("</tr>\n");
+            echo "</tr>\n";
         }
     }
     ?>
 </table>
 <p>The query to fetch this data, with help from PEAR::Calendar, might be;</p>
 <pre>
-<?php echo($sql); ?>
+<?php echo $sql; ?>
 </pre>
 </body>
 </html>

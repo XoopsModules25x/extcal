@@ -1,13 +1,13 @@
 <?php
-// $Id: hour_test.php 1645 2011-12-30 20:03:00Z jjdai $
+//
 
-require_once 'simple_include.php';
-require_once 'calendar_include.php';
+require_once __DIR__.'/simple_include.php';
+require_once __DIR__.'/calendar_include.php';
 
-require_once './calendar_test.php';
+require_once __DIR__.'/./calendar_test.php';
 
 /**
- * Class TestOfHour
+ * Class TestOfHour.
  */
 class TestOfHour extends TestOfCalendar
 {
@@ -27,12 +27,13 @@ class TestOfHour extends TestOfCalendar
     public function testPrevDay_Array()
     {
         $this->assertEqual(array(
-                               'year'   => 2003,
-                               'month'  => 10,
-                               'day'    => 24,
-                               'hour'   => 0,
+                               'year' => 2003,
+                               'month' => 10,
+                               'day' => 24,
+                               'hour' => 0,
                                'minute' => 0,
-                               'second' => 0), $this->cal->prevDay('array'));
+                               'second' => 0,
+                           ), $this->cal->prevDay('array'));
     }
 
     public function testPrevMinute()
@@ -73,7 +74,7 @@ class TestOfHour extends TestOfCalendar
 }
 
 /**
- * Class TestOfHourBuild
+ * Class TestOfHourBuild.
  */
 class TestOfHourBuild extends TestOfHour
 {
@@ -105,7 +106,7 @@ class TestOfHourBuild extends TestOfHour
     {
         $this->cal->build();
         $children = array();
-        $i        = 0;
+        $i = 0;
         while ($Child = $this->cal->fetch()) {
             $children[$i] = $Child;
             ++$i;
@@ -115,7 +116,7 @@ class TestOfHourBuild extends TestOfHour
 
     public function testSelection()
     {
-        require_once(CALENDAR_ROOT . 'Minute.php');
+        require_once CALENDAR_ROOT.'Minute.php';
         $selection = array(new Calendar_Minute(2003, 10, 25, 13, 32));
         $this->cal->build($selection);
         $i = 0;

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Class ColorTools
+ * Class ColorTools.
  */
-class ColorTools
+class colorTools
 {
     /**
      *
@@ -159,9 +159,9 @@ class ColorTools
         $tHex = array('', '', '', '');
 
         $tHex[0] = $aColors[0];
-        $tHex[1] = substr('00' . dechex($aColors[1]), -2);
-        $tHex[2] = substr('00' . dechex($aColors[2]), -2);
-        $tHex[3] = substr('00' . dechex($aColors[3]), -2);
+        $tHex[1] = substr('00'.dechex($aColors[1]), -2);
+        $tHex[2] = substr('00'.dechex($aColors[2]), -2);
+        $tHex[3] = substr('00'.dechex($aColors[3]), -2);
 
         $colorHexa = implode('', $tHex);
 
@@ -201,10 +201,10 @@ class ColorTools
         $t = array('', '', '', '');
 
         if (0 === strpos($colorHexa, '#')) {
-            $t[0]      = '#';
+            $t[0] = '#';
             $offsetCar = 1;
         } else {
-            $t[0]      = '';
+            $t[0] = '';
             $offsetCar = 0;
         }
 
@@ -227,10 +227,10 @@ class ColorTools
      */
     public function hexa2rgb($colorHexa, &$r, &$v, &$b, &$diese)
     {
-        $t     = static::hexa2rgbA($colorHexa);
-        $r     = $t[1];
-        $v     = $t[2];
-        $v     = $t[3];
+        $t = static::hexa2rgbA($colorHexa);
+        $r = $t[1];
+        $v = $t[2];
+        $v = $t[3];
         $diese = $t[0];
 
         return true;
@@ -258,4 +258,3 @@ class ColorTools
     //--------------------------------------------------------
 } // --- fin de la classe colors
 //--------------------------------------------------------
-

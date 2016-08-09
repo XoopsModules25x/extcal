@@ -2,14 +2,13 @@
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once XOOPS_ROOT_PATH . '/modules/extcal/class/ExtcalPersistableObjectHandler.php';
+include_once __DIR__.'/ExtcalPersistableObjectHandler.php';
 
 /**
- * Class ExtcalEventmember
+ * Class ExtcalEventmember.
  */
 class ExtcalEventmember extends XoopsObject
 {
-
     /**
      * ExtcalEventmember constructor.
      */
@@ -23,7 +22,7 @@ class ExtcalEventmember extends XoopsObject
 }
 
 /**
- * Class ExtcalEventmemberHandler
+ * Class ExtcalEventmemberHandler.
  */
 class ExtcalEventmemberHandler extends ExtcalPersistableObjectHandler
 {
@@ -66,13 +65,13 @@ class ExtcalEventmemberHandler extends ExtcalPersistableObjectHandler
     public function getMembers($eventId)
     {
         $memberHandler = xoops_getHandler('member');
-        $eventMember   =& $this->getObjects(new Criteria('event_id', $eventId));
-        $count         = count($eventMember);
+        $eventMember = &$this->getObjects(new Criteria('event_id', $eventId));
+        $count = count($eventMember);
         if ($count > 0) {
-            $in = '(' . $eventMember[0]->getVar('uid');
+            $in = '('.$eventMember[0]->getVar('uid');
             array_shift($eventMember);
             foreach ($eventMember as $member) {
-                $in .= ',' . $member->getVar('uid');
+                $in .= ','.$member->getVar('uid');
             }
             $in .= ')';
             $criteria = new Criteria('uid', $in, 'IN');

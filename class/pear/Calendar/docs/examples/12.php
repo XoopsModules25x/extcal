@@ -1,12 +1,12 @@
 <?php
 /**
- * Description: a complete year
+ * Description: a complete year.
  */
 function getmicrotime()
 {
     list($usec, $sec) = explode(' ', microtime());
 
-    return ((float)$usec + (float)$sec);
+    return (float) $usec + (float) $sec;
 }
 
 $start = getmicrotime();
@@ -15,7 +15,7 @@ if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 
-require_once CALENDAR_ROOT . 'Year.php';
+require_once CALENDAR_ROOT.'Year.php';
 
 define('CALENDAR_MONTH_STATE', CALENDAR_USE_MONTH_WEEKDAYS);
 
@@ -30,7 +30,7 @@ $Year->build();
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
-    <title> <?php echo($Year->thisYear()); ?> </title>
+    <title> <?php echo $Year->thisYear(); ?> </title>
     <style type="text/css">
         body {
             font-family: Georgia, serif;
@@ -74,12 +74,12 @@ $Year->build();
 <body>
 <table>
     <caption class="year">
-        <?php echo($Year->thisYear()); ?>
+        <?php echo $Year->thisYear(); ?>
         <div id="next">
-            <a href="?year=<?php echo($Year->nextYear()); ?>">>></a>
+            <a href="?year=<?php echo $Year->nextYear(); ?>">>></a>
         </div>
         <div id="prev">
-            <a href="?year=<?php echo($Year->prevYear()); ?>"><<</a>
+            <a href="?year=<?php echo $Year->prevYear(); ?>"><<</a>
         </div>
     </caption>
     <?php
@@ -87,41 +87,41 @@ $Year->build();
     while ($Month = $Year->fetch()) {
         switch ($i) {
             case 0:
-                echo("<tr>\n");
+                echo "<tr>\n";
                 break;
             case 3:
             case 6:
             case 9:
-                echo("</tr>\n<tr>\n");
+                echo "</tr>\n<tr>\n";
                 break;
             case 12:
-                echo("</tr>\n");
+                echo "</tr>\n";
                 break;
         }
 
-        echo("<td>\n<table class=\"month\">\n");
-        echo("<caption class=\"month\">" . date('F', $Month->thisMonth(true)) . '</caption>');
-        echo("<tr>\n<th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th><th>S</th>\n</tr>");
+        echo "<td>\n<table class=\"month\">\n";
+        echo '<caption class="month">'.date('F', $Month->thisMonth(true)).'</caption>';
+        echo "<tr>\n<th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th><th>S</th>\n</tr>";
         $Month->build();
         while ($Day = $Month->fetch()) {
             if ($Day->isFirst()) {
-                echo("<tr>\n");
+                echo "<tr>\n";
             }
             if ($Day->isEmpty()) {
-                echo("<td>&nbsp;</td>\n");
+                echo "<td>&nbsp;</td>\n";
             } else {
-                echo('<td>' . $Day->thisDay() . "</td>\n");
+                echo '<td>'.$Day->thisDay()."</td>\n";
             }
             if ($Day->isLast()) {
-                echo("</tr>\n");
+                echo "</tr>\n";
             }
         }
-        echo("</table>\n</td>\n");
+        echo "</table>\n</td>\n";
 
         ++$i;
     }
     ?>
 </table>
-<p>Took: <?php echo(getmicrotime() - $start); ?></p>
+<p>Took: <?php echo getmicrotime() - $start; ?></p>
 </body>
 </html>

@@ -819,7 +819,12 @@ if (!hs) {
                 if (pos[i]) {
                     if (this.hasAlphaImageLoader) {
                         var w = (i == 1 || i == 7) ? '100%' : this.graphic.width + 'px';
-                        var div = hs.createElement('div', null, {width: '100%', height: '100%', position: 'relative', overflow: 'hidden'}, this.td[i], true);
+                        var div = hs.createElement('div', null, {
+                            width: '100%',
+                            height: '100%',
+                            position: 'relative',
+                            overflow: 'hidden'
+                        }, this.td[i], true);
                         hs.createElement('div', null, {
                                 filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale, src='" + this.graphic.src + "')",
                                 position: 'absolute',

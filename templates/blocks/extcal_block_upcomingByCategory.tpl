@@ -3,7 +3,8 @@
 
     <tr class='head'>
 
-        <td style="border-left: 4px solid #<{$cat.cat_color}>;border-top: 4px solid #<{$cat.cat_color}>;margin-left: 8px;" colspan='1'>
+        <td style="border-left: 4px solid #<{$cat.cat_color}>;border-top: 4px solid #<{$cat.cat_color}>;margin-left: 8px;"
+            colspan='1'>
             <strong> <{$cat.cat_name}> (#<{$cat.cat_id}>)</strong>
         </td>
     </tr>

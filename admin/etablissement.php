@@ -2,7 +2,7 @@
 /**
  * ****************************************************************************
  *  - TDMAds By TDM   - TEAM DEV MODULE FOR XOOPS
- *  - Licence PRO Copyright (c)  (http://www.tdmxoops.net)
+ *  - Licence PRO Copyright (c)  (http://www.tdmxoops.net).
  *
  * Cette licence, contient des limitations!!!
  *
@@ -18,18 +18,19 @@
  */
 
 // Include xoops admin header
-include_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
-include_once XOOPS_ROOT_PATH . '/modules/extcal/class/ExtcalPersistableObjectHandler.php';
-include_once(XOOPS_ROOT_PATH . '/kernel/module.php');
-include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include_once XOOPS_ROOT_PATH . '/class/tree.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
-include_once XOOPS_ROOT_PATH . '/modules/extcal/class/etablissement.php';
-include_once XOOPS_ROOT_PATH . '/modules/extcal/include/constantes.php';
-include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
-include_once(XOOPS_ROOT_PATH . '/class/uploader.php');
-include_once __DIR__ . '/admin_header.php';
+include_once dirname(dirname(dirname(__DIR__))).'/include/cp_header.php';
+include_once __DIR__.'/../class/ExtcalPersistableObjectHandler.php';
+include_once __DIR__.'/../../../kernel/module.php';
+include_once __DIR__.'/../../../class/xoopsformloader.php';
+include_once __DIR__.'/../../../class/tree.php';
+include_once __DIR__.'/../../../class/xoopslists.php';
+include_once __DIR__.'/../../../class/pagenav.php';
+include_once __DIR__.'/../../../class/xoopsform/grouppermform.php';
+include_once __DIR__.'/../../../class/uploader.php';
+include_once __DIR__.'/../class/etablissement.php';
+include_once __DIR__.'/../include/constantes.php';
+
+include_once __DIR__.'/admin_header.php';
 
 //include_once("functions.php");
 //include_once("../include/functions.php");
@@ -37,10 +38,10 @@ include_once __DIR__ . '/admin_header.php';
 if ($xoopsUser) {
     $xoopsModule = XoopsModule::getByDirname('extcal');
     if (!$xoopsUser->isAdmin($xoopsModule->mid())) {
-        redirect_header(XOOPS_URL . '/', 3, _NOPERM);
+        redirect_header(XOOPS_URL.'/', 3, _NOPERM);
     }
 } else {
-    redirect_header(XOOPS_URL . '/', 3, _NOPERM);
+    redirect_header(XOOPS_URL.'/', 3, _NOPERM);
 }
 
 // Include language file
@@ -71,7 +72,6 @@ if (isset($_REQUEST['op'])) {
 switch ($op) {
     // Vue liste
     case 'liste':
-
         // @author   JJDAI
         //***************************************************************************************
         $etablissementAdmin = new ModuleAdmin();
@@ -96,9 +96,9 @@ switch ($op) {
         $criteria->setSort('nom');
         $criteria->setOrder('ASC');
         $etablissement_arr = $etablissementHandler->getObjects($criteria);
-        $numrows           = $etablissementHandler->getCount($criteria);
+        $numrows = $etablissementHandler->getCount($criteria);
         if ($numrows > $limit) {
-            $pagenav = new XoopsPageNav($numrows, $limit, $start, 'start', 'op=liste&limit=' . $limit);
+            $pagenav = new XoopsPageNav($numrows, $limit, $start, 'start', 'op=liste&limit='.$limit);
             $pagenav = $pagenav->renderNav(4);
         } else {
             $pagenav = '';
@@ -107,39 +107,41 @@ switch ($op) {
         if ($numrows > 0) {
             echo '<table width="100%" cellspacing="1" class="outer">';
             echo '<tr>';
-            echo '<th align="center">' . _AM_EXTCAL_ETABLISSEMENT_FORM_NOM . '</th>';
-            echo '<th align="center" width="20%">' . _AM_EXTCAL_ETABLISSEMENT_FORM_ADRESSE . '</th>';
-            echo '<th align="center" width="20%">' . _AM_EXTCAL_ETABLISSEMENT_FORM_CITY . '</th>';
-            echo '<th align="center" width="15%">' . _AM_EXTCAL_ETABLISSEMENT_FORM_TELEPHONE . '</th>';
-            echo '<th align="center" width="15%">' . _AM_EXTCAL_ETABLISSEMENT_FORM_ACTION . '</th>';
+            echo '<th align="center">'._AM_EXTCAL_ETABLISSEMENT_FORM_NOM.'</th>';
+            echo '<th align="center" width="20%">'._AM_EXTCAL_ETABLISSEMENT_FORM_ADRESSE.'</th>';
+            echo '<th align="center" width="20%">'._AM_EXTCAL_ETABLISSEMENT_FORM_CITY.'</th>';
+            echo '<th align="center" width="15%">'._AM_EXTCAL_ETABLISSEMENT_FORM_TELEPHONE.'</th>';
+            echo '<th align="center" width="15%">'._AM_EXTCAL_ETABLISSEMENT_FORM_ACTION.'</th>';
             echo '</tr>';
             $class = 'odd';
             foreach (array_keys($etablissement_arr) as $i) {
-                $class                   = ($class === 'even') ? 'odd' : 'even';
-                $etablissement_id        = $etablissement_arr[$i]->getVar('id');
-                $etablissement_nom       = $etablissement_arr[$i]->getVar('nom');
-                $etablissement_adresse   = $etablissement_arr[$i]->getVar('adresse');
-                $etablissement_city      = $etablissement_arr[$i]->getVar('ville');
+                $class = ($class === 'even') ? 'odd' : 'even';
+                $etablissement_id = $etablissement_arr[$i]->getVar('id');
+                $etablissement_nom = $etablissement_arr[$i]->getVar('nom');
+                $etablissement_adresse = $etablissement_arr[$i]->getVar('adresse');
+                $etablissement_city = $etablissement_arr[$i]->getVar('ville');
                 $etablissement_telephone = $etablissement_arr[$i]->getVar('tel_fixe');
-                echo '<tr class="' . $class . '">';
-                echo '<td align="left">' . '<a href="etablissement.php?op=edit_etablissement&etablissement_id=' . $etablissement_id . '">' . $etablissement_nom . '</a>' . '</td>';
+                echo '<tr class="'.$class.'">';
+                echo '<td align="left">'.'<a href="etablissement.php?op=edit_etablissement&etablissement_id='.$etablissement_id.'">'.$etablissement_nom.'</a>'.'</td>';
 
-                echo '<td align="center"><b>' . $etablissement_adresse . '</td>';
-                echo '<td align="center"><b>' . $etablissement_city . '</td>';
-                echo '<td align="center"><b>' . $etablissement_telephone . '</td>';
+                echo '<td align="center"><b>'.$etablissement_adresse.'</td>';
+                echo '<td align="center"><b>'.$etablissement_city.'</td>';
+                echo '<td align="center"><b>'.$etablissement_telephone.'</td>';
                 echo '<td align="center" width="15%">';
-                echo '<a href="etablissement.php?op=edit_etablissement&etablissement_id=' . $etablissement_id . '"><img src=' . $pathIcon16 . '/edit.png alt="' . _AM_EXTCAL_ETABLISSEMENT_FORM_EDIT . '" title="' . _AM_EXTCAL_ETABLISSEMENT_FORM_EDIT . '"></a> ';
-                echo '<a href="etablissement.php?op=delete_etablissement&etablissement_id=' . $etablissement_id . '"><img src=' . $pathIcon16 . '/delete.png alt="' . _AM_EXTCAL_ETABLISSEMENT_FORM_DELETE . '" title="' . _AM_EXTCAL_ETABLISSEMENT_FORM_DELETE . '"></a> ';
+                echo '<a href="etablissement.php?op=edit_etablissement&etablissement_id='.$etablissement_id.'"><img src='.$pathIcon16.'/edit.png alt="'._AM_EXTCAL_ETABLISSEMENT_FORM_EDIT
+                     .'" title="'._AM_EXTCAL_ETABLISSEMENT_FORM_EDIT.'"></a> ';
+                echo '<a href="etablissement.php?op=delete_etablissement&etablissement_id='.$etablissement_id.'"><img src='.$pathIcon16.'/delete.png alt="'
+                     ._AM_EXTCAL_ETABLISSEMENT_FORM_DELETE.'" title="'._AM_EXTCAL_ETABLISSEMENT_FORM_DELETE.'"></a> ';
                 echo '</td>';
             }
-            echo '</table><br />';
-            echo '<br /><div align=right>' . $pagenav . '</div><br />';
+            echo '</table><br>';
+            echo '<br><div align=right>'.$pagenav.'</div><br>';
         } else {
-            echo '<div class="errorMsg" style="text-align: center;">' . _AM_EXTCAL_ERREUR_NO_ETABLISSEMENT . '</div>';
+            echo '<div class="errorMsg" style="text-align: center;">'._AM_EXTCAL_ERREUR_NO_ETABLISSEMENT.'</div>';
         }
 
         // Affichage du formulaire
-        $obj  = $etablissementHandler->create();
+        $obj = $etablissementHandler->create();
         $form = $obj->getForm(false);
         break;
 
@@ -154,7 +156,11 @@ switch ($op) {
                 redirect_header('etablissement.php', 1, _AM_EXTCAL_REDIRECT_DELOK);
             }
         } else {
-            xoops_confirm(array('ok' => 1, 'etablissement_id' => $_REQUEST['etablissement_id'], 'op' => 'delete_etablissement'), $_SERVER['REQUEST_URI'], _AM_EXTCAL_ETABLISSEMENT_SURDEL . '<br>');
+            xoops_confirm(array(
+                              'ok' => 1,
+                              'etablissement_id' => $_REQUEST['etablissement_id'],
+                              'op' => 'delete_etablissement',
+                          ), $_SERVER['REQUEST_URI'], _AM_EXTCAL_ETABLISSEMENT_SURDEL.'<br>');
         }
         break;
 
@@ -165,7 +171,7 @@ switch ($op) {
         echo $etablissementAdmin->addNavigation(basename(__FILE__));
         //***************************************************************************************
         //Affichage du formulaire de création des téléchargements
-        $obj  = $etablissementHandler->get($_REQUEST['etablissement_id']);
+        $obj = $etablissementHandler->get($_REQUEST['etablissement_id']);
         $form = $obj->getForm(false);
         break;
 
@@ -174,9 +180,9 @@ switch ($op) {
             redirect_header('etablissement.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         if (isset($_REQUEST['etablissement_id'])) {
-            $obj =& $etablissementHandler->get($_REQUEST['etablissement_id']);
+            $obj = &$etablissementHandler->get($_REQUEST['etablissement_id']);
         } else {
-            $obj =& $etablissementHandler->create();
+            $obj = &$etablissementHandler->create();
         }
 
         $obj->setVar('nom', $_REQUEST['nom']);
@@ -196,13 +202,19 @@ switch ($op) {
         $obj->setVar('map', $_REQUEST['map']);
 
         //Logo
-        $uploaddir_etablissement = XOOPS_ROOT_PATH . '/uploads/extcal/etablissement/';
-        $uploadurl_etablissement = XOOPS_URL . '/uploads/extcal/etablissement/';
+        $uploaddir_etablissement = XOOPS_ROOT_PATH.'/uploads/extcal/etablissement/';
+        $uploadurl_etablissement = XOOPS_URL.'/uploads/extcal/etablissement/';
 
         $delimg = @$_REQUEST['delimg'];
-        $delimg = isset($delimg) ? (int)$delimg : 0;
+        $delimg = isset($delimg) ? (int) $delimg : 0;
         if ($delimg == 0 && !empty($_REQUEST['xoops_upload_file'][0])) {
-            $upload = new XoopsMediaUploader($uploaddir_etablissement, array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png'), 3145728, null, null);
+            $upload = new XoopsMediaUploader($uploaddir_etablissement, array(
+                'image/gif',
+                'image/jpeg',
+                'image/pjpeg',
+                'image/x-png',
+                'image/png',
+            ), 3145728, null, null);
             if ($upload->fetchMedia($_REQUEST['xoops_upload_file'][0])) {
                 $upload->setPrefix('etablissement_');
                 $upload->fetchMedia($_REQUEST['xoops_upload_file'][0]);
@@ -216,8 +228,8 @@ switch ($op) {
                 $logo = $_REQUEST['file'];
             }
         } else {
-            $logo              = '';
-            $url_etablissement = XOOPS_ROOT_PATH . '/uploads/extcal/etablissement/' . $_REQUEST['file'];
+            $logo = '';
+            $url_etablissement = XOOPS_ROOT_PATH.'/uploads/extcal/etablissement/'.$_REQUEST['file'];
             if (is_file($url_etablissement)) {
                 chmod($url_etablissement, 0777);
                 unlink($url_etablissement);
@@ -237,4 +249,4 @@ switch ($op) {
         break;
 }
 
-include_once __DIR__ . '/admin_footer.php';
+include_once __DIR__.'/admin_footer.php';

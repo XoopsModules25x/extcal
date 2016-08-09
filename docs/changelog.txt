@@ -1,3 +1,22 @@
+2.39 Beta RC 1         NOT RELEASED
+===================================
+- removed @version (mamba)
+- code cosmetics (mamba)
+- replaced < b /> with < b > (mamba)
+- update Help (mamba)
+- changed _handler to Handler (mamba)
+- reference mismatch (mamba)
+
+2.39 Beta 2             2016-08-08
+===================================
+- fix undefined function see #7 (geekwright)
+- move custom form class into module space (geekwright)
+- move module code to top directory (geekwright)
+- fix PHP 7 compatibility errors/warnings (geekwright)
+- fix css error with relative background url (now data) (geekwright)
+- fix class collision on 'info' (now 'ecinfo') (geekwright)
+- rename ExtcalPersistableObjectHandler::delete() to deleteById() to fix signature mismatch (geekwright)
+
 2.39 Beta 1             2016-03-21
 ===================================
 - moved all images, CSS, and JS files to /assets (mamba)

@@ -1,17 +1,17 @@
 <?php
 
-include dirname(dirname(__DIR__)) . '/mainfile.php';
-include_once __DIR__ . '/include/constantes.php';
-$params                                  = array('view' => _EXTCAL_NAV_YEAR, 'file' => _EXTCAL_FILE_YEAR);
+include dirname(dirname(__DIR__)).'/mainfile.php';
+include_once __DIR__.'/include/constantes.php';
+$params = array('view' => _EXTCAL_NAV_YEAR, 'file' => _EXTCAL_FILE_YEAR);
 $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
-include_once __DIR__ . '/header.php';
+include_once __DIR__.'/header.php';
 
 /* ========================================================================== */
-$year = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
-$cat  = isset($_GET['cat']) ? (int)$_GET['cat'] : 0;
+$year = isset($_GET['year']) ? (int) $_GET['year'] : date('Y');
+$cat = isset($_GET['cat']) ? (int) $_GET['cat'] : 0;
 
 // Getting eXtCal object's handler
-$catHandler   = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+$catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
 $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
 
 // Tooltips include
@@ -31,11 +31,12 @@ $form->assign($xoopsTpl);
 // Retriving events and formatting them
 //$events = $eventHandler->objectToArray($eventHandler->getEventYear($year, $cat), array('cat_id'));
 $criteres = array(
-    'periode'      => _EXTCAL_EVENTS_YEAR,
-    'year'         => $year,
-    'cat'          => $cat,
-    'externalKeys' => 'cat_id');
-$events   = $eventHandler->getEventsOnPeriode($criteres);
+    'periode' => _EXTCAL_EVENTS_YEAR,
+    'year' => $year,
+    'cat' => $cat,
+    'externalKeys' => 'cat_id',
+);
+$events = $eventHandler->getEventsOnPeriode($criteres);
 /**********************************************************************/
 $eventsArray = $events;
 // Formating date
@@ -75,21 +76,25 @@ $cats = $catHandler->objectToArray($catHandler->getAllCat($xoopsUser));
 $xoopsTpl->assign('cats', $cats);
 
 $prevYear = $year - 1;
-$nexYear  = $year + 1;
+$nexYear = $year + 1;
 // Making navig data
 $navig = array(
     'prev' => array(
-        'uri'  => 'year=' . $prevYear,
-        'name' => $prevYear),
+        'uri' => 'year='.$prevYear,
+        'name' => $prevYear,
+    ),
     'this' => array(
-        'uri'  => 'year=' . $year,
-        'name' => $year),
+        'uri' => 'year='.$year,
+        'name' => $year,
+    ),
     'next' => array(
-        'uri'  => 'year=' . $nexYear,
-        'name' => $nexYear));
+        'uri' => 'year='.$nexYear,
+        'name' => $nexYear,
+    ),
+);
 
 // Title of the page
-$xoopsTpl->assign('xoops_pagetitle', $xoopsModule->getVar('name') . ' ' . $navig['this']['name']);
+$xoopsTpl->assign('xoops_pagetitle', $xoopsModule->getVar('name').' '.$navig['this']['name']);
 
 // Assigning navig data to the template
 $xoopsTpl->assign('navig', $navig);
@@ -126,20 +131,21 @@ if ($xoopsUser) {
 
 //mb missing for xBootstrap templates by Angelo
 $lang = array(
-    'start'      => _MD_EXTCAL_START,
-    'end'        => _MD_EXTCAL_END,
-    'calmonth'   => _MD_EXTCAL_NAV_CALMONTH,
-    'calweek'    => _MD_EXTCAL_NAV_CALWEEK,
-    'year'       => _MD_EXTCAL_NAV_YEAR,
-    'month'      => _MD_EXTCAL_NAV_MONTH,
-    'week'       => _MD_EXTCAL_NAV_WEEK,
-    'day'        => _MD_EXTCAL_NAV_DAY,
+    'start' => _MD_EXTCAL_START,
+    'end' => _MD_EXTCAL_END,
+    'calmonth' => _MD_EXTCAL_NAV_CALMONTH,
+    'calweek' => _MD_EXTCAL_NAV_CALWEEK,
+    'year' => _MD_EXTCAL_NAV_YEAR,
+    'month' => _MD_EXTCAL_NAV_MONTH,
+    'week' => _MD_EXTCAL_NAV_WEEK,
+    'day' => _MD_EXTCAL_NAV_DAY,
     'agendaweek' => _MD_EXTCAL_NAV_AGENDA_WEEK,
-    'agendaday'  => _MD_EXTCAL_NAV_AGENDA_DAY,
-    'search'     => _MD_EXTCAL_NAV_SEARCH,
-    'newevent'   => _MD_EXTCAL_NAV_NEW_EVENT);
+    'agendaday' => _MD_EXTCAL_NAV_AGENDA_DAY,
+    'search' => _MD_EXTCAL_NAV_SEARCH,
+    'newevent' => _MD_EXTCAL_NAV_NEW_EVENT,
+);
 // Assigning language data to the template
 $xoopsTpl->assign('lang', $lang);
 $xoopsTpl->assign('view', 'year');
 
-include XOOPS_ROOT_PATH . '/footer.php';
+include XOOPS_ROOT_PATH.'/footer.php';
