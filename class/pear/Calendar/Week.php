@@ -1,8 +1,9 @@
 <?php
+
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * Contains the Calendar_Week class
+ * Contains the Calendar_Week class.
  *
  * PHP versions 4 and 5
  *
@@ -28,17 +29,18 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @category  Date and Time
- * @package   Calendar
+ *
  * @author    Harry Fuecks <hfuecks@phppatterns.com>
  * @author    Lorenzo Alberton <l.alberton@quipo.it>
  * @copyright 2003-2007 Harry Fuecks, Lorenzo Alberton
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
- * @version   CVS: $Id: Week.php 1511 2011-09-01 20:56:07Z jjdai $
+ *
  * @link      http://pear.php.net/package/Calendar
  */
 
 /**
- * Allows Calendar include path to be redefined
+ * Allows Calendar include path to be redefined.
+ *
  * @ignore
  */
 if (!defined('CALENDAR_ROOT')) {
@@ -46,14 +48,14 @@ if (!defined('CALENDAR_ROOT')) {
 }
 
 /**
- * Load Calendar base class
+ * Load Calendar base class.
  */
-require_once CALENDAR_ROOT . 'Calendar.php';
+require_once CALENDAR_ROOT.'Calendar.php';
 
 /**
  * Represents a Week and builds Days in tabular format<br>
  * <code>
- * require_once 'Calendar/Week.php';
+ * require_once __DIR__ . '/Calendar/Week.php';
  * $Week = new Calendar_Week(2003, 10, 1); Oct 2003, 1st tabular week
  * echo '<tr>';
  * while ($Day = $Week->fetch()) {
@@ -64,96 +66,92 @@ require_once CALENDAR_ROOT . 'Calendar.php';
  *      }
  * }
  * echo '</tr>';
- * </code>
+ * </code>.
  *
  * @category  Date and Time
- * @package   Calendar
+ *
  * @author    Harry Fuecks <hfuecks@phppatterns.com>
  * @author    Lorenzo Alberton <l.alberton@quipo.it>
  * @copyright 2003-2007 Harry Fuecks, Lorenzo Alberton
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
+ *
  * @link      http://pear.php.net/package/Calendar
  */
 class Calendar_Week extends Calendar
 {
     /**
-     * Instance of Calendar_Table_Helper
+     * Instance of Calendar_Table_Helper.
+     *
      * @var Calendar_Table_Helper
-     * @access private
      */
     public $tableHelper;
 
     /**
-     * Stores the timestamp of the first day of this week
-     * @access private
+     * Stores the timestamp of the first day of this week.
+     *
      * @var object
      */
     public $thisWeek;
 
     /**
-     * Stores the timestamp of first day of previous week
-     * @access private
+     * Stores the timestamp of first day of previous week.
+     *
      * @var object
      */
     public $prevWeek;
 
     /**
-     * Stores the timestamp of first day of next week
-     * @access private
+     * Stores the timestamp of first day of next week.
+     *
      * @var object
      */
     public $nextWeek;
 
     /**
-     * Used by build() to set empty days
-     * @access private
-     * @var boolean
+     * Used by build() to set empty days.
+     *
+     * @var bool
      */
     public $firstWeek = false;
 
     /**
-     * Used by build() to set empty days
-     * @access private
-     * @var boolean
+     * Used by build() to set empty days.
+     *
+     * @var bool
      */
     public $lastWeek = false;
 
     /**
-     * First day of the week (0=sunday, 1=monday...)
-     * @access private
-     * @var boolean
+     * First day of the week (0=sunday, 1=monday...).
+     *
+     * @var bool
      */
     public $firstDay = 1;
 
     /**
-     * Constructs Week
+     * Constructs Week.
      *
      * @param int $y        year e.g. 2003
      * @param int $m        month e.g. 5
      * @param int $d        a day of the desired week
      * @param int $firstDay (optional) first day of week (e.g. 0 for Sunday, 2 for Tuesday etc.)
-     *
-     * @access public
      */
     public function __construct($y, $m, $d, $firstDay = null)
     {
-        include_once CALENDAR_ROOT . 'Table/Helper.php';
+        include_once CALENDAR_ROOT.'Table/Helper.php';
         parent::__construct($y, $m, $d);
-        $this->firstDay    = $this->defineFirstDayOfWeek($firstDay);
+        $this->firstDay = $this->defineFirstDayOfWeek($firstDay);
         $this->tableHelper = new Calendar_Table_Helper($this, $this->firstDay);
-        $this->thisWeek    = $this->tableHelper->getWeekStart($y, $m, $d, $this->firstDay);
-        $this->prevWeek    = $this->tableHelper->getWeekStart($y, $m, $d - $this->cE->getDaysInWeek($this->thisYear(), $this->thisMonth(), $this->thisDay()), $this->firstDay);
-        $this->nextWeek    = $this->tableHelper->getWeekStart($y, $m, $d + $this->cE->getDaysInWeek($this->thisYear(), $this->thisMonth(), $this->thisDay()), $this->firstDay);
+        $this->thisWeek = $this->tableHelper->getWeekStart($y, $m, $d, $this->firstDay);
+        $this->prevWeek = $this->tableHelper->getWeekStart($y, $m, $d - $this->cE->getDaysInWeek($this->thisYear(), $this->thisMonth(), $this->thisDay()), $this->firstDay);
+        $this->nextWeek = $this->tableHelper->getWeekStart($y, $m, $d + $this->cE->getDaysInWeek($this->thisYear(), $this->thisMonth(), $this->thisDay()), $this->firstDay);
     }
 
     /**
      * Defines the calendar by a timestamp (Unix or ISO-8601), replacing values
-     * passed to the constructor
+     * passed to the constructor.
      *
      * @param int|string $ts Unix or ISO-8601 timestamp
-     *
-     * @return void
-     * @access public
      */
     public function setTimestamp($ts)
     {
@@ -164,23 +162,22 @@ class Calendar_Week extends Calendar
     }
 
     /**
-     * Builds Calendar_Day objects for this Week
+     * Builds Calendar_Day objects for this Week.
      *
      * @param array $sDates (optional) Calendar_Day objects representing selected dates
      *
-     * @return boolean
-     * @access public
+     * @return bool
      */
     public function build($sDates = array())
     {
-        include_once CALENDAR_ROOT . 'Day.php';
-        $year  = $this->cE->stampToYear($this->thisWeek);
+        include_once CALENDAR_ROOT.'Day.php';
+        $year = $this->cE->stampToYear($this->thisWeek);
         $month = $this->cE->stampToMonth($this->thisWeek);
-        $day   = $this->cE->stampToDay($this->thisWeek);
-        $end   = $this->cE->getDaysInWeek($this->thisYear(), $this->thisMonth(), $this->thisDay());
+        $day = $this->cE->stampToDay($this->thisWeek);
+        $end = $this->cE->getDaysInWeek($this->thisYear(), $this->thisMonth(), $this->thisDay());
 
         for ($i = 1; $i <= $end; ++$i) {
-            $stamp              = $this->cE->dateToStamp($year, $month, $day++);
+            $stamp = $this->cE->dateToStamp($year, $month, $day++);
             $this->children[$i] = new Calendar_Day($this->cE->stampToYear($stamp), $this->cE->stampToMonth($stamp), $this->cE->stampToDay($stamp));
         }
 
@@ -206,12 +203,9 @@ class Calendar_Week extends Calendar
     }
 
     /**
-     * Set as first week of the month
+     * Set as first week of the month.
      *
-     * @param boolean $state whether it's first or not
-     *
-     * @return void
-     * @access private
+     * @param bool $state whether it's first or not
      */
     public function setFirst($state = true)
     {
@@ -219,12 +213,9 @@ class Calendar_Week extends Calendar
     }
 
     /**
-     * Set as last week of the month
+     * Set as last week of the month.
      *
-     * @param boolean $state whether it's lasst or not
-     *
-     * @return void
-     * @access private
+     * @param bool $state whether it's lasst or not
      */
     public function setLast($state = true)
     {
@@ -232,18 +223,17 @@ class Calendar_Week extends Calendar
     }
 
     /**
-     * Called from build()
+     * Called from build().
      *
      * @param array $sDates Calendar_Day objects representing selected dates
-     *
-     * @return void
-     * @access private
      */
     public function setSelection($sDates)
     {
         foreach ($sDates as $sDate) {
             foreach ($this->children as $key => $child) {
-                if ($child->thisDay() == $sDate->thisDay() && $child->thisMonth() == $sDate->thisMonth() && $child->thisYear() == $sDate->thisYear()) {
+                if ($child->thisDay() == $sDate->thisDay() && $child->thisMonth() == $sDate->thisMonth()
+                    && $child->thisYear() == $sDate->thisYear()
+                ) {
                     $this->children[$key] = $sDate;
                     $this->children[$key]->setSelected();
                 }
@@ -253,7 +243,7 @@ class Calendar_Week extends Calendar
     }
 
     /**
-     * Returns the value for this year
+     * Returns the value for this year.
      *
      * When a on the first/last week of the year, the year of the week is
      * calculated according to ISO-8601
@@ -261,14 +251,13 @@ class Calendar_Week extends Calendar
      * @param string $format return value format ['int' | 'timestamp' | 'object' | 'array']
      *
      * @return int e.g. 2003 or timestamp
-     * @access public
      */
     public function thisYear($format = 'int')
     {
         if (null !== $this->thisWeek) {
             $tmp_cal = new Calendar();
             $tmp_cal->setTimestamp($this->thisWeek);
-            $first_dow    = $tmp_cal->thisDay('array');
+            $first_dow = $tmp_cal->thisDay('array');
             $days_in_week = $tmp_cal->cE->getDaysInWeek($tmp_cal->year, $tmp_cal->month, $tmp_cal->day);
             $tmp_cal->day += $days_in_week;
             $last_dow = $tmp_cal->thisDay('array');
@@ -288,12 +277,11 @@ class Calendar_Week extends Calendar
     }
 
     /**
-     * Gets the value of the previous week, according to the requested format
+     * Gets the value of the previous week, according to the requested format.
      *
      * @param string $format ['timestamp' | 'n_in_month' | 'n_in_year' | 'array']
      *
      * @return mixed
-     * @access public
      */
     public function prevWeek($format = 'n_in_month')
     {
@@ -306,7 +294,7 @@ class Calendar_Week extends Calendar
             case 'array':
                 return $this->toArray($this->prevWeek);
             case 'object':
-                include_once CALENDAR_ROOT . 'Factory.php';
+                include_once CALENDAR_ROOT.'Factory.php';
 
                 return Calendar_Factory::createByTimestamp('Week', $this->prevWeek);
             case 'timestamp':
@@ -316,12 +304,11 @@ class Calendar_Week extends Calendar
     }
 
     /**
-     * Gets the value of the current week, according to the requested format
+     * Gets the value of the current week, according to the requested format.
      *
      * @param string $format ['timestamp' | 'n_in_month' | 'n_in_year' | 'array']
      *
      * @return mixed
-     * @access public
      */
     public function thisWeek($format = 'n_in_month')
     {
@@ -341,7 +328,7 @@ class Calendar_Week extends Calendar
             case 'array':
                 return $this->toArray($this->thisWeek);
             case 'object':
-                include_once CALENDAR_ROOT . 'Factory.php';
+                include_once CALENDAR_ROOT.'Factory.php';
 
                 return Calendar_Factory::createByTimestamp('Week', $this->thisWeek);
             case 'timestamp':
@@ -351,12 +338,11 @@ class Calendar_Week extends Calendar
     }
 
     /**
-     * Gets the value of the following week, according to the requested format
+     * Gets the value of the following week, according to the requested format.
      *
      * @param string $format ['timestamp' | 'n_in_month' | 'n_in_year' | 'array']
      *
      * @return mixed
-     * @access public
      */
     public function nextWeek($format = 'n_in_month')
     {
@@ -369,7 +355,7 @@ class Calendar_Week extends Calendar
             case 'array':
                 return $this->toArray($this->nextWeek);
             case 'object':
-                include_once CALENDAR_ROOT . 'Factory.php';
+                include_once CALENDAR_ROOT.'Factory.php';
 
                 return Calendar_Factory::createByTimestamp('Week', $this->nextWeek);
             case 'timestamp':
@@ -380,21 +366,17 @@ class Calendar_Week extends Calendar
 
     /**
      * Returns the instance of Calendar_Table_Helper.
-     * Called from Calendar_Validator::isValidWeek
+     * Called from Calendar_Validator::isValidWeek.
      *
      * @return Calendar_Table_Helper
-     * @access protected
      */
-    public function & getHelper()
+    public function &getHelper()
     {
         return $this->tableHelper;
     }
 
     /**
-     * Makes sure theres a value for $this->day
-     *
-     * @return void
-     * @access private
+     * Makes sure theres a value for $this->day.
      */
     public function findFirstDay()
     {

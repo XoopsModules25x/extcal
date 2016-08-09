@@ -1,11 +1,11 @@
 <?php
-// $Id: peardate_engine_test.php 1645 2011-12-30 20:03:00Z jjdai $
+//
 
-require_once 'simple_include.php';
-require_once 'calendar_include.php';
+require_once __DIR__.'/simple_include.php';
+require_once __DIR__.'/calendar_include.php';
 
 /**
- * Class TestOfPearDateEngine
+ * Class TestOfPearDateEngine.
  */
 class TestOfPearDateEngine extends UnitTestCase
 {
@@ -156,14 +156,14 @@ class TestOfPearDateEngine extends UnitTestCase
     public function testAdjustDate()
     {
         $stamp = '2004-01-01 13:30:45';
-        $y     = $this->engine->stampToYear($stamp);
-        $m     = $this->engine->stampToMonth($stamp);
-        $d     = $this->engine->stampToDay($stamp);
+        $y = $this->engine->stampToYear($stamp);
+        $m = $this->engine->stampToMonth($stamp);
+        $d = $this->engine->stampToDay($stamp);
 
         //the first day of the month should be thursday
         $this->assertEqual($this->engine->getDayOfWeek($y, $m, $d), 4);
 
-        $m--; // 2004-00-01 => 2003-12-01
+        --$m; // 2004-00-01 => 2003-12-01
         $this->engine->adjustDate($y, $m, $d, $dummy, $dummy, $dummy);
 
         $this->assertEqual($y, 2003);

@@ -2,12 +2,12 @@
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once XOOPS_ROOT_PATH . '/modules/extcal/class/ExtcalPersistableObjectHandler.php';
-include_once XOOPS_ROOT_PATH . '/modules/extcal/class/perm.php';
-include_once XOOPS_ROOT_PATH . '/modules/extcal/class/time.php';
+include_once __DIR__.'/ExtcalPersistableObjectHandler.php';
+include_once __DIR__.'/perm.php';
+include_once __DIR__.'/time.php';
 
 /**
- * Class ExtcalCat
+ * Class ExtcalCat.
  */
 class ExtcalCat extends XoopsObject
 {
@@ -28,7 +28,7 @@ class ExtcalCat extends XoopsObject
 }
 
 /**
- * Class ExtcalCatHandler
+ * Class ExtcalCatHandler.
  */
 class ExtcalCatHandler extends ExtcalPersistableObjectHandler
 {
@@ -58,7 +58,7 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
 
         // Retriving permission mask
         $groupPermissionHandler = xoops_getHandler('groupperm');
-        $moduleId               = $GLOBALS['xoopsModule']->getVar('mid');
+        $moduleId = $GLOBALS['xoopsModule']->getVar('mid');
 
         $criteria = new CriteriaCompo();
         $criteria->add(new Criteria('gperm_name', 'extcal_perm_mask'));
@@ -67,7 +67,7 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
 
         // Retriving group list
         $memberHandler = xoops_getHandler('member');
-        $glist         = $memberHandler->getGroupList();
+        $glist = $memberHandler->getGroupList();
 
         // Applying permission mask
         foreach ($permMask as $perm) {
@@ -127,7 +127,7 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
         if (!$skipPerm) {
             $this->_addCatPermCriteria($criteriaCompo, $GLOBALS['xoopsUser']);
         }
-        $ret =& $this->getObjects($criteriaCompo);
+        $ret = &$this->getObjects($criteriaCompo);
         if (isset($ret[0])) {
             return $ret[0];
         } else {
@@ -181,12 +181,12 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
     public function _addCatPermCriteria(&$criteria, &$user, $perm = 'extcal_cat_view')
     {
         $authorizedAccessCats = $this->_extcalPerm->getAuthorizedCat($user, 'extcal_cat_view');
-        $count                = count($authorizedAccessCats);
+        $count = count($authorizedAccessCats);
         if ($count > 0) {
-            $in = '(' . $authorizedAccessCats[0];
+            $in = '('.$authorizedAccessCats[0];
             array_shift($authorizedAccessCats);
             foreach ($authorizedAccessCats as $authorizedAccessCat) {
-                $in .= ',' . $authorizedAccessCat;
+                $in .= ','.$authorizedAccessCat;
             }
             $in .= ')';
             $criteria->add(new Criteria('cat_id', $in, 'IN'));

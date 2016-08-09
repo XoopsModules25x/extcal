@@ -1,7 +1,7 @@
 <?php
 /**
  * classGenerator
- * walls_watermarks
+ * walls_watermarks.
  *
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -37,7 +37,7 @@ define('_EXTCAL_CLS_EVENT', 'event');
 define('_EXTCAL_CLN_EVENT', 'ExtcalEvent');
 
 //-------------------------------------------------------------------
-define('_EXTCAL_PEAR_ROOT_DEFAULT', XOOPS_ROOT_PATH . '/modules/extcal/class/pear');
+define('_EXTCAL_PEAR_ROOT_DEFAULT', dirname(__DIR__) .'/class/pear');
 //define('_EXTCAL_PEAR_ROOT', 'F:/wamp/www/xfr254b/xoops_lib/Frameworks/pear' );
 
 $pear_path = _EXTCAL_PEAR_ROOT_DEFAULT;
@@ -49,14 +49,14 @@ if (is_object($xoopsModule)) {
 }
 
 $moduleHandler = xoops_getHandler('module');
-$module        = $moduleHandler->getByDirname('extcal');
+$module = $moduleHandler->getByDirname('extcal');
 
 if ($name === 'extcal' || is_object($module)) {
     if (is_object($xoopsModuleConfig)) {
         $extcalConfig = $xoopsModuleConfig;
     } else {
         $configHandler = xoops_getHandler('config');
-        $extcalConfig  = $configHandler->getConfigList($module->getVar('mid'));
+        $extcalConfig = $configHandler->getConfigList($module->getVar('mid'));
     }
 }
 
@@ -71,22 +71,22 @@ if ($name === 'extcal' || is_object($module)) {
 //}
 define('_EXTCAL_PEAR_ROOT', $pear_path);
 
-define('_EXTCAL_PEAR_CALENDAR_ROOT', _EXTCAL_PEAR_ROOT . '/Calendar');
-define('CALENDAR_ROOT', _EXTCAL_PEAR_CALENDAR_ROOT . '/');
+define('_EXTCAL_PEAR_CALENDAR_ROOT', _EXTCAL_PEAR_ROOT.'/Calendar');
+define('CALENDAR_ROOT', _EXTCAL_PEAR_CALENDAR_ROOT.'/');
 
 //-------------------------------------------------------------------
 define('_EXTCAL_SHOW_NO_PICTURE', false);
 
 define('_EXTCAL_PATH_HORLOGES', '/modules/extcal/assets/images/horloges/');
-define('_EXTCAL_PATH_ICONS16', XOOPS_URL . '/Frameworks/moduleclasses/icons/16/');
-define('_EXTCAL_PATH_ICONS32', XOOPS_URL . '/Frameworks/moduleclasses/icons/32/');
-define('_EXTCAL_PATH_FO', XOOPS_URL . '/modules/extcal/');
-define('_EXTCAL_PATH_BO', _EXTCAL_PATH_FO . 'admin/');
-define('_EXTCAL_PATH_LG', XOOPS_URL . '/modules/extcal/languages/');
+define('_EXTCAL_PATH_ICONS16', XOOPS_URL.'/Frameworks/moduleclasses/icons/16/');
+define('_EXTCAL_PATH_ICONS32', XOOPS_URL.'/Frameworks/moduleclasses/icons/32/');
+define('_EXTCAL_PATH_FO', XOOPS_URL.'/modules/extcal/');
+define('_EXTCAL_PATH_BO', _EXTCAL_PATH_FO.'admin/');
+define('_EXTCAL_PATH_LG', XOOPS_URL.'/modules/extcal/languages/');
 
 define('_EXTCAL_IMG_INTERVAL', 'interval04.png');
-define('_EXTCAL_IMG_INTERVAL16', _EXTCAL_PATH_ICONS16 . _EXTCAL_IMG_INTERVAL);
-define('_EXTCAL_IMG_INTERVAL32', _EXTCAL_PATH_ICONS32 . _EXTCAL_IMG_INTERVAL);
+define('_EXTCAL_IMG_INTERVAL16', _EXTCAL_PATH_ICONS16._EXTCAL_IMG_INTERVAL);
+define('_EXTCAL_IMG_INTERVAL32', _EXTCAL_PATH_ICONS32._EXTCAL_IMG_INTERVAL);
 
 //define('_EXTCAL_DIRNAME',    $xoopsModule->getVar('dirname'));
 
@@ -101,21 +101,23 @@ define('_EXTCAL_NAV_AGENDA_DAY', 'agenda-day');
 define('_EXTCAL_NAV_SEARCH', 'search');
 define('_EXTCAL_NAV_NEW_EVENT', 'new-event');
 
-define('_EXTCAL_NAV_LIST', _EXTCAL_NAV_CALMONTH . "\n" . _EXTCAL_NAV_CALWEEK . "\n" . _EXTCAL_NAV_YEAR . "\n" . _EXTCAL_NAV_MONTH . "\n" . _EXTCAL_NAV_WEEK . "\n" . _EXTCAL_NAV_DAY . "\n" . _EXTCAL_NAV_AGENDA_WEEK . "\n" . _EXTCAL_NAV_AGENDA_DAY . "\n" . _EXTCAL_NAV_SEARCH . "\n" . _EXTCAL_NAV_NEW_EVENT);
+define('_EXTCAL_NAV_LIST',
+       _EXTCAL_NAV_CALMONTH."\n"._EXTCAL_NAV_CALWEEK."\n"._EXTCAL_NAV_YEAR."\n"._EXTCAL_NAV_MONTH."\n"._EXTCAL_NAV_WEEK."\n"._EXTCAL_NAV_DAY."\n"._EXTCAL_NAV_AGENDA_WEEK."\n"
+       ._EXTCAL_NAV_AGENDA_DAY."\n"._EXTCAL_NAV_SEARCH."\n"._EXTCAL_NAV_NEW_EVENT);
 
 define('_EXTCAL_PREFIX_VIEW', 'view_');
 define('_EXTCAL_SUFFIX_VIEW', '.php');
 
-define('_EXTCAL_FILE_CALMONTH', _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_CALMONTH . _EXTCAL_SUFFIX_VIEW);
-define('_EXTCAL_FILE_CALWEEK', _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_CALWEEK . _EXTCAL_SUFFIX_VIEW);
-define('_EXTCAL_FILE_YEAR', _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_YEAR . _EXTCAL_SUFFIX_VIEW);
-define('_EXTCAL_FILE_MONTH', _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_MONTH . _EXTCAL_SUFFIX_VIEW);
-define('_EXTCAL_FILE_WEEK', _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_WEEK . _EXTCAL_SUFFIX_VIEW);
-define('_EXTCAL_FILE_DAY', _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_DAY . _EXTCAL_SUFFIX_VIEW);
-define('_EXTCAL_FILE_AGENDA_WEEK', _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_AGENDA_WEEK . _EXTCAL_SUFFIX_VIEW);
-define('_EXTCAL_FILE_AGENDA_DAY', _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_AGENDA_DAY . _EXTCAL_SUFFIX_VIEW);
-define('_EXTCAL_FILE_SEARCH', _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_SEARCH . _EXTCAL_SUFFIX_VIEW);
-define('_EXTCAL_FILE_NEW_EVENT', _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_NEW_EVENT . _EXTCAL_SUFFIX_VIEW);
+define('_EXTCAL_FILE_CALMONTH', _EXTCAL_PREFIX_VIEW._EXTCAL_NAV_CALMONTH._EXTCAL_SUFFIX_VIEW);
+define('_EXTCAL_FILE_CALWEEK', _EXTCAL_PREFIX_VIEW._EXTCAL_NAV_CALWEEK._EXTCAL_SUFFIX_VIEW);
+define('_EXTCAL_FILE_YEAR', _EXTCAL_PREFIX_VIEW._EXTCAL_NAV_YEAR._EXTCAL_SUFFIX_VIEW);
+define('_EXTCAL_FILE_MONTH', _EXTCAL_PREFIX_VIEW._EXTCAL_NAV_MONTH._EXTCAL_SUFFIX_VIEW);
+define('_EXTCAL_FILE_WEEK', _EXTCAL_PREFIX_VIEW._EXTCAL_NAV_WEEK._EXTCAL_SUFFIX_VIEW);
+define('_EXTCAL_FILE_DAY', _EXTCAL_PREFIX_VIEW._EXTCAL_NAV_DAY._EXTCAL_SUFFIX_VIEW);
+define('_EXTCAL_FILE_AGENDA_WEEK', _EXTCAL_PREFIX_VIEW._EXTCAL_NAV_AGENDA_WEEK._EXTCAL_SUFFIX_VIEW);
+define('_EXTCAL_FILE_AGENDA_DAY', _EXTCAL_PREFIX_VIEW._EXTCAL_NAV_AGENDA_DAY._EXTCAL_SUFFIX_VIEW);
+define('_EXTCAL_FILE_SEARCH', _EXTCAL_PREFIX_VIEW._EXTCAL_NAV_SEARCH._EXTCAL_SUFFIX_VIEW);
+define('_EXTCAL_FILE_NEW_EVENT', _EXTCAL_PREFIX_VIEW._EXTCAL_NAV_NEW_EVENT._EXTCAL_SUFFIX_VIEW);
 
 define('_EXTCAL_MULTILOADER', '/class/xoopsform/multiuploads/formmultiuploads.php');
 

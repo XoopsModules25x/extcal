@@ -1,12 +1,12 @@
 <?php
 
-include XOOPS_ROOT_PATH . '/modules/extcal/class/form/formdatetime.php';
-include XOOPS_ROOT_PATH . '/modules/extcal/class/form/formrecurrules.php';
-include XOOPS_ROOT_PATH . '/modules/extcal/class/form/formfilecheckbox.php';
-include XOOPS_ROOT_PATH . '/modules/extcal/class/form/formrrulecheckbox.php';
+include __DIR__.'/formdatetime.php';
+include __DIR__.'/formrecurrules.php';
+include __DIR__.'/formfilecheckbox.php';
+include __DIR__.'/formrrulecheckbox.php';
 
 /**
- * Class ExtcalThemeForm
+ * Class ExtcalThemeForm.
  */
 class ExtcalThemeForm extends XoopsThemeForm
 {

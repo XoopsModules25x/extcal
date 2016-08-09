@@ -88,11 +88,12 @@ define('_AM_EXTCAL_INFO_EDIT_PENDING_EVENT', '<b>Edit</b> new event before appro
 define('_AM_EXTCAL_INFORMATION', 'Information');
 define('_AM_EXTCAL_INSTALL', 'Install files');
 define('_AM_EXTCAL_INSTALL_DONE', 'Installing done. Click here to update your module');
-define('_AM_EXTCAL_LG_FILE_DONT_EXIST', "Language files don\'t exist in repository: <br /><b>Server : </b>%s<br /><b>File : </b>%s");
-define('_AM_EXTCAL_MD_FILE_DONT_EXIST', "Module files don\'t exist on repository :<br /><b>Server : </b>%s<br /><b>File : </b>%s");
+define('_AM_EXTCAL_LG_FILE_DONT_EXIST', "Language files don\'t exist in repository: <br><b>Server : </b>%s<br><b>File : </b>%s");
+define('_AM_EXTCAL_MD_FILE_DONT_EXIST', "Module files don\'t exist on repository :<br><b>Server : </b>%s<br><b>File : </b>%s");
 define('_AM_EXTCAL_MD_FILE_DONT_EXIST_SHORT', "Module files don't exist");
 define('_AM_EXTCAL_MODULE_ADMIN_SUMMARY', 'eXtCal Administration Summary');
-define('_AM_EXTCAL_MULTIUPLOADS_NOT_OK', "The multiuploads component is not installed.<br /><br /><a href='http://xoops.kiolo.com/modules/mydownloads/'>Download here the multiuploads component</a><br /><br />and install it in the folder 'class/xoopsform/'");
+define('_AM_EXTCAL_MULTIUPLOADS_NOT_OK',
+       "The multiuploads component is not installed.<br><br><a href='http://xoops.kiolo.com/modules/mydownloads/'>Download here the multiuploads component</a><br><br>and install it in the folder 'class/xoopsform/'");
 define('_AM_EXTCAL_NAME', 'Name');
 define('_AM_EXTCAL_NOPERMSSET', 'Permission cannot be set: There are no Categories created yet! Please create a Category first.');
 define('_AM_EXTCAL_PENDING', 'Pending');
@@ -101,7 +102,8 @@ define('_AM_EXTCAL_PERM_MASK_UPDATED', 'Permission mask updated');
 define('_AM_EXTCAL_PERM_NO_CATEGORY', 'You must create category first');
 define('_AM_EXTCAL_PREFERENCES', 'Preferences');
 define('_AM_EXTCAL_PUBLIC_PERM_MASK', 'Public permissions mask');
-define('_AM_EXTCAL_PUBLIC_PERM_MASK_INFO', "You can set here the default mask permission who will be apply to new category. Be careful to don't give excessive permissions here because all new category will give them.");
+define('_AM_EXTCAL_PUBLIC_PERM_MASK_INFO',
+       "You can set here the default mask permission who will be apply to new category. Be careful to don't give excessive permissions here because all new category will give them.");
 define('_AM_EXTCAL_REDIRECT_DELOK', 'successfully deleted');
 define('_AM_EXTCAL_START_DATE', 'Start Date');
 define('_AM_EXTCAL_SUBMIT_PERMISSION', 'Submit permission');
@@ -128,9 +130,6 @@ define('_AM_EXTCAL_EVENT_EDIT_FAILED', 'Event Editing failed');
 define('_AM_EXTCAL_EVENT_CREATE_FAILED', "Couldn't create event");
 //2.39
 define('_AM_EXTCAL_SUBJECT', '');
-define('_AM_EXTCAL_USEFUL_TAGS', '');
-define('_AM_EXTCAL_MAILTAGS6', '');
-define('_AM_EXTCAL_MAILTAGS2', '');
 define('_AM_EXTCAL_BODY', '');
 define('_AM_EXTCAL_USEFUL_TAGS', '');
 define('_AM_EXTCAL_MAILTAGS1', '');

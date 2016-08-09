@@ -2,52 +2,52 @@
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-$path = dirname(dirname(dirname(__DIR__)));
-include_once $path . '/mainfile.php';
+$moduleDirName = basename(dirname(__DIR__));
+/** @var XoopsModuleHandler $moduleHandler */
+$moduleHandler = xoops_getHandler('module');
+$module        = $moduleHandler->getByDirname($moduleDirName);
+$pathIcon32    = '../../' . $module->getInfo('sysicons32');
+$pathModIcon32 = './' . $module->getInfo('modicons32');
+xoops_loadLanguage('modinfo', $moduleDirName);
 
-$dirname         = basename(dirname(__DIR__));
-$module_handler  = xoops_getHandler('module');
-$module          = $module_handler->getByDirname($dirname);
-$pathIcon32      = $module->getInfo('icons32');
-$pathModuleAdmin = $module->getInfo('dirmoduleadmin');
-$pathLanguage    = $path . $pathModuleAdmin;
+$xoopsModuleAdminPath = XOOPS_ROOT_PATH . '/' . $module->getInfo('dirmoduleadmin');
 
-if (!file_exists($fileinc = $pathLanguage . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/' . 'main.php')) {
-    $fileinc = $pathLanguage . '/language/english/main.php';
+if (!file_exists($fileinc = $xoopsModuleAdminPath . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/' . 'main.php')) {
+    $fileinc = $xoopsModuleAdminPath . '/language/english/main.php';
 }
 
 include_once $fileinc;
 
-$adminmenu = array();
+$adminmenu[] = array(
+    'title' => _AM_MODULEADMIN_HOME,
+    'link'  => 'admin/index.php',
+    'icon'  => $pathIcon32 . '/home.png'
+);
 
-$i                      = 1;
-$adminmenu[$i]['title'] = _MI_EXTCAL_INDEX;
-$adminmenu[$i]['link']  = 'admin/index.php';
-$adminmenu[$i]['icon']  = $pathIcon32 . '/home.png';
-++$i;
-$adminmenu[$i]['title'] = _MI_EXTCAL_CATEGORY;
-$adminmenu[$i]['link']  = 'admin/cat.php';
-$adminmenu[$i]['icon']  = $pathIcon32 . '/category.png';
-++$i;
-$adminmenu[$i]['title'] = _MI_EXTCAL_EVENT;
-$adminmenu[$i]['link']  = 'admin/event.php';
-$adminmenu[$i]['icon']  = $pathIcon32 . '/event.png';
-++$i;
-$adminmenu[$i]['title'] = _MI_EXTCAL_ETABLISSEMENTS;
-$adminmenu[$i]['link']  = 'admin/etablissement.php';
-//$adminmenu[$i]["icon"] = '../../'.$pathImageAdmin.'/etablissement.png';
-$adminmenu[$i]['icon'] = 'assets/images/icons/32/etablissement.png';
-//echo $adminmenu[$i]["icon"]."<br>";
+$adminmenu[] = array(
+    'title' => _MI_EXTCAL_CATEGORY,
+    'link'  => 'admin/cat.php',
+    'icon'  => $pathIcon32 . '/category.png'
+);
 
-++$i;
-$adminmenu[$i]['title'] = _MI_EXTCAL_PERMISSIONS;
-$adminmenu[$i]['link']  = 'admin/permissions.php';
-$adminmenu[$i]['icon']  = $pathIcon32 . '/permissions.png';
-//++$i;
-//$adminmenu[$i]['title'] = _MI_EXTCAL_PRUNING;
-//$adminmenu[$i]['link'] = "admin/prune.php";
-//$adminmenu[$i]["icon"] = "assets/images/admin/about.png";
-++$i;
-$adminmenu[$i]['title'] = _MI_EXTCAL_ABOUT;
-$adminmenu[$i]['link']  = 'admin/about.php';
-$adminmenu[$i]['icon']  = $pathIcon32 . '/about.png';
+$adminmenu[] = array(
+    'title' => _MI_EXTCAL_EVENT,
+    'link'  => 'admin/event.php',
+    'icon'  => $pathIcon32 . '/event.png'
+);
+$adminmenu[] = array(
+    'title' => _MI_EXTCAL_ETABLISSEMENTS,
+    'link'  => 'admin/etablissement.php',
+    'icon'  => $pathModIcon32 . '/etablissement.png'
+);
+$adminmenu[] = array(
+    'title' => _MI_EXTCAL_PERMISSIONS,
+    'link'  => 'admin/permissions.php',
+    'icon'  => $pathIcon32 . '/permissions.png'
+);
+
+$adminmenu[] = array(
+    'title' => _AM_MODULEADMIN_ABOUT,
+    'link'  => 'admin/about.php',
+    'icon'  => $pathIcon32 . '/about.png'
+);

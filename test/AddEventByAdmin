@@ -89,7 +89,7 @@
 <tr>
 	<td>type</td>
 	<td>event_address</td>
-	<td>My New Corporation<br />New York, NY</td>
+	<td>My New Corporation<br>New York, NY</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>

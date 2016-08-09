@@ -1,8 +1,9 @@
 <?php
+
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 
 /**
- * Contains the Calendar_Decorator_Wrapper class
+ * Contains the Calendar_Decorator_Wrapper class.
  *
  * PHP versions 4 and 5
  *
@@ -28,17 +29,18 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @category  Date and Time
- * @package   Calendar
+ *
  * @author    Harry Fuecks <hfuecks@phppatterns.com>
  * @author    Lorenzo Alberton <l.alberton@quipo.it>
  * @copyright 2003-2007 Harry Fuecks, Lorenzo Alberton
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
- * @version   CVS: $Id: Wrapper.php 1511 2011-09-01 20:56:07Z jjdai $
+ *
  * @link      http://pear.php.net/package/Calendar
  */
 
 /**
- * Allows Calendar include path to be redefined
+ * Allows Calendar include path to be redefined.
+ *
  * @ignore
  */
 if (!defined('CALENDAR_ROOT')) {
@@ -46,30 +48,28 @@ if (!defined('CALENDAR_ROOT')) {
 }
 
 /**
- * Load Calendar decorator base class
+ * Load Calendar decorator base class.
  */
-require_once CALENDAR_ROOT . 'Decorator.php';
+require_once CALENDAR_ROOT.'Decorator.php';
 
 /**
- * Decorator to help with wrapping built children in another decorator
+ * Decorator to help with wrapping built children in another decorator.
  *
  * @category  Date and Time
- * @package   Calendar
+ *
  * @author    Harry Fuecks <hfuecks@phppatterns.com>
  * @author    Lorenzo Alberton <l.alberton@quipo.it>
  * @copyright 2003-2007 Harry Fuecks, Lorenzo Alberton
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
+ *
  * @link      http://pear.php.net/package/Calendar
- * @access    public
  */
 class Calendar_Decorator_Wrapper extends Calendar_Decorator
 {
     /**
-     * Constructs Calendar_Decorator_Wrapper
+     * Constructs Calendar_Decorator_Wrapper.
      *
      * @param object &$Calendar subclass of Calendar
-     *
-     * @access public
      */
     public function __construct(&$Calendar)
     {
@@ -77,17 +77,16 @@ class Calendar_Decorator_Wrapper extends Calendar_Decorator
     }
 
     /**
-     * Wraps objects returned from fetch in the named Decorator class
+     * Wraps objects returned from fetch in the named Decorator class.
      *
      * @param string $decorator name of Decorator class to wrap with
      *
      * @return object instance of named decorator
-     * @access public
      */
-    public function & fetch($decorator)
+    public function &fetch($decorator)
     {
         $Calendar = parent::fetch();
-        $ret      = false;
+        $ret = false;
         if ($Calendar) {
             $ret = new $decorator($Calendar);
         }
@@ -96,12 +95,11 @@ class Calendar_Decorator_Wrapper extends Calendar_Decorator
     }
 
     /**
-     * Wraps the returned calendar objects from fetchAll in the named decorator
+     * Wraps the returned calendar objects from fetchAll in the named decorator.
      *
      * @param string $decorator name of Decorator class to wrap with
      *
      * @return array
-     * @access public
      */
     public function fetchAll($decorator)
     {

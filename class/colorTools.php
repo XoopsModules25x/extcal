@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Class ColorTools
+ * Class ColorTools.
  */
-class ColorTools
+class colorTools
 {
     /**
      *
@@ -30,8 +30,18 @@ class ColorTools
      *
      * @return string
      */
-    public function modifierCouleur($colorHexa, $incrementRouge, $incrementVert, $incrementBleu, $plancherRouge = 0, $plafondRouge = 255, $plancherVert = 0, $plafondVert = 255, $plancherBleu = 0, $plafondBleu = 255)
-    {
+    public function modifierCouleur(
+        $colorHexa,
+        $incrementRouge,
+        $incrementVert,
+        $incrementBleu,
+        $plancherRouge = 0,
+        $plafondRouge = 255,
+        $plancherVert = 0,
+        $plafondVert = 255,
+        $plancherBleu = 0,
+        $plafondBleu = 255
+    ) {
         $t10 = static::hexa2rgbA($colorHexa);
 
         $t10[1] = static::bornerValeur($t10[1] + $incrementRouge, $plancherRouge, $plafondRouge);
@@ -92,6 +102,7 @@ class ColorTools
         // ext_echoArray($t10);
 
         $newColorHexa = static::getHexaColorFromA($t10);
+
         // echo "colorHexa = {$newColorHexa}-{$colorHexa}<br>";
         return $newColorHexa;
     }
@@ -258,4 +269,3 @@ class ColorTools
     //--------------------------------------------------------
 } // --- fin de la classe colors
 //--------------------------------------------------------
-

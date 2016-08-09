@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class extDateTime
+ * Class extDateTime.
  */
 class extDateTime extends DateTime
 {

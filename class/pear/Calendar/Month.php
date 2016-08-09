@@ -1,8 +1,9 @@
 <?php
+
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 
 /**
- * Contains the Calendar_Month class
+ * Contains the Calendar_Month class.
  *
  * PHP versions 4 and 5
  *
@@ -28,16 +29,17 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @category  Date and Time
- * @package   Calendar
+ *
  * @author    Harry Fuecks <hfuecks@phppatterns.com>
  * @copyright 2003-2007 Harry Fuecks
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
- * @version   CVS: $Id: Month.php 1511 2011-09-01 20:56:07Z jjdai $
+ *
  * @link      http://pear.php.net/package/Calendar
  */
 
 /**
- * Allows Calendar include path to be redefined
+ * Allows Calendar include path to be redefined.
+ *
  * @ignore
  */
 if (!defined('CALENDAR_ROOT')) {
@@ -45,39 +47,37 @@ if (!defined('CALENDAR_ROOT')) {
 }
 
 /**
- * Load Calendar base class
+ * Load Calendar base class.
  */
-require_once CALENDAR_ROOT . 'Calendar.php';
+require_once CALENDAR_ROOT.'Calendar.php';
 
 /**
  * Represents a Month and builds Days
  * <code>
- * require_once 'Calendar/Month.php';
+ * require_once __DIR__ . '/Calendar/Month.php';
  * $Month = new Calendar_Month(2003, 10); // Oct 2003
  * $Month->build(); // Build Calendar_Day objects
  * while ($Day = $Month->fetch()) {
- *     echo $Day->thisDay().'<br />';
+ *     echo $Day->thisDay().'<br>';
  * }
- * </code>
+ * </code>.
  *
  * @category  Date and Time
- * @package   Calendar
+ *
  * @author    Harry Fuecks <hfuecks@phppatterns.com>
  * @copyright 2003-2007 Harry Fuecks
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
+ *
  * @link      http://pear.php.net/package/Calendar
- * @access    public
  */
 class Calendar_Month extends Calendar
 {
     /**
-     * Constructs Calendar_Month
+     * Constructs Calendar_Month.
      *
      * @param int $y        year e.g. 2003
      * @param int $m        month e.g. 5
      * @param int $firstDay first day of the week [optional]
-     *
-     * @access public
      */
     public function __construct($y, $m, $firstDay = null)
     {
@@ -87,16 +87,15 @@ class Calendar_Month extends Calendar
 
     /**
      * Builds Day objects for this Month. Creates as many Calendar_Day objects
-     * as there are days in the month
+     * as there are days in the month.
      *
      * @param array $sDates (optional) Calendar_Day objects representing selected dates
      *
-     * @return boolean
-     * @access public
+     * @return bool
      */
     public function build($sDates = array())
     {
-        include_once CALENDAR_ROOT . 'Day.php';
+        include_once CALENDAR_ROOT.'Day.php';
         $daysInMonth = $this->cE->getDaysInMonth($this->year, $this->month);
         for ($i = 1; $i <= $daysInMonth; ++$i) {
             $this->children[$i] = new Calendar_Day($this->year, $this->month, $i);
@@ -109,12 +108,9 @@ class Calendar_Month extends Calendar
     }
 
     /**
-     * Called from build()
+     * Called from build().
      *
      * @param array $sDates Calendar_Day objects representing selected dates
-     *
-     * @return void
-     * @access private
      */
     public function setSelection($sDates)
     {

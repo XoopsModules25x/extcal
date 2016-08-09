@@ -1,8 +1,9 @@
 <?php
+
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 
 /**
- * Contains the Calendar_Month_Weekdays class
+ * Contains the Calendar_Month_Weekdays class.
  *
  * PHP versions 4 and 5
  *
@@ -28,16 +29,17 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @category  Date and Time
- * @package   Calendar
+ *
  * @author    Harry Fuecks <hfuecks@phppatterns.com>
  * @copyright 2003-2007 Harry Fuecks
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
- * @version   CVS: $Id: Weekdays.php 1511 2011-09-01 20:56:07Z jjdai $
+ *
  * @link      http://pear.php.net/package/Calendar
  */
 
 /**
- * Allows Calendar include path to be redefined
+ * Allows Calendar include path to be redefined.
+ *
  * @ignore
  */
 if (!defined('CALENDAR_ROOT')) {
@@ -45,19 +47,19 @@ if (!defined('CALENDAR_ROOT')) {
 }
 
 /**
- * Load Calendar base class
+ * Load Calendar base class.
  */
-require_once CALENDAR_ROOT . 'Calendar.php';
+require_once CALENDAR_ROOT.'Calendar.php';
 
 /**
- * Load base month
+ * Load base month.
  */
-require_once CALENDAR_ROOT . 'Month.php';
+require_once CALENDAR_ROOT.'Month.php';
 
 /**
  * Represents a Month and builds Days in tabular form<br>
  * <code>
- * require_once 'Calendar/Month/Weekdays.php';
+ * require_once __DIR__ . '/Calendar/Month/Weekdays.php';
  * $Month = new Calendar_Month_Weekdays(2003, 10); // Oct 2003
  * $Month->build(); // Build Calendar_Day objects
  * while ($Day = $Month->fetch()) {
@@ -73,43 +75,42 @@ require_once CALENDAR_ROOT . 'Month.php';
  *         echo '</tr>';
  *     }
  * }
- * </code>
+ * </code>.
  *
  * @category  Date and Time
- * @package   Calendar
+ *
  * @author    Harry Fuecks <hfuecks@phppatterns.com>
  * @copyright 2003-2007 Harry Fuecks
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
+ *
  * @link      http://pear.php.net/package/Calendar
- * @access    public
  */
 class Calendar_Month_Weekdays extends Calendar_Month
 {
     /**
-     * Instance of Calendar_Table_Helper
+     * Instance of Calendar_Table_Helper.
+     *
      * @var Calendar_Table_Helper
-     * @access private
      */
     public $tableHelper;
 
     /**
-     * First day of the week
-     * @access private
+     * First day of the week.
+     *
      * @var string
      */
     public $firstDay;
 
     /**
-     * Constructs Calendar_Month_Weekdays
+     * Constructs Calendar_Month_Weekdays.
      *
      * @param int $y        year e.g. 2003
      * @param int $m        month e.g. 5
      * @param int $firstDay (optional) first day of week (e.g. 0 for Sunday, 2 for Tuesday etc.)
-     *
-     * @access public
      */
     public function __construct($y, $m, $firstDay = null)
     {
+        $this->firstDay = $firstDay;
         parent::__construct($y, $m, $firstDay);
     }
 
@@ -120,15 +121,15 @@ class Calendar_Month_Weekdays extends Calendar_Month
      *
      * @param array $sDates (optional) Calendar_Day objects representing selected dates
      *
-     * @return boolean
-     * @access public
+     * @return bool
+     *
      * @see    Calendar_Day::isEmpty()
      * @see    Calendar_Day_Base::isFirst()
      * @see    Calendar_Day_Base::isLast()
      */
     public function build($sDates = array())
     {
-        include_once CALENDAR_ROOT . 'Table/Helper.php';
+        include_once CALENDAR_ROOT.'Table/Helper.php';
         $this->tableHelper = new Calendar_Table_Helper($this, $this->firstDay);
         Calendar_Month::build($sDates);
         $this->buildEmptyDaysBefore();
@@ -140,17 +141,14 @@ class Calendar_Month_Weekdays extends Calendar_Month
     }
 
     /**
-     * Prepends empty days before the real days in the month
-     *
-     * @return void
-     * @access private
+     * Prepends empty days before the real days in the month.
      */
     public function buildEmptyDaysBefore()
     {
         $eBefore = $this->tableHelper->getEmptyDaysBefore();
         for ($i = 0; $i < $eBefore; ++$i) {
             $stamp = $this->cE->dateToStamp($this->year, $this->month, -$i);
-            $Day   = new Calendar_Day($this->cE->stampToYear($stamp), $this->cE->stampToMonth($stamp), $this->cE->stampToDay($stamp));
+            $Day = new Calendar_Day($this->cE->stampToYear($stamp), $this->cE->stampToMonth($stamp), $this->cE->stampToDay($stamp));
             $Day->setEmpty();
             $Day->adjust();
             array_unshift($this->children, $Day);
@@ -158,10 +156,7 @@ class Calendar_Month_Weekdays extends Calendar_Month
     }
 
     /**
-     * Shifts the array of children forward, if necessary
-     *
-     * @return void
-     * @access private
+     * Shifts the array of children forward, if necessary.
      */
     public function shiftDays()
     {
@@ -172,15 +167,12 @@ class Calendar_Month_Weekdays extends Calendar_Month
     }
 
     /**
-     * Appends empty days after the real days in the month
-     *
-     * @return void
-     * @access private
+     * Appends empty days after the real days in the month.
      */
     public function buildEmptyDaysAfter()
     {
         $eAfter = $this->tableHelper->getEmptyDaysAfter();
-        $sDOM   = $this->tableHelper->getNumTableDaysInMonth();
+        $sDOM = $this->tableHelper->getNumTableDaysInMonth();
         for ($i = 1; $i <= $sDOM - $eAfter; ++$i) {
             $Day = new Calendar_Day($this->year, $this->month + 1, $i);
             $Day->setEmpty();
@@ -191,14 +183,11 @@ class Calendar_Month_Weekdays extends Calendar_Month
 
     /**
      * Sets the "markers" for the beginning and of a of week, in the
-     * built Calendar_Day children
-     *
-     * @return void
-     * @access private
+     * built Calendar_Day children.
      */
     public function setWeekMarkers()
     {
-        $dIW  = $this->cE->getDaysInWeek($this->thisYear(), $this->thisMonth(), $this->thisDay());
+        $dIW = $this->cE->getDaysInWeek($this->thisYear(), $this->thisMonth(), $this->thisDay());
         $sDOM = $this->tableHelper->getNumTableDaysInMonth();
         for ($i = 1; $i <= $sDOM; $i += $dIW) {
             $this->children[$i]->setFirst();

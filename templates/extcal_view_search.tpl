@@ -56,7 +56,8 @@
         <tr class="even">
             <td colspan='2' align='center'>
                 <input type="submit" style='width:150px;' value="<{$smarty.const._MD_EXTCAL_SEARCH}>" name="B1">
-                <input type="button" style='width:150px;' value="<{$smarty.const._MD_CLEAR_CRITERIA}>" name="B2" onclick="extcal_clear_criteres();">
+                <input type="button" style='width:150px;' value="<{$smarty.const._MD_CLEAR_CRITERIA}>" name="B2"
+                       onclick="extcal_clear_criteres();">
                 <input type="button" style='width:50px;visibility:hidden;' value="" name="B0">
 
             </td>

@@ -1,14 +1,14 @@
 <?php
-// $Id: helper_test.php 1645 2011-12-30 20:03:00Z jjdai $
+//
 
-require_once 'simple_include.php';
-require_once 'calendar_include.php';
+require_once __DIR__.'/simple_include.php';
+require_once __DIR__.'/calendar_include.php';
 
 Mock::generate('Calendar_Engine_Interface', 'Mock_Calendar_Engine');
 Mock::generate('Calendar_Second', 'Mock_Calendar_Second');
 
 /**
- * Class TestOfTableHelper
+ * Class TestOfTableHelper.
  */
 class TestOfTableHelper extends UnitTestCase
 {

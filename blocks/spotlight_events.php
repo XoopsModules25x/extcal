@@ -1,5 +1,6 @@
 <?php
-include_once(XOOPS_ROOT_PATH . '/modules/extcal/include/constantes.php');
+
+include_once __DIR__.'/../include/constantes.php';
 
 //---------------------------------------------------------------------
 

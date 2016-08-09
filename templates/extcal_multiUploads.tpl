@@ -2,7 +2,7 @@
     <h1><{$event.event_title}> (#<{$event.event_id}>)</h1>
 
     <p><{$event.event_desc}></p>
-    <br/>
+    <br>
 
     <{if $multiUploadsOK}>
         <{$multiUploads}>
@@ -10,8 +10,8 @@
         <p><b><span style="color: #FF0000; font-size: x-large; ">
                     <{$smarty.const._AM_EXTCAL_MULTIUPLOADS_NOT_OK}>
                 </span></b></p>
-        <br/>
-        <br/>
+        <br>
+        <br>
     <{/if}>
 
 </div>

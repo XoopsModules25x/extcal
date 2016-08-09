@@ -22,7 +22,8 @@
 
         </a>
         <a href="<{$smarty.const._EXTCAL_FILE_NEW_EVENT}>?event=<{$event.event_id}>&action=clone">
-            <img src="<{$smarty.const._EXTCAL_PATH_ICONS16}>/editcopy.png" title='<{$smarty.const._MD_EXTCAL_ICONE_CLONE}>'
+            <img src="<{$smarty.const._EXTCAL_PATH_ICONS16}>/editcopy.png"
+                 title='<{$smarty.const._MD_EXTCAL_ICONE_CLONE}>'
                  class='extbtnimg'
                  style='margin-left:2px;margin-right:2px;'/>
 

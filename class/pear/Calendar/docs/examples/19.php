@@ -1,6 +1,6 @@
 <?php
 /**
-* Description: demonstrates using the Weekday decorator
+* Description: demonstrates using the Weekday decorator.
 */
 if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
@@ -8,7 +8,7 @@ if (!@include 'Calendar/Calendar.php') {
 require_once CALENDAR_ROOT.'Day.php';
 require_once CALENDAR_ROOT.'Decorator/Weekday.php';
 
-$Day = new Calendar_Day(date('Y'), date('n'),date('d'));
+$Day = new Calendar_Day(date('Y'), date('n'), date('d'));
 $WeekDay = new Calendar_Decorator_Weekday($Day);
 // $WeekDay->setFirstDay(0); // Make Sunday first Day
 
@@ -18,6 +18,6 @@ echo 'Tomorrow: '.$WeekDay->nextWeekDay().'<br>';
 
 $WeekDay->build();
 echo 'Hours today:<br>';
-while ( $Hour = $WeekDay->fetch() ) {
+while ($Hour = $WeekDay->fetch()) {
     echo $Hour->thisHour().'<br>';
 }

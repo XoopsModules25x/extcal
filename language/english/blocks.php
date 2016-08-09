@@ -1,4 +1,5 @@
 <?php
+
 define('_MB_EXTCAL_BGCOLOR', 'Background color');
 define('_MB_EXTCAL_CAT_TO_USE', 'Category');
 define('_MB_EXTCAL_HEIGHT', 'Height');
