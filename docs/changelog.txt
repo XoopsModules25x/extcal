@@ -1,4 +1,17 @@
-2.39 Beta RC 1         NOT RELEASED
+2.39 Beta RC 2         NOT RELEASED
+===================================
+- added xoops_loadLanguage /header.php (zyspec/mamba)
+- addNavigation(basename(__FILE__))  (mamba)
+- dirname(__FILE__) to __DIR__ (mamba)
+- changed RGB to HEX (mamba)
+- updated and optimized CSS (background and margins) (mamba)
+- added "type hints" via PhpDocs (mamba)
+- added oninstall.php, onupdate.php (mamba)
+- added checks for PHP & XOOPS Versions (mamba)
+- added moduleConfig array (mamba)
+
+
+2.39 Beta RC 1         2016-08-10
 ===================================
 - removed @version (mamba)
 - code cosmetics (mamba)
@@ -6,6 +19,7 @@
 - update Help (mamba)
 - changed _handler to Handler (mamba)
 - reference mismatch (mamba)
+
 
 2.39 Beta 2             2016-08-08
 ===================================

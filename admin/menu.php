@@ -5,7 +5,7 @@
 $moduleDirName = basename(dirname(__DIR__));
 /** @var XoopsModuleHandler $moduleHandler */
 $moduleHandler = xoops_getHandler('module');
-$module        = $moduleHandler->getByDirname($moduleDirName);
+$module        =& $moduleHandler->getByDirname($moduleDirName);
 $pathIcon32    = '../../' . $module->getInfo('sysicons32');
 $pathModIcon32 = './' . $module->getInfo('modicons32');
 xoops_loadLanguage('modinfo', $moduleDirName);

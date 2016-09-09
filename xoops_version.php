@@ -35,8 +35,8 @@ $modversion['modicons32']       = 'assets/images/icons/32';
 //***************************************************************************************
 
 //about
-$modversion['module_status']       = 'RC 1';
-$modversion['release_date']        = '2016/08/09';
+$modversion['module_status']       = 'RC 2';
+$modversion['release_date']        = '2016/09/07';
 $modversion['module_website_url']  = 'www.xoops.org/';
 $modversion['module_website_name'] = 'XOOPS';
 $modversion['min_php']             = '5.5';
@@ -73,14 +73,21 @@ if (isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule'])
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// ------------------- Mysql ------------------- //
+$modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
+
+// Tables created by sql file (without prefix!)
+$modversion['tables'] = array(
+    $moduleDirName . '_' . 'cat',
+    $moduleDirName . '_' . 'event',
+    $moduleDirName . '_' . 'eventmember',
+    $moduleDirName . '_' . 'eventnotmember',
+    $moduleDirName . '_' . 'file',
+    $moduleDirName . '_' . 'etablissement'
+);
 
 // SQL
-$modversion['tables'][1] = 'extcal_cat';
-$modversion['tables'][2] = 'extcal_event';
-$modversion['tables'][3] = 'extcal_eventmember';
-$modversion['tables'][4] = 'extcal_eventnotmember';
-$modversion['tables'][5] = 'extcal_file';
-$modversion['tables'][6] = 'extcal_etablissement';
+
 
 // Comments
 $modversion['hasComments']          = 1;
