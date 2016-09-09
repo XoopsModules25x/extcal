@@ -37,7 +37,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
         $this->table     = $db->prefix($tablename);
         $this->keyName   = $keyname;
         $this->className = $classname;
-        if ($idenfierName != false) {
+        if ($idenfierName !== false) {
             $this->identifierName = $idenfierName;
         }
     }
@@ -185,7 +185,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
     public function getList(CriteriaElement $criteria = null, $limit = 0, $start = 0)
     {
         $ret = array();
-        if ($criteria == null) {
+        if ($criteria === null) {
             $criteria = new CriteriaCompo();
         }
 
@@ -248,7 +248,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
         if (!$result) {
             return 0;
         }
-        if ($groupby == false) {
+        if ($groupby === false) {
             list($count) = $this->db->fetchRow($result);
 
             return $count;
@@ -305,7 +305,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
      */
     public function insert(XoopsObject $obj, $force = false, $checkObject = true)
     {
-        if ($checkObject != false) {
+        if ($checkObject !== false) {
             if (!is_object($obj)) {
 //                var_dump($obj);
                 return false;
@@ -365,7 +365,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
             }
             $sql .= ' WHERE ' . $whereclause;
         }
-        if (false != $force) {
+        if (false !== $force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -404,7 +404,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
         }
-        if (false != $force) {
+        if (false !== $force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -430,7 +430,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
         }
-        if (false != $force) {
+        if (false !== $force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -571,7 +571,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
     public function objectToArrayWithoutExternalKey($object, $format = 's')
     {
         $ret = array();
-        if ($object != null) {
+        if ($object !== null) {
             $vars = $object->getVars();
             foreach ($vars as $k => $v) {
                 $ret[$k] = $object->getVar($k, $format);
@@ -627,7 +627,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
         if (!$result) {
             return 0;
         }
-        if ($groupby == false) {
+        if ($groupby === false) {
             list($sum) = $this->db->fetchRow($result);
 
             return $sum;
@@ -668,7 +668,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
         if (!$result) {
             return 0;
         }
-        if ($groupby == false) {
+        if ($groupby === false) {
             list($max) = $this->db->fetchRow($result);
 
             return $max;
