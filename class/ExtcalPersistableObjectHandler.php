@@ -149,7 +149,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
                     $ret[] = $obj;
                 } else {
                     $row  = array();
-                    $vars = $obj->getVars();
+                    $vars =& $obj->getVars();
                     foreach (array_keys($vars) as $i) {
                         $row[$i] = $obj->getVar($i);
                     }
@@ -160,7 +160,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
                     $ret[$myrow[$this->keyName]] = $obj;
                 } else {
                     $row  = array();
-                    $vars = $obj->getVars();
+                    $vars =& $obj->getVars();
                     foreach (array_keys($vars) as $i) {
                         $row[$i] = $obj->getVar($i);
                     }

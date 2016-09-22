@@ -48,6 +48,7 @@ if (is_object($xoopsModule)) {
     $name = $xoopsModule->getVar('name');
 }
 
+/** @var XoopsModuleHandler $moduleHandler */
 $moduleHandler = xoops_getHandler('module');
 $module        = $moduleHandler->getByDirname('extcal');
 

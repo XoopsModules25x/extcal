@@ -32,10 +32,11 @@ class ExtcalConfig
             $moduleConfig = $GLOBALS['xoopsModuleConfig'];
         } else {
             if (!isset($moduleConfig)) {
+                /** @var XoopsModuleHandler $moduleHandler */
                 $moduleHandler = xoops_getHandler('module');
-                $module = $moduleHandler->getByDirname('extcal');
+                $module        = $moduleHandler->getByDirname('extcal');
                 $configHandler = xoops_getHandler('config');
-                $moduleConfig = $configHandler->getConfigList($module->getVar('mid'));
+                $moduleConfig  = $configHandler->getConfigList($module->getVar('mid'));
             }
         }
 

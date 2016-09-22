@@ -55,6 +55,7 @@ function bExtcalMinicalShow($options)
     //$xoopsModuleConfig = $extcalConfig->getModuleConfig();
     //----------------------------------------------------
     //recupe de xoopsmoduleConfig
+    /** @var XoopsModuleHandler $moduleHandler */
     $moduleHandler = xoops_getHandler('module');
     $module        = $moduleHandler->getByDirname('extcal');
     $configHandler = xoops_getHandler('config');

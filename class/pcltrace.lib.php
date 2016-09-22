@@ -431,9 +431,9 @@ if (!defined('PCLTRACE_LIB')) {
             }
             echo '</tr></table></td>';
             echo '<td width=5></td>';
-            echo "<td><font size=1 face=$v_font>" . basename($g_pcl_trace_entries[$i]['file']) . '</font></td>';
+            echo '<td><span style="font-size: xx-small; font-family: $v_font; ">' . basename($g_pcl_trace_entries[$i]['file']) . '</span></td>';
             echo '<td width=5></td>';
-            echo "<td><font size=1 face=$v_font>" . $g_pcl_trace_entries[$i]['line'] . '</font></td>';
+            echo '<td><span style="font-size: xx-small; font-family: $v_font; ">' . $g_pcl_trace_entries[$i]['line'] . '</span></td>';
             echo '</tr>';
         }
 

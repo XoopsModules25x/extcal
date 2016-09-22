@@ -46,8 +46,9 @@ class ExtcalPerm
         $userId = $user ? $user->getVar('uid') : 0;
         if (!isset($authorizedCat[$perm][$userId])) {
             $groupPermHandler = xoops_getHandler('groupperm');
+            /** @var XoopsModuleHandler $moduleHandler */
             $moduleHandler = xoops_getHandler('module');
-            $module = $moduleHandler->getByDirname('extcal');
+            $module           = $moduleHandler->getByDirname('extcal');
             if (!$module) {
                 return false;
             }
