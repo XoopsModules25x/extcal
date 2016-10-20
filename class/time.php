@@ -2,7 +2,7 @@
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once XOOPS_ROOT_PATH.'/language/'.$GLOBALS['xoopsConfig']['language'].'/calendar.php';
+include_once XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/calendar.php';
 
 $moduleDirName = basename(dirname(__DIR__));
 xoops_loadLanguage('main', $moduleDirName);
@@ -26,11 +26,11 @@ class ExtcalTime
     }
 
     /**
-     * @param $user
+     * @param XoopsUser $user
      *
      * @return mixed
      */
-    public function _getUserTimeZone($user)
+    public function _getUserTimeZone(XoopsUser $user)
     {
         global $xoopsConfig;
 
@@ -45,15 +45,15 @@ class ExtcalTime
     public function getMonthName($id)
     {
         $monthName = array(
-            '1' => _CAL_JANUARY,
-            '2' => _CAL_FEBRUARY,
-            '3' => _CAL_MARCH,
-            '4' => _CAL_APRIL,
-            '5' => _CAL_MAY,
-            '6' => _CAL_JUNE,
-            '7' => _CAL_JULY,
-            '8' => _CAL_AUGUST,
-            '9' => _CAL_SEPTEMBER,
+            '1'  => _CAL_JANUARY,
+            '2'  => _CAL_FEBRUARY,
+            '3'  => _CAL_MARCH,
+            '4'  => _CAL_APRIL,
+            '5'  => _CAL_MAY,
+            '6'  => _CAL_JUNE,
+            '7'  => _CAL_JULY,
+            '8'  => _CAL_AUGUST,
+            '9'  => _CAL_SEPTEMBER,
             '10' => _CAL_OCTOBER,
             '11' => _CAL_NOVEMBER,
             '12' => _CAL_DECEMBER,
@@ -90,7 +90,7 @@ class ExtcalTime
      */
     public function getFormatedDate($format, $timestamp)
     {
-        $patterns = array(
+        $patterns     = array(
             '/January/',
             '/February/',
             '/March/',
@@ -143,18 +143,18 @@ class ExtcalTime
             _CAL_OCTOBER,
             _CAL_NOVEMBER,
             _CAL_DECEMBER,
-            substr(_CAL_JANUARY, 0, 3).' ',
-            substr(_CAL_FEBRUARY, 0, 3).' ',
-            substr(_CAL_MARCH, 0, 3).' ',
-            substr(_CAL_APRIL, 0, 3).' ',
-            substr(_CAL_MAY, 0, 3).' ',
-            substr(_CAL_JUNE, 0, 3).' ',
-            substr(_CAL_JULY, 0, 3).' ',
-            substr(_CAL_AUGUST, 0, 3).' ',
-            substr(_CAL_SEPTEMBER, 0, 3).' ',
-            substr(_CAL_OCTOBER, 0, 3).' ',
-            substr(_CAL_NOVEMBER, 0, 3).' ',
-            substr(_CAL_DECEMBER, 0, 3).' ',
+            substr(_CAL_JANUARY, 0, 3) . ' ',
+            substr(_CAL_FEBRUARY, 0, 3) . ' ',
+            substr(_CAL_MARCH, 0, 3) . ' ',
+            substr(_CAL_APRIL, 0, 3) . ' ',
+            substr(_CAL_MAY, 0, 3) . ' ',
+            substr(_CAL_JUNE, 0, 3) . ' ',
+            substr(_CAL_JULY, 0, 3) . ' ',
+            substr(_CAL_AUGUST, 0, 3) . ' ',
+            substr(_CAL_SEPTEMBER, 0, 3) . ' ',
+            substr(_CAL_OCTOBER, 0, 3) . ' ',
+            substr(_CAL_NOVEMBER, 0, 3) . ' ',
+            substr(_CAL_DECEMBER, 0, 3) . ' ',
             _CAL_SUNDAY,
             _CAL_MONDAY,
             _CAL_TUESDAY,
@@ -162,13 +162,13 @@ class ExtcalTime
             _CAL_THURSDAY,
             _CAL_FRIDAY,
             _CAL_SATURDAY,
-            substr(_CAL_SUNDAY, 0, 3).' ',
-            substr(_CAL_MONDAY, 0, 3).' ',
-            substr(_CAL_TUESDAY, 0, 3).' ',
-            substr(_CAL_WEDNESDAY, 0, 3).' ',
-            substr(_CAL_THURSDAY, 0, 3).' ',
-            substr(_CAL_FRIDAY, 0, 3).' ',
-            substr(_CAL_SATURDAY, 0, 3).' ',
+            substr(_CAL_SUNDAY, 0, 3) . ' ',
+            substr(_CAL_MONDAY, 0, 3) . ' ',
+            substr(_CAL_TUESDAY, 0, 3) . ' ',
+            substr(_CAL_WEDNESDAY, 0, 3) . ' ',
+            substr(_CAL_THURSDAY, 0, 3) . ' ',
+            substr(_CAL_FRIDAY, 0, 3) . ' ',
+            substr(_CAL_SATURDAY, 0, 3) . ' ',
         );
 
         return preg_replace($patterns, $replacements, date($format, $timestamp));
@@ -210,7 +210,7 @@ class ExtcalTime
                 array_shift($eventOptions);
                 $day = '';
                 foreach ($eventOptions as $option) {
-                    $day .= ' '.$daysName[$option].', ';
+                    $day .= ' ' . $daysName[$option] . ', ';
                 }
                 $ret = sprintf(_MD_EXTCAL_RR_WEEKLY, $day, $interval);
 
@@ -221,34 +221,34 @@ class ExtcalTime
             case 'monthly':
 
                 $monthDays = array(
-                    '1MO' => _MD_EXTCAL_1_MO,
-                    '1TU' => _MD_EXTCAL_1_TU,
-                    '1WE' => _MD_EXTCAL_1_WE,
-                    '1TH' => _MD_EXTCAL_1_TH,
-                    '1FR' => _MD_EXTCAL_1_FR,
-                    '1SA' => _MD_EXTCAL_1_SA,
-                    '1SU' => _MD_EXTCAL_1_SU,
-                    '2MO' => _MD_EXTCAL_2_MO,
-                    '2TU' => _MD_EXTCAL_2_TU,
-                    '2WE' => _MD_EXTCAL_2_WE,
-                    '2TH' => _MD_EXTCAL_2_TH,
-                    '2FR' => _MD_EXTCAL_2_FR,
-                    '2SA' => _MD_EXTCAL_2_SA,
-                    '2SU' => _MD_EXTCAL_2_SU,
-                    '3MO' => _MD_EXTCAL_3_MO,
-                    '3TU' => _MD_EXTCAL_3_TU,
-                    '3WE' => _MD_EXTCAL_3_WE,
-                    '3TH' => _MD_EXTCAL_3_TH,
-                    '3FR' => _MD_EXTCAL_3_FR,
-                    '3SA' => _MD_EXTCAL_3_SA,
-                    '3SU' => _MD_EXTCAL_3_SU,
-                    '4MO' => _MD_EXTCAL_4_MO,
-                    '4TU' => _MD_EXTCAL_4_TU,
-                    '4WE' => _MD_EXTCAL_4_WE,
-                    '4TH' => _MD_EXTCAL_4_TH,
-                    '4FR' => _MD_EXTCAL_4_FR,
-                    '4SA' => _MD_EXTCAL_4_SA,
-                    '4SU' => _MD_EXTCAL_4_SU,
+                    '1MO'  => _MD_EXTCAL_1_MO,
+                    '1TU'  => _MD_EXTCAL_1_TU,
+                    '1WE'  => _MD_EXTCAL_1_WE,
+                    '1TH'  => _MD_EXTCAL_1_TH,
+                    '1FR'  => _MD_EXTCAL_1_FR,
+                    '1SA'  => _MD_EXTCAL_1_SA,
+                    '1SU'  => _MD_EXTCAL_1_SU,
+                    '2MO'  => _MD_EXTCAL_2_MO,
+                    '2TU'  => _MD_EXTCAL_2_TU,
+                    '2WE'  => _MD_EXTCAL_2_WE,
+                    '2TH'  => _MD_EXTCAL_2_TH,
+                    '2FR'  => _MD_EXTCAL_2_FR,
+                    '2SA'  => _MD_EXTCAL_2_SA,
+                    '2SU'  => _MD_EXTCAL_2_SU,
+                    '3MO'  => _MD_EXTCAL_3_MO,
+                    '3TU'  => _MD_EXTCAL_3_TU,
+                    '3WE'  => _MD_EXTCAL_3_WE,
+                    '3TH'  => _MD_EXTCAL_3_TH,
+                    '3FR'  => _MD_EXTCAL_3_FR,
+                    '3SA'  => _MD_EXTCAL_3_SA,
+                    '3SU'  => _MD_EXTCAL_3_SU,
+                    '4MO'  => _MD_EXTCAL_4_MO,
+                    '4TU'  => _MD_EXTCAL_4_TU,
+                    '4WE'  => _MD_EXTCAL_4_WE,
+                    '4TH'  => _MD_EXTCAL_4_TH,
+                    '4FR'  => _MD_EXTCAL_4_FR,
+                    '4SA'  => _MD_EXTCAL_4_SA,
+                    '4SU'  => _MD_EXTCAL_4_SU,
                     '-1MO' => _MD_EXTCAL_LAST_MO,
                     '-1TU' => _MD_EXTCAL_LAST_TU,
                     '-1WE' => _MD_EXTCAL_LAST_WE,
@@ -270,34 +270,34 @@ class ExtcalTime
             case 'yearly':
 
                 $monthDays = array(
-                    '1MO' => _MD_EXTCAL_1_MO,
-                    '1TU' => _MD_EXTCAL_1_TU,
-                    '1WE' => _MD_EXTCAL_1_WE,
-                    '1TH' => _MD_EXTCAL_1_TH,
-                    '1FR' => _MD_EXTCAL_1_FR,
-                    '1SA' => _MD_EXTCAL_1_SA,
-                    '1SU' => _MD_EXTCAL_1_SU,
-                    '2MO' => _MD_EXTCAL_2_MO,
-                    '2TU' => _MD_EXTCAL_2_TU,
-                    '2WE' => _MD_EXTCAL_2_WE,
-                    '2TH' => _MD_EXTCAL_2_TH,
-                    '2FR' => _MD_EXTCAL_2_FR,
-                    '2SA' => _MD_EXTCAL_2_SA,
-                    '2SU' => _MD_EXTCAL_2_SU,
-                    '3MO' => _MD_EXTCAL_3_MO,
-                    '3TU' => _MD_EXTCAL_3_TU,
-                    '3WE' => _MD_EXTCAL_3_WE,
-                    '3TH' => _MD_EXTCAL_3_TH,
-                    '3FR' => _MD_EXTCAL_3_FR,
-                    '3SA' => _MD_EXTCAL_3_SA,
-                    '3SU' => _MD_EXTCAL_3_SU,
-                    '4MO' => _MD_EXTCAL_4_MO,
-                    '4TU' => _MD_EXTCAL_4_TU,
-                    '4WE' => _MD_EXTCAL_4_WE,
-                    '4TH' => _MD_EXTCAL_4_TH,
-                    '4FR' => _MD_EXTCAL_4_FR,
-                    '4SA' => _MD_EXTCAL_4_SA,
-                    '4SU' => _MD_EXTCAL_4_SU,
+                    '1MO'  => _MD_EXTCAL_1_MO,
+                    '1TU'  => _MD_EXTCAL_1_TU,
+                    '1WE'  => _MD_EXTCAL_1_WE,
+                    '1TH'  => _MD_EXTCAL_1_TH,
+                    '1FR'  => _MD_EXTCAL_1_FR,
+                    '1SA'  => _MD_EXTCAL_1_SA,
+                    '1SU'  => _MD_EXTCAL_1_SU,
+                    '2MO'  => _MD_EXTCAL_2_MO,
+                    '2TU'  => _MD_EXTCAL_2_TU,
+                    '2WE'  => _MD_EXTCAL_2_WE,
+                    '2TH'  => _MD_EXTCAL_2_TH,
+                    '2FR'  => _MD_EXTCAL_2_FR,
+                    '2SA'  => _MD_EXTCAL_2_SA,
+                    '2SU'  => _MD_EXTCAL_2_SU,
+                    '3MO'  => _MD_EXTCAL_3_MO,
+                    '3TU'  => _MD_EXTCAL_3_TU,
+                    '3WE'  => _MD_EXTCAL_3_WE,
+                    '3TH'  => _MD_EXTCAL_3_TH,
+                    '3FR'  => _MD_EXTCAL_3_FR,
+                    '3SA'  => _MD_EXTCAL_3_SA,
+                    '3SU'  => _MD_EXTCAL_3_SU,
+                    '4MO'  => _MD_EXTCAL_4_MO,
+                    '4TU'  => _MD_EXTCAL_4_TU,
+                    '4WE'  => _MD_EXTCAL_4_WE,
+                    '4TH'  => _MD_EXTCAL_4_TH,
+                    '4FR'  => _MD_EXTCAL_4_FR,
+                    '4SA'  => _MD_EXTCAL_4_SA,
+                    '4SU'  => _MD_EXTCAL_4_SU,
                     '-1MO' => _MD_EXTCAL_LAST_MO,
                     '-1TU' => _MD_EXTCAL_LAST_TU,
                     '-1WE' => _MD_EXTCAL_LAST_WE,
@@ -308,28 +308,28 @@ class ExtcalTime
                 );
 
                 $monthName = array(
-                    1 => _CAL_JANUARY,
-                    2 => _CAL_FEBRUARY,
-                    3 => _CAL_MARCH,
-                    4 => _CAL_APRIL,
-                    5 => _CAL_MAY,
-                    6 => _CAL_JUNE,
-                    7 => _CAL_JULY,
-                    8 => _CAL_AUGUST,
-                    9 => _CAL_SEPTEMBER,
+                    1  => _CAL_JANUARY,
+                    2  => _CAL_FEBRUARY,
+                    3  => _CAL_MARCH,
+                    4  => _CAL_APRIL,
+                    5  => _CAL_MAY,
+                    6  => _CAL_JUNE,
+                    7  => _CAL_JULY,
+                    8  => _CAL_AUGUST,
+                    9  => _CAL_SEPTEMBER,
                     10 => _CAL_OCTOBER,
                     11 => _CAL_NOVEMBER,
                     12 => _CAL_DECEMBER,
                 );
 
                 $interval = $eventOptions[1];
-                $day = $eventOptions[2];
+                $day      = $eventOptions[2];
                 array_shift($eventOptions);
                 array_shift($eventOptions);
                 array_shift($eventOptions);
                 $month = '';
                 foreach ($eventOptions as $option) {
-                    $month .= ' '.$monthName[$option].', ';
+                    $month .= ' ' . $monthName[$option] . ', ';
                 }
                 $dayString = $day;
                 if (array_key_exists($day, $monthDays)) {
