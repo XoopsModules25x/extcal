@@ -31,7 +31,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
      * @param string        $keyname   Name of the property, holding the key
      * @param bool          $idenfierName
      */
-    public function __construct($db, $tablename, $classname, $keyname, $idenfierName = false)
+    public function __construct(XoopsDatabase $db, $tablename, $classname, $keyname, $idenfierName = false)
     {
         parent::__construct($db);
         $this->table     = $db->prefix($tablename);
@@ -601,12 +601,12 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
     }
 
     /**
-     * @param null   $criteria
+     * @param null|CriteriaElement   $criteria
      * @param string $sum
      *
      * @return array|string
      */
-    public function getSum($criteria = null, $sum = '*')
+    public function getSum(CriteriaElement $criteria = null, $sum = '*')
     {
         $field   = '';
         $groupby = false;
@@ -642,12 +642,12 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
     }
 
     /**
-     * @param null   $criteria
+     * @param null|CriteriaElement   $criteria
      * @param string $max
      *
      * @return array|string
      */
-    public function getMax($criteria = null, $max = '*')
+    public function getMax(CriteriaElement $criteria = null, $max = '*')
     {
         $field   = '';
         $groupby = false;

@@ -18,7 +18,7 @@
  */
 
 // Include xoops admin header
-include_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+include_once __DIR__ . '/../../../include/cp_header.php';
 include_once __DIR__ . '/../class/ExtcalPersistableObjectHandler.php';
 include_once __DIR__ . '/../../../kernel/module.php';
 include_once __DIR__ . '/../../../class/xoopsformloader.php';
@@ -180,9 +180,9 @@ switch ($op) {
             redirect_header('etablissement.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         if (isset($_REQUEST['etablissement_id'])) {
-            $obj = &$etablissementHandler->get($_REQUEST['etablissement_id']);
+            $obj = $etablissementHandler->get($_REQUEST['etablissement_id']);
         } else {
-            $obj = &$etablissementHandler->create();
+            $obj = $etablissementHandler->create();
         }
 
         $obj->setVar('nom', $_REQUEST['nom']);

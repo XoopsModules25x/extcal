@@ -37,7 +37,7 @@ define('_EXTCAL_CLS_EVENT', 'event');
 define('_EXTCAL_CLN_EVENT', 'ExtcalEvent');
 
 //-------------------------------------------------------------------
-define('_EXTCAL_PEAR_ROOT_DEFAULT', dirname(__DIR__) . '/class/pear');
+define('_EXTCAL_PEAR_ROOT_DEFAULT', __DIR__ . '/../class/pear');
 //define('_EXTCAL_PEAR_ROOT', 'F:/wamp/www/xfr254b/xoops_lib/Frameworks/pear' );
 
 $pear_path = _EXTCAL_PEAR_ROOT_DEFAULT;

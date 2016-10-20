@@ -10,8 +10,10 @@ include_once __DIR__ . '/class/config.php';
 setlocale(LC_TIME, $xoopsConfig['language']);
 
 //***************************************************************************************
-$modversion['name']             = _MI_EXTCAL_NAME;
 $modversion['version']          = '2.39';
+$modversion['module_status']    = 'FINAL';
+$modversion['release_date']     = '2016/10/18';
+$modversion['name']             = _MI_EXTCAL_NAME;
 $modversion['description']      = _MI_EXTCAL_DESC;
 $modversion['credits']          = 'Zoullou';
 $modversion['author']           = 'Zoullou, Mage, Mamba, JJ Delalandre (JJDai)';
@@ -32,16 +34,11 @@ $modversion['sysicons16']       = 'Frameworks/moduleclasses/icons/16';
 $modversion['sysicons32']       = 'Frameworks/moduleclasses/icons/32';
 $modversion['modicons16']       = 'assets/images/icons/16';
 $modversion['modicons32']       = 'assets/images/icons/32';
-//***************************************************************************************
-
 //about
-$modversion['module_status']       = 'RC 2';
-$modversion['release_date']        = '2016/09/07';
 $modversion['module_website_url']  = 'www.xoops.org/';
 $modversion['module_website_name'] = 'XOOPS';
 $modversion['min_php']             = '5.5';
 $modversion['min_xoops']           = '2.5.8';
-
 // Admin things
 $modversion['hasAdmin']   = 1;
 $modversion['adminindex'] = 'admin/index.php';
@@ -87,7 +84,6 @@ $modversion['tables'] = array(
 );
 
 // SQL
-
 
 // Comments
 $modversion['hasComments']          = 1;

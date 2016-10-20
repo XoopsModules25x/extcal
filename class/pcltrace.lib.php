@@ -448,7 +448,7 @@ if (!defined('PCLTRACE_LIB')) {
         echo '<tr bgcolor=#0000CC>';
         echo '<td bgcolor=#0000CC width=1>';
         echo '</td>';
-        echo "<td><div align=center><font color=#FFFFFF face=$v_font>&nbsp</font></div></td>";
+        echo "<td><div align=center><span style='color: #FFFFFF; font-family: $v_font;'>&nbsp</span></div></td>";
         echo '</tr>';
         echo '</table>';
     }
@@ -479,7 +479,7 @@ if (!defined('PCLTRACE_LIB')) {
             if ($p_entry['type'] == 1) {
                 echo '<b>' . $p_entry['name'] . '</b>(' . $p_entry['param'] . ') : ' . $p_entry['message'] . ' [' . $p_entry['file'] . ', ' . $p_entry['line'] . ']<br>';
             } else {
-                if ($p_entry[type] == 2) {
+                if ($p_entry['type'] == 2) {
                     echo '<b>' . $p_entry['name'] . '</b>()=' . $p_entry['param'] . ' : ' . $p_entry['message'] . ' [' . $p_entry['file'] . ', ' . $p_entry['line'] . ']<br>';
                 } else {
                     echo $p_entry['message'] . ' [' . $p_entry['file'] . ', ' . $p_entry['line'] . ']<br>';

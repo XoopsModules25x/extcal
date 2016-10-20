@@ -1,6 +1,6 @@
 <?php
 
-include dirname(dirname(__DIR__)) . '/mainfile.php';
+include __DIR__ . '/../../mainfile.php';
 include_once __DIR__ . '/include/constantes.php';
 $params                                  = array(
     'view' => _EXTCAL_NAV_SEARCH,

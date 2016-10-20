@@ -431,6 +431,7 @@ function getNavBarTabs($currentTab = '')
     }
 
     $user       = isset($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser'] : null;
+    /** @var ExtcalCatHandler $catHandler */
     $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
     if ($catHandler->haveSubmitRight($user)) {
         $view = _EXTCAL_NAV_NEW_EVENT;

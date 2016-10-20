@@ -1,4 +1,4 @@
-2.39 Beta RC 2         NOT RELEASED
+2.39 FINAL         2016-10-18
 ===================================
 - added xoops_loadLanguage /header.php (zyspec/mamba)
 - addNavigation(basename(__FILE__))  (mamba)

@@ -1,6 +1,6 @@
 <?php
 
-include_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+include_once __DIR__ . '/../../../include/cp_header.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
 include_once __DIR__ . '/admin_header.php';
 

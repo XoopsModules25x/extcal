@@ -57,10 +57,10 @@
 
     </tbody>
 </table>
-<!--
-<form name="frmCatNew" id="frmCatNew" action="cat.php?op=new&id=0" method="post">
-    <fieldset>
-        <div class="txtcenter"><input type="submit" value="<{$smarty.const._ADD}>" name="B1" title="<{$smarty.const._ADD}>"></div>
-    </fieldset>-->
-</form>
+
+<{*<form name="frmCatNew" id="frmCatNew" action="cat.php?op=new&id=0" method="post">*}>
+    <{*<fieldset>*}>
+        <{*<div class="txtcenter"><input type="submit" value="<{$smarty.const._ADD}>" name="B1" title="<{$smarty.const._ADD}>"></div>*}>
+    <{*</fieldset>*}>
+<{*</form>*}>
 
