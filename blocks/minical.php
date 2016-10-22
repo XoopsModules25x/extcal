@@ -429,7 +429,7 @@ function _makeXMLSlideshowConf($options)
 
 /**************************************************************************/
 /**
- * @param ExtcalEvent $event
+ * @param array $event
  * @param array $eventsArray
  * @param ExtcalTime $extcalTimeHandler
  * @param $startMonth
@@ -438,7 +438,7 @@ function _makeXMLSlideshowConf($options)
  *
  * @return bool
  */
-function bExtcalMinicalAddEventToArray(ExtcalEvent $event, &$eventsArray, $extcalTimeHandler, $startMonth, $endMonth, $cats)
+function bExtcalMinicalAddEventToArray($event, &$eventsArray, $extcalTimeHandler, $startMonth, $endMonth, $cats)
 {
     // ext_echoArray($event);
     // exit;

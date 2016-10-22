@@ -976,7 +976,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
             if ($mode === 'clone') {
                 $data['event_id'] = 0;
                 $event->setVar('event_id', 0);
-                $newTitle = $event->getVar('event_title') . ' (' . _AM_EXTCAL_CLONE_OF . $data['event_id'] . ')';
+                $newTitle = $event->getVar('event_title') . ' (' . _MD_EXTCAL_CLONE_OF . $data['event_id'] . ')';
                 $event->setVar('event_title', $newTitle);
             }
 
