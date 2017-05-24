@@ -226,7 +226,7 @@ function extcal_SendMail(
     //-----------------------------
     $myts = MyTextSanitizer::getInstance();
     //$xoopsMailer = getMailer();
-    $xoopsMailer =& xoops_getMailer();
+    $xoopsMailer = xoops_getMailer();
 
     //$xoopsMailer->setToUsers($destinataires[$i]);
 
