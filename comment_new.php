@@ -25,14 +25,14 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 
-include dirname(dirname(__DIR__)).'/mainfile.php';
-$com_itemid = isset($_GET['com_itemid']) ? (int) $_GET['com_itemid'] : 0;
+include __DIR__ . '/../../mainfile.php';
+$com_itemid = isset($_GET['com_itemid']) ? (int)$_GET['com_itemid'] : 0;
 if ($com_itemid > 0) {
     // Get link title
-    $sql = 'SELECT event_title, event_desc FROM '.$xoopsDB->prefix('extcal_event').' WHERE event_id='.$com_itemid.'';
-    $result = $xoopsDB->query($sql);
-    $row = $xoopsDB->fetchArray($result);
+    $sql            = 'SELECT event_title, event_desc FROM ' . $xoopsDB->prefix('extcal_event') . ' WHERE event_id=' . $com_itemid . '';
+    $result         = $xoopsDB->query($sql);
+    $row            = $xoopsDB->fetchArray($result);
     $com_replytitle = $row['event_title'];
-    $com_replytext = $row['event_desc'];
-    include XOOPS_ROOT_PATH.'/include/comment_new.php';
+    $com_replytext  = $row['event_desc'];
+    include XOOPS_ROOT_PATH . '/include/comment_new.php';
 }

@@ -17,31 +17,31 @@
  * @author              JJDai <http://xoops.kiolo.com>
  **/
 //----------------------------------------------------
-class extcal_2_21
+class Extcal_2_21
 {
     //----------------------------------------------------
 
     /**
      * @param XoopsModule $module
-     * @param $options
+     * @param             $options
      */
-    public function __construct(XoopsModule  $module, $options)
+    public function __construct(XoopsModule $module, $options)
     {
         global $xoopsDB;
 
         // Create eXtcal upload directory if don't exist
-        $dir = XOOPS_ROOT_PATH.'/uploads/extcal';
+        $dir = XOOPS_ROOT_PATH . '/uploads/extcal';
         if (!is_dir($dir)) {
             mkdir($dir);
 
             // Copy index.html files on uploads folders
-            $indexFile = __DIR__.'/index.html';
-            copy($indexFile, XOOPS_ROOT_PATH.'/uploads/extcal/index.html');
+            $indexFile = __DIR__ . '/index.html';
+            copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extcal/index.html');
         }
 
         // Create who's not going table to fix bug. If the table exist, the query will faile
-        $sql = 'CREATE TABLE `'.$xoopsDB->prefix('extcal_eventnotmember')
-               ."` (`eventnotmember_id` int(11) NOT NULL auto_increment,`event_id` int(11) NOT NULL default '0',`uid` int(11) NOT NULL default '0',PRIMARY KEY  (`eventnotmember_id`),UNIQUE KEY `eventnotmember` (`event_id`,`uid`)) COMMENT='eXtcal By Zoullou' ;";
+        $sql = 'CREATE TABLE `' . $xoopsDB->prefix('extcal_eventnotmember')
+               . "` (`eventnotmember_id` int(11) NOT NULL auto_increment,`event_id` int(11) NOT NULL default '0',`uid` int(11) NOT NULL default '0',PRIMARY KEY  (`eventnotmember_id`),UNIQUE KEY `eventnotmember` (`event_id`,`uid`)) COMMENT='eXtcal By Zoullou' ;";
         $xoopsDB->query($sql);
     }
 

@@ -17,19 +17,19 @@
  * @author              JJDai <http://xoops.kiolo.com>
  **/
 //----------------------------------------------------
-class extcal_2_04
+class Extcal_2_04
 {
     //----------------------------------------------------
 
     /**
      * @param XoopsModule $module
-     * @param $options
+     * @param             $options
      */
-    public function __construct(XoopsModule  $module, $options)
+    public function __construct(XoopsModule $module, $options)
     {
         global $xoopsDB;
 
-        $sql = 'ALTER TABLE `'.$xoopsDB->prefix('extcal_event')."` ADD `event_nbmember` tinyint(4) NOT NULL default '0' AFTER `event_submitdate` ;";
+        $sql = 'ALTER TABLE `' . $xoopsDB->prefix('extcal_event') . "` ADD `event_nbmember` tinyint(4) NOT NULL default '0' AFTER `event_submitdate` ;";
         $xoopsDB->query($sql);
     }
 

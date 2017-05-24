@@ -116,7 +116,7 @@
 }
 
 .custom img:first-child {
-    src: url(assets/images/Critical.png);
+    src: url(images/Critical.png);
     height: 48px;
     width: 48px;
 }

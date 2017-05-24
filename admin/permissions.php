@@ -1,8 +1,8 @@
 <?php
 
-include_once dirname(dirname(dirname(__DIR__))).'/include/cp_header.php';
-include_once XOOPS_ROOT_PATH.'/class/xoopsform/grouppermform.php';
-include_once __DIR__.'/admin_header.php';
+include_once __DIR__ . '/../../../include/cp_header.php';
+include_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
+include_once __DIR__ . '/admin_header.php';
 
 $step = 'default';
 if (isset($_POST['step'])) {
@@ -43,17 +43,17 @@ switch ($step) {
         echo $permAdmin->addNavigation(basename(__FILE__));
         //***************************************************************************************
 
-        $memberHandler = xoops_getHandler('member');
+        $memberHandler          = xoops_getHandler('member');
         $groupPermissionHandler = xoops_getHandler('groupperm');
 
         // Retriving the group list
         $glist = $memberHandler->getGroupList();
 
         // Retriving Public category permission mask
-        $viewGroup = $groupPermissionHandler->getGroupIds('extcal_perm_mask', 1, $moduleId);
-        $submitGroup = $groupPermissionHandler->getGroupIds('extcal_perm_mask', 2, $moduleId);
+        $viewGroup        = $groupPermissionHandler->getGroupIds('extcal_perm_mask', 1, $moduleId);
+        $submitGroup      = $groupPermissionHandler->getGroupIds('extcal_perm_mask', 2, $moduleId);
         $autoApproveGroup = $groupPermissionHandler->getGroupIds('extcal_perm_mask', 4, $moduleId);
-        $editGroup = $groupPermissionHandler->getGroupIds('extcal_perm_mask', 8, $moduleId);
+        $editGroup        = $groupPermissionHandler->getGroupIds('extcal_perm_mask', 8, $moduleId);
 
         /**
          * @param $array
@@ -76,36 +76,36 @@ switch ($step) {
          * Public category permission mask
          */
         echo '<fieldset id="defaultBookmark"><legend><a href="#defaultBookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\'default\'); toggleIcon(\'defaultIcon\');"><img id="defaultIcon" src="../assets/images/icons/minus.gif" />&nbsp;'
-             ._AM_EXTCAL_PUBLIC_PERM_MASK.'</a></legend><div id="default">';
-        echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">'._AM_EXTCAL_INFORMATION.'</legend>';
+             . _AM_EXTCAL_PUBLIC_PERM_MASK . '</a></legend><div id="default">';
+        echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _AM_EXTCAL_INFORMATION . '</legend>';
         echo _AM_EXTCAL_PUBLIC_PERM_MASK_INFO;
         echo '</fieldset><br>';
         echo '<table class="outer" style="width:100%;">';
         echo '<form method="post" action="permissions.php">';
         echo '<tr>';
-        echo '<th colspan="8" style="text-align:center;">'._AM_EXTCAL_PUBLIC_PERM_MASK.'</th>';
+        echo '<th colspan="8" style="text-align:center;">' . _AM_EXTCAL_PUBLIC_PERM_MASK . '</th>';
         echo '</tr>';
         echo '<tr>';
-        echo '<td class="head" style="text-align:center;">'._AM_EXTCAL_GROUP_NAME.'</td>';
-        echo '<td class="head" style="text-align:center;">'._AM_EXTCAL_CAN_VIEW.'</td>';
-        echo '<td class="head" style="text-align:center;">'._AM_EXTCAL_CAN_SUBMIT.'</td>';
-        echo '<td class="head" style="text-align:center;">'._AM_EXTCAL_AUTO_APPROVE.'</td>';
-        echo '<td class="head" style="text-align:center;">'._AM_EXTCAL_CAN_EDIT.'</td>';
+        echo '<td class="head" style="text-align:center;">' . _AM_EXTCAL_GROUP_NAME . '</td>';
+        echo '<td class="head" style="text-align:center;">' . _AM_EXTCAL_CAN_VIEW . '</td>';
+        echo '<td class="head" style="text-align:center;">' . _AM_EXTCAL_CAN_SUBMIT . '</td>';
+        echo '<td class="head" style="text-align:center;">' . _AM_EXTCAL_AUTO_APPROVE . '</td>';
+        echo '<td class="head" style="text-align:center;">' . _AM_EXTCAL_CAN_EDIT . '</td>';
         echo '</tr>';
         $i = 0;
         foreach ($glist as $k => $v) {
             $style = (++$i % 2 == 0) ? 'odd' : 'even';
             echo '<tr>';
-            echo '<td class="'.$style.'">'.$v.'</td>';
-            echo '<td class="'.$style.'" style="text-align:center;"><input name="perms[extcal_perm_mask][group]['.$k.'][1]" type="checkbox"'.getChecked($viewGroup, $k).' /></td>';
-            echo '<td class="'.$style.'" style="text-align:center;"><input name="perms[extcal_perm_mask][group]['.$k.'][2]" type="checkbox"'.getChecked($submitGroup, $k).' /></td>';
-            echo '<td class="'.$style.'" style="text-align:center;"><input name="perms[extcal_perm_mask][group]['.$k.'][4]" type="checkbox"'.getChecked($autoApproveGroup, $k).' /></td>';
-            echo '<td class="'.$style.'" style="text-align:center;"><input name="perms[extcal_perm_mask][group]['.$k.'][8]" type="checkbox"'.getChecked($editGroup, $k).' /></td>';
+            echo '<td class="' . $style . '">' . $v . '</td>';
+            echo '<td class="' . $style . '" style="text-align:center;"><input name="perms[extcal_perm_mask][group][' . $k . '][1]" type="checkbox"' . getChecked($viewGroup, $k) . ' /></td>';
+            echo '<td class="' . $style . '" style="text-align:center;"><input name="perms[extcal_perm_mask][group][' . $k . '][2]" type="checkbox"' . getChecked($submitGroup, $k) . ' /></td>';
+            echo '<td class="' . $style . '" style="text-align:center;"><input name="perms[extcal_perm_mask][group][' . $k . '][4]" type="checkbox"' . getChecked($autoApproveGroup, $k) . ' /></td>';
+            echo '<td class="' . $style . '" style="text-align:center;"><input name="perms[extcal_perm_mask][group][' . $k . '][8]" type="checkbox"' . getChecked($editGroup, $k) . ' /></td>';
             echo '</tr>';
         }
         echo '<input type="hidden" name="type" value="public" />';
         echo '<input type="hidden" name="step" value="enreg" />';
-        echo '<tr><td colspan="8" style="text-align:center;" class="head"><input type="submit" value="'._SUBMIT.'" /></td></tr></form>';
+        echo '<tr><td colspan="8" style="text-align:center;" class="head"><input type="submit" value="' . _SUBMIT . '" /></td></tr></form>';
         echo '</table><br>';
 
         echo '</div></fieldset><br>';
@@ -118,21 +118,21 @@ switch ($step) {
          * Access Form
          */
         $titleOfForm = _AM_EXTCAL_VIEW_PERMISSION;
-        $permName = 'extcal_cat_view';
-        $permDesc = _AM_EXTCAL_VIEW_PERMISSION_DESC;
-        $form = new XoopsGroupPermForm($titleOfForm, $moduleId, $permName, $permDesc, 'admin/permissions.php');
+        $permName    = 'extcal_cat_view';
+        $permDesc    = _AM_EXTCAL_VIEW_PERMISSION_DESC;
+        $form        = new XoopsGroupPermForm($titleOfForm, $moduleId, $permName, $permDesc, 'admin/permissions.php');
         foreach ($cats as $cat) {
             $form->addItem($cat->getVar('cat_id'), $cat->getVar('cat_name'));
         }
 
-        echo '<fieldset id="'.$permName.'Bookmark"><legend><a href="#'.$permName.'Bookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\''.$permName.'\'); toggleIcon(\''
-             .$permName.'Icon\');"><img id="'.$permName.'Icon" src="../assets/images/icons/minus.gif" />&nbsp;'.$titleOfForm.'</a></legend><div id="'.$permName.'">';
-        echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">'._AM_EXTCAL_INFORMATION.'</legend>';
+        echo '<fieldset id="' . $permName . 'Bookmark"><legend><a href="#' . $permName . 'Bookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\'' . $permName . '\'); toggleIcon(\'' . $permName . 'Icon\');"><img id="' . $permName
+             . 'Icon" src="../assets/images/icons/minus.gif" />&nbsp;' . $titleOfForm . '</a></legend><div id="' . $permName . '">';
+        echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _AM_EXTCAL_INFORMATION . '</legend>';
         echo $permDesc;
         echo '</fieldset>';
 
         if ($catHandler->getCount()) {
-            echo $form->render().'<br>';
+            echo $form->render() . '<br>';
         } else {
             redirect_header('cat.php', 2, _AM_EXTCAL_NOPERMSSET, false);
         }
@@ -143,20 +143,20 @@ switch ($step) {
          * Submit form
          */
         $titleOfForm = _AM_EXTCAL_SUBMIT_PERMISSION;
-        $permName = 'extcal_cat_submit';
-        $permDesc = _AM_EXTCAL_SUBMIT_PERMISSION_DESC;
-        $form = new XoopsGroupPermForm($titleOfForm, $moduleId, $permName, $permDesc, 'admin/permissions.php');
+        $permName    = 'extcal_cat_submit';
+        $permDesc    = _AM_EXTCAL_SUBMIT_PERMISSION_DESC;
+        $form        = new XoopsGroupPermForm($titleOfForm, $moduleId, $permName, $permDesc, 'admin/permissions.php');
         foreach ($cats as $cat) {
             $form->addItem($cat->getVar('cat_id'), $cat->getVar('cat_name'));
         }
 
-        echo '<fieldset id="'.$permName.'Bookmark"><legend><a href="#'.$permName.'Bookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\''.$permName.'\'); toggleIcon(\''
-             .$permName.'Icon\');"><img id="'.$permName.'Icon" src="../assets/images/icons/minus.gif" />&nbsp;'.$titleOfForm.'</a></legend><div id="'.$permName.'">';
-        echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">'._AM_EXTCAL_INFORMATION.'</legend>';
+        echo '<fieldset id="' . $permName . 'Bookmark"><legend><a href="#' . $permName . 'Bookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\'' . $permName . '\'); toggleIcon(\'' . $permName . 'Icon\');"><img id="' . $permName
+             . 'Icon" src="../assets/images/icons/minus.gif" />&nbsp;' . $titleOfForm . '</a></legend><div id="' . $permName . '">';
+        echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _AM_EXTCAL_INFORMATION . '</legend>';
         echo $permDesc;
         echo '</fieldset>';
         if ($catHandler->getCount()) {
-            echo $form->render().'<br>';
+            echo $form->render() . '<br>';
         } else {
             redirect_header('cat.php', 2, _AM_EXTCAL_NOPERMSSET, false);
         }
@@ -167,20 +167,20 @@ switch ($step) {
          * Auto Approve form
          */
         $titleOfForm = _AM_EXTCAL_AUTOAPPROVE_PERMISSION;
-        $permName = 'extcal_cat_autoapprove';
-        $permDesc = _AM_EXTCAL_AUTOAPPROVE_PERMISSION_DESC;
-        $form = new XoopsGroupPermForm($titleOfForm, $moduleId, $permName, $permDesc, 'admin/permissions.php');
+        $permName    = 'extcal_cat_autoapprove';
+        $permDesc    = _AM_EXTCAL_AUTOAPPROVE_PERMISSION_DESC;
+        $form        = new XoopsGroupPermForm($titleOfForm, $moduleId, $permName, $permDesc, 'admin/permissions.php');
         foreach ($cats as $cat) {
             $form->addItem($cat->getVar('cat_id'), $cat->getVar('cat_name'));
         }
 
-        echo '<fieldset id="'.$permName.'Bookmark"><legend><a href="#'.$permName.'Bookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\''.$permName.'\'); toggleIcon(\''
-             .$permName.'Icon\');"><img id="'.$permName.'Icon" src="../assets/images/icons/minus.gif" />&nbsp;'.$titleOfForm.'</a></legend><div id="'.$permName.'">';
-        echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">'._AM_EXTCAL_INFORMATION.'</legend>';
+        echo '<fieldset id="' . $permName . 'Bookmark"><legend><a href="#' . $permName . 'Bookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\'' . $permName . '\'); toggleIcon(\'' . $permName . 'Icon\');"><img id="' . $permName
+             . 'Icon" src="../assets/images/icons/minus.gif" />&nbsp;' . $titleOfForm . '</a></legend><div id="' . $permName . '">';
+        echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _AM_EXTCAL_INFORMATION . '</legend>';
         echo $permDesc;
         echo '</fieldset>';
         if ($catHandler->getCount()) {
-            echo $form->render().'<br>';
+            echo $form->render() . '<br>';
         } else {
             redirect_header('cat.php', 2, _AM_EXTCAL_NOPERMSSET, false);
         }
@@ -191,20 +191,20 @@ switch ($step) {
          * Can edit form
          */
         $titleOfForm = _AM_EXTCAL_EDIT_PERMISSION;
-        $permName = 'extcal_cat_edit';
-        $permDesc = _AM_EXTCAL_EDIT_PERMISSION_DESC;
-        $form = new XoopsGroupPermForm($titleOfForm, $moduleId, $permName, $permDesc, 'admin/permissions.php');
+        $permName    = 'extcal_cat_edit';
+        $permDesc    = _AM_EXTCAL_EDIT_PERMISSION_DESC;
+        $form        = new XoopsGroupPermForm($titleOfForm, $moduleId, $permName, $permDesc, 'admin/permissions.php');
         foreach ($cats as $cat) {
             $form->addItem($cat->getVar('cat_id'), $cat->getVar('cat_name'));
         }
 
-        echo '<fieldset id="'.$permName.'Bookmark"><legend><a href="#'.$permName.'Bookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\''.$permName.'\'); toggleIcon(\''
-             .$permName.'Icon\');"><img id="'.$permName.'Icon" src="../assets/images/icons/minus.gif" />&nbsp;'.$titleOfForm.'</a></legend><div id="'.$permName.'">';
-        echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">'._AM_EXTCAL_INFORMATION.'</legend>';
+        echo '<fieldset id="' . $permName . 'Bookmark"><legend><a href="#' . $permName . 'Bookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\'' . $permName . '\'); toggleIcon(\'' . $permName . 'Icon\');"><img id="' . $permName
+             . 'Icon" src="../assets/images/icons/minus.gif" />&nbsp;' . $titleOfForm . '</a></legend><div id="' . $permName . '">';
+        echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _AM_EXTCAL_INFORMATION . '</legend>';
         echo $permDesc;
         echo '</fieldset>';
         if ($catHandler->getCount()) {
-            echo $form->render().'<br>';
+            echo $form->render() . '<br>';
         } else {
             redirect_header('cat.php', 2, _AM_EXTCAL_NOPERMSSET, false);
         }
@@ -221,7 +221,7 @@ switch ($step) {
         echo 'toggle(\'extcal_cat_edit\'); toggleIcon (\'extcal_cat_editIcon\');';
         echo '</script>';
 
-        include_once __DIR__.'/admin_footer.php';
+        include_once __DIR__ . '/admin_footer.php';
 
         break;
 

@@ -2,13 +2,13 @@
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once __DIR__.'/ExtcalPersistableObjectHandler.php';
-include_once __DIR__.'/perm.php';
-include_once __DIR__.'/time.php';
-include_once __DIR__.'/config.php';
-include_once __DIR__.'/extDateTime.php';
-include_once __DIR__.'/utilities.php';
-include_once __DIR__.'/../include/constantes.php';
+include_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
+include_once __DIR__ . '/perm.php';
+include_once __DIR__ . '/time.php';
+include_once __DIR__ . '/config.php';
+include_once __DIR__ . '/extDateTime.php';
+include_once __DIR__ . '/utilities.php';
+include_once __DIR__ . '/../include/constantes.php';
 
 /**
  * Class ExtcalEvent.
@@ -49,17 +49,17 @@ class ExtcalEvent extends XoopsObject
         $this->initVar('event_etablissement', XOBJ_DTYPE_INT, 5, false);
         $this->initVar('event_icone', XOBJ_DTYPE_TXTBOX, '', false);
 
-        $this->externalKey['cat_id'] = array(
-            'className' => 'cat',
+        $this->externalKey['cat_id']          = array(
+            'className'      => 'cat',
             'getMethodeName' => 'getCat',
-            'keyName' => 'cat',
-            'core' => false,
+            'keyName'        => 'cat',
+            'core'           => false,
         );
         $this->externalKey['event_submitter'] = array(
-            'className' => 'user',
+            'className'      => 'user',
             'getMethodeName' => 'get',
-            'keyName' => 'user',
-            'core' => true,
+            'keyName'        => 'user',
+            'core'           => true,
         );
     }
 
@@ -114,7 +114,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
     /**
      * @param $data
      *
-     * @return object
+     * @return XoopsObject
      */
     public function createEventForPreview($data)
     {
@@ -268,10 +268,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
     {
         if (!$event['event_isrecur']) {
             $event['formated_event_start'] = $this->_extcalTime->getFormatedDate($pattern, $event['event_start']);
-            $event['formated_event_end'] = $this->_extcalTime->getFormatedDate($pattern, $event['event_end']);
+            $event['formated_event_end']   = $this->_extcalTime->getFormatedDate($pattern, $event['event_end']);
         } else {
             $event['formated_event_start'] = $this->_extcalTime->getFormatedDate($pattern, $event['event_start']);
-            $event['formated_event_end'] = $this->_extcalTime->getFormatedDate($pattern, $event['event_end']);
+            $event['formated_event_end']   = $this->_extcalTime->getFormatedDate($pattern, $event['event_end']);
             $event['formated_reccur_rule'] = $this->_extcalTime->getFormatedReccurRule($event['event_recur_rules']);
         }
         $event['formated_event_submitdate'] = $this->_extcalTime->getFormatedDate($pattern, $event['event_submitdate']);
@@ -302,7 +302,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
     public function _checkDate(&$data)
     {
         $data['event_start'] = strtotime($data['event_start']['date']) + $data['event_start']['time'];
-        $data['event_end'] = strtotime($data['event_end']['date']) + $data['event_end']['time'];
+        $data['event_end']   = strtotime($data['event_end']['date']) + $data['event_end']['time'];
 
         if ($data['have_end'] == 0 || $data['event_start'] > $data['event_end']) {
             $data['event_end'] = $data['event_start'];
@@ -317,7 +317,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         $user = $GLOBALS['xoopsUser'];
 
         $data['event_start'] = userTimeToServerTime($data['event_start'], $this->_extcalTime->_getUserTimeZone($user));
-        $data['event_end'] = userTimeToServerTime($data['event_end'], $this->_extcalTime->_getUserTimeZone($user));
+        $data['event_end']   = userTimeToServerTime($data['event_end'], $this->_extcalTime->_getUserTimeZone($user));
     }
 
     /**
@@ -327,8 +327,8 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
     {
         $user = $GLOBALS['xoopsUser'];
 
-        $data['event_start'] = xoops_getUserTimestamp($data['event_start'], $this->_extcalTime->_getUserTimeZone($user));
-        $data['event_end'] = xoops_getUserTimestamp($data['event_end'], $this->_extcalTime->_getUserTimeZone($user));
+        $data['event_start']      = xoops_getUserTimestamp($data['event_start'], $this->_extcalTime->_getUserTimeZone($user));
+        $data['event_end']        = xoops_getUserTimestamp($data['event_end'], $this->_extcalTime->_getUserTimeZone($user));
         $data['event_submitdate'] = xoops_getUserTimestamp($data['event_submitdate'], $this->_extcalTime->_getUserTimeZone($user));
     }
 
@@ -349,10 +349,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
      */
     public function _addRecurValue(&$data)
     {
-        $data['event_isrecur'] = $this->getIsRecur($_POST);
+        $data['event_isrecur']     = $this->getIsRecur($_POST);
         $data['event_recur_rules'] = $this->getRecurRules($_POST);
         $data['event_recur_start'] = $this->getRecurStart($data, $_POST);
-        $data['event_recur_end'] = $this->getRecurEnd($data, $_POST);
+        $data['event_recur_end']   = $this->getRecurEnd($data, $_POST);
     }
 
     /***************************************************************
@@ -371,18 +371,18 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
         $eventsU = $this->getEventsUniques($criteres);
         $eventsR = $this->getEventsRecurents($criteres);
-        $events = array_merge($eventsU, $eventsR);
+        $events  = array_merge($eventsU, $eventsR);
 
         //      $events = $eventsU;
 
         //ext_echoArray($events);
 
         //Tri des evennement par date ascendante
-        $ordre = array();
+        $ordre      = array();
         $eventArray = array();
 
         while (list($k, $v) = each($events)) {
-            $ordre[] = (int) $v['event_start'];
+            $ordre[] = (int)$v['event_start'];
             $this->formatEventDate($v, $extcalConfig['event_date_week']);
             //$v['cat']['cat_light_color'] = $v['cat']['cat_color'];
             $v['cat']['cat_light_color'] = ExtcalUtilities::getLighterColor($v['cat']['cat_color'], _EXTCAL_INFOBULLE_RGB_MIN, _EXTCAL_INFOBULLE_RGB_MAX);
@@ -390,7 +390,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
                 $v['event_icone'] = $v['cat']['cat_icone'];
             }
             $v['event_desc'] = html_entity_decode($v['event_desc']);
-            $eventArray[] = $v;
+            $eventArray[]    = $v;
         }
         array_multisort($eventArray, SORT_ASC, SORT_NUMERIC, $ordre, SORT_ASC, SORT_NUMERIC);
 
@@ -511,7 +511,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
             case _EXTCAL_EVENTS_AGENDA_WEEK:
             case _EXTCAL_EVENTS_UPCOMING:
                 $start = userTimeToServerTime(mktime(0, 0, 0, $month, $day, $year), $this->_extcalTime->_getUserTimeZone($user));
-                $end = userTimeToServerTime(mktime(0, 0, 0, $month, $day + $nbDays + 1, $year), $this->_extcalTime->_getUserTimeZone($user));
+                $end   = userTimeToServerTime(mktime(0, 0, 0, $month, $day + $nbDays + 1, $year), $this->_extcalTime->_getUserTimeZone($user));
                 //$end = $start + (($nbDays + 1 )* _EXTCAL_TS_DAY);
                 //$end = userTimeToServerTime(mktime(0, 0, 0, $month, $day+(($nbJours)+1 * _EXTCAL_TS_DAY), $year), $this->_extcalTime->_getUserTimeZone($user));;
                 break;
@@ -519,7 +519,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
             case _EXTCAL_EVENTS_MONTH:
             case _EXTCAL_EVENTS_CALENDAR_MONTH:
                 $start = userTimeToServerTime(mktime(0, 0, 0, $month, 1, $year), $this->_extcalTime->_getUserTimeZone($user));
-                $end = userTimeToServerTime(mktime(23, 59, 59, $month + 1, 1, $year) - _EXTCAL_TS_DAY, $this->_extcalTime->_getUserTimeZone($user));
+                $end   = userTimeToServerTime(mktime(23, 59, 59, $month + 1, 1, $year) - _EXTCAL_TS_DAY, $this->_extcalTime->_getUserTimeZone($user));
 
                 $criteriaCompo->add(new Criteria('event_start', $end, '<='));
                 //$criteriaCompo->add(new Criteria('event_end', $start, '>='));
@@ -528,14 +528,14 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
             case _EXTCAL_EVENTS_DAY:
                 $start = userTimeToServerTime(mktime(0, 0, 0, $month, $day, $year), $this->_extcalTime->_getUserTimeZone($user));
-                $end = userTimeToServerTime(mktime(0, 0, 0, $month, $day + 1, $year), $this->_extcalTime->_getUserTimeZone($user));
+                $end   = userTimeToServerTime(mktime(0, 0, 0, $month, $day + 1, $year), $this->_extcalTime->_getUserTimeZone($user));
                 //$criteriaCompo->add(new Criteria('event_start', $end, '<='));
 
                 break;
 
             case _EXTCAL_EVENTS_YEAR:
                 $start = userTimeToServerTime(mktime(0, 0, 0, 1, 1, $year), $this->_extcalTime->_getUserTimeZone($user));
-                $end = userTimeToServerTime(mktime(0, 0, 0, 12, 31, $year), $this->_extcalTime->_getUserTimeZone($user));
+                $end   = userTimeToServerTime(mktime(0, 0, 0, 12, 31, $year), $this->_extcalTime->_getUserTimeZone($user));
                 break;
 
         }
@@ -583,7 +583,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
         reset($period);
         foreach ($period as $dt) {
-            echo $dt->format("l d-m-Y H:i:s\n").'<br>';
+            echo $dt->format("l d-m-Y H:i:s\n") . '<br>';
         }
     }
 
@@ -601,8 +601,8 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
     {
         $user = $GLOBALS['xoopsUser'];
 
-        $dayStart = userTimeToServerTime(mktime(0, 0, 0, $month, $day, $year), $this->_extcalTime->_getUserTimeZone($user));
-        $dayEnd = userTimeToServerTime(mktime(23, 59, 59, $month, $day, $year), $this->_extcalTime->_getUserTimeZone($user));
+        $dayStart      = userTimeToServerTime(mktime(0, 0, 0, $month, $day, $year), $this->_extcalTime->_getUserTimeZone($user));
+        $dayEnd        = userTimeToServerTime(mktime(23, 59, 59, $month, $day, $year), $this->_extcalTime->_getUserTimeZone($user));
         $criteriaCompo = $this->_getListCriteriaCompo($dayStart, $dayEnd, $cat, $user);
 
         return $criteriaCompo;
@@ -623,9 +623,9 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         $user = $GLOBALS['xoopsUser'];
 
         $userStartTime = mktime(0, 0, 0, $month, $day, $year);
-        $userEndTime = $userStartTime + (_EXTCAL_TS_DAY * $nbDays);
-        $weekStart = userTimeToServerTime($userStartTime, $this->_extcalTime->_getUserTimeZone($user));
-        $weekEnd = userTimeToServerTime($userEndTime, $this->_extcalTime->_getUserTimeZone($user));
+        $userEndTime   = $userStartTime + (_EXTCAL_TS_DAY * $nbDays);
+        $weekStart     = userTimeToServerTime($userStartTime, $this->_extcalTime->_getUserTimeZone($user));
+        $weekEnd       = userTimeToServerTime($userEndTime, $this->_extcalTime->_getUserTimeZone($user));
         $criteriaCompo = $this->_getCriteriaCompo($weekStart, $weekEnd, $cat, $user);
 
         return $criteriaCompo;
@@ -644,9 +644,9 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         $user = $GLOBALS['xoopsUser'];
 
         $userStartTime = mktime(0, 0, 0, $month, 1, $year);
-        $userEndTime = mktime(23, 59, 59, $month + 1, 0, $year);
-        $monthStart = userTimeToServerTime($userStartTime, $this->_extcalTime->_getUserTimeZone($user));
-        $monthEnd = userTimeToServerTime($userEndTime, $this->_extcalTime->_getUserTimeZone($user));
+        $userEndTime   = mktime(23, 59, 59, $month + 1, 0, $year);
+        $monthStart    = userTimeToServerTime($userStartTime, $this->_extcalTime->_getUserTimeZone($user));
+        $monthEnd      = userTimeToServerTime($userEndTime, $this->_extcalTime->_getUserTimeZone($user));
         $criteriaCompo = $this->_getCriteriaCompo($monthStart, $monthEnd, $cat, $user);
 
         return $criteriaCompo;
@@ -664,9 +664,9 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         $user = $GLOBALS['xoopsUser'];
 
         $userStartTime = mktime(0, 0, 0, 1, 1, $year);
-        $userEndTime = mktime(23, 59, 59, 12, 31, $year);
-        $yearStart = userTimeToServerTime($userStartTime, $this->_extcalTime->_getUserTimeZone($user));
-        $yearEnd = userTimeToServerTime($userEndTime, $this->_extcalTime->_getUserTimeZone($user));
+        $userEndTime   = mktime(23, 59, 59, 12, 31, $year);
+        $yearStart     = userTimeToServerTime($userStartTime, $this->_extcalTime->_getUserTimeZone($user));
+        $yearEnd       = userTimeToServerTime($userEndTime, $this->_extcalTime->_getUserTimeZone($user));
         $criteriaCompo = $this->_getListCriteriaCompo($yearStart, $yearEnd, $cat, $user);
 
         return $criteriaCompo;
@@ -811,12 +811,12 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
      */
     public function getThisDayEvent($nbEvent, $cat = 0)
     {
-        $day = date('j');
+        $day   = date('j');
         $month = date('n');
-        $year = date('Y');
+        $year  = date('Y');
 
         $dayStart = mktime(0, 0, 0, $month, $day, $year);
-        $dayEnd = mktime(0, 0, 0, $month, $day + 1, $year);
+        $dayEnd   = mktime(0, 0, 0, $month, $day + 1, $year);
 
         $criteriaCompo = new CriteriaCompo();
         $this->_addCatSelectCriteria($criteriaCompo, $cat);
@@ -907,12 +907,12 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
     public function _addCatPermCriteria(&$criteria, &$user)
     {
         $authorizedAccessCats = $this->_extcalPerm->getAuthorizedCat($user, 'extcal_cat_view');
-        $count = count($authorizedAccessCats);
+        $count                = count($authorizedAccessCats);
         if ($count > 0) {
-            $in = '('.$authorizedAccessCats[0];
+            $in = '(' . $authorizedAccessCats[0];
             array_shift($authorizedAccessCats);
             foreach ($authorizedAccessCats as $authorizedAccessCat) {
-                $in .= ','.$authorizedAccessCat;
+                $in .= ',' . $authorizedAccessCat;
             }
             $in .= ')';
             $criteria->add(new Criteria('cat_id', $in, 'IN'));
@@ -932,10 +932,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         }
         if (is_array($cats)) {
             if (array_search(0, $cats) === false) {
-                $in = '('.current($cats);
+                $in = '(' . current($cats);
                 array_shift($cats);
                 foreach ($cats as $cat) {
-                    $in .= ','.$cat;
+                    $in .= ',' . $cat;
                 }
                 $in .= ')';
                 $criteria->add(new Criteria('cat_id', $in, 'IN'));
@@ -949,22 +949,22 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
      * @param string $siteSide
      * @param string $mode
      * @param null   $data
-     * @return \ExtcalThemeForm
+     * @return \ExtcalThemeForm|bool
      */
     public function getEventForm($siteSide = 'user', $mode = 'new', $data = null)
     {
         global $xoopsModuleConfig;
-        $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+        $catHandler  = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
         $fileHandler = xoops_getModuleHandler(_EXTCAL_CLS_FILE, _EXTCAL_MODULE);
 
         /***************************************************/
-        include_once __DIR__.'/etablissement.php';
+        include_once __DIR__ . '/etablissement.php';
         if ($siteSide === 'admin') {
             $action = 'event.php?op=enreg';
-            $cats = $catHandler->getAllCat($GLOBALS['xoopsUser'], 'all');
+            $cats   = $catHandler->getAllCat($GLOBALS['xoopsUser'], 'all');
         } else {
             $action = 'post.php';
-            $cats = $catHandler->getAllCat($GLOBALS['xoopsUser']);
+            $cats   = $catHandler->getAllCat($GLOBALS['xoopsUser']);
         }
         /***************************************************/
         $reccurOptions = array();
@@ -976,45 +976,45 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
             if ($mode === 'clone') {
                 $data['event_id'] = 0;
                 $event->setVar('event_id', 0);
-                $newTitle = $event->getVar('event_title').' ('._AM_EXTCAL_CLONE_OF.$data['event_id'].')';
+                $newTitle = $event->getVar('event_title') . ' (' . _MD_EXTCAL_CLONE_OF . $data['event_id'] . ')';
                 $event->setVar('event_title', $newTitle);
             }
 
-            $formTitle = _MD_EXTCAL_EDIT_EVENT;
-            $formName = 'modify_event';
-            $title = $event->getVar('event_title', 'e');
-            $cat = $event->getVar('cat_id');
-            $desc = $event->getVar('event_desc', 'e');
-            $nbMember = $event->getVar('event_nbmember', 'e');
-            $organisateur = $event->getVar('event_organisateur');
-            $contact = $event->getVar('event_contact', 'e');
-            $url = $event->getVar('event_url', 'e');
-            $email = $event->getVar('event_email', 'e');
-            $event_address = $event->getVar('event_address', 'e');
-            $startDateValue = xoops_getUserTimestamp($event->getVar('event_start'), $this->_extcalTime->_getUserTimeZone($GLOBALS['xoopsUser']));
-            $endDateValue = xoops_getUserTimestamp($event->getVar('event_end'), $this->_extcalTime->_getUserTimeZone($GLOBALS['xoopsUser']));
-            $event_picture1 = $event->getVar('event_picture1');
-            $event_picture2 = $event->getVar('event_picture2');
-            $event_price = $event->getVar('event_price');
+            $formTitle           = _MD_EXTCAL_EDIT_EVENT;
+            $formName            = 'modify_event';
+            $title               = $event->getVar('event_title', 'e');
+            $cat                 = $event->getVar('cat_id');
+            $desc                = $event->getVar('event_desc', 'e');
+            $nbMember            = $event->getVar('event_nbmember', 'e');
+            $organisateur        = $event->getVar('event_organisateur');
+            $contact             = $event->getVar('event_contact', 'e');
+            $url                 = $event->getVar('event_url', 'e');
+            $email               = $event->getVar('event_email', 'e');
+            $event_address       = $event->getVar('event_address', 'e');
+            $startDateValue      = xoops_getUserTimestamp($event->getVar('event_start'), $this->_extcalTime->_getUserTimeZone($GLOBALS['xoopsUser']));
+            $endDateValue        = xoops_getUserTimestamp($event->getVar('event_end'), $this->_extcalTime->_getUserTimeZone($GLOBALS['xoopsUser']));
+            $event_picture1      = $event->getVar('event_picture1');
+            $event_picture2      = $event->getVar('event_picture2');
+            $event_price         = $event->getVar('event_price');
             $event_etablissement = $event->getVar('event_etablissement');
-            $event_icone = $event->getVar('event_icone');
+            $event_icone         = $event->getVar('event_icone');
 
             // Configuring recurring form
             $eventOptions = explode('|', $event->getVar('event_recur_rules'));
-            $reccurMode = $eventOptions[0];
+            $reccurMode   = $eventOptions[0];
             array_shift($eventOptions);
             switch ($reccurMode) {
 
                 case 'daily':
 
-                    $reccurOptions['rrule_freq'] = 'daily';
+                    $reccurOptions['rrule_freq']           = 'daily';
                     $reccurOptions['rrule_daily_interval'] = $eventOptions[0];
 
                     break;
 
                 case 'weekly':
 
-                    $reccurOptions['rrule_freq'] = 'weekly';
+                    $reccurOptions['rrule_freq']            = 'weekly';
                     $reccurOptions['rrule_weekly_interval'] = $eventOptions[0];
                     array_shift($eventOptions);
                     $reccurOptions['rrule_weekly_bydays'] = $eventOptions;
@@ -1023,7 +1023,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case 'monthly':
 
-                    $reccurOptions['rrule_freq'] = 'monthly';
+                    $reccurOptions['rrule_freq']             = 'monthly';
                     $reccurOptions['rrule_monthly_interval'] = $eventOptions[0];
                     array_shift($eventOptions);
                     if (0 !== strpos($eventOptions[0], 'MD')) {
@@ -1036,7 +1036,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case 'yearly':
 
-                    $reccurOptions['rrule_freq'] = 'yearly';
+                    $reccurOptions['rrule_freq']            = 'yearly';
                     $reccurOptions['rrule_yearly_interval'] = $eventOptions[0];
                     array_shift($eventOptions);
                     $reccurOptions['rrule_yearly_byday'] = $eventOptions[0];
@@ -1050,42 +1050,42 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
             $files = $fileHandler->objectToArray($fileHandler->getEventFiles($data['event_id']));
             $fileHandler->formatFilesSize($files);
         } elseif ($mode === 'preview') {
-            $formTitle = _MD_EXTCAL_SUBMIT_EVENT;
-            $formName = 'submit_event';
-            $title = $data['event_title'];
-            $cat = $data['cat_id'];
-            $desc = $data['event_desc'];
-            $nbMember = $data['event_nbmember'];
-            $organisateur = $data['event_organisateur'];
-            $contact = $data['event_contact'];
-            $url = $data['event_url'];
-            $email = $data['event_email'];
-            $event_address = $data['event_address'];
-            $startDateValue = $data['event_start'];
-            $endDateValue = $data['event_end'];
-            $eventEndOk = $data['have_end'];
-            $event_picture1 = $data['event_picture1'];
-            $event_picture2 = $data['event_picture2'];
-            $event_price = $data['event_price'];
+            $formTitle           = _MD_EXTCAL_SUBMIT_EVENT;
+            $formName            = 'submit_event';
+            $title               = $data['event_title'];
+            $cat                 = $data['cat_id'];
+            $desc                = $data['event_desc'];
+            $nbMember            = $data['event_nbmember'];
+            $organisateur        = $data['event_organisateur'];
+            $contact             = $data['event_contact'];
+            $url                 = $data['event_url'];
+            $email               = $data['event_email'];
+            $event_address       = $data['event_address'];
+            $startDateValue      = $data['event_start'];
+            $endDateValue        = $data['event_end'];
+            $eventEndOk          = $data['have_end'];
+            $event_picture1      = $data['event_picture1'];
+            $event_picture2      = $data['event_picture2'];
+            $event_price         = $data['event_price'];
             $event_etablissement = $data['event_etablissement'];
-            $event_icone = $data['event_icone'];
+            $event_icone         = $data['event_icone'];
 
             // Configuring recurring form
             $eventOptions = explode('|', $this->getRecurRules($_POST));
-            $reccurMode = $eventOptions[0];
+            $reccurMode   = $eventOptions[0];
             array_shift($eventOptions);
             switch ($reccurMode) {
 
                 case 'daily':
 
-                    $reccurOptions['rrule_freq'] = 'daily';
+                    $reccurOptions['rrule_freq']           = 'daily';
                     $reccurOptions['rrule_daily_interval'] = $eventOptions[0];
 
                     break;
 
                 case 'weekly':
 
-                    $reccurOptions['rrule_freq'] = 'weekly';
+                    $reccurOptions['rrule_freq']            = 'weekly';
                     $reccurOptions['rrule_weekly_interval'] = $eventOptions[0];
                     array_shift($eventOptions);
                     $reccurOptions['rrule_weekly_bydays'] = $eventOptions;
@@ -1094,7 +1094,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case 'monthly':
 
-                    $reccurOptions['rrule_freq'] = 'monthly';
+                    $reccurOptions['rrule_freq']             = 'monthly';
                     $reccurOptions['rrule_monthly_interval'] = $eventOptions[0];
                     array_shift($eventOptions);
                     if (0 !== strpos($eventOptions[0], 'MD')) {
@@ -1107,7 +1107,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case 'yearly':
 
-                    $reccurOptions['rrule_freq'] = 'yearly';
+                    $reccurOptions['rrule_freq']            = 'yearly';
                     $reccurOptions['rrule_yearly_interval'] = $eventOptions[0];
                     array_shift($eventOptions);
                     $reccurOptions['rrule_yearly_byday'] = $eventOptions[0];
@@ -1121,26 +1121,26 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
             $files = $fileHandler->objectToArray($fileHandler->getEventFiles($data['event_id']));
             $fileHandler->formatFilesSize($files);
         } else {
-            $formTitle = _MD_EXTCAL_SUBMIT_EVENT;
-            $formName = 'submit_event';
-            $title = '';
-            $cat = '';
-            $desc = '';
-            $nbMember = 0;
-            $organisateur = '';
-            $contact = '';
-            $url = '';
-            $email = '';
-            $event_address = '';
-            $startDateValue = 0;
-            $endDateValue = 0;
-            $eventEndOk = 0;
-            $event_picture1 = '';
-            $event_picture2 = '';
-            $event_price = '';
+            $formTitle           = _MD_EXTCAL_SUBMIT_EVENT;
+            $formName            = 'submit_event';
+            $title               = '';
+            $cat                 = '';
+            $desc                = '';
+            $nbMember            = 0;
+            $organisateur        = '';
+            $contact             = '';
+            $url                 = '';
+            $email               = '';
+            $event_address       = '';
+            $startDateValue      = 0;
+            $endDateValue        = 0;
+            $eventEndOk          = 0;
+            $event_picture1      = '';
+            $event_picture2      = '';
+            $event_price         = '';
             $event_etablissement = '';
-            $files = array();
-            $event_icone = '';
+            $files               = array();
+            $event_icone         = '';
         }
 
         // Create XoopsForm Object
@@ -1160,8 +1160,8 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         $form->addElement($catSelect, true);
         //-----------------------------------------------------------
 
-        $file_path = __DIR__.'/../assets/css/images';
-        $tf = XoopsLists::getImgListAsArray($file_path);
+        $file_path = __DIR__ . '/../assets/css/images';
+        $tf        = XoopsLists::getImgListAsArray($file_path);
         array_unshift($tf, _MD_EXTCAL_NONE);
         $xfIcones = new XoopsFormSelect(_MD_EXTCAL_ICONE, 'event_icone', $event_icone, '');
         $xfIcones->addOptionArray($tf);
@@ -1170,14 +1170,14 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         //etablissement
         $etablissementHandler = xoops_getModuleHandler(_EXTCAL_CLS_ETABLISSEMENT, _EXTCAL_MODULE);
         $etablissement_select = new XoopsFormSelect(_MD_EXTCAL_ETABLISSEMENT, 'event_etablissement', $event_etablissement);
-        $criteria = new CriteriaCompo();
+        $criteria             = new CriteriaCompo();
         $criteria->setSort('nom');
         $criteria->setOrder('ASC');
 
         //$lstEtablissement = $etablissementHandler->getList($criteria);
         $etablissement_arr = $etablissementHandler->getAll($criteria);
-        $tEts = array();
-        $tEts[0] = _MD_EXTCAL_NONE;
+        $tEts              = array();
+        $tEts[0]           = _MD_EXTCAL_NONE;
         foreach (array_keys($etablissement_arr) as $i) {
             $tEts[$etablissement_arr[$i]->getVar('id')] = $etablissement_arr[$i]->getVar('nom');
             //            $tEts[$etablissement_arr[$i]['id']] = $etablissement_arr[$i]['nom'];
@@ -1200,11 +1200,11 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
         // Description
         if (class_exists('XoopsFormEditor')) {
-            $options['name'] = 'event_desc';
-            $options['value'] = $desc;
-            $options['rows'] = 5;
-            $options['cols'] = '100%';
-            $options['width'] = '100%';
+            $options['name']   = 'event_desc';
+            $options['value']  = $desc;
+            $options['rows']   = 5;
+            $options['cols']   = '100%';
+            $options['width']  = '100%';
             $options['height'] = '200px';
             if ($isAdmin) {
                 $descEditor = new XoopsFormEditor(_MD_EXTCAL_DESCRIPTION, $xoopsModuleConfig['editorAdmin'], $options, $nohtml = false, $onfailure = 'textarea');
@@ -1240,11 +1240,11 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
         // Address
         if (class_exists('XoopsFormEditor')) {
-            $options['name'] = 'event_address';
-            $options['value'] = $event_address;
-            $options['rows'] = 5;
-            $options['cols'] = '100%';
-            $options['width'] = '100%';
+            $options['name']   = 'event_address';
+            $options['value']  = $event_address;
+            $options['rows']   = 5;
+            $options['cols']   = '100%';
+            $options['width']  = '100%';
             $options['height'] = '200px';
             if ($isAdmin) {
                 $addressEditor = new XoopsFormEditor(_MD_EXTCAL_DESCRIPTION, $xoopsModuleConfig['editorAdmin'], $options, $nohtml = false, $onfailure = 'textarea');
@@ -1265,7 +1265,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         if (count($files) > 0) {
             $eventFiles = new ExtcalFormFileCheckBox('', 'filetokeep');
             foreach ($files as $file) {
-                $name = $file['file_nicename'].' (<i>'.$file['file_mimetype'].'</i>) '.$file['formated_file_size'];
+                $name = $file['file_nicename'] . ' (<i>' . $file['file_mimetype'] . '</i>) ' . $file['formated_file_size'];
                 $eventFiles->addOption($file['file_id'], $name);
             }
             $fileElmtTray->addElement($eventFiles);
@@ -1281,7 +1281,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         //Picture1
         $file_tray = new XoopsFormElementTray(sprintf(_MD_EXTCAL_FORM_IMG, 1), '');
         if (!empty($event_picture1)) {
-            $file_tray->addElement(new XoopsFormLabel('', "<img src='".XOOPS_URL.'/uploads/extcal/'.$event_picture1."' name='image' id='image' alt=''/><br><br>"));
+            $file_tray->addElement(new XoopsFormLabel('', "<img src='" . XOOPS_URL . '/uploads/extcal/' . $event_picture1 . "' name='image' id='image' alt=''/><br><br>"));
             $check_del_img = new XoopsFormCheckBox('', 'delimg_1');
             $check_del_img->addOption(1, _MD_EXTCAL_DEL_IMG);
             $file_tray->addElement($check_del_img);
@@ -1292,8 +1292,8 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         }
         $file_img->setExtra("size ='40'");
         $file_tray->addElement($file_img);
-        $msg = sprintf(_MD_EXTCAL_IMG_CONFIG, (int) (400728 / 1000), 500, 500);
-        $file_label = new XoopsFormLabel('', '<br>'.$msg);
+        $msg        = sprintf(_MD_EXTCAL_IMG_CONFIG, (int)(400728 / 1000), 500, 500);
+        $file_label = new XoopsFormLabel('', '<br>' . $msg);
         $file_tray->addElement($file_label);
         $form->addElement($file_tray);
         $form->addElement(new XoopsFormHidden('file1', $event_picture1));
@@ -1301,7 +1301,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         //Picture2
         $file_tray = new XoopsFormElementTray(sprintf(_MD_EXTCAL_FORM_IMG, 2), '');
         if (!empty($event_picture2)) {
-            $file_tray->addElement(new XoopsFormLabel('', "<img src='".XOOPS_URL.'/uploads/extcal/'.$event_picture2."' name='image' id='image' alt=''/><br><br>"));
+            $file_tray->addElement(new XoopsFormLabel('', "<img src='" . XOOPS_URL . '/uploads/extcal/' . $event_picture2 . "' name='image' id='image' alt=''/><br><br>"));
             $check_del_img = new XoopsFormCheckBox('', 'delimg_2');
             $check_del_img->addOption(1, _MD_EXTCAL_DEL_IMG);
             $file_tray->addElement($check_del_img);
@@ -1312,8 +1312,8 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         }
         $file_img->setExtra("size ='40'");
         $file_tray->addElement($file_img);
-        $msg = sprintf(_MD_EXTCAL_IMG_CONFIG, (int) (400728 / 1000), 500, 500);
-        $file_label = new XoopsFormLabel('', '<br>'.$msg);
+        $msg        = sprintf(_MD_EXTCAL_IMG_CONFIG, (int)(400728 / 1000), 500, 500);
+        $file_label = new XoopsFormLabel('', '<br>' . $msg);
         $file_tray->addElement($file_label);
         $form->addElement($file_tray);
         $form->addElement(new XoopsFormHidden('file2', $event_picture2));
@@ -1380,7 +1380,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
                 $recurRules = 'weekly|';
                 $recurRules .= $parm['rrule_weekly_interval'];
                 foreach ($parm['rrule_weekly_bydays'] as $day) {
-                    $recurRules .= '|'.$day;
+                    $recurRules .= '|' . $day;
                 }
 
                 break;
@@ -1390,11 +1390,11 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
                     $parm['rrule_monthly_interval'] = 0;
                 }
                 $recurRules = 'monthly|';
-                $recurRules .= $parm['rrule_monthly_interval'].'|';
+                $recurRules .= $parm['rrule_monthly_interval'] . '|';
                 if ($parm['rrule_monthly_byday'] != '') {
                     $recurRules .= $parm['rrule_monthly_byday'];
                 } else {
-                    $recurRules .= 'MD'.$parm['rrule_bymonthday'];
+                    $recurRules .= 'MD' . $parm['rrule_bymonthday'];
                 }
 
                 break;
@@ -1422,15 +1422,15 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
                     $parm['rrule_yearly_interval'] = 0;
                 }
                 if ($parm['rrule_yearly_byday'] == '') {
-                    $time = strtotime($parm['event_start']['date']);
+                    $time                       = strtotime($parm['event_start']['date']);
                     $parm['rrule_yearly_byday'] = date('j', mktime(0, 0, 0, date('m', $time), date('d', $time), date('Y', $time)));
                 }
 
                 $recurRules = 'yearly|';
                 $recurRules .= $parm['rrule_yearly_interval'];
-                $recurRules .= '|'.$parm['rrule_yearly_byday'];
+                $recurRules .= '|' . $parm['rrule_yearly_byday'];
                 foreach ($parm['rrule_yearly_bymonths'] as $month) {
-                    $recurRules .= '|'.$month;
+                    $recurRules .= '|' . $month;
                 }
 
                 break;
@@ -1486,7 +1486,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 // Getting the first weekday TS
                 $startWeekTS = mktime(0, 0, 0, date('n', $data['event_recur_start']), date('j', $data['event_recur_start']), date('Y', $data['event_recur_start']));
-                $offset = date('w', $startWeekTS) - $extcalConfig['week_start_day'];
+                $offset      = date('w', $startWeekTS) - $extcalConfig['week_start_day'];
                 $startWeekTS -= ($offset * _EXTCAL_TS_DAY);
 
                 $recurEnd = $startWeekTS + ($parm['rrule_weekly_interval'] * _EXTCAL_TS_WEEK) - 1;
@@ -1520,7 +1520,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
     {
         global $extcalConfig;
 
-        $recuEvents = array();
+        $recuEvents   = array();
         $eventOptions = explode('|', $event['event_recur_rules']);
 
         switch ($eventOptions[0]) {
@@ -1533,7 +1533,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
                 }
 
                 $occurEventStart = $event['event_recur_start'];
-                $occurEventEnd = $event['event_recur_start'] + ($event['event_end'] - $event['event_start']);
+                $occurEventEnd   = $event['event_recur_start'] + ($event['event_end'] - $event['event_start']);
 
                 $nbOccur = 0;
                 // This variable is used to stop the loop after we add all occur on the view to keep good performance
@@ -1547,9 +1547,9 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
                      $occurEventEnd >= $periodStart
                     ) {
                         $event['event_start'] = $occurEventStart;
-                        $event['event_end'] = $occurEventEnd;
+                        $event['event_end']   = $occurEventEnd;
 
-                        $recuEvents[] = $event;
+                        $recuEvents[]    = $event;
                         $isOccurOnPeriod = true;
                     } elseif ($isOccurOnPeriod) {
                         break;
@@ -1575,11 +1575,11 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 // Getting the first weekday TS
                 $startWeekTS = mktime(0, 0, 0, date('n', $event['event_recur_start']), date('j', $event['event_recur_start']), date('Y', $event['event_recur_start']));
-                $offset = date('w', $startWeekTS) - $extcalConfig['week_start_day'];
+                $offset      = date('w', $startWeekTS) - $extcalConfig['week_start_day'];
                 $startWeekTS = $startWeekTS - ($offset * _EXTCAL_TS_DAY) + _EXTCAL_TS_WEEK;
 
                 $occurEventStart = $event['event_recur_start'];
-                $occurEventEnd = $event['event_recur_start'] + ($event['event_end'] - $event['event_start']);
+                $occurEventEnd   = $event['event_recur_start'] + ($event['event_end'] - $event['event_start']);
 
                 $dayArray = array('SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA');
 
@@ -1595,7 +1595,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
                         // This week day is selected
 
                         $event['event_start'] = $occurEventStart;
-                        $event['event_end'] = $occurEventEnd;
+                        $event['event_end']   = $occurEventEnd;
 
                         $recuEvents[] = $event;
                     }
@@ -1619,14 +1619,14 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
                 }
                 array_shift($eventOptions);
 
-                $day = date('j', $event['event_recur_start']);
+                $day   = date('j', $event['event_recur_start']);
                 $month = date('n', $event['event_recur_start']);
-                $year = date('Y', $event['event_recur_start']);
+                $year  = date('Y', $event['event_recur_start']);
 
                 $nbOccur = 0;
 
                 $eventHourOccurStart = $event['event_recur_start'] - mktime(0, 0, 0, $month, $day, $year);
-                $eventHourOccurEnd = $event['event_end'] - $event['event_start'];
+                $eventHourOccurEnd   = $event['event_end'] - $event['event_start'];
 
                 // Parse all occurence of this event
                 while ($nbOccur < $rRuleInterval) {
@@ -1636,7 +1636,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
                     }
 
                     $occurEventStart = $eventDayOccurStart + $eventHourOccurStart;
-                    $occurEventEnd = $occurEventStart + $eventHourOccurEnd;
+                    $occurEventEnd   = $occurEventStart + $eventHourOccurEnd;
 
                     if // Event start falls within search period
                     ($occurEventStart <= $periodEnd
@@ -1646,7 +1646,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
                      $occurEventStart >= $event['event_recur_start']
                     ) {
                         $event['event_start'] = $occurEventStart;
-                        $event['event_end'] = $occurEventEnd;
+                        $event['event_end']   = $occurEventEnd;
 
                         $recuEvents[] = $event;
                     } elseif ($occurEventStart > $periodEnd) {
@@ -1673,14 +1673,14 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
                 $dayCode = $eventOptions[0];
                 array_shift($eventOptions);
 
-                $day = date('j', $event['event_recur_start']);
+                $day   = date('j', $event['event_recur_start']);
                 $month = date('n', $event['event_recur_start']);
-                $year = date('Y', $event['event_recur_start']);
+                $year  = date('Y', $event['event_recur_start']);
 
                 $nbOccur = 0;
 
                 $eventHourOccurStart = $event['event_recur_start'] - mktime(0, 0, 0, $month, $day, $year);
-                $eventHourOccurEnd = $event['event_end'] - $event['event_start'];
+                $eventHourOccurEnd   = $event['event_end'] - $event['event_start'];
 
                 // If recurring month not specified, make it starting month
                 if (!count($eventOptions)) {
@@ -1695,7 +1695,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
                     }
 
                     $occurEventStart = $eventDayOccurStart + $eventHourOccurStart;
-                    $occurEventEnd = $eventDayOccurStart + $eventHourOccurEnd;
+                    $occurEventEnd   = $eventDayOccurStart + $eventHourOccurEnd;
 
                     if // Event start falls within search period
                     (($occurEventStart <= $periodEnd)
@@ -1705,7 +1705,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
                      in_array($month, $eventOptions)
                     ) {
                         $event['event_start'] = $occurEventStart;
-                        $event['event_end'] = $occurEventEnd;
+                        $event['event_end']   = $occurEventEnd;
 
                         $recuEvents[] = $event;
                     } elseif ($occurEventStart > $periodEnd) {
@@ -1748,10 +1748,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '1SU':
 
-                    $ts = mktime(0, 0, 0, $month, 1, $year);
+                    $ts        = mktime(0, 0, 0, $month, 1, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 0) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 0) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 0) {
                         ++$dayOfWeek;
                         ++$i;
@@ -1763,10 +1763,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '1MO':
 
-                    $ts = mktime(0, 0, 0, $month, 1, $year);
+                    $ts        = mktime(0, 0, 0, $month, 1, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 1) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 1) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 1) {
                         ++$dayOfWeek;
                         ++$i;
@@ -1778,10 +1778,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '1TU':
 
-                    $ts = mktime(0, 0, 0, $month, 1, $year);
+                    $ts        = mktime(0, 0, 0, $month, 1, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 2) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 2) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 2) {
                         ++$dayOfWeek;
                         ++$i;
@@ -1793,10 +1793,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '1WE':
 
-                    $ts = mktime(0, 0, 0, $month, 1, $year);
+                    $ts        = mktime(0, 0, 0, $month, 1, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 3) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 3) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 3) {
                         ++$dayOfWeek;
                         ++$i;
@@ -1808,10 +1808,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '1TH':
 
-                    $ts = mktime(0, 0, 0, $month, 1, $year);
+                    $ts        = mktime(0, 0, 0, $month, 1, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 4) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 4) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 4) {
                         ++$dayOfWeek;
                         ++$i;
@@ -1823,10 +1823,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '1FR':
 
-                    $ts = mktime(0, 0, 0, $month, 1, $year);
+                    $ts        = mktime(0, 0, 0, $month, 1, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 5) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 5) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 5) {
                         ++$dayOfWeek;
                         ++$i;
@@ -1838,10 +1838,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '1SA':
 
-                    $ts = mktime(0, 0, 0, $month, 1, $year);
+                    $ts        = mktime(0, 0, 0, $month, 1, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 6) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 6) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 6) {
                         ++$dayOfWeek;
                         ++$i;
@@ -1853,10 +1853,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '2SU':
 
-                    $ts = mktime(0, 0, 0, $month, 7, $year);
+                    $ts        = mktime(0, 0, 0, $month, 7, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 0) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 0) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 0) {
                         ++$dayOfWeek;
                         ++$i;
@@ -1868,10 +1868,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '2MO':
 
-                    $ts = mktime(0, 0, 0, $month, 7, $year);
+                    $ts        = mktime(0, 0, 0, $month, 7, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 1) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 1) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 1) {
                         ++$dayOfWeek;
                         ++$i;
@@ -1883,10 +1883,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '2TU':
 
-                    $ts = mktime(0, 0, 0, $month, 7, $year);
+                    $ts        = mktime(0, 0, 0, $month, 7, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 2) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 2) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 2) {
                         ++$dayOfWeek;
                         ++$i;
@@ -1898,10 +1898,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '2WE':
 
-                    $ts = mktime(0, 0, 0, $month, 7, $year);
+                    $ts        = mktime(0, 0, 0, $month, 7, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 3) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 3) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 3) {
                         ++$dayOfWeek;
                         ++$i;
@@ -1913,10 +1913,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '2TH':
 
-                    $ts = mktime(0, 0, 0, $month, 7, $year);
+                    $ts        = mktime(0, 0, 0, $month, 7, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 4) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 4) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 4) {
                         ++$dayOfWeek;
                         ++$i;
@@ -1928,10 +1928,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '2FR':
 
-                    $ts = mktime(0, 0, 0, $month, 7, $year);
+                    $ts        = mktime(0, 0, 0, $month, 7, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 5) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 5) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 5) {
                         ++$dayOfWeek;
                         ++$i;
@@ -1943,10 +1943,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '2SA':
 
-                    $ts = mktime(0, 0, 0, $month, 7, $year);
+                    $ts        = mktime(0, 0, 0, $month, 7, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 6) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 6) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 6) {
                         ++$dayOfWeek;
                         ++$i;
@@ -1958,10 +1958,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '3SU':
 
-                    $ts = mktime(0, 0, 0, $month, 14, $year);
+                    $ts        = mktime(0, 0, 0, $month, 14, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 0) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 0) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 0) {
                         ++$dayOfWeek;
                         ++$i;
@@ -1973,10 +1973,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '3MO':
 
-                    $ts = mktime(0, 0, 0, $month, 14, $year);
+                    $ts        = mktime(0, 0, 0, $month, 14, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 1) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 1) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 1) {
                         ++$dayOfWeek;
                         ++$i;
@@ -1988,10 +1988,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '3TU':
 
-                    $ts = mktime(0, 0, 0, $month, 14, $year);
+                    $ts        = mktime(0, 0, 0, $month, 14, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 2) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 2) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 2) {
                         ++$dayOfWeek;
                         ++$i;
@@ -2003,10 +2003,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '3WE':
 
-                    $ts = mktime(0, 0, 0, $month, 14, $year);
+                    $ts        = mktime(0, 0, 0, $month, 14, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 3) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 3) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 3) {
                         ++$dayOfWeek;
                         ++$i;
@@ -2018,10 +2018,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '3TH':
 
-                    $ts = mktime(0, 0, 0, $month, 14, $year);
+                    $ts        = mktime(0, 0, 0, $month, 14, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 4) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 4) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 4) {
                         ++$dayOfWeek;
                         ++$i;
@@ -2033,10 +2033,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '3FR':
 
-                    $ts = mktime(0, 0, 0, $month, 14, $year);
+                    $ts        = mktime(0, 0, 0, $month, 14, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 5) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 5) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 5) {
                         ++$dayOfWeek;
                         ++$i;
@@ -2048,10 +2048,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '3SA':
 
-                    $ts = mktime(0, 0, 0, $month, 14, $year);
+                    $ts        = mktime(0, 0, 0, $month, 14, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 6) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 6) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 6) {
                         ++$dayOfWeek;
                         ++$i;
@@ -2063,10 +2063,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '4SU':
 
-                    $ts = mktime(0, 0, 0, $month, 21, $year);
+                    $ts        = mktime(0, 0, 0, $month, 21, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 0) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 0) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 0) {
                         ++$dayOfWeek;
                         ++$i;
@@ -2078,10 +2078,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '4MO':
 
-                    $ts = mktime(0, 0, 0, $month, 21, $year);
+                    $ts        = mktime(0, 0, 0, $month, 21, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 1) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 1) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 1) {
                         ++$dayOfWeek;
                         ++$i;
@@ -2093,10 +2093,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '4TU':
 
-                    $ts = mktime(0, 0, 0, $month, 21, $year);
+                    $ts        = mktime(0, 0, 0, $month, 21, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 2) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 2) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 2) {
                         ++$dayOfWeek;
                         ++$i;
@@ -2108,10 +2108,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '4WE':
 
-                    $ts = mktime(0, 0, 0, $month, 21, $year);
+                    $ts        = mktime(0, 0, 0, $month, 21, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 3) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 3) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 3) {
                         ++$dayOfWeek;
                         ++$i;
@@ -2123,10 +2123,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '4TH':
 
-                    $ts = mktime(0, 0, 0, $month, 21, $year);
+                    $ts        = mktime(0, 0, 0, $month, 21, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 4) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 4) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 4) {
                         ++$dayOfWeek;
                         ++$i;
@@ -2138,10 +2138,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '4FR':
 
-                    $ts = mktime(0, 0, 0, $month, 21, $year);
+                    $ts        = mktime(0, 0, 0, $month, 21, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 5) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 5) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 5) {
                         ++$dayOfWeek;
                         ++$i;
@@ -2153,10 +2153,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '4SA':
 
-                    $ts = mktime(0, 0, 0, $month, 21, $year);
+                    $ts        = mktime(0, 0, 0, $month, 21, $year);
                     $dayOfWeek = date('w', $ts);
-                    $ts = (date('w', $ts) == 6) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i = 0;
+                    $ts        = (date('w', $ts) == 6) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 6) {
                         ++$dayOfWeek;
                         ++$i;
@@ -2168,9 +2168,9 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '-1SU':
 
-                    $ts = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
+                    $ts        = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
                     $dayOfWeek = date('w', $ts);
-                    $i = 0;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 0) {
                         ++$dayOfWeek;
                         ++$i;
@@ -2185,9 +2185,9 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '-1MO':
 
-                    $ts = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
+                    $ts        = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
                     $dayOfWeek = date('w', $ts);
-                    $i = 0;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 1) {
                         ++$dayOfWeek;
                         ++$i;
@@ -2202,9 +2202,9 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '-1TU':
 
-                    $ts = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
+                    $ts        = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
                     $dayOfWeek = date('w', $ts);
-                    $i = 0;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 2) {
                         ++$dayOfWeek;
                         ++$i;
@@ -2219,9 +2219,9 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '-1WE':
 
-                    $ts = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
+                    $ts        = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
                     $dayOfWeek = date('w', $ts);
-                    $i = 0;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 3) {
                         ++$dayOfWeek;
                         ++$i;
@@ -2236,9 +2236,9 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '-1TH':
 
-                    $ts = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
+                    $ts        = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
                     $dayOfWeek = date('w', $ts);
-                    $i = 0;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 4) {
                         ++$dayOfWeek;
                         ++$i;
@@ -2253,9 +2253,9 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '-1FR':
 
-                    $ts = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
+                    $ts        = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
                     $dayOfWeek = date('w', $ts);
-                    $i = 0;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 5) {
                         ++$dayOfWeek;
                         ++$i;
@@ -2270,9 +2270,9 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
                 case '-1SA':
 
-                    $ts = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
+                    $ts        = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
                     $dayOfWeek = date('w', $ts);
-                    $i = 0;
+                    $i         = 0;
                     while ($dayOfWeek % 7 != 6) {
                         ++$dayOfWeek;
                         ++$i;
@@ -2319,8 +2319,8 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
         $ret = array();
         while ($myrow = $xoopsDB->fetchArray($result)) {
-            $myrow['cat']['cat_name'] = $myrow['cat_name'];
-            $myrow['cat']['cat_color'] = $myrow['cat_color'];
+            $myrow['cat']['cat_name']        = $myrow['cat_name'];
+            $myrow['cat']['cat_color']       = $myrow['cat_color'];
             $myrow['cat']['cat_light_color'] = ExtcalUtilities::getLighterColor($myrow['cat']['cat_color'], _EXTCAL_INFOBULLE_RGB_MIN, _EXTCAL_INFOBULLE_RGB_MAX);
             if ($myrow['event_icone'] == '') {
                 $myrow['event_icone'] = $myrow['cat']['cat_icone'];
@@ -2357,26 +2357,25 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         $orderBy,
         $limit = 0,
         $offset = 0,
-        &$userId = 0,
-        &$user = ''
+        $userId = 0,
+        $user = ''
     ) {
         global $xoopsDB;
 
         //echo "<hr>{$andor}-{$limit}-{$offset}-{$userId}-{$user}<br>{$criteresPlus}";
-        $tEvent = $xoopsDB->prefix('extcal_event').' AS te';
-        $tCat = $xoopsDB->prefix('extcal_cat').' AS tc';
+        $tEvent = $xoopsDB->prefix('extcal_event') . ' AS te';
+        $tCat   = $xoopsDB->prefix('extcal_cat') . ' AS tc';
 
-        $sql = 'SELECT te.*, tc.cat_name , tc.cat_color, '.'year(FROM_UNIXTIME(event_start)) AS year,'.'month(FROM_UNIXTIME(event_start)) AS month,'.'day(FROM_UNIXTIME(event_start)) AS day'
-               ." FROM {$tEvent}, {$tCat}";
+        $sql = 'SELECT te.*, tc.cat_name , tc.cat_color, ' . 'year(FROM_UNIXTIME(event_start)) AS year,' . 'month(FROM_UNIXTIME(event_start)) AS month,' . 'day(FROM_UNIXTIME(event_start)) AS day' . " FROM {$tEvent}, {$tCat}";
         //---------------------------------------------------
-        $tw = array();
+        $tw   = array();
         $tw[] = 'te.cat_id = tc.cat_id';
         $tw[] = 'event_approved = 1';
 
         $authorizedAccessCats = $this->_extcalPerm->getAuthorizedCat($user, 'extcal_cat_view');
-        $inCat = 'te.cat_id IN (0)';
+        $inCat                = 'te.cat_id IN (0)';
         if (count($authorizedAccessCats) > 0) {
-            $inCat = 'te.cat_id IN ('.implode(',', $authorizedAccessCats).')';
+            $inCat = 'te.cat_id IN (' . implode(',', $authorizedAccessCats) . ')';
         }
         //echo $tw[count($tw)-1];
 
@@ -2412,12 +2411,12 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
                 'te.event_address',
                 'tc.cat_name',
             );
-            $t = array();
+            $t       = array();
             for ($i = 0, $count = count($queryarray); $i < $count; ++$i) {
                 $t1[] = " %1\$s LIKE '#{$queryarray[$i]}#' ";
             }
 
-            $flt = '('.implode(" {$andor} ", $t1).')';
+            $flt = '(' . implode(" {$andor} ", $t1) . ')';
 
             $t = array();
             for ($h = 0, $count = count($tFields); $h < $count; ++$h) {
@@ -2426,10 +2425,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
             $filtre = implode(' OR ', $t);
             $filtre = str_replace('#', '%', $filtre);
-            $tw[] = '('.$filtre.')';
+            $tw[]   = '(' . $filtre . ')';
         }
 
-        $sql .= ' WHERE '.implode(' AND ', $tw);
+        $sql .= ' WHERE ' . implode(' AND ', $tw);
         //------------------------------------------------------------
         if (count($orderBy) > 0) {
             $t = array();
@@ -2439,7 +2438,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
                 }
             }
             if (count($t) > 0) {
-                $sql .= ' ORDER BY '.implode(',', $t);
+                $sql .= ' ORDER BY ' . implode(',', $t);
             }
         }
 
@@ -2472,10 +2471,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         $i = 0;
         while ($myrow = $xoopsDB->fetchArray($result)) {
             $ret[$i]['image'] = 'assets/images/icons/extcal.gif';
-            $ret[$i]['link'] = 'event.php?event='.$myrow['event_id'];
+            $ret[$i]['link']  = 'event.php?event=' . $myrow['event_id'];
             $ret[$i]['title'] = $myrow['event_title'];
-            $ret[$i]['time'] = $myrow['event_submitdate'];
-            $ret[$i]['uid'] = $myrow['event_submitter'];
+            $ret[$i]['time']  = $myrow['event_submitdate'];
+            $ret[$i]['uid']   = $myrow['event_submitter'];
             ++$i;
         }
 
@@ -2511,24 +2510,24 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         //            $cols = 'event_id, event_title, event_submitter, event_submitdate';
         //        }
         $tEvent = $xoopsDB->prefix('extcal_event');
-        $tCat = $xoopsDB->prefix('extcal_cat');
-        $sql = "SELECT {$tEvent}.*, {$tCat}.cat_name AS categorie, {$tCat}.cat_color "." FROM {$tEvent}, {$tCat}"." WHERE {$tEvent}.cat_id = {$tCat}.cat_id AND event_approved = '1'";
+        $tCat   = $xoopsDB->prefix('extcal_cat');
+        $sql    = "SELECT {$tEvent}.*, {$tCat}.cat_name AS categorie, {$tCat}.cat_color " . " FROM {$tEvent}, {$tCat}" . " WHERE {$tEvent}.cat_id = {$tCat}.cat_id AND event_approved = '1'";
 
         $authorizedAccessCats = $this->_extcalPerm->getAuthorizedCat($user, 'extcal_cat_view');
-        $count = count($authorizedAccessCats);
+        $count                = count($authorizedAccessCats);
         if ($count > 0) {
-            $in = '('.$authorizedAccessCats[0];
+            $in = '(' . $authorizedAccessCats[0];
             array_shift($authorizedAccessCats);
             foreach ($authorizedAccessCats as $authorizedAccessCat) {
-                $in .= ','.$authorizedAccessCat;
+                $in .= ',' . $authorizedAccessCat;
             }
             $in .= ')';
         } else {
             $in = '(0)';
         }
-        $sql .= " AND {$tEvent}.cat_id IN ".$in.'';
+        $sql .= " AND {$tEvent}.cat_id IN " . $in . '';
         if ($userId != 0) {
-            $sql .= " AND event_submitter = '".$userId."'";
+            $sql .= " AND event_submitter = '" . $userId . "'";
         }
 
         //echoArray($queryarray,false);
@@ -2543,12 +2542,12 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
             */
 
             $tFields = array('event_title', 'event_desc', 'event_contact', 'event_address', 'cat_name');
-            $t = array();
+            $t       = array();
             for ($i = 0, $count = count($queryarray); $i < $count; ++$i) {
                 $t1[] = " %1\$s LIKE '#{$queryarray[$i]}#' ";
             }
 
-            $flt = '('.implode(" {$andor} ", $t1).')';
+            $flt = '(' . implode(" {$andor} ", $t1) . ')';
 
             $t = array();
             for ($h = 0, $count = count($tFields); $h < $count; ++$h) {
@@ -2561,27 +2560,27 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         }
 
         if ($criteresPlus != '') {
-            $sql .= ' AND '.$criteresPlus;
+            $sql .= ' AND ' . $criteresPlus;
         }
         $sql .= ' ORDER BY event_id DESC';
 
         $result = $xoopsDB->query($sql, $limit, $offset);
-        $ret = array();
-        $i = 0;
+        $ret    = array();
+        $i      = 0;
         if ($xoopsSearch) {
             while ($myrow = $xoopsDB->fetchArray($result)) {
                 $ret[$i]['image'] = 'assets/images/icons/extcal.gif';
-                $ret[$i]['link'] = 'event.php?event='.$myrow['event_id'];
+                $ret[$i]['link']  = 'event.php?event=' . $myrow['event_id'];
                 $ret[$i]['title'] = $myrow['event_title'];
-                $ret[$i]['time'] = $myrow['event_submitdate'];
-                $ret[$i]['uid'] = $myrow['event_submitter'];
+                $ret[$i]['time']  = $myrow['event_submitdate'];
+                $ret[$i]['uid']   = $myrow['event_submitter'];
                 ++$i;
             }
         } else {
             while ($myrow = $xoopsDB->fetchArray($result)) {
-                $myrow['cat']['cat_name'] = $myrow['cat_name'];
+                $myrow['cat']['cat_name']  = $myrow['cat_name'];
                 $myrow['cat']['cat_color'] = $myrow['cat_color'];
-                $ret[] = $myrow;
+                $ret[]                     = $myrow;
                 ++$i;
             }
         }
@@ -2601,13 +2600,13 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
         // Calculating the start and the end of the event
         $startEvent = $event['event_start'];
-        $endEvent = $event['event_end'];
+        $endEvent   = $event['event_end'];
 
         // This event start before this month and finish after
         if ($startEvent < $startPeriod && $endEvent > $endPeriod) {
             $endFor = date('t', mktime(0, 0, 0, $month, 1, $year));
             for ($i = 1; $i <= $endFor; ++$i) {
-                $event['status'] = 'middle';
+                $event['status']   = 'middle';
                 $eventsArray[$i][] = $event;
             }
             // This event start before this month and finish during
@@ -2615,22 +2614,22 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
             if ($startEvent < $startPeriod) {
                 $endFor = date('j', $endEvent);
                 for ($i = 1; $i <= $endFor; ++$i) {
-                    $event['status'] = ($i != $endFor) ? 'middle' : 'end';
+                    $event['status']   = ($i != $endFor) ? 'middle' : 'end';
                     $eventsArray[$i][] = $event;
                 }
                 // This event start during this month and finish after
             } else {
                 if ($endEvent > $endPeriod) {
                     $startFor = date('j', $startEvent);
-                    $endFor = date('t', mktime(0, 0, 0, $month, 1, $year));
+                    $endFor   = date('t', mktime(0, 0, 0, $month, 1, $year));
                     for ($i = $startFor; $i <= $endFor; ++$i) {
-                        $event['status'] = ($i == $startFor) ? 'start' : 'middle';
+                        $event['status']   = ($i == $startFor) ? 'start' : 'middle';
                         $eventsArray[$i][] = $event;
                     }
                     // This event start and finish during this month
                 } else {
                     $startFor = date('j', $startEvent);
-                    $endFor = date('j', $endEvent);
+                    $endFor   = date('j', $endEvent);
                     for ($i = $startFor; $i <= $endFor; ++$i) {
                         if ($startFor == $endFor) {
                             $event['status'] = 'single';

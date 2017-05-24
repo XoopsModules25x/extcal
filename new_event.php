@@ -1,16 +1,16 @@
 <?php
 
-include dirname(dirname(__DIR__)).'/mainfile.php';
-include_once __DIR__.'/include/constantes.php';
-include_once __DIR__.'/header.php';
+include __DIR__ . '/../../mainfile.php';
+include_once __DIR__ . '/include/constantes.php';
+include_once __DIR__ . '/header.php';
 
 // Getting eXtCal object's handler
 $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
 
 $permHandler = ExtcalPerm::getHandler();
-$xoopsUser = $xoopsUser ?: null;
+$xoopsUser   = $xoopsUser ?: null;
 if (count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) > 0) {
-    include XOOPS_ROOT_PATH.'/header.php';
+    include XOOPS_ROOT_PATH . '/header.php';
 
     // Title of the page
     $xoopsTpl->assign('xoops_pagetitle', _MI_EXTCAL_SUBMIT_EVENT);
@@ -20,7 +20,7 @@ if (count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) > 0) 
 
     //$form->display();
 
-    include XOOPS_ROOT_PATH.'/footer.php';
+    include XOOPS_ROOT_PATH . '/footer.php';
 } else {
     redirect_header('index.php', 3);
 }

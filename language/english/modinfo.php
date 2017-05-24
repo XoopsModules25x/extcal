@@ -1,6 +1,7 @@
 <?php
 
-include_once __DIR__.'/../../include/constantes.php';
+include_once __DIR__ . '/../../include/constantes.php';
+define('_MI_EXTCAL_NAME', 'eXtCal');
 define('_MI_EXTCAL_ABOUT', 'About');
 define('_MI_EXTCAL_AFTER', 'After');
 define('_MI_EXTCAL_AGENDA_END_HOUR', 'Agenda: Last hour');
@@ -77,7 +78,6 @@ define('_MI_EXTCAL_HTML_DESC', 'Allow HTML or not for text field');
 define('_MI_EXTCAL_INDEX', 'Home');
 define('_MI_EXTCAL_LIST_POS', 'Selection list');
 define('_MI_EXTCAL_LIST_POS_DESC', 'Selection lists position.<br>0 = above the tabs.<br>1 = below the tabs');
-define('_MI_EXTCAL_NAME', 'eXtCal');
 define('_MI_EXTCAL_NAV_AGENDA_DAY', 'Day (Agenda)');
 define('_MI_EXTCAL_NAV_AGENDA_WEEK', 'Week (Agenda)');
 define('_MI_EXTCAL_NAV_CALMONTH', 'Month (Calendar)');
@@ -135,7 +135,7 @@ define('_MI_EXTCAL_SORT_ORDER_DESC', 'Event order on list view (Start date)');
 define('_MI_EXTCAL_START_PAGE', 'Module home page');
 define('_MI_EXTCAL_SUBMIT_EVENT', 'Submit Event');
 define('_MI_EXTCAL_TABS_WEIGHT', 'Order of the Tabs');
-define('_MI_EXTCAL_TABS_WEIGHT_DESC', 'Set the tab order <br>Be careful to respect tab names:<br>'."<span style='color:#0000FF'>"._EXTCAL_NAV_LIST.'</span>'.' <br>Separator: new line');
+define('_MI_EXTCAL_TABS_WEIGHT_DESC', 'Set the tab order <br>Be careful to respect tab names:<br>' . "<span style='color:#0000FF;'>" . _EXTCAL_NAV_LIST . '</span>' . ' <br>Separator: new line');
 define('_MI_EXTCAL_VISIBLE_TAB_DESC', 'Define the visible view.');
 define('_MI_EXTCAL_VISIBLE_TABS', 'Visible tab');
 define('_MI_EXTCAL_WEEK_START_DAY', 'Week start Day');
@@ -156,8 +156,13 @@ define('_MI_EXTCAL_SHOW_OTHEROPTIONS', 'Other Options');
 // 2.38
 
 define('_MI_EXTCAL_EDITOR_ADMIN', 'Editor to use (admin):');
-define('_MI_EXTCAL_EDITOR_ADMIN_DESC',
-       "Select the editor to use for admin side. If you have a 'simple' install (e.g you use only XOOPS core editor class, provided in the standard xoops core package), then you can just select DHTML and Compact");
+define('_MI_EXTCAL_EDITOR_ADMIN_DESC', "Select the editor to use for admin side. If you have a 'simple' install (e.g you use only XOOPS core editor class, provided in the standard xoops core package), then you can just select DHTML and Compact");
 define('_MI_EXTCAL_EDITOR_USER', 'Editor to use (user):');
-define('_MI_EXTCAL_EDITOR_USER_DESC',
-       "Select the editor to use for user side. If you have a 'simple' install (e.g you use only XOOPS core editor class, provided in the standard xoops core package), then you can just select DHTML and Compact");
+define('_MI_EXTCAL_EDITOR_USER_DESC', "Select the editor to use for user side. If you have a 'simple' install (e.g you use only XOOPS core editor class, provided in the standard xoops core package), then you can just select DHTML and Compact");
+
+
+//Help
+define('_MI_EXTCAL_DIRNAME', basename(dirname(dirname(__DIR__))));
+define('_MI_EXTCAL_HELP_HEADER', __DIR__.'/help/helpheader.html');
+define('_MI_EXTCAL_BACK_2_ADMIN', 'Back to Administration of ');
+define('_MI_EXTCAL_OVERVIEW', 'Overview');

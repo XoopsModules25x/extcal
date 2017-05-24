@@ -10,8 +10,10 @@ include_once __DIR__ . '/class/config.php';
 setlocale(LC_TIME, $xoopsConfig['language']);
 
 //***************************************************************************************
-$modversion['name']             = _MI_EXTCAL_NAME;
 $modversion['version']          = '2.39';
+$modversion['module_status']    = 'FINAL';
+$modversion['release_date']     = '2016/10/18';
+$modversion['name']             = _MI_EXTCAL_NAME;
 $modversion['description']      = _MI_EXTCAL_DESC;
 $modversion['credits']          = 'Zoullou';
 $modversion['author']           = 'Zoullou, Mage, Mamba, JJ Delalandre (JJDai)';
@@ -32,16 +34,11 @@ $modversion['sysicons16']       = 'Frameworks/moduleclasses/icons/16';
 $modversion['sysicons32']       = 'Frameworks/moduleclasses/icons/32';
 $modversion['modicons16']       = 'assets/images/icons/16';
 $modversion['modicons32']       = 'assets/images/icons/32';
-//***************************************************************************************
-
 //about
-$modversion['module_status']       = 'RC 1';
-$modversion['release_date']        = '2016/08/09';
 $modversion['module_website_url']  = 'www.xoops.org/';
 $modversion['module_website_name'] = 'XOOPS';
 $modversion['min_php']             = '5.5';
 $modversion['min_xoops']           = '2.5.8';
-
 // Admin things
 $modversion['hasAdmin']   = 1;
 $modversion['adminindex'] = 'admin/index.php';
@@ -73,14 +70,20 @@ if (isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule'])
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// ------------------- Mysql ------------------- //
+$modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
+
+// Tables created by sql file (without prefix!)
+$modversion['tables'] = array(
+    $moduleDirName . '_' . 'cat',
+    $moduleDirName . '_' . 'event',
+    $moduleDirName . '_' . 'eventmember',
+    $moduleDirName . '_' . 'eventnotmember',
+    $moduleDirName . '_' . 'file',
+    $moduleDirName . '_' . 'etablissement'
+);
 
 // SQL
-$modversion['tables'][1] = 'extcal_cat';
-$modversion['tables'][2] = 'extcal_event';
-$modversion['tables'][3] = 'extcal_eventmember';
-$modversion['tables'][4] = 'extcal_eventnotmember';
-$modversion['tables'][5] = 'extcal_file';
-$modversion['tables'][6] = 'extcal_etablissement';
 
 // Comments
 $modversion['hasComments']          = 1;

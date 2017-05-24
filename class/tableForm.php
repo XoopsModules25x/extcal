@@ -16,7 +16,7 @@ class XoopsTableForm extends XoopsForm
     /**
      * ad the balise html "table" to render.
      *
-     * @var bool
+     * @var bool|string
      */
     public $_addBaliseTable = '';
 
@@ -55,13 +55,13 @@ class XoopsTableForm extends XoopsForm
      */
     public function insertBreak($extra = '', $class = '')
     {
-        $class = ($class != '') ? " class='".preg_replace('/[^A-Za-z0-9\s\s_-]/i', '', $class)."'" : '';
+        $class = ($class != '') ? " class='" . preg_replace('/[^A-Za-z0-9\s\s_-]/i', '', $class) . "'" : '';
         // Fix for $extra tag not showing
         if ($extra) {
-            $extra = '<tr><td colspan="2" '.$class.'>'.$extra.'</td></tr>';
+            $extra = '<tr><td colspan="2" ' . $class . '>' . $extra . '</td></tr>';
             $this->addElement($extra);
         } else {
-            $extra = '<tr><td colspan="2" '.$class.'>&nbsp;</td></tr>';
+            $extra = '<tr><td colspan="2" ' . $class . '>&nbsp;</td></tr>';
             $this->addElement($extra);
         }
     }
@@ -82,19 +82,19 @@ class XoopsTableForm extends XoopsForm
     public function render()
     {
         $addBaliseTable = $this->_addBaliseTable;
-        $title = $this->getTitle();
-        $ret = '';
+        $title          = $this->getTitle();
+        $ret            = '';
 
         if ($addBaliseTable) {
             $ret .= '<table width="100%" class="outer" cellspacing="1"> ';
         }
 
         if ($title != '') {
-            $ret .= '<tr><th colspan="2">'.$title.'</th></tr>';
+            $ret .= '<tr><th colspan="2">' . $title . '</th></tr>';
         }
 
         $hidden = '';
-        $class = 'even';
+        $class  = 'even';
         foreach ($this->getElements() as $ele) {
             if (!is_object($ele)) {
                 $ret .= $ele;
@@ -102,24 +102,24 @@ class XoopsTableForm extends XoopsForm
                 if (!$ele->getNocolspan()) {
                     $ret .= '<tr valign="top" align="left"><td class="head">';
                     if (($caption = $ele->getCaption()) != '') {
-                        $ret .= '<div class="xoops-form-element-caption'.($ele->isRequired() ? '-required' : '').'">';
-                        $ret .= '<span class="caption-text">'.$caption.'</span>';
+                        $ret .= '<div class="xoops-form-element-caption' . ($ele->isRequired() ? '-required' : '') . '">';
+                        $ret .= '<span class="caption-text">' . $caption . '</span>';
                         $ret .= '<span class="caption-marker">*</span>';
                         $ret .= '</div>';
                     }
                     if (($desc = $ele->getDescription()) != '') {
-                        $ret .= '<div class="xoops-form-element-help">'.$desc.'</div>';
+                        $ret .= '<div class="xoops-form-element-help">' . $desc . '</div>';
                     }
-                    $ret .= '</td><td class="'.$class.'">'.$ele->render().'</td></tr>'.NWLINE;
+                    $ret .= '</td><td class="' . $class . '">' . $ele->render() . '</td></tr>' . NWLINE;
                 } else {
                     $ret .= '<tr valign="top" align="left"><td class="head" colspan="2">';
                     if (($caption = $ele->getCaption()) != '') {
-                        $ret .= '<div class="xoops-form-element-caption'.($ele->isRequired() ? '-required' : '').'">';
-                        $ret .= '<span class="caption-text">'.$caption.'</span>';
+                        $ret .= '<div class="xoops-form-element-caption' . ($ele->isRequired() ? '-required' : '') . '">';
+                        $ret .= '<span class="caption-text">' . $caption . '</span>';
                         $ret .= '<span class="caption-marker">*</span>';
                         $ret .= '</div>';
                     }
-                    $ret .= '</td></tr><tr valign="top" align="left"><td class="'.$class.'" colspan="2">'.$ele->render().'</td></tr>';
+                    $ret .= '</td></tr><tr valign="top" align="left"><td class="' . $class . '" colspan="2">' . $ele->render() . '</td></tr>';
                 }
             } else {
                 $hidden .= $ele->render();
@@ -130,7 +130,7 @@ class XoopsTableForm extends XoopsForm
             $ret .= '</table>';
         }
 
-        $ret .= NWLINE.' '.$hidden.NWLINE;
+        $ret .= NWLINE . ' ' . $hidden . NWLINE;
 
         return $ret;
     }

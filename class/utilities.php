@@ -15,7 +15,7 @@
  * L'utilisation de ce formulaire d'adminitration suppose
  * que la classe correspondante de la table a été générées avec classGenerator
  **/
-include_once XOOPS_ROOT_PATH.'/class/uploader.php';
+include_once XOOPS_ROOT_PATH . '/class/uploader.php';
 
 /**
  * Class ExtcalUtilities.
@@ -30,9 +30,9 @@ class ExtcalUtilities
     public static function extcal_getEvent($eventId)
     {
         $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
-        $event = $eventHandler->getEvent($eventId);
-        $t = $event->getVars();
-        $data = array();
+        $event        = $eventHandler->getEvent($eventId);
+        $t            = $event->getVars();
+        $data         = array();
         while (list($key, $val) = each($t)) {
             $data[$key] = $val['value'];
         }
@@ -48,12 +48,12 @@ class ExtcalUtilities
     public static function extcal_loadImg(&$REQUEST, &$event_picture1, &$event_picture2)
     {
         ///////////////////////////////////////////////////////////////////////////////
-        $uploaddir_event = XOOPS_ROOT_PATH.'/uploads/extcal/';
-        $uploadurl_event = XOOPS_URL.'/uploads/extcal/';
+        $uploaddir_event = XOOPS_ROOT_PATH . '/uploads/extcal/';
+        $uploadurl_event = XOOPS_URL . '/uploads/extcal/';
         //$picture = '';
         for ($j = 1; $j < 3; ++$j) {
-            $delimg = @$REQUEST['delimg_'.$j.''];
-            $delimg = isset($delimg) ? (int) $delimg : 0;
+            $delimg = @$REQUEST['delimg_' . $j . ''];
+            $delimg = isset($delimg) ? (int)$delimg : 0;
             if (0 == $delimg && !empty($REQUEST['xoops_upload_file'][$j])) {
                 $upload = new XoopsMediaUploader($uploaddir_event, array(
                     'image/gif',
@@ -76,15 +76,15 @@ class ExtcalUtilities
                             $event_picture2 = $upload->getSavedFileName();
                         }
                     }
-                } elseif (!empty($REQUEST['file'.$j])) {
+                } elseif (!empty($REQUEST['file' . $j])) {
                     if ($j == 1) {
-                        $event_picture1 = $REQUEST['file'.$j];
+                        $event_picture1 = $REQUEST['file' . $j];
                     } elseif ($j == 2) {
-                        $event_picture2 = $REQUEST['file'.$j];
+                        $event_picture2 = $REQUEST['file' . $j];
                     }
                 }
             } else {
-                $url_event = XOOPS_ROOT_PATH.'/uploads/extcal/'.$REQUEST['file'.$j];
+                $url_event = XOOPS_ROOT_PATH . '/uploads/extcal/' . $REQUEST['file' . $j];
                 if ($j == 1) {
                     $event_picture1 = '';
                 } elseif ($j == 2) {
@@ -114,7 +114,7 @@ class ExtcalUtilities
         // Category selectbox
         $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
 
-        $catsList = $catHandler->getAllCat($xoopsUser);
+        $catsList  = $catHandler->getAllCat($xoopsUser);
         $catSelect = new XoopsFormSelect('', $name, $cat);
         if ($addNone) {
             $catSelect->addOption(0, ' ');
@@ -141,16 +141,16 @@ class ExtcalUtilities
         //<option style="background-color:#00FFFF;">VARCHAR</option>
 
         $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-        $catsList = $catHandler->getAllCat($xoopsUser);
+        $catsList   = $catHandler->getAllCat($xoopsUser);
 
         $t = array();
         foreach ($catsList as $catList) {
-            $cat_id = $catList->getVar('cat_id');
-            $name = $catList->getVar('cat_name');
+            $cat_id    = $catList->getVar('cat_id');
+            $name      = $catList->getVar('cat_name');
             $cat_color = $catList->getVar('cat_color');
-            $checked = in_array($cat_id, $cat) ? 'checked' : '';
-            $cat = ''."<div style='float:left; margin-left:5px;'>"."<input type='checkbox' name='{$name}[{$cat_id}]' value='1' {$checked}>"
-                         ."<div style='absolute:left;height:12px; width:6px; background-color:#{$cat_color}; border:1px solid black; float:left; margin-right:5px;' ></div>"." {$name}".'</div>';
+            $checked   = in_array($cat_id, $cat) ? 'checked' : '';
+            $cat       = '' . "<div style='float:left; margin-left:5px;'>" . "<input type='checkbox' name='{$name}[{$cat_id}]' value='1' {$checked}>"
+                         . "<div style='absolute:left;height:12px; width:6px; background-color:#{$cat_color}; border:1px solid black; float:left; margin-right:5px;' ></div>" . " {$name}" . '</div>';
 
             $t[] = $cat;
         }
@@ -176,17 +176,17 @@ class ExtcalUtilities
             $select->addOption('', '');
         }
 
-        $select->addOption('year ASC', _MD_EXTCAL_YEAR.' '._MD_EXTCAL_ORDER_BY_ASC);
-        $select->addOption('year DESC', _MD_EXTCAL_YEAR.' '._MD_EXTCAL_ORDER_BY_DESC);
+        $select->addOption('year ASC', _MD_EXTCAL_YEAR . ' ' . _MD_EXTCAL_ORDER_BY_ASC);
+        $select->addOption('year DESC', _MD_EXTCAL_YEAR . ' ' . _MD_EXTCAL_ORDER_BY_DESC);
 
-        $select->addOption('month ASC', _MD_EXTCAL_MONTH.' '._MD_EXTCAL_ORDER_BY_ASC);
-        $select->addOption('month DESC', _MD_EXTCAL_MONTH.' '._MD_EXTCAL_ORDER_BY_DESC);
+        $select->addOption('month ASC', _MD_EXTCAL_MONTH . ' ' . _MD_EXTCAL_ORDER_BY_ASC);
+        $select->addOption('month DESC', _MD_EXTCAL_MONTH . ' ' . _MD_EXTCAL_ORDER_BY_DESC);
 
-        $select->addOption('event_title ASC', _MD_EXTCAL_ALPHA.' '._MD_EXTCAL_ORDER_BY_ASC);
-        $select->addOption('event_title DESC', _MD_EXTCAL_ALPHA.' '._MD_EXTCAL_ORDER_BY_DESC);
+        $select->addOption('event_title ASC', _MD_EXTCAL_ALPHA . ' ' . _MD_EXTCAL_ORDER_BY_ASC);
+        $select->addOption('event_title DESC', _MD_EXTCAL_ALPHA . ' ' . _MD_EXTCAL_ORDER_BY_DESC);
 
-        $select->addOption('cat_name ASC', _MD_EXTCAL_CATEGORY.' '._MD_EXTCAL_ORDER_BY_ASC);
-        $select->addOption('cat_name DESC', _MD_EXTCAL_CATEGORY.' '._MD_EXTCAL_ORDER_BY_DESC);
+        $select->addOption('cat_name ASC', _MD_EXTCAL_CATEGORY . ' ' . _MD_EXTCAL_ORDER_BY_ASC);
+        $select->addOption('cat_name DESC', _MD_EXTCAL_CATEGORY . ' ' . _MD_EXTCAL_ORDER_BY_DESC);
 
         return $select;
     }
@@ -261,7 +261,7 @@ class ExtcalUtilities
         //echo $end->format("d/m/Y à H\hi:s").'<br>'; // 03/10/2007 à 19h39:53
         //echo "<hr>";
         $interval = DateInterval::createFromDateString('next sunday');
-        $period = new DatePeriod($begin, $interval, $end);
+        $period   = new DatePeriod($begin, $interval, $end);
         //echoDateArray($period);
 
         //echo "<hr>{$interval}";
@@ -300,7 +300,7 @@ class ExtcalUtilities
     public static function echoDateArray($period)
     {
         foreach ($period as $dt) {
-            echo $dt->format("l Y-m-d H:i:s\n").'<br>';
+            echo $dt->format("l Y-m-d H:i:s\n") . '<br>';
         }
     }
 
@@ -316,7 +316,7 @@ class ExtcalUtilities
         }
 
         $txt = print_r($t, true);
-        echo '<pre>Number of items: '.count($t)."<br>{$txt}</pre>";
+        echo '<pre>Number of items: ' . count($t) . "<br>{$txt}</pre>";
     }
 
     /*****************************************************************/
@@ -329,7 +329,7 @@ class ExtcalUtilities
         if ($msg != '') {
             echo "<hr>{$msg}<hr>";
         }
-        echo $line.'<br>';
+        echo $line . '<br>';
     }
 
     /*****************************************************************/
@@ -356,7 +356,7 @@ class ExtcalUtilities
             echo "<hr>{$msg}<hr>";
         }
 
-        echo 'date --->'.$tsName.' = '.$ts.' - '.date('d-m-Y H:m:s', $ts).'<br>';
+        echo 'date --->' . $tsName . ' = ' . $ts . ' - ' . date('d-m-Y H:m:s', $ts) . '<br>';
     }
 
     /*****************************************************************/
@@ -392,7 +392,7 @@ class ExtcalUtilities
     public static function ext_DateAdd($givendate, $day = 0, $mth = 0, $yr = 0)
     {
         //$cd = strtotime($givendate);
-        $cd = $givendate;
+        $cd      = $givendate;
         $newdate = date('Y-m-d h:i:s', mktime(date('h', $cd), date('i', $cd), date('s', $cd), date('m', $cd) + $mth, date('d', $cd) + $day, date('Y', $cd) + $yr));
 
         return strtotime($newdate);
@@ -408,12 +408,12 @@ class ExtcalUtilities
     public static function ext_DateAdd2($date, $number, $interval = 'd')
     {
         $date_time_array = getdate($date);
-        $hours = $date_time_array['hours'];
-        $minutes = $date_time_array['minutes'];
-        $seconds = $date_time_array['seconds'];
-        $month = $date_time_array['mon'];
-        $day = $date_time_array['mday'];
-        $year = $date_time_array['year'];
+        $hours           = $date_time_array['hours'];
+        $minutes         = $date_time_array['minutes'];
+        $seconds         = $date_time_array['seconds'];
+        $month           = $date_time_array['mon'];
+        $day             = $date_time_array['mday'];
+        $year            = $date_time_array['year'];
 
         switch ($interval) {
 
@@ -470,11 +470,140 @@ class ExtcalUtilities
      */
     public static function getLighterColor($color, $plancher, $plafond)
     {
-        include_once __DIR__.'/colorTools.php';
+        include_once __DIR__ . '/colorTools.php';
 
         //$ct = new ColorTools();
         //return $ct->eclaircir($color,$plancher,$plafond);
         return ColorTools::eclaircir($color, $plancher, $plafond);
     }
     /**************************************************************************/
+
+    /**
+     * Function responsible for checking if a directory exists, we can also write in and create an index.html file
+     *
+     * @param string $folder The full path of the directory to check
+     *
+     * @return void
+     */
+    public static function createFolder($folder)
+    {
+        try {
+            if (!file_exists($folder)) {
+                if (!mkdir($folder) && !is_dir($folder)) {
+                    throw new \RuntimeException(sprintf('Unable to create the %s directory', $folder));
+                } else {
+                    file_put_contents($folder . '/index.html', '<script>history.go(-1);</script>');
+                }
+            }
+        } catch (Exception $e) {
+            echo 'Caught exception: ', $e->getMessage(), "\n", '<br/>';
+        }
+    }
+
+    /**
+     * @param $file
+     * @param $folder
+     * @return bool
+     */
+    public static function copyFile($file, $folder)
+    {
+        return copy($file, $folder);
+        //        try {
+        //            if (!is_dir($folder)) {
+        //                throw new \RuntimeException(sprintf('Unable to copy file as: %s ', $folder));
+        //            } else {
+        //                return copy($file, $folder);
+        //            }
+        //        } catch (Exception $e) {
+        //            echo 'Caught exception: ', $e->getMessage(), "\n", "<br/>";
+        //        }
+        //        return false;
+    }
+
+    /**
+     * @param $src
+     * @param $dst
+     */
+    public static function recurseCopy($src, $dst)
+    {
+        $dir = opendir($src);
+        //    @mkdir($dst);
+        while (false !== ($file = readdir($dir))) {
+            if (($file !== '.') && ($file !== '..')) {
+                if (is_dir($src . '/' . $file)) {
+                    self::recurseCopy($src . '/' . $file, $dst . '/' . $file);
+                } else {
+                    copy($src . '/' . $file, $dst . '/' . $file);
+                }
+            }
+        }
+        closedir($dir);
+    }
+
+    /**
+     *
+     * Verifies XOOPS version meets minimum requirements for this module
+     * @static
+     * @param XoopsModule $module
+     *
+     * @return bool true if meets requirements, false if not
+     */
+    public static function checkXoopsVer(XoopsModule $module)
+    {
+        xoops_loadLanguage('admin', $module->dirname());
+        //check for minimum XOOPS version
+        $currentVer  = substr(XOOPS_VERSION, 6); // get the numeric part of string
+        $currArray   = explode('.', $currentVer);
+        $requiredVer = '' . $module->getInfo('min_xoops'); //making sure it's a string
+        $reqArray    = explode('.', $requiredVer);
+        $success     = true;
+        foreach ($reqArray as $k => $v) {
+            if (isset($currArray[$k])) {
+                if ($currArray[$k] > $v) {
+                    break;
+                } elseif ($currArray[$k] == $v) {
+                    continue;
+                } else {
+                    $success = false;
+                    break;
+                }
+            } else {
+                if ((int)$v > 0) { // handles things like x.x.x.0_RC2
+                    $success = false;
+                    break;
+                }
+            }
+        }
+
+        if (!$success) {
+            $module->setErrors(sprintf(_AM_TAG_ERROR_BAD_XOOPS, $requiredVer, $currentVer));
+        }
+
+        return $success;
+    }
+
+    /**
+     *
+     * Verifies PHP version meets minimum requirements for this module
+     * @static
+     * @param XoopsModule $module
+     *
+     * @return bool true if meets requirements, false if not
+     */
+    public static function checkPhpVer(XoopsModule $module)
+    {
+        xoops_loadLanguage('admin', $module->dirname());
+        // check for minimum PHP version
+        $success = true;
+        $verNum  = phpversion();
+        $reqVer  =& $module->getInfo('min_php');
+        if (false !== $reqVer && '' !== $reqVer) {
+            if (version_compare($verNum, $reqVer, '<')) {
+                $module->setErrors(sprintf(_AM_TAG_ERROR_BAD_PHP, $reqVer, $verNum));
+                $success = false;
+            }
+        }
+
+        return $success;
+    }
 }

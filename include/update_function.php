@@ -2,35 +2,35 @@
 
 /**
  * @param XoopsModule $xoopsModule
- * @param null        $oldVersion
+ * @param null        $previousVersion
  *
  * @return bool
  */
-function xoops_module_update_extcal(XoopsModule $xoopsModule, $oldVersion = null)
+function xoops_module_update_extcal(XoopsModule $xoopsModule, $previousVersion = null)
 {
     $newVersion = $xoopsModule->getVar('version') * 100;
-    if ($newVersion == $oldVersion) {
+    if ($newVersion == $previousVersion) {
         return true;
     }
 
     //----------------------------------------------------------
     // Create eXtCal upload directory
-    $indexFile = __DIR__.'/index.html';
+    $indexFile = __DIR__ . '/index.html';
 
-    $dir = XOOPS_ROOT_PATH.'/uploads/extcal';
+    $dir = XOOPS_ROOT_PATH . '/uploads/extcal';
     if (!is_dir($dir)) {
         mkdir($dir, 0777);
-        copy($indexFile, $dir.'/index.html');
+        copy($indexFile, $dir . '/index.html');
     }
 
-    $dir = XOOPS_ROOT_PATH.'/uploads/extcal/etablissement';
+    $dir = XOOPS_ROOT_PATH . '/uploads/extcal/etablissement';
     if (!is_dir($dir)) {
         mkdir($dir, 0777);
-        copy($indexFile, $dir.'/index.html');
+        copy($indexFile, $dir . '/index.html');
     }
     //------------------------------------------------------------
 
-    $fld = XOOPS_ROOT_PATH.'/modules/'.$xoopsModule->getVar('dirname').'/versions/';
+    $fld = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/versions/';
     $cls = 'extcal_%1$s';
 
     $version = array(
@@ -46,14 +46,14 @@ function xoops_module_update_extcal(XoopsModule $xoopsModule, $oldVersion = null
     );
 
     while (list($key, $val) = each($version)) {
-        if ($oldVersion < $val) {
+        if ($previousVersion < $val) {
             $name = sprintf($cls, $key);
-            $f = $fld.$name.'.php';
+            $f    = $fld . $name . '.php';
             //ext_echo ("<hr>{$f}<hr>");
             if (is_readable($f)) {
                 echo "mise à jour version : {$key} = {$val}<br>";
                 include_once $f;
-                $cl = new $name($xoopsModule, array('oldVersion' => $oldVersion));
+                $cl = new $name($xoopsModule, array('previousVersion' => $previousVersion));
             }
         }
     }

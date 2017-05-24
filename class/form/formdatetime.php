@@ -8,27 +8,27 @@
 class ExtcalFormDateTime
 {
     /**
-     * @param     $form
+     * @param ExtcalThemeForm $form
      * @param int $startTS
      * @param int $endTS
      *
      * @return ExtcalFormDateTime
      */
-    public function __construct(&$form, $startTS = 0, $endTS = 0)
+    public function __construct($form, $startTS = 0, $endTS = 0)
     {
-        $startTS = (int) $startTS;
-        $startTS = ($startTS > 0) ? $startTS : time();
+        $startTS       = (int)$startTS;
+        $startTS       = ($startTS > 0) ? $startTS : time();
         $startDatetime = getdate($startTS);
 
-        $endTS = (int) $endTS;
-        $endTS = ($endTS > 0) ? $endTS : time();
+        $endTS       = (int)$endTS;
+        $endTS       = ($endTS > 0) ? $endTS : time();
         $endDatetime = getdate($endTS);
 
         $timearray = array();
         for ($i = 0; $i < 24; ++$i) {
             for ($j = 0; $j < _EXTCAL_TS_MINUTE; $j += 15) {
-                $key = ($i * _EXTCAL_TS_HOUR) + ($j * _EXTCAL_TS_MINUTE);
-                $timearray[$key] = ($j != 0) ? $i.':'.$j : $i.':0'.$j;
+                $key             = ($i * _EXTCAL_TS_HOUR) + ($j * _EXTCAL_TS_MINUTE);
+                $timearray[$key] = ($j != 0) ? $i . ':' . $j : $i . ':0' . $j;
             }
         }
         ksort($timearray);
@@ -54,7 +54,7 @@ class ExtcalFormDateTime
         $form->addElement($startElmtTray, true);
 
         // End date element's form
-        $endElmtTray = new XoopsFormElementTray(_MD_EXTCAL_END_DATE, '<br>');
+        $endElmtTray     = new XoopsFormElementTray(_MD_EXTCAL_END_DATE, '<br>');
         $endDateElmtTray = new XoopsFormElementTray('', '&nbsp;');
 
         $endElmtTray->addElement(new XoopsFormRadioYN(_MD_EXTCAL_EVENT_END, 'have_end', 1));

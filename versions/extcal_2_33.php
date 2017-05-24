@@ -17,15 +17,15 @@
  * @author              JJDai <http://xoops.kiolo.com>
  **/
 //----------------------------------------------------
-class extcal_2_33
+class Extcal_2_33
 {
     //----------------------------------------------------
 
     /**
      * @param XoopsModule $module
-     * @param $options
+     * @param             $options
      */
-    public function __construct(XoopsModule  $module, $options)
+    public function __construct(XoopsModule $module, $options)
     {
         global $xoopsDB;
 

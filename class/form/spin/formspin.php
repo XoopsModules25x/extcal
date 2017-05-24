@@ -18,7 +18,7 @@
  *
  * @version         ExtcalFormSpin v 1.2
  */
-defined('XOOPS_ROOT_PATH') or die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 xoops_load('XoopsFormElement');
 
@@ -502,7 +502,8 @@ class ExtcalFormSpin extends XoopsFormElement
         }
 
         if ($value != '') {
-            if (substr($value, 0, strlen($attribut)) != $attribut) {
+//            if (substr($value, 0, strlen($attribut)) != $attribut) {
+            if (0 !== strpos($value, $attribut)) {
                 $r = "{$attribut}=\"{$value}\"";
             }
 
