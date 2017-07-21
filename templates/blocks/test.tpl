@@ -89,6 +89,7 @@
             <div class="blockContent">
                 <div class="txtcenter">
                     <form style="margin-top: 0;" action="http://localhost/xtest256final/user.php" method="post">
+                        <{securityToken}><{*//mb*}>
                         Username: <br>
                         <input type="text" name="uname" size="12" value="" maxlength="25"/><br>
                         Password: <br>

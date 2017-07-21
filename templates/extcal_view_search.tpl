@@ -1,7 +1,7 @@
 <{include file="db:extcal_navbar.tpl"}>
 
 <form action="<{$navigSelectBox.action}>" method="post">
-
+    <{securityToken}><{*//mb*}>
     <table class="outer" style="border-top: none;">
         <tr>
             <th align='center' colspan='2'>
@@ -52,7 +52,6 @@
         </tr>
 
         <input type="hidden" name="num_tries" value="<{$num_tries}>">
-
         <tr class="even">
             <td colspan='2' align='center'>
                 <input type="submit" style='width:150px;' value="<{$smarty.const._MD_EXTCAL_SEARCH}>" name="B1">

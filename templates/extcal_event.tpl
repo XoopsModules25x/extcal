@@ -189,10 +189,10 @@
                     <a href="<{$xoops_url}>/userinfo.php?uid=<{$member.uid}>"><{$member.uname}></a><{/foreach}>
                 <{if $eventmember.member.show_button}>
                     <form style="display:inline;" method="post" action="event_member.php">
+                        <{securityToken}><{*//mb*}>
                         <input type="hidden" name="mode" value="<{$eventmember.member.joinevent_mode}>"/>
                         <input type="hidden" name="event" value="<{$event.event_id}>"/>
-                        <{$token}>
-                        <input type="submit" value="<{$eventmember.member.button_text}>"<{$eventmember.member.button_disabled}> />
+                        <input type="submit" value="<{$eventmember.member.button_text}>"<{$eventmember.member.button_disabled}>>
                     </form>
                 <{/if}>
             </td>
@@ -206,10 +206,10 @@
                     <a href="<{$xoops_url}>/userinfo.php?uid=<{$member.uid}>"><{$member.uname}></a><{/foreach}>
                 <{if $eventmember.notmember.show_button}>
                     <form style="display:inline;" method="post" action="event_notmember.php">
+                        <{securityToken}><{*//mb*}>
                         <input type="hidden" name="mode" value="<{$eventmember.notmember.joinevent_mode}>"/>
                         <input type="hidden" name="event" value="<{$event.event_id}>"/>
-                        <{$token}>
-                        <input type="submit" value="<{$eventmember.notmember.button_text}>"<{$eventmember.notmember.button_disabled}> />
+                        <input type="submit" value="<{$eventmember.notmember.button_text}>"<{$eventmember.notmember.button_disabled}>>
                     </form>
                 <{/if}>
             </td>
