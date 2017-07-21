@@ -40,6 +40,7 @@ include XOOPS_ROOT_PATH . '/header.php';
 /* ========================================================================== */
 
 // Tooltips include
+/** @var xos_opal_Theme $xoTheme */
 $xoTheme->addScript('modules/extcal/include/ToolTips.js');
 $xoTheme->addStylesheet('modules/extcal/assets/css/infobulle.css');
 

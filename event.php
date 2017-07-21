@@ -223,6 +223,7 @@ $xoopsTpl->assign('tNavBar', $tNavBar);
   $xoopsTpl->assign('status', $xfStatus->render());
 */
 
+/** @var xos_opal_Theme $xoTheme */
 $xoTheme->addScript('browse.php?modules/extcal/assets/js/highslide.js');
 $xoTheme->addStylesheet('browse.php?modules/extcal/assets/js/highslide.css');
 

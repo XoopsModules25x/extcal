@@ -79,6 +79,7 @@ while ($donnees = $xoopsDB->fetchArray($requete)) {
         'event_start'    => date('Y-m-d', $donnees['event_start']),
     ));
 }
+/** @var xos_opal_Theme $xoTheme */
 $xoTheme->addScript('browse.php?modules/extcal/assets/js/highslide.js');
 $xoTheme->addStylesheet('browse.php?modules/extcal/assets/js/highslide.css');
 require_once XOOPS_ROOT_PATH . '/footer.php';

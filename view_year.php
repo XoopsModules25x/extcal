@@ -32,6 +32,7 @@ $catHandler   = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
 $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
 
 // Tooltips include
+/** @var xos_opal_Theme $xoTheme */
 $xoTheme->addScript('modules/extcal/include/ToolTips.js');
 $xoTheme->addStylesheet('modules/extcal/assets/css/infobulle.css');
 

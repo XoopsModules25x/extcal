@@ -65,7 +65,7 @@ function xoops_module_install_extcal(XoopsModule $xoopsModule)
     $moduleId = $xoopsModule->getVar('mid');
     /** @var XoopsGroupPermHandler $groupPermissionHandler */
     $groupPermissionHandler = xoops_getHandler('groupperm');
-    /** @var XoopsConfigHandler $configHandler */
+    /** @var XoopsModuleHandler $moduleHandler */
     $configHandler = xoops_getHandler('config');
 
     /*

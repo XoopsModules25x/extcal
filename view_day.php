@@ -146,7 +146,7 @@ if ($xoopsUser) {
     $xoopsTpl->assign('isAdmin', false);
     $xoopsTpl->assign('canEdit', false);
 }
-
+/** @var xos_opal_Theme $xoTheme */
 $xoTheme->addScript('browse.php?modules/extcal/assets/js/highslide.js');
 $xoTheme->addStylesheet('browse.php?modules/extcal/assets/js/highslide.css');
 

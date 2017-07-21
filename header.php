@@ -45,6 +45,7 @@ $permHandler       = ExtcalPerm::getHandler();
 $xoopsUser         = $xoopsUser ?: null;
 //------------------------------------------------------
 // Tooltips include
+/** @var xos_opal_Theme $xoTheme */
 $xoTheme->addScript('modules/extcal/include/ToolTips.js');
 $xoTheme->addStylesheet('modules/extcal/assets/css/infobulle.css');
 
