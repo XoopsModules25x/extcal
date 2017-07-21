@@ -19,7 +19,7 @@
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 
-echo $adminObject->addNavigation(basename(__FILE__));
+echo $adminObject->displayNavigation(basename(__FILE__));
 echo $adminObject->renderAbout('xoopsfoundation@gmail.com', false);
 
 require_once __DIR__ . '/admin_footer.php';

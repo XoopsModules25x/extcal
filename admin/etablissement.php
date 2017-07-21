@@ -75,7 +75,7 @@ switch ($op) {
         // @author   JJDAI
         //***************************************************************************************
         $etablissementAdmin = new ModuleAdmin();
-        echo $etablissementAdmin->addNavigation(basename(__FILE__));
+        echo $etablissementAdmin->displayNavigation(basename(__FILE__));
         //***************************************************************************************
 
         $criteria = new CriteriaCompo();
@@ -168,7 +168,7 @@ switch ($op) {
         // @author   JJDAI
         //***************************************************************************************
         $etablissementAdmin = new ModuleAdmin();
-        echo $etablissementAdmin->addNavigation(basename(__FILE__));
+        echo $etablissementAdmin->displayNavigation(basename(__FILE__));
         //***************************************************************************************
         //Affichage du formulaire de création des téléchargements
         $obj  = $etablissementHandler->get($_REQUEST['etablissement_id']);

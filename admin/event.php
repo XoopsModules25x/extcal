@@ -166,7 +166,7 @@ switch ($op) {
         //***************************************************************************************
         //         require_once XOOPS_ROOT_PATH . "/modules/extcal/class/admin.php";
         $eventAdmin = new ModuleAdmin();
-        echo $eventAdmin->addNavigation(basename(__FILE__));
+        echo $eventAdmin->displayNavigation(basename(__FILE__));
         //***************************************************************************************
 
         $eventId      = $_GET['event_id'];
@@ -226,7 +226,7 @@ switch ($op) {
             //***************************************************************************************
             //require_once XOOPS_ROOT_PATH . "/modules/extcal/class/admin.php";
             $eventAdmin = new ModuleAdmin();
-            echo $eventAdmin->addNavigation(basename(__FILE__));
+            echo $eventAdmin->displayNavigation(basename(__FILE__));
             //***************************************************************************************
 
             $hiddens = array('event_id' => $_GET['event_id'], 'form_delete' => '', 'confirm' => 1);
@@ -244,7 +244,7 @@ switch ($op) {
         //***************************************************************************************
         //require_once XOOPS_ROOT_PATH . "/modules/extcal/class/admin.php";
         $eventAdmin = new ModuleAdmin();
-        echo $eventAdmin->addNavigation(basename(__FILE__));
+        echo $eventAdmin->displayNavigation(basename(__FILE__));
         //***************************************************************************************
         if (isset($_POST['deleteSelection'][0])) {
             $msg = _AM_EXTCAL_CONFIRM_DELETE_ALL;
@@ -305,7 +305,7 @@ switch ($op) {
         //***************************************************************************************
 
         $eventAdmin = new ModuleAdmin();
-        echo $eventAdmin->addNavigation(basename(__FILE__));
+        echo $eventAdmin->displayNavigation(basename(__FILE__));
         //***************************************************************************************
 
         $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);

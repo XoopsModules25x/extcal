@@ -37,7 +37,7 @@ foreach (array_keys($configurator['uploadFolders']) as $i) {
 
 
 
-echo $adminObject->addNavigation(basename(__FILE__));
+echo $adminObject->displayNavigation(basename(__FILE__));
 echo $adminObject->renderIndex();
 
 require_once __DIR__ . '/admin_footer.php';

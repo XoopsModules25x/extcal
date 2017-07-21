@@ -164,7 +164,7 @@ switch ($op) {
     //         //***************************************************************************************
     //         require_once XOOPS_ROOT_PATH . "/modules/extcal/class/admin.php";
     //         $categoryAdmin = new ModuleAdmin();
-    //         echo $categoryAdmin->addNavigation(basename(__FILE__));
+    //         echo $categoryAdmin->displayNavigation(basename(__FILE__));
     //         //***************************************************************************************
     //
     //                     $hiddens = array('cat_id' => $cat_id, 'form_delete' => '', 'confirm' => 1);
@@ -190,7 +190,7 @@ switch ($op) {
     //         // @author      Gregory Mage (Aka Mage)
     //         //***************************************************************************************
     //         $categoryAdmin = new ModuleAdmin();
-    //         echo $categoryAdmin->addNavigation(basename(__FILE__));
+    //         echo $categoryAdmin->displayNavigation(basename(__FILE__));
     //         //***************************************************************************************
     //
     //         // $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
@@ -238,7 +238,7 @@ switch ($op) {
     default:
         xoops_cp_header();
         $categoryAdmin = new ModuleAdmin();
-        echo $categoryAdmin->addNavigation(basename(__FILE__));
+        echo $categoryAdmin->displayNavigation(basename(__FILE__));
 
         $categoryAdmin->addItemButton('Add Category', 'cat.php?op=new', 'add', '');
         echo $categoryAdmin->renderButton('left', '');

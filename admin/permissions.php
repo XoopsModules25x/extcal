@@ -40,7 +40,7 @@ switch ($step) {
         // @author      Gregory Mage (Aka Mage)
         //***************************************************************************************
         $permAdmin = new ModuleAdmin();
-        echo $permAdmin->addNavigation(basename(__FILE__));
+        echo $permAdmin->displayNavigation(basename(__FILE__));
         //***************************************************************************************
 
         $memberHandler          = xoops_getHandler('member');
