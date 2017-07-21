@@ -29,7 +29,6 @@ if (!defined('EXTCAL_DIRNAME')) {
     define('EXTCAL_AUTHOR_LOGOIMG', EXTCAL_URL . '/assets/images/logoModule.png');
     define('EXTCAL_UPLOAD_URL', XOOPS_UPLOAD_URL . '/' . EXTCAL_DIRNAME); // WITHOUT Trailing slash
     define('EXTCAL_UPLOAD_PATH', XOOPS_UPLOAD_PATH . '/' . EXTCAL_DIRNAME); // WITHOUT Trailing slash
-
 }
 
 //Configurator
@@ -39,10 +38,10 @@ return array(
         EXTCAL_UPLOAD_PATH,
         EXTCAL_UPLOAD_PATH . '/etablissement'
     ),
-//    'copyFiles'     => array(
-//        EXTCAL_UPLOAD_PATH,
-//        EXTCAL_UPLOAD_PATH . '/etablissement'
-//    ),
+    //    'copyFiles'     => array(
+    //        EXTCAL_UPLOAD_PATH,
+    //        EXTCAL_UPLOAD_PATH . '/etablissement'
+    //    ),
 
     'templateFolders' => array(
         '/templates/',
@@ -50,7 +49,7 @@ return array(
         '/templates/admin/'
 
     ),
-    'oldFiles'      => array(
+    'oldFiles'        => array(
         '/include/update_functions.php',
         '/include/install_functions.php'
     ),
@@ -58,4 +57,4 @@ return array(
 
 // module information
 $mod_copyright = "<a href='https://xoops.org' title='XOOPS Project' target='_blank'>
-                     <img src='" . EXTCAL_AUTHOR_LOGOIMG . "' alt='XOOPS Project' /></a>";
+                     <img src='" . EXTCAL_AUTHOR_LOGOIMG . "' alt='XOOPS Project'></a>";

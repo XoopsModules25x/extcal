@@ -32,10 +32,10 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
      *
      * @var string
      */
-//    public $table;
-//    public $keyName;
-//    public $className;
-//    public $identifierName;
+    //    public $table;
+    //    public $keyName;
+    //    public $className;
+    //    public $identifierName;
 
     /**#@-*/
 
@@ -106,7 +106,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
             $criteria = new Criteria($this->keyName, (int)$id);
         }
         $criteria->setLimit(1);
-        $objectArray = &$this->getObjects($criteria, false, true);
+        $objectArray = $this->getObjects($criteria, false, true);
         if (count($objectArray) != 1) {
             return $this->create();
         }
@@ -150,8 +150,8 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
      * Convert a database resultset to a returnable array.
      *
      * @param XoopsObject $result  database resultset
-     * @param bool   $idAsKey - should NOT be used with joint keys
-     * @param bool   $asObject
+     * @param bool        $idAsKey - should NOT be used with joint keys
+     * @param bool        $asObject
      *
      * @return array
      */
@@ -324,7 +324,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
     {
         if ($checkObject !== false) {
             if (!is_object($obj)) {
-//                var_dump($obj);
+                //                var_dump($obj);
                 return false;
             }
 
@@ -366,7 +366,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
                 if (isset($notfirst)) {
                     $sql .= ',';
                 }
-                $sql .= ' ' . $key . ' = ' . $value;
+                $sql      .= ' ' . $key . ' = ' . $value;
                 $notfirst = true;
             }
             if (is_array($this->keyName)) {
@@ -401,7 +401,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
      * Change a value for objects with a certain criteria.
      *
      * @param string          $fieldname  Name of the field
-     * @param string|array          $fieldvalue Value to write
+     * @param string|array    $fieldvalue Value to write
      * @param CriteriaElement $criteria   {@link CriteriaElement}
      * @param bool            $force
      *
@@ -462,10 +462,10 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
     /**
      * delete all objects meeting the conditions.
      *
-     * @param CriteriaElement $criteria {@link CriteriaElement}
+     * @param CriteriaElement $criteria        {@link CriteriaElement}
      *                                         with conditions to meet
-     * @param bool                   $force
-     * @param bool                   $asObject
+     * @param bool            $force
+     * @param bool            $asObject
      *
      * @return bool
      */
@@ -607,8 +607,8 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
      */
     public function updateCounter($fieldname, $criteria, $op = '+')
     {
-        $sql = 'UPDATE ' . $this->table . ' SET ' . $fieldname . ' = ' . $fieldname . $op . '1';
-        $sql .= ' ' . $criteria->renderWhere();
+        $sql    = 'UPDATE ' . $this->table . ' SET ' . $fieldname . ' = ' . $fieldname . $op . '1';
+        $sql    .= ' ' . $criteria->renderWhere();
         $result = $this->db->queryF($sql);
         if (!$result) {
             return false;
@@ -618,8 +618,8 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
     }
 
     /**
-     * @param null|CriteriaElement   $criteria
-     * @param string $sum
+     * @param null|CriteriaElement $criteria
+     * @param string               $sum
      *
      * @return array|string
      */
@@ -659,8 +659,8 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
     }
 
     /**
-     * @param null|CriteriaElement   $criteria
-     * @param string $max
+     * @param null|CriteriaElement $criteria
+     * @param string               $max
      *
      * @return array|string
      */

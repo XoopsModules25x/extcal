@@ -46,16 +46,16 @@ $modversion['onInstall']        = 'include/install_function.php';
 $modversion['onUpdate']         = 'include/update_function.php';
 $modversion['system_menu']      = 1;
 $modversion['help']             = 'page=help';
-$modversion['dirmoduleadmin']   = 'Frameworks/moduleclasses/moduleadmin';
-$modversion['sysicons16']       = 'Frameworks/moduleclasses/icons/16';
-$modversion['sysicons32']       = 'Frameworks/moduleclasses/icons/32';
-$modversion['modicons16']       = 'assets/images/icons/16';
-$modversion['modicons32']       = 'assets/images/icons/32';
+//$modversion['dirmoduleadmin']   = 'Frameworks/moduleclasses/moduleadmin';
+//$modversion['sysicons16']       = 'Frameworks/moduleclasses/icons/16';
+//$modversion['sysicons32']       = 'Frameworks/moduleclasses/icons/32';
+$modversion['modicons16'] = 'assets/images/icons/16';
+$modversion['modicons32'] = 'assets/images/icons/32';
 //about
 $modversion['module_website_url']  = 'www.xoops.org/';
 $modversion['module_website_name'] = 'XOOPS';
 $modversion['min_php']             = '5.5';
-$modversion['min_xoops']           = '2.5.8';
+$modversion['min_xoops']           = '2.5.9';
 // Admin things
 $modversion['hasAdmin']   = 1;
 $modversion['adminindex'] = 'admin/index.php';
@@ -79,11 +79,12 @@ if (isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule'])
         }
     */
     $tTabs = getNavBarTabs();
-    while (list($k, $v) = each($tTabs)) {
-        ++$i;
-        $modversion['sub'][$i]['name'] = $v['name'];
-        $modversion['sub'][$i]['url']  = $v['href'];
-    }
+//    while (list($key, $value) = each($tTabs)) {
+        foreach ($tTabs as $key => $value) {
+            ++$i;
+            $modversion['sub'][$i]['name'] = $value['name'];
+            $modversion['sub'][$i]['url']  = $value['href'];
+        }
 }
 
 ////////////////////////////////////////////////////////////////////////////

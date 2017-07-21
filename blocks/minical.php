@@ -161,7 +161,8 @@ function bExtcalMinicalShow($options)
      */
     // Flag current day
     $selectedDays = array(
-        new Calendar_Day(date('Y', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($GLOBALS['xoopsUser']))), date('n', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($GLOBALS['xoopsUser']))),
+        new Calendar_Day(date('Y', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($GLOBALS['xoopsUser']))),
+                         date('n', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($GLOBALS['xoopsUser']))),
                          date('j', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($GLOBALS['xoopsUser'])))),
     );
 
@@ -446,12 +447,12 @@ function _makeXMLSlideshowConf($options)
 
 /**************************************************************************/
 /**
- * @param array $event
- * @param array $eventsArray
+ * @param array      $event
+ * @param array      $eventsArray
  * @param ExtcalTime $extcalTimeHandler
- * @param $startMonth
- * @param $endMonth
- * @param $cats
+ * @param            $startMonth
+ * @param            $endMonth
+ * @param            $cats
  *
  * @return bool
  */

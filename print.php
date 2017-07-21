@@ -43,7 +43,7 @@ $eventHandler->formatEventDate($event, $xoopsModuleConfig['event_date_event']);
 echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">' . "\n";
 echo '<html xmlns="http://www.w3.org/1999/xhtml">' . "\n";
 echo '<head>' . "\n";
-echo '<meta http-equiv="content-type" content="text/html; charset=' . _CHARSET . '" />' . "\n";
+echo '<meta http-equiv="content-type" content="text/html; charset=' . _CHARSET . '">' . "\n";
 echo '<title>' . $event['cat']['cat_name'] . ' - ' . $event['event_title'] . '</title>' . "\n";
 echo '</head>' . "\n";
 echo '<body onload="window.print()">' . "\n";
@@ -107,7 +107,7 @@ if ($event['event_etablissement'] = 0) {
         echo '<span style="font-weight:normal;"> (' . $location['categorie'] . ') <br>' . "\n";
     }
     if ($location['logo'] != '') {
-        echo '<img align=right style="border:1px solid #FFFFFF;margin-right:6px" src=' . XOOPS_URL . '/uploads/extcal/etablissement/' . $location['logo'] . ' height="75px" />' . '' . "\n";
+        echo '<img align=right style="border:1px solid #FFFFFF;margin-right:6px" src=' . XOOPS_URL . '/uploads/extcal/etablissement/' . $location['logo'] . ' height="75px">' . '' . "\n";
     }
 
     echo '<span style="font-weight:normal;">' . $location['nom'] . '<br>' . "\n";
@@ -154,12 +154,12 @@ if (($event['event_picture1'] != '') || ($event['event_picture2'] != '')) {
     echo '<tr>' . "\n";
     if ($event['event_picture1'] != '') {
         echo '<td style="border:1px solid black;">' . "\n";
-        echo '<img align=left style="border:1px solid #FFFFFF;margin-right:6px" src=' . XOOPS_URL . '/uploads/extcal/' . $event['event_picture1'] . ' height="100px" />' . '' . "\n";
+        echo '<img align=left style="border:1px solid #FFFFFF;margin-right:6px" src=' . XOOPS_URL . '/uploads/extcal/' . $event['event_picture1'] . ' height="100px">' . '' . "\n";
         echo '</td>' . "\n";
     }
     if ($event['event_picture2'] != '') {
         echo '<td style="border:1px solid black;">' . "\n";
-        echo '<img align=left style="border:1px solid #FFFFFF;margin-right:6px" src=' . XOOPS_URL . '/uploads/extcal/' . $event['event_picture2'] . ' height="100px" />' . '' . "\n";
+        echo '<img align=left style="border:1px solid #FFFFFF;margin-right:6px" src=' . XOOPS_URL . '/uploads/extcal/' . $event['event_picture2'] . ' height="100px">' . '' . "\n";
         echo '</td>' . "\n";
     }
     echo '</tr>' . "\n";

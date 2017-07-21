@@ -33,16 +33,16 @@ function xoops_module_pre_install_extcal(XoopsModule $module)
         xoops_load('utility', $moduleDirName);
     }
     //check for minimum XOOPS version
-    if (!$className::checkXoopsVer($module)) {
+    if (!$className::checkVerXoops($module)) {
         return false;
     }
 
     // check for minimum PHP version
-    if (!$className::checkPhpVer($module)) {
+    if (!$className::checkVerPhp($module)) {
         return false;
     }
 
-    $mod_tables =& $module->getInfo('tables');
+    $mod_tables = $module->getInfo('tables');
     foreach ($mod_tables as $table) {
         $GLOBALS['xoopsDB']->queryF('DROP TABLE IF EXISTS ' . $GLOBALS['xoopsDB']->prefix($table) . ';');
     }

@@ -43,8 +43,9 @@ class Extcal_2_21
         }
 
         // Create who's not going table to fix bug. If the table exist, the query will faile
-        $sql = 'CREATE TABLE `' . $xoopsDB->prefix('extcal_eventnotmember')
-               . "` (`eventnotmember_id` int(11) NOT NULL auto_increment,`event_id` int(11) NOT NULL default '0',`uid` int(11) NOT NULL default '0',PRIMARY KEY  (`eventnotmember_id`),UNIQUE KEY `eventnotmember` (`event_id`,`uid`)) COMMENT='eXtcal By Zoullou' ;";
+        $sql = 'CREATE TABLE `'
+               . $xoopsDB->prefix('extcal_eventnotmember')
+               . "` (`eventnotmember_id` INT(11) NOT NULL AUTO_INCREMENT,`event_id` INT(11) NOT NULL DEFAULT '0',`uid` INT(11) NOT NULL DEFAULT '0',PRIMARY KEY  (`eventnotmember_id`),UNIQUE KEY `eventnotmember` (`event_id`,`uid`)) COMMENT='eXtcal By Zoullou' ;";
         $xoopsDB->query($sql);
     }
 

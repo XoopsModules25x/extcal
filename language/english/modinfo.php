@@ -156,13 +156,14 @@ define('_MI_EXTCAL_SHOW_OTHEROPTIONS', 'Other Options');
 // 2.38
 
 define('_MI_EXTCAL_EDITOR_ADMIN', 'Editor to use (admin):');
-define('_MI_EXTCAL_EDITOR_ADMIN_DESC', "Select the editor to use for admin side. If you have a 'simple' install (e.g you use only XOOPS core editor class, provided in the standard xoops core package), then you can just select DHTML and Compact");
+define('_MI_EXTCAL_EDITOR_ADMIN_DESC',
+       "Select the editor to use for admin side. If you have a 'simple' install (e.g you use only XOOPS core editor class, provided in the standard xoops core package), then you can just select DHTML and Compact");
 define('_MI_EXTCAL_EDITOR_USER', 'Editor to use (user):');
-define('_MI_EXTCAL_EDITOR_USER_DESC', "Select the editor to use for user side. If you have a 'simple' install (e.g you use only XOOPS core editor class, provided in the standard xoops core package), then you can just select DHTML and Compact");
-
+define('_MI_EXTCAL_EDITOR_USER_DESC',
+       "Select the editor to use for user side. If you have a 'simple' install (e.g you use only XOOPS core editor class, provided in the standard xoops core package), then you can just select DHTML and Compact");
 
 //Help
 define('_MI_EXTCAL_DIRNAME', basename(dirname(dirname(__DIR__))));
-define('_MI_EXTCAL_HELP_HEADER', __DIR__.'/help/helpheader.html');
+define('_MI_EXTCAL_HELP_HEADER', __DIR__ . '/help/helpheader.html');
 define('_MI_EXTCAL_BACK_2_ADMIN', 'Back to Administration of ');
 define('_MI_EXTCAL_OVERVIEW', 'Overview');

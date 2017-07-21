@@ -328,7 +328,7 @@ function getNavBarTabs($currentTab = '')
     ext_loadLanguage('_MD_');
 
     $visibleTabs = $xoopsModuleConfig['visible_tabs'];
-    $tNavBar     = array();
+    $tNavBar     = $ordre = array();
 
     $sep     = '=';
     $tabs    = str_replace("\n", $sep, $xoopsModuleConfig['weight_tabs']);
@@ -430,7 +430,7 @@ function getNavBarTabs($currentTab = '')
         );
     }
 
-    $user       = isset($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser'] : null;
+    $user = isset($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser'] : null;
     /** @var ExtcalCatHandler $catHandler */
     $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
     if ($catHandler->haveSubmitRight($user)) {
@@ -445,8 +445,9 @@ function getNavBarTabs($currentTab = '')
         }
     }
     //----------------------------------------------------------------
-    $ordre = array();
-    while (list($k, $v) = each($tNavBar)) {
+    //    $ordre = array();
+    //    while (list($k, $v) = each($tNavBar)) {
+    foreach ($tNavBar as $k => $v) {
         if (isset($tWeight[$k])) {
             $ordre[] = (int)$tWeight[$k]; //ordre defini dans les option du module
         } else {

@@ -25,7 +25,8 @@ require_once __DIR__ . '/admin_header.php';
 require_once __DIR__ . '/../class/utility.php';
 
 $gepeto = array_merge($_GET, $_POST);
-while (list($k, $v) = each($gepeto)) {
+//while (list($k, $v) = each($gepeto)) {
+foreach ($gepeto as $k => $v) {
     $$k = $v;
 }
 if (!isset($op)) {
@@ -46,19 +47,20 @@ function deleteEvents($ids)
     //Supression des images
     $rst = $eventHandler->getAllEvents($criteria);
 
-    while (list($k, $t) = each($rst)) {
-        if ($t['event_picture1'] != '') {
-            $f = XOOPS_ROOT_PATH . '/uploads/extcal/' . $t['event_picture1'];
-            unlink($f);
-            echo $f . '<br>';
-        }
+//    while (list($k, $t) = each($rst)) {
+        foreach ($rst as $k => $t) {
+            if ($t['event_picture1'] != '') {
+                $f = XOOPS_ROOT_PATH . '/uploads/extcal/' . $t['event_picture1'];
+                unlink($f);
+                echo $f . '<br>';
+            }
 
-        if ($t['event_picture2'] != '') {
-            $f = XOOPS_ROOT_PATH . '/uploads/extcal/' . $t['event_picture1'];
-            unlink($f);
-            echo $f . '<br>';
+            if ($t['event_picture2'] != '') {
+                $f = XOOPS_ROOT_PATH . '/uploads/extcal/' . $t['event_picture1'];
+                unlink($f);
+                echo $f . '<br>';
+            }
         }
-    }
 
     //Supression des enregistrements
     $eventHandler->deleteAllEvents($criteria);
@@ -209,11 +211,12 @@ switch ($op) {
         $event        = $eventHandler->getEvent($eventId);
         $t            = $event->getVars();
         $data         = array();
-        while (list($key, $val) = each($t)) {
+//        while (list($key, $val) = each($t)) {
+        foreach ($t as $key => $val) {
             $data[$key] = $val['value'];
         }
 
-        $data['event_id'] = 0;
+        $data['event_id']    = 0;
         $data['event_title'] .= ' (' . _AM_EXTCAL_CLONE_OF . $eventId . ')';
 
         $newEvent = $eventHandler->create();
@@ -342,7 +345,7 @@ switch ($op) {
         echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _MD_EXTCAL_SUBMITED_EVENT . '</legend>';
 
         echo '<form method="POST" action="event.php">';
-        echo '<input type="hidden" name="op" value="deleteSelection" />';
+        echo '<input type="hidden" name="op" value="deleteSelection">';
 
         echo '<table class="outer" style="width:100%;">';
         echo '<tr style="text-align:center;">';
@@ -365,7 +368,7 @@ switch ($op) {
                 echo '<tr style="text-align:left;" class="' . $class . '">';
                 echo "<td width='10%' align='center'>";
                 echo "<input type='checkbox' name='deleteEvents[{$event['event_id']}]' value='1' >";
-                echo "<input type='hidden' name='deleteAllEvents[{$event['event_id']}]' value='1' />";
+                echo "<input type='hidden' name='deleteAllEvents[{$event['event_id']}]' value='1'>";
                 echo '</td>';
                 echo "<td align = 'center' width='5%'>" . $event['event_id'] . '</td>';
                 echo "<td  width='10%'>" . '<a href=cat.php?op=modify&amp;cat_id=' . $event['cat']['cat_id'] . '&form_modify' . '>' . $event['cat']['cat_name'] . '</a>' . '</td>';
@@ -387,9 +390,9 @@ switch ($op) {
                 echo '<td>' . $event['formated_reccur_rule'] . '</td>';
 
                 echo '<td style="width:10%; text-align:center;">';
-                echo '<a href=event.php?op=modify&amp;event_id=' . $event['event_id'] . "><img src='" . $pathIcon16 . "/edit.png' title='" . _AM_EXTCAL_ICONE_EDIT . "' /></a>&nbsp;&nbsp;";
-                echo '<a href=event.php?op=delete&amp;event_id=' . $event['event_id'] . "><img src='" . $pathIcon16 . "/delete.png' title='" . _AM_EXTCAL_ICONE_DELETE . "' /></a>&nbsp;&nbsp;";
-                echo '<a href=event.php?op=clone&amp;event_id=' . $event['event_id'] . "><img src='" . $pathIcon16 . "/editcopy.png' title='" . _AM_EXTCAL_ICONE_CLONE . "' /></a>";
+                echo '<a href=event.php?op=modify&amp;event_id=' . $event['event_id'] . "><img src='" . $pathIcon16 . "/edit.png' title='" . _AM_EXTCAL_ICONE_EDIT . "'></a>&nbsp;&nbsp;";
+                echo '<a href=event.php?op=delete&amp;event_id=' . $event['event_id'] . "><img src='" . $pathIcon16 . "/delete.png' title='" . _AM_EXTCAL_ICONE_DELETE . "'></a>&nbsp;&nbsp;";
+                echo '<a href=event.php?op=clone&amp;event_id=' . $event['event_id'] . "><img src='" . $pathIcon16 . "/editcopy.png' title='" . _AM_EXTCAL_ICONE_CLONE . "'></a>";
                 echo '</td>';
 
                 echo '</tr>';

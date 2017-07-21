@@ -51,12 +51,12 @@ function xoops_module_pre_update_extcal(XoopsModule $module)
         xoops_load('utility', $moduleDirName);
     }
     //check for minimum XOOPS version
-    if (!$classUtility::checkXoopsVer($module)) {
+    if (!$classUtility::checkVerXoops($module)) {
         return false;
     }
 
     // check for minimum PHP version
-    if (!$classUtility::checkPHPVer($module)) {
+    if (!$classUtility::checkVerPhp($module)) {
         return false;
     }
 
@@ -83,7 +83,6 @@ function xoops_module_update_extcal(XoopsModule $module, $previousVersion = null
         return true;
     }
 
-
     $fld = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/versions/';
     $cls = 'extcal_%1$s';
 
@@ -99,7 +98,8 @@ function xoops_module_update_extcal(XoopsModule $module, $previousVersion = null
         '2_37' => 237,
     );
 
-    while (list($key, $val) = each($version)) {
+//    while (list($key, $val) = each($version)) {
+    foreach ($version as $key => $val) {
         if ($previousVersion < $val) {
             $name = sprintf($cls, $key);
             $f    = $fld . $name . '.php';
@@ -112,17 +112,12 @@ function xoops_module_update_extcal(XoopsModule $module, $previousVersion = null
         }
     }
 
-
-
     if ($previousVersion < 240) {
-
-
         $configurator = include __DIR__ . '/config.php';
         $classUtility = ucfirst($moduleDirName) . 'Utility';
         if (!class_exists($classUtility)) {
             xoops_load('utility', $moduleDirName);
         }
-
 
         //delete old HTML templates
         if (count($configurator['templateFolders']) > 0) {
@@ -141,8 +136,6 @@ function xoops_module_update_extcal(XoopsModule $module, $previousVersion = null
                 }
             }
         }
-
-
 
         //  ---  COPY blank.png FILES ---------------
         if (count($configurator['copyFiles']) > 0) {
@@ -167,9 +160,7 @@ function xoops_module_update_extcal(XoopsModule $module, $previousVersion = null
         //---------------------
 
         //delete .html entries from the tpl table
-        $sql = 'DELETE FROM ' . $xoopsDB->prefix('tplfile') . " WHERE `tpl_module` = '" . $module->getVar('dirname',
-                                                                                                          'n')
-               . "' AND `tpl_file` LIKE '%.html%'";
+        $sql = 'DELETE FROM ' . $xoopsDB->prefix('tplfile') . " WHERE `tpl_module` = '" . $module->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
         $xoopsDB->queryF($sql);
 
         // Load class XoopsFile ====================

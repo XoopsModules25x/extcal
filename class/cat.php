@@ -132,6 +132,7 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
     }
 
     // Return one cat selected by his id
+
     /**
      * @param      $catId
      * @param bool $skipPerm
@@ -145,7 +146,7 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
         if (!$skipPerm) {
             $this->_addCatPermCriteria($criteriaCompo, $GLOBALS['xoopsUser']);
         }
-        $ret = &$this->getObjects($criteriaCompo);
+        $ret = $this->getObjects($criteriaCompo);
         if (isset($ret[0])) {
             return $ret[0];
         } else {
@@ -184,7 +185,8 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
 
         $t = $this->objectToArray($this->getObjects($criteriaCompo));
         $r = array();
-        while (list($k, $v) = each($t)) {
+//        while (list($k, $v) = each($t)) {
+        foreach ($t as $k => $v) {
             $r[$v['cat_id']] = $v;
         }
 

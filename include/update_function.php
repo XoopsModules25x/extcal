@@ -63,7 +63,8 @@ function xoops_module_update_extcal(XoopsModule $xoopsModule, $previousVersion =
         '2_37' => 237,
     );
 
-    while (list($key, $val) = each($version)) {
+//    while (list($key, $val) = each($version)) {
+    foreach ($version as $key => $val) {
         if ($previousVersion < $val) {
             $name = sprintf($cls, $key);
             $f    = $fld . $name . '.php';
@@ -77,7 +78,7 @@ function xoops_module_update_extcal(XoopsModule $xoopsModule, $previousVersion =
     }
 
     /*
-        //$db = Database::getInstance();
+        //$db = XoopsDatabaseFactory::getDatabaseConnection();
         $xoopsDB = XoopsDatabaseFactory::getDatabaseConnection();
 
         $sql = "ALTER TABLE `".$db->prefix('extcal_event')."` ADD `event_organisateur` varchar( 255 ) NOT NULL AFTER `event_desc` ;";

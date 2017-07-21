@@ -21,7 +21,7 @@
  **/
 
 require_once __DIR__ . '/../../../class/uploader.php';
-require __DIR__ . '/../../../class/mail/phpmailer/class.phpmailer.php'; // First we require the PHPMailer libary in our script
+require_once __DIR__ . '/../../../class/mail/phpmailer/class.phpmailer.php'; // First we require the PHPMailer libary in our script
 require_once __DIR__ . '/../class/utility.php';
 require_once __DIR__ . '/constantes.php';
 require_once __DIR__ . '/../../../class/template.php';
@@ -160,7 +160,8 @@ __sql__;
     $destinataires                     = array();
     $destinataires[$submiter['email']] = $submiter['email'];
     $destinataires[$acteur['email']]   = $acteur['email'];
-    while (list($k, $row) = each($members)) {
+//    while (list($k, $row) = each($members)) {
+    foreach ($members as $k => $row) {
         $destinataires[$row['email']] = $row['email'];
     }
 
@@ -235,7 +236,8 @@ function extcal_SendMail(
 
     //$xoopsMailer->setToUsers($destinataires[$i]);
 
-    while (list($k, $v) = each($destinataires)) {
+//    while (list($k, $v) = each($destinataires)) {
+    foreach ($destinataires as $k => $v) {
         //for ( $i = 0, $iMax = count($destinataires); $i < $iMax; ++$i) {
         //$xoopsMailer->setToUsers($destinataires[$i]);
         $xoopsMailer->setToEmails($v);
@@ -311,7 +313,7 @@ function extcal_getHeader($mode, $emailSender)
     $header   = array();
     $header[] = "From: {$emailSender}";
     $header[] = "Reply-To: {$emailSender}";
-    $header[] = 'X-Mailer: PHP/' . phpversion();
+    $header[] = 'X-Mailer: PHP/' . PHP_VERSION;
 
     if ($mode == _EXTCAL_HEADER_HTML) {
         $header[] = 'MIME-Version: 1.0';

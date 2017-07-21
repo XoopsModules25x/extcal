@@ -50,13 +50,27 @@ if (isset($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->getVar('mid'))) {
 /* todo a deplacer dans le template JJD */
 $uid = $xoopsUser ? $xoopsUser->getVar('uid') : 0;
 global $xoopsModule;
-$pathIcon16 =& $xoopsModule->getInfo('icons16');
+$pathIcon16      = \Xmf\Module\Admin::iconUrl('', 16);
 
 $edit_delete = '';
 if (is_object($xoopsUser) && $isAdmin) {
-    $edit_delete = '<a href="' . XOOPS_URL . '/modules/extcal/admin/etablissement.php?op=edit_etablissement&etablissement_id=' . $etablissement_id . '"><img src="' . $pathIcon16 . '/edit.png" width="16px" height="16px" border="0" title="'
-                   . _MD_EXTCAL_ETABLISSEMENT_EDIT . '"/></a><a href="' . XOOPS_URL . '/modules/extcal/admin/etablissement.php?op=delete_etablissement&etablissement_id=' . $etablissement_id . '"><img src="' . $pathIcon16
-                   . '/delete.png" width="16px" height="16px" border="0" title="' . _MD_EXTCAL_ETABLISSEMENT_DELETE . '"/></a>';
+    $edit_delete = '<a href="'
+                   . XOOPS_URL
+                   . '/modules/extcal/admin/etablissement.php?op=edit_etablissement&etablissement_id='
+                   . $etablissement_id
+                   . '"><img src="'
+                   . $pathIcon16
+                   . '/edit.png" width="16px" height="16px" border="0" title="'
+                   . _MD_EXTCAL_ETABLISSEMENT_EDIT
+                   . '"/></a><a href="'
+                   . XOOPS_URL
+                   . '/modules/extcal/admin/etablissement.php?op=delete_etablissement&etablissement_id='
+                   . $etablissement_id
+                   . '"><img src="'
+                   . $pathIcon16
+                   . '/delete.png" width="16px" height="16px" border="0" title="'
+                   . _MD_EXTCAL_ETABLISSEMENT_DELETE
+                   . '"/></a>';
 }
 $xoopsTpl->assign('edit_delete', $edit_delete);
 
@@ -64,7 +78,13 @@ $xoopsTpl->assign('etablissement', $etablissement);
 
 $date = mktime(0, 0, 0, date('m'), date('d'), date('y'));
 
-$requete = $xoopsDB->query('SELECT event_id, event_title, event_desc, event_picture1, event_start FROM ' . $xoopsDB->prefix('extcal_event') . " WHERE event_etablissement='" . $etablissement_id . "' AND event_start >='" . $date . "'");
+$requete = $xoopsDB->query('SELECT event_id, event_title, event_desc, event_picture1, event_start FROM '
+                           . $xoopsDB->prefix('extcal_event')
+                           . " WHERE event_etablissement='"
+                           . $etablissement_id
+                           . "' AND event_start >='"
+                           . $date
+                           . "'");
 while ($donnees = $xoopsDB->fetchArray($requete)) {
     if ($donnees['event_desc'] > 210) {
         $event_desc = $donnees['event_desc'];

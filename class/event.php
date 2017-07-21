@@ -198,7 +198,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
      */
     public function getAllEvents($criteria = null, $asObject = false)
     {
-        $rst = &$this->getObjects($criteria, $asObject);
+        $rst = $this->getObjects($criteria, $asObject);
         if ($asObject) {
             return $rst;
         } else {
@@ -207,6 +207,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
     }
 
     // Return one approved event selected by his id
+
     /**
      * @param      $eventId
      * @param bool $skipPerm
@@ -223,7 +224,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         if (!$skipPerm) {
             $this->_addCatPermCriteria($criteriaCompo, $user);
         }
-        $ret = &$this->getObjects($criteriaCompo);
+        $ret = $this->getObjects($criteriaCompo);
         if (isset($ret[0])) {
             return $ret[0];
         } else {
@@ -232,6 +233,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
     }
 
     // Return one event selected by his id (approve or not)
+
     /**
      * @param      $eventId
      * @param bool $skipPerm
@@ -247,7 +249,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         if (!$skipPerm) {
             $this->_addCatPermCriteria($criteriaCompo, $user);
         }
-        $ret = &$this->getObjects($criteriaCompo);
+        $ret = $this->getObjects($criteriaCompo);
         if (isset($ret[0])) {
             return $ret[0];
         } else {
@@ -398,17 +400,18 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         $ordre      = array();
         $eventArray = array();
 
-        while (list($k, $v) = each($events)) {
-            $ordre[] = (int)$v['event_start'];
-            $this->formatEventDate($v, $extcalConfig['event_date_week']);
+//        while (list($k, $v) = each($events)) {
+            foreach ($events as $k => $t) {
+                $ordre[] = (int)$v['event_start'];
+                $this->formatEventDate($v, $extcalConfig['event_date_week']);
             //$v['cat']['cat_light_color'] = $v['cat']['cat_color'];
             $v['cat']['cat_light_color'] = ExtcalUtility::getLighterColor($v['cat']['cat_color'], _EXTCAL_INFOBULLE_RGB_MIN, _EXTCAL_INFOBULLE_RGB_MAX);
-            if ($v['event_icone'] == '') {
-                $v['event_icone'] = $v['cat']['cat_icone'];
+                if ($v['event_icone'] == '') {
+                    $v['event_icone'] = $v['cat']['cat_icone'];
+                }
+                $v['event_desc'] = html_entity_decode($v['event_desc']);
+                $eventArray[]    = $v;
             }
-            $v['event_desc'] = html_entity_decode($v['event_desc']);
-            $eventArray[]    = $v;
-        }
         array_multisort($eventArray, SORT_ASC, SORT_NUMERIC, $ordre, SORT_ASC, SORT_NUMERIC);
 
         return $eventArray;
@@ -423,9 +426,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
     public function getEventsUniques($criteres)
     {
         global $extcalConfig;
-        while (list($k, $v) = each($criteres)) {
-            $$k = $v;
-        }
+//        while (list($k, $v) = each($criteres)) {
+            foreach ($criteres as $k => $t) {
+                $$k = $v;
+            }
         if (!isset($nbDays)) {
             $nbDays = 7;
         }
@@ -487,7 +491,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         $criteriaCompo->add(new Criteria('event_isrecur', 0, '='));
         $criteriaCompo->setOrder($sens);
 
-        $result = &$this->getObjects($criteriaCompo);
+        $result = $this->getObjects($criteriaCompo);
         $events = $this->objectToArray($result, $externalKeys);
         $this->serverTimeToUserTimes($events);
 
@@ -505,7 +509,8 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
     {
         global $extcalConfig;
 
-        while (list($k, $v) = each($criteres)) {
+//        while (list($k, $v) = each($criteres)) {
+        foreach ($criteres as $k => $t) {
             $$k = $v;
         }
         if (!isset($nbDays)) {
@@ -561,13 +566,14 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         $criteriaCompo->add(new Criteria('event_isrecur', 1, '='));
         $criteriaCompo->setOrder($sens);
 
-        $result = &$this->getObjects($criteriaCompo);
+        $result = $this->getObjects($criteriaCompo);
         $events = $this->objectToArray($result, $externalKeys);
         $this->serverTimeToUserTimes($events);
 
         //Balyage de tous les evennements récurrents et creation de toutes le events
         $eventsR = array();
-        while (list($k, $event) = each($events)) {
+//        while (list($k, $event) = each($events)) {
+        foreach ($events as $k => $event) {
             //$te = $this->GetInterval($event, $start, $end);
             //$eventsR = array_merge($eventsR, $te);
             //echo 'event : ' . $event['event_id'] . '<br>';
@@ -626,6 +632,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
     }
 
     // Return the criteria compo object for a week
+
     /**
      * @param     $day
      * @param     $month
@@ -649,6 +656,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
     }
 
     // Return the criteria compo object for a month
+
     /**
      * @param $month
      * @param $year
@@ -670,6 +678,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
     }
 
     // Return the criteria compo object for event occuring on a given year
+
     /**
      * @param     $year
      * @param int $cat
@@ -775,6 +784,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
     }
 
     // Return upcomming event
+
     /**
      * @param     $nbEvent
      * @param int $cat
@@ -820,6 +830,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
     }
 
     // Return event occuring this day
+
     /**
      * @param     $nbEvent
      * @param int $cat
@@ -848,6 +859,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
     }
 
     // Return last added event
+
     /**
      * @param      $start
      * @param      $limit
@@ -886,6 +898,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
     }
 
     // Return random upcomming event
+
     /**
      * @param     $nbEvent
      * @param int $cat
@@ -1573,7 +1586,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
                     }
 
                     $occurEventStart += _EXTCAL_TS_DAY;
-                    $occurEventEnd += _EXTCAL_TS_DAY;
+                    $occurEventEnd   += _EXTCAL_TS_DAY;
 
                     ++$nbOccur;
                 }
@@ -1618,7 +1631,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
                     }
 
                     $occurEventStart += _EXTCAL_TS_DAY;
-                    $occurEventEnd += _EXTCAL_TS_DAY;
+                    $occurEventEnd   += _EXTCAL_TS_DAY;
 
                     if ($occurEventStart >= $startWeekTS) {
                         ++$nbOccur;
@@ -2349,6 +2362,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
     }
 
     //-----------------------------------------------------------
+
     /**
      * @param int    $year
      * @param int    $month
@@ -2383,7 +2397,11 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         $tEvent = $xoopsDB->prefix('extcal_event') . ' AS te';
         $tCat   = $xoopsDB->prefix('extcal_cat') . ' AS tc';
 
-        $sql = 'SELECT te.*, tc.cat_name , tc.cat_color, ' . 'year(FROM_UNIXTIME(event_start)) AS year,' . 'month(FROM_UNIXTIME(event_start)) AS month,' . 'day(FROM_UNIXTIME(event_start)) AS day' . " FROM {$tEvent}, {$tCat}";
+        $sql = 'SELECT te.*, tc.cat_name , tc.cat_color, '
+               . 'year(FROM_UNIXTIME(event_start)) AS year,'
+               . 'month(FROM_UNIXTIME(event_start)) AS month,'
+               . 'day(FROM_UNIXTIME(event_start)) AS day'
+               . " FROM {$tEvent}, {$tCat}";
         //---------------------------------------------------
         $tw   = array();
         $tw[] = 'te.cat_id = tc.cat_id';
@@ -2573,7 +2591,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
             $filtre = implode(' OR ', $t);
             $filtre = str_replace('#', '%', $filtre);
-            $sql .= " AND ($filtre)";
+            $sql    .= " AND ($filtre)";
         }
 
         if ($criteresPlus != '') {

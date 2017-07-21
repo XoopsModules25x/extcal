@@ -17,7 +17,7 @@
  * @author       XOOPS Development Team,
  */
 
-require_once __DIR__.'/../include/constantes.php';
+require_once __DIR__ . '/../include/constantes.php';
 
 /**
  * @param $options
@@ -26,15 +26,15 @@ require_once __DIR__.'/../include/constantes.php';
  */
 function bExtcalNewShow($options)
 {
-    require_once __DIR__.'/../class/config.php';
+    require_once __DIR__ . '/../class/config.php';
 
     // Retriving module config
-    $extcalConfig = ExtcalConfig::getHandler();
+    $extcalConfig      = ExtcalConfig::getHandler();
     $xoopsModuleConfig = $extcalConfig->getModuleConfig();
 
     $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
 
-    $nbEvent = $options[0];
+    $nbEvent     = $options[0];
     $titleLenght = $options[1];
     array_shift($options);
     array_shift($options);
@@ -64,22 +64,22 @@ function bExtcalNewEdit($options)
 
     $cats = $catHandler->getAllCat($xoopsUser, 'extcal_cat_view');
 
-    $form = _MB_EXTCAL_DISPLAY."&nbsp;\n";
-    $form .= '<input name="options[0]" size="5" maxlength="255" value="'.$options[0].'" type="text" />&nbsp;'._MB_EXTCAL_EVENT.'<br>';
-    $form .= _MB_EXTCAL_TITLE_LENGTH.' : <input name="options[1]" size="5" maxlength="255" value="'.$options[1].'" type="text" /><br>';
+    $form = _MB_EXTCAL_DISPLAY . "&nbsp;\n";
+    $form .= '<input name="options[0]" size="5" maxlength="255" value="' . $options[0] . '" type="text">&nbsp;' . _MB_EXTCAL_EVENT . '<br>';
+    $form .= _MB_EXTCAL_TITLE_LENGTH . ' : <input name="options[1]" size="5" maxlength="255" value="' . $options[1] . '" type="text"><br>';
     array_shift($options);
     array_shift($options);
-    $form .= _MB_EXTCAL_CAT_TO_USE.'<br><select name="options[]" multiple="multiple" size="5">';
+    $form .= _MB_EXTCAL_CAT_TO_USE . '<br><select name="options[]" multiple="multiple" size="5">';
     if (array_search(0, $options) === false) {
-        $form .= '<option value="0">'._MB_EXTCAL_ALL_CAT.'</option>';
+        $form .= '<option value="0">' . _MB_EXTCAL_ALL_CAT . '</option>';
     } else {
-        $form .= '<option value="0" selected="selected">'._MB_EXTCAL_ALL_CAT.'</option>';
+        $form .= '<option value="0" selected="selected">' . _MB_EXTCAL_ALL_CAT . '</option>';
     }
     foreach ($cats as $cat) {
         if (array_search($cat->getVar('cat_id'), $options) === false) {
-            $form .= '<option value="'.$cat->getVar('cat_id').'">'.$cat->getVar('cat_name').'</option>';
+            $form .= '<option value="' . $cat->getVar('cat_id') . '">' . $cat->getVar('cat_name') . '</option>';
         } else {
-            $form .= '<option value="'.$cat->getVar('cat_id').'" selected="selected">'.$cat->getVar('cat_name').'</option>';
+            $form .= '<option value="' . $cat->getVar('cat_id') . '" selected="selected">' . $cat->getVar('cat_name') . '</option>';
         }
     }
     $form .= '</select>';

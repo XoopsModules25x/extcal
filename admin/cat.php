@@ -24,9 +24,10 @@ require_once __DIR__ . '/../class/utility.php';
 require_once __DIR__ . '/../include/constantes.php';
 
 $gepeto = array_merge($_GET, $_POST);
-while (list($k, $v) = each($gepeto)) {
-    $$k = $v;
-}
+//while (list($key, $value) = each($gepeto)) {
+    foreach ($gepeto as $key => $value) {
+        $$k = $value;
+    }
 if (!isset($op)) {
     $op = '';
 }

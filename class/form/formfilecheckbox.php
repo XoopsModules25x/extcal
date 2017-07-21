@@ -43,13 +43,13 @@ class ExtcalFormFileCheckBox extends XoopsFormCheckBox
     {
         $ret = '';
         if (count($this->getOptions()) > 1 && substr($this->getName(), -2, 2) !== '[]') {
-            $newname = $this->getName().'[]';
+            $newname = $this->getName() . '[]';
             $this->setName($newname);
         }
         foreach ($this->getOptions() as $value => $name) {
-            $ret .= "<input type='checkbox' name='".$this->getName()."' value='".$value."'";
+            $ret .= "<input type='checkbox' name='" . $this->getName() . "' value='" . $value . "'";
             $ret .= ' checked';
-            $ret .= $this->getExtra().' />'.$name."<br>\n";
+            $ret .= $this->getExtra() . '>' . $name . "<br>\n";
         }
 
         return $ret;

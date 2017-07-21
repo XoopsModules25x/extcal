@@ -92,8 +92,9 @@ switch ($step) {
         /*
          * Public category permission mask
          */
-        echo '<fieldset id="defaultBookmark"><legend><a href="#defaultBookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\'default\'); toggleIcon(\'defaultIcon\');"><img id="defaultIcon" src="../assets/images/icons/minus.gif" />&nbsp;'
-             . _AM_EXTCAL_PUBLIC_PERM_MASK . '</a></legend><div id="default">';
+        echo '<fieldset id="defaultBookmark"><legend><a href="#defaultBookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\'default\'); toggleIcon(\'defaultIcon\');"><img id="defaultIcon" src="../assets/images/icons/minus.gif">&nbsp;'
+             . _AM_EXTCAL_PUBLIC_PERM_MASK
+             . '</a></legend><div id="default">';
         echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _AM_EXTCAL_INFORMATION . '</legend>';
         echo _AM_EXTCAL_PUBLIC_PERM_MASK_INFO;
         echo '</fieldset><br>';
@@ -114,15 +115,15 @@ switch ($step) {
             $style = (++$i % 2 == 0) ? 'odd' : 'even';
             echo '<tr>';
             echo '<td class="' . $style . '">' . $v . '</td>';
-            echo '<td class="' . $style . '" style="text-align:center;"><input name="perms[extcal_perm_mask][group][' . $k . '][1]" type="checkbox"' . getChecked($viewGroup, $k) . ' /></td>';
-            echo '<td class="' . $style . '" style="text-align:center;"><input name="perms[extcal_perm_mask][group][' . $k . '][2]" type="checkbox"' . getChecked($submitGroup, $k) . ' /></td>';
-            echo '<td class="' . $style . '" style="text-align:center;"><input name="perms[extcal_perm_mask][group][' . $k . '][4]" type="checkbox"' . getChecked($autoApproveGroup, $k) . ' /></td>';
-            echo '<td class="' . $style . '" style="text-align:center;"><input name="perms[extcal_perm_mask][group][' . $k . '][8]" type="checkbox"' . getChecked($editGroup, $k) . ' /></td>';
+            echo '<td class="' . $style . '" style="text-align:center;"><input name="perms[extcal_perm_mask][group][' . $k . '][1]" type="checkbox"' . getChecked($viewGroup, $k) . '></td>';
+            echo '<td class="' . $style . '" style="text-align:center;"><input name="perms[extcal_perm_mask][group][' . $k . '][2]" type="checkbox"' . getChecked($submitGroup, $k) . '></td>';
+            echo '<td class="' . $style . '" style="text-align:center;"><input name="perms[extcal_perm_mask][group][' . $k . '][4]" type="checkbox"' . getChecked($autoApproveGroup, $k) . '></td>';
+            echo '<td class="' . $style . '" style="text-align:center;"><input name="perms[extcal_perm_mask][group][' . $k . '][8]" type="checkbox"' . getChecked($editGroup, $k) . '></td>';
             echo '</tr>';
         }
-        echo '<input type="hidden" name="type" value="public" />';
-        echo '<input type="hidden" name="step" value="enreg" />';
-        echo '<tr><td colspan="8" style="text-align:center;" class="head"><input type="submit" value="' . _SUBMIT . '" /></td></tr></form>';
+        echo '<input type="hidden" name="type" value="public">';
+        echo '<input type="hidden" name="step" value="enreg">';
+        echo '<tr><td colspan="8" style="text-align:center;" class="head"><input type="submit" value="' . _SUBMIT . '"></td></tr></form>';
         echo '</table><br>';
 
         echo '</div></fieldset><br>';
@@ -142,8 +143,21 @@ switch ($step) {
             $form->addItem($cat->getVar('cat_id'), $cat->getVar('cat_name'));
         }
 
-        echo '<fieldset id="' . $permName . 'Bookmark"><legend><a href="#' . $permName . 'Bookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\'' . $permName . '\'); toggleIcon(\'' . $permName . 'Icon\');"><img id="' . $permName
-             . 'Icon" src="../assets/images/icons/minus.gif" />&nbsp;' . $titleOfForm . '</a></legend><div id="' . $permName . '">';
+        echo '<fieldset id="'
+             . $permName
+             . 'Bookmark"><legend><a href="#'
+             . $permName
+             . 'Bookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\''
+             . $permName
+             . '\'); toggleIcon(\''
+             . $permName
+             . 'Icon\');"><img id="'
+             . $permName
+             . 'Icon" src="../assets/images/icons/minus.gif">&nbsp;'
+             . $titleOfForm
+             . '</a></legend><div id="'
+             . $permName
+             . '">';
         echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _AM_EXTCAL_INFORMATION . '</legend>';
         echo $permDesc;
         echo '</fieldset>';
@@ -167,8 +181,21 @@ switch ($step) {
             $form->addItem($cat->getVar('cat_id'), $cat->getVar('cat_name'));
         }
 
-        echo '<fieldset id="' . $permName . 'Bookmark"><legend><a href="#' . $permName . 'Bookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\'' . $permName . '\'); toggleIcon(\'' . $permName . 'Icon\');"><img id="' . $permName
-             . 'Icon" src="../assets/images/icons/minus.gif" />&nbsp;' . $titleOfForm . '</a></legend><div id="' . $permName . '">';
+        echo '<fieldset id="'
+             . $permName
+             . 'Bookmark"><legend><a href="#'
+             . $permName
+             . 'Bookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\''
+             . $permName
+             . '\'); toggleIcon(\''
+             . $permName
+             . 'Icon\');"><img id="'
+             . $permName
+             . 'Icon" src="../assets/images/icons/minus.gif">&nbsp;'
+             . $titleOfForm
+             . '</a></legend><div id="'
+             . $permName
+             . '">';
         echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _AM_EXTCAL_INFORMATION . '</legend>';
         echo $permDesc;
         echo '</fieldset>';
@@ -191,8 +218,21 @@ switch ($step) {
             $form->addItem($cat->getVar('cat_id'), $cat->getVar('cat_name'));
         }
 
-        echo '<fieldset id="' . $permName . 'Bookmark"><legend><a href="#' . $permName . 'Bookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\'' . $permName . '\'); toggleIcon(\'' . $permName . 'Icon\');"><img id="' . $permName
-             . 'Icon" src="../assets/images/icons/minus.gif" />&nbsp;' . $titleOfForm . '</a></legend><div id="' . $permName . '">';
+        echo '<fieldset id="'
+             . $permName
+             . 'Bookmark"><legend><a href="#'
+             . $permName
+             . 'Bookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\''
+             . $permName
+             . '\'); toggleIcon(\''
+             . $permName
+             . 'Icon\');"><img id="'
+             . $permName
+             . 'Icon" src="../assets/images/icons/minus.gif">&nbsp;'
+             . $titleOfForm
+             . '</a></legend><div id="'
+             . $permName
+             . '">';
         echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _AM_EXTCAL_INFORMATION . '</legend>';
         echo $permDesc;
         echo '</fieldset>';
@@ -215,8 +255,21 @@ switch ($step) {
             $form->addItem($cat->getVar('cat_id'), $cat->getVar('cat_name'));
         }
 
-        echo '<fieldset id="' . $permName . 'Bookmark"><legend><a href="#' . $permName . 'Bookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\'' . $permName . '\'); toggleIcon(\'' . $permName . 'Icon\');"><img id="' . $permName
-             . 'Icon" src="../assets/images/icons/minus.gif" />&nbsp;' . $titleOfForm . '</a></legend><div id="' . $permName . '">';
+        echo '<fieldset id="'
+             . $permName
+             . 'Bookmark"><legend><a href="#'
+             . $permName
+             . 'Bookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\''
+             . $permName
+             . '\'); toggleIcon(\''
+             . $permName
+             . 'Icon\');"><img id="'
+             . $permName
+             . 'Icon" src="../assets/images/icons/minus.gif">&nbsp;'
+             . $titleOfForm
+             . '</a></legend><div id="'
+             . $permName
+             . '">';
         echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _AM_EXTCAL_INFORMATION . '</legend>';
         echo $permDesc;
         echo '</fieldset>';

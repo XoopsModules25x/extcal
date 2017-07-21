@@ -45,4 +45,3 @@ $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
 /** @var ExtcalEventmemberHandler $eventMemberHandler */
 $eventMemberHandler = xoops_getModuleHandler(_EXTCAL_CLS_MEMBER, _EXTCAL_MODULE);
 //xoops_cp_header();
-$adminObject = new ModuleAdmin();

@@ -132,7 +132,7 @@ if (isset($_POST['form_preview'])) {
         'event_url'           => $_POST['event_url'],
         'event_email'         => $_POST['event_email'],
         'event_address'       => $_POST['event_address'],
-        'event_approved'      => ($approve == false) ? 0 : 1,
+        'event_approved'      => ($approve === false) ? 0 : 1,
         'event_start'         => $_POST['event_start'],
         'have_end'            => $_POST['have_end'],
         'event_end'           => $_POST['event_end'],

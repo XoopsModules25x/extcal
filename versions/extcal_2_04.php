@@ -32,7 +32,7 @@ class Extcal_2_04
     {
         global $xoopsDB;
 
-        $sql = 'ALTER TABLE `' . $xoopsDB->prefix('extcal_event') . "` ADD `event_nbmember` tinyint(4) NOT NULL default '0' AFTER `event_submitdate` ;";
+        $sql = 'ALTER TABLE `' . $xoopsDB->prefix('extcal_event') . "` ADD `event_nbmember` TINYINT(4) NOT NULL DEFAULT '0' AFTER `event_submitdate` ;";
         $xoopsDB->query($sql);
     }
 
