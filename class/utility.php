@@ -15,12 +15,12 @@
  * L'utilisation de ce formulaire d'adminitration suppose
  * que la classe correspondante de la table a été générées avec classGenerator
  **/
-include_once XOOPS_ROOT_PATH . '/class/uploader.php';
+require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 
 /**
- * Class ExtcalUtilities.
+ * Class ExtcalUtility.
  */
-class ExtcalUtilities
+class ExtcalUtility
 {
     /**
      * @param $eventId
@@ -33,9 +33,10 @@ class ExtcalUtilities
         $event        = $eventHandler->getEvent($eventId);
         $t            = $event->getVars();
         $data         = array();
-        while (list($key, $val) = each($t)) {
-            $data[$key] = $val['value'];
-        }
+//        while (list($key, $val) = each($t)) {
+            foreach ($t as $key => $val) {
+                $data[$key] = $val['value'];
+            }
 
         return $data;
     }
@@ -149,8 +150,12 @@ class ExtcalUtilities
             $name      = $catList->getVar('cat_name');
             $cat_color = $catList->getVar('cat_color');
             $checked   = in_array($cat_id, $cat) ? 'checked' : '';
-            $cat       = '' . "<div style='float:left; margin-left:5px;'>" . "<input type='checkbox' name='{$name}[{$cat_id}]' value='1' {$checked}>"
-                         . "<div style='absolute:left;height:12px; width:6px; background-color:#{$cat_color}; border:1px solid black; float:left; margin-right:5px;' ></div>" . " {$name}" . '</div>';
+            $cat       = ''
+                         . "<div style='float:left; margin-left:5px;'>"
+                         . "<input type='checkbox' name='{$name}[{$cat_id}]' value='1' {$checked}>"
+                         . "<div style='absolute:left;height:12px; width:6px; background-color:#{$cat_color}; border:1px solid black; float:left; margin-right:5px;' ></div>"
+                         . " {$name}"
+                         . '</div>';
 
             $t[] = $cat;
         }
@@ -470,7 +475,7 @@ class ExtcalUtilities
      */
     public static function getLighterColor($color, $plancher, $plafond)
     {
-        include_once __DIR__ . '/colorTools.php';
+        require_once __DIR__ . '/colorTools.php';
 
         //$ct = new ColorTools();
         //return $ct->eclaircir($color,$plancher,$plafond);
@@ -545,18 +550,25 @@ class ExtcalUtilities
      * Verifies XOOPS version meets minimum requirements for this module
      * @static
      * @param XoopsModule $module
+     * @param null|string        $requiredVer
      *
      * @return bool true if meets requirements, false if not
      */
-    public static function checkXoopsVer(XoopsModule $module)
+    public static function checkVerXoops(XoopsModule $module = null, $requiredVer = null)
     {
-        xoops_loadLanguage('admin', $module->dirname());
+        $moduleDirName = basename(dirname(__DIR__));
+        if (null === $module) {
+            $module        = XoopsModule::getByDirname($moduleDirName);
+        }
+        xoops_loadLanguage('admin', $moduleDirName);
         //check for minimum XOOPS version
-        $currentVer  = substr(XOOPS_VERSION, 6); // get the numeric part of string
-        $currArray   = explode('.', $currentVer);
-        $requiredVer = '' . $module->getInfo('min_xoops'); //making sure it's a string
-        $reqArray    = explode('.', $requiredVer);
-        $success     = true;
+        $currentVer = substr(XOOPS_VERSION, 6); // get the numeric part of string
+        $currArray  = explode('.', $currentVer);
+        if (null === $requiredVer) {
+            $requiredVer = '' . $module->getInfo('min_xoops'); //making sure it's a string
+        }
+        $reqArray = explode('.', $requiredVer);
+        $success  = true;
         foreach ($reqArray as $k => $v) {
             if (isset($currArray[$k])) {
                 if ($currArray[$k] > $v) {
@@ -590,13 +602,13 @@ class ExtcalUtilities
      *
      * @return bool true if meets requirements, false if not
      */
-    public static function checkPhpVer(XoopsModule $module)
+    public static function checkVerPhp(XoopsModule $module)
     {
         xoops_loadLanguage('admin', $module->dirname());
         // check for minimum PHP version
         $success = true;
-        $verNum  = phpversion();
-        $reqVer  =& $module->getInfo('min_php');
+        $verNum  = PHP_VERSION;
+        $reqVer  = $module->getInfo('min_php');
         if (false !== $reqVer && '' !== $reqVer) {
             if (version_compare($verNum, $reqVer, '<')) {
                 $module->setErrors(sprintf(_AM_TAG_ERROR_BAD_PHP, $reqVer, $verNum));
