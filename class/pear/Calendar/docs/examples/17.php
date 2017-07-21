@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Description: demonstrates using the Textual decorator.
  */
