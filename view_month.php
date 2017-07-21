@@ -15,7 +15,7 @@ $cat   = isset($_GET['cat']) ? (int)$_GET['cat'] : 0;
 $form = new XoopsSimpleForm('', 'navigSelectBox', $params['file'], 'get');
 $form->addElement(getListYears($year, $xoopsModuleConfig['agenda_nb_years_before'], $xoopsModuleConfig['agenda_nb_years_after']));
 $form->addElement(getListMonths($month));
-$form->addElement(ExtcalUtilities::getListCategories($cat));
+$form->addElement(ExtcalUtility::getListCategories($cat));
 $form->addElement(new XoopsFormButton('', '', _SUBMIT, 'submit'));
 
 // Assigning the form to the template

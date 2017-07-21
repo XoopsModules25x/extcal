@@ -2,7 +2,7 @@
 
 global $extcalConfig, $xoopsUser;
 require_once __DIR__ . '/../include/constantes.php';
-require_once __DIR__ . '/../class/utilities.php';
+require_once __DIR__ . '/../class/utility.php';
 require_once __DIR__ . '/../class/tableForm.php';
 //---------------------------------------------------------------------------
 /**

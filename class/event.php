@@ -7,7 +7,7 @@ require_once __DIR__ . '/perm.php';
 require_once __DIR__ . '/time.php';
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/extDateTime.php';
-require_once __DIR__ . '/utilities.php';
+require_once __DIR__ . '/utility.php';
 require_once __DIR__ . '/../include/constantes.php';
 
 /**
@@ -385,7 +385,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
             $ordre[] = (int)$v['event_start'];
             $this->formatEventDate($v, $extcalConfig['event_date_week']);
             //$v['cat']['cat_light_color'] = $v['cat']['cat_color'];
-            $v['cat']['cat_light_color'] = ExtcalUtilities::getLighterColor($v['cat']['cat_color'], _EXTCAL_INFOBULLE_RGB_MIN, _EXTCAL_INFOBULLE_RGB_MAX);
+            $v['cat']['cat_light_color'] = ExtcalUtility::getLighterColor($v['cat']['cat_color'], _EXTCAL_INFOBULLE_RGB_MIN, _EXTCAL_INFOBULLE_RGB_MAX);
             if ($v['event_icone'] == '') {
                 $v['event_icone'] = $v['cat']['cat_icone'];
             }
@@ -2321,7 +2321,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         while ($myrow = $xoopsDB->fetchArray($result)) {
             $myrow['cat']['cat_name']        = $myrow['cat_name'];
             $myrow['cat']['cat_color']       = $myrow['cat_color'];
-            $myrow['cat']['cat_light_color'] = ExtcalUtilities::getLighterColor($myrow['cat']['cat_color'], _EXTCAL_INFOBULLE_RGB_MIN, _EXTCAL_INFOBULLE_RGB_MAX);
+            $myrow['cat']['cat_light_color'] = ExtcalUtility::getLighterColor($myrow['cat']['cat_color'], _EXTCAL_INFOBULLE_RGB_MIN, _EXTCAL_INFOBULLE_RGB_MAX);
             if ($myrow['event_icone'] == '') {
                 $myrow['event_icone'] = $myrow['cat']['cat_icone'];
             }

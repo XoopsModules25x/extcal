@@ -25,9 +25,9 @@
 function xoops_module_pre_install_extcal(XoopsModule $module)
 {
     $moduleDirName = basename(dirname(__DIR__));
-    $className     = ucfirst($moduleDirName) . 'Utilities';
+    $className     = ucfirst($moduleDirName) . 'Utility';
     if (!class_exists($className)) {
-        xoops_load('utilities', $moduleDirName);
+        xoops_load('utility', $moduleDirName);
     }
     //check for minimum XOOPS version
     if (!$className::checkXoopsVer($module)) {
@@ -83,22 +83,22 @@ function xoops_module_install_extcal(XoopsModule $xoopsModule)
     //    $moduleDirName = $xoopsModule->getVar('dirname');
     $configurator = include $GLOBALS['xoops']->path('modules/' . $moduleDirName . '/include/config.php');
 
-    $classUtilities = ucfirst($moduleDirName) . 'Utilities';
-    if (!class_exists($classUtilities)) {
-        xoops_load('utilities', $moduleDirName);
+    $classUtility = ucfirst($moduleDirName) . 'Utility';
+    if (!class_exists($classUtility)) {
+        xoops_load('utility', $moduleDirName);
     }
 
     if (count($configurator['uploadFolders']) > 0) {
         //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
         foreach (array_keys($configurator['uploadFolders']) as $i) {
-            $classUtilities::createFolder($configurator['uploadFolders'][$i]);
+            $classUtility::createFolder($configurator['uploadFolders'][$i]);
         }
     }
     if (count($configurator['copyFiles']) > 0) {
         $file = __DIR__ . '/../assets/images/blank.png';
         foreach (array_keys($configurator['copyFiles']) as $i) {
             $dest = $configurator['copyFiles'][$i] . '/blank.png';
-            $classUtilities::copyFile($file, $dest);
+            $classUtility::copyFile($file, $dest);
         }
     }
 

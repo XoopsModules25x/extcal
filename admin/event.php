@@ -5,7 +5,7 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 require_once __DIR__ . '/../class/form/extcalform.php';
 require_once __DIR__ . '/admin_header.php';
-require_once __DIR__ . '/../class/utilities.php';
+require_once __DIR__ . '/../class/utility.php';
 
 $gepeto = array_merge($_GET, $_POST);
 while (list($k, $v) = each($gepeto)) {
@@ -72,7 +72,7 @@ switch ($op) {
 
         //exit;
         ///////////////////////////////////////////////////////////////////////////////
-        ExtcalUtilities::extcal_loadImg($_REQUEST, $event_picture1, $event_picture2);
+        ExtcalUtility::extcal_loadImg($_REQUEST, $event_picture1, $event_picture2);
         ///////////////////////////////////////////////////////////////////////////////
         $data = array(
             'event_title'         => $_POST['event_title'],

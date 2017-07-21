@@ -5,7 +5,7 @@ include XOOPS_ROOT_PATH . '/header.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
 require_once __DIR__ . '/include/agenda_fnc.php';
-require_once __DIR__ . '/class/utilities.php';
+require_once __DIR__ . '/class/utility.php';
 
 require_once __DIR__ . '/class/perm.php';
 require_once __DIR__ . '/class/form/extcalform.php';

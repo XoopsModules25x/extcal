@@ -19,7 +19,7 @@ define('_EXTCAL_FORMAT_AGENDA_KEYD', 'Y-m-d');
 define('_EXTCAL_FORMAT_AGENDA_KEYT', 'H:i');
 
 require_once __DIR__ . '/constantes.php';
-require_once __DIR__ . '/../class/utilities.php';
+require_once __DIR__ . '/../class/utility.php';
 
 $moduleDirName = basename(dirname(__DIR__));
 xoops_loadLanguage('main', $moduleDirName);
