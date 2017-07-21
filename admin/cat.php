@@ -180,8 +180,8 @@ switch ($op) {
     //         // @author      Gregory Mage (Aka Mage)
     //         //***************************************************************************************
     //         require_once XOOPS_ROOT_PATH . "/modules/extcal/class/admin.php";
-    //         $categoryAdmin = new ModuleAdmin();
-    //         echo $categoryAdmin->displayNavigation(basename(__FILE__));
+    //         $adminObject = \Xmf\Module\Admin::getInstance();
+    //         $adminObject->displayNavigation(basename(__FILE__));
     //         //***************************************************************************************
     //
     //                     $hiddens = array('cat_id' => $cat_id, 'form_delete' => '', 'confirm' => 1);
@@ -206,8 +206,8 @@ switch ($op) {
     //         xoops_cp_header();
     //         // @author      Gregory Mage (Aka Mage)
     //         //***************************************************************************************
-    //         $categoryAdmin = new ModuleAdmin();
-    //         echo $categoryAdmin->displayNavigation(basename(__FILE__));
+    //         $adminObject = \Xmf\Module\Admin::getInstance();
+    //         $adminObject->displayNavigation(basename(__FILE__));
     //         //***************************************************************************************
     //
     //         // $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
@@ -254,11 +254,11 @@ switch ($op) {
     case 'list':
     default:
         xoops_cp_header();
-        $categoryAdmin = new ModuleAdmin();
-        echo $categoryAdmin->displayNavigation(basename(__FILE__));
+        $adminObject = \Xmf\Module\Admin::getInstance();
+        $adminObject->displayNavigation(basename(__FILE__));
 
-        $categoryAdmin->addItemButton('Add Category', 'cat.php?op=new', 'add', '');
-        echo $categoryAdmin->renderButton('left', '');
+        $adminObject->addItemButton('Add Category', 'cat.php?op=new', 'add', '');
+        $adminObject->displayButton('left', '');
 
         // $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
         $cats = $catHandler->getAllCatById($xoopsUser);

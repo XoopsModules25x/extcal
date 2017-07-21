@@ -182,8 +182,8 @@ switch ($op) {
         // @author      Gregory Mage (Aka Mage)
         //***************************************************************************************
         //         require_once XOOPS_ROOT_PATH . "/modules/extcal/class/admin.php";
-        $eventAdmin = new ModuleAdmin();
-        echo $eventAdmin->displayNavigation(basename(__FILE__));
+        $adminObject = \Xmf\Module\Admin::getInstance();
+        $adminObject->displayNavigation(basename(__FILE__));
         //***************************************************************************************
 
         $eventId      = $_GET['event_id'];
@@ -242,8 +242,8 @@ switch ($op) {
             // @author      Gregory Mage (Aka Mage)
             //***************************************************************************************
             //require_once XOOPS_ROOT_PATH . "/modules/extcal/class/admin.php";
-            $eventAdmin = new ModuleAdmin();
-            echo $eventAdmin->displayNavigation(basename(__FILE__));
+            $adminObject = \Xmf\Module\Admin::getInstance();
+            $adminObject->displayNavigation(basename(__FILE__));
             //***************************************************************************************
 
             $hiddens = array('event_id' => $_GET['event_id'], 'form_delete' => '', 'confirm' => 1);
@@ -260,8 +260,8 @@ switch ($op) {
         // @author      Gregory Mage (Aka Mage)
         //***************************************************************************************
         //require_once XOOPS_ROOT_PATH . "/modules/extcal/class/admin.php";
-        $eventAdmin = new ModuleAdmin();
-        echo $eventAdmin->displayNavigation(basename(__FILE__));
+        $adminObject = \Xmf\Module\Admin::getInstance();
+        $adminObject->displayNavigation(basename(__FILE__));
         //***************************************************************************************
         if (isset($_POST['deleteSelection'][0])) {
             $msg = _AM_EXTCAL_CONFIRM_DELETE_ALL;
@@ -321,8 +321,8 @@ switch ($op) {
         // @author      Gregory Mage (Aka Mage)
         //***************************************************************************************
 
-        $eventAdmin = new ModuleAdmin();
-        echo $eventAdmin->displayNavigation(basename(__FILE__));
+        $adminObject = \Xmf\Module\Admin::getInstance();
+        $adminObject->displayNavigation(basename(__FILE__));
         //***************************************************************************************
 
         $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);

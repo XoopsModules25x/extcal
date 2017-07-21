@@ -74,8 +74,8 @@ switch ($op) {
     case 'liste':
         // @author   JJDAI
         //***************************************************************************************
-        $etablissementAdmin = new ModuleAdmin();
-        echo $etablissementAdmin->displayNavigation(basename(__FILE__));
+        $adminObject = \Xmf\Module\Admin::getInstance();
+        $adminObject->displayNavigation(basename(__FILE__));
         //***************************************************************************************
 
         $criteria = new CriteriaCompo();
@@ -167,8 +167,8 @@ switch ($op) {
     case 'edit_etablissement':
         // @author   JJDAI
         //***************************************************************************************
-        $etablissementAdmin = new ModuleAdmin();
-        echo $etablissementAdmin->displayNavigation(basename(__FILE__));
+        $adminObject = \Xmf\Module\Admin::getInstance();
+        $adminObject->displayNavigation(basename(__FILE__));
         //***************************************************************************************
         //Affichage du formulaire de création des téléchargements
         $obj  = $etablissementHandler->get($_REQUEST['etablissement_id']);

@@ -56,8 +56,8 @@ switch ($step) {
         xoops_cp_header();
         // @author      Gregory Mage (Aka Mage)
         //***************************************************************************************
-        $permAdmin = new ModuleAdmin();
-        echo $permAdmin->displayNavigation(basename(__FILE__));
+        $adminObject = \Xmf\Module\Admin::getInstance();
+        $adminObject->displayNavigation(basename(__FILE__));
         //***************************************************************************************
 
         $memberHandler          = xoops_getHandler('member');

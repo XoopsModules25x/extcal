@@ -26,7 +26,7 @@ if (!class_exists($classUtility)) {
     xoops_load('utility', $moduleDirName);
 }
 
-$configurator = include __DIR__ .  '/../include/config.php';
+$configurator = include __DIR__ . '/../include/config.php';
 
 foreach (array_keys($configurator['uploadFolders']) as $i) {
     $classUtility::createFolder($configurator['uploadFolders'][$i]);
@@ -34,10 +34,7 @@ foreach (array_keys($configurator['uploadFolders']) as $i) {
     //    $adminObject->addConfigBoxLine(array($configurator['uploadFolders'][$i], '777'), 'chmod');
 }
 
-
-
-
-echo $adminObject->displayNavigation(basename(__FILE__));
-echo $adminObject->renderIndex();
+$adminObject->displayNavigation(basename(__FILE__));
+$adminObject->displayIndex();
 
 require_once __DIR__ . '/admin_footer.php';
