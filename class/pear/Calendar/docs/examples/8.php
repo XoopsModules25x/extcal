@@ -2,12 +2,12 @@
 /**
  * Description: client for the SOAP Calendar Server.
  */
-if (version_compare(phpversion(), '5.0.0', '>')) {
+if (version_compare(PHP_VERSION, '5.0.0', '>')) {
     die('PHP 5 has problems with PEAR::SOAP Client (8.0RC3)
         - remove @ before include below to see why');
 }
 
-if (!@include('SOAP/Client.php')) {
+if (!@include 'SOAP/Client.php') {
     die('You must have PEAR::SOAP installed');
 }
 
@@ -15,7 +15,7 @@ if (!@include('SOAP/Client.php')) {
 $basePath = explode('/', $_SERVER['SCRIPT_NAME']);
 array_pop($basePath);
 $basePath = implode('/', $basePath);
-$url = 'http://'.$_SERVER['SERVER_NAME'].$basePath.'/7.php?wsdl';
+$url      = 'http://' . $_SERVER['SERVER_NAME'] . $basePath . '/7.php?wsdl';
 
 if (!isset($_GET['y'])) {
     $_GET['y'] = date('Y');
@@ -26,11 +26,11 @@ if (!isset($_GET['m'])) {
 
 $wsdl = new SOAP_WSDL($url);
 
-echo '<pre>'.$wsdl->generateProxyCode().'</pre>';
+echo '<pre>' . $wsdl->generateProxyCode() . '</pre>';
 
 $calendarClient = $wsdl->getProxy();
 
-$month = $calendarClient->getMonth((int) $_GET['y'], (int) $_GET['m']);
+$month = $calendarClient->getMonth((int)$_GET['y'], (int)$_GET['m']);
 
 if (PEAR::isError($month)) {
     die($month->toString());
@@ -62,7 +62,7 @@ if (PEAR::isError($month)) {
         if ($day->isEmpty === 1) {
             echo '<td></td>';
         } else {
-            echo '<td>'.$day->day.'</td>';
+            echo '<td>' . $day->day . '</td>';
         }
         if ($day->isLast === 1) {
             echo "</tr>\n";

@@ -49,7 +49,7 @@ if (!defined('CALENDAR_ROOT')) {
 /**
  * Load Calendar base class.
  */
-require_once CALENDAR_ROOT.'Calendar.php';
+require_once CALENDAR_ROOT . 'Calendar.php';
 
 /**
  * Represents a Year and builds Months<br>
@@ -103,9 +103,9 @@ class Calendar_Year extends Calendar
      */
     public function build($sDates = array(), $firstDay = null)
     {
-        require_once CALENDAR_ROOT.'Factory.php';
+        require_once CALENDAR_ROOT . 'Factory.php';
         $this->firstDay = $this->defineFirstDayOfWeek($firstDay);
-        $monthsInYear = $this->cE->getMonthsInYear($this->thisYear());
+        $monthsInYear   = $this->cE->getMonthsInYear($this->thisYear());
         for ($i = 1; $i <= $monthsInYear; ++$i) {
             $this->children[$i] = Calendar_Factory::create('Month', $this->year, $i);
         }
@@ -120,6 +120,7 @@ class Calendar_Year extends Calendar
      * Called from build().
      *
      * @param array $sDates array of Calendar_Month objects representing selected dates
+     * @return bool|void
      */
     public function setSelection($sDates)
     {

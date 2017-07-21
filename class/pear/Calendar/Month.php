@@ -49,7 +49,7 @@ if (!defined('CALENDAR_ROOT')) {
 /**
  * Load Calendar base class.
  */
-require_once CALENDAR_ROOT.'Calendar.php';
+require_once CALENDAR_ROOT . 'Calendar.php';
 
 /**
  * Represents a Month and builds Days
@@ -95,7 +95,7 @@ class Calendar_Month extends Calendar
      */
     public function build($sDates = array())
     {
-        require_once CALENDAR_ROOT.'Day.php';
+        require_once CALENDAR_ROOT . 'Day.php';
         $daysInMonth = $this->cE->getDaysInMonth($this->year, $this->month);
         for ($i = 1; $i <= $daysInMonth; ++$i) {
             $this->children[$i] = new Calendar_Day($this->year, $this->month, $i);
@@ -111,6 +111,7 @@ class Calendar_Month extends Calendar
      * Called from build().
      *
      * @param array $sDates Calendar_Day objects representing selected dates
+     * @return bool|void
      */
     public function setSelection($sDates)
     {

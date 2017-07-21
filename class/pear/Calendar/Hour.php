@@ -49,7 +49,7 @@ if (!defined('CALENDAR_ROOT')) {
 /**
  * Load Calendar base class.
  */
-require_once CALENDAR_ROOT.'Calendar.php';
+require_once CALENDAR_ROOT . 'Calendar.php';
 
 /**
  * Represents an Hour and builds Minutes
@@ -94,7 +94,7 @@ class Calendar_Hour extends Calendar
      */
     public function build($sDates = array())
     {
-        require_once CALENDAR_ROOT.'Minute.php';
+        require_once CALENDAR_ROOT . 'Minute.php';
         $mIH = $this->cE->getMinutesInHour($this->year, $this->month, $this->day, $this->hour);
         for ($i = 0; $i < $mIH; ++$i) {
             $this->children[$i] = new Calendar_Minute($this->year, $this->month, $this->day, $this->hour, $i);
@@ -110,6 +110,7 @@ class Calendar_Hour extends Calendar
      * Called from build().
      *
      * @param array $sDates Calendar_Minute objects representing selected dates
+     * @return bool|void
      */
     public function setSelection($sDates)
     {
@@ -118,7 +119,7 @@ class Calendar_Hour extends Calendar
                 && $this->day == $sDate->thisDay()
                 && $this->hour == $sDate->thisHour()
             ) {
-                $key = (int) $sDate->thisMinute();
+                $key = (int)$sDate->thisMinute();
                 if (isset($this->children[$key])) {
                     $sDate->setSelected();
                     $this->children[$key] = $sDate;
