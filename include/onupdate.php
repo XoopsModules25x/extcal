@@ -45,8 +45,8 @@ function tableExists($tablename)
  */
 function xoops_module_pre_update_extcal(XoopsModule $module)
 {
-    $moduleDirName  = basename(dirname(__DIR__));
-    $classUtility = ucfirst($moduleDirName) . 'Utility';
+    $moduleDirName = basename(dirname(__DIR__));
+    $classUtility  = ucfirst($moduleDirName) . 'Utility';
     if (!class_exists($classUtility)) {
         xoops_load('utility', $moduleDirName);
     }
@@ -74,7 +74,7 @@ function xoops_module_pre_update_extcal(XoopsModule $module)
 
 function xoops_module_update_extcal(XoopsModule $module, $previousVersion = null)
 {
-//    global $xoopsDB;
+    //    global $xoopsDB;
 
     $moduleDirName = basename(dirname(__DIR__));
 
@@ -124,7 +124,7 @@ function xoops_module_update_extcal(XoopsModule $module, $previousVersion = null
             foreach ($configurator['templateFolders'] as $folder) {
                 $templateFolder = $GLOBALS['xoops']->path('modules/' . $moduleDirName . $folder);
                 if (is_dir($templateFolder)) {
-                    $templateList = array_diff(scandir($templateFolder), array('..', '.'));
+                    $templateList = array_diff(scandir($templateFolder, SCANDIR_SORT_NONE), array('..', '.'));
                     foreach ($templateList as $k => $v) {
                         $fileInfo = new SplFileInfo($templateFolder . $v);
                         if ($fileInfo->getExtension() === 'html' && $fileInfo->getFilename() !== 'index.html') {
