@@ -1,8 +1,8 @@
 <?php
 
-include_once __DIR__ . '/../../../include/cp_header.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
-include_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/../../../include/cp_header.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
+require_once __DIR__ . '/admin_header.php';
 
 $step = 'default';
 if (isset($_POST['step'])) {
@@ -221,7 +221,7 @@ switch ($step) {
         echo 'toggle(\'extcal_cat_edit\'); toggleIcon (\'extcal_cat_editIcon\');';
         echo '</script>';
 
-        include_once __DIR__ . '/admin_footer.php';
+        require_once __DIR__ . '/admin_footer.php';
 
         break;
 

@@ -5,7 +5,7 @@ include __DIR__ . '/../../mainfile.php';
 include XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 include __DIR__ . '/class/form/extcalform.php';
 include __DIR__ . '/class/perm.php';
-include_once __DIR__ . '/include/constantes.php';
+require_once __DIR__ . '/include/constantes.php';
 
 $permHandler = ExtcalPerm::getHandler();
 $xoopsUser   = $xoopsUser ?: null;

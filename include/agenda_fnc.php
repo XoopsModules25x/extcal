@@ -18,8 +18,8 @@
 define('_EXTCAL_FORMAT_AGENDA_KEYD', 'Y-m-d');
 define('_EXTCAL_FORMAT_AGENDA_KEYT', 'H:i');
 
-include_once __DIR__ . '/constantes.php';
-include_once __DIR__ . '/../class/utilities.php';
+require_once __DIR__ . '/constantes.php';
+require_once __DIR__ . '/../class/utilities.php';
 
 $moduleDirName = basename(dirname(__DIR__));
 xoops_loadLanguage('main', $moduleDirName);
@@ -311,7 +311,7 @@ function ext_loadLanguage($name)
 
     $file   = XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/' . $f;
     $prefix = (defined($name) ? '_MI' : '_MD');
-    include_once $file;
+    require_once $file;
 }
 
 /*******************************************************************

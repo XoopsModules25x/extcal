@@ -2,7 +2,7 @@
 //Kraven 30
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once XOOPS_ROOT_PATH.'/kernel/object.php';
+require_once XOOPS_ROOT_PATH.'/kernel/object.php';
 
 //class ExtcalEvent extends XoopsObject
 //class extcal_etablissement extends XoopsObject
@@ -51,7 +51,7 @@ class ExtcalEtablissement extends XoopsObject
 
         $title = $this->isNew() ? sprintf(_MD_EXTCAL_ETABLISSEMENT_ADD) : sprintf(_MD_EXTCAL_ETABLISSEMENT_EDIT);
 
-        include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
+        require_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
 
         $form = new XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');

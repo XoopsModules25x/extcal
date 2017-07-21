@@ -1,10 +1,10 @@
 <?php
 
-include_once __DIR__ . '/../../../include/cp_header.php';
+require_once __DIR__ . '/../../../include/cp_header.php';
 include __DIR__ . '/../../../class/xoopsformloader.php';
-include_once __DIR__ . '/admin_header.php';
-include_once __DIR__ . '/../class/utilities.php';
-include_once __DIR__ . '/../include/constantes.php';
+require_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/../class/utilities.php';
+require_once __DIR__ . '/../include/constantes.php';
 
 $gepeto = array_merge($_GET, $_POST);
 while (list($k, $v) = each($gepeto)) {
@@ -73,7 +73,7 @@ switch ($op) {
 
         $form->display();
 
-        include_once __DIR__ . '/admin_footer.php';
+        require_once __DIR__ . '/admin_footer.php';
         break;
 
     case 'edit':
@@ -162,7 +162,7 @@ switch ($op) {
     //                     xoops_cp_header();
     //         // @author      Gregory Mage (Aka Mage)
     //         //***************************************************************************************
-    //         include_once XOOPS_ROOT_PATH . "/modules/extcal/class/admin.php";
+    //         require_once XOOPS_ROOT_PATH . "/modules/extcal/class/admin.php";
     //         $categoryAdmin = new ModuleAdmin();
     //         echo $categoryAdmin->addNavigation(basename(__FILE__));
     //         //***************************************************************************************
@@ -230,7 +230,7 @@ switch ($op) {
     //
     //         echo '</fieldset><br>';
     //
-    //         include_once __DIR__ . '/admin_footer.php';
+    //         require_once __DIR__ . '/admin_footer.php';
     //
     //         break;
 
@@ -250,6 +250,6 @@ switch ($op) {
         //$xoopsTpl->assign("module_dirname",    $xoopsModule->getVar("dirname") );
 
         $xoopsTpl->display('db:admin/extcal_admin_cat_list.tpl');
-        include_once __DIR__ . '/admin_footer.php';
+        require_once __DIR__ . '/admin_footer.php';
         break;
 }

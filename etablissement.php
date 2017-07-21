@@ -1,13 +1,13 @@
 <?php
 
-include_once __DIR__ . '/../../mainfile.php';
-include_once __DIR__ . '/include/constantes.php';
+require_once __DIR__ . '/../../mainfile.php';
+require_once __DIR__ . '/include/constantes.php';
 $GLOBALS['xoopsOption']['template_main'] = 'extcal_etablissement.tpl';
-include_once __DIR__ . '/header.php';
+require_once __DIR__ . '/header.php';
 
-//include_once XOOPS_ROOT_PATH."/modules/extcal/class/etablissement.php";
+//require_once XOOPS_ROOT_PATH."/modules/extcal/class/etablissement.php";
 $etablissementHandler = xoops_getModuleHandler(_EXTCAL_CLS_ETABLISSEMENT, _EXTCAL_MODULE);
-//include_once XOOPS_ROOT_PATH.'/header.php';
+//require_once XOOPS_ROOT_PATH.'/header.php';
 
 $etablissement_id = isset($_REQUEST['etablissement_id']) ? $_REQUEST['etablissement_id'] : 0;
 
@@ -64,4 +64,4 @@ while ($donnees = $xoopsDB->fetchArray($requete)) {
 }
 $xoTheme->addScript('browse.php?modules/extcal/assets/js/highslide.js');
 $xoTheme->addStylesheet('browse.php?modules/extcal/assets/js/highslide.css');
-include_once XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

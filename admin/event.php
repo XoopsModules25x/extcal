@@ -1,11 +1,11 @@
 <?php
 
-include_once __DIR__ . '/../../../include/cp_header.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-include_once __DIR__ . '/../class/form/extcalform.php';
-include_once __DIR__ . '/admin_header.php';
-include_once __DIR__ . '/../class/utilities.php';
+require_once __DIR__ . '/../../../include/cp_header.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+require_once __DIR__ . '/../class/form/extcalform.php';
+require_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/../class/utilities.php';
 
 $gepeto = array_merge($_GET, $_POST);
 while (list($k, $v) = each($gepeto)) {
@@ -134,7 +134,7 @@ switch ($op) {
         $action = (($op === 'clone') ? 'clone' : 'edit');
         xoops_cp_header();
         //================================================
-        // include_once (XOOPS_ROOT_PATH . '/class/xoopsform/tc_calendar/formtccalendar.php');
+        // require_once (XOOPS_ROOT_PATH . '/class/xoopsform/tc_calendar/formtccalendar.php');
         //
         //        // Call the calendar constructor - use the desired form and format, according to the instructions/samples provided on triconsole.com
         //        $dateBirthday = new XoopsTcCalendar("datez1", true, false);
@@ -164,7 +164,7 @@ switch ($op) {
         //================================================
         // @author      Gregory Mage (Aka Mage)
         //***************************************************************************************
-        //         include_once XOOPS_ROOT_PATH . "/modules/extcal/class/admin.php";
+        //         require_once XOOPS_ROOT_PATH . "/modules/extcal/class/admin.php";
         $eventAdmin = new ModuleAdmin();
         echo $eventAdmin->addNavigation(basename(__FILE__));
         //***************************************************************************************
@@ -224,7 +224,7 @@ switch ($op) {
             xoops_cp_header();
             // @author      Gregory Mage (Aka Mage)
             //***************************************************************************************
-            //include_once XOOPS_ROOT_PATH . "/modules/extcal/class/admin.php";
+            //require_once XOOPS_ROOT_PATH . "/modules/extcal/class/admin.php";
             $eventAdmin = new ModuleAdmin();
             echo $eventAdmin->addNavigation(basename(__FILE__));
             //***************************************************************************************
@@ -242,7 +242,7 @@ switch ($op) {
         xoops_cp_header();
         // @author      Gregory Mage (Aka Mage)
         //***************************************************************************************
-        //include_once XOOPS_ROOT_PATH . "/modules/extcal/class/admin.php";
+        //require_once XOOPS_ROOT_PATH . "/modules/extcal/class/admin.php";
         $eventAdmin = new ModuleAdmin();
         echo $eventAdmin->addNavigation(basename(__FILE__));
         //***************************************************************************************
@@ -407,7 +407,7 @@ switch ($op) {
 
         echo '</fieldset>';
 
-        include_once __DIR__ . '/admin_footer.php';
+        require_once __DIR__ . '/admin_footer.php';
 
         break;
 }

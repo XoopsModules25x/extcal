@@ -15,11 +15,11 @@
  * L'utilisation de ce formulaire d'adminitration suppose
  * que la classe correspondante de la table a été générées avec classGenerator
  **/
-include_once __DIR__ . '/../../../class/uploader.php';
+require_once __DIR__ . '/../../../class/uploader.php';
 require __DIR__ . '/../../../class/mail/phpmailer/class.phpmailer.php'; // First we require the PHPMailer libary in our script
-include_once __DIR__ . '/../class/utilities.php';
-include_once __DIR__ . '/constantes.php';
-include_once __DIR__ . '/../../../class/template.php';
+require_once __DIR__ . '/../class/utilities.php';
+require_once __DIR__ . '/constantes.php';
+require_once __DIR__ . '/../../../class/template.php';
 
 /********************************************************************
  *

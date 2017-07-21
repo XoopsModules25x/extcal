@@ -16,7 +16,7 @@ if (!file_exists($fileinc = $xoopsModuleAdminPath . '/language/' . $GLOBALS['xoo
     $fileinc = $xoopsModuleAdminPath . '/language/english/main.php';
 }
 
-include_once $fileinc;
+require_once $fileinc;
 
 $adminmenu[] = array(
     'title' => _AM_MODULEADMIN_HOME,

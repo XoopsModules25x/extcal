@@ -18,19 +18,19 @@
  */
 
 // Include xoops admin header
-include_once __DIR__ . '/../../../include/cp_header.php';
-include_once __DIR__ . '/../class/ExtcalPersistableObjectHandler.php';
-include_once __DIR__ . '/../../../kernel/module.php';
-include_once __DIR__ . '/../../../class/xoopsformloader.php';
-include_once __DIR__ . '/../../../class/tree.php';
-include_once __DIR__ . '/../../../class/xoopslists.php';
-include_once __DIR__ . '/../../../class/pagenav.php';
-include_once __DIR__ . '/../../../class/xoopsform/grouppermform.php';
-include_once __DIR__ . '/../../../class/uploader.php';
-include_once __DIR__ . '/../class/etablissement.php';
-include_once __DIR__ . '/../include/constantes.php';
+require_once __DIR__ . '/../../../include/cp_header.php';
+require_once __DIR__ . '/../class/ExtcalPersistableObjectHandler.php';
+require_once __DIR__ . '/../../../kernel/module.php';
+require_once __DIR__ . '/../../../class/xoopsformloader.php';
+require_once __DIR__ . '/../../../class/tree.php';
+require_once __DIR__ . '/../../../class/xoopslists.php';
+require_once __DIR__ . '/../../../class/pagenav.php';
+require_once __DIR__ . '/../../../class/xoopsform/grouppermform.php';
+require_once __DIR__ . '/../../../class/uploader.php';
+require_once __DIR__ . '/../class/etablissement.php';
+require_once __DIR__ . '/../include/constantes.php';
 
-include_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 
 //include_once("functions.php");
 //include_once("../include/functions.php");
@@ -64,7 +64,7 @@ if (isset($_REQUEST['op'])) {
 // if ( !is_readable(XOOPS_ROOT_PATH . "/Frameworks/art/functions.admin.php")) {
 // adminmenu(4, _MI_EXTCAL_ETABLISSEMENT);
 // } else {
-// include_once XOOPS_ROOT_PATH.'/Frameworks/art/functions.admin.php';
+// require_once XOOPS_ROOT_PATH.'/Frameworks/art/functions.admin.php';
 // loadModuleAdminMenu (4, _MI_EXTCAL_ETABLISSEMENT);
 // }
 
@@ -249,4 +249,4 @@ switch ($op) {
         break;
 }
 
-include_once __DIR__ . '/admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';

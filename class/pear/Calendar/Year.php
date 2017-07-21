@@ -103,7 +103,7 @@ class Calendar_Year extends Calendar
      */
     public function build($sDates = array(), $firstDay = null)
     {
-        include_once CALENDAR_ROOT.'Factory.php';
+        require_once CALENDAR_ROOT.'Factory.php';
         $this->firstDay = $this->defineFirstDayOfWeek($firstDay);
         $monthsInYear = $this->cE->getMonthsInYear($this->thisYear());
         for ($i = 1; $i <= $monthsInYear; ++$i) {

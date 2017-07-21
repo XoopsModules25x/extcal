@@ -5,7 +5,7 @@ if (isset($_POST['step'])) {
     $step = $_POST['step'];
 }
 
-include_once __DIR__ . '/../../../include/cp_header.php';
+require_once __DIR__ . '/../../../include/cp_header.php';
 include __DIR__ . '/function.php';
 
 // Change this variable if you use a cloned version of eXtGallery

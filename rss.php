@@ -1,10 +1,10 @@
 <?php
 
 include __DIR__ . '/../../mainfile.php';
-include_once __DIR__ . '/include/constantes.php';
-include_once __DIR__ . '/header.php';
+require_once __DIR__ . '/include/constantes.php';
+require_once __DIR__ . '/header.php';
 
-include_once XOOPS_ROOT_PATH . '/class/template.php';
+require_once XOOPS_ROOT_PATH . '/class/template.php';
 $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
 if (!isset($_GET['cat'])) {
     $cat = 0;

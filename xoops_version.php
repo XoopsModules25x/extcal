@@ -1,9 +1,9 @@
 <?php
 
 // defined('XOOPS_ROOT_PATH') || die('XOOPS Root Path not defined');
-include_once __DIR__ . '/include/constantes.php';
-include_once __DIR__ . '/include/agenda_fnc.php';
-include_once __DIR__ . '/class/config.php';
+require_once __DIR__ . '/include/constantes.php';
+require_once __DIR__ . '/include/agenda_fnc.php';
+require_once __DIR__ . '/class/config.php';
 //$loc_de = setlocale (LC_ALL, 'french');
 
 //echo "local :" .  setlocale(LC_TIME, $xoopsConfig['language'])."</ br>";

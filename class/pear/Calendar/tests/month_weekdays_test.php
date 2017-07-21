@@ -146,7 +146,7 @@ class TestOfMonthWeekdaysBuild extends TestOfMonthWeekdays
 
     public function testSelection()
     {
-        include_once CALENDAR_ROOT.'Day.php';
+        require_once CALENDAR_ROOT.'Day.php';
         $selection = array(new Calendar_Day(2003, 10, 25));
         $this->cal->build($selection);
         $daysInPrevMonth = (0 == CALENDAR_FIRST_DAY_OF_WEEK) ? 3 : 2;

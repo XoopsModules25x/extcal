@@ -1,10 +1,10 @@
 <?php
 
 include __DIR__ . '/../../mainfile.php';
-include_once __DIR__ . '/include/constantes.php';
+require_once __DIR__ . '/include/constantes.php';
 $params                                  = array('view' => _EXTCAL_NAV_AGENDA_DAY, 'file' => _EXTCAL_FILE_AGENDA_DAY);
 $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
-include_once __DIR__ . '/header.php';
+require_once __DIR__ . '/header.php';
 
 /* ========================================================================== */
 //recupe des variables get

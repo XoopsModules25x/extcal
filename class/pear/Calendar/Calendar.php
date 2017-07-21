@@ -97,7 +97,7 @@ class Calendar_Engine_Factory
         }
         if (!$engine) {
             if (!class_exists($class)) {
-                include_once CALENDAR_ROOT.'Engine'.'/'.CALENDAR_ENGINE.'.php';
+                require_once CALENDAR_ROOT.'Engine'.'/'.CALENDAR_ENGINE.'.php';
             }
             $engine = new $class();
         }
@@ -331,7 +331,7 @@ class Calendar
                 return $this->toArray($stamp);
                 break;
             case 'object':
-                include_once CALENDAR_ROOT.'Factory.php';
+                require_once CALENDAR_ROOT.'Factory.php';
 
                 return Calendar_Factory::createByTimestamp($returnType, $stamp);
                 break;
@@ -353,7 +353,7 @@ class Calendar
      */
     public function build($sDates = array())
     {
-        include_once __DIR__.'/PEAR.php';
+        require_once __DIR__.'/PEAR.php';
         PEAR::raiseError('Calendar::build is abstract', null, PEAR_ERROR_TRIGGER, E_USER_NOTICE, 'Calendar::build()');
 
         return false;
@@ -369,7 +369,7 @@ class Calendar
      */
     public function setSelection($sDates)
     {
-        include_once __DIR__.'/PEAR.php';
+        require_once __DIR__.'/PEAR.php';
         PEAR::raiseError('Calendar::setSelection is abstract', null, PEAR_ERROR_TRIGGER, E_USER_NOTICE, 'Calendar::setSelection()');
 
         return false;
@@ -436,7 +436,7 @@ class Calendar
     public function &getValidator()
     {
         if (!isset($this->validator)) {
-            include_once CALENDAR_ROOT.'Validator.php';
+            require_once CALENDAR_ROOT.'Validator.php';
             $this->validator = new Calendar_Validator($this);
         }
 

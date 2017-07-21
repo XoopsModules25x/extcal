@@ -2,13 +2,13 @@
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
-include_once __DIR__ . '/perm.php';
-include_once __DIR__ . '/time.php';
-include_once __DIR__ . '/config.php';
-include_once __DIR__ . '/extDateTime.php';
-include_once __DIR__ . '/utilities.php';
-include_once __DIR__ . '/../include/constantes.php';
+require_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
+require_once __DIR__ . '/perm.php';
+require_once __DIR__ . '/time.php';
+require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/extDateTime.php';
+require_once __DIR__ . '/utilities.php';
+require_once __DIR__ . '/../include/constantes.php';
 
 /**
  * Class ExtcalEvent.
@@ -958,7 +958,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         $fileHandler = xoops_getModuleHandler(_EXTCAL_CLS_FILE, _EXTCAL_MODULE);
 
         /***************************************************/
-        include_once __DIR__ . '/etablissement.php';
+        require_once __DIR__ . '/etablissement.php';
         if ($siteSide === 'admin') {
             $action = 'event.php?op=enreg';
             $cats   = $catHandler->getAllCat($GLOBALS['xoopsUser'], 'all');

@@ -1,6 +1,6 @@
 <?php
 
-include_once __DIR__.'/../include/constantes.php';
+require_once __DIR__.'/../include/constantes.php';
 
 /**
  * @param $options
@@ -9,7 +9,7 @@ include_once __DIR__.'/../include/constantes.php';
  */
 function bExtcalNewShow($options)
 {
-    include_once __DIR__.'/../class/config.php';
+    require_once __DIR__.'/../class/config.php';
 
     // Retriving module config
     $extcalConfig = ExtcalConfig::getHandler();

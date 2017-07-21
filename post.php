@@ -7,8 +7,8 @@ include XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 include __DIR__ . '/class/form/extcalform.php';
 include __DIR__ . '/class/perm.php';
 
-include_once __DIR__ . '/class/utilities.php';
-include_once __DIR__ . '/include/constantes.php';
+require_once __DIR__ . '/class/utilities.php';
+require_once __DIR__ . '/include/constantes.php';
 
 $permHandler = ExtcalPerm::getHandler();
 $xoopsUser   = $xoopsUser ?: null;
@@ -99,7 +99,7 @@ if (isset($_POST['form_preview'])) {
     ExtcalUtilities::extcal_loadImg($_REQUEST, $event_picture1, $event_picture2);
     ///////////////////////////////////////////////////////////////////////////////
 
-    include_once __DIR__ . '/class/perm.php';
+    require_once __DIR__ . '/class/perm.php';
 
     $fileHandler = xoops_getModuleHandler(_EXTCAL_CLS_FILE, _EXTCAL_MODULE);
     $permHandler = ExtcalPerm::getHandler();

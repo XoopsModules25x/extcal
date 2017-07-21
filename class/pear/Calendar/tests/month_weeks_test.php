@@ -147,7 +147,7 @@ class TestOfMonthWeeksBuild extends TestOfMonthWeeks
     */
     public function testSelection()
     {
-        include_once CALENDAR_ROOT.'Week.php';
+        require_once CALENDAR_ROOT.'Week.php';
         $selection = array(new Calendar_Week(2003, 10, 12));
         $this->cal->build($selection);
         $i = 1;

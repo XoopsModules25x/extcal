@@ -104,7 +104,7 @@ function xoops_module_update_extcal(XoopsModule $module, $previousVersion = null
             //ext_echo ("<hr>{$f}<hr>");
             if (is_readable($f)) {
                 echo "mise à jour version : {$key} = {$val}<br>";
-                include_once $f;
+                require_once $f;
                 $cl = new $name($xoopsModule, array('previousVersion' => $previousVersion));
             }
         }

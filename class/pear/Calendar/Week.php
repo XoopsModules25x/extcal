@@ -138,7 +138,7 @@ class Calendar_Week extends Calendar
      */
     public function __construct($y, $m, $d, $firstDay = null)
     {
-        include_once CALENDAR_ROOT.'Table/Helper.php';
+        require_once CALENDAR_ROOT.'Table/Helper.php';
         parent::__construct($y, $m, $d);
         $this->firstDay = $this->defineFirstDayOfWeek($firstDay);
         $this->tableHelper = new Calendar_Table_Helper($this, $this->firstDay);
@@ -170,7 +170,7 @@ class Calendar_Week extends Calendar
      */
     public function build($sDates = array())
     {
-        include_once CALENDAR_ROOT.'Day.php';
+        require_once CALENDAR_ROOT.'Day.php';
         $year = $this->cE->stampToYear($this->thisWeek);
         $month = $this->cE->stampToMonth($this->thisWeek);
         $day = $this->cE->stampToDay($this->thisWeek);
@@ -294,7 +294,7 @@ class Calendar_Week extends Calendar
             case 'array':
                 return $this->toArray($this->prevWeek);
             case 'object':
-                include_once CALENDAR_ROOT.'Factory.php';
+                require_once CALENDAR_ROOT.'Factory.php';
 
                 return Calendar_Factory::createByTimestamp('Week', $this->prevWeek);
             case 'timestamp':
@@ -328,7 +328,7 @@ class Calendar_Week extends Calendar
             case 'array':
                 return $this->toArray($this->thisWeek);
             case 'object':
-                include_once CALENDAR_ROOT.'Factory.php';
+                require_once CALENDAR_ROOT.'Factory.php';
 
                 return Calendar_Factory::createByTimestamp('Week', $this->thisWeek);
             case 'timestamp':
@@ -355,7 +355,7 @@ class Calendar_Week extends Calendar
             case 'array':
                 return $this->toArray($this->nextWeek);
             case 'object':
-                include_once CALENDAR_ROOT.'Factory.php';
+                require_once CALENDAR_ROOT.'Factory.php';
 
                 return Calendar_Factory::createByTimestamp('Week', $this->nextWeek);
             case 'timestamp':

@@ -1,6 +1,6 @@
 <?php
 
-include_once __DIR__.'/../include/constantes.php';
+require_once __DIR__.'/../include/constantes.php';
 
 //---------------------------------------------------------------------
 

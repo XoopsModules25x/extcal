@@ -95,7 +95,7 @@ class Calendar_Month extends Calendar
      */
     public function build($sDates = array())
     {
-        include_once CALENDAR_ROOT.'Day.php';
+        require_once CALENDAR_ROOT.'Day.php';
         $daysInMonth = $this->cE->getDaysInMonth($this->year, $this->month);
         for ($i = 1; $i <= $daysInMonth; ++$i) {
             $this->children[$i] = new Calendar_Day($this->year, $this->month, $i);

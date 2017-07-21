@@ -2,9 +2,9 @@
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
-include_once __DIR__ . '/perm.php';
-include_once __DIR__ . '/time.php';
+require_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
+require_once __DIR__ . '/perm.php';
+require_once __DIR__ . '/time.php';
 
 /**
  * Class ExtcalCat.

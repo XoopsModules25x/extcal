@@ -1,6 +1,6 @@
 <?php
 
-include_once XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/calendar.php';
+require_once XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/calendar.php';
 define('_MD_CLEAR_CRITERIA', 'clear criteria');
 define('_MD_EXTCAL_1_FR', '1st ' . _CAL_FRIDAY);
 define('_MD_EXTCAL_1_MO', '1st ' . _CAL_MONDAY);

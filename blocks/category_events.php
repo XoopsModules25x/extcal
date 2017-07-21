@@ -1,6 +1,6 @@
 <?php
 
-include_once __DIR__.'/../include/constantes.php';
+require_once __DIR__.'/../include/constantes.php';
 
 /******************************************************/
 /* Ajour JJD - Evenements par categries               */
@@ -14,7 +14,7 @@ function bExtcalUpcomingByCategoryShow($options)
 {
     global $xoopsUser, $extcalConfig;
 
-    include_once __DIR__.'/../class/config.php';
+    require_once __DIR__.'/../class/config.php';
 
     // Retriving module config
     //     $extcalConfig = ExtcalConfig::getHandler();

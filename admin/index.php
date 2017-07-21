@@ -17,7 +17,7 @@
  * @author     XOOPS Development Team
  */
 
-include_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 // Display Admin header
 xoops_cp_header();
 
@@ -40,4 +40,4 @@ foreach (array_keys($configurator['uploadFolders']) as $i) {
 echo $adminObject->addNavigation(basename(__FILE__));
 echo $adminObject->renderIndex();
 
-include_once __DIR__ . '/admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';

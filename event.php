@@ -1,10 +1,10 @@
 <?php
 
 include __DIR__ . '/../../mainfile.php';
-include_once __DIR__ . '/include/constantes.php';
+require_once __DIR__ . '/include/constantes.php';
 $params                                  = array('view' => _EXTCAL_NAV_NEW_EVENT, 'file' => _EXTCAL_FILE_NEW_EVENT);
 $GLOBALS['xoopsOption']['template_main'] = 'extcal_event.tpl';
-include_once __DIR__ . '/header.php';
+require_once __DIR__ . '/header.php';
 
 //exit;
 
@@ -20,8 +20,8 @@ $fileHandler           = xoops_getModuleHandler(_EXTCAL_CLS_FILE, _EXTCAL_MODULE
 $eventMemberHandler    = xoops_getModuleHandler(_EXTCAL_CLS_MEMBER, _EXTCAL_MODULE);
 $eventNotMemberHandler = xoops_getModuleHandler(_EXTCAL_CLS_NOT_MEMBER, _EXTCAL_MODULE);
 $permHandler           = ExtcalPerm::getHandler();
-include_once __DIR__ . '/class/etablissement.php';
-include_once __DIR__ . '/class/utilities.php';
+require_once __DIR__ . '/class/etablissement.php';
+require_once __DIR__ . '/class/utilities.php';
 $myts = MyTextSanitizer::getInstance(); // MyTextSanitizer object
 
 if (!function_exists('clear_unicodeslashes')) {

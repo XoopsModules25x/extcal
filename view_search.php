@@ -1,13 +1,13 @@
 <?php
 
 include __DIR__ . '/../../mainfile.php';
-include_once __DIR__ . '/include/constantes.php';
+require_once __DIR__ . '/include/constantes.php';
 $params                                  = array(
     'view' => _EXTCAL_NAV_SEARCH,
     'file' => _EXTCAL_FILE_SEARCH,
 );
 $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
-include_once __DIR__ . '/header.php';
+require_once __DIR__ . '/header.php';
 
 $recurEventsArray = array();
 //needed to save the state of the form, so we don't show on the first time the list of available events

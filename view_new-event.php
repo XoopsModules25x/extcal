@@ -1,10 +1,10 @@
 <?php
 
 include __DIR__ . '/../../mainfile.php';
-include_once __DIR__ . '/include/constantes.php';
+require_once __DIR__ . '/include/constantes.php';
 $params                                  = array('view' => _EXTCAL_NAV_NEW_EVENT, 'file' => _EXTCAL_FILE_NEW_EVENT);
 $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
-include_once __DIR__ . '/header.php';
+require_once __DIR__ . '/header.php';
 
 /* ========================================================================== */
 //ext_echoArray($_GET);

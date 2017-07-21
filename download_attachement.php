@@ -1,7 +1,7 @@
 <?php
 
 include __DIR__ . '/../../mainfile.php';
-include_once __DIR__ . '/include/constantes.php';
+require_once __DIR__ . '/include/constantes.php';
 
 if (!isset($_GET['file'])) {
     $fileId = 0;

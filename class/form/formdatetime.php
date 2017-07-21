@@ -34,7 +34,7 @@ class ExtcalFormDateTime
         ksort($timearray);
 
         // test new calendar
-        //         include_once (XOOPS_ROOT_PATH . "/class/xoopsform/dateselect/formdateselect.php");
+        //         require_once (XOOPS_ROOT_PATH . "/class/xoopsform/dateselect/formdateselect.php");
         //         $test = new XoopsFormDateSelect('', 'event_start[date]', 15, $startTS);
         //         $test->setExtra('onBlur=\'validDate("event_start[date]", "event_start[time]", "event_end[date]", "event_end[time]");\'');
         //         $form->addElement($test);

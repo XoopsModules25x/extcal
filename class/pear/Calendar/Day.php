@@ -113,7 +113,7 @@ class Calendar_Day extends Calendar
      */
     public function build($sDates = array())
     {
-        include_once CALENDAR_ROOT.'Hour.php';
+        require_once CALENDAR_ROOT.'Hour.php';
 
         $hID = $this->cE->getHoursInDay($this->year, $this->month, $this->day);
         for ($i = 0; $i < $hID; ++$i) {

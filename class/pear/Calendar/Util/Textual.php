@@ -207,7 +207,7 @@ class Calendar_Util_Textual
         $days = self::weekdayNames($format);
         $stamp = $Calendar->prevDay('timestamp');
         $cE = $Calendar->getEngine();
-        include_once __DIR__.'/Date/Calc.php';
+        require_once __DIR__.'/Date/Calc.php';
         $day = Date_Calc::dayOfWeek($cE->stampToDay($stamp), $cE->stampToMonth($stamp), $cE->stampToYear($stamp));
 
         return $days[$day];
@@ -226,7 +226,7 @@ class Calendar_Util_Textual
     public static function thisDayName($Calendar, $format = 'long')
     {
         $days = self::weekdayNames($format);
-        include_once __DIR__.'/Date/Calc.php';
+        require_once __DIR__.'/Date/Calc.php';
         $day = Date_Calc::dayOfWeek($Calendar->thisDay(), $Calendar->thisMonth(), $Calendar->thisYear());
 
         return $days[$day];
@@ -246,7 +246,7 @@ class Calendar_Util_Textual
         $days = self::weekdayNames($format);
         $stamp = $Calendar->nextDay('timestamp');
         $cE = $Calendar->getEngine();
-        include_once __DIR__.'/Date/Calc.php';
+        require_once __DIR__.'/Date/Calc.php';
         $day = Date_Calc::dayOfWeek($cE->stampToDay($stamp), $cE->stampToMonth($stamp), $cE->stampToYear($stamp));
 
         return $days[$day];
