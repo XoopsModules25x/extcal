@@ -9,10 +9,11 @@
 if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
-require_once CALENDAR_ROOT.'Month/Weekdays.php';
-require_once CALENDAR_ROOT.'Decorator.php';
+require_once CALENDAR_ROOT . 'Month/Weekdays.php';
+require_once CALENDAR_ROOT . 'Decorator.php';
 
 // Decorate a Month with methods to improve formatting
+
 /**
  * Class MonthDecorator.
  */
@@ -36,7 +37,7 @@ class MonthDecorator extends Calendar_Decorator
         $prevStamp = parent::prevMonth(true);
 
         // Build the URL for the previous month
-        return $_SERVER['PHP_SELF'].'?y='.date('Y', $prevStamp).'&m='.date('n', $prevStamp).'&d='.date('j', $prevStamp);
+        return $_SERVER['PHP_SELF'] . '?y=' . date('Y', $prevStamp) . '&m=' . date('n', $prevStamp) . '&d=' . date('j', $prevStamp);
     }
 
     /**
@@ -58,7 +59,7 @@ class MonthDecorator extends Calendar_Decorator
         $nextStamp = parent::nextMonth(true);
 
         // Build the URL for next month
-        return $_SERVER['PHP_SELF'].'?y='.date('Y', $nextStamp).'&m='.date('n', $nextStamp).'&d='.date('j', $nextStamp);
+        return $_SERVER['PHP_SELF'] . '?y=' . date('Y', $nextStamp) . '&m=' . date('n', $nextStamp) . '&d=' . date('j', $nextStamp);
     }
 }
 
@@ -94,7 +95,7 @@ $MonthDecorator->build();
         if ($Day->isEmpty()) {
             echo '<td>&nbsp;</td>';
         } else {
-            echo '<td>'.$Day->thisDay().'</td>';
+            echo '<td>' . $Day->thisDay() . '</td>';
         }
         if ($Day->isLast()) {
             echo "\n</tr>\n";

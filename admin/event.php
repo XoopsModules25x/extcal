@@ -47,20 +47,20 @@ function deleteEvents($ids)
     //Supression des images
     $rst = $eventHandler->getAllEvents($criteria);
 
-//    while (list($k, $t) = each($rst)) {
-        foreach ($rst as $k => $t) {
-            if ($t['event_picture1'] != '') {
-                $f = XOOPS_ROOT_PATH . '/uploads/extcal/' . $t['event_picture1'];
-                unlink($f);
-                echo $f . '<br>';
-            }
-
-            if ($t['event_picture2'] != '') {
-                $f = XOOPS_ROOT_PATH . '/uploads/extcal/' . $t['event_picture1'];
-                unlink($f);
-                echo $f . '<br>';
-            }
+    //    while (list($k, $t) = each($rst)) {
+    foreach ($rst as $k => $t) {
+        if ($t['event_picture1'] != '') {
+            $f = XOOPS_ROOT_PATH . '/uploads/extcal/' . $t['event_picture1'];
+            unlink($f);
+            echo $f . '<br>';
         }
+
+        if ($t['event_picture2'] != '') {
+            $f = XOOPS_ROOT_PATH . '/uploads/extcal/' . $t['event_picture1'];
+            unlink($f);
+            echo $f . '<br>';
+        }
+    }
 
     //Supression des enregistrements
     $eventHandler->deleteAllEvents($criteria);
@@ -211,7 +211,7 @@ switch ($op) {
         $event        = $eventHandler->getEvent($eventId);
         $t            = $event->getVars();
         $data         = array();
-//        while (list($key, $val) = each($t)) {
+        //        while (list($key, $val) = each($t)) {
         foreach ($t as $key => $val) {
             $data[$key] = $val['value'];
         }
@@ -334,11 +334,11 @@ switch ($op) {
 
         echo '<fieldset><legend style="font-weight:bold; color:#990000;">' . _AM_EXTCAL_APPROVED_EVENT . '</legend>';
         echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _AM_EXTCAL_INFORMATION . '</legend>';
-        //echo'<img src='. XOOPS_URL .'/'. $moduleInfo->getInfo('dirmoduleadmin').'/assets/images/action/edit.png' .' '.'style=vertical-align:middle;/>&nbsp;&nbsp;' . _AM_EXTCAL_INFO_EDIT . '<br>';
-        //echo'<img src='. XOOPS_URL .'/'. $moduleInfo->getInfo('dirmoduleadmin').'/assets/images/action/delete.png'. ' '."style=vertical-align:middle;/>&nbsp;&nbsp;". _AM_EXTCAL_INFO_DELETE;
+        //echo'<img src='. XOOPS_URL .'/'. $moduleInfo->getInfo('dirmoduleadmin').'/assets/images/action/edit.png' .' '.'style=vertical-align:middle;>&nbsp;&nbsp;' . _AM_EXTCAL_INFO_EDIT . '<br>';
+        //echo'<img src='. XOOPS_URL .'/'. $moduleInfo->getInfo('dirmoduleadmin').'/assets/images/action/delete.png'. ' '."style=vertical-align:middle;>&nbsp;&nbsp;". _AM_EXTCAL_INFO_DELETE;
 
-        echo '<img src=' . $pathIcon16 . '/edit.png' . ' ' . 'style=vertical-align:middle;/>&nbsp;&nbsp;' . _AM_EXTCAL_INFO_EDIT . '<br>';
-        echo '<img src=' . $pathIcon16 . '/delete.png' . ' ' . 'style=vertical-align:middle;/>&nbsp;&nbsp;' . _AM_EXTCAL_INFO_DELETE . '<br>';
+        echo '<img src=' . $pathIcon16 . '/edit.png' . ' ' . 'style=vertical-align:middle;>&nbsp;&nbsp;' . _AM_EXTCAL_INFO_EDIT . '<br>';
+        echo '<img src=' . $pathIcon16 . '/delete.png' . ' ' . 'style=vertical-align:middle;>&nbsp;&nbsp;' . _AM_EXTCAL_INFO_DELETE . '<br>';
 
         echo '</fieldset><br>';
 

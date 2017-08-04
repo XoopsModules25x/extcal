@@ -63,7 +63,7 @@ function xoops_module_update_extcal(XoopsModule $xoopsModule, $previousVersion =
         '2_37' => 237,
     );
 
-//    while (list($key, $val) = each($version)) {
+    //    while (list($key, $val) = each($version)) {
     foreach ($version as $key => $val) {
         if ($previousVersion < $val) {
             $name = sprintf($cls, $key);

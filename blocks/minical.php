@@ -161,8 +161,7 @@ function bExtcalMinicalShow($options)
      */
     // Flag current day
     $selectedDays = array(
-        new Calendar_Day(date('Y', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($GLOBALS['xoopsUser']))),
-                         date('n', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($GLOBALS['xoopsUser']))),
+        new Calendar_Day(date('Y', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($GLOBALS['xoopsUser']))), date('n', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($GLOBALS['xoopsUser']))),
                          date('j', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($GLOBALS['xoopsUser'])))),
     );
 
@@ -373,14 +372,16 @@ function bExtcalMinicalEdit($options)
     //---------------------------------------------------------------------
     //=====================================================================
     return $form->render();
+/*
+          $t = array();
+          //while (list($key,$val) = each($xfValue)) {
+            foreach ($xfValue as $key => $val) {
+           $t[] = $val->render();
+          }
+         return implode("\n", $t);
 
-    //      $t = array();
-    //      while (list($key,$val) = each($xfValue)) {
-    //       $t[] = $val->render();
-    //      }
-    //     return implode("\n", $t);
-
-    //    return extcal_buildHtmlArray($xfValue, _OPTIONS);
+        return extcal_buildHtmlArray($xfValue, _OPTIONS);
+*/
 }
 
 /**************************************************************************/

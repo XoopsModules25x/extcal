@@ -68,8 +68,7 @@ $modversion['hasMain'] = 1;
 $i                     = 0;
 
 if (isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule'])
-    && $GLOBALS['xoopsModule']->getVar('dirname') === 'extcal'
-) {
+    && $GLOBALS['xoopsModule']->getVar('dirname') === 'extcal') {
     /*
         $user = isset($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser'] : null;
         $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
@@ -79,12 +78,12 @@ if (isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule'])
         }
     */
     $tTabs = getNavBarTabs();
-//    while (list($key, $value) = each($tTabs)) {
-        foreach ($tTabs as $key => $value) {
-            ++$i;
-            $modversion['sub'][$i]['name'] = $value['name'];
-            $modversion['sub'][$i]['url']  = $value['href'];
-        }
+    //    while (list($key, $value) = each($tTabs)) {
+    foreach ($tTabs as $key => $value) {
+        ++$i;
+        $modversion['sub'][$i]['name'] = $value['name'];
+        $modversion['sub'][$i]['url']  = $value['href'];
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////

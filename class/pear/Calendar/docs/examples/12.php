@@ -6,7 +6,7 @@ function getmicrotime()
 {
     list($usec, $sec) = explode(' ', microtime());
 
-    return (float) $usec + (float) $sec;
+    return (float)$usec + (float)$sec;
 }
 
 $start = getmicrotime();
@@ -15,7 +15,7 @@ if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 
-require_once CALENDAR_ROOT.'Year.php';
+require_once CALENDAR_ROOT . 'Year.php';
 
 define('CALENDAR_MONTH_STATE', CALENDAR_USE_MONTH_WEEKDAYS);
 
@@ -100,7 +100,7 @@ $Year->build();
         }
 
         echo "<td>\n<table class=\"month\">\n";
-        echo '<caption class="month">'.date('F', $Month->thisMonth(true)).'</caption>';
+        echo '<caption class="month">' . date('F', $Month->thisMonth(true)) . '</caption>';
         echo "<tr>\n<th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th><th>S</th>\n</tr>";
         $Month->build();
         while ($Day = $Month->fetch()) {
@@ -110,7 +110,7 @@ $Year->build();
             if ($Day->isEmpty()) {
                 echo "<td>&nbsp;</td>\n";
             } else {
-                echo '<td>'.$Day->thisDay()."</td>\n";
+                echo '<td>' . $Day->thisDay() . "</td>\n";
             }
             if ($Day->isLast()) {
                 echo "</tr>\n";

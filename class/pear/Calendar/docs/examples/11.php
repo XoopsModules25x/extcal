@@ -6,11 +6,12 @@
 if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
-require_once CALENDAR_ROOT.'Day.php';
-require_once CALENDAR_ROOT.'Hour.php';
-require_once CALENDAR_ROOT.'Decorator.php';
+require_once CALENDAR_ROOT . 'Day.php';
+require_once CALENDAR_ROOT . 'Hour.php';
+require_once CALENDAR_ROOT . 'Decorator.php';
 
 // Decorator to "attach" functionality to selected hours
+
 /**
  * Class DiaryEvent.
  */
@@ -53,9 +54,9 @@ $sql = "
         FROM
             diary
         WHERE
-            eventtime >= '".$Day->thisDay(true)."'
+            eventtime >= '" . $Day->thisDay(true) . "'
         AND
-            eventtime < '".$Day->nextDay(true)."';";
+            eventtime < '" . $Day->nextDay(true) . "';";
 
 // An array simulating data from a database
 $result = array(
@@ -101,7 +102,7 @@ $Day->build($selection);
     </tr>
     <?php
     while ($Hour = $Day->fetch()) {
-        $hour = $Hour->thisHour();
+        $hour   = $Hour->thisHour();
         $minute = $Hour->thisMinute();
 
         // Office hours only...
@@ -111,7 +112,7 @@ $Day->build($selection);
 
             // If the hour is selected, call the decorator method...
             if ($Hour->isSelected()) {
-                echo '<td bgcolor="silver">'.$Hour->getEntry()."</td>\n";
+                echo '<td bgcolor="silver">' . $Hour->getEntry() . "</td>\n";
             } else {
                 echo "<td>&nbsp;</td>\n";
             }

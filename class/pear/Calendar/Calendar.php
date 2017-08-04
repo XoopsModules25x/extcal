@@ -97,7 +97,7 @@ class Calendar_Engine_Factory
         }
         if (!$engine) {
             if (!class_exists($class)) {
-                require_once CALENDAR_ROOT.'Engine'.'/'.CALENDAR_ENGINE.'.php';
+                require_once CALENDAR_ROOT . 'Engine' . '/' . CALENDAR_ENGINE . '.php';
             }
             $engine = new $class();
         }
@@ -209,13 +209,13 @@ class Calendar
         if (!isset($cE)) {
             $cE = Calendar_Engine_Factory::getEngine();
         }
-        $this->cE = &$cE;
-        $this->year = (int) $y;
-        $this->month = (int) $m;
-        $this->day = (int) $d;
-        $this->hour = (int) $h;
-        $this->minute = (int) $i;
-        $this->second = (int) $s;
+        $this->cE     =& $cE;
+        $this->year   = (int)$y;
+        $this->month  = (int)$m;
+        $this->day    = (int)$d;
+        $this->hour   = (int)$h;
+        $this->minute = (int)$i;
+        $this->second = (int)$s;
     }
 
     /**
@@ -226,10 +226,10 @@ class Calendar
      */
     public function setTimestamp($ts)
     {
-        $this->year = $this->cE->stampToYear($ts);
-        $this->month = $this->cE->stampToMonth($ts);
-        $this->day = $this->cE->stampToDay($ts);
-        $this->hour = $this->cE->stampToHour($ts);
+        $this->year   = $this->cE->stampToYear($ts);
+        $this->month  = $this->cE->stampToMonth($ts);
+        $this->day    = $this->cE->stampToDay($ts);
+        $this->hour   = $this->cE->stampToHour($ts);
         $this->minute = $this->cE->stampToMinute($ts);
         $this->second = $this->cE->stampToSecond($ts);
     }
@@ -280,11 +280,11 @@ class Calendar
      */
     public function adjust()
     {
-        $stamp = $this->getTimestamp();
-        $this->year = $this->cE->stampToYear($stamp);
-        $this->month = $this->cE->stampToMonth($stamp);
-        $this->day = $this->cE->stampToDay($stamp);
-        $this->hour = $this->cE->stampToHour($stamp);
+        $stamp        = $this->getTimestamp();
+        $this->year   = $this->cE->stampToYear($stamp);
+        $this->month  = $this->cE->stampToMonth($stamp);
+        $this->day    = $this->cE->stampToDay($stamp);
+        $this->hour   = $this->cE->stampToHour($stamp);
         $this->minute = $this->cE->stampToMinute($stamp);
         $this->second = $this->cE->stampToSecond($stamp);
     }
@@ -303,10 +303,10 @@ class Calendar
         }
 
         return array(
-            'year' => $this->cE->stampToYear($stamp),
-            'month' => $this->cE->stampToMonth($stamp),
-            'day' => $this->cE->stampToDay($stamp),
-            'hour' => $this->cE->stampToHour($stamp),
+            'year'   => $this->cE->stampToYear($stamp),
+            'month'  => $this->cE->stampToMonth($stamp),
+            'day'    => $this->cE->stampToDay($stamp),
+            'hour'   => $this->cE->stampToHour($stamp),
             'minute' => $this->cE->stampToMinute($stamp),
             'second' => $this->cE->stampToSecond($stamp),
         );
@@ -331,7 +331,7 @@ class Calendar
                 return $this->toArray($stamp);
                 break;
             case 'object':
-                require_once CALENDAR_ROOT.'Factory.php';
+                require_once CALENDAR_ROOT . 'Factory.php';
 
                 return Calendar_Factory::createByTimestamp($returnType, $stamp);
                 break;
@@ -353,7 +353,7 @@ class Calendar
      */
     public function build($sDates = array())
     {
-        require_once __DIR__.'/PEAR.php';
+        require_once __DIR__ . '/PEAR.php';
         PEAR::raiseError('Calendar::build is abstract', null, PEAR_ERROR_TRIGGER, E_USER_NOTICE, 'Calendar::build()');
 
         return false;
@@ -369,7 +369,7 @@ class Calendar
      */
     public function setSelection($sDates)
     {
-        require_once __DIR__.'/PEAR.php';
+        require_once __DIR__ . '/PEAR.php';
         PEAR::raiseError('Calendar::setSelection is abstract', null, PEAR_ERROR_TRIGGER, E_USER_NOTICE, 'Calendar::setSelection()');
 
         return false;
@@ -436,7 +436,7 @@ class Calendar
     public function &getValidator()
     {
         if (!isset($this->validator)) {
-            require_once CALENDAR_ROOT.'Validator.php';
+            require_once CALENDAR_ROOT . 'Validator.php';
             $this->validator = new Calendar_Validator($this);
         }
 
@@ -470,7 +470,7 @@ class Calendar
     {
         if (defined('CALENDAR_FIRST_DAY_OF_WEEK')) {
             if (($firstDay != CALENDAR_FIRST_DAY_OF_WEEK) && !is_null($firstDay)) {
-                $msg = 'CALENDAR_FIRST_DAY_OF_WEEK constant already defined.'.' The $firstDay parameter will be ignored.';
+                $msg = 'CALENDAR_FIRST_DAY_OF_WEEK constant already defined.' . ' The $firstDay parameter will be ignored.';
                 trigger_error($msg, E_USER_WARNING);
             }
 

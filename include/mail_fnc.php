@@ -160,7 +160,7 @@ __sql__;
     $destinataires                     = array();
     $destinataires[$submiter['email']] = $submiter['email'];
     $destinataires[$acteur['email']]   = $acteur['email'];
-//    while (list($k, $row) = each($members)) {
+    //    while (list($k, $row) = each($members)) {
     foreach ($members as $k => $row) {
         $destinataires[$row['email']] = $row['email'];
     }
@@ -236,7 +236,7 @@ function extcal_SendMail(
 
     //$xoopsMailer->setToUsers($destinataires[$i]);
 
-//    while (list($k, $v) = each($destinataires)) {
+    //    while (list($k, $v) = each($destinataires)) {
     foreach ($destinataires as $k => $v) {
         //for ( $i = 0, $iMax = count($destinataires); $i < $iMax; ++$i) {
         //$xoopsMailer->setToUsers($destinataires[$i]);

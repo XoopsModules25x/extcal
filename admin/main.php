@@ -85,14 +85,7 @@ switch ($op) {
             default:
                 xoops_cp_header();
                 $fromemail      = !empty($xoopsConfig['adminmail']) ? $xoopsConfig['adminmail'] : $xoopsUser->getVar('email', 'E');
-                $subjectCaption = _AM_EXTCAL_SUBJECT
-                                  . "<br><br><span style='font-size:x-small;font-weight:bold;'>"
-                                  . _AM_EXTCAL_USEFUL_TAGS
-                                  . "</span><br><span style='font-size:x-small;font-weight:normal;'>"
-                                  . _AM_EXTCAL_MAILTAGS6
-                                  . '<br>'
-                                  . _AM_EXTCAL_MAILTAGS2
-                                  . '</span>&nbsp;&nbsp;&nbsp;';
+                $subjectCaption = _AM_EXTCAL_SUBJECT . "<br><br><span style='font-size:x-small;font-weight:bold;'>" . _AM_EXTCAL_USEFUL_TAGS . "</span><br><span style='font-size:x-small;font-weight:normal;'>" . _AM_EXTCAL_MAILTAGS6 . '<br>' . _AM_EXTCAL_MAILTAGS2 . '</span>&nbsp;&nbsp;&nbsp;';
                 $bodyCaption    = _AM_EXTCAL_BODY
                                   . "<br><br><span style='font-size:x-small;font-weight:bold;'>"
                                   . _AM_EXTCAL_USEFUL_TAGS
@@ -148,7 +141,7 @@ switch ($op) {
         //        require_once XOOPS_ROOT_PATH . "/modules/extcal/class/admin.php";
         //        $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
         //        $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
-        $adminObject  = \Xmf\Module\Admin::getInstance();
+        $adminObject = \Xmf\Module\Admin::getInstance();
         $adminObject->addInfoBox(_MI_EXTCAL_DASHBOARD);
         $adminObject->addInfoBoxLine(_MI_EXTCAL_DASHBOARD, '<infolabel>' . _AM_EXTCAL_INDEX_CATEGORIES . '</infolabel>', $catHandler->getCount(), 'Green');
         $adminObject->addInfoBoxLine(_MI_EXTCAL_DASHBOARD, '<infolabel>' . _AM_EXTCAL_INDEX_EVENT . '</infolabel>', $eventHandler->getCount(new Criteria('event_approved', 1)), 'Green');

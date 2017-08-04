@@ -141,8 +141,7 @@ if ($extcalConfig['whos_going']) {
 
             // If this event is full
             if ($event['event_nbmember'] != 0
-                && $eventMemberHandler->getNbMember($eventId) >= $event['event_nbmember']
-            ) {
+                && $eventMemberHandler->getNbMember($eventId) >= $event['event_nbmember']) {
                 $eventmember['member']['disabled'] = ' disabled="disabled"';
             }
         }

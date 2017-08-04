@@ -48,7 +48,7 @@ if (isset($_GET['mime']) && $_GET['mime'] === 'wml') {
                 <anchor>
                     Back to Month View
                     <go href="<?php
-                    echo '?y=' . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . '&amp;mime=wml'; ?>"/>
+                    echo '?y=' . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . '&amp;mime=wml'; ?>">
                 </anchor>
             </p>
             <table>
@@ -61,7 +61,6 @@ if (isset($_GET['mime']) && $_GET['mime'] === 'wml') {
             } ?>
             </table>
             <?php
-
         } else {
             ?>
             <p><strong><?php echo date('F Y', $Month->getTimestamp()); ?></strong></p>
@@ -84,27 +83,9 @@ if (isset($_GET['mime']) && $_GET['mime'] === 'wml') {
                 if ($Day->isEmpty()) {
                     echo "<td></td>\n";
                 } elseif ($Day->isSelected()) {
-                    echo '<td><anchor><strong><u>'
-                             . $Day->thisDay()
-                             . "</u></strong>\n<go href=\""
-                             . $_SERVER['PHP_SELF']
-                             . '?viewday=true&amp;y='
-                             . $Day->thisYear()
-                             . '&amp;m='
-                             . $Day->thisMonth()
-                             . '&amp;d='
-                             . $Day->thisDay()
-                             . "&amp;mime=wml\">\n</anchor></td>\n";
+                    echo '<td><anchor><strong><u>' . $Day->thisDay() . "</u></strong>\n<go href=\"" . $_SERVER['PHP_SELF'] . '?viewday=true&amp;y=' . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . "&amp;mime=wml\">\n</anchor></td>\n";
                 } else {
-                    echo '<td><anchor>'
-                             . $Day->thisDay()
-                             . "\n<go href=\"?viewday=true&amp;y="
-                             . $Day->thisYear()
-                             . '&amp;m='
-                             . $Day->thisMonth()
-                             . '&amp;d='
-                             . $Day->thisDay()
-                             . "&amp;mime=wml\"></anchor></td>\n";
+                    echo '<td><anchor>' . $Day->thisDay() . "\n<go href=\"?viewday=true&amp;y=" . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . "&amp;mime=wml\"></anchor></td>\n";
                 }
                 if ($Day->isLast()) {
                     echo "</tr>\n";
@@ -115,7 +96,7 @@ if (isset($_GET['mime']) && $_GET['mime'] === 'wml') {
                         <anchor>
                             &lt;&lt;
                             <go href="<?php
-                            echo '?y=' . $Month->thisYear() . '&amp;m=' . $Month->prevMonth() . '&amp;d=' . $Month->thisDay() . '&amp;mime=wml'; ?>"/>
+                            echo '?y=' . $Month->thisYear() . '&amp;m=' . $Month->prevMonth() . '&amp;d=' . $Month->thisDay() . '&amp;mime=wml'; ?>">
                         </anchor>
                     </td>
                     <td></td>
@@ -127,14 +108,13 @@ if (isset($_GET['mime']) && $_GET['mime'] === 'wml') {
                         <anchor>
                             &gt;&gt;
                             <go href="<?php
-                            echo '?y=' . $Month->thisYear() . '&amp;m=' . $Month->nextMonth() . '&amp;d=' . $Month->thisDay() . '&amp;mime=wml'; ?>"/>
+                            echo '?y=' . $Month->thisYear() . '&amp;m=' . $Month->nextMonth() . '&amp;d=' . $Month->thisDay() . '&amp;mime=wml'; ?>">
                         </anchor>
                     </td>
                 </tr>
             </table>
 
             <?php
-
         } ?>
         <p><a href="<?php echo $_SERVER['PHP_SELF']; ?>">Back to HTML</a></p>
         <?php echo '<p>Took: ' . (getmicrotime() - $start) . ' seconds</p>'; ?>
@@ -173,7 +153,6 @@ if (isset($_GET['mime']) && $_GET['mime'] === 'wml') {
         } ?>
         </table>
         <?php
-
     } else {
         ?>
         <p><strong><?php echo date('F Y', $Month->getTimestamp()); ?></strong></p>
@@ -196,29 +175,9 @@ if (isset($_GET['mime']) && $_GET['mime'] === 'wml') {
             if ($Day->isEmpty()) {
                 echo "<td></td>\n";
             } elseif ($Day->isSelected()) {
-                echo '<td><a href="'
-                         . $_SERVER['PHP_SELF']
-                         . '?viewday=true&amp;y='
-                         . $Day->thisYear()
-                         . '&amp;m='
-                         . $Day->thisMonth()
-                         . '&amp;d='
-                         . $Day->thisDay()
-                         . '&amp;wml"><strong><u>'
-                         . $Day->thisDay()
-                         . "</u></strong></a></td>\n";
+                echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?viewday=true&amp;y=' . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . '&amp;wml"><strong><u>' . $Day->thisDay() . "</u></strong></a></td>\n";
             } else {
-                echo '<td><a href="'
-                         . $_SERVER['PHP_SELF']
-                         . '?viewday=true&amp;y='
-                         . $Day->thisYear()
-                         . '&amp;m='
-                         . $Day->thisMonth()
-                         . '&amp;d='
-                         . $Day->thisDay()
-                         . '">'
-                         . $Day->thisDay()
-                         . "</a></td>\n";
+                echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?viewday=true&amp;y=' . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . '">' . $Day->thisDay() . "</a></td>\n";
             }
             if ($Day->isLast()) {
                 echo "</tr>\n";
@@ -243,12 +202,10 @@ if (isset($_GET['mime']) && $_GET['mime'] === 'wml') {
         </table>
 
         <?php
-
     } ?>
 
     <?php echo '<p><b>Took: ' . (getmicrotime() - $start) . ' seconds</b></p>'; ?>
     </body>
     </html>
     <?php
-
 }

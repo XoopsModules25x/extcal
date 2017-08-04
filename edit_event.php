@@ -28,8 +28,7 @@ $permHandler = ExtcalPerm::getHandler();
 $xoopsUser   = $xoopsUser ?: null;
 
 if (count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) == 0
-    && count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_edit')) == 0
-) {
+    && count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_edit')) == 0) {
     redirect_header('index.php', 3);
     exit;
 }

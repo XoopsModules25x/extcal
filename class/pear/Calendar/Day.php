@@ -136,8 +136,7 @@ class Calendar_Day extends Calendar
     {
         foreach ($sDates as $sDate) {
             if ($this->year == $sDate->thisYear() && $this->month == $sDate->thisMonth()
-                && $this->day == $sDate->thisDay()
-            ) {
+                && $this->day == $sDate->thisDay()) {
                 $key = (int)$sDate->thisHour();
                 if (isset($this->children[$key])) {
                     $sDate->setSelected();

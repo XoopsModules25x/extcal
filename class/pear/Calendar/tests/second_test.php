@@ -1,10 +1,10 @@
 <?php
 //
 
-require_once __DIR__.'/simple_include.php';
-require_once __DIR__.'/calendar_include.php';
+require_once __DIR__ . '/simple_include.php';
+require_once __DIR__ . '/calendar_include.php';
 
-require_once __DIR__.'/./calendar_test.php';
+require_once __DIR__ . '/./calendar_test.php';
 
 /**
  * Class TestOfSecond.
@@ -27,10 +27,10 @@ class TestOfSecond extends TestOfCalendar
     public function testPrevDay_Array()
     {
         $this->assertEqual(array(
-                               'year' => 2003,
-                               'month' => 10,
-                               'day' => 24,
-                               'hour' => 0,
+                               'year'   => 2003,
+                               'month'  => 10,
+                               'day'    => 24,
+                               'hour'   => 0,
                                'minute' => 0,
                                'second' => 0,
                            ), $this->cal->prevDay('array'));

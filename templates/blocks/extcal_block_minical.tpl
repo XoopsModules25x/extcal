@@ -40,7 +40,7 @@
         <tr>
             <td colspan="7">
                 <img src="<{$xoops_url}>/modules/extcal/assets/images/icons/addevent.gif"
-                     alt="Add event"/> <a href="<{$xoops_url}>/modules/extcal/view_new-event.php"><{$block.submitText}></a>
+                     alt="Add event"> <a href="<{$xoops_url}>/modules/extcal/view_new-event.php"><{$block.submitText}></a>
             </td>
         </tr>
     <{/if}>

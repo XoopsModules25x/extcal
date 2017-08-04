@@ -15,15 +15,15 @@
             </div>
             <!--<div style="text-align:right;">-->
             <!--<a href="<{$xoops_url}>/modules/extcal/print.php?event=<{$event.event_id}>">-->
-            <!--<img src="<{$smarty.const._EXTCAL_PATH_ICONS16}>/printer.png"/>-->
+            <!--<img src="<{$smarty.const._EXTCAL_PATH_ICONS16}>/printer.png">-->
             <!--</a>-->
             <!--<{if $isAdmin || $canEdit}>-->
             <!--<a href="edit_event.php?event=<{$event.event_id}>">-->
-            <!--<img src="<{$smarty.const._EXTCAL_PATH_ICONS16}>/edit.png"/>-->
+            <!--<img src="<{$smarty.const._EXTCAL_PATH_ICONS16}>/edit.png">-->
             <!--</a><{/if}>-->
             <!--<{if $isAdmin}>-->
             <!--<a href="admin/event.php?op=delete&event_id=<{$event.event_id}>">-->
-            <!--<img src="<{$smarty.const._EXTCAL_PATH_ICONS16}>/delete.png"/>-->
+            <!--<img src="<{$smarty.const._EXTCAL_PATH_ICONS16}>/delete.png">-->
             <!--</a>-->
             <!--<{/if}>-->
             <!--</div>-->
@@ -37,14 +37,14 @@
                     <a href="<{$xoops_url}>/uploads/extcal/<{$event.event_picture1}>" class="highslide"
                        onclick="return hs.expand(this)">
                         <img align="left" style="margin-right:10px;"
-                             src="<{$xoops_url}>/uploads/extcal/<{$event.event_picture1}>" height="150px"/>
+                             src="<{$xoops_url}>/uploads/extcal/<{$event.event_picture1}>" height="150px">
                     </a>
 
                     <div class="highslide-heading"></div>
                 </div>
             <{elseif $smarty.const._EXTCAL_SHOW_NO_PICTURE}>
                 <img align=left style="margin-right:6px;"
-                     src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180"/>
+                     src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180">
             <{/if}>
 
             <{if $event.event_picture2}>
@@ -52,14 +52,14 @@
                     <a href="<{$xoops_url}>/uploads/extcal/<{$event.event_picture2}>" class="highslide"
                        onclick="return hs.expand(this)">
                         <img align="left" style="margin-right:10px;"
-                             src="<{$xoops_url}>/uploads/extcal/<{$event.event_picture2}>" height="150px"/>
+                             src="<{$xoops_url}>/uploads/extcal/<{$event.event_picture2}>" height="150px">
                     </a>
 
                     <div class="highslide-heading"></div>
                 </div>
             <{elseif $smarty.const._EXTCAL_SHOW_NO_PICTURE}>
                 <img align=left style="margin-right:6px;"
-                     src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180"/>
+                     src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180">
             <{/if}>
 
 
@@ -125,14 +125,14 @@
                            class="highslide" onclick="return hs.expand(this)">
                             <img align="left" style="margin-right:10px;"
                                  src="<{$xoops_url}>/uploads/extcal/etablissement/<{$etablissement.logo.value}>"
-                                 height="150px"/>
+                                 height="150px">
                         </a>
 
                         <div class="highslide-heading"></div>
                     </div>
                 <{elseif $smarty.const._EXTCAL_SHOW_NO_PICTURE}>
                     <img align=left style="margin-right:6px;"
-                         src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180"/>
+                         src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180">
                 <{/if}>
             </td>
         </tr>
@@ -190,8 +190,8 @@
                 <{if $eventmember.member.show_button}>
                     <form style="display:inline;" method="post" action="event_member.php">
                         <{securityToken}><{*//mb*}>
-                        <input type="hidden" name="mode" value="<{$eventmember.member.joinevent_mode}>"/>
-                        <input type="hidden" name="event" value="<{$event.event_id}>"/>
+                        <input type="hidden" name="mode" value="<{$eventmember.member.joinevent_mode}>">
+                        <input type="hidden" name="event" value="<{$event.event_id}>">
                         <input type="submit" value="<{$eventmember.member.button_text}>"<{$eventmember.member.button_disabled}>>
                     </form>
                 <{/if}>
@@ -207,8 +207,8 @@
                 <{if $eventmember.notmember.show_button}>
                     <form style="display:inline;" method="post" action="event_notmember.php">
                         <{securityToken}><{*//mb*}>
-                        <input type="hidden" name="mode" value="<{$eventmember.notmember.joinevent_mode}>"/>
-                        <input type="hidden" name="event" value="<{$event.event_id}>"/>
+                        <input type="hidden" name="mode" value="<{$eventmember.notmember.joinevent_mode}>">
+                        <input type="hidden" name="event" value="<{$event.event_id}>">
                         <input type="submit" value="<{$eventmember.notmember.button_text}>"<{$eventmember.notmember.button_disabled}>>
                     </form>
                 <{/if}>
@@ -221,7 +221,7 @@
         <tr>
             <td colspan="3" class="even">
                 <{$smarty.const._MD_EXTCAL_STATUS}> : <{$status}>
-                <input type="submit" value="<{$smarty.const._MD_EXTCAL_VALIDATE}>"/>
+                <input type="submit" value="<{$smarty.const._MD_EXTCAL_VALIDATE}>">
             </td>
         </tr>
     <{/if}>

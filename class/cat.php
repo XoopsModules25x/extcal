@@ -185,7 +185,7 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
 
         $t = $this->objectToArray($this->getObjects($criteriaCompo));
         $r = array();
-//        while (list($k, $v) = each($t)) {
+        //        while (list($k, $v) = each($t)) {
         foreach ($t as $k => $v) {
             $r[$v['cat_id']] = $v;
         }

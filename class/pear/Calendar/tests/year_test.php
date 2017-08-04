@@ -1,10 +1,10 @@
 <?php
 //
 
-require_once __DIR__.'/simple_include.php';
-require_once __DIR__.'/calendar_include.php';
+require_once __DIR__ . '/simple_include.php';
+require_once __DIR__ . '/calendar_include.php';
 
-require_once __DIR__.'/./calendar_test.php';
+require_once __DIR__ . '/./calendar_test.php';
 
 /**
  * Class TestOfYear.
@@ -42,10 +42,10 @@ class TestOfYear extends TestOfCalendar
     public function testPrevMonth_Array()
     {
         $this->assertEqual(array(
-                               'year' => 2002,
-                               'month' => 12,
-                               'day' => 1,
-                               'hour' => 0,
+                               'year'   => 2002,
+                               'month'  => 12,
+                               'day'    => 1,
+                               'hour'   => 0,
                                'minute' => 0,
                                'second' => 0,
                            ), $this->cal->prevMonth('array'));
@@ -69,10 +69,10 @@ class TestOfYear extends TestOfCalendar
     public function testPrevDay_Array()
     {
         $this->assertEqual(array(
-                               'year' => 2002,
-                               'month' => 12,
-                               'day' => 31,
-                               'hour' => 0,
+                               'year'   => 2002,
+                               'month'  => 12,
+                               'day'    => 31,
+                               'hour'   => 0,
                                'minute' => 0,
                                'second' => 0,
                            ), $this->cal->prevDay('array'));
@@ -173,7 +173,7 @@ class TestOfYearBuild extends TestOfYear
     {
         $this->cal->build();
         $children = array();
-        $i = 1;
+        $i        = 1;
         while ($Child = $this->cal->fetch()) {
             $children[$i] = $Child;
             ++$i;
@@ -183,7 +183,7 @@ class TestOfYearBuild extends TestOfYear
 
     public function testSelection()
     {
-        require_once CALENDAR_ROOT.'Month.php';
+        require_once CALENDAR_ROOT . 'Month.php';
         $selection = array(new Calendar_Month(2003, 10));
         $this->cal->build($selection);
         $i = 1;

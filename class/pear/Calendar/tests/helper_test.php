@@ -1,8 +1,8 @@
 <?php
 //
 
-require_once __DIR__.'/simple_include.php';
-require_once __DIR__.'/calendar_include.php';
+require_once __DIR__ . '/simple_include.php';
+require_once __DIR__ . '/calendar_include.php';
 
 Mock::generate('Calendar_Engine_Interface', 'Mock_Calendar_Engine');
 Mock::generate('Calendar_Second', 'Mock_Calendar_Second');

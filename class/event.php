@@ -400,18 +400,18 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         $ordre      = array();
         $eventArray = array();
 
-//        while (list($k, $v) = each($events)) {
-            foreach ($events as $k => $t) {
-                $ordre[] = (int)$v['event_start'];
-                $this->formatEventDate($v, $extcalConfig['event_date_week']);
+        //        while (list($k, $v) = each($events)) {
+        foreach ($events as $k => $t) {
+            $ordre[] = (int)$v['event_start'];
+            $this->formatEventDate($v, $extcalConfig['event_date_week']);
             //$v['cat']['cat_light_color'] = $v['cat']['cat_color'];
             $v['cat']['cat_light_color'] = ExtcalUtility::getLighterColor($v['cat']['cat_color'], _EXTCAL_INFOBULLE_RGB_MIN, _EXTCAL_INFOBULLE_RGB_MAX);
-                if ($v['event_icone'] == '') {
-                    $v['event_icone'] = $v['cat']['cat_icone'];
-                }
-                $v['event_desc'] = html_entity_decode($v['event_desc']);
-                $eventArray[]    = $v;
+            if ($v['event_icone'] == '') {
+                $v['event_icone'] = $v['cat']['cat_icone'];
             }
+            $v['event_desc'] = html_entity_decode($v['event_desc']);
+            $eventArray[]    = $v;
+        }
         array_multisort($eventArray, SORT_ASC, SORT_NUMERIC, $ordre, SORT_ASC, SORT_NUMERIC);
 
         return $eventArray;
@@ -426,10 +426,10 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
     public function getEventsUniques($criteres)
     {
         global $extcalConfig;
-//        while (list($k, $v) = each($criteres)) {
-            foreach ($criteres as $k => $t) {
-                $$k = $v;
-            }
+        //        while (list($k, $v) = each($criteres)) {
+        foreach ($criteres as $k => $t) {
+            $$k = $v;
+        }
         if (!isset($nbDays)) {
             $nbDays = 7;
         }
@@ -509,7 +509,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
     {
         global $extcalConfig;
 
-//        while (list($k, $v) = each($criteres)) {
+        //        while (list($k, $v) = each($criteres)) {
         foreach ($criteres as $k => $t) {
             $$k = $v;
         }
@@ -572,7 +572,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
         //Balyage de tous les evennements récurrents et creation de toutes le events
         $eventsR = array();
-//        while (list($k, $event) = each($events)) {
+        //        while (list($k, $event) = each($events)) {
         foreach ($events as $k => $event) {
             //$te = $this->GetInterval($event, $start, $end);
             //$eventsR = array_merge($eventsR, $te);
@@ -1311,7 +1311,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         //Picture1
         $file_tray = new XoopsFormElementTray(sprintf(_MD_EXTCAL_FORM_IMG, 1), '');
         if (!empty($event_picture1)) {
-            $file_tray->addElement(new XoopsFormLabel('', "<img src='" . XOOPS_URL . '/uploads/extcal/' . $event_picture1 . "' name='image' id='image' alt=''/><br><br>"));
+            $file_tray->addElement(new XoopsFormLabel('', "<img src='" . XOOPS_URL . '/uploads/extcal/' . $event_picture1 . "' name='image' id='image' alt=''><br><br>"));
             $check_del_img = new XoopsFormCheckBox('', 'delimg_1');
             $check_del_img->addOption(1, _MD_EXTCAL_DEL_IMG);
             $file_tray->addElement($check_del_img);
@@ -1331,7 +1331,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         //Picture2
         $file_tray = new XoopsFormElementTray(sprintf(_MD_EXTCAL_FORM_IMG, 2), '');
         if (!empty($event_picture2)) {
-            $file_tray->addElement(new XoopsFormLabel('', "<img src='" . XOOPS_URL . '/uploads/extcal/' . $event_picture2 . "' name='image' id='image' alt=''/><br><br>"));
+            $file_tray->addElement(new XoopsFormLabel('', "<img src='" . XOOPS_URL . '/uploads/extcal/' . $event_picture2 . "' name='image' id='image' alt=''><br><br>"));
             $check_del_img = new XoopsFormCheckBox('', 'delimg_2');
             $check_del_img->addOption(1, _MD_EXTCAL_DEL_IMG);
             $file_tray->addElement($check_del_img);
@@ -1574,8 +1574,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
                     if // Event start falls within search period
                     ($occurEventStart <= $periodEnd
                      && // Event end falls within search period
-                     $occurEventEnd >= $periodStart
-                    ) {
+                     $occurEventEnd >= $periodStart) {
                         $event['event_start'] = $occurEventStart;
                         $event['event_end']   = $occurEventEnd;
 
@@ -1620,8 +1619,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
                     // Add this event occurence only if it's on the period view and according to day
                     if ($occurEventStart <= $periodEnd // Event start falls within search period
                         && $occurEventEnd >= $periodStart // Event end falls within search period
-                        && in_array($dayArray[date('w', $occurEventStart)], $eventOptions)
-                    ) {
+                        && in_array($dayArray[date('w', $occurEventStart)], $eventOptions)) {
                         // This week day is selected
 
                         $event['event_start'] = $occurEventStart;
@@ -1673,8 +1671,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
                      && // Event end falls within search period
                      $occurEventEnd >= $periodStart
                      && // This occur is after start reccur date
-                     $occurEventStart >= $event['event_recur_start']
-                    ) {
+                     $occurEventStart >= $event['event_recur_start']) {
                         $event['event_start'] = $occurEventStart;
                         $event['event_end']   = $occurEventEnd;
 
@@ -1732,8 +1729,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
                      && // Event end falls within search period
                      ($occurEventEnd >= $periodStart)
                      && // This week day is selected
-                     in_array($month, $eventOptions)
-                    ) {
+                     in_array($month, $eventOptions)) {
                         $event['event_start'] = $occurEventStart;
                         $event['event_end']   = $occurEventEnd;
 
@@ -2397,11 +2393,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         $tEvent = $xoopsDB->prefix('extcal_event') . ' AS te';
         $tCat   = $xoopsDB->prefix('extcal_cat') . ' AS tc';
 
-        $sql = 'SELECT te.*, tc.cat_name , tc.cat_color, '
-               . 'year(FROM_UNIXTIME(event_start)) AS year,'
-               . 'month(FROM_UNIXTIME(event_start)) AS month,'
-               . 'day(FROM_UNIXTIME(event_start)) AS day'
-               . " FROM {$tEvent}, {$tCat}";
+        $sql = 'SELECT te.*, tc.cat_name , tc.cat_color, ' . 'year(FROM_UNIXTIME(event_start)) AS year,' . 'month(FROM_UNIXTIME(event_start)) AS month,' . 'day(FROM_UNIXTIME(event_start)) AS day' . " FROM {$tEvent}, {$tCat}";
         //---------------------------------------------------
         $tw   = array();
         $tw[] = 'te.cat_id = tc.cat_id';

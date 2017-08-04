@@ -19,8 +19,7 @@
  */
 
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof XoopsUser)
-    || !$GLOBALS['xoopsUser']->IsAdmin()
-) {
+    || !$GLOBALS['xoopsUser']->IsAdmin()) {
     exit('Restricted access' . PHP_EOL);
 }
 
@@ -39,11 +38,11 @@ function tableExists($tablename)
 /**
  *
  * Prepares system prior to attempting to install module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param XoopsModule $xoopsModule {@link XoopsModule}
  *
  * @return bool true if ready to install, false if not
  */
-function xoops_module_pre_update_extcal(XoopsModule $module)
+function xoops_module_pre_update_extcal(XoopsModule $xoopsModule)
 {
     $moduleDirName = basename(dirname(__DIR__));
     $classUtility  = ucfirst($moduleDirName) . 'Utility';
@@ -51,12 +50,12 @@ function xoops_module_pre_update_extcal(XoopsModule $module)
         xoops_load('utility', $moduleDirName);
     }
     //check for minimum XOOPS version
-    if (!$classUtility::checkVerXoops($module)) {
+    if (!$classUtility::checkVerXoops($xoopsModule)) {
         return false;
     }
 
     // check for minimum PHP version
-    if (!$classUtility::checkVerPhp($module)) {
+    if (!$classUtility::checkVerPhp($xoopsModule)) {
         return false;
     }
 
@@ -66,16 +65,15 @@ function xoops_module_pre_update_extcal(XoopsModule $module)
 /**
  *
  * Performs tasks required during update of the module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param XoopsModule $xoopsModule {@link XoopsModule}
  * @param null        $previousVersion
  *
  * @return bool true if update successful, false if not
  */
 
-function xoops_module_update_extcal(XoopsModule $module, $previousVersion = null)
+function xoops_module_update_extcal(XoopsModule $xoopsModule, $previousVersion = null)
 {
     //    global $xoopsDB;
-
     $moduleDirName = basename(dirname(__DIR__));
 
     $newVersion = $xoopsModule->getVar('version') * 100;
@@ -98,7 +96,7 @@ function xoops_module_update_extcal(XoopsModule $module, $previousVersion = null
         '2_37' => 237,
     );
 
-//    while (list($key, $val) = each($version)) {
+    //    while (list($key, $val) = each($version)) {
     foreach ($version as $key => $val) {
         if ($previousVersion < $val) {
             $name = sprintf($cls, $key);
@@ -160,19 +158,19 @@ function xoops_module_update_extcal(XoopsModule $module, $previousVersion = null
         //---------------------
 
         //delete .html entries from the tpl table
-        $sql = 'DELETE FROM ' . $xoopsDB->prefix('tplfile') . " WHERE `tpl_module` = '" . $module->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
+        $sql = 'DELETE FROM ' . $xoopsDB->prefix('tplfile') . " WHERE `tpl_module` = '" . $xoopsModule->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
         $xoopsDB->queryF($sql);
 
         // Load class XoopsFile ====================
         xoops_load('XoopsFile');
 
         //delete /images directory ============
-        $imagesDirectory = $GLOBALS['xoops']->path('modules/' . $module->getVar('dirname', 'n') . '/images/');
+        $imagesDirectory = $GLOBALS['xoops']->path('modules/' . $xoopsModule->getVar('dirname', 'n') . '/images/');
         $folderHandler   = XoopsFile::getHandler('folder', $imagesDirectory);
         $folderHandler->delete($imagesDirectory);
     }
 
     $gpermHandler = xoops_getHandler('groupperm');
 
-    return $gpermHandler->deleteByModule($module->getVar('mid'), 'item_read');
+    return $gpermHandler->deleteByModule($xoopsModule->getVar('mid'), 'item_read');
 }

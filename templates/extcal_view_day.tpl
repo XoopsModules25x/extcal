@@ -56,14 +56,14 @@
                         <a href="<{$xoops_url}>/uploads/extcal/<{$event.event_picture1}>" class="highslide"
                            onclick="return hs.expand(this)">
                             <img align="left" style="margin-right:10px;"
-                                 src="<{$xoops_url}>/uploads/extcal/<{$event.event_picture1}>" height="150px"/>
+                                 src="<{$xoops_url}>/uploads/extcal/<{$event.event_picture1}>" height="150px">
                         </a>
 
                         <div class="highslide-heading"></div>
                     </div>
                 <{elseif $smarty.const._EXTCAL_SHOW_NO_PICTURE}>
                     <img align=left style="margin-right:6px;"
-                         src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180"/>
+                         src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180">
                 <{/if}>
 
                 <{if $event.event_picture2}>
@@ -71,14 +71,14 @@
                         <a href="<{$xoops_url}>/uploads/extcal/<{$event.event_picture2}>" class="highslide"
                            onclick="return hs.expand(this)">
                             <img align="left" style="margin-right:10px;"
-                                 src="<{$xoops_url}>/uploads/extcal/<{$event.event_picture2}>" height="150px"/>
+                                 src="<{$xoops_url}>/uploads/extcal/<{$event.event_picture2}>" height="150px">
                         </a>
 
                         <div class="highslide-heading"></div>
                     </div>
                 <{elseif $smarty.const._EXTCAL_SHOW_NO_PICTURE}>
                     <img align=left style="margin-right:6px;"
-                         src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180"/>
+                         src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180">
                 <{/if}>
 
                 <!-- ------------------------------------ -->
@@ -89,5 +89,5 @@
 
 <{include file="db:extcal_categorie.tpl"}>
 
-<div style="text-align:right;"><a href="<{$xoops_url}>/modules/extcal/rss.php?cat=<{$selectedCat}>"><img src="assets/images/icons/rss.gif" alt="RSS Feed"/></a></div>
+<div style="text-align:right;"><a href="<{$xoops_url}>/modules/extcal/rss.php?cat=<{$selectedCat}>"><img src="assets/images/icons/rss.gif" alt="RSS Feed"></a></div>
 <{include file='db:system_notification_select.tpl'}>

@@ -2,10 +2,10 @@
 //
 define('CALENDAR_FIRST_DAY_OF_WEEK', 0); //force firstDay = Sunday
 
-require_once __DIR__.'/simple_include.php';
-require_once __DIR__.'/calendar_include.php';
+require_once __DIR__ . '/simple_include.php';
+require_once __DIR__ . '/calendar_include.php';
 
-require_once __DIR__.'/./calendar_test.php';
+require_once __DIR__ . '/./calendar_test.php';
 
 /**
  * Class TestOfWeek_firstday_0.
@@ -34,10 +34,10 @@ class TestOfWeek_firstday_0 extends TestOfCalendar
     public function testPrevDay_Array()
     {
         $this->assertEqual(array(
-                               'year' => 2003,
-                               'month' => 10,
-                               'day' => 8,
-                               'hour' => 0,
+                               'year'   => 2003,
+                               'month'  => 10,
+                               'day'    => 8,
+                               'hour'   => 0,
                                'minute' => 0,
                                'second' => 0,
                            ), $this->cal->prevDay('array'));
@@ -174,10 +174,10 @@ class TestOfWeek_firstday_0 extends TestOfCalendar
     public function testPrevWeekArray()
     {
         $testArray = array(
-            'year' => 2003,
-            'month' => 9,
-            'day' => 28,
-            'hour' => 0,
+            'year'   => 2003,
+            'month'  => 9,
+            'day'    => 28,
+            'hour'   => 0,
             'minute' => 0,
             'second' => 0,
         );
@@ -187,10 +187,10 @@ class TestOfWeek_firstday_0 extends TestOfCalendar
     public function testThisWeekArray()
     {
         $testArray = array(
-            'year' => 2003,
-            'month' => 10,
-            'day' => 5,
-            'hour' => 0,
+            'year'   => 2003,
+            'month'  => 10,
+            'day'    => 5,
+            'hour'   => 0,
             'minute' => 0,
             'second' => 0,
         );
@@ -200,10 +200,10 @@ class TestOfWeek_firstday_0 extends TestOfCalendar
     public function testNextWeekArray()
     {
         $testArray = array(
-            'year' => 2003,
-            'month' => 10,
-            'day' => 12,
-            'hour' => 0,
+            'year'   => 2003,
+            'month'  => 10,
+            'day'    => 12,
+            'hour'   => 0,
             'minute' => 0,
             'second' => 0,
         );
@@ -213,21 +213,21 @@ class TestOfWeek_firstday_0 extends TestOfCalendar
     public function testPrevWeekObject()
     {
         $testWeek = Calendar_Factory::create('Week', 2003, 9, 28);
-        $Week = $this->cal->prevWeek('object');
+        $Week     = $this->cal->prevWeek('object');
         $this->assertEqual($testWeek->getTimestamp(), $Week->getTimestamp());
     }
 
     public function testThisWeekObject()
     {
         $testWeek = Calendar_Factory::create('Week', 2003, 10, 5);
-        $Week = $this->cal->thisWeek('object');
+        $Week     = $this->cal->thisWeek('object');
         $this->assertEqual($testWeek->getTimestamp(), $Week->getTimestamp());
     }
 
     public function testNextWeekObject()
     {
         $testWeek = Calendar_Factory::create('Week', 2003, 10, 12);
-        $Week = $this->cal->nextWeek('object');
+        $Week     = $this->cal->nextWeek('object');
         $this->assertEqual($testWeek->getTimestamp(), $Week->getTimestamp());
     }
 }
@@ -265,7 +265,7 @@ class TestOfWeek_firstday_0_Build extends TestOfWeek_firstday_0
     {
         $this->cal->build();
         $children = array();
-        $i = 1;
+        $i        = 1;
         while ($Child = $this->cal->fetch()) {
             $children[$i] = $Child;
             ++$i;
@@ -275,7 +275,7 @@ class TestOfWeek_firstday_0_Build extends TestOfWeek_firstday_0
 
     public function testSelection()
     {
-        require_once CALENDAR_ROOT.'Day.php';
+        require_once CALENDAR_ROOT . 'Day.php';
         $selection = array(Calendar_Factory::create('Day', 2003, 10, 6));
         $this->cal->build($selection);
         $i = 1;
@@ -290,7 +290,7 @@ class TestOfWeek_firstday_0_Build extends TestOfWeek_firstday_0
 
     public function testSelectionCornerCase()
     {
-        require_once CALENDAR_ROOT.'Day.php';
+        require_once CALENDAR_ROOT . 'Day.php';
         $selectedDays = array(
             Calendar_Factory::create('Day', 2003, 12, 28),
             Calendar_Factory::create('Day', 2003, 12, 29),
@@ -300,7 +300,7 @@ class TestOfWeek_firstday_0_Build extends TestOfWeek_firstday_0
             Calendar_Factory::create('Day', 2004, 01, 02),
             Calendar_Factory::create('Day', 2004, 01, 03),
         );
-        $this->cal = Calendar_Factory::create('Week', 2003, 12, 31, 0);
+        $this->cal    = Calendar_Factory::create('Week', 2003, 12, 31, 0);
         $this->cal->build($selectedDays);
         while ($Day = $this->cal->fetch()) {
             $this->assertTrue($Day->isSelected());

@@ -5,7 +5,7 @@
 if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
-require_once CALENDAR_ROOT.'Day.php';
+require_once CALENDAR_ROOT . 'Day.php';
 
 $Day = new Calendar_Day(2003, 10, 23);
 

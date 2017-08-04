@@ -359,8 +359,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
             foreach ($cleanvars as $key => $value) {
                 if ((!is_array($this->keyName) && $key == $this->keyName)
                     || (is_array($this->keyName)
-                        && in_array($key, $this->keyName))
-                ) {
+                        && in_array($key, $this->keyName))) {
                     continue;
                 }
                 if (isset($notfirst)) {

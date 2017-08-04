@@ -34,14 +34,14 @@
     <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
             codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0"
             width="150px" height="225px" id="Slideshow" align="middle">
-        <param name="allowScriptAccess" value="sameDomain"/>
-        <param name="allowFullScreen" value="false"/>
+        <param name="allowScriptAccess" value="sameDomain">
+        <param name="allowFullScreen" value="false">
         <param name="movie"
-               value="<{$xoops_url}>/modules/extcal/include/SlideShow.swf"/>
-        <param name="quality" value="high"/>
-        <param name="bgcolor" value="#ffffff"/>
+               value="<{$xoops_url}>/modules/extcal/include/SlideShow.swf">
+        <param name="quality" value="high">
+        <param name="bgcolor" value="#ffffff">
         <param name="FlashVars"
-               value="confFile=<{$xoops_url}>/cache/extcalSlideShowParam.xml"/>
+               value="confFile=<{$xoops_url}>/cache/extcalSlideShowParam.xml">
         <embed src="<{$xoops_url}>/modules/extcal/include/SlideShow.swf"
                quality="high" bgcolor="#ffffff"
                width="<{$block.imageParam.frameWidth}>"
@@ -50,7 +50,7 @@
                allowScriptAccess="sameDomain"
                allowFullScreen="false"
                type="application/x-shockwave-flash"
-               pluginspage="http://www.macromedia.com/go/getflashplayer"/>
+               pluginspage="http://www.macromedia.com/go/getflashplayer">
     </object>
 </noscript>
 

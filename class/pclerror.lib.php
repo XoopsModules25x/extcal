@@ -45,7 +45,7 @@ if (!defined('PCLERROR_LIB')) {
     // ----- Internal variables
     // These values must only be change by PclError library functions
     $g_pcl_error_string = '';
-    $g_pcl_error_code = 1;
+    $g_pcl_error_code   = 1;
 
     // --------------------------------------------------------------------------------
     // Function : PclErrorLog()
@@ -61,7 +61,7 @@ if (!defined('PCLERROR_LIB')) {
         global $g_pcl_error_string;
         global $g_pcl_error_code;
 
-        $g_pcl_error_code = $p_error_code;
+        $g_pcl_error_code   = $p_error_code;
         $g_pcl_error_string = $p_error_string;
     }
 
@@ -101,7 +101,7 @@ if (!defined('PCLERROR_LIB')) {
         global $g_pcl_error_string;
         global $g_pcl_error_code;
 
-        $g_pcl_error_code = 1;
+        $g_pcl_error_code   = 1;
         $g_pcl_error_string = '';
     }
 
@@ -138,7 +138,7 @@ if (!defined('PCLERROR_LIB')) {
         global $g_pcl_error_string;
         global $g_pcl_error_code;
 
-        return $g_pcl_error_string." [code $g_pcl_error_code]";
+        return $g_pcl_error_string . " [code $g_pcl_error_code]";
     }
 
     // --------------------------------------------------------------------------------

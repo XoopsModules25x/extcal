@@ -77,7 +77,7 @@ class Calendar_Engine_UnixTS /* implements Calendar_Engine_Interface */
     {
         static $stamps = array();
         if (!isset($stamps[$stamp])) {
-            $date = @date('Y n j H i s t W w', $stamp);
+            $date           = @date('Y n j H i s t W w', $stamp);
             $stamps[$stamp] = sscanf($date, '%d %d %d %d %d %d %d %d %d');
         }
 
@@ -95,7 +95,7 @@ class Calendar_Engine_UnixTS /* implements Calendar_Engine_Interface */
     {
         $date = self::stampCollection($stamp);
 
-        return (int) $date[0];
+        return (int)$date[0];
     }
 
     /**
@@ -109,7 +109,7 @@ class Calendar_Engine_UnixTS /* implements Calendar_Engine_Interface */
     {
         $date = self::stampCollection($stamp);
 
-        return (int) $date[1];
+        return (int)$date[1];
     }
 
     /**
@@ -123,7 +123,7 @@ class Calendar_Engine_UnixTS /* implements Calendar_Engine_Interface */
     {
         $date = self::stampCollection($stamp);
 
-        return (int) $date[2];
+        return (int)$date[2];
     }
 
     /**
@@ -137,7 +137,7 @@ class Calendar_Engine_UnixTS /* implements Calendar_Engine_Interface */
     {
         $date = self::stampCollection($stamp);
 
-        return (int) $date[3];
+        return (int)$date[3];
     }
 
     /**
@@ -151,7 +151,7 @@ class Calendar_Engine_UnixTS /* implements Calendar_Engine_Interface */
     {
         $date = self::stampCollection($stamp);
 
-        return (int) $date[4];
+        return (int)$date[4];
     }
 
     /**
@@ -165,7 +165,7 @@ class Calendar_Engine_UnixTS /* implements Calendar_Engine_Interface */
     {
         $date = self::stampCollection($stamp);
 
-        return (int) $date[5];
+        return (int)$date[5];
     }
 
     /**
@@ -233,7 +233,7 @@ class Calendar_Engine_UnixTS /* implements Calendar_Engine_Interface */
     public function getDaysInMonth($y, $m)
     {
         $stamp = self::dateToStamp($y, $m, 1);
-        $date = self::stampCollection($stamp);
+        $date  = self::stampCollection($stamp);
 
         return $date[6];
     }
@@ -250,7 +250,7 @@ class Calendar_Engine_UnixTS /* implements Calendar_Engine_Interface */
     public function getFirstDayInMonth($y, $m)
     {
         $stamp = self::dateToStamp($y, $m, 1);
-        $date = self::stampCollection($stamp);
+        $date  = self::stampCollection($stamp);
 
         return $date[8];
     }
@@ -281,7 +281,7 @@ class Calendar_Engine_UnixTS /* implements Calendar_Engine_Interface */
     public function getWeekNInYear($y, $m, $d)
     {
         $stamp = self::dateToStamp($y, $m, $d);
-        $date = self::stampCollection($stamp);
+        $date  = self::stampCollection($stamp);
 
         return $date[7];
     }
@@ -298,7 +298,7 @@ class Calendar_Engine_UnixTS /* implements Calendar_Engine_Interface */
      */
     public function getWeekNInMonth($y, $m, $d, $firstDay = 1)
     {
-        $weekEnd = (0 == $firstDay) ? $this->getDaysInWeek() - 1 : $firstDay - 1;
+        $weekEnd     = (0 == $firstDay) ? $this->getDaysInWeek() - 1 : $firstDay - 1;
         $end_of_week = 1;
         while (@date('w', @mktime(0, 0, 0, $m, $end_of_week, $y)) != $weekEnd) {
             ++$end_of_week; //find first weekend of the month
@@ -329,14 +329,14 @@ class Calendar_Engine_UnixTS /* implements Calendar_Engine_Interface */
         }
         if ($FDOM > $firstDay) {
             $daysInTheFirstWeek = $this->getDaysInWeek() - $FDOM + $firstDay;
-            $weeks = 1;
+            $weeks              = 1;
         } else {
             $daysInTheFirstWeek = $firstDay - $FDOM;
-            $weeks = 0;
+            $weeks              = 0;
         }
         $daysInTheFirstWeek %= $this->getDaysInWeek();
 
-        return (int) (ceil(($this->getDaysInMonth($y, $m) - $daysInTheFirstWeek) / $this->getDaysInWeek()) + $weeks);
+        return (int)(ceil(($this->getDaysInMonth($y, $m) - $daysInTheFirstWeek) / $this->getDaysInWeek()) + $weeks);
     }
 
     /**
@@ -351,7 +351,7 @@ class Calendar_Engine_UnixTS /* implements Calendar_Engine_Interface */
     public function getDayOfWeek($y, $m, $d)
     {
         $stamp = self::dateToStamp($y, $m, $d);
-        $date = self::stampCollection($stamp);
+        $date  = self::stampCollection($stamp);
 
         return $date[8];
     }
@@ -441,7 +441,7 @@ class Calendar_Engine_UnixTS /* implements Calendar_Engine_Interface */
         static $today = null;
         if (is_null($today)) {
             $today_date = @date('Y n j');
-            $today = sscanf($today_date, '%d %d %d');
+            $today      = sscanf($today_date, '%d %d %d');
         }
         $date = self::stampCollection($stamp);
 

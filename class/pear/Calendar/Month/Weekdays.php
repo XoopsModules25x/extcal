@@ -49,12 +49,12 @@ if (!defined('CALENDAR_ROOT')) {
 /**
  * Load Calendar base class.
  */
-require_once CALENDAR_ROOT.'Calendar.php';
+require_once CALENDAR_ROOT . 'Calendar.php';
 
 /**
  * Load base month.
  */
-require_once CALENDAR_ROOT.'Month.php';
+require_once CALENDAR_ROOT . 'Month.php';
 
 /**
  * Represents a Month and builds Days in tabular form<br>
@@ -129,7 +129,7 @@ class Calendar_Month_Weekdays extends Calendar_Month
      */
     public function build($sDates = array())
     {
-        require_once CALENDAR_ROOT.'Table/Helper.php';
+        require_once CALENDAR_ROOT . 'Table/Helper.php';
         $this->tableHelper = new Calendar_Table_Helper($this, $this->firstDay);
         Calendar_Month::build($sDates);
         $this->buildEmptyDaysBefore();
@@ -148,7 +148,7 @@ class Calendar_Month_Weekdays extends Calendar_Month
         $eBefore = $this->tableHelper->getEmptyDaysBefore();
         for ($i = 0; $i < $eBefore; ++$i) {
             $stamp = $this->cE->dateToStamp($this->year, $this->month, -$i);
-            $Day = new Calendar_Day($this->cE->stampToYear($stamp), $this->cE->stampToMonth($stamp), $this->cE->stampToDay($stamp));
+            $Day   = new Calendar_Day($this->cE->stampToYear($stamp), $this->cE->stampToMonth($stamp), $this->cE->stampToDay($stamp));
             $Day->setEmpty();
             $Day->adjust();
             array_unshift($this->children, $Day);
@@ -172,7 +172,7 @@ class Calendar_Month_Weekdays extends Calendar_Month
     public function buildEmptyDaysAfter()
     {
         $eAfter = $this->tableHelper->getEmptyDaysAfter();
-        $sDOM = $this->tableHelper->getNumTableDaysInMonth();
+        $sDOM   = $this->tableHelper->getNumTableDaysInMonth();
         for ($i = 1; $i <= $sDOM - $eAfter; ++$i) {
             $Day = new Calendar_Day($this->year, $this->month + 1, $i);
             $Day->setEmpty();
@@ -187,7 +187,7 @@ class Calendar_Month_Weekdays extends Calendar_Month
      */
     public function setWeekMarkers()
     {
-        $dIW = $this->cE->getDaysInWeek($this->thisYear(), $this->thisMonth(), $this->thisDay());
+        $dIW  = $this->cE->getDaysInWeek($this->thisYear(), $this->thisMonth(), $this->thisDay());
         $sDOM = $this->tableHelper->getNumTableDaysInMonth();
         for ($i = 1; $i <= $sDOM; $i += $dIW) {
             $this->children[$i]->setFirst();

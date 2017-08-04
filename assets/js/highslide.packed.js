@@ -1,4 +1,4 @@
-/** 
+/**
  * Name:    Highslide JS
  * Version: 4.1.13 (2011-10-06)
  * Config:  default +packed

@@ -116,7 +116,7 @@ class Calendar_Table_Helper
     public function __construct($calendar, $firstDay = null)
     {
         $this->calendar = $calendar;
-        $this->cE = $calendar->getEngine();
+        $this->cE       = $calendar->getEngine();
         if (is_null($firstDay)) {
             $firstDay = $this->cE->getFirstDayOfWeek($this->calendar->thisYear(), $this->calendar->thisMonth(), $this->calendar->thisDay());
         }
@@ -131,14 +131,14 @@ class Calendar_Table_Helper
     public function setFirstDay()
     {
         $weekDays = $this->cE->getWeekDays($this->calendar->thisYear(), $this->calendar->thisMonth(), $this->calendar->thisDay());
-        $endDays = array();
-        $tmpDays = array();
-        $begin = false;
+        $endDays  = array();
+        $tmpDays  = array();
+        $begin    = false;
         foreach ($weekDays as $day) {
             if ($begin) {
                 $endDays[] = $day;
             } elseif ($day === $this->firstDay) {
-                $begin = true;
+                $begin     = true;
                 $endDays[] = $day;
             } else {
                 $tmpDays[] = $day;
@@ -153,8 +153,8 @@ class Calendar_Table_Helper
     public function setDaysOfMonth()
     {
         $this->daysOfMonth = $this->daysOfWeek;
-        $daysInMonth = $this->cE->getDaysInMonth($this->calendar->thisYear(), $this->calendar->thisMonth());
-        $firstDayInMonth = $this->cE->getFirstDayInMonth($this->calendar->thisYear(), $this->calendar->thisMonth());
+        $daysInMonth       = $this->cE->getDaysInMonth($this->calendar->thisYear(), $this->calendar->thisMonth());
+        $firstDayInMonth   = $this->cE->getFirstDayInMonth($this->calendar->thisYear(), $this->calendar->thisMonth());
         $this->emptyBefore = 0;
         foreach ($this->daysOfMonth as $dayOfWeek) {
             if ($firstDayInMonth == $dayOfWeek) {

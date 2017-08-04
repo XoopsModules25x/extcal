@@ -28,12 +28,12 @@
                        href="<{$smarty.const.XOOPS_URL}>/uploads/extcal/etablissement/<{$etablissement.logo}>">
                         <img align=right style="border:1px solid #FFFFFF;margin-right:6px;"
                              src="<{$smarty.const.XOOPS_URL}>/uploads/extcal/etablissement/<{$etablissement.logo}>"
-                             height="150px"/>
+                             height="150px">
                     </a>
                 <{elseif $smarty.const._EXTCAL_SHOW_NO_PICTURE}>
                     <img align=right style="border:1px solid #FFFFFF;margin-right:6px;"
                          src="<{$smarty.const.XOOPS_URL}>/modules/extcal/assets/images/no_picture.png" width="180"
-                         height="180"/>
+                         height="180">
                 <{/if}>
             </div>
             <div style="font-size:16px; font-weight:bold; width:280px; overflow:hidden; margin-left:30px;">
@@ -92,10 +92,10 @@
                                                    <{*href="<{$xoops_url}>/uploads/extcal/<{$event.event_picture1}>"><img align=left*}>
                                                                                                                        <{*style="border:1px solid #333333;margin-right:6px"*}>
                                                                                                                        <{*src="<{$xoops_url}>/uploads/extcal/<{$event.event_picture1}>"*}>
-                                                                                                                       <{*width="100px" height="100px"/></a>*}>
+                                                                                                                       <{*width="100px" height="100px"></a>*}>
                                             <{*<{elseif $smarty.const._EXTCAL_SHOW_NO_PICTURE}>*}>
                                                 <{*<img align=left style="border:1px solid #333333;margin-right:6px"*}>
-                                                     <{*src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" width="100px" height="100px"/>*}>
+                                                     <{*src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" width="100px" height="100px">*}>
                                             <{*<{/if}>*}>
                                         <{*</td>*}>
                                         <{*<td><u><strong><a href="./event.php?event=<{$event.event_id}>"><{$event.event_title}></a></strong></u>&nbsp;&nbsp;( <{$event.event_start}>*}>

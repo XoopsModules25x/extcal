@@ -16,10 +16,10 @@ $cat   = isset($_GET['cat']) ? (int)$_GET['cat'] : 0;
 $dayTS = mktime(0, 0, 0, $month, $day, $year);
 //$offset = date('w', $dayTS) - $xoopsModuleConfig['week_start_day'];
 $offset = date('w', $dayTS) + 7 - $xoopsModuleConfig['week_start_day'] < 7 ? date('w', $dayTS) + 7 - $xoopsModuleConfig['week_start_day'] : 0;
-$dayTS -= ($offset * _EXTCAL_TS_DAY);
-$year  = date('Y', $dayTS);
-$month = date('n', $dayTS);
-$day   = date('j', $dayTS);
+$dayTS  -= ($offset * _EXTCAL_TS_DAY);
+$year   = date('Y', $dayTS);
+$month  = date('n', $dayTS);
+$day    = date('j', $dayTS);
 
 $form = new XoopsSimpleForm('', 'navigSelectBox', $params['file'], 'get');
 $form->addElement(getListYears($year, $xoopsModuleConfig['agenda_nb_years_before'], $xoopsModuleConfig['agenda_nb_years_after']));

@@ -50,12 +50,12 @@ if (!defined('CALENDAR_ROOT')) {
 /**
  * Load Calendar decorator base class.
  */
-require_once CALENDAR_ROOT.'Decorator.php';
+require_once CALENDAR_ROOT . 'Decorator.php';
 
 /**
  * Load the Uri utility.
  */
-require_once CALENDAR_ROOT.'Util/Uri.php';
+require_once CALENDAR_ROOT . 'Util/Uri.php';
 
 /**
  * Decorator to help with building HTML links for navigating the calendar<br>

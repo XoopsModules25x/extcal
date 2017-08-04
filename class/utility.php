@@ -33,10 +33,10 @@ class ExtcalUtility
         $event        = $eventHandler->getEvent($eventId);
         $t            = $event->getVars();
         $data         = array();
-//        while (list($key, $val) = each($t)) {
-            foreach ($t as $key => $val) {
-                $data[$key] = $val['value'];
-            }
+        //        while (list($key, $val) = each($t)) {
+        foreach ($t as $key => $val) {
+            $data[$key] = $val['value'];
+        }
 
         return $data;
     }
@@ -501,7 +501,7 @@ class ExtcalUtility
                 }
             }
         } catch (Exception $e) {
-            echo 'Caught exception: ', $e->getMessage(), "\n", '<br/>';
+            echo 'Caught exception: ', $e->getMessage(), "\n", '<br>';
         }
     }
 
@@ -520,7 +520,7 @@ class ExtcalUtility
         //                return copy($file, $folder);
         //            }
         //        } catch (Exception $e) {
-        //            echo 'Caught exception: ', $e->getMessage(), "\n", "<br/>";
+        //            echo 'Caught exception: ', $e->getMessage(), "\n", "<br>";
         //        }
         //        return false;
     }
@@ -550,7 +550,7 @@ class ExtcalUtility
      * Verifies XOOPS version meets minimum requirements for this module
      * @static
      * @param XoopsModule $module
-     * @param null|string        $requiredVer
+     * @param null|string $requiredVer
      *
      * @return bool true if meets requirements, false if not
      */
@@ -558,7 +558,7 @@ class ExtcalUtility
     {
         $moduleDirName = basename(dirname(__DIR__));
         if (null === $module) {
-            $module        = XoopsModule::getByDirname($moduleDirName);
+            $module = XoopsModule::getByDirname($moduleDirName);
         }
         xoops_loadLanguage('admin', $moduleDirName);
         //check for minimum XOOPS version
@@ -580,7 +580,7 @@ class ExtcalUtility
                     break;
                 }
             } else {
-                if ((int)$v > 0) { // handles things like x.x.x.0_RC2
+                if ((int)$v > 0) { // handles versions like x.x.x.0_RC2
                     $success = false;
                     break;
                 }

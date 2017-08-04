@@ -1,10 +1,10 @@
 <?php
 //
 
-require_once __DIR__.'/simple_include.php';
-require_once __DIR__.'/calendar_include.php';
+require_once __DIR__ . '/simple_include.php';
+require_once __DIR__ . '/calendar_include.php';
 
-require_once __DIR__.'/./decorator_test.php';
+require_once __DIR__ . '/./decorator_test.php';
 
 /**
  * Class TestOfUtilTextual.
@@ -25,7 +25,7 @@ class TestOfUtilTextual extends UnitTestCase
     public function setUp()
     {
         $this->mockengine = new Mock_Calendar_Engine($this);
-        $this->mockcal = new Mock_Calendar_Second($this);
+        $this->mockcal    = new Mock_Calendar_Second($this);
         $this->mockcal->setReturnValue('prevYear', 2002);
         $this->mockcal->setReturnValue('thisYear', 2003);
         $this->mockcal->setReturnValue('nextYear', 2004);
@@ -56,15 +56,15 @@ class TestOfUtilTextual extends UnitTestCase
     public function testMonthNamesLong()
     {
         $monthNames = array(
-            1 => 'January',
-            2 => 'February',
-            3 => 'March',
-            4 => 'April',
-            5 => 'May',
-            6 => 'June',
-            7 => 'July',
-            8 => 'August',
-            9 => 'September',
+            1  => 'January',
+            2  => 'February',
+            3  => 'March',
+            4  => 'April',
+            5  => 'May',
+            6  => 'June',
+            7  => 'July',
+            8  => 'August',
+            9  => 'September',
             10 => 'October',
             11 => 'November',
             12 => 'December',
@@ -75,15 +75,15 @@ class TestOfUtilTextual extends UnitTestCase
     public function testMonthNamesShort()
     {
         $monthNames = array(
-            1 => 'Jan',
-            2 => 'Feb',
-            3 => 'Mar',
-            4 => 'Apr',
-            5 => 'May',
-            6 => 'Jun',
-            7 => 'Jul',
-            8 => 'Aug',
-            9 => 'Sep',
+            1  => 'Jan',
+            2  => 'Feb',
+            3  => 'Mar',
+            4  => 'Apr',
+            5  => 'May',
+            6  => 'Jun',
+            7  => 'Jul',
+            8  => 'Aug',
+            9  => 'Sep',
             10 => 'Oct',
             11 => 'Nov',
             12 => 'Dec',
@@ -94,15 +94,15 @@ class TestOfUtilTextual extends UnitTestCase
     public function testMonthNamesTwo()
     {
         $monthNames = array(
-            1 => 'Ja',
-            2 => 'Fe',
-            3 => 'Ma',
-            4 => 'Ap',
-            5 => 'Ma',
-            6 => 'Ju',
-            7 => 'Ju',
-            8 => 'Au',
-            9 => 'Se',
+            1  => 'Ja',
+            2  => 'Fe',
+            3  => 'Ma',
+            4  => 'Ap',
+            5  => 'Ma',
+            6  => 'Ju',
+            7  => 'Ju',
+            8  => 'Au',
+            9  => 'Se',
             10 => 'Oc',
             11 => 'No',
             12 => 'De',
@@ -113,15 +113,15 @@ class TestOfUtilTextual extends UnitTestCase
     public function testMonthNamesOne()
     {
         $monthNames = array(
-            1 => 'J',
-            2 => 'F',
-            3 => 'M',
-            4 => 'A',
-            5 => 'M',
-            6 => 'J',
-            7 => 'J',
-            8 => 'A',
-            9 => 'S',
+            1  => 'J',
+            2  => 'F',
+            3  => 'M',
+            4  => 'A',
+            5  => 'M',
+            6  => 'J',
+            7  => 'J',
+            8  => 'A',
+            9  => 'S',
             10 => 'O',
             11 => 'N',
             12 => 'D',
@@ -216,7 +216,7 @@ class TestOfUtilTextual extends UnitTestCase
             5 => 'Fri',
             6 => 'Sat',
         );
-        $nShifts = CALENDAR_FIRST_DAY_OF_WEEK;
+        $nShifts      = CALENDAR_FIRST_DAY_OF_WEEK;
         while ($nShifts-- > 0) {
             $day = array_shift($weekdayNames);
             array_push($weekdayNames, $day);

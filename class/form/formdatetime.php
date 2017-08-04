@@ -9,8 +9,8 @@ class ExtcalFormDateTime
 {
     /**
      * @param ExtcalThemeForm $form
-     * @param int $startTS
-     * @param int $endTS
+     * @param int             $startTS
+     * @param int             $endTS
      *
      * @return ExtcalFormDateTime
      */

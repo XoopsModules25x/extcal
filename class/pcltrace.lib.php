@@ -86,7 +86,7 @@ if (!defined('PCLTRACE_LIB')) {
             case 'log':
                 $g_pcl_trace_mode = $p_mode;
                 break;
-            default :
+            default:
                 $g_pcl_trace_mode = 'logged';
         }
 

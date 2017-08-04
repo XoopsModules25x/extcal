@@ -53,8 +53,7 @@ if ($xoopsUser && $xoopsModuleConfig['whos_going']) {
             $event = $eventHandler->getEvent((int)$_POST['event'], $xoopsUser);
 
             if ($event->getVar('event_nbmember') > 0
-                && $eventMemberHandler->getNbMember((int)$_POST['event']) >= $event->getVar('event_nbmember')
-            ) {
+                && $eventMemberHandler->getNbMember((int)$_POST['event']) >= $event->getVar('event_nbmember')) {
                 sendMail2member($mode, $event_id, $member_uid, _MD_EXTCAL_SUBJECT_0, _MD_EXTCAL_MSG_0);
                 $rediredtMessage = _MD_EXTCAL_MAX_MEMBER_REACHED;
             } else {

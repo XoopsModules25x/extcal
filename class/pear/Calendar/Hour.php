@@ -117,8 +117,7 @@ class Calendar_Hour extends Calendar
         foreach ($sDates as $sDate) {
             if ($this->year == $sDate->thisYear() && $this->month == $sDate->thisMonth()
                 && $this->day == $sDate->thisDay()
-                && $this->hour == $sDate->thisHour()
-            ) {
+                && $this->hour == $sDate->thisHour()) {
                 $key = (int)$sDate->thisMinute();
                 if (isset($this->children[$key])) {
                     $sDate->setSelected();

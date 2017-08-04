@@ -7,7 +7,7 @@ function getmicrotime()
 {
     list($usec, $sec) = explode(' ', microtime());
 
-    return (float) $usec + (float) $sec;
+    return (float)$usec + (float)$sec;
 }
 
 $start = getmicrotime();
@@ -15,8 +15,8 @@ $start = getmicrotime();
 if (!@include 'Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
-require_once CALENDAR_ROOT.'Month/Weekdays.php';
-require_once CALENDAR_ROOT.'Day.php';
+require_once CALENDAR_ROOT . 'Month/Weekdays.php';
+require_once CALENDAR_ROOT . 'Day.php';
 
 if (!isset($_GET['y'])) {
     $_GET['y'] = date('Y');
@@ -33,9 +33,9 @@ $Month = new Calendar_Month_Weekdays($_GET['y'], $_GET['m']);
 
 // Construct strings for next/previous links
 $PMonth = $Month->prevMonth('object'); // Get previous month as object
-$prev = $_SERVER['PHP_SELF'].'?y='.$PMonth->thisYear().'&m='.$PMonth->thisMonth().'&d='.$PMonth->thisDay();
+$prev   = $_SERVER['PHP_SELF'] . '?y=' . $PMonth->thisYear() . '&m=' . $PMonth->thisMonth() . '&d=' . $PMonth->thisDay();
 $NMonth = $Month->nextMonth('object');
-$next = $_SERVER['PHP_SELF'].'?y='.$NMonth->thisYear().'&m='.$NMonth->thisMonth().'&d='.$NMonth->thisDay();
+$next   = $_SERVER['PHP_SELF'] . '?y=' . $NMonth->thisYear() . '&m=' . $NMonth->thisMonth() . '&d=' . $NMonth->thisDay();
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
@@ -110,7 +110,7 @@ $Month->build($selectedDays);
     while ($Day = $Month->fetch()) {
 
         // Build a link string for each day
-        $link = $_SERVER['PHP_SELF'].'?y='.$Day->thisYear().'&m='.$Day->thisMonth().'&d='.$Day->thisDay();
+        $link = $_SERVER['PHP_SELF'] . '?y=' . $Day->thisYear() . '&m=' . $Day->thisMonth() . '&d=' . $Day->thisDay();
 
         // isFirst() to find start of week
         if ($Day->isFirst()) {
@@ -118,11 +118,11 @@ $Month->build($selectedDays);
         }
 
         if ($Day->isSelected()) {
-            echo '<td class="selected">'.$Day->thisDay()."</td>\n";
+            echo '<td class="selected">' . $Day->thisDay() . "</td>\n";
         } elseif ($Day->isEmpty()) {
             echo "<td>&nbsp;</td>\n";
         } else {
-            echo '<td><a href="'.$link.'">'.$Day->thisDay()."</a></td>\n";
+            echo '<td><a href="' . $link . '">' . $Day->thisDay() . "</a></td>\n";
         }
 
         // isLast() to find end of week
@@ -142,7 +142,7 @@ $Month->build($selectedDays);
     </tr>
 </table>
 <?php
-echo '<p><b>Took: '.(getmicrotime() - $start).' seconds</b></p>';
+echo '<p><b>Took: ' . (getmicrotime() - $start) . ' seconds</b></p>';
 ?>
 </body>
 </html>

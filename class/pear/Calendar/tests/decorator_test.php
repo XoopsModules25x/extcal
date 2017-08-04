@@ -1,8 +1,8 @@
 <?php
 //
 
-require_once __DIR__.'/simple_include.php';
-require_once __DIR__.'/calendar_include.php';
+require_once __DIR__ . '/simple_include.php';
+require_once __DIR__ . '/calendar_include.php';
 
 Mock::generate('Calendar_Engine_Interface', 'Mock_Calendar_Engine');
 Mock::generate('Calendar_Second', 'Mock_Calendar_Second');
@@ -29,7 +29,7 @@ class TestOfDecorator extends UnitTestCase
     public function setUp()
     {
         $this->mockengine = new Mock_Calendar_Engine($this);
-        $this->mockcal = new Mock_Calendar_Second($this);
+        $this->mockcal    = new Mock_Calendar_Second($this);
         $this->mockcal->setReturnValue('prevYear', 2002);
         $this->mockcal->setReturnValue('thisYear', 2003);
         $this->mockcal->setReturnValue('nextYear', 2004);

@@ -16,6 +16,7 @@
  *
  * @author              JJDai <http://xoops.kiolo.com>
  **/
+
 //----------------------------------------------------
 class Extcal_2_35
 {

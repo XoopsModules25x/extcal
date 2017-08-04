@@ -120,8 +120,7 @@ class Calendar_Minute extends Calendar
                 && $this->month == $sDate->thisMonth()
                 && $this->day == $sDate->thisDay()
                 && $this->hour == $sDate->thisHour()
-                && $this->minute == $sDate->thisMinute()
-            ) {
+                && $this->minute == $sDate->thisMinute()) {
                 $key = (int)$sDate->thisSecond();
                 if (isset($this->children[$key])) {
                     $sDate->setSelected();

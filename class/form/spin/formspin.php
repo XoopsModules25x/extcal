@@ -9,7 +9,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright       XOOPS Project (https://xoops.org)
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  *
  * @since           2.0.0
@@ -502,7 +502,7 @@ class ExtcalFormSpin extends XoopsFormElement
         }
 
         if ($value != '') {
-//            if (substr($value, 0, strlen($attribut)) != $attribut) {
+            //            if (substr($value, 0, strlen($attribut)) != $attribut) {
             if (0 !== strpos($value, $attribut)) {
                 $r = "{$attribut}=\"{$value}\"";
             }

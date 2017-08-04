@@ -17,10 +17,10 @@ $cat   = isset($_GET['cat']) ? (int)$_GET['cat'] : 0;
 $dayTS = mktime(0, 0, 0, $month, $day, $year);
 //$offset = date('w', $dayTS) - $xoopsModuleConfig['week_start_day'];
 $offset = date('w', $dayTS) + 7 - $xoopsModuleConfig['week_start_day'] < 7 ? date('w', $dayTS) + 7 - $xoopsModuleConfig['week_start_day'] : 0;
-$dayTS -= ($offset * _EXTCAL_TS_DAY);
-$year  = date('Y', $dayTS);
-$month = date('n', $dayTS);
-$day   = date('j', $dayTS);
+$dayTS  -= ($offset * _EXTCAL_TS_DAY);
+$year   = date('Y', $dayTS);
+$month  = date('n', $dayTS);
+$day    = date('j', $dayTS);
 
 //echo $dayTS . '   dayTS-2 <br>';
 //echo gmdate("Y-m-d\TH:i:s\Z", $dayTS). '   dayTS-2 <br>';
@@ -85,9 +85,7 @@ foreach ($events as $event) {
 */
 // Flag current day
 $selectedDays = array(
-    new Calendar_Day(date('Y', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($xoopsUser))), 
-                     date('n', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($xoopsUser))),
-                     date('j', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($xoopsUser)))),
+    new Calendar_Day(date('Y', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($xoopsUser))), date('n', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($xoopsUser))), date('j', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($xoopsUser)))),
 );
 
 // Build calendar object

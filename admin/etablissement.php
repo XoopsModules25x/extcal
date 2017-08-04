@@ -128,24 +128,8 @@ switch ($op) {
                 echo '<td align="center"><b>' . $etablissement_city . '</td>';
                 echo '<td align="center"><b>' . $etablissement_telephone . '</td>';
                 echo '<td align="center" width="15%">';
-                echo '<a href="etablissement.php?op=edit_etablissement&etablissement_id='
-                     . $etablissement_id
-                     . '"><img src='
-                     . $pathIcon16
-                     . '/edit.png alt="'
-                     . _AM_EXTCAL_ETABLISSEMENT_FORM_EDIT
-                     . '" title="'
-                     . _AM_EXTCAL_ETABLISSEMENT_FORM_EDIT
-                     . '"></a> ';
-                echo '<a href="etablissement.php?op=delete_etablissement&etablissement_id='
-                     . $etablissement_id
-                     . '"><img src='
-                     . $pathIcon16
-                     . '/delete.png alt="'
-                     . _AM_EXTCAL_ETABLISSEMENT_FORM_DELETE
-                     . '" title="'
-                     . _AM_EXTCAL_ETABLISSEMENT_FORM_DELETE
-                     . '"></a> ';
+                echo '<a href="etablissement.php?op=edit_etablissement&etablissement_id=' . $etablissement_id . '"><img src=' . $pathIcon16 . '/edit.png alt="' . _AM_EXTCAL_ETABLISSEMENT_FORM_EDIT . '" title="' . _AM_EXTCAL_ETABLISSEMENT_FORM_EDIT . '"></a> ';
+                echo '<a href="etablissement.php?op=delete_etablissement&etablissement_id=' . $etablissement_id . '"><img src=' . $pathIcon16 . '/delete.png alt="' . _AM_EXTCAL_ETABLISSEMENT_FORM_DELETE . '" title="' . _AM_EXTCAL_ETABLISSEMENT_FORM_DELETE . '"></a> ';
                 echo '</td>';
             }
             echo '</table><br>';

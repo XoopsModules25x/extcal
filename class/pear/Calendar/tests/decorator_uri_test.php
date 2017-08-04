@@ -1,10 +1,10 @@
 <?php
 //
 
-require_once __DIR__.'/simple_include.php';
-require_once __DIR__.'/calendar_include.php';
+require_once __DIR__ . '/simple_include.php';
+require_once __DIR__ . '/calendar_include.php';
 
-require_once __DIR__.'/./decorator_test.php';
+require_once __DIR__ . '/./decorator_test.php';
 
 /**
  * Class TestOfDecoratorUri.

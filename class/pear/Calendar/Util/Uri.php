@@ -144,8 +144,8 @@ class Calendar_Util_Uri
      */
     public function prev($Calendar, $unit)
     {
-        $method = 'prev'.$unit;
-        $stamp = $Calendar->{$method}('timestamp');
+        $method = 'prev' . $unit;
+        $stamp  = $Calendar->{$method}('timestamp');
 
         return $this->buildUriString($Calendar, $method, $stamp);
     }
@@ -160,8 +160,8 @@ class Calendar_Util_Uri
      */
     public function this($Calendar, $unit)
     {
-        $method = 'this'.$unit;
-        $stamp = $Calendar->{$method}('timestamp');
+        $method = 'this' . $unit;
+        $stamp  = $Calendar->{$method}('timestamp');
 
         return $this->buildUriString($Calendar, $method, $stamp);
     }
@@ -176,8 +176,8 @@ class Calendar_Util_Uri
      */
     public function next($Calendar, $unit)
     {
-        $method = 'next'.$unit;
-        $stamp = $Calendar->{$method}('timestamp');
+        $method = 'next' . $unit;
+        $stamp  = $Calendar->{$method}('timestamp');
 
         return $this->buildUriString($Calendar, $method, $stamp);
     }
@@ -194,13 +194,13 @@ class Calendar_Util_Uri
     public function buildUriString($Calendar, $method, $stamp)
     {
         $uriString = '';
-        $cE = $Calendar->getEngine();
+        $cE        = $Calendar->getEngine();
         $separator = '';
         foreach ($this->uris as $unit => $uri) {
-            $call = 'stampTo'.$unit;
+            $call      = 'stampTo' . $unit;
             $uriString .= $separator;
             if (!$this->scalar) {
-                $uriString .= $uri.'=';
+                $uriString .= $uri . '=';
             }
             $uriString .= $cE->{$call}($stamp);
             $separator = $this->separator;

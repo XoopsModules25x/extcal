@@ -1,9 +1,9 @@
 <?php
 
-include __DIR__.'/formdatetime.php';
-include __DIR__.'/formrecurrules.php';
-include __DIR__.'/formfilecheckbox.php';
-include __DIR__.'/formrrulecheckbox.php';
+include __DIR__ . '/formdatetime.php';
+include __DIR__ . '/formrecurrules.php';
+include __DIR__ . '/formfilecheckbox.php';
+include __DIR__ . '/formrrulecheckbox.php';
 
 /**
  * Class ExtcalThemeForm.
