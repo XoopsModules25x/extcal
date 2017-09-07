@@ -17,7 +17,7 @@
  * @author       XOOPS Development Team,
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 require_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
 
@@ -48,7 +48,7 @@ class ExtcalEventmemberHandler extends ExtcalPersistableObjectHandler
      */
     public function __construct(XoopsDatabase $db)
     {
-        parent::__construct($db, 'extcal_eventmember', _EXTCAL_CLN_MEMBER, array('event_id', 'uid'));
+        parent::__construct($db, 'extcal_eventmember', _EXTCAL_CLN_MEMBER, ['event_id', 'uid']);
     }
 
     /**
@@ -60,7 +60,7 @@ class ExtcalEventmemberHandler extends ExtcalPersistableObjectHandler
         $eventmember->setVars($varArr);
         if ($this->insert($eventmember, true)) {
             $eventNotMemberHandler = xoops_getModuleHandler(_EXTCAL_CLS_NOT_MEMBER, _EXTCAL_MODULE);
-            $eventNotMemberHandler->deleteById(array($varArr['event_id'], $varArr['uid']));
+            $eventNotMemberHandler->deleteById([$varArr['event_id'], $varArr['uid']]);
         }
     }
 

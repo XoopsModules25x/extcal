@@ -46,7 +46,7 @@ class TestOfPearDateEngine extends UnitTestCase
 
     public function testGetWeekDays()
     {
-        $this->assertEqual($this->engine->getWeekDays(), array(0, 1, 2, 3, 4, 5, 6));
+        $this->assertEqual($this->engine->getWeekDays(), [0, 1, 2, 3, 4, 5, 6]);
     }
 
     public function testGetDaysInWeek()

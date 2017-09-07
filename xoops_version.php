@@ -91,14 +91,14 @@ if (isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule'])
 $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
 
 // Tables created by sql file (without prefix!)
-$modversion['tables'] = array(
+$modversion['tables'] = [
     $moduleDirName . '_' . 'cat',
     $moduleDirName . '_' . 'event',
     $moduleDirName . '_' . 'eventmember',
     $moduleDirName . '_' . 'eventnotmember',
     $moduleDirName . '_' . 'file',
     $moduleDirName . '_' . 'etablissement'
-);
+];
 
 // SQL
 
@@ -120,7 +120,7 @@ $modversion['config'][$i]['title']       = '_MI_EXTCAL_VISIBLE_TABS';
 $modversion['config'][$i]['description'] = '_MI_EXTCAL_VISIBLE_TABS_DESC';
 $modversion['config'][$i]['formtype']    = 'select_multi';
 $modversion['config'][$i]['valuetype']   = 'array';
-$modversion['config'][$i]['default']     = array(
+$modversion['config'][$i]['default']     = [
     _EXTCAL_NAV_CALMONTH,
     _EXTCAL_NAV_CALWEEK,
     _EXTCAL_NAV_YEAR,
@@ -131,10 +131,10 @@ $modversion['config'][$i]['default']     = array(
     _EXTCAL_NAV_AGENDA_DAY,
     _EXTCAL_NAV_SEARCH,
     _EXTCAL_NAV_NEW_EVENT,
-);
+];
 // $t = print_r($modversion['config'][$i]['default'],true);
 // echo _EXTCAL_NAV_CALMONTH . "<br><pre>{$t}</pre>";
-$modversion['config'][$i]['options'] = array(
+$modversion['config'][$i]['options'] = [
     '_MI_EXTCAL_NAV_CALMONTH'    => _EXTCAL_NAV_CALMONTH,
     '_MI_EXTCAL_NAV_CALWEEK'     => _EXTCAL_NAV_CALWEEK,
     '_MI_EXTCAL_NAV_YEAR'        => _EXTCAL_NAV_YEAR,
@@ -145,7 +145,7 @@ $modversion['config'][$i]['options'] = array(
     '_MI_EXTCAL_NAV_AGENDA_DAY'  => _EXTCAL_NAV_AGENDA_DAY,
     '_MI_EXTCAL_NAV_SEARCH'      => _EXTCAL_NAV_SEARCH,
     '_MI_EXTCAL_NAV_NEW_EVENT'   => _EXTCAL_NAV_NEW_EVENT,
-);
+];
 //-----------------------------------------------------------------------------
 ++$i;
 $modversion['config'][$i]['name']        = 'weight_tabs';
@@ -164,7 +164,7 @@ $modversion['config'][$i]['description'] = '';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = _EXTCAL_FILE_CALMONTH;
-$modversion['config'][$i]['options']     = array(
+$modversion['config'][$i]['options']     = [
     '_MI_EXTCAL_NAV_CALMONTH'    => _EXTCAL_FILE_CALMONTH,
     '_MI_EXTCAL_NAV_CALWEEK'     => _EXTCAL_FILE_CALWEEK,
     '_MI_EXTCAL_NAV_YEAR'        => _EXTCAL_FILE_YEAR,
@@ -175,7 +175,7 @@ $modversion['config'][$i]['options']     = array(
     '_MI_EXTCAL_NAV_AGENDA_DAY'  => _EXTCAL_FILE_AGENDA_DAY,
     '_MI_EXTCAL_NAV_SEARCH'      => _EXTCAL_FILE_SEARCH,
     '_MI_EXTCAL_NAV_NEW_EVENT'   => _EXTCAL_FILE_NEW_EVENT,
-);
+];
 
 ++$i;
 $modversion['config'][$i]['name']        = 'week_start_day';
@@ -184,7 +184,7 @@ $modversion['config'][$i]['description'] = '_MI_EXTCAL_WEEK_START_DAY_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 1;
-$modversion['config'][$i]['options']     = array(
+$modversion['config'][$i]['options']     = [
     '_MI_EXTCAL_DAY_SUNDAY'    => 0,
     '_MI_EXTCAL_DAY_MONDAY'    => 1,
     '_MI_EXTCAL_DAY_TUESDAY'   => 2,
@@ -192,7 +192,7 @@ $modversion['config'][$i]['options']     = array(
     '_MI_EXTCAL_DAY_THURSDAY'  => 4,
     '_MI_EXTCAL_DAY_FRIDAY'    => 5,
     '_MI_EXTCAL_DAY_SATURDAY'  => 6,
-);
+];
 ++$i;
 $modversion['config'][$i]['name']        = 'list_position';
 $modversion['config'][$i]['title']       = '_MI_EXTCAL_LIST_POS';
@@ -200,10 +200,10 @@ $modversion['config'][$i]['description'] = '_MI_EXTCAL_LIST_POS_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = 1;
-$modversion['config'][$i]['options']     = array(
+$modversion['config'][$i]['options']     = [
     '_MI_EXTCAL_BEFORE' => 0,
     '_MI_EXTCAL_AFTER'  => 1,
-);
+];
 
 xoops_load('XoopsEditorHandler');
 $editorHandler = XoopsEditorHandler::getInstance();
@@ -262,10 +262,10 @@ $modversion['config'][$i]['description'] = '_MI_EXTCAL_SORT_ORDER_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = 1;
-$modversion['config'][$i]['options']     = array(
+$modversion['config'][$i]['options']     = [
     '_MI_EXTCAL_ASCENDING'  => 'ASC',
     '_MI_EXTCAL_DESCENDING' => 'DESC',
-);
+];
 ++$i;
 $modversion['config'][$i]['name']        = 'event_date_year';
 $modversion['config'][$i]['title']       = '_MI_EXTCAL_EY_DATE_PATTERN';
@@ -349,8 +349,8 @@ $modversion['config'][$i]['title']       = '_MI_EXTCAL_FILE_EXTENTION';
 $modversion['config'][$i]['description'] = '_MI_EXTCAL_FILE_EXTENTION_DESC';
 $modversion['config'][$i]['formtype']    = 'select_multi';
 $modversion['config'][$i]['valuetype']   = 'array';
-$modversion['config'][$i]['default']     = array('doc', 'jpg', 'jpeg', 'gif', 'png', 'pdf', 'txt');
-$modversion['config'][$i]['options']     = array(
+$modversion['config'][$i]['default']     = ['doc', 'jpg', 'jpeg', 'gif', 'png', 'pdf', 'txt'];
+$modversion['config'][$i]['options']     = [
     'ai'    => 'ai',
     'aif'   => 'aif',
     'aiff'  => 'aiff',
@@ -448,7 +448,7 @@ $modversion['config'][$i]['options']     = array(
     'xpm'   => 'xpm',
     'xsl'   => 'xsl',
     'zip'   => 'zip',
-);
+];
 ++$i;
 $modversion['config'][$i]['name']        = 'allow_html';
 $modversion['config'][$i]['title']       = '_MI_EXTCAL_HTML';
@@ -560,11 +560,11 @@ $modversion['config'][$i]['description'] = '_MI_EXTCAL_EMAIL_MODE_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 0;
-$modversion['config'][$i]['options']     = array(
+$modversion['config'][$i]['options']     = [
     '_MI_EXTCAL_EMAIL_MODE_NONE' => 0,
     '_MI_EXTCAL_EMAIL_MODE_TEXT' => 1,
     '_MI_EXTCAL_EMAIL_MODE_HTML' => 2,
-);
+];
 
 ++$i;
 $modversion['config'][$i]['name']        = 'pear_path';
@@ -747,7 +747,7 @@ $modversion['notification']['category'][1]['item_name']      = '';
 $modversion['notification']['category'][2]['name']           = 'cat';
 $modversion['notification']['category'][2]['title']          = _MI_EXTCAL_CAT_NOTIFY;
 $modversion['notification']['category'][2]['description']    = _MI_EXTCAL_CAT_NOTIFYDSC;
-$modversion['notification']['category'][2]['subscribe_from'] = array('calendar.php', 'year.php', 'day.php');
+$modversion['notification']['category'][2]['subscribe_from'] = ['calendar.php', 'year.php', 'day.php'];
 $modversion['notification']['category'][2]['item_name']      = 'cat';
 
 $modversion['notification']['category'][3]['name']           = 'event';

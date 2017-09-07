@@ -93,7 +93,7 @@ class Calendar_Minute extends Calendar
      *
      * @return bool
      */
-    public function build($sDates = array())
+    public function build($sDates = [])
     {
         require_once CALENDAR_ROOT . 'Second.php';
         $sIM = $this->cE->getSecondsInMinute($this->year, $this->month, $this->day, $this->hour, $this->minute);

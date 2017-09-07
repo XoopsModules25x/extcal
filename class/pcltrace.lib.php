@@ -46,7 +46,7 @@ if (!defined('PCLTRACE_LIB')) {
     // These values must be change by PclTrace library functions
     $g_pcl_trace_mode     = 'memory';
     $g_pcl_trace_filename = 'trace.txt';
-    $g_pcl_trace_name     = array();
+    $g_pcl_trace_name     = [];
     $g_pcl_trace_index    = 0;
     $g_pcl_trace_level    = 0;
     //$g_pcl_trace_entries = array();

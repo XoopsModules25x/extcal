@@ -84,14 +84,14 @@ class Calendar_Table_Helper
      *
      * @var array
      */
-    public $daysOfWeek = array();
+    public $daysOfWeek = [];
 
     /**
      * Days of the month built from days of the week.
      *
      * @var array
      */
-    public $daysOfMonth = array();
+    public $daysOfMonth = [];
 
     /**
      * Number of weeks in month.
@@ -131,8 +131,8 @@ class Calendar_Table_Helper
     public function setFirstDay()
     {
         $weekDays = $this->cE->getWeekDays($this->calendar->thisYear(), $this->calendar->thisMonth(), $this->calendar->thisDay());
-        $endDays  = array();
-        $tmpDays  = array();
+        $endDays  = [];
+        $tmpDays  = [];
         $begin    = false;
         foreach ($weekDays as $day) {
             if ($begin) {

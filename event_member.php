@@ -57,17 +57,17 @@ if ($xoopsUser && $xoopsModuleConfig['whos_going']) {
                 sendMail2member($mode, $event_id, $member_uid, _MD_EXTCAL_SUBJECT_0, _MD_EXTCAL_MSG_0);
                 $rediredtMessage = _MD_EXTCAL_MAX_MEMBER_REACHED;
             } else {
-                $eventMemberHandler->createEventmember(array(
+                $eventMemberHandler->createEventmember([
                                                            'event_id' => (int)$_POST['event'],
                                                            'uid'      => $xoopsUser->getVar('uid'),
-                                                       ));
+                                                       ]);
                 sendMail2member($mode, $event_id, $member_uid, _MD_EXTCAL_SUBJECT_1, _MD_EXTCAL_MSG_1);
                 $rediredtMessage = _MD_EXTCAL_WHOS_GOING_ADDED_TO_EVENT;
             }
             // If the user have to be remove
         } else {
             if ($_POST['mode'] === 'remove') {
-                $eventMemberHandler->deleteEventmember(array((int)$_POST['event'], $xoopsUser->getVar('uid')));
+                $eventMemberHandler->deleteEventmember([(int)$_POST['event'], $xoopsUser->getVar('uid')]);
                 sendMail2member($mode, $event_id, $member_uid, _MD_EXTCAL_SUBJECT_2, _MD_EXTCAL_MSG_2);
                 $rediredtMessage = _MD_EXTCAL_WHOS_GOING_REMOVED_TO_EVENT;
             }

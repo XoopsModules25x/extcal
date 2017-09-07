@@ -67,7 +67,7 @@ class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
      */
     public function stampCollection($stamp)
     {
-        static $stamps = array();
+        static $stamps = [];
         if (!isset($stamps[$stamp])) {
             $stamps[$stamp] = new Date($stamp);
         }
@@ -173,7 +173,7 @@ class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
      */
     public function dateToStamp($y, $m, $d, $h = 0, $i = 0, $s = 0)
     {
-        $r = array();
+        $r = [];
         self::adjustDate($y, $m, $d, $h, $i, $s);
         $key = $y . $m . $d . $h . $i . $s;
         if (!isset($r[$key])) {
@@ -409,7 +409,7 @@ class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
      */
     public function getWeekDays($y = null, $m = null, $d = null)
     {
-        return array(0, 1, 2, 3, 4, 5, 6);
+        return [0, 1, 2, 3, 4, 5, 6];
     }
 
     /**

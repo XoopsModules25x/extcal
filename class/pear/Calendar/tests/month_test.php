@@ -36,14 +36,14 @@ class TestOfMonth extends TestOfCalendar
 
     public function testPrevDay_Array()
     {
-        $this->assertEqual(array(
+        $this->assertEqual([
                                'year'   => 2003,
                                'month'  => 9,
                                'day'    => 30,
                                'hour'   => 0,
                                'minute' => 0,
                                'second' => 0,
-                           ), $this->cal->prevDay('array'));
+                           ], $this->cal->prevDay('array'));
     }
 
     public function testThisDay()
@@ -140,7 +140,7 @@ class TestOfMonthBuild extends TestOfMonth
     public function testFetchAll()
     {
         $this->cal->build();
-        $children = array();
+        $children = [];
         $i        = 1;
         while ($Child = $this->cal->fetch()) {
             $children[$i] = $Child;
@@ -152,7 +152,7 @@ class TestOfMonthBuild extends TestOfMonth
     public function testSelection()
     {
         require_once CALENDAR_ROOT . 'Day.php';
-        $selection = array(new Calendar_Day(2003, 10, 25));
+        $selection = [new Calendar_Day(2003, 10, 25)];
         $this->cal->build($selection);
         $i = 1;
         while ($Child = $this->cal->fetch()) {

@@ -1,6 +1,6 @@
 <?php
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 require_once XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/calendar.php';
 
@@ -44,7 +44,7 @@ class ExtcalTime
      */
     public function getMonthName($id)
     {
-        $monthName = array(
+        $monthName = [
             '1'  => _CAL_JANUARY,
             '2'  => _CAL_FEBRUARY,
             '3'  => _CAL_MARCH,
@@ -57,7 +57,7 @@ class ExtcalTime
             '10' => _CAL_OCTOBER,
             '11' => _CAL_NOVEMBER,
             '12' => _CAL_DECEMBER,
-        );
+        ];
 
         return $monthName[$id];
     }
@@ -69,7 +69,7 @@ class ExtcalTime
      */
     public function getDayName($id)
     {
-        $dayName = array(
+        $dayName = [
             _CAL_SUNDAY,
             _CAL_MONDAY,
             _CAL_TUESDAY,
@@ -77,7 +77,7 @@ class ExtcalTime
             _CAL_THURSDAY,
             _CAL_FRIDAY,
             _CAL_SATURDAY,
-        );
+        ];
 
         return $dayName[$id];
     }
@@ -90,7 +90,7 @@ class ExtcalTime
      */
     public function getFormatedDate($format, $timestamp)
     {
-        $patterns     = array(
+        $patterns     = [
             '/January/',
             '/February/',
             '/March/',
@@ -129,8 +129,8 @@ class ExtcalTime
             '/Thu /',
             '/Fri /',
             '/Sat /',
-        );
-        $replacements = array(
+        ];
+        $replacements = [
             _CAL_JANUARY,
             _CAL_FEBRUARY,
             _CAL_MARCH,
@@ -169,7 +169,7 @@ class ExtcalTime
             substr(_CAL_THURSDAY, 0, 3) . ' ',
             substr(_CAL_FRIDAY, 0, 3) . ' ',
             substr(_CAL_SATURDAY, 0, 3) . ' ',
-        );
+        ];
 
         return preg_replace($patterns, $replacements, date($format, $timestamp));
     }
@@ -195,7 +195,7 @@ class ExtcalTime
 
             case 'weekly':
 
-                $daysName = array(
+                $daysName = [
                     'MO' => _CAL_MONDAY,
                     'TU' => _CAL_TUESDAY,
                     'WE' => _CAL_WEDNESDAY,
@@ -203,7 +203,7 @@ class ExtcalTime
                     'FR' => _CAL_FRIDAY,
                     'SA' => _CAL_SATURDAY,
                     'SU' => _CAL_SUNDAY,
-                );
+                ];
 
                 $interval = $eventOptions[1];
                 array_shift($eventOptions);
@@ -220,7 +220,7 @@ class ExtcalTime
 
             case 'monthly':
 
-                $monthDays = array(
+                $monthDays = [
                     '1MO'  => _MD_EXTCAL_1_MO,
                     '1TU'  => _MD_EXTCAL_1_TU,
                     '1WE'  => _MD_EXTCAL_1_WE,
@@ -256,7 +256,7 @@ class ExtcalTime
                     '-1FR' => _MD_EXTCAL_LAST_FR,
                     '-1SA' => _MD_EXTCAL_LAST_SA,
                     '-1SU' => _MD_EXTCAL_LAST_SU,
-                );
+                ];
 
                 $interval = $eventOptions[1];
                 if (0 === strpos($eventOptions[2], 'MD')) {
@@ -269,7 +269,7 @@ class ExtcalTime
 
             case 'yearly':
 
-                $monthDays = array(
+                $monthDays = [
                     '1MO'  => _MD_EXTCAL_1_MO,
                     '1TU'  => _MD_EXTCAL_1_TU,
                     '1WE'  => _MD_EXTCAL_1_WE,
@@ -305,9 +305,9 @@ class ExtcalTime
                     '-1FR' => _MD_EXTCAL_LAST_FR,
                     '-1SA' => _MD_EXTCAL_LAST_SA,
                     '-1SU' => _MD_EXTCAL_LAST_SU,
-                );
+                ];
 
-                $monthName = array(
+                $monthName = [
                     1  => _CAL_JANUARY,
                     2  => _CAL_FEBRUARY,
                     3  => _CAL_MARCH,
@@ -320,7 +320,7 @@ class ExtcalTime
                     10 => _CAL_OCTOBER,
                     11 => _CAL_NOVEMBER,
                     12 => _CAL_DECEMBER,
-                );
+                ];
 
                 $interval = $eventOptions[1];
                 $day      = $eventOptions[2];

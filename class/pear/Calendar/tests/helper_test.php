@@ -33,7 +33,7 @@ class TestOfTableHelper extends UnitTestCase
         $this->mockengine->setReturnValue('getHoursInDay', 24);
         $this->mockengine->setReturnValue('getMinutesInHour', _EXTCAL_TS_MINUTE);
         $this->mockengine->setReturnValue('getSecondsInMinute', _EXTCAL_TS_MINUTE);
-        $this->mockengine->setReturnValue('getWeekDays', array(0, 1, 2, 3, 4, 5, 6));
+        $this->mockengine->setReturnValue('getWeekDays', [0, 1, 2, 3, 4, 5, 6]);
         $this->mockengine->setReturnValue('getDaysInWeek', 7);
         $this->mockengine->setReturnValue('getFirstDayOfWeek', 1);
         $this->mockengine->setReturnValue('getFirstDayInMonth', 3);
@@ -58,19 +58,19 @@ class TestOfTableHelper extends UnitTestCase
     public function testGetDaysOfWeekMonday()
     {
         $Helper = new Calendar_Table_Helper($this->mockcal);
-        $this->assertEqual($Helper->getDaysOfWeek(), array(1, 2, 3, 4, 5, 6, 0));
+        $this->assertEqual($Helper->getDaysOfWeek(), [1, 2, 3, 4, 5, 6, 0]);
     }
 
     public function testGetDaysOfWeekSunday()
     {
         $Helper = new Calendar_Table_Helper($this->mockcal, 0);
-        $this->assertEqual($Helper->getDaysOfWeek(), array(0, 1, 2, 3, 4, 5, 6));
+        $this->assertEqual($Helper->getDaysOfWeek(), [0, 1, 2, 3, 4, 5, 6]);
     }
 
     public function testGetDaysOfWeekThursday()
     {
         $Helper = new Calendar_Table_Helper($this->mockcal, 4);
-        $this->assertEqual($Helper->getDaysOfWeek(), array(4, 5, 6, 0, 1, 2, 3));
+        $this->assertEqual($Helper->getDaysOfWeek(), [4, 5, 6, 0, 1, 2, 3]);
     }
 
     public function testGetNumWeeks()

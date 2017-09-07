@@ -19,7 +19,7 @@
 
 include __DIR__ . '/../../mainfile.php';
 require_once __DIR__ . '/include/constantes.php';
-$params                                  = array('view' => _EXTCAL_NAV_NEW_EVENT, 'file' => _EXTCAL_FILE_NEW_EVENT);
+$params                                  = ['view' => _EXTCAL_NAV_NEW_EVENT, 'file' => _EXTCAL_FILE_NEW_EVENT];
 $GLOBALS['xoopsOption']['template_main'] = 'extcal_event.tpl';
 require_once __DIR__ . '/header.php';
 
@@ -49,9 +49,9 @@ if (!function_exists('clear_unicodeslashes')) {
      */
     function clear_unicodeslashes($text)
     {
-        $text = str_replace(array("\\'"), "'", $text);
-        $text = str_replace(array("\\\\\\'"), "'", $text);
-        $text = str_replace(array('\\"'), '"', $text);
+        $text = str_replace(["\\'"], "'", $text);
+        $text = str_replace(["\\\\\\'"], "'", $text);
+        $text = str_replace(['\\"'], '"', $text);
 
         return $text;
     }
@@ -64,7 +64,7 @@ if (!$eventObj) {
     redirect_header('index.php', 3, '');
 }
 
-$event = $eventHandler->objectToArray($eventObj, array('cat_id', 'event_submitter'));
+$event = $eventHandler->objectToArray($eventObj, ['cat_id', 'event_submitter']);
 $eventHandler->serverTimeToUserTime($event);
 
 $configHandler = xoops_getHandler('config');
@@ -120,7 +120,7 @@ if ($extcalConfig['whos_going']) {
     // Making a list with members and counting regitered user's
     foreach ($members as $k => $v) {
         ++$nbUser;
-        $eventmember['member']['userList'][] = array('uid' => $k, 'uname' => $v->getVar('uname'));
+        $eventmember['member']['userList'][] = ['uid' => $k, 'uname' => $v->getVar('uname')];
     }
     $eventmember['member']['nbUser'] = $nbUser;
 
@@ -163,7 +163,7 @@ if ($extcalConfig['whosnot_going']) {
     // Making a list with not members
     foreach ($notmembers as $k => $v) {
         ++$nbUser;
-        $eventmember['notmember']['userList'][] = array('uid' => $k, 'uname' => $v->getVar('uname'));
+        $eventmember['notmember']['userList'][] = ['uid' => $k, 'uname' => $v->getVar('uname')];
     }
     $eventmember['notmember']['nbUser'] = $nbUser;
 

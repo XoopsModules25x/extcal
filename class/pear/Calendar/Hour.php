@@ -92,7 +92,7 @@ class Calendar_Hour extends Calendar
      *
      * @return bool
      */
-    public function build($sDates = array())
+    public function build($sDates = [])
     {
         require_once CALENDAR_ROOT . 'Minute.php';
         $mIH = $this->cE->getMinutesInHour($this->year, $this->month, $this->day, $this->hour);

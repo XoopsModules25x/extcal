@@ -32,7 +32,7 @@ class ExtcalUtility
         $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
         $event        = $eventHandler->getEvent($eventId);
         $t            = $event->getVars();
-        $data         = array();
+        $data         = [];
         //        while (list($key, $val) = each($t)) {
         foreach ($t as $key => $val) {
             $data[$key] = $val['value'];
@@ -56,14 +56,14 @@ class ExtcalUtility
             $delimg = @$REQUEST['delimg_' . $j . ''];
             $delimg = isset($delimg) ? (int)$delimg : 0;
             if (0 == $delimg && !empty($REQUEST['xoops_upload_file'][$j])) {
-                $upload = new XoopsMediaUploader($uploaddir_event, array(
+                $upload = new XoopsMediaUploader($uploaddir_event, [
                     'image/gif',
                     'image/jpeg',
                     'image/pjpeg',
                     'image/x-png',
                     'image/png',
                     'image/jpg',
-                ), 3145728, null, null);
+                ], 3145728, null, null);
                 if ($upload->fetchMedia($REQUEST['xoops_upload_file'][$j])) {
                     $upload->setPrefix('event_');
                     $upload->fetchMedia($REQUEST['xoops_upload_file'][$j]);
@@ -144,7 +144,7 @@ class ExtcalUtility
         $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
         $catsList   = $catHandler->getAllCat($xoopsUser);
 
-        $t = array();
+        $t = [];
         foreach ($catsList as $catList) {
             $cat_id    = $catList->getVar('cat_id');
             $name      = $catList->getVar('cat_name');
@@ -587,7 +587,7 @@ class ExtcalUtility
             }
         }
 
-        if (!$success) {
+        if (false === $success) {
             $module->setErrors(sprintf(_AM_TAG_ERROR_BAD_XOOPS, $requiredVer, $currentVer));
         }
 

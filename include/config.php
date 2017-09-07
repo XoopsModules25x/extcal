@@ -32,28 +32,28 @@ if (!defined('EXTCAL_DIRNAME')) {
 }
 
 //Configurator
-return array(
+return [
     'name'          => 'Module Configurator',
-    'uploadFolders' => array(
+    'uploadFolders' => [
         EXTCAL_UPLOAD_PATH,
         EXTCAL_UPLOAD_PATH . '/etablissement'
-    ),
+    ],
     //    'copyFiles'     => array(
     //        EXTCAL_UPLOAD_PATH,
     //        EXTCAL_UPLOAD_PATH . '/etablissement'
     //    ),
 
-    'templateFolders' => array(
+    'templateFolders' => [
         '/templates/',
         '/templates/blocks/',
         '/templates/admin/'
 
-    ),
-    'oldFiles'        => array(
+    ],
+    'oldFiles'        => [
         '/include/update_functions.php',
         '/include/install_functions.php'
-    ),
-);
+    ],
+];
 
 // module information
 $mod_copyright = "<a href='https://xoops.org' title='XOOPS Project' target='_blank'>

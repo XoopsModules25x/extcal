@@ -173,7 +173,7 @@ if (!defined('PCL_TAR')) {
     {
         TrFctStart(__FILE__, __LINE__, 'PclTarAdd', "tar=$p_tarname, file=$p_filelist");
         $v_result      = 1;
-        $v_list_detail = array();
+        $v_list_detail = [];
 
         // ----- Extract the tar format from the extension
         if (($p_mode = PclTarHandleExtension($p_tarname)) == '') {
@@ -251,7 +251,7 @@ if (!defined('PCL_TAR')) {
     {
         TrFctStart(__FILE__, __LINE__, 'PclTarAddList', "tar=$p_tarname, file=$p_filelist, p_add_dir='$p_add_dir', p_remove_dir='$p_remove_dir', mode=$p_mode");
         $v_result      = 1;
-        $p_list_detail = array();
+        $p_list_detail = [];
 
         // ----- Extract the tar format from the extension
         if (($p_mode == '') || (($p_mode !== 'tar') && ($p_mode !== 'tgz'))) {
@@ -339,7 +339,7 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Call the extracting fct
-        $p_list = array();
+        $p_list = [];
         if (($v_result = PclTarHandleExtract($p_tarname, 0, $p_list, 'list', '', $p_mode, '')) != 1) {
             unset($p_list);
             TrFctEnd(__FILE__, __LINE__, 0, PclErrorString());
@@ -1095,7 +1095,7 @@ if (!defined('PCL_TAR')) {
     {
         TrFctStart(__FILE__, __LINE__, 'PclTarHandleCreate', "tar=$p_tarname, list, mode=$p_mode, add_dir='$p_add_dir', remove_dir='$p_remove_dir'");
         $v_result      = 1;
-        $v_list_detail = array();
+        $v_list_detail = [];
 
         // ----- Check the parameters
         if (($p_tarname == '') || (($p_mode !== 'tar') && ($p_mode !== 'tgz'))) {
@@ -1376,7 +1376,7 @@ if (!defined('PCL_TAR')) {
     {
         TrFctStart(__FILE__, __LINE__, 'PclTarHandleAddList', "tar='$p_tar', list, mode='$p_mode', add_dir='$p_add_dir', remove_dir='$p_remove_dir'");
         $v_result = 1;
-        $v_header = array();
+        $v_header = [];
 
         // ----- Recuperate the current number of elt in list
         $v_nb = count($p_list_detail);
@@ -2989,7 +2989,7 @@ if (!defined('PCL_TAR')) {
         TrFctStart(__FILE__, __LINE__, 'PclTarHandleUpdate', "archive='$p_tarname', list, tar_mode=$p_tar_mode");
         $v_result     = 1;
         $v_nb         = 0;
-        $v_found_list = array();
+        $v_found_list = [];
 
         // ----- Look for regular tar file
         if ($p_tar_mode === 'tar') {

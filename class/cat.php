@@ -17,7 +17,7 @@
  * @author       XOOPS Development Team,
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 require_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
 require_once __DIR__ . '/perm.php';
@@ -28,7 +28,7 @@ require_once __DIR__ . '/time.php';
  */
 class ExtcalCat extends XoopsObject
 {
-    public $externalKey = array();
+    public $externalKey = [];
 
     /**
      * ExtcalCat constructor.
@@ -184,7 +184,7 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
         }
 
         $t = $this->objectToArray($this->getObjects($criteriaCompo));
-        $r = array();
+        $r = [];
         //        while (list($k, $v) = each($t)) {
         foreach ($t as $k => $v) {
             $r[$v['cat_id']] = $v;

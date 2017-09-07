@@ -51,7 +51,7 @@ function xoops_module_update_extcal(XoopsModule $xoopsModule, $previousVersion =
     $fld = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/versions/';
     $cls = 'extcal_%1$s';
 
-    $version = array(
+    $version = [
         '2_04' => 204,
         '2_15' => 215,
         '2_21' => 221,
@@ -61,7 +61,7 @@ function xoops_module_update_extcal(XoopsModule $xoopsModule, $previousVersion =
         '2_34' => 234,
         '2_35' => 235,
         '2_37' => 237,
-    );
+    ];
 
     //    while (list($key, $val) = each($version)) {
     foreach ($version as $key => $val) {
@@ -72,7 +72,7 @@ function xoops_module_update_extcal(XoopsModule $xoopsModule, $previousVersion =
             if (is_readable($f)) {
                 echo "mise à jour version : {$key} = {$val}<br>";
                 require_once $f;
-                $cl = new $name($xoopsModule, array('previousVersion' => $previousVersion));
+                $cl = new $name($xoopsModule, ['previousVersion' => $previousVersion]);
             }
         }
     }

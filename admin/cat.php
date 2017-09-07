@@ -41,26 +41,26 @@ switch ($op) {
         if (isset($cat_id)) {
             /** @var ExtcalCatHandler $catHandler */
             // $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-            $varArr = array(
+            $varArr = [
                 'cat_name'   => $cat_name,
                 'cat_desc'   => $cat_desc,
                 'cat_weight' => $cat_weight,
                 'cat_color'  => substr($cat_color, 1),
                 'cat_icone'  => $cat_icone,
-            );
+            ];
 
             $catHandler->modifyCat($cat_id, $varArr);
             redirect_header('cat.php', 3, _AM_EXTCAL_CAT_EDITED, false);
             // Create new cat
         } else {
             // $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-            $varArr = array(
+            $varArr = [
                 'cat_name'   => $cat_name,
                 'cat_desc'   => $cat_desc,
                 'cat_weight' => $cat_weight,
                 'cat_color'  => substr($cat_color, 1),
                 'cat_icone'  => $cat_icone,
-            );
+            ];
             $catHandler->createCat($varArr);
             redirect_header('cat.php', 3, _AM_EXTCAL_CAT_CREATED, false);
         }
@@ -131,11 +131,11 @@ switch ($op) {
     case 'delete':
         if (!isset($confirm)) {
             xoops_cp_header();
-            $hiddens = array(
+            $hiddens = [
                 'cat_id'      => $cat_id,
                 'form_delete' => '',
                 'confirm'     => 1,
-            );
+            ];
             xoops_confirm($hiddens, 'cat.php?op=delete', _AM_EXTCAL_CONFIRM_DELETE_CAT, _DELETE, 'cat.php');
 
             xoops_cp_footer();

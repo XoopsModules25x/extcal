@@ -107,7 +107,7 @@ WHERE tm.uid = tu.uid
 __sql__;
 
     $rst     = $xoopsDB->query($sql);
-    $members = array();
+    $members = [];
     while ($row = $xoopsDB->fetchArray($rst)) {
         $row['status']        = _MD_EXTCAL_PRESENT;
         $members[$row['uid']] = $row;
@@ -157,7 +157,7 @@ __sql__;
     $tpl->assign('br', '<br>');
 
     //--------------------------------------------------------------
-    $destinataires                     = array();
+    $destinataires                     = [];
     $destinataires[$submiter['email']] = $submiter['email'];
     $destinataires[$acteur['email']]   = $acteur['email'];
     //    while (list($k, $row) = each($members)) {
@@ -310,7 +310,7 @@ function extcal_getHeader($mode, $emailSender)
         }
     }
     //-----------------------------------------------------------
-    $header   = array();
+    $header   = [];
     $header[] = "From: {$emailSender}";
     $header[] = "Reply-To: {$emailSender}";
     $header[] = 'X-Mailer: PHP/' . PHP_VERSION;

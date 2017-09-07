@@ -127,7 +127,7 @@ class Calendar_Month_Weekdays extends Calendar_Month
      * @see    Calendar_Day_Base::isFirst()
      * @see    Calendar_Day_Base::isLast()
      */
-    public function build($sDates = array())
+    public function build($sDates = [])
     {
         require_once CALENDAR_ROOT . 'Table/Helper.php';
         $this->tableHelper = new Calendar_Table_Helper($this, $this->firstDay);

@@ -2,14 +2,14 @@
 
 include __DIR__ . '/../../mainfile.php';
 require_once __DIR__ . '/include/constantes.php';
-$params                                  = array(
+$params                                  = [
     'view' => _EXTCAL_NAV_SEARCH,
     'file' => _EXTCAL_FILE_SEARCH,
-);
+];
 $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
 require_once __DIR__ . '/header.php';
 
-$recurEventsArray = array();
+$recurEventsArray = [];
 //needed to save the state of the form, so we don't show on the first time the list of available events
 $num_tries = isset($_POST['num_tries']) ? $_POST['num_tries'] + 1 : 0;
 
@@ -31,7 +31,7 @@ $orderby3  = isset($_POST['orderby3']) ? $_POST['orderby3'] : '';
 //$orderby = isset($_GET['orderby']) ? (int)($_GET['orderby']) : 0;
 
 //---------------------------------------------------------------
-$search              = array();
+$search              = [];
 $exp                 = new XoopsFormText(_MD_EXTCAL_EXPRESSION, 'searchExp', 80, 80, $searchExp);
 $search['searchExp'] = $exp->render();
 $search['andor']     = ExtcalUtility::getListAndOr('andor', '', $andor)->render();
@@ -66,11 +66,11 @@ $xoopsTpl->assign('search', $search);
 
 // Retriving events
 //echoArray($_GET, false);
-$orderBy = array(
+$orderBy = [
     $orderby1,
     $orderby2,
     $orderby3,
-);
+];
 $userId  = 0;
 $user    = '';
 //get all events for the date
@@ -91,7 +91,7 @@ $endMonth       = mktime(23, 59, 59, $month, $daysInTheMonth, $year);
 
 //echo "Start & End Month ===><br>{$startMonth}<br>{$endMonth}<br>";
 
-$eventsArray = array();
+$eventsArray = [];
 foreach ($events as $event) {
     if (!$event['event_isrecur']) {
         // Formating date
@@ -216,7 +216,7 @@ $xoopsTpl->assign('list_position', -1);
 //---------------------------------------------------------------
 
 //mb missing for xBootstrap templates by Angelo
-$lang = array(
+$lang = [
     'start'      => _MD_EXTCAL_START,
     'end'        => _MD_EXTCAL_END,
     'calmonth'   => _MD_EXTCAL_NAV_CALMONTH,
@@ -229,7 +229,7 @@ $lang = array(
     'agendaday'  => _MD_EXTCAL_NAV_AGENDA_DAY,
     'search'     => _MD_EXTCAL_NAV_SEARCH,
     'newevent'   => _MD_EXTCAL_NAV_NEW_EVENT,
-);
+];
 // Assigning language data to the template
 $xoopsTpl->assign('lang', $lang);
 $xoopsTpl->assign('view', 'search');

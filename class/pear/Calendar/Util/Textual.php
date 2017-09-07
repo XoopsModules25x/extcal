@@ -80,16 +80,16 @@ class Calendar_Util_Textual
      */
     public static function monthNames($format = 'long')
     {
-        $formats = array(
+        $formats = [
             'one'   => '%b',
             'two'   => '%b',
             'short' => '%b',
             'long'  => '%B',
-        );
+        ];
         if (!array_key_exists($format, $formats)) {
             $format = 'long';
         }
-        $months = array();
+        $months = [];
         for ($i = 1; $i <= 12; ++$i) {
             $stamp = mktime(0, 0, 0, $i, 1, 2003);
             $month = strftime($formats[$format], $stamp);
@@ -117,16 +117,16 @@ class Calendar_Util_Textual
      */
     public static function weekdayNames($format = 'long')
     {
-        $formats = array(
+        $formats = [
             'one'   => '%a',
             'two'   => '%a',
             'short' => '%a',
             'long'  => '%A',
-        );
+        ];
         if (!array_key_exists($format, $formats)) {
             $format = 'long';
         }
-        $days = array();
+        $days = [];
         for ($i = 0; $i <= 6; ++$i) {
             $stamp = mktime(0, 0, 0, 11, $i + 2, 2003);
             $day   = strftime($formats[$format], $stamp);
@@ -278,7 +278,7 @@ class Calendar_Util_Textual
             } elseif (isset($Calendar->firstDay)) {
                 $firstDay = $Calendar->firstDay;
             }
-            $ordereddays = array();
+            $ordereddays = [];
             for ($i = $firstDay; $i < 7; ++$i) {
                 $ordereddays[] = $i;
             }
@@ -289,7 +289,7 @@ class Calendar_Util_Textual
 
         $ordereddays = array_flip($ordereddays);
         $i           = 0;
-        $returndays  = array();
+        $returndays  = [];
         foreach ($ordereddays as $key => $value) {
             $returndays[$i] = $days[$key];
             ++$i;

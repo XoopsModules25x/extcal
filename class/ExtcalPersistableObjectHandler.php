@@ -125,7 +125,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
      */
     public function &getObjects(CriteriaElement $criteria = null, $idAsKey = false, $asObject = true)
     {
-        $ret   = array();
+        $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->table;
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
@@ -157,7 +157,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
      */
     public function convertResultSet($result, $idAsKey = false, $asObject = true)
     {
-        $ret = array();
+        $ret = [];
         while ($myrow = $this->db->fetchArray($result)) {
             $obj = $this->create(false);
             $obj->assignVars($myrow);
@@ -165,7 +165,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
                 if ($asObject) {
                     $ret[] = $obj;
                 } else {
-                    $row  = array();
+                    $row  = [];
                     $vars =& $obj->getVars();
                     foreach (array_keys($vars) as $i) {
                         $row[$i] = $obj->getVar($i);
@@ -176,7 +176,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
                 if ($asObject) {
                     $ret[$myrow[$this->keyName]] = $obj;
                 } else {
-                    $row  = array();
+                    $row  = [];
                     $vars =& $obj->getVars();
                     foreach (array_keys($vars) as $i) {
                         $row[$i] = $obj->getVar($i);
@@ -201,7 +201,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
      */
     public function getList(CriteriaElement $criteria = null, $limit = 0, $start = 0)
     {
-        $ret = array();
+        $ret = [];
         if ($criteria === null) {
             $criteria = new CriteriaCompo();
         }
@@ -270,7 +270,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
 
             return $count;
         } else {
-            $ret = array();
+            $ret = [];
             while (list($id, $count) = $this->db->fetchRow($result)) {
                 $ret[$id] = $count;
             }
@@ -290,7 +290,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
     public function deleteById($id, $force = false) //delete(XoopsObject $object, $force = false)
     {
         if (is_array($this->keyName)) {
-            $clause = array();
+            $clause = [];
             for ($i = 0, $iMax = count($this->keyName); $i < $iMax; ++$i) {
                 $clause[] = $this->keyName[$i] . ' = ' . $id[$i];
             }
@@ -492,7 +492,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
     public function _toObject($data)
     {
         if (is_array($data)) {
-            $ret = array();
+            $ret = [];
             foreach ($data as $v) {
                 $object = new $this->className();
                 $object->assignVars($v);
@@ -515,14 +515,14 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
      *
      * @return array
      */
-    public function objectToArray($objects, $externalKeys = array(), $format = 's')
+    public function objectToArray($objects, $externalKeys = [], $format = 's')
     {
         static $cache;
         if (!is_array($externalKeys)) {
-            $externalKeys = array($externalKeys);
+            $externalKeys = [$externalKeys];
         } //JJD
 
-        $ret = array();
+        $ret = [];
         if (is_array($objects)) {
             $i = 0;
             foreach ($objects as $object) {
@@ -586,7 +586,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
      */
     public function objectToArrayWithoutExternalKey($object, $format = 's')
     {
-        $ret = array();
+        $ret = [];
         if ($object !== null) {
             $vars = $object->getVars();
             foreach ($vars as $k => $v) {
@@ -648,7 +648,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
 
             return $sum;
         } else {
-            $ret = array();
+            $ret = [];
             while (list($id, $sum) = $this->db->fetchRow($result)) {
                 $ret[$id] = $sum;
             }
@@ -689,7 +689,7 @@ class ExtcalPersistableObjectHandler extends XoopsPersistableObjectHandler //Xoo
 
             return $max;
         } else {
-            $ret = array();
+            $ret = [];
             while (list($id, $max) = $this->db->fetchRow($result)) {
                 $ret[$id] = $max;
             }

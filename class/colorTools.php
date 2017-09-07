@@ -65,8 +65,8 @@ class colorTools
      */
     public static function eclaircir($colorHexa, $plancher = 0, $plafond = 255)
     {
-        $tMin = array('', $plancher, $plancher, $plancher);
-        $tMax = array('', $plafond, $plafond, $plafond);
+        $tMin = ['', $plancher, $plancher, $plancher];
+        $tMax = ['', $plafond, $plafond, $plafond];
 
         $t10 = static::hexa2rgbA($colorHexa);
         // echo "<hr>";
@@ -119,8 +119,8 @@ class colorTools
      */
     public function foncer($colorHexa, $plancher = 0, $plafond = 255)
     {
-        $tMin = array('', $plancher, $plancher, $plancher);
-        $tMax = array('', $plafond, $plafond, $plafond);
+        $tMin = ['', $plancher, $plancher, $plancher];
+        $tMax = ['', $plafond, $plafond, $plafond];
 
         $t10 = static::hexa2rgbA($colorHexa);
         $max = 255;
@@ -167,7 +167,7 @@ class colorTools
      */
     public static function getHexaColorFromA($aColors)
     {
-        $tHex = array('', '', '', '');
+        $tHex = ['', '', '', ''];
 
         $tHex[0] = $aColors[0];
         $tHex[1] = substr('00' . dechex($aColors[1]), -2);
@@ -191,7 +191,7 @@ class colorTools
      */
     public function rgb2hexa($r, $g, $b, $prefixe = '')
     {
-        $colorHexa = static::getHexaColorFromA(array($prefixe, $r, $g, $b));
+        $colorHexa = static::getHexaColorFromA([$prefixe, $r, $g, $b]);
 
         return $colorHexa;
     }
@@ -209,7 +209,7 @@ class colorTools
      */
     public static function hexa2rgbA($colorHexa)
     {
-        $t = array('', '', '', '');
+        $t = ['', '', '', ''];
 
         if (0 === strpos($colorHexa, '#')) {
             $t[0]      = '#';

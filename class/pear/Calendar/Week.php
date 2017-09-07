@@ -168,7 +168,7 @@ class Calendar_Week extends Calendar
      *
      * @return bool
      */
-    public function build($sDates = array())
+    public function build($sDates = [])
     {
         require_once CALENDAR_ROOT . 'Day.php';
         $year  = $this->cE->stampToYear($this->thisWeek);

@@ -56,18 +56,18 @@ function bExtcalUpcomingByCategoryShow($options)
     /***********************************************************/
     $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
     $t          = $catHandler->objectToArray($catHandler->getAllCat($xoopsUser, 'all'));
-    $tCats      = array();
+    $tCats      = [];
     for ($h = 0, $count = count($t); $h < $count; ++$h) {
         $tCats[$t[$h]['cat_id']] = $t[$h];
     }
 
-    $te = array();
+    $te = [];
 
     for ($h = 0, $count = count($events); $h < $count; ++$h) {
         $catId = $events[$h]['cat_id'];
         if (!isset($te[$catId])) {
             $te[$catId]           = $tCats[$catId];
-            $te[$catId]['events'] = array();
+            $te[$catId]['events'] = [];
         }
         $te[$catId]['events'][] = $events[$h];
     }

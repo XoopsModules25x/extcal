@@ -74,7 +74,7 @@ if (isset($_POST['update'])) {
     Year: <input type="text" name="y" value="<?php echo $_POST['y']; ?>" size="4">&nbsp;
     Month:<select name="m">
         <?php
-        $selection = array($Month);
+        $selection = [$Month];
     $Year->build($selection);
     while ($Child = $Year->fetch()) {
         if ($Child->isSelected()) {
@@ -86,7 +86,7 @@ if (isset($_POST['update'])) {
     </select>&nbsp;
     Day:<select name="d">
         <?php
-        $selection = array($Day);
+        $selection = [$Day];
     $Month->build($selection);
     while ($Child = $Month->fetch()) {
         if ($Child->isSelected()) {
@@ -98,7 +98,7 @@ if (isset($_POST['update'])) {
     </select>&nbsp;
     Hour:<select name="h">
         <?php
-        $selection = array($Hour);
+        $selection = [$Hour];
     $Day->build($selection);
     while ($Child = $Day->fetch()) {
         if ($Child->isSelected()) {
@@ -110,7 +110,7 @@ if (isset($_POST['update'])) {
     </select>&nbsp;
     Minute:<select name="i">
         <?php
-        $selection = array($Minute);
+        $selection = [$Minute];
     $Hour->build($selection);
     while ($Child = $Hour->fetch()) {
         if ($Child->isSelected()) {
@@ -122,7 +122,7 @@ if (isset($_POST['update'])) {
     </select>&nbsp;
     Second:<select name="s">
         <?php
-        $selection = array($Second);
+        $selection = [$Second];
     $Minute->build($selection);
     while ($Child = $Minute->fetch()) {
         if ($Child->isSelected()) {

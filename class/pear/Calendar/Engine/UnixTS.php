@@ -75,7 +75,7 @@ class Calendar_Engine_UnixTS /* implements Calendar_Engine_Interface */
      */
     public function stampCollection($stamp)
     {
-        static $stamps = array();
+        static $stamps = [];
         if (!isset($stamps[$stamp])) {
             $date           = @date('Y n j H i s t W w', $stamp);
             $stamps[$stamp] = sscanf($date, '%d %d %d %d %d %d %d %d %d');
@@ -182,7 +182,7 @@ class Calendar_Engine_UnixTS /* implements Calendar_Engine_Interface */
      */
     public function dateToStamp($y, $m, $d, $h = 0, $i = 0, $s = 0)
     {
-        static $dates = array();
+        static $dates = [];
         if (!isset($dates[$y][$m][$d][$h][$i][$s])) {
             $dates[$y][$m][$d][$h][$i][$s] = @mktime($h, $i, $s, $m, $d, $y);
         }
@@ -367,7 +367,7 @@ class Calendar_Engine_UnixTS /* implements Calendar_Engine_Interface */
      */
     public function getWeekDays($y = null, $m = null, $d = null)
     {
-        return array(0, 1, 2, 3, 4, 5, 6);
+        return [0, 1, 2, 3, 4, 5, 6];
     }
 
     /**

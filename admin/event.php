@@ -93,7 +93,7 @@ switch ($op) {
         ///////////////////////////////////////////////////////////////////////////////
         ExtcalUtility::extcal_loadImg($_REQUEST, $event_picture1, $event_picture2);
         ///////////////////////////////////////////////////////////////////////////////
-        $data = array(
+        $data = [
             'event_title'         => $_POST['event_title'],
             'cat_id'              => $_POST['cat_id'],
             'event_desc'          => $_POST['event_desc'],
@@ -113,7 +113,7 @@ switch ($op) {
             'event_etablissement' => $_POST['event_etablissement'],
             'dohtml'              => $extcalConfig['allow_html'],
             'event_icone'         => $_POST['event_icone'],
-        );
+        ];
 
         // Event edited
         if (isset($_POST['event_id'])) {
@@ -136,11 +136,11 @@ switch ($op) {
             if ($eventHandler->createEvent($data, $_POST)) {
                 $fileHandler->createFile($eventHandler->getInsertId());
                 $cat = $catHandler->getCat($_POST['cat_id'], $xoopsUser, 'all');
-                $notificationHandler->triggerEvent('global', 0, 'new_event', array('EVENT_TITLE' => $_POST['event_title']));
-                $notificationHandler->triggerEvent('cat', $_POST['cat_id'], 'new_event_cat', array(
+                $notificationHandler->triggerEvent('global', 0, 'new_event', ['EVENT_TITLE' => $_POST['event_title']]);
+                $notificationHandler->triggerEvent('cat', $_POST['cat_id'], 'new_event_cat', [
                     'EVENT_TITLE' => $_POST['event_title'],
                     'CAT_NAME'    => $cat->getVar('cat_name'),
-                ));
+                ]);
                 redirect_header('event.php', 3, _AM_EXTCAL_EVENT_CREATED, false);
             } else {
                 redirect_header('event.php', 3, _AM_EXTCAL_EVENT_CREATE_FAILED, false);
@@ -193,7 +193,7 @@ switch ($op) {
 
         echo '<fieldset><legend style="font-weight:bold; color:#990000;">' . _MD_EXTCAL_EDIT_EVENT . '</legend>';
 
-        if ($form = $eventHandler->getEventForm('admin', $action, array('event_id' => $eventId))) {
+        if ($form = $eventHandler->getEventForm('admin', $action, ['event_id' => $eventId])) {
             $form->display();
         }
 
@@ -210,7 +210,7 @@ switch ($op) {
         $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
         $event        = $eventHandler->getEvent($eventId);
         $t            = $event->getVars();
-        $data         = array();
+        $data         = [];
         //        while (list($key, $val) = each($t)) {
         foreach ($t as $key => $val) {
             $data[$key] = $val['value'];
@@ -234,7 +234,6 @@ switch ($op) {
         if (isset($_POST['confirm'])) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('index.php', 3, _NOPERM . '<br>' . implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
-                exit;
             }
             //             $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
             //             $eventHandler->deleteEvent($_POST['event_id']);
@@ -249,7 +248,7 @@ switch ($op) {
             $adminObject->displayNavigation(basename(__FILE__));
             //***************************************************************************************
 
-            $hiddens = array('event_id' => $_GET['event_id'], 'form_delete' => '', 'confirm' => 1);
+            $hiddens = ['event_id' => $_GET['event_id'], 'form_delete' => '', 'confirm' => 1];
             xoops_confirm($hiddens, 'event.php?op=delete', _AM_EXTCAL_CONFIRM_DELETE_EVENT, _DELETE, 'event.php');
 
             xoops_cp_footer();
@@ -278,7 +277,7 @@ switch ($op) {
         //           $ids = array_keys($_POST['deleteEvents']);
         $ids = implode(',', $ids);
         //echo $ids.'<br>';
-        $hiddens = array('event_ids' => $ids, 'form_delete' => '', 'confirm' => 1);
+        $hiddens = ['event_ids' => $ids, 'form_delete' => '', 'confirm' => 1];
         //$hiddens = array('event_ids' => $_POST['deleteEvents'], 'form_delete' => '', 'confirm' => 1);
         xoops_confirm($hiddens, 'event.php?op=deleteSelectionOK', $msg, _DELETE, 'event.php');
 
@@ -300,7 +299,6 @@ switch ($op) {
         } else {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('index.php', 3, _NOPERM . '<br>' . implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
-                exit;
             }
 
             deleteEvents($_POST['event_ids']);
@@ -329,7 +327,7 @@ switch ($op) {
         //***************************************************************************************
 
         $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
-        $events       = $eventHandler->objectToArray($eventHandler->getNewEvent($start, $nbEventsByPage, 0, true), array('cat_id'));
+        $events       = $eventHandler->objectToArray($eventHandler->getNewEvent($start, $nbEventsByPage, 0, true), ['cat_id']);
         $eventHandler->formatEventsDate($events, _SHORTDATESTRING);
 
         echo '<fieldset><legend style="font-weight:bold; color:#990000;">' . _AM_EXTCAL_APPROVED_EVENT . '</legend>';

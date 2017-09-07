@@ -25,43 +25,43 @@ if (false !== ($moduleHelper = Xmf\Module\Helper::getHelper($moduleDirName))) {
 } else {
     $moduleHelper = Xmf\Module\Helper::getHelper('system');
 }
-$adminObject = \Xmf\Module\Admin::getInstance();
+
 
 $pathIcon32    = \Xmf\Module\Admin::menuIconPath('');
 $pathModIcon32 = $moduleHelper->getModule()->getInfo('modicons32');
 
 $moduleHelper->loadLanguage('modinfo');
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _AM_MODULEADMIN_HOME,
     'link'  => 'admin/index.php',
     'icon'  => $pathIcon32 . '/home.png'
-);
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_EXTCAL_CATEGORY,
     'link'  => 'admin/cat.php',
     'icon'  => $pathIcon32 . '/category.png'
-);
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_EXTCAL_EVENT,
     'link'  => 'admin/event.php',
     'icon'  => $pathIcon32 . '/event.png'
-);
-$adminmenu[] = array(
+];
+$adminmenu[] = [
     'title' => _MI_EXTCAL_ETABLISSEMENTS,
     'link'  => 'admin/etablissement.php',
     'icon'  => $pathModIcon32 . '/etablissement.png'
-);
-$adminmenu[] = array(
+];
+$adminmenu[] = [
     'title' => _MI_EXTCAL_PERMISSIONS,
     'link'  => 'admin/permissions.php',
     'icon'  => $pathIcon32 . '/permissions.png'
-);
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _AM_MODULEADMIN_ABOUT,
     'link'  => 'admin/about.php',
     'icon'  => $pathIcon32 . '/about.png'
-);
+];

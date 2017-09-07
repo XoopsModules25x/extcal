@@ -114,7 +114,7 @@ class Calendar_Month_Weeks extends Calendar_Month
      *
      * @return bool
      */
-    public function build($sDates = array())
+    public function build($sDates = [])
     {
         require_once CALENDAR_ROOT . 'Table/Helper.php';
         $this->tableHelper = new Calendar_Table_Helper($this, $this->firstDay);

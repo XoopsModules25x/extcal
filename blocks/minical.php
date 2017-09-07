@@ -48,21 +48,21 @@ function bExtcalMinicalShow($options)
         $criteria->setSort('RAND()');
         $criteria->setLimit($options[6]);
         $images         = $imageHandler->getObjects($criteria);
-        $slideShowParam = array(
+        $slideShowParam = [
             'images'      => $images,
             'frameHeight' => $options[3],
             'frameWidth'  => $options[2],
             'transTime'   => $options[4],
             'pauseTime'   => $options[5],
-        );
+        ];
         if (count($images) > 0) {
             _makeXMLSlideshowConf($slideShowParam);
-            $imageParam = array('displayImage' => true);
+            $imageParam = ['displayImage' => true];
         } else {
-            $imageParam = array('displayImage' => false);
+            $imageParam = ['displayImage' => false];
         }
     } else {
-        $imageParam = array('displayImage' => false);
+        $imageParam = ['displayImage' => false];
     }
     $imageParam['frameHeight'] = $options[3];
     $imageParam['frameWidth']  = $options[2];
@@ -117,16 +117,16 @@ function bExtcalMinicalShow($options)
     // Retriving events and formatting them
     //$events = $eventHandler->objectToArray($eventHandler->getEventCalendarMonth($month, $year, $tCatSelected));
     if (true) {
-        $criteres = array(
+        $criteres = [
             'periode'      => _EXTCAL_EVENTS_MONTH,
             'month'        => $month,
             'year'         => $year,
             'cat'          => $tCatSelected,
             'externalKeys' => 'cat_id',
-        );
+        ];
         $events   = $eventHandler->getEventsOnPeriode($criteres);
     } else {
-        $events = array();
+        $events = [];
     }
     //ext_echoArray($events, 'minical');
     /***************************************************************/
@@ -139,7 +139,7 @@ function bExtcalMinicalShow($options)
     /*
      *  Adding all event occuring during this month to an array indexed by day number
      */
-    $eventsArray = array();
+    $eventsArray = [];
     foreach ($events as $event) {
         //echo "id->{$event['event_id']}<br>";
         bExtcalMinicalAddEventToArray($event, $eventsArray, $extcalTimeHandler, $startMonth, $endMonth, $cats);
@@ -160,32 +160,35 @@ function bExtcalMinicalShow($options)
      *  Making an array to create tabbed output on the template
      */
     // Flag current day
-    $selectedDays = array(
-        new Calendar_Day(date('Y', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($GLOBALS['xoopsUser']))), date('n', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($GLOBALS['xoopsUser']))),
-                         date('j', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($GLOBALS['xoopsUser'])))),
-    );
+    $selectedDays = [
+        new Calendar_Day(
+            date('Y', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($GLOBALS['xoopsUser']))),
+            date('n', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($GLOBALS['xoopsUser']))),
+                         date('j', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($GLOBALS['xoopsUser'])))
+        ),
+    ];
 
     // Build calendar object
     $monthCalObj = new Calendar_Month_Weeks($year, $month, $extcalConfig['week_start_day']);
     $monthCalObj->build();
 
-    $tableRows = array();
+    $tableRows = [];
     $rowId     = 0;
     $cellId    = 0;
     while ($weekCalObj = $monthCalObj->fetch()) {
         $weekCalObj->build($selectedDays);
-        $tableRows[$rowId]['weekInfo'] = array(
+        $tableRows[$rowId]['weekInfo'] = [
             'week'  => $weekCalObj->thisWeek('n_in_year'),
             'day'   => $weekCalObj->thisDay(),
             'month' => $monthCalObj->thisMonth(),
             'year'  => $monthCalObj->thisYear(),
-        );
+        ];
         while ($dayCalObj = $weekCalObj->fetch()) {
-            $tableRows[$rowId]['week'][$cellId] = array(
+            $tableRows[$rowId]['week'][$cellId] = [
                 'isEmpty'    => $dayCalObj->isEmpty(),
                 'number'     => $dayCalObj->thisDay(),
                 'isSelected' => $dayCalObj->isSelected(),
-            );
+            ];
             $day                                = $dayCalObj->thisDay();
             if (isset($eventsArray[$day]) && !$dayCalObj->isEmpty()) {
                 $tableRows[$rowId]['week'][$cellId]['haveEvents'] = true;
@@ -214,19 +217,19 @@ function bExtcalMinicalShow($options)
     }
 
     // Making navig data
-    $navig = array(
+    $navig = [
         'page' => $extcalConfig['start_page'],
         'uri'  => 'year=' . $monthCalObj->thisYear() . '&amp;month=' . $monthCalObj->thisMonth(),
         'name' => $extcalTimeHandler->getFormatedDate($extcalConfig['nav_date_month'], $monthCalObj->getTimestamp()),
-    );
+    ];
 
-    $horloge             = array();
+    $horloge             = [];
     $horloge['display']  = (trim($options[11]) != '');
     $horloge['fullName'] = XOOPS_URL . _EXTCAL_PATH_HORLOGES . $options[11];
     $horloge['width']    = $options[12] . 'px';
     $horloge['height']   = $options[13] . 'px';
 
-    $ret = array(
+    $ret = [
         'imageParam'   => $imageParam,
         'displayLink'  => $displayLink,
         'submitText'   => _MB_EXTCAL_SUBMIT_LINK_TEXT,
@@ -235,7 +238,7 @@ function bExtcalMinicalShow($options)
         'navig'        => $navig,
         'horloge'      => $horloge,
         'bgColor'      => $options[10],
-    );
+    ];
 
     // $t = print_r($horloge,true);
     // echo "<pre>{$t}</pre>";
@@ -259,7 +262,7 @@ function bExtcalMinicalEdit($options)
 
     extcal_getDefautminicalOption($options);
 
-    $xfValue = array();
+    $xfValue = [];
 
     $form = new XoopsTableForm(_OPTIONS, '', '');
     //$form->setExtra('enctype="multipart/form-data"');
@@ -281,7 +284,7 @@ function bExtcalMinicalEdit($options)
     $form->addElement($xfValue[$k], false);
     //---------------------------------------------------------------------
     $imageCats = $imageCatHandler->getObjects();
-    $t         = array();
+    $t         = [];
     $t[0]      = _NONE;
     foreach ($imageCats as $cat) {
         $t[$cat->getVar('imgcat_id')] = $cat->getVar('imgcat_name');
@@ -314,11 +317,11 @@ function bExtcalMinicalEdit($options)
     //=====================================================================
     $form->insertBreak('<div style="text-align: center;font-weight: bold;">' . _MB_EXTCAL_OPT_SHOW . '</div>', 'head');
 
-    $t = array(
+    $t = [
         -1 => _MB_EXTCAL_PREVIEW,
         0  => _MB_EXTCAL_CURRENT,
         1  => _MB_EXTCAL_NEXT,
-    );
+    ];
 
     $k           = 7;
     $xfValue[$k] = new XoopsFormSelect(_MB_EXTCAL_DISPLAY_MONTH, "options[{$k}]", $options[$k], 1, false);
@@ -333,7 +336,7 @@ function bExtcalMinicalEdit($options)
     $form->addElement($xfValue[$k], false);
     //---------------------------------------------------------------------
     //for ($h=0;$h<8;++$h) array_shift($options);
-    $t = array();
+    $t = [];
     foreach ($cats as $cat) {
         $t[$cat->getVar('cat_id')] = $cat->getVar('cat_name');
     }
@@ -354,7 +357,7 @@ function bExtcalMinicalEdit($options)
     $form->insertBreak('<div style="text-align: center;font-weight: bold;">' . _MB_EXTCAL_HORLOGE_OPT . '</div>', 'head');
     //---------------------------------------------------------------------
     $t = XoopsLists::getFileListAsArray(XOOPS_ROOT_PATH . _EXTCAL_PATH_HORLOGES);
-    $t = array_merge(array(' ' => _NONE), $t);
+    $t = array_merge([' ' => _NONE], $t);
 
     $k           = 11;
     $xfValue[$k] = new XoopsFormSelect(_MB_EXTCAL_HORLOGE, "options[{$k}]", $options[$k], 1, false);
@@ -372,16 +375,16 @@ function bExtcalMinicalEdit($options)
     //---------------------------------------------------------------------
     //=====================================================================
     return $form->render();
-/*
-          $t = array();
-          //while (list($key,$val) = each($xfValue)) {
-            foreach ($xfValue as $key => $val) {
-           $t[] = $val->render();
-          }
-         return implode("\n", $t);
-
-        return extcal_buildHtmlArray($xfValue, _OPTIONS);
-*/
+    /*
+              $t = array();
+              //while (list($key,$val) = each($xfValue)) {
+                foreach ($xfValue as $key => $val) {
+               $t[] = $val->render();
+              }
+             return implode("\n", $t);
+    
+            return extcal_buildHtmlArray($xfValue, _OPTIONS);
+    */
 }
 
 /**************************************************************************/

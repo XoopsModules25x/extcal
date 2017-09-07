@@ -37,11 +37,11 @@ $Month = new Calendar_Month_Weeks($_GET['y'], $_GET['m']);
 
 // Create an array of days which are "selected"
 // Used for Week::build() below
-$selectedDays = array(
+$selectedDays = [
     new Calendar_Day($_GET['y'], $_GET['m'], $_GET['d']),
     new Calendar_Day($_GET['y'], 12, 25),
     new Calendar_Day(date('Y'), date('m'), date('d')),
-);
+];
 
 // Instruct month to build Week objects
 $Month->build();

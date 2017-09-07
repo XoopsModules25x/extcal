@@ -28,7 +28,7 @@ if (!isset($_GET['event'])) {
     $eventId = (int)$_GET['event'];
 }
 $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
-$event        = $eventHandler->objectToArray($eventHandler->getEvent($eventId), array('cat_id'));
+$event        = $eventHandler->objectToArray($eventHandler->getEvent($eventId), ['cat_id']);
 
 //adding location
 /** @var ExtcalEtablissementHandler $locationHandler */

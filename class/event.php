@@ -17,7 +17,7 @@
  * @author       XOOPS Development Team,
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 require_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
 require_once __DIR__ . '/perm.php';
@@ -32,7 +32,7 @@ require_once __DIR__ . '/../include/constantes.php';
  */
 class ExtcalEvent extends XoopsObject
 {
-    public $externalKey = array();
+    public $externalKey = [];
 
     /**
      *
@@ -66,18 +66,18 @@ class ExtcalEvent extends XoopsObject
         $this->initVar('event_etablissement', XOBJ_DTYPE_INT, 5, false);
         $this->initVar('event_icone', XOBJ_DTYPE_TXTBOX, '', false);
 
-        $this->externalKey['cat_id']          = array(
+        $this->externalKey['cat_id']          = [
             'className'      => 'cat',
             'getMethodeName' => 'getCat',
             'keyName'        => 'cat',
             'core'           => false,
-        );
-        $this->externalKey['event_submitter'] = array(
+        ];
+        $this->externalKey['event_submitter'] = [
             'className'      => 'user',
             'getMethodeName' => 'get',
             'keyName'        => 'user',
             'core'           => true,
-        );
+        ];
     }
 
     /**
@@ -397,8 +397,8 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         //ext_echoArray($events);
 
         //Tri des evennement par date ascendante
-        $ordre      = array();
-        $eventArray = array();
+        $ordre      = [];
+        $eventArray = [];
 
         //        while (list($k, $v) = each($events)) {
         foreach ($events as $k => $t) {
@@ -437,7 +437,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
             $sens = 'ASC';
         }
         if (!isset($externalKeys)) {
-            $externalKeys = array('cat_id');
+            $externalKeys = ['cat_id'];
         }
         //------------------------------------------------------
         switch ($periode) {
@@ -520,7 +520,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
             $sens = 'ASC';
         }
         if (!isset($externalKeys)) {
-            $externalKeys = array('cat_id');
+            $externalKeys = ['cat_id'];
         }
         $user = $GLOBALS['xoopsUser'];
         //------------------------------------------------------
@@ -571,7 +571,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         $this->serverTimeToUserTimes($events);
 
         //Balyage de tous les evennements récurrents et creation de toutes le events
-        $eventsR = array();
+        $eventsR = [];
         //        while (list($k, $event) = each($events)) {
         foreach ($events as $k => $event) {
             //$te = $this->GetInterval($event, $start, $end);
@@ -997,7 +997,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
             $cats   = $catHandler->getAllCat($GLOBALS['xoopsUser']);
         }
         /***************************************************/
-        $reccurOptions = array();
+        $reccurOptions = [];
 
         if ($mode === 'edit' || $mode === 'clone') {
             if (!$event = $this->getEventWithNotApprove($data['event_id'])) {
@@ -1169,7 +1169,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
             $event_picture2      = '';
             $event_price         = '';
             $event_etablissement = '';
-            $files               = array();
+            $files               = [];
             $event_icone         = '';
         }
 
@@ -1206,7 +1206,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
         //$lstEtablissement = $etablissementHandler->getList($criteria);
         $etablissement_arr = $etablissementHandler->getAll($criteria);
-        $tEts              = array();
+        $tEts              = [];
         $tEts[0]           = _MD_EXTCAL_NONE;
         foreach (array_keys($etablissement_arr) as $i) {
             $tEts[$etablissement_arr[$i]->getVar('id')] = $etablissement_arr[$i]->getVar('nom');
@@ -1369,7 +1369,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
      */
     public function getIsRecur($parm)
     {
-        $recurFreq = array('daily', 'weekly', 'monthly', 'yearly');
+        $recurFreq = ['daily', 'weekly', 'monthly', 'yearly'];
 
         return in_array($parm['rrule_freq'], $recurFreq);
     }
@@ -1550,7 +1550,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
     {
         global $extcalConfig;
 
-        $recuEvents   = array();
+        $recuEvents   = [];
         $eventOptions = explode('|', $event['event_recur_rules']);
 
         switch ($eventOptions[0]) {
@@ -1610,7 +1610,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
                 $occurEventStart = $event['event_recur_start'];
                 $occurEventEnd   = $event['event_recur_start'] + ($event['event_end'] - $event['event_start']);
 
-                $dayArray = array('SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA');
+                $dayArray = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
 
                 $nbOccur = 0;
 
@@ -2343,7 +2343,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
             $result = $this->getSearchEvents($year, $month, $day, $cat, $searchExp, $andor, $orderBy, 0, 0);
         }
 
-        $ret = array();
+        $ret = [];
         while ($myrow = $xoopsDB->fetchArray($result)) {
             $myrow['cat']['cat_name']        = $myrow['cat_name'];
             $myrow['cat']['cat_color']       = $myrow['cat_color'];
@@ -2395,7 +2395,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
 
         $sql = 'SELECT te.*, tc.cat_name , tc.cat_color, ' . 'year(FROM_UNIXTIME(event_start)) AS year,' . 'month(FROM_UNIXTIME(event_start)) AS month,' . 'day(FROM_UNIXTIME(event_start)) AS day' . " FROM {$tEvent}, {$tCat}";
         //---------------------------------------------------
-        $tw   = array();
+        $tw   = [];
         $tw[] = 'te.cat_id = tc.cat_id';
         $tw[] = 'event_approved = 1';
 
@@ -2431,21 +2431,21 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         }
 
         if (is_array($queryarray)) {
-            $tFields = array(
+            $tFields = [
                 'te.event_title',
                 'te.event_desc',
                 'te.event_contact',
                 'te.event_address',
                 'tc.cat_name',
-            );
-            $t       = array();
+            ];
+            $t       = [];
             for ($i = 0, $count = count($queryarray); $i < $count; ++$i) {
                 $t1[] = " %1\$s LIKE '#{$queryarray[$i]}#' ";
             }
 
             $flt = '(' . implode(" {$andor} ", $t1) . ')';
 
-            $t = array();
+            $t = [];
             for ($h = 0, $count = count($tFields); $h < $count; ++$h) {
                 $t[] = sprintf($flt, $tFields[$h]);
             }
@@ -2458,7 +2458,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         $sql .= ' WHERE ' . implode(' AND ', $tw);
         //------------------------------------------------------------
         if (count($orderBy) > 0) {
-            $t = array();
+            $t = [];
             for ($h = 0, $count = count($orderBy); $h < $count; ++$h) {
                 if ($orderBy[$h] != '') {
                     $t[] = $orderBy[$h];
@@ -2493,7 +2493,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
     {
         global $xoopsDB;
 
-        $result = $this->getSearchEvents(0, 0, 0, 0, $queryarray, $andor, array('event_id DESC'));
+        $result = $this->getSearchEvents(0, 0, 0, 0, $queryarray, $andor, ['event_id DESC']);
 
         $i = 0;
         while ($myrow = $xoopsDB->fetchArray($result)) {
@@ -2568,15 +2568,15 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
             $sql .= ") ";
             */
 
-            $tFields = array('event_title', 'event_desc', 'event_contact', 'event_address', 'cat_name');
-            $t       = array();
+            $tFields = ['event_title', 'event_desc', 'event_contact', 'event_address', 'cat_name'];
+            $t       = [];
             for ($i = 0, $count = count($queryarray); $i < $count; ++$i) {
                 $t1[] = " %1\$s LIKE '#{$queryarray[$i]}#' ";
             }
 
             $flt = '(' . implode(" {$andor} ", $t1) . ')';
 
-            $t = array();
+            $t = [];
             for ($h = 0, $count = count($tFields); $h < $count; ++$h) {
                 $t[] = sprintf($flt, $tFields[$h]);
             }
@@ -2592,7 +2592,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         $sql .= ' ORDER BY event_id DESC';
 
         $result = $xoopsDB->query($sql, $limit, $offset);
-        $ret    = array();
+        $ret    = [];
         $i      = 0;
         if ($xoopsSearch) {
             while ($myrow = $xoopsDB->fetchArray($result)) {

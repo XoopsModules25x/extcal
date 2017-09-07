@@ -81,7 +81,7 @@ class Calendar_Validator
      *
      * @var array
      */
-    public $errors = array();
+    public $errors = [];
 
     /**
      * Constructs Calendar_Validator.
@@ -101,14 +101,14 @@ class Calendar_Validator
      */
     public function isValid()
     {
-        $checks = array(
+        $checks = [
             'isValidYear',
             'isValidMonth',
             'isValidDay',
             'isValidHour',
             'isValidMinute',
             'isValidSecond',
-        );
+        ];
         $valid  = true;
         foreach ($checks as $check) {
             if (!$this->{$check}()) {

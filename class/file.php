@@ -17,7 +17,7 @@
  * @author       XOOPS Development Team,
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 require_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
 require_once XOOPS_ROOT_PATH . '/class/uploader.php';
@@ -67,7 +67,7 @@ class ExtcalFileHandler extends ExtcalPersistableObjectHandler
     {
         $userId = $GLOBALS['xoopsUser'] ? $GLOBALS['xoopsUser']->getVar('uid') : 0;
 
-        $allowedMimeType = array();
+        $allowedMimeType = [];
         $mimeType        = include XOOPS_ROOT_PATH . '/include/mimetypes.inc.php';
         foreach ($GLOBALS['xoopsModuleConfig']['allowed_file_extention'] as $fileExt) {
             $allowedMimeType[] = $mimeType[$fileExt];
@@ -83,7 +83,7 @@ class ExtcalFileHandler extends ExtcalPersistableObjectHandler
             return false;
         }
 
-        $data = array(
+        $data = [
             'file_name'     => $uploader->getSavedFileName(),
             'file_nicename' => $uploader->getMediaName(),
             'file_mimetype' => $uploader->getMediaType(),
@@ -92,7 +92,7 @@ class ExtcalFileHandler extends ExtcalPersistableObjectHandler
             'file_approved' => 1,
             'event_id'      => $eventId,
             'uid'           => $userId,
-        );
+        ];
 
         $file = $this->create();
         $file->setVars($data);

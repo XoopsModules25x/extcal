@@ -26,14 +26,14 @@ class TestOfDay extends TestOfCalendar
 
     public function testPrevDay_Array()
     {
-        $this->assertEqual(array(
+        $this->assertEqual([
                                'year'   => 2003,
                                'month'  => 10,
                                'day'    => 24,
                                'hour'   => 0,
                                'minute' => 0,
                                'second' => 0,
-                           ), $this->cal->prevDay('array'));
+                           ], $this->cal->prevDay('array'));
     }
 
     public function testPrevHour()
@@ -120,7 +120,7 @@ class TestOfDayBuild extends TestOfDay
     public function testFetchAll()
     {
         $this->cal->build();
-        $children = array();
+        $children = [];
         $i        = 0;
         while ($Child = $this->cal->fetch()) {
             $children[$i] = $Child;
@@ -132,7 +132,7 @@ class TestOfDayBuild extends TestOfDay
     public function testSelection()
     {
         require_once CALENDAR_ROOT . 'Hour.php';
-        $selection = array(new Calendar_Hour(2003, 10, 25, 13));
+        $selection = [new Calendar_Hour(2003, 10, 25, 13)];
         $this->cal->build($selection);
         $i = 0;
         while ($Child = $this->cal->fetch()) {

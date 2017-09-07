@@ -101,7 +101,7 @@ class Calendar_Year extends Calendar
      *
      * @return bool
      */
-    public function build($sDates = array(), $firstDay = null)
+    public function build($sDates = [], $firstDay = null)
     {
         require_once CALENDAR_ROOT . 'Factory.php';
         $this->firstDay = $this->defineFirstDayOfWeek($firstDay);

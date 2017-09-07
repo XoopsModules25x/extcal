@@ -45,17 +45,17 @@ function tableExists($tablename)
 function xoops_module_pre_update_extcal(XoopsModule $xoopsModule)
 {
     $moduleDirName = basename(dirname(__DIR__));
-    $classUtility  = ucfirst($moduleDirName) . 'Utility';
-    if (!class_exists($classUtility)) {
+    $utilityClass  = ucfirst($moduleDirName) . 'Utility';
+    if (!class_exists($utilityClass)) {
         xoops_load('utility', $moduleDirName);
     }
     //check for minimum XOOPS version
-    if (!$classUtility::checkVerXoops($xoopsModule)) {
+    if (!$utilityClass::checkVerXoops($xoopsModule)) {
         return false;
     }
 
     // check for minimum PHP version
-    if (!$classUtility::checkVerPhp($xoopsModule)) {
+    if (!$utilityClass::checkVerPhp($xoopsModule)) {
         return false;
     }
 
@@ -84,7 +84,7 @@ function xoops_module_update_extcal(XoopsModule $xoopsModule, $previousVersion =
     $fld = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/versions/';
     $cls = 'extcal_%1$s';
 
-    $version = array(
+    $version = [
         '2_04' => 204,
         '2_15' => 215,
         '2_21' => 221,
@@ -94,7 +94,7 @@ function xoops_module_update_extcal(XoopsModule $xoopsModule, $previousVersion =
         '2_34' => 234,
         '2_35' => 235,
         '2_37' => 237,
-    );
+    ];
 
     //    while (list($key, $val) = each($version)) {
     foreach ($version as $key => $val) {
@@ -105,15 +105,16 @@ function xoops_module_update_extcal(XoopsModule $xoopsModule, $previousVersion =
             if (is_readable($f)) {
                 echo "mise à jour version : {$key} = {$val}<br>";
                 require_once $f;
-                $cl = new $name($xoopsModule, array('previousVersion' => $previousVersion));
+                $cl = new $name($xoopsModule, ['previousVersion' => $previousVersion]);
             }
         }
     }
 
     if ($previousVersion < 240) {
         $configurator = include __DIR__ . '/config.php';
-        $classUtility = ucfirst($moduleDirName) . 'Utility';
-        if (!class_exists($classUtility)) {
+        /** @var ExtcalUtility $utilityClass */
+        $utilityClass = ucfirst($moduleDirName) . 'Utility';
+        if (!class_exists($utilityClass)) {
             xoops_load('utility', $moduleDirName);
         }
 
@@ -122,7 +123,7 @@ function xoops_module_update_extcal(XoopsModule $xoopsModule, $previousVersion =
             foreach ($configurator['templateFolders'] as $folder) {
                 $templateFolder = $GLOBALS['xoops']->path('modules/' . $moduleDirName . $folder);
                 if (is_dir($templateFolder)) {
-                    $templateList = array_diff(scandir($templateFolder, SCANDIR_SORT_NONE), array('..', '.'));
+                    $templateList = array_diff(scandir($templateFolder, SCANDIR_SORT_NONE), ['..', '.']);
                     foreach ($templateList as $k => $v) {
                         $fileInfo = new SplFileInfo($templateFolder . $v);
                         if ($fileInfo->getExtension() === 'html' && $fileInfo->getFilename() !== 'index.html') {
@@ -140,7 +141,7 @@ function xoops_module_update_extcal(XoopsModule $xoopsModule, $previousVersion =
             $file = __DIR__ . '/../assets/images/blank.png';
             foreach (array_keys($configurator['copyFiles']) as $i) {
                 $dest = $configurator['copyFiles'][$i] . '/blank.png';
-                $classUtility::copyFile($file, $dest);
+                $utilityClass::copyFile($file, $dest);
             }
         }
 

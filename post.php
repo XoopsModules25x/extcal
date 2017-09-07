@@ -32,7 +32,6 @@ $xoopsUser   = $xoopsUser ?: null;
 
 if (!$permHandler->isAllowed($xoopsUser, 'extcal_cat_submit', (int)$_POST['cat_id'])) {
     redirect_header('index.php', 3);
-    exit;
 }
 
 // Getting eXtCal object's handler
@@ -44,7 +43,7 @@ if (isset($_POST['form_preview'])) {
     // Title of the page
     $xoopsTpl->assign('xoops_pagetitle', _MI_EXTCAL_SUBMIT_EVENT);
 
-    $data = array(
+    $data = [
         'event_title'        => $_POST['event_title'],
         'cat_id'             => (int)$_POST['cat_id'],
         'event_desc'         => $_POST['event_desc'],
@@ -61,7 +60,7 @@ if (isset($_POST['form_preview'])) {
         'event_price'        => $_POST['event_price'],
         'event_organisateur' => $_POST['event_organisateur'],
         'event_icone'        => $_POST['event_icone'],
-    );
+    ];
 
     if (isset($_POST['event_id'])) {
         $data['event_id'] = (int)$_POST['event_id'];
@@ -69,7 +68,7 @@ if (isset($_POST['form_preview'])) {
 
     // Creating tempory event object to apply Object data filtering
     $event = $eventHandler->createEventForPreview($data);
-    $event = $eventHandler->objectToArray($event, array('cat_id'), 'p');
+    $event = $eventHandler->objectToArray($event, ['cat_id'], 'p');
 
     // Adding formated date for start and end event
     $eventHandler->formatEventDate($event, $xoopsModuleConfig['event_date_event']);
@@ -122,7 +121,7 @@ if (isset($_POST['form_preview'])) {
     $permHandler = ExtcalPerm::getHandler();
     $approve     = $permHandler->isAllowed($xoopsUser, 'extcal_cat_autoapprove', (int)$_POST['cat_id']);
 
-    $data = array(
+    $data = [
         'event_title'         => $_POST['event_title'],
         'cat_id'              => $_POST['cat_id'],
         'event_desc'          => $_POST['event_desc'],
@@ -143,7 +142,7 @@ if (isset($_POST['form_preview'])) {
         'dohtml'              => $xoopsModuleConfig['allow_html'],
         'event_icone'         => $_POST['event_icone'],
 
-    );
+    ];
 
     if (isset($_POST['event_id'])) {
         $eventHandler->modifyEvent((int)$_POST['event_id'], $data);
@@ -164,14 +163,14 @@ if (isset($_POST['form_preview'])) {
         }
 
         $notificationHandler = xoops_getHandler('notification');
-        $notificationHandler->triggerEvent('global', 0, $notifyEvent, array('EVENT_TITLE' => $_POST['event_title']));
+        $notificationHandler->triggerEvent('global', 0, $notifyEvent, ['EVENT_TITLE' => $_POST['event_title']]);
         if ($approve == 1) {
             $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
             $cat        = $catHandler->getCat((int)$_POST['cat_id'], $xoopsUser, 'all');
-            $notificationHandler->triggerEvent('cat', (int)$_POST['cat_id'], 'new_event_cat', array(
+            $notificationHandler->triggerEvent('cat', (int)$_POST['cat_id'], 'new_event_cat', [
                 'EVENT_TITLE' => $_POST['event_title'],
                 'CAT_NAME'    => $cat->getVar('cat_name'),
-            ));
+            ]);
         }
     }
 

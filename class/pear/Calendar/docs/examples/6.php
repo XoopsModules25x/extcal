@@ -31,7 +31,7 @@ if (!isset($_GET['d'])) {
 
 $Month     = new Calendar_Month_Weekdays($_GET['y'], $_GET['m']);
 $Day       = new Calendar_Day($_GET['y'], $_GET['m'], $_GET['d']);
-$selection = array($Day);
+$selection = [$Day];
 
 #-----------------------------------------------------------------------------#
 if (isset($_GET['mime']) && $_GET['mime'] === 'wml') {

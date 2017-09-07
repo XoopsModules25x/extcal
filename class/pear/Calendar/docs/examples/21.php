@@ -24,10 +24,10 @@ if (!isset($_GET['year'])) {
     $_GET['year'] = date('Y');
 }
 
-$week_types = array(
+$week_types = [
     'n_in_year',
     'n_in_month',
-);
+];
 
 if (!isset($_GET['week_type']) || !in_array($_GET['week_type'], $week_types)) {
     $_GET['week_type'] = 'n_in_year';

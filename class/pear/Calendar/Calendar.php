@@ -191,7 +191,7 @@ class Calendar
      *
      * @var array
      */
-    public $children = array();
+    public $children = [];
 
     /**
      * Constructs the Calendar.
@@ -302,14 +302,14 @@ class Calendar
             $stamp = $this->getTimestamp();
         }
 
-        return array(
+        return [
             'year'   => $this->cE->stampToYear($stamp),
             'month'  => $this->cE->stampToMonth($stamp),
             'day'    => $this->cE->stampToDay($stamp),
             'hour'   => $this->cE->stampToHour($stamp),
             'minute' => $this->cE->stampToMinute($stamp),
             'second' => $this->cE->stampToSecond($stamp),
-        );
+        ];
     }
 
     /**
@@ -351,7 +351,7 @@ class Calendar
      * @return bool
      * @abstract
      */
-    public function build($sDates = array())
+    public function build($sDates = [])
     {
         require_once __DIR__ . '/PEAR.php';
         PEAR::raiseError('Calendar::build is abstract', null, PEAR_ERROR_TRIGGER, E_USER_NOTICE, 'Calendar::build()');

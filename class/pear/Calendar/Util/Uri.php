@@ -67,7 +67,7 @@ class Calendar_Util_Uri
      *
      * @var array
      */
-    public $uris = array();
+    public $uris = [];
 
     /**
      * String to separate fragments with.

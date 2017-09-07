@@ -36,14 +36,14 @@ class TestOfCalendar extends UnitTestCase
 
     public function testPrevYear_Array()
     {
-        $this->assertEqual(array(
+        $this->assertEqual([
                                'year'   => 2002,
                                'month'  => 1,
                                'day'    => 1,
                                'hour'   => 0,
                                'minute' => 0,
                                'second' => 0,
-                           ), $this->cal->prevYear('array'));
+                           ], $this->cal->prevYear('array'));
     }
 
     public function testThisYear()
@@ -63,14 +63,14 @@ class TestOfCalendar extends UnitTestCase
 
     public function testPrevMonth_Array()
     {
-        $this->assertEqual(array(
+        $this->assertEqual([
                                'year'   => 2003,
                                'month'  => 9,
                                'day'    => 1,
                                'hour'   => 0,
                                'minute' => 0,
                                'second' => 0,
-                           ), $this->cal->prevMonth('array'));
+                           ], $this->cal->prevMonth('array'));
     }
 
     public function testThisMonth()
@@ -90,14 +90,14 @@ class TestOfCalendar extends UnitTestCase
 
     public function testPrevDay_Array()
     {
-        $this->assertEqual(array(
+        $this->assertEqual([
                                'year'   => 2003,
                                'month'  => 10,
                                'day'    => 24,
                                'hour'   => 0,
                                'minute' => 0,
                                'second' => 0,
-                           ), $this->cal->prevDay('array'));
+                           ], $this->cal->prevDay('array'));
     }
 
     public function testThisDay()

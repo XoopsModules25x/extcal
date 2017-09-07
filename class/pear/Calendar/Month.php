@@ -93,7 +93,7 @@ class Calendar_Month extends Calendar
      *
      * @return bool
      */
-    public function build($sDates = array())
+    public function build($sDates = [])
     {
         require_once CALENDAR_ROOT . 'Day.php';
         $daysInMonth = $this->cE->getDaysInMonth($this->year, $this->month);

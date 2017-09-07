@@ -19,7 +19,7 @@
 
 include __DIR__ . '/../../mainfile.php';
 require_once __DIR__ . '/include/constantes.php';
-$params                                  = array('view' => _EXTCAL_NAV_YEAR, 'file' => _EXTCAL_FILE_YEAR);
+$params                                  = ['view' => _EXTCAL_NAV_YEAR, 'file' => _EXTCAL_FILE_YEAR];
 $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
 require_once __DIR__ . '/header.php';
 
@@ -48,12 +48,12 @@ $form->assign($xoopsTpl);
 /**********************************************************************/
 // Retriving events and formatting them
 //$events = $eventHandler->objectToArray($eventHandler->getEventYear($year, $cat), array('cat_id'));
-$criteres = array(
+$criteres = [
     'periode'      => _EXTCAL_EVENTS_YEAR,
     'year'         => $year,
     'cat'          => $cat,
     'externalKeys' => 'cat_id',
-);
+];
 $events   = $eventHandler->getEventsOnPeriode($criteres);
 /**********************************************************************/
 $eventsArray = $events;
@@ -96,20 +96,20 @@ $xoopsTpl->assign('cats', $cats);
 $prevYear = $year - 1;
 $nexYear  = $year + 1;
 // Making navig data
-$navig = array(
-    'prev' => array(
+$navig = [
+    'prev' => [
         'uri'  => 'year=' . $prevYear,
         'name' => $prevYear,
-    ),
-    'this' => array(
+    ],
+    'this' => [
         'uri'  => 'year=' . $year,
         'name' => $year,
-    ),
-    'next' => array(
+    ],
+    'next' => [
         'uri'  => 'year=' . $nexYear,
         'name' => $nexYear,
-    ),
-);
+    ],
+];
 
 // Title of the page
 $xoopsTpl->assign('xoops_pagetitle', $xoopsModule->getVar('name') . ' ' . $navig['this']['name']);
@@ -148,7 +148,7 @@ if ($xoopsUser) {
 }
 
 //mb missing for xBootstrap templates by Angelo
-$lang = array(
+$lang = [
     'start'      => _MD_EXTCAL_START,
     'end'        => _MD_EXTCAL_END,
     'calmonth'   => _MD_EXTCAL_NAV_CALMONTH,
@@ -161,7 +161,7 @@ $lang = array(
     'agendaday'  => _MD_EXTCAL_NAV_AGENDA_DAY,
     'search'     => _MD_EXTCAL_NAV_SEARCH,
     'newevent'   => _MD_EXTCAL_NAV_NEW_EVENT,
-);
+];
 // Assigning language data to the template
 $xoopsTpl->assign('lang', $lang);
 $xoopsTpl->assign('view', 'year');

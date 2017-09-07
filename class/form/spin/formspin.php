@@ -18,7 +18,7 @@
  *
  * @version         ExtcalFormSpin v 1.2
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 xoops_load('XoopsFormElement');
 
@@ -420,7 +420,7 @@ class ExtcalFormSpin extends XoopsFormElement
         $styleText    = $this->htmlAddAttribut('style', $this->getStyleText());
         $styleArrow   = 'style="display: table-cell;vertical-align: middle; text-align: center; line-height: 100%; font-size: 7 pt; margin-top: 0; margin-bottom: 0; padding: 0"';
         //----------------------------------------------------------------
-        $t = array();
+        $t = [];
 
         if ($this->_loadJS) {
             $js  = $sSpinFolder . '/js/spin.js';

@@ -15,26 +15,26 @@ if (!@include 'Calendar/Calendar.php') {
  */
 class Calendar_Server
 {
-    public $__dispatch_map = array();
-    public $__typedef      = array();
+    public $__dispatch_map = [];
+    public $__typedef      = [];
 
     public function __construct()
     {
-        $this->__dispatch_map['getMonth'] = array(
-            'in'  => array('year' => 'int', 'month' => 'int'),
-            'out' => array('month' => '{urn:PEAR_SOAP_Calendar}Month'),
-        );
-        $this->__typedef['Month']         = array(
+        $this->__dispatch_map['getMonth'] = [
+            'in'  => ['year' => 'int', 'month' => 'int'],
+            'out' => ['month' => '{urn:PEAR_SOAP_Calendar}Month'],
+        ];
+        $this->__typedef['Month']         = [
             'monthname' => 'string',
             'days'      => '{urn:PEAR_SOAP_Calendar}MonthDays',
-        );
-        $this->__typedef['MonthDays']     = array(array('{urn:PEAR_SOAP_Calendar}Day'));
-        $this->__typedef['Day']           = array(
+        ];
+        $this->__typedef['MonthDays']     = [['{urn:PEAR_SOAP_Calendar}Day']];
+        $this->__typedef['Day']           = [
             'isFirst' => 'int',
             'isLast'  => 'int',
             'isEmpty' => 'int',
             'day'     => 'int',
-        );
+        ];
     }
 
     /**
@@ -70,19 +70,19 @@ class Calendar_Server
             return new SOAP_Fault($errorMsg, 'Client');
         } else {
             $monthname = date('F Y', $Month->getTimestamp());
-            $days      = array();
+            $days      = [];
             $Month->build();
             while ($Day = $Month->fetch()) {
-                $day    = array(
+                $day    = [
                     'isFirst' => (int)$Day->isFirst(),
                     'isLast'  => (int)$Day->isLast(),
                     'isEmpty' => (int)$Day->isEmpty(),
                     'day'     => (int)$Day->thisDay(),
-                );
+                ];
                 $days[] = $day;
             }
 
-            return array('monthname' => $monthname, 'days' => $days);
+            return ['monthname' => $monthname, 'days' => $days];
         }
     }
 }

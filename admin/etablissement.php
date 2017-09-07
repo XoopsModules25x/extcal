@@ -154,11 +154,11 @@ switch ($op) {
                 redirect_header('etablissement.php', 1, _AM_EXTCAL_REDIRECT_DELOK);
             }
         } else {
-            xoops_confirm(array(
+            xoops_confirm([
                               'ok'               => 1,
                               'etablissement_id' => $_REQUEST['etablissement_id'],
                               'op'               => 'delete_etablissement',
-                          ), $_SERVER['REQUEST_URI'], _AM_EXTCAL_ETABLISSEMENT_SURDEL . '<br>');
+                          ], $_SERVER['REQUEST_URI'], _AM_EXTCAL_ETABLISSEMENT_SURDEL . '<br>');
         }
         break;
 
@@ -206,13 +206,13 @@ switch ($op) {
         $delimg = @$_REQUEST['delimg'];
         $delimg = isset($delimg) ? (int)$delimg : 0;
         if ($delimg == 0 && !empty($_REQUEST['xoops_upload_file'][0])) {
-            $upload = new XoopsMediaUploader($uploaddir_etablissement, array(
+            $upload = new XoopsMediaUploader($uploaddir_etablissement, [
                 'image/gif',
                 'image/jpeg',
                 'image/pjpeg',
                 'image/x-png',
                 'image/png',
-            ), 3145728, null, null);
+            ], 3145728, null, null);
             if ($upload->fetchMedia($_REQUEST['xoops_upload_file'][0])) {
                 $upload->setPrefix('etablissement_');
                 $upload->fetchMedia($_REQUEST['xoops_upload_file'][0]);

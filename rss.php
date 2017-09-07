@@ -34,13 +34,13 @@ if (!$tpl->is_cached('db:extcal_rss.tpl', $cat)) {
         $tpl->assign('image_width', 92);
         $tpl->assign('image_height', 52);
         foreach ($events as $event) {
-            $tpl->append('items', array(
+            $tpl->append('items', [
                 'title'       => xoops_utf8_encode(htmlspecialchars($event->getVar('event_title'), ENT_QUOTES)),
                 'link'        => XOOPS_URL . '/modules/extcal/event.php?event=' . $event->getVar('event_id'),
                 'guid'        => XOOPS_URL . '/modules/extcal/event.php?event=' . $event->getVar('event_id'),
                 'pubdate'     => formatTimestamp($event->getVar('event_start'), 'rss'),
                 'description' => xoops_utf8_encode(htmlspecialchars($event->getVar('event_desc'), ENT_QUOTES)),
-            ));
+            ]);
         }
     }
 }

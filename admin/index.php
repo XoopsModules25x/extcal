@@ -20,16 +20,16 @@
 require_once __DIR__ . '/admin_header.php';
 // Display Admin header
 xoops_cp_header();
-
-$classUtility = ucfirst($moduleDirName) . 'Utility';
-if (!class_exists($classUtility)) {
+/** @var ExtcalUtility $utilityClass */
+$utilityClass = ucfirst($moduleDirName) . 'Utility';
+if (!class_exists($utilityClass)) {
     xoops_load('utility', $moduleDirName);
 }
 
 $configurator = include __DIR__ . '/../include/config.php';
 
 foreach (array_keys($configurator['uploadFolders']) as $i) {
-    $classUtility::createFolder($configurator['uploadFolders'][$i]);
+    $utilityClass::createFolder($configurator['uploadFolders'][$i]);
     $adminObject->addConfigBoxLine($configurator['uploadFolders'][$i], 'folder');
     //    $adminObject->addConfigBoxLine(array($configurator['uploadFolders'][$i], '777'), 'chmod');
 }

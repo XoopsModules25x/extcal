@@ -65,13 +65,13 @@ switch ($op) {
                 if (empty($_POST['mail_inactive']) && in_array('pm', $_POST['mail_send_to'])) {
                     $xoopsMailer->usePM();
                 }
-                $tag = array(
+                $tag = [
                     'EV_CAT'   => $cat->getVar('cat_name'),
                     'EV_TITLE' => $event->getVar('event_title'),
                     'EV_START' => $extcalTime->getFormatedDate($xoopsModuleConfig['date_long'], $event->getVar('event_start')),
                     'EV_END'   => $extcalTime->getFormatedDate($xoopsModuleConfig['date_long'], $event->getVar('event_end')),
                     'EV_LINK'  => XOOPS_URL . '/modules/extcal/event.php?event=' . $event->getVar('event_id'),
-                );
+                ];
                 $xoopsMailer->assign($tag);
                 $xoopsMailer->send(true);
                 echo $xoopsMailer->getSuccess();
@@ -163,7 +163,7 @@ switch ($op) {
         $adminObject->displayNavigation(basename(__FILE__));
         $adminObject->displayIndex();
         //***************************************************************************************
-        $pendingEvent = $eventHandler->objectToArray($eventHandler->getPendingEvent(), array('cat_id'));
+        $pendingEvent = $eventHandler->objectToArray($eventHandler->getPendingEvent(), ['cat_id']);
         $eventHandler->formatEventsDate($pendingEvent, 'd/m/Y');
 
         echo '<fieldset><legend style="font-weight:bold; color:#990000;">' . _AM_EXTCAL_PENDING_EVENT . '</legend>';

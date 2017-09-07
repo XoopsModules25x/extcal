@@ -1,6 +1,6 @@
 <?php
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
  * Class ExtcalFormDateTime.
@@ -24,7 +24,7 @@ class ExtcalFormDateTime
         $endTS       = ($endTS > 0) ? $endTS : time();
         $endDatetime = getdate($endTS);
 
-        $timearray = array();
+        $timearray = [];
         for ($i = 0; $i < 24; ++$i) {
             for ($j = 0; $j < _EXTCAL_TS_MINUTE; $j += 15) {
                 $key             = ($i * _EXTCAL_TS_HOUR) + ($j * _EXTCAL_TS_MINUTE);

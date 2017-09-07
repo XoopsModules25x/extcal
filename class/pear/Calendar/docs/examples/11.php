@@ -59,14 +59,14 @@ $sql = "
             eventtime < '" . $Day->nextDay(true) . "';";
 
 // An array simulating data from a database
-$result = array(
-    array('eventtime' => mktime(9, 0, 0, 10, 24, 2003), 'entry' => 'Meeting with sales team'),
-    array('eventtime' => mktime(11, 0, 0, 10, 24, 2003), 'entry' => 'Conference call with Widget Inc.'),
-    array('eventtime' => mktime(15, 0, 0, 10, 24, 2003), 'entry' => 'Presentation to board of directors'),
-);
+$result = [
+    ['eventtime' => mktime(9, 0, 0, 10, 24, 2003), 'entry' => 'Meeting with sales team'],
+    ['eventtime' => mktime(11, 0, 0, 10, 24, 2003), 'entry' => 'Conference call with Widget Inc.'],
+    ['eventtime' => mktime(15, 0, 0, 10, 24, 2003), 'entry' => 'Presentation to board of directors'],
+];
 
 // An array to place selected hours in
-$selection = array();
+$selection = [];
 
 // Loop through the "database result"
 foreach ($result as $row) {

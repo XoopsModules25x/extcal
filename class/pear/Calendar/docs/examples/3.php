@@ -84,10 +84,10 @@ $next   = $_SERVER['PHP_SELF'] . '?y=' . $NMonth->thisYear() . '&m=' . $NMonth->
 <body>
 
 <?php
-$selectedDays = array(
+$selectedDays = [
     new Calendar_Day($_GET['y'], $_GET['m'], $_GET['d']),
     new Calendar_Day($_GET['y'], 12, 25),
-);
+];
 
 // Build the days in the month
 $Month->build($selectedDays);

@@ -76,7 +76,7 @@ function bExtcalUpcomingShow($options)
 
     // Retriving events and formatting them
     //$events = $eventHandler->objectToArray($eventHandler->getEventWeek($day, $month, $year, $cat), array('cat_id'));
-    $criteres = array(
+    $criteres = [
         'periode'      => _EXTCAL_EVENTS_UPCOMING,
         //        'periode'      => _EXTCAL_EVENTS_CALENDAR_WEEK,
         'day'          => $day,
@@ -86,7 +86,7 @@ function bExtcalUpcomingShow($options)
         'externalKeys' => 'cat_id',
         'nbEvent'      => $nbEvent,
         'nbDays'       => $nbDays,
-    );
+    ];
     $events   = $eventHandler->getEventsOnPeriode($criteres);
 
     //----------------------------

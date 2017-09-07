@@ -22,7 +22,7 @@ require_once CALENDAR_ROOT . 'Decorator.php';
  */
 class DiaryEvent extends Calendar_Decorator
 {
-    public $entries = array();
+    public $entries = [];
 
     /**
      * @param $calendar
@@ -74,7 +74,7 @@ class MonthPayload_Decorator extends Calendar_Decorator
      *
      * @return bool
      */
-    public function build($events = array())
+    public function build($events = [])
     {
         require_once CALENDAR_ROOT . 'Day.php';
         require_once CALENDAR_ROOT . 'Table/Helper.php';
@@ -142,23 +142,23 @@ class MonthPayload_Decorator extends Calendar_Decorator
 // you can switch Calendar Engine and the example still works
 $cal = new Calendar();
 
-$events = array();
+$events = [];
 //add some events
-$events[] = array(
+$events[] = [
     'start' => $cal->cE->dateToStamp(2004, 6, 1, 10),
     'end'   => $cal->cE->dateToStamp(2004, 6, 1, 12),
     'desc'  => 'Important meeting',
-);
-$events[] = array(
+];
+$events[] = [
     'start' => $cal->cE->dateToStamp(2004, 6, 1, 21),
     'end'   => $cal->cE->dateToStamp(2004, 6, 1, 23, 59),
     'desc'  => 'Dinner with the boss',
-);
-$events[] = array(
+];
+$events[] = [
     'start' => $cal->cE->dateToStamp(2004, 6, 5),
     'end'   => $cal->cE->dateToStamp(2004, 6, 10, 23, 59),
     'desc'  => 'Holidays!',
-);
+];
 
 $Month          = new Calendar_Month_Weekdays(2004, 6);
 $MonthDecorator = new MonthPayload_Decorator($Month);

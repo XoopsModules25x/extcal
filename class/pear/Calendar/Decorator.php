@@ -245,7 +245,7 @@ class Calendar_Decorator
      * @return bool
      * @abstract
      */
-    public function build($sDates = array())
+    public function build($sDates = [])
     {
         $this->calendar->build($sDates);
     }

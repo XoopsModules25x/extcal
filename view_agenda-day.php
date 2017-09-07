@@ -2,7 +2,7 @@
 
 include __DIR__ . '/../../mainfile.php';
 require_once __DIR__ . '/include/constantes.php';
-$params                                  = array('view' => _EXTCAL_NAV_AGENDA_DAY, 'file' => _EXTCAL_FILE_AGENDA_DAY);
+$params                                  = ['view' => _EXTCAL_NAV_AGENDA_DAY, 'file' => _EXTCAL_FILE_AGENDA_DAY];
 $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
 require_once __DIR__ . '/header.php';
 
@@ -35,7 +35,7 @@ $nbJours  = $xoopsModuleConfig['agenda_nb_days_day']; //nombre de jour
 /**********************************************************************/
 // Retriving events and formatting them
 //$events = $eventHandler->objectToArray($eventHandler->getEventWeek($day, $month, $year, $cat, $nbJours), array('cat_id'));
-$criteres = array(
+$criteres = [
     'periode'      => _EXTCAL_EVENTS_DAY,
     'day'          => $day,
     'month'        => $month,
@@ -43,7 +43,7 @@ $criteres = array(
     'cat'          => $cat,
     'nbJours'      => $nbJours,
     'externalKeys' => 'cat_id',
-);
+];
 $events   = $eventHandler->getEventsOnPeriode($criteres);
 /**********************************************************************/
 $eventsArray = $events;
@@ -97,20 +97,20 @@ $dayCalObj  = new Calendar_Day($year, $month, $day);
 $pDayCalObj = $dayCalObj->prevDay('object');
 $nDayCalObj = $dayCalObj->nextDay('object');
 
-$navig = array(
-    'prev' => array(
+$navig = [
+    'prev' => [
         'uri'  => 'year=' . $pDayCalObj->thisYear() . '&amp;month=' . $pDayCalObj->thisMonth() . '&amp;day=' . $pDayCalObj->thisDay(),
         'name' => $extcalTimeHandler->getFormatedDate($xoopsModuleConfig['nav_date_day'], $pDayCalObj->getTimestamp()),
-    ),
-    'this' => array(
+    ],
+    'this' => [
         'uri'  => 'year=' . $dayCalObj->thisYear() . '&amp;month=' . $dayCalObj->thisMonth() . '&amp;day=' . $dayCalObj->thisDay(),
         'name' => $extcalTimeHandler->getFormatedDate($xoopsModuleConfig['nav_date_day'], $dayCalObj->getTimestamp()),
-    ),
-    'next' => array(
+    ],
+    'next' => [
         'uri'  => 'year=' . $nDayCalObj->thisYear() . '&amp;month=' . $nDayCalObj->thisMonth() . '&amp;day=' . $nDayCalObj->thisDay(),
         'name' => $extcalTimeHandler->getFormatedDate($xoopsModuleConfig['nav_date_day'], $nDayCalObj->getTimestamp()),
-    ),
-);
+    ],
+];
 
 // Title of the page
 $xoopsTpl->assign('xoops_pagetitle', $xoopsModule->getVar('name') . ' ' . $navig['this']['name']);
@@ -136,7 +136,7 @@ $xoopsTpl->assign('list_position', $xoopsModuleConfig['list_position']);
 // echoArray($tNavBar,true);
 
 //mb missing for xBootstrap templates by Angelo
-$lang = array(
+$lang = [
     'start'      => _MD_EXTCAL_START,
     'end'        => _MD_EXTCAL_END,
     'calmonth'   => _MD_EXTCAL_NAV_CALMONTH,
@@ -149,7 +149,7 @@ $lang = array(
     'agendaday'  => _MD_EXTCAL_NAV_AGENDA_DAY,
     'search'     => _MD_EXTCAL_NAV_SEARCH,
     'newevent'   => _MD_EXTCAL_NAV_NEW_EVENT,
-);
+];
 // Assigning language data to the template
 $xoopsTpl->assign('lang', $lang);
 $xoopsTpl->assign('view', 'agendaday');

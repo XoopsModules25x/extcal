@@ -85,13 +85,13 @@ while ($donnees = $xoopsDB->fetchArray($requete)) {
     } else {
         $event_desc = substr($donnees['event_desc'], 0, 210) . '...';
     }
-    $xoopsTpl->append('events', array(
+    $xoopsTpl->append('events', [
         'event_picture1' => $donnees['event_picture1'],
         'event_id'       => $donnees['event_id'],
         'event_title'    => $donnees['event_title'],
         'event_desc'     => $event_desc,
         'event_start'    => date('Y-m-d', $donnees['event_start']),
-    ));
+    ]);
 }
 /** @var xos_opal_Theme $xoTheme */
 $xoTheme->addScript('browse.php?modules/extcal/assets/js/highslide.js');

@@ -111,7 +111,7 @@ class Calendar_Day extends Calendar
      *
      * @return bool
      */
-    public function build($sDates = array())
+    public function build($sDates = [])
     {
         require_once CALENDAR_ROOT . 'Hour.php';
 
