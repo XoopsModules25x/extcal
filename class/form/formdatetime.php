@@ -28,7 +28,7 @@ class ExtcalFormDateTime
         for ($i = 0; $i < 24; ++$i) {
             for ($j = 0; $j < _EXTCAL_TS_MINUTE; $j += 15) {
                 $key             = ($i * _EXTCAL_TS_HOUR) + ($j * _EXTCAL_TS_MINUTE);
-                $timearray[$key] = ($j != 0) ? $i . ':' . $j : $i . ':0' . $j;
+                $timearray[$key] = (0 != $j) ? $i . ':' . $j : $i . ':0' . $j;
             }
         }
         ksort($timearray);

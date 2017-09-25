@@ -112,7 +112,7 @@ switch ($step) {
         echo '</tr>';
         $i = 0;
         foreach ($glist as $k => $v) {
-            $style = (++$i % 2 == 0) ? 'odd' : 'even';
+            $style = (0 == ++$i % 2) ? 'odd' : 'even';
             echo '<tr>';
             echo '<td class="' . $style . '">' . $v . '</td>';
             echo '<td class="' . $style . '" style="text-align:center;"><input name="perms[extcal_perm_mask][group][' . $k . '][1]" type="checkbox"' . getChecked($viewGroup, $k) . '></td>';

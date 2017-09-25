@@ -131,7 +131,7 @@ if (isset($_POST['form_preview'])) {
         'event_url'           => $_POST['event_url'],
         'event_email'         => $_POST['event_email'],
         'event_address'       => $_POST['event_address'],
-        'event_approved'      => ($approve === false) ? 0 : 1,
+        'event_approved'      => (false === $approve) ? 0 : 1,
         'event_start'         => $_POST['event_start'],
         'have_end'            => $_POST['have_end'],
         'event_end'           => $_POST['event_end'],
@@ -164,7 +164,7 @@ if (isset($_POST['form_preview'])) {
 
         $notificationHandler = xoops_getHandler('notification');
         $notificationHandler->triggerEvent('global', 0, $notifyEvent, ['EVENT_TITLE' => $_POST['event_title']]);
-        if ($approve == 1) {
+        if (1 == $approve) {
             $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
             $cat        = $catHandler->getCat((int)$_POST['cat_id'], $xoopsUser, 'all');
             $notificationHandler->triggerEvent('cat', (int)$_POST['cat_id'], 'new_event_cat', [

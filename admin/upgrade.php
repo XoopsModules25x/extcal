@@ -48,7 +48,7 @@ switch ($step) {
         }
 
         // English file are included on module package
-        if ($xoopsConfig['language'] !== 'english') {
+        if ('english' !== $xoopsConfig['language']) {
             if (!$handle = @fopen($downloadServer . $langFileName, 'r')) {
                 printf(_AM_EXTCAL_LG_FILE_DONT_EXIST, $downloadServer, $langFileName);
             } else {
@@ -102,7 +102,7 @@ switch ($step) {
         // Delete template_c file
         if ($handle = opendir(XOOPS_ROOT_PATH . '/templates_c')) {
             while (false !== ($file = readdir($handle))) {
-                if ($file !== '.' && $file !== '..' && $file !== 'index.html') {
+                if ('.' !== $file && '..' !== $file && 'index.html' !== $file) {
                     unlink(XOOPS_ROOT_PATH . '/templates_c/' . $file);
                 }
             }

@@ -115,7 +115,7 @@ switch ($op) {
             echo '</tr>';
             $class = 'odd';
             foreach (array_keys($etablissement_arr) as $i) {
-                $class                   = ($class === 'even') ? 'odd' : 'even';
+                $class                   = ('even' === $class) ? 'odd' : 'even';
                 $etablissement_id        = $etablissement_arr[$i]->getVar('id');
                 $etablissement_nom       = $etablissement_arr[$i]->getVar('nom');
                 $etablissement_adresse   = $etablissement_arr[$i]->getVar('adresse');
@@ -146,7 +146,7 @@ switch ($op) {
     // permet de suprimmer le rapport de téléchargment brisé
     case 'delete_etablissement':
         $obj = $etablissementHandler->get($_REQUEST['etablissement_id']);
-        if (isset($_REQUEST['ok']) && $_REQUEST['ok'] == 1) {
+        if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('etablissement.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
             }
@@ -205,7 +205,7 @@ switch ($op) {
 
         $delimg = @$_REQUEST['delimg'];
         $delimg = isset($delimg) ? (int)$delimg : 0;
-        if ($delimg == 0 && !empty($_REQUEST['xoops_upload_file'][0])) {
+        if (0 == $delimg && !empty($_REQUEST['xoops_upload_file'][0])) {
             $upload = new XoopsMediaUploader($uploaddir_etablissement, [
                 'image/gif',
                 'image/jpeg',

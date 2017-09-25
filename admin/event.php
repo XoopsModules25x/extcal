@@ -49,13 +49,13 @@ function deleteEvents($ids)
 
     //    while (list($k, $t) = each($rst)) {
     foreach ($rst as $k => $t) {
-        if ($t['event_picture1'] != '') {
+        if ('' != $t['event_picture1']) {
             $f = XOOPS_ROOT_PATH . '/uploads/extcal/' . $t['event_picture1'];
             unlink($f);
             echo $f . '<br>';
         }
 
-        if ($t['event_picture2'] != '') {
+        if ('' != $t['event_picture2']) {
             $f = XOOPS_ROOT_PATH . '/uploads/extcal/' . $t['event_picture1'];
             unlink($f);
             echo $f . '<br>';
@@ -150,7 +150,7 @@ switch ($op) {
 
     case 'clone': /* sur validation du formulaire */
     case 'modify':
-        $action = (($op === 'clone') ? 'clone' : 'edit');
+        $action = (('clone' === $op) ? 'clone' : 'edit');
         xoops_cp_header();
         //================================================
         // require_once (XOOPS_ROOT_PATH . '/class/xoopsform/tc_calendar/formtccalendar.php');
@@ -362,7 +362,7 @@ switch ($op) {
         if (count($events) > 0) {
             $i = 0;
             foreach ($events as $event) {
-                $class = (++$i % 2 == 0) ? 'even' : 'odd';
+                $class = (0 == ++$i % 2) ? 'even' : 'odd';
                 echo '<tr style="text-align:left;" class="' . $class . '">';
                 echo "<td width='10%' align='center'>";
                 echo "<input type='checkbox' name='deleteEvents[{$event['event_id']}]' value='1' >";
@@ -381,7 +381,7 @@ switch ($op) {
 
                 echo "<td align = 'center' width='10%'>" . $event['formated_event_start'] . '</td>';
                 echo "<td align = 'center' width='10%'>" . $event['formated_event_end'] . '</td>';
-                echo '<td align="center">' . (($event['event_isrecur'] == 1) ? _YES : _NO) . '</td>';
+                echo '<td align="center">' . ((1 == $event['event_isrecur']) ? _YES : _NO) . '</td>';
                 if (!isset($event['formated_reccur_rule'])) {
                     $event['formated_reccur_rule'] = '';
                 }

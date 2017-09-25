@@ -184,7 +184,7 @@ if (!defined('PCLTRACE_LIB')) {
         $g_pcl_trace_entries[$i]['type']    = '1'; // means start of function
 
         // ----- Update the message entry
-        if ($p_message != '') {
+        if ('' != $p_message) {
             $i                                  = count($g_pcl_trace_entries);
             $g_pcl_trace_entries[$i]['name']    = '';
             $g_pcl_trace_entries[$i]['param']   = '';
@@ -246,7 +246,7 @@ if (!defined('PCLTRACE_LIB')) {
         --$g_pcl_trace_index;
 
         // ----- Update the message entry
-        if ($p_message != '') {
+        if ('' != $p_message) {
             $i                                  = count($g_pcl_trace_entries);
             $g_pcl_trace_entries[$i]['name']    = '';
             $g_pcl_trace_entries[$i]['param']   = '';
@@ -370,7 +370,7 @@ if (!defined('PCLTRACE_LIB')) {
         global $g_pcl_trace_entries;
 
         // ----- Look for disabled trace
-        if (($g_pcl_trace_level <= 0) || ($g_pcl_trace_mode !== 'memory')) {
+        if (($g_pcl_trace_level <= 0) || ('memory' !== $g_pcl_trace_mode)) {
             return;
         }
 
@@ -402,7 +402,7 @@ if (!defined('PCLTRACE_LIB')) {
 
             for ($j = 0; $j <= $g_pcl_trace_entries[$i]['index']; ++$j) {
                 if ($j == $g_pcl_trace_entries[$i]['index']) {
-                    if (($g_pcl_trace_entries[$i]['type'] == 1) || ($g_pcl_trace_entries[$i]['type'] == 2)) {
+                    if ((1 == $g_pcl_trace_entries[$i]['type']) || (2 == $g_pcl_trace_entries[$i]['type'])) {
                         echo "<td width=10><div align=center><span style='font-size: x-small; font-family: $v_font; '>+</span></div></td>";
                     }
                 } else {
@@ -472,14 +472,14 @@ if (!defined('PCLTRACE_LIB')) {
         global $g_pcl_trace_index;
         global $g_pcl_trace_entries;
 
-        if ($g_pcl_trace_mode === 'normal') {
+        if ('normal' === $g_pcl_trace_mode) {
             for ($i = 0; $i < $p_entry['index']; ++$i) {
                 echo '---';
             }
-            if ($p_entry['type'] == 1) {
+            if (1 == $p_entry['type']) {
                 echo '<b>' . $p_entry['name'] . '</b>(' . $p_entry['param'] . ') : ' . $p_entry['message'] . ' [' . $p_entry['file'] . ', ' . $p_entry['line'] . ']<br>';
             } else {
-                if ($p_entry['type'] == 2) {
+                if (2 == $p_entry['type']) {
                     echo '<b>' . $p_entry['name'] . '</b>()=' . $p_entry['param'] . ' : ' . $p_entry['message'] . ' [' . $p_entry['file'] . ', ' . $p_entry['line'] . ']<br>';
                 } else {
                     echo $p_entry['message'] . ' [' . $p_entry['file'] . ', ' . $p_entry['line'] . ']<br>';

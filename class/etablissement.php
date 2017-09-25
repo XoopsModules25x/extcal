@@ -64,7 +64,7 @@ class ExtcalEtablissement extends XoopsObject
     {
         global $xoopsDB, $extcalConfig;
 
-        if ($action === false) {
+        if (false === $action) {
             $action = $_SERVER['REQUEST_URI'];
         }
 
@@ -96,7 +96,7 @@ class ExtcalEtablissement extends XoopsObject
 
         //Logo
         $file_tray = new XoopsFormElementTray(sprintf(_MD_EXTCAL_FORM_IMG, 2), '');
-        if ($this->getVar('logo') != '') {
+        if ('' != $this->getVar('logo')) {
             $file_tray->addElement(new XoopsFormLabel('', "<img src='" . XOOPS_URL . '/uploads/extcal/etablissement/' . $this->getVar('logo') . "' name='image' id='image' alt=''><br><br>"));
             $check_del_img = new XoopsFormCheckBox('', 'delimg');
             $check_del_img->addOption(1, _MD_EXTCAL_DEL_IMG);

@@ -177,7 +177,7 @@ __sql__;
     $sep   = '|';
 
     $template = 'extcal_mail_member_text.tpl';
-    if ($mode == _EXTCAL_HEADER_HTML) {
+    if (_EXTCAL_HEADER_HTML == $mode) {
         $template = 'extcal_mail_member_html.tpl';
     }
     $mail_body = $tpl->fetch('db:' . $template);
@@ -217,7 +217,7 @@ function extcal_SendMail(
 
     // $destinataires = array('jjd@kiolo.com','jjdelalandre@wanadoo.fr','admin@win-trading.com');
     //$mail_fromname = "test jjd hermes";
-    if ($mail_fromname == '') {
+    if ('' == $mail_fromname) {
         $mail_fromname = $mail_fromemail;
     }
 
@@ -302,8 +302,8 @@ function extcal_getHeader($mode, $emailSender)
     $d = date('d-m-Y h:m:h', time());
     //-----------------------------------------------------------
     //defini l'expediteur du mail
-    if ($emailSender == '') {
-        if ($xoopsConfig['adminmail'] == '') {
+    if ('' == $emailSender) {
+        if ('' == $xoopsConfig['adminmail']) {
             $emailSender = "webmaster@{$_SERVER['SERVER_NAME']}";
         } else {
             $emailSender = $xoopsConfig['adminmail'];
@@ -315,7 +315,7 @@ function extcal_getHeader($mode, $emailSender)
     $header[] = "Reply-To: {$emailSender}";
     $header[] = 'X-Mailer: PHP/' . PHP_VERSION;
 
-    if ($mode == _EXTCAL_HEADER_HTML) {
+    if (_EXTCAL_HEADER_HTML == $mode) {
         $header[] = 'MIME-Version: 1.0';
         $header[] = 'Content-type: text/html; charset=iso-8859-1';
     } else {

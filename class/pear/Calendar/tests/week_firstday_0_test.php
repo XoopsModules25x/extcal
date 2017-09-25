@@ -280,7 +280,7 @@ class TestOfWeek_firstday_0_Build extends TestOfWeek_firstday_0
         $this->cal->build($selection);
         $i = 1;
         while ($Child = $this->cal->fetch()) {
-            if ($i == 2) {
+            if (2 == $i) {
                 break; //06-10-2003 is the 2nd day of the week
             }
             ++$i;

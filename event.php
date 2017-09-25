@@ -140,7 +140,7 @@ if ($extcalConfig['whos_going']) {
             $eventmember['member']['joinevent_mode'] = 'add';
 
             // If this event is full
-            if ($event['event_nbmember'] != 0
+            if (0 != $event['event_nbmember']
                 && $eventMemberHandler->getNbMember($eventId) >= $event['event_nbmember']) {
                 $eventmember['member']['disabled'] = ' disabled="disabled"';
             }

@@ -42,7 +42,7 @@ function bExtcalMinicalShow($options)
     //     require_once CALENDAR_ROOT . 'Day.php';
 
     // Retriving Image for block if enabled
-    if ($options[0] == 1) {
+    if (1 == $options[0]) {
         $imageHandler = xoops_getHandler('image');
         $criteria     = new Criteria('imgcat_id', $options[1]);
         $criteria->setSort('RAND()');
@@ -224,7 +224,7 @@ function bExtcalMinicalShow($options)
     ];
 
     $horloge             = [];
-    $horloge['display']  = (trim($options[11]) != '');
+    $horloge['display']  = ('' != trim($options[11]));
     $horloge['fullName'] = XOOPS_URL . _EXTCAL_PATH_HORLOGES . $options[11];
     $horloge['width']    = $options[12] . 'px';
     $horloge['height']   = $options[13] . 'px';

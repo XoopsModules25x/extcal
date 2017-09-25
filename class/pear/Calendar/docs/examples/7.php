@@ -92,12 +92,12 @@ $server->_auto_translation = true;
 $calendar                  = new Calendar_Server();
 $server->addObjectMap($calendar, 'urn:PEAR_SOAP_Calendar');
 
-if (strtoupper($_SERVER['REQUEST_METHOD']) === 'POST') {
+if ('POST' === strtoupper($_SERVER['REQUEST_METHOD'])) {
     $server->service($GLOBALS['HTTP_RAW_POST_DATA']);
 } else {
     require_once 'SOAP/Disco.php';
     $disco = new SOAP_DISCO_Server($server, 'PEAR_SOAP_Calendar');
-    if (isset($_SERVER['QUERY_STRING']) && strcasecmp($_SERVER['QUERY_STRING'], 'wsdl') == 0) {
+    if (isset($_SERVER['QUERY_STRING']) && 0 == strcasecmp($_SERVER['QUERY_STRING'], 'wsdl')) {
         header('Content-type: text/xml');
         echo $disco->getWSDL();
     } else {

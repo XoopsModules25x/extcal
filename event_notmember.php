@@ -26,12 +26,12 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 
 if ($xoopsUser && $xoopsModuleConfig['whosnot_going']) {
     // If param are right
-    if ((int)$_POST['event'] > 0 && ($_POST['mode'] === 'add' || $_POST['mode'] === 'remove')) {
+    if ((int)$_POST['event'] > 0 && ('add' === $_POST['mode'] || 'remove' === $_POST['mode'])) {
         $eventHandler          = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
         $eventNotMemberHandler = xoops_getModuleHandler(_EXTCAL_CLS_NOT_MEMBER, _EXTCAL_MODULE);
 
         // If the user have to be added
-        if ($_POST['mode'] === 'add') {
+        if ('add' === $_POST['mode']) {
             $event = $eventHandler->getEvent((int)$_POST['event'], $xoopsUser);
             $eventNotMemberHandler->createEventNotMember([
                                                              'event_id' => (int)$_POST['event'],
@@ -42,7 +42,7 @@ if ($xoopsUser && $xoopsModuleConfig['whosnot_going']) {
 
             // If the user have to be remove
         } else {
-            if ($_POST['mode'] === 'remove') {
+            if ('remove' === $_POST['mode']) {
                 $eventNotMemberHandler->deleteEventNotMember([(int)$_POST['event'], $xoopsUser->getVar('uid')]);
                 sendMail2member($mode, $event_id, $member_uid, _MD_EXTCAL_SUBJECT_4, _MD_EXTCAL_MSG_4);
                 $rediredtMessage = _MD_EXTCAL_WHOSNOT_GOING_REMOVED_TO_EVENT;

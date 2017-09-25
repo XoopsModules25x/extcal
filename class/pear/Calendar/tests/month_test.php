@@ -156,7 +156,7 @@ class TestOfMonthBuild extends TestOfMonth
         $this->cal->build($selection);
         $i = 1;
         while ($Child = $this->cal->fetch()) {
-            if ($i == 25) {
+            if (25 == $i) {
                 break;
             }
             ++$i;

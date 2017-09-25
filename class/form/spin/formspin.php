@@ -242,7 +242,7 @@ class ExtcalFormSpin extends XoopsFormElement
     public function setSmallIncrement($smallIncrement)
     {
         $this->_smallIncrement = (int)$smallIncrement;
-        if ($this->_smallIncrement == 0) {
+        if (0 == $this->_smallIncrement) {
             $this->_smallIncrement = 1;
         }
     }
@@ -264,7 +264,7 @@ class ExtcalFormSpin extends XoopsFormElement
     public function setLargeIncrement($largeIncrement)
     {
         $this->_largeIncrement = (int)$largeIncrement;
-        if ($this->_largeIncrement == 0) {
+        if (0 == $this->_largeIncrement) {
             $this->_largeIncrement = 10;
         }
     }
@@ -287,7 +287,7 @@ class ExtcalFormSpin extends XoopsFormElement
     public function setSize($size)
     {
         $this->_size = $size;
-        if ($this->_size == 0) {
+        if (0 == $this->_size) {
             $this->_size = 2;
         }
     }
@@ -311,7 +311,7 @@ class ExtcalFormSpin extends XoopsFormElement
      */
     public function setImgFolder($folder)
     {
-        if ($folder != '') {
+        if ('' != $folder) {
             $this->_imgFolder = $folder;
         }
     }
@@ -349,7 +349,7 @@ class ExtcalFormSpin extends XoopsFormElement
      */
     public function setStyleText($style)
     {
-        if ($style != '') {
+        if ('' != $style) {
             $this->_styleText = $style;
         }
     }
@@ -369,7 +369,7 @@ class ExtcalFormSpin extends XoopsFormElement
      */
     public function setStyleBordure($style)
     {
-        if ($style != '') {
+        if ('' != $style) {
             $this->_styleBordure = $style;
         }
     }
@@ -440,7 +440,7 @@ class ExtcalFormSpin extends XoopsFormElement
         $t[] = '    </td>';
 
         $unite = $this->getUnite();
-        if ($unite != '') {
+        if ('' != $unite) {
             $t[] = "    <td style='display: table-cell;vertical-align: middle; '>&nbsp;{$unite}&nbsp;</td>";
         }
         //-------------------------------------------------------
@@ -497,11 +497,11 @@ class ExtcalFormSpin extends XoopsFormElement
     public function htmlAddAttribut($attribut, $value, $default = '')
     {
         $r = '';
-        if ($value == '') {
+        if ('' == $value) {
             $value = $default;
         }
 
-        if ($value != '') {
+        if ('' != $value) {
             //            if (substr($value, 0, strlen($attribut)) != $attribut) {
             if (0 !== strpos($value, $attribut)) {
                 $r = "{$attribut}=\"{$value}\"";

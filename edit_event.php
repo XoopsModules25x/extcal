@@ -27,8 +27,8 @@ require_once __DIR__ . '/include/constantes.php';
 $permHandler = ExtcalPerm::getHandler();
 $xoopsUser   = $xoopsUser ?: null;
 
-if (count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) == 0
-    && count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_edit')) == 0) {
+if (0 == count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit'))
+    && 0 == count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_edit'))) {
     redirect_header('index.php', 3);
 }
 

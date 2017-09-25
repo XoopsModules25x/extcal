@@ -22,7 +22,7 @@ if (count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) > 0) 
     $xoopsTpl->assign('xoops_pagetitle', _MI_EXTCAL_SUBMIT_EVENT);
 
     // Display the submit form
-    if ($eventId == 0) {
+    if (0 == $eventId) {
         $form = $eventHandler->getEventForm();
     } else {
         $form = $eventHandler->getEventForm('user', $action, ['event_id' => $eventId]);

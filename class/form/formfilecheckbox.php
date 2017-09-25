@@ -42,7 +42,7 @@ class ExtcalFormFileCheckBox extends XoopsFormCheckBox
     public function render()
     {
         $ret = '';
-        if (count($this->getOptions()) > 1 && substr($this->getName(), -2, 2) !== '[]') {
+        if (count($this->getOptions()) > 1 && '[]' !== substr($this->getName(), -2, 2)) {
             $newname = $this->getName() . '[]';
             $this->setName($newname);
         }

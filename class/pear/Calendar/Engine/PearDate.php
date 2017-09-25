@@ -346,7 +346,7 @@ class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
      */
     public function getWeekNInMonth($y, $m, $d, $firstDay = 1)
     {
-        $weekEnd     = ($firstDay == 0) ? $this->getDaysInWeek() - 1 : $firstDay - 1;
+        $weekEnd     = (0 == $firstDay) ? $this->getDaysInWeek() - 1 : $firstDay - 1;
         $end_of_week = (int)Date_Calc::nextDayOfWeek($weekEnd, 1, $m, $y, '%e', true);
         $w           = 1;
         while ($d > $end_of_week) {
@@ -369,7 +369,7 @@ class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
     public function getWeeksInMonth($y, $m, $firstDay = 1)
     {
         $FDOM = Date_Calc::firstOfMonthWeekday($m, $y);
-        if ($FDOM == 0) {
+        if (0 == $FDOM) {
             $FDOM = $this->getDaysInWeek();
         }
         if ($FDOM > $firstDay) {

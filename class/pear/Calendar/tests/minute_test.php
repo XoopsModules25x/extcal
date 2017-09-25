@@ -116,7 +116,7 @@ class TestOfMinuteBuild extends TestOfMinute
         $this->cal->build($selection);
         $i = 0;
         while ($Child = $this->cal->fetch()) {
-            if ($i == 43) {
+            if (43 == $i) {
                 break;
             }
             ++$i;

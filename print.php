@@ -69,16 +69,16 @@ echo '</td>' . "\n";
 echo '</tr>' . "\n";
 
 echo '<tr>' . "\n";
-if ($event['event_desc'] != '') {
+if ('' != $event['event_desc']) {
     echo '<td style="border:1px solid black;">' . $event['event_desc'] . '</td>' . "\n";
 }
-if ($event['event_price'] != '') {
+if ('' != $event['event_price']) {
     echo '<td style="border:1px solid black;">' . _MD_EXTCAL_ETABLISSEMENT_PRICE . $event['event_price'] . ' ' . _MD_EXTCAL_DEVISE2 . '</td>' . "\n";
 }
 echo '</tr>' . "\n";
 
 //show contact info
-if ($event['event_contact'] != '') {
+if ('' != $event['event_contact']) {
     echo '<tr>' . "\n";
     echo '<td style="border:1px solid black;">' . "\n";
     echo '<b>' . _MD_EXTCAL_CONTACT_INFO . '</b><br>' . "\n";
@@ -103,41 +103,41 @@ if ($event['event_etablissement'] = 0) {
 
     echo '<td style="border:1px solid black;">' . "\n";
     echo '<b>' . _MD_EXTCAL_ETABLISSEMENT . '</b>' . "\n";
-    if ($location['categorie'] != '') {
+    if ('' != $location['categorie']) {
         echo '<span style="font-weight:normal;"> (' . $location['categorie'] . ') <br>' . "\n";
     }
-    if ($location['logo'] != '') {
+    if ('' != $location['logo']) {
         echo '<img align=right style="border:1px solid #FFFFFF;margin-right:6px" src=' . XOOPS_URL . '/uploads/extcal/etablissement/' . $location['logo'] . ' height="75px">' . '' . "\n";
     }
 
     echo '<span style="font-weight:normal;">' . $location['nom'] . '<br>' . "\n";
     echo $location['description'] . '<br>' . "\n";
     echo $location['adresse'] . '</span> <br>' . "\n";
-    if ($location['adresse2'] != '') {
+    if ('' != $location['adresse2']) {
         echo $location['adresse2'] . '</span> <br>' . "\n";
     }
     echo $location['ville'] . "\n";
     echo $location['cp'] . '<br>' . "\n";
 
-    if ($location['horaires'] != '') {
+    if ('' != $location['horaires']) {
         echo $location['horaires'] . '</span> <br>' . "\n";
     }
 
-    if ($location['divers'] != '') {
+    if ('' != $location['divers']) {
         echo $location['divers'] . '</span> <br>' . "\n";
     }
 
-    if ($location['tarifs'] != '') {
+    if ('' != $location['tarifs']) {
         echo $location['tarifs'] . '</span> ' . _MD_EXTCAL_DEVISE2 . "\n";
     }
 
     echo '</td>' . "\n";
     echo '<td style="border:1px solid black;">' . "\n";
 
-    if ($location['tel_fixe'] != '') {
+    if ('' != $location['tel_fixe']) {
         echo '<b>' . _MD_EXTCAL_ETABLISSEMENT_TEL_FIXE . ' :</b>' . $location['tel_fixe'] . '<br>' . "\n";
     }
-    if ($location['tel_portable'] != '') {
+    if ('' != $location['tel_portable']) {
         echo '<b>' . _MD_EXTCAL_ETABLISSEMENT_TEL_PORTABLE . ' :</b>' . $location['tel_portable'] . '<br>' . "\n";
     }
 
@@ -150,14 +150,14 @@ if ($event['event_etablissement'] = 0) {
 }
 //show images
 
-if (($event['event_picture1'] != '') || ($event['event_picture2'] != '')) {
+if (('' != $event['event_picture1']) || ('' != $event['event_picture2'])) {
     echo '<tr>' . "\n";
-    if ($event['event_picture1'] != '') {
+    if ('' != $event['event_picture1']) {
         echo '<td style="border:1px solid black;">' . "\n";
         echo '<img align=left style="border:1px solid #FFFFFF;margin-right:6px" src=' . XOOPS_URL . '/uploads/extcal/' . $event['event_picture1'] . ' height="100px">' . '' . "\n";
         echo '</td>' . "\n";
     }
-    if ($event['event_picture2'] != '') {
+    if ('' != $event['event_picture2']) {
         echo '<td style="border:1px solid black;">' . "\n";
         echo '<img align=left style="border:1px solid #FFFFFF;margin-right:6px" src=' . XOOPS_URL . '/uploads/extcal/' . $event['event_picture2'] . ' height="100px">' . '' . "\n";
         echo '</td>' . "\n";

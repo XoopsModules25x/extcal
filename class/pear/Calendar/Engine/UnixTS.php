@@ -207,7 +207,7 @@ class Calendar_Engine_UnixTS /* implements Calendar_Engine_Interface */
      */
     public function getMinYears()
     {
-        return $min = strpos(PHP_OS, 'WIN') === false ? 1902 : 1970;
+        return $min = false === strpos(PHP_OS, 'WIN') ? 1902 : 1970;
     }
 
     /**
@@ -324,7 +324,7 @@ class Calendar_Engine_UnixTS /* implements Calendar_Engine_Interface */
     public function getWeeksInMonth($y, $m, $firstDay = 1)
     {
         $FDOM = $this->getFirstDayInMonth($y, $m);
-        if ($FDOM == 0) {
+        if (0 == $FDOM) {
             $FDOM = $this->getDaysInWeek();
         }
         if ($FDOM > $firstDay) {

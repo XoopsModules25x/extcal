@@ -56,7 +56,7 @@ if (is_object($xoopsModule)) {
 $moduleHandler = xoops_getHandler('module');
 $module        = $moduleHandler->getByDirname('extcal');
 
-if ($name === 'extcal' || is_object($module)) {
+if ('extcal' === $name || is_object($module)) {
     if (is_object($xoopsModuleConfig)) {
         $extcalConfig = $xoopsModuleConfig;
     } else {

@@ -121,7 +121,7 @@ class TestOfHourBuild extends TestOfHour
         $this->cal->build($selection);
         $i = 0;
         while ($Child = $this->cal->fetch()) {
-            if ($i == 32) {
+            if (32 == $i) {
                 break;
             }
             ++$i;

@@ -71,24 +71,24 @@ class ExtcalUtility
                         $errors = $upload->getErrors();
                         redirect_header('javascript:history.go(-1)', 3, $errors);
                     } else {
-                        if ($j == 1) {
+                        if (1 == $j) {
                             $event_picture1 = $upload->getSavedFileName();
-                        } elseif ($j == 2) {
+                        } elseif (2 == $j) {
                             $event_picture2 = $upload->getSavedFileName();
                         }
                     }
                 } elseif (!empty($REQUEST['file' . $j])) {
-                    if ($j == 1) {
+                    if (1 == $j) {
                         $event_picture1 = $REQUEST['file' . $j];
-                    } elseif ($j == 2) {
+                    } elseif (2 == $j) {
                         $event_picture2 = $REQUEST['file' . $j];
                     }
                 }
             } else {
                 $url_event = XOOPS_ROOT_PATH . '/uploads/extcal/' . $REQUEST['file' . $j];
-                if ($j == 1) {
+                if (1 == $j) {
                     $event_picture1 = '';
-                } elseif ($j == 2) {
+                } elseif (2 == $j) {
                     $event_picture2 = '';
                 }
                 if (is_file($url_event)) {
@@ -316,7 +316,7 @@ class ExtcalUtility
      */
     public static function ext_echoArray($t, $msg = '')
     {
-        if ($msg != '') {
+        if ('' != $msg) {
             echo "<hr>{$msg}<hr>";
         }
 
@@ -331,7 +331,7 @@ class ExtcalUtility
      */
     public static function ext_echo($line, $msg = '')
     {
-        if ($msg != '') {
+        if ('' != $msg) {
             echo "<hr>{$msg}<hr>";
         }
         echo $line . '<br>';
@@ -357,7 +357,7 @@ class ExtcalUtility
      */
     public static function ext_echoTSU($ts, $tsName, $msg = '')
     {
-        if ($msg != '') {
+        if ('' != $msg) {
             echo "<hr>{$msg}<hr>";
         }
 
@@ -534,7 +534,7 @@ class ExtcalUtility
         $dir = opendir($src);
         //    @mkdir($dst);
         while (false !== ($file = readdir($dir))) {
-            if (($file !== '.') && ($file !== '..')) {
+            if (('.' !== $file) && ('..' !== $file)) {
                 if (is_dir($src . '/' . $file)) {
                     self::recurseCopy($src . '/' . $file, $dst . '/' . $file);
                 } else {

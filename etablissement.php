@@ -35,7 +35,7 @@ $criteria = new CriteriaCompo();
 $criteria->add(new Criteria('id', $etablissement_id, '='));
 $etablissement_exist = $etablissementHandler->getCount($criteria);
 
-if ($etablissement_exist == 0) {
+if (0 == $etablissement_exist) {
     redirect_header(XOOPS_URL . '/modules/extcal/index.php', 3, _NOPERM);
 }
 

@@ -41,12 +41,12 @@ class ExtcalFormRRuleCheckBox extends XoopsFormCheckBox
     {
         $ret = '<table><tr>';
         $i   = 0;
-        if (count($this->getOptions()) > 1 && substr($this->getName(), -2, 2) !== '[]') {
+        if (count($this->getOptions()) > 1 && '[]' !== substr($this->getName(), -2, 2)) {
             $newname = $this->getName() . '[]';
             $this->setName($newname);
         }
         foreach ($this->getOptions() as $value => $name) {
-            if ((++$i) % 6 == 0) {
+            if (0 == (++$i) % 6) {
                 $ret .= '</tr><tr>';
             }
             $ret .= "<td><input type='checkbox' name='" . $this->getName() . "' value='" . $value . "'";

@@ -469,7 +469,7 @@ class Calendar
     public function defineFirstDayOfWeek($firstDay = null)
     {
         if (defined('CALENDAR_FIRST_DAY_OF_WEEK')) {
-            if (($firstDay != CALENDAR_FIRST_DAY_OF_WEEK) && !is_null($firstDay)) {
+            if ((CALENDAR_FIRST_DAY_OF_WEEK != $firstDay) && !is_null($firstDay)) {
                 $msg = 'CALENDAR_FIRST_DAY_OF_WEEK constant already defined.' . ' The $firstDay parameter will be ignored.';
                 trigger_error($msg, E_USER_WARNING);
             }

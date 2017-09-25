@@ -70,13 +70,13 @@ function bExtcalDayEdit($options)
     array_shift($options);
     array_shift($options);
     $form .= _MB_EXTCAL_CAT_TO_USE . '<br><select name="options[]" multiple="multiple" size="5">';
-    if (array_search(0, $options) === false) {
+    if (false === array_search(0, $options)) {
         $form .= '<option value="0">' . _MB_EXTCAL_ALL_CAT . '</option>';
     } else {
         $form .= '<option value="0" selected="selected">' . _MB_EXTCAL_ALL_CAT . '</option>';
     }
     foreach ($cats as $cat) {
-        if (array_search($cat->getVar('cat_id'), $options) === false) {
+        if (false === array_search($cat->getVar('cat_id'), $options)) {
             $form .= '<option value="' . $cat->getVar('cat_id') . '">' . $cat->getVar('cat_name') . '</option>';
         } else {
             $form .= '<option value="' . $cat->getVar('cat_id') . '" selected="selected">' . $cat->getVar('cat_name') . '</option>';

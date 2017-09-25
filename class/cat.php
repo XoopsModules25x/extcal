@@ -89,16 +89,16 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
 
         // Applying permission mask
         foreach ($permMask as $perm) {
-            if ($perm->getVar('gperm_itemid') == 1) {
+            if (1 == $perm->getVar('gperm_itemid')) {
                 $groupPermissionHandler->addRight('extcal_cat_view', $cat->getVar('cat_id'), $perm->getVar('gperm_groupid'), $moduleId);
             }
-            if ($perm->getVar('gperm_itemid') == 2) {
+            if (2 == $perm->getVar('gperm_itemid')) {
                 $groupPermissionHandler->addRight('extcal_cat_submit', $cat->getVar('cat_id'), $perm->getVar('gperm_groupid'), $moduleId);
             }
-            if ($perm->getVar('gperm_itemid') == 4) {
+            if (4 == $perm->getVar('gperm_itemid')) {
                 $groupPermissionHandler->addRight('extcal_cat_autoapprove', $cat->getVar('cat_id'), $perm->getVar('gperm_groupid'), $moduleId);
             }
-            if ($perm->getVar('gperm_itemid') == 8) {
+            if (8 == $perm->getVar('gperm_itemid')) {
                 $groupPermissionHandler->addRight('extcal_cat_edit', $cat->getVar('cat_id'), $perm->getVar('gperm_groupid'), $moduleId);
             }
         }
@@ -163,7 +163,7 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
     public function getAllCat($user, $perm = 'extcal_cat_view')
     {
         $criteriaCompo = new CriteriaCompo();
-        if ($perm !== 'all') {
+        if ('all' !== $perm) {
             $this->_addCatPermCriteria($criteriaCompo, $user, $perm);
         }
 
@@ -179,7 +179,7 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
     public function getAllCatById($user, $perm = 'all')
     {
         $criteriaCompo = new CriteriaCompo();
-        if ($perm !== 'all') {
+        if ('all' !== $perm) {
             $this->_addCatPermCriteria($criteriaCompo, $user, $perm);
         }
 

@@ -184,7 +184,7 @@ switch ($op) {
         if (count($pendingEvent) > 0) {
             $i = 0;
             foreach ($pendingEvent as $event) {
-                $class = (++$i % 2 == 0) ? 'even' : 'odd';
+                $class = (0 == ++$i % 2) ? 'even' : 'odd';
                 echo '<tr style="text-align:center;" class="' . $class . '">';
                 echo '<td>' . $event['cat']['cat_name'] . '</td>';
                 echo '<td>' . $event['event_title'] . '</td>';

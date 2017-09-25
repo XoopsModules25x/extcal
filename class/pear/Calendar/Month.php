@@ -121,7 +121,7 @@ class Calendar_Month extends Calendar
                 if (isset($this->children[$key])) {
                     $sDate->setSelected();
                     $class = strtolower(get_class($sDate));
-                    if ($class === 'calendar_day' || $class === 'calendar_decorator') {
+                    if ('calendar_day' === $class || 'calendar_decorator' === $class) {
                         $sDate->setFirst($this->children[$key]->isFirst());
                         $sDate->setLast($this->children[$key]->isLast());
                     }

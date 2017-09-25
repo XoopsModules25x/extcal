@@ -136,7 +136,7 @@ class TestOfDayBuild extends TestOfDay
         $this->cal->build($selection);
         $i = 0;
         while ($Child = $this->cal->fetch()) {
-            if ($i == 13) {
+            if (13 == $i) {
                 break;
             }
             ++$i;

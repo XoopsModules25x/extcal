@@ -56,15 +56,15 @@ if (PEAR::isError($month)) {
     </tr>
     <?php
     foreach ($month->days as $day) {
-        if ($day->isFirst === 1) {
+        if (1 === $day->isFirst) {
             echo "<tr>\n";
         }
-        if ($day->isEmpty === 1) {
+        if (1 === $day->isEmpty) {
             echo '<td></td>';
         } else {
             echo '<td>' . $day->day . '</td>';
         }
-        if ($day->isLast === 1) {
+        if (1 === $day->isLast) {
             echo "</tr>\n";
         }
     }

@@ -28,7 +28,7 @@ class ExtcalConfig
         global $xoopsModule;
         static $moduleConfig;
         $dirname = (isset($xoopsModule) ? $xoopsModule->getVar('dirname') : 'system');
-        if ($dirname === 'extcal') {
+        if ('extcal' === $dirname) {
             $moduleConfig = $GLOBALS['xoopsModuleConfig'];
         } else {
             if (!isset($moduleConfig)) {

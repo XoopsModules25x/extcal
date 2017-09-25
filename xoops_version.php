@@ -68,7 +68,7 @@ $modversion['hasMain'] = 1;
 $i                     = 0;
 
 if (isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule'])
-    && $GLOBALS['xoopsModule']->getVar('dirname') === 'extcal') {
+    && 'extcal' === $GLOBALS['xoopsModule']->getVar('dirname')) {
     /*
         $user = isset($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser'] : null;
         $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);

@@ -70,7 +70,7 @@ function agenda_getCanevas($ts, $hStart, $hEnd, $mPlage = 15, $nbJours = 1, $for
 
         $tj[$kj]['dayWeek'] = date('w', $tsj);
         $tj[$kj]['jour']    = $jName[$tj[$kj]['dayWeek']]; //date('l', $tsj);
-        if ($tj[$kj]['dayWeek'] == 0) {
+        if (0 == $tj[$kj]['dayWeek']) {
             $tj[$kj]['bg'] = "background='" . XOOPS_URL . "/modules/extcal/assets/images/trame.png'";
         } else {
             $tj[$kj]['bg'] = '';
@@ -98,7 +98,7 @@ function agenda_getCanevas($ts, $hStart, $hEnd, $mPlage = 15, $nbJours = 1, $for
         //echo "{$k}-$tsCurent-";
         $ta[$k]['caption'] = date($formatJour, $tsCurent);
         $ta[$k]['jours']   = $tj;
-        $ta[$k]['class']   = ((($h % 2) == 0) ? 'odd' : 'even');
+        $ta[$k]['class']   = ((0 == ($h % 2)) ? 'odd' : 'even');
 
         //----------------------------------------------
         ++$h;
@@ -202,7 +202,7 @@ function orderEvents($event1, $event2)
     if ($event1['event_start'] == $event2['event_start']) {
         return 0;
     }
-    if ($GLOBALS['xoopsModuleConfig']['sort_order'] === 'ASC') {
+    if ('ASC' === $GLOBALS['xoopsModuleConfig']['sort_order']) {
         $opt1 = -1;
         $opt2 = 1;
     } else {
@@ -230,7 +230,7 @@ function getListYears($year, $nbYearsBefore = 0, $nbYearsAfter = 5, $addNone = f
     if ($addNone) {
         $select->addOption(0, ' ');
     }
-    if ($year == 0) {
+    if (0 == $year) {
         $year = date('Y');
     }
 

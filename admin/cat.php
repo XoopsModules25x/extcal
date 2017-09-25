@@ -98,7 +98,7 @@ switch ($op) {
         xoops_cp_header();
 
         // $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-        if ($cat_id != 0) {
+        if (0 != $cat_id) {
             $cat = $catHandler->getCat($cat_id, true);
         } else {
             $cat = $catHandler->getCat($cat_id, true);

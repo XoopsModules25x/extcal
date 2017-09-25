@@ -188,7 +188,7 @@ class TestOfYearBuild extends TestOfYear
         $this->cal->build($selection);
         $i = 1;
         while ($Child = $this->cal->fetch()) {
-            if ($i == 10) {
+            if (10 == $i) {
                 break;
             }
             ++$i;
