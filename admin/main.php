@@ -143,13 +143,13 @@ switch ($op) {
         //        $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
         $adminObject = \Xmf\Module\Admin::getInstance();
         $adminObject->addInfoBox(_MI_EXTCAL_DASHBOARD);
-        $adminObject->addInfoBoxLine(_MI_EXTCAL_DASHBOARD, '<infolabel>' . _AM_EXTCAL_INDEX_CATEGORIES . '</infolabel>', $catHandler->getCount(), 'Green');
-        $adminObject->addInfoBoxLine(_MI_EXTCAL_DASHBOARD, '<infolabel>' . _AM_EXTCAL_INDEX_EVENT . '</infolabel>', $eventHandler->getCount(new Criteria('event_approved', 1)), 'Green');
-        $adminObject->addInfoBoxLine(_MI_EXTCAL_DASHBOARD, '<infolabel>' . _AM_EXTCAL_INDEX_PENDING . '</infolabel>', $eventHandler->getCount(new Criteria('event_approved', 0)), 'Red');
+        $adminObject->addInfoBoxLine(sprintf( '<infolabel>' . _AM_EXTCAL_INDEX_CATEGORIES . '</infolabel>', $catHandler->getCount()), '', 'Green');
+        $adminObject->addInfoBoxLine(sprintf( '<infolabel>' . _AM_EXTCAL_INDEX_EVENT . '</infolabel>', $eventHandler->getCount(new Criteria('event_approved', 1))), '', 'Green');
+        $adminObject->addInfoBoxLine(sprintf( '<infolabel>' . _AM_EXTCAL_INDEX_PENDING . '</infolabel>', $eventHandler->getCount(new Criteria('event_approved', 0))), '', 'Red');
         $criteriaCompo = new CriteriaCompo();
         $criteriaCompo->add(new Criteria('event_approved', 1));
         $criteriaCompo->add(new Criteria('event_start', time(), '>='));
-        $adminObject->addInfoBoxLine(_MI_EXTCAL_DASHBOARD, '<infolabel>' . _AM_EXTCAL_INDEX_APPROVED . '</infolabel><infotext>', $eventHandler->getCount($criteriaCompo) . '</infotext>', 'Green');
+        $adminObject->addInfoBoxLine(sprintf( '<infolabel>' . _AM_EXTCAL_INDEX_APPROVED . '</infolabel><infotext>', $eventHandler->getCount($criteriaCompo) . '</infotext>'), '', 'Green');
 
         $adminObject->addConfigBoxLine();
         $adminObject->addConfigBoxLine(_AM_EXTCAL_PEAR_PATH);
