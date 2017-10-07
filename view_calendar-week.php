@@ -121,7 +121,8 @@ $cats = $catHandler->objectToArray($catHandler->getAllCat($xoopsUser));
 $xoopsTpl->assign('cats', $cats);
 
 // Retriving weekdayNames
-$weekdayNames = Calendar_Util_Textual::weekdayNames();
+//$weekdayNames = Calendar_Util_Textual::weekdayNames();
+$weekdayNames = [_CAL_SUNDAY, _CAL_MONDAY, _CAL_TUESDAY, _CAL_WEDNESDAY, _CAL_THURSDAY, _CAL_FRIDAY, _CAL_SATURDAY];
 for ($i = 0; $i < $xoopsModuleConfig['week_start_day']; ++$i) {
     $weekdayName    = array_shift($weekdayNames);
     $weekdayNames[] = $weekdayName;
