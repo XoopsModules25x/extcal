@@ -27,9 +27,9 @@ require_once __DIR__ . '/class/config.php';
 setlocale(LC_TIME, $xoopsConfig['language']);
 
 //***************************************************************************************
-$modversion['version']          = '2.39';
-$modversion['module_status']    = 'FINAL';
-$modversion['release_date']     = '2016/10/18';
+$modversion['version']          = '2.40';
+$modversion['module_status']    = 'Beta 1';
+$modversion['release_date']     = '2017/10/08';
 $modversion['name']             = _MI_EXTCAL_NAME;
 $modversion['description']      = _MI_EXTCAL_DESC;
 $modversion['credits']          = 'Zoullou';

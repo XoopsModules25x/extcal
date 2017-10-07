@@ -1,5 +1,23 @@
-2.39 FINAL         2016-10-18
-===================================
+<h5>2.40 Beta 1  [NOT RELEASED]</h5>
+<hr>
+* fix dashboard (mamba)
+* Fix for days in local language (aerograf/mamba)
+* Yoda, short syntax array (mamba)
+* renamed help .html to .tpl (mamba)
++ SCANDIR_SORT_NONE in scandir() (mamba)
++ securityToken (mamba)
++ auto-completion (mamba)
+* updated Headers (mamba)
+* Utilities to Utility (mamba)
+* https (mamba)
++ update for PayPal (zyspec)
++ started conversion to XMF (mamba)
+    &nbsp;&nbsp;- updated addInfoBoxLine entries (mamba)
+    &nbsp;&nbsp;- displayNavigation(basename(__FILE__))  (mamba)
+    &nbsp;&nbsp;- changed to ->displayButton('left') (mamba)
+
+<h5>2.39 FINAL         [2016-10-18]</h5>
+<hr>
 - added xoops_loadLanguage /header.php (zyspec/mamba)
 - addNavigation(basename(__FILE__))  (mamba)
 - dirname(__FILE__) to __DIR__ (mamba)
@@ -11,8 +29,8 @@
 - added moduleConfig array (mamba)
 
 
-2.39 Beta RC 1         2016-08-10
-===================================
+<h5>2.39 Beta RC 1         [2016-08-10]</h5>
+<hr>
 - removed @version (mamba)
 - code cosmetics (mamba)
 - replaced < b /> with < b > (mamba)
@@ -21,8 +39,8 @@
 - reference mismatch (mamba)
 
 
-2.39 Beta 2             2016-08-08
-===================================
+<h5>2.39 Beta 2             [2016-08-08]</h5>
+<hr>
 - fix undefined function see #7 (geekwright)
 - move custom form class into module space (geekwright)
 - move module code to top directory (geekwright)
@@ -31,31 +49,31 @@
 - fix class collision on 'info' (now 'ecinfo') (geekwright)
 - rename ExtcalPersistableObjectHandler::delete() to deleteById() to fix signature mismatch (geekwright)
 
-2.39 Beta 1             2016-03-21
-===================================
+<h5>2.39 Beta 1             [2016-03-21]</h5>
+<hr>
 - moved all images, CSS, and JS files to /assets (mamba)
 - renamed .html Smarty templates to .tpl (mamba)
 - some changes to make it compatible with Angelo's templates for xBootstrap (mamba)
 - updates for PHP7, XOOPS 2.5.8 (mamba)
 
-2.38 Beta 1             2013-08-21
-===================================
+<h5>2.38 Beta 1             [2013-08-21]</h5>
+<hr>
 - added editor selection in Preferences for Admin and User (mamba)
 - added checks if event was added/modified successfully (mamba)
 
-2.37 Final              2013-07-10
-===================================
+<h5>2.37 Final              [2013-07-10]</h5>
+<hr>
 - small changes for PHP 5.4
 - fixed: removed today's events from "upcoming" block (chefry/mamba)
 
-2.37 RC6                2013-04-20
-===================================
+2.37 RC6                [2013-04-20]</h5>
+<hr>
 - modification of the English language files for Transifex (cesagonchu)
 - fixed: missing argument 6 for agenda_getCanevas() (cesagonchu)
 - fixed: missing phone column (Sabahan/Mamba)
 
-2.37 RC5                2013-01-29
-===================================
+<h5>2.37 RC5                [2013-01-29]</h5>
+<hr>
 - fixed: missing edit/delete icons for Admin in year/month/week/day view (mamba)
 - fixed: missing print icons in week/day views (jcweb/mamba)
 - fixed: date format in Agenda view (jcweb/mamba)
@@ -63,8 +81,8 @@
 - added: recurring events in "Upcoming events" block (sabahan/mamba)
 - changed time interval in Admin from 10 minutes to 15 minutes (playsome)
 
-2.37 RC4                2013-01-02
-===================================
+<h5>2.37 RC4                [2013-01-02]</h5>
+<hr>
 - fixed: removed list of events when showing first time the Search form (sabahan/mamba)
 - fixed: if we disable tooltips , event title will be missing in from the calendar (sabahan/mamba)
 - fixed: changed notice text when user/guest submit an event (sabahan/mamba)
@@ -73,16 +91,16 @@
 - fixed: Agenda view reflects now start and end time set in Preferences (jcweb/mamba)
 
 
-2.37 RC3                2013-01-01
-===================================
+<h5>2.37 RC3                [2013-01-01]</h5>
+<hr>
 - fixed: bug in setting recurring events for a x-day of the month, when 1st of the month is on the following day of the week.
   E.g. if you select 3rd Thursday, and the first day of the month is on Friday, extCal would set the event on the 2nd Thursday
 - fixed: added location info in Print, if not empty (sabahan/mamba)
 - fixed: if not auto-approved, event is set as pending (sabahan/mamba)
 - fixed: redirect after updating or creating an event (sabahan/mamba)
 
-2.37 RC2                2012-12-22
-===================================
+<h5>2.37 RC2                [2012-12-22]</h5>
+<hr>
 - fixed: attachment bug (JammerPro/mamba)
 - fixed: past events not being visible consistently, when selected by user in Preferences (mamba)
 - fixed: displaying the correct week in Week view when the first day of the week is Monday (mamba)
@@ -94,47 +112,47 @@
 - fixed: removed double edit icons (sabahan/mamba)
 - fixed: removed Contact info from Print, if empty (sabahan/mamba)
 
-2.37 Beta 4             2012-04-02
-===================================
+<h5>2.37 Beta 4             [2012-04-02]</h5>
+<hr>
 - small code cleanups (mamba)
 -
 
-2012/02/02: Version 2.37 (JJD.fr)
-===================================
+<h5>2.37 [2012/02/02] (JJD.fr)</h5>
+<hr>
 - Ajout du champ icone dans la table event_event
 - Ajout du chmp icone dans la table event_cat
 - Affichage de l'icone de event/cat dans l'infobulle
 - Mis à jour des constantes de langue
 - Patch de mise à jour des tables
 
-2.36 (JJD.fr)               2012-01-31
-===================================
+<h5>2.36 (JJD.fr)               [2012-01-31]</h5>
+<hr>
 - Fixed display
 - Replacement of infobulle by another model more pro
 
-2.35 (JJD.fr)               2012-01-21
-===================================
+<h5>2.35 (JJD.fr)               [2012-01-21]</h5>
+<hr>
 - Réintrégation file update extcal_2_34.php omitted in the previous version
 - Fixed zoom in on photos to certeines
 - Fixed default value of 0 in the table event_etablissement event
 - Intancciation of extcalConfig <=> xoopsModuleConfig for blocks
 
-2.34 (JJD.fr)               2012-01-06
-===================================
+<h5>2.34                [2012-01-06] (JJD.fr)</h5>
+<hr>
   - Fixed handling of images of events and the establishment
   - Fixed the RSS feed
   - Fixed MOFIF regular expressions to validate dates
   - Fixed link on the site of the facility
   - Remove the newline before the currency in the form of the establishment
 
-===================================
-2011/12/30: Version 2.34 (JJD.fr)
-===================================
+
+<h5>2.34 [2011/12/30] (JJD.fr)</h5>
+<hr>
   - Field "desc" table "establishment" renowned "description".
   - Fixed template, admin and office are for schools
 
-2011/12/30: Version 2.33 (JJD.fr) (Google translation)
-===================================
+<h5>2.33 [2011/12/30] (JJD.fr) (Google translation)]</h5>
+<hr>
 - Re-write functions
   bExtcalMinicalShow
   bExtcalMinicaledit (using xoopsform)
@@ -193,9 +211,9 @@ Google Traduction pour les entreprises :Google Translator ToolkitGadget Traducti
 Désactiver la traduction instantanéeÀ propos de Google TraductionMobileConfidentialitéAideEnvoyer des commentaires
 
 
-===================================
-2011/10/21a: Version 2.32 (JJD.fr)
-===================================
+
+<h5>2.32 [2011/10/21] (JJD.fr)]</h5>
+<hr>
  - Fixed the "getSearchEvent" used by the search for Xoops;
    It did not take into account only the first word of an expression.
    In addition it has been adapted for a search from the module itself
@@ -211,8 +229,8 @@ Désactiver la traduction instantanéeÀ propos de Google TraductionMobileConfid
    important:
    Think in this tab to add those options visible in the modules.
 
-2011/10/21a: Version 2.31 (JJD.fr)
-===================================
+<h5>2.31 [2011/10/21] (JJD.fr)]</h5>
+<hr>
  - Fixed loading images in the front office
  - Fixed currency and add exchange constants
    define ('_MD_EXTCAL_DEVISE1', "Euro");
@@ -231,14 +249,14 @@ Désactiver la traduction instantanéeÀ propos de Google TraductionMobileConfid
  - Simplification of the template by adding generic templates
    for tooltips and categories
 
-2011/10/21a: Version 2.30 (JJD.fr)
-===================================
+<h5>2.30 [2011/10/21] (JJD.fr)]</h5>
+<hr>
  - Added the removal by batch or by selection
    in the administration page of events.
    delete images related to the event.
 
-2011/09/04: Version 2.29  (JJD-fr)
-====================================
+<h5>2.29 [2011/09/04] (JJD-fr)]</h5>
+<hr>
 - Corrections by Trabis
 - Module-wide tooltips new look in all views.
 - Hiding the image seen in the "days" and "week" if it is not defined.
@@ -251,9 +269,9 @@ Désactiver la traduction instantanéeÀ propos de Google TraductionMobileConfid
 - Add a block "Upcoming Events by category"
    The block is bordered on the left and above each category by the color of the latter.
 
-====================================
-2011/08/22: Version 2.28  (JJD-fr)
-====================================
+
+<h5>2.28 [2011/08/22] (JJD-fr)]</h5>
+<hr>
 - Merging of "version 2.22 Plus" by Kraven with "2.27"
      * Added table "etablisement"
      * Entry Form for companies
@@ -262,14 +280,14 @@ Désactiver la traduction instantanéeÀ propos de Google TraductionMobileConfid
 - Added tooltips agenda_day in views-view-view and agenda_week
 - Adjusting the input boxes of Events
 
-2011/08/07: Version 2.27  (Mamba)
-=================================
+<h5>2.27 [2011/08/07] (Mamba)</h5>
+<hr>
 - fixed bug with default for starting page (mamba)
 - fixed event "title" for Agenda views (mamba)
 
-====================================
-2011/08/07: Version 2.26  (JJD-fr)
-====================================
+
+<h5>2.26 [2011/08/07] (JJD-fr)</h5>
+<hr>
 - Fixed include  constantes.php in xoops_version.php
 - Fixed the block recovery xoopsModuleConfig minical
 - Important: additional information in the file doc / install.txt
@@ -279,9 +297,9 @@ Désactiver la traduction instantanéeÀ propos de Google TraductionMobileConfid
   Now shows view 'stat_page' set in options.
   View 'start_page' should be visible.
 
-====================================
-2011/08/03: Version 2.25  (JJD-fr)
-====================================
+
+<h5>2.25 [2011/08/03] (JJD-fr)</h5>
+<hr>
 - Added selection of tabs to display the options of the module.
 - Fixed link on the mini calendar.
   Now shows view 'stat_page' set in the options.
@@ -313,18 +331,17 @@ Désactiver la traduction instantanéeÀ propos de Google TraductionMobileConfid
   Can limit the previous year, for example.
 
 
-============================
-2011/03/21: Version 2.24
-============================
 
+<h5>2.24 [2011/03/21]</h5>
+<hr>
 + Zend Coding Standard (Mamba)
 + Changed to standardized XOOPS Module GUI (mamba, Mage)
 + Spanish translation (josespi)
 + fix problem in upcoming events block (josespi)
 
-============================
-2008/10/09: Version 2.2.2
-============================
+
+<h5>2.2.2 [2008/10/09]</h5>
+<hr>
 
 - Fix bug : Event not display in upcomming bloc if anonymous aren't allowed to view
 - Fix bug : First occur for monthly reccur event could be not displayed
@@ -343,10 +360,9 @@ _MB_EXTCAL_SS_NB_PHOTOS
 _MB_EXTCAL_PX
 _MB_EXTCAL_SECONDES
 
-============================
-2008/13/08: Version 2.2.1
-============================
 
+<h5>2.2.1] [2008/13/08</h5>
+<hr>
 - Fix bug : typo fix on the monthly reccur rule string
 - Fix bug : 404 error when we update notifications
 - Fix bug : Yearly "Same as event start date" recur option don't work. This option allow to set an event a the same day number in month as the start date. This allow to create reccuring event like birthday
@@ -366,10 +382,9 @@ admin.php
 _AM_EXTCAL_CONFIRM_DELETE_EVENT
 _AM_EXTCAL_EVENT_DELETED
 
-============================
-2008/14/06: Version 2.2.0
-============================
 
+<h5>2.2.0 [2008/14/06]</h5>
+<hr>
 - Fix bug : Event year selection box don't work on year.php page
 - Fix bug : Blank page when event is submitted with wrong date format
 - Fix bug : Timezone offset bug on calendar pages and event page
@@ -377,10 +392,9 @@ _AM_EXTCAL_EVENT_DELETED
 - Fix bug : Translate error on minical day's letter
 
 
-============================
-2008/21/05: Version 2.1.9
-============================
 
+<h5>2.1.9 [2008/21/05]</h5>
+<hr>
 - Add tooltips box on all pages to display start and end date when mouse over the event name (need Mootools)
 - Add list navig for event on admin side
 - Fix bug : File isn't attached when event is submitted from admin side
@@ -396,20 +410,18 @@ _MB_EXTCAL_TITLE_LENGTH
 
 Add mail_template directory
 
-============================
-2008/07/05: Version 2.1.8
-============================
 
+<h5>2.1.8 [2008/07/05]</h5>
+<hr>
 - Add a feature to make a module update just by clicking on module admin side. The server will download, install files and update the module.
 - Fix bug : User could submit event without perm by accessing directly to the submit page
 - Fix bug : Recur rule aren't updated when an event is edited
 - Fix bug : Timezone bug when user timezone is different than server timezone
 
 
-============================
-2008/28/03: Version 2.1.7
-============================
 
+<h5>2.1.7 [2008/28/03]</h5>
+<hr>
 - Fix bug : event_submitdate field wasn't created during upgrade from version before 2.0.4
 - Fix bug : wrong link when week start in month before the current view (stefan88)
 - Add the send notification function
@@ -418,20 +430,18 @@ Add mail_template directory
 - Add the Notifications system
 
 
-============================
-2008/21/01: Version 2.1.6
-============================
 
+<h5>2.1.6 [2008/21/01]</h5>
+<hr>
 - Fix error when submit an event from public side
 - Fix Bug : Category perm are not respected to display event
 - Fix Bug : Translation file isn't loaded
 - Fix bug : An user could be in the who's going and who's not going list
 
 
-============================
-2008/28/12: Version 2.1.5
-============================
 
+<h5>2.1.5 [2008/28/12]</h5>
+<hr>
 - Add Reccuring rule description on event view
 - Add the RSS page
 - Extend the search function to address and contact field
@@ -439,56 +449,45 @@ Add mail_template directory
 - Add the navigation tab menu
 
 
-============================
-2007/18/12: Version 2.1.4
-============================
 
+<h5>2.1.4 [2007/18/12]</h5>
+<hr>
 - Add reccuring event feature
 
 
-============================
-2007/10/07: Version 2.1.3
-============================
-
+<h5>2.1.3 [2007/10/07]</h5>
+<hr>
 - Add a file attachement feature to the module
 - Add a "who's not going" feature
 - Add a version checker (display a message if a new version of the module is out)
 
 
-============================
-2007/28/04: Version 2.1.2
-============================
-
+<h5>2.1.2 [2007/28/04]</h5>
+<hr>
 - Add a preview feature on submit event page
 - Fix a bug that disallow fresh install
 
 
-============================
-2007/25/04: Version 2.1.1
-============================
-
+<h5>2.1.1 [2007/25/04]</h5>
+<hr>
 - Add the "hide past event" feature
 
 
-============================
-2007/22/04: Version 2.1.0
-============================
-
+<h5>2.1.0 [2007/22/04]</h5>
+<hr>
 - Rewrite the module from scratch
 
 
-============================
-2006/11/04: Version 2.0.4 RC2
-============================
 
+<h5>2.0.4 RC2 [2006/11/04]</h5>
+<hr>
 - Add the possibility to display more than 1 event on spotlight bloc
 - Bug fix : eXtCal don't work with XOOPS under 2.0.15
 
 
-============================
-2006/31/10: Version 2.0.4 RC1
-============================
 
+<h5>2.0.4 RC1 [2006/31/10]</h5>
+<hr>
 - Add a "flat" monthly view
 - Little display improvement
 - Fix an error on pruning page
