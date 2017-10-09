@@ -401,7 +401,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         $eventArray = [];
 
         //        while (list($k, $v) = each($events)) {
-        foreach ($events as $k => $t) {
+        foreach ($events as $k => $v) {
             $ordre[] = (int)$v['event_start'];
             $this->formatEventDate($v, $extcalConfig['event_date_week']);
             //$v['cat']['cat_light_color'] = $v['cat']['cat_color'];
@@ -427,7 +427,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
     {
         global $extcalConfig;
         //        while (list($k, $v) = each($criteres)) {
-        foreach ($criteres as $k => $t) {
+        foreach ($criteres as $k => $v) {
             $$k = $v;
         }
         if (!isset($nbDays)) {
@@ -510,7 +510,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         global $extcalConfig;
 
         //        while (list($k, $v) = each($criteres)) {
-        foreach ($criteres as $k => $t) {
+        foreach ($criteres as $k => $v) {
             $$k = $v;
         }
         if (!isset($nbDays)) {
