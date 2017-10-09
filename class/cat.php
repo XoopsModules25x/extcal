@@ -216,7 +216,7 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
     }
 
     /**
-     * @param $xoopsUser
+     * @param XoopsUser|string $xoopsUser
      *
      * @return bool
      */

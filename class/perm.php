@@ -35,12 +35,12 @@ class ExtcalPerm
     }
 
     /**
-     * @param XoopsUser $user
+     * @param $user
      * @param           $perm
      *
      * @return bool
      */
-    public function getAuthorizedCat(XoopsUser $user, $perm)
+    public function getAuthorizedCat($user, $perm)
     {
         static $authorizedCat;
         $userId = $user ? $user->getVar('uid') : 0;

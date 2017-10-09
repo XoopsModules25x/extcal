@@ -11,6 +11,7 @@
 * Utilities to Utility (mamba)
 * https (mamba)
 + update for PayPal (zyspec)
++ bug in haveSubmitRight (aerograf/mamba)
 + started conversion to XMF (mamba)
     &nbsp;&nbsp;- updated addInfoBoxLine entries (mamba)
     &nbsp;&nbsp;- displayNavigation(basename(__FILE__))  (mamba)

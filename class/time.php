@@ -26,11 +26,11 @@ class ExtcalTime
     }
 
     /**
-     * @param XoopsUser $user
+     * @param XoopsUser|string $user
      *
      * @return mixed
      */
-    public function _getUserTimeZone(XoopsUser $user)
+    public function _getUserTimeZone($user)
     {
         global $xoopsConfig;
 
