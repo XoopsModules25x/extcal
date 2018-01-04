@@ -15,7 +15,7 @@ if (function_exists('mb_http_output')) {
     mb_http_output('pass');
 }
 header('Content-Type:text/xml; charset=utf-8');
-$tpl          = new XoopsTpl();
+$tpl          = new \XoopsTpl();
 $tpl->caching = 0;
 $tpl->xoops_setCacheTime($xoopsModuleConfig['rss_cache_time'] * _EXTCAL_TS_MINUTE);
 if (!$tpl->is_cached('db:extcal_rss.tpl', $cat)) {

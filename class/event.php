@@ -386,7 +386,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
     {
         //ext_echoArray($criteres);
         global $extcalConfig;
-        $myts = MyTextSanitizer::getInstance(); // MyTextSanitizer object
+        $myts = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
 
         $eventsU = $this->getEventsUniques($criteres);
         $eventsR = $this->getEventsRecurents($criteres);
@@ -405,7 +405,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
             $ordre[] = (int)$v['event_start'];
             $this->formatEventDate($v, $extcalConfig['event_date_week']);
             //$v['cat']['cat_light_color'] = $v['cat']['cat_color'];
-            $v['cat']['cat_light_color'] = ExtcalUtility::getLighterColor($v['cat']['cat_color'], _EXTCAL_INFOBULLE_RGB_MIN, _EXTCAL_INFOBULLE_RGB_MAX);
+            $v['cat']['cat_light_color'] = Extcal\Utility::getLighterColor($v['cat']['cat_color'], _EXTCAL_INFOBULLE_RGB_MIN, _EXTCAL_INFOBULLE_RGB_MAX);
             if ('' == $v['event_icone']) {
                 $v['event_icone'] = $v['cat']['cat_icone'];
             }
@@ -1183,7 +1183,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         $form->addElement(new XoopsFormText(_MD_EXTCAL_TITLE, 'event_title', 80, 255, $title), true);
         //-----------------------------------------------
         // Category select
-        $catSelect = new XoopsFormSelect(_MD_EXTCAL_CATEGORY, 'cat_id', $cat);
+        $catSelect = new \XoopsFormSelect(_MD_EXTCAL_CATEGORY, 'cat_id', $cat);
         foreach ($cats as $cat) {
             $catSelect->addOption($cat->getVar('cat_id'), $cat->getVar('cat_name'));
         }
@@ -1193,13 +1193,13 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         $file_path = __DIR__ . '/../assets/css/images';
         $tf        = XoopsLists::getImgListAsArray($file_path);
         array_unshift($tf, _MD_EXTCAL_NONE);
-        $xfIcones = new XoopsFormSelect(_MD_EXTCAL_ICONE, 'event_icone', $event_icone, '');
+        $xfIcones = new \XoopsFormSelect(_MD_EXTCAL_ICONE, 'event_icone', $event_icone, '');
         $xfIcones->addOptionArray($tf);
         $form->addElement($xfIcones, false);
         //-----------------------------------------------------------
         //etablissement
         $etablissementHandler = xoops_getModuleHandler(_EXTCAL_CLS_ETABLISSEMENT, _EXTCAL_MODULE);
-        $etablissement_select = new XoopsFormSelect(_MD_EXTCAL_ETABLISSEMENT, 'event_etablissement', $event_etablissement);
+        $etablissement_select = new \XoopsFormSelect(_MD_EXTCAL_ETABLISSEMENT, 'event_etablissement', $event_etablissement);
         $criteria             = new CriteriaCompo();
         $criteria->setSort('nom');
         $criteria->setOrder('ASC');
@@ -1237,26 +1237,26 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
             $options['width']  = '100%';
             $options['height'] = '200px';
             if ($isAdmin) {
-                $descEditor = new XoopsFormEditor(_MD_EXTCAL_DESCRIPTION, $xoopsModuleConfig['editorAdmin'], $options, $nohtml = false, $onfailure = 'textarea');
+                $descEditor = new \XoopsFormEditor(_MD_EXTCAL_DESCRIPTION, $xoopsModuleConfig['editorAdmin'], $options, $nohtml = false, $onfailure = 'textarea');
             } else {
-                $descEditor = new XoopsFormEditor(_MD_EXTCAL_DESCRIPTION, $xoopsModuleConfig['editorUser'], $options, $nohtml = false, $onfailure = 'textarea');
+                $descEditor = new \XoopsFormEditor(_MD_EXTCAL_DESCRIPTION, $xoopsModuleConfig['editorUser'], $options, $nohtml = false, $onfailure = 'textarea');
             }
         } else {
-            $descEditor = new XoopsFormDhtmlTextArea(_MD_EXTCAL_DESCRIPTION, 'event_desc', $desc, '100%', '100%');
+            $descEditor = new \XoopsFormDhtmlTextArea(_MD_EXTCAL_DESCRIPTION, 'event_desc', $desc, '100%', '100%');
         }
         $form->addElement($descEditor);
 
         // Max registered member for this event
-        $nbMemberElement = new XoopsFormText(_MD_EXTCAL_NBMEMBER, 'event_nbmember', 4, 4, $nbMember);
+        $nbMemberElement = new \XoopsFormText(_MD_EXTCAL_NBMEMBER, 'event_nbmember', 4, 4, $nbMember);
         $nbMemberElement->setDescription(_MD_EXTCAL_NBMEMBER_DESC);
         $form->addElement($nbMemberElement, false);
 
         //Price and monnaie
-        $monnaie_price = new XoopsFormElementTray(_MD_EXTCAL_PRICE, '');
+        $monnaie_price = new \XoopsFormElementTray(_MD_EXTCAL_PRICE, '');
         //price
         $monnaie_price->addElement(new XoopsFormText('', 'event_price', 20, 255, $event_price));
         //monnaie
-        $monnaie = new XoopsFormLabel(_MD_EXTCAL_DEVISE2, '');
+        $monnaie = new \XoopsFormLabel(_MD_EXTCAL_DEVISE2, '');
         $monnaie_price->addElement($monnaie);
         $form->addElement($monnaie_price);
         //----------------------------------------------------------------
@@ -1277,19 +1277,19 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
             $options['width']  = '100%';
             $options['height'] = '200px';
             if ($isAdmin) {
-                $addressEditor = new XoopsFormEditor(_MD_EXTCAL_DESCRIPTION, $xoopsModuleConfig['editorAdmin'], $options, $nohtml = false, $onfailure = 'textarea');
+                $addressEditor = new \XoopsFormEditor(_MD_EXTCAL_DESCRIPTION, $xoopsModuleConfig['editorAdmin'], $options, $nohtml = false, $onfailure = 'textarea');
             } else {
-                $addressEditor = new XoopsFormEditor(_MD_EXTCAL_DESCRIPTION, $xoopsModuleConfig['editorUser'], $options, $nohtml = false, $onfailure = 'textarea');
+                $addressEditor = new \XoopsFormEditor(_MD_EXTCAL_DESCRIPTION, $xoopsModuleConfig['editorUser'], $options, $nohtml = false, $onfailure = 'textarea');
             }
         } else {
-            $addressEditor = new XoopsFormDhtmlTextArea(_MD_EXTCAL_DESCRIPTION, 'event_address', $event_address, '100%', '100%');
+            $addressEditor = new \XoopsFormDhtmlTextArea(_MD_EXTCAL_DESCRIPTION, 'event_address', $event_address, '100%', '100%');
         }
         $form->addElement($addressEditor);
 
         // Recurence form
         $form->addElement(new ExtcalFormRecurRules($reccurOptions));
         // File attachement
-        $fileElmtTray = new XoopsFormElementTray(_MD_EXTCAL_FILE_ATTACHEMENT, '<br>');
+        $fileElmtTray = new \XoopsFormElementTray(_MD_EXTCAL_FILE_ATTACHEMENT, '<br>');
 
         // If they are attached file to this event
         if (count($files) > 0) {
@@ -1309,48 +1309,48 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         //Hack Kraven0
         ///////////////////////////////////////////////////////////////////////////////
         //Picture1
-        $file_tray = new XoopsFormElementTray(sprintf(_MD_EXTCAL_FORM_IMG, 1), '');
+        $file_tray = new \XoopsFormElementTray(sprintf(_MD_EXTCAL_FORM_IMG, 1), '');
         if (!empty($event_picture1)) {
             $file_tray->addElement(new XoopsFormLabel('', "<img src='" . XOOPS_URL . '/uploads/extcal/' . $event_picture1 . "' name='image' id='image' alt=''><br><br>"));
-            $check_del_img = new XoopsFormCheckBox('', 'delimg_1');
+            $check_del_img = new \XoopsFormCheckBox('', 'delimg_1');
             $check_del_img->addOption(1, _MD_EXTCAL_DEL_IMG);
             $file_tray->addElement($check_del_img);
-            $file_img = new XoopsFormFile(_MD_EXTCAL_IMG, 'attachedimage1', 2145728);
+            $file_img = new \XoopsFormFile(_MD_EXTCAL_IMG, 'attachedimage1', 2145728);
             unset($check_del_img);
         } else {
-            $file_img = new XoopsFormFile('', 'attachedimage1', 2145728);
+            $file_img = new \XoopsFormFile('', 'attachedimage1', 2145728);
         }
         $file_img->setExtra("size ='40'");
         $file_tray->addElement($file_img);
         $msg        = sprintf(_MD_EXTCAL_IMG_CONFIG, (int)(400728 / 1000), 500, 500);
-        $file_label = new XoopsFormLabel('', '<br>' . $msg);
+        $file_label = new \XoopsFormLabel('', '<br>' . $msg);
         $file_tray->addElement($file_label);
         $form->addElement($file_tray);
         $form->addElement(new XoopsFormHidden('file1', $event_picture1));
         unset($file_img, $file_tray);
         //Picture2
-        $file_tray = new XoopsFormElementTray(sprintf(_MD_EXTCAL_FORM_IMG, 2), '');
+        $file_tray = new \XoopsFormElementTray(sprintf(_MD_EXTCAL_FORM_IMG, 2), '');
         if (!empty($event_picture2)) {
             $file_tray->addElement(new XoopsFormLabel('', "<img src='" . XOOPS_URL . '/uploads/extcal/' . $event_picture2 . "' name='image' id='image' alt=''><br><br>"));
-            $check_del_img = new XoopsFormCheckBox('', 'delimg_2');
+            $check_del_img = new \XoopsFormCheckBox('', 'delimg_2');
             $check_del_img->addOption(1, _MD_EXTCAL_DEL_IMG);
             $file_tray->addElement($check_del_img);
-            $file_img = new XoopsFormFile(_MD_EXTCAL_IMG, 'attachedimage2', 2145728);
+            $file_img = new \XoopsFormFile(_MD_EXTCAL_IMG, 'attachedimage2', 2145728);
             unset($check_del_img);
         } else {
-            $file_img = new XoopsFormFile('', 'attachedimage2', 2145728);
+            $file_img = new \XoopsFormFile('', 'attachedimage2', 2145728);
         }
         $file_img->setExtra("size ='40'");
         $file_tray->addElement($file_img);
         $msg        = sprintf(_MD_EXTCAL_IMG_CONFIG, (int)(400728 / 1000), 500, 500);
-        $file_label = new XoopsFormLabel('', '<br>' . $msg);
+        $file_label = new \XoopsFormLabel('', '<br>' . $msg);
         $file_tray->addElement($file_label);
         $form->addElement($file_tray);
         $form->addElement(new XoopsFormHidden('file2', $event_picture2));
         unset($file_img, $file_tray);
         ///////////////////////////////////////////////////////////////////////////////
 
-        $buttonElmtTray = new XoopsFormElementTray('', '&nbsp;');
+        $buttonElmtTray = new \XoopsFormElementTray('', '&nbsp;');
         $buttonElmtTray->addElement(new XoopsFormButton('', 'form_submit', _SUBMIT, 'submit'), false);
         if ('user' === $siteSide) {
             $buttonElmtTray->addElement(new XoopsFormButton('', 'form_preview', _MD_EXTCAL_PREVIEW, 'submit'), false);
@@ -2347,7 +2347,7 @@ class ExtcalEventHandler extends ExtcalPersistableObjectHandler
         while ($myrow = $xoopsDB->fetchArray($result)) {
             $myrow['cat']['cat_name']        = $myrow['cat_name'];
             $myrow['cat']['cat_color']       = $myrow['cat_color'];
-            $myrow['cat']['cat_light_color'] = ExtcalUtility::getLighterColor($myrow['cat']['cat_color'], _EXTCAL_INFOBULLE_RGB_MIN, _EXTCAL_INFOBULLE_RGB_MAX);
+            $myrow['cat']['cat_light_color'] = Extcal\Utility::getLighterColor($myrow['cat']['cat_color'], _EXTCAL_INFOBULLE_RGB_MIN, _EXTCAL_INFOBULLE_RGB_MAX);
             if ('' == $myrow['event_icone']) {
                 $myrow['event_icone'] = $myrow['cat']['cat_icone'];
             }

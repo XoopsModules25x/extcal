@@ -22,7 +22,7 @@
 
 require_once __DIR__ . '/../../../class/uploader.php';
 require_once __DIR__ . '/../../../class/mail/phpmailer/class.phpmailer.php'; // First we require the PHPMailer libary in our script
-require_once __DIR__ . '/../class/utility.php';
+require_once __DIR__ . '/../class/Utility.php';
 require_once __DIR__ . '/constantes.php';
 require_once __DIR__ . '/../../../class/template.php';
 
@@ -143,7 +143,7 @@ __sql__;
     //Chargement du template dans le dossier de langue
     //$f = _EXTCAL_PATH_LG . $xoopsConfig['language'] . '\mail_inscription.html';
     //$tpl = new tpl($f);
-    $tpl = new XoopsTpl();
+    $tpl = new \XoopsTpl();
 
     $tpl->assign('dateAction', date(_MD_EXTCAL_FORMAT_DATE));
     $tpl->assign('submiter', $submiter);
@@ -230,7 +230,7 @@ function extcal_SendMail(
     }
     $header = extcal_getHeader(1, $mail_fromemail);
     //-----------------------------
-    $myts = MyTextSanitizer::getInstance();
+    $myts = \MyTextSanitizer::getInstance();
     //$xoopsMailer = getMailer();
     $xoopsMailer = xoops_getMailer();
 
@@ -259,8 +259,8 @@ function extcal_SendMail(
     $xoopsMailer->send($bEcho);
 
     if ($bEcho) {
-        ExtcalUtility::ext_echo($xoopsMailer->getSuccess());
-        ExtcalUtility::ext_echo($xoopsMailer->getErrors());
+        Extcal\Utility::ext_echo($xoopsMailer->getSuccess());
+        Extcal\Utility::ext_echo($xoopsMailer->getErrors());
     }
     /*
 

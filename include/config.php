@@ -17,31 +17,41 @@
  * @author       XOOPS Development Team,
  */
 
-require_once __DIR__ . '/../../../mainfile.php';
 $moduleDirName = basename(dirname(__DIR__));
+$moduleDirNameUpper = strtoupper($moduleDirName);
 
-if (!defined('EXTCAL_DIRNAME')) {
-    define('EXTCAL_DIRNAME', $moduleDirName);
-    define('EXTCAL_PATH', XOOPS_ROOT_PATH . '/modules/' . EXTCAL_DIRNAME);
-    define('EXTCAL_URL', XOOPS_URL . '/modules/' . EXTCAL_DIRNAME);
-    define('EXTCAL_ADMIN', EXTCAL_URL . '/admin/index.php');
-    define('EXTCAL_ROOT_PATH', XOOPS_ROOT_PATH . '/modules/' . EXTCAL_DIRNAME);
-    define('EXTCAL_AUTHOR_LOGOIMG', EXTCAL_URL . '/assets/images/logoModule.png');
-    define('EXTCAL_UPLOAD_URL', XOOPS_UPLOAD_URL . '/' . EXTCAL_DIRNAME); // WITHOUT Trailing slash
-    define('EXTCAL_UPLOAD_PATH', XOOPS_UPLOAD_PATH . '/' . EXTCAL_DIRNAME); // WITHOUT Trailing slash
-}
 
 //Configurator
-return [
-    'name'          => 'Module Configurator',
-    'uploadFolders' => [
-        EXTCAL_UPLOAD_PATH,
-        EXTCAL_UPLOAD_PATH . '/etablissement'
+return (object)[
+    'name'           => strtoupper($moduleDirName) . ' Module Configurator',
+    'paths'          => [
+        'dirname'    => $moduleDirName,
+        'admin'      => XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/admin',
+        'modPath'    => XOOPS_ROOT_PATH . '/modules/' . $moduleDirName,
+        'modUrl'     => XOOPS_URL . '/modules/' . $moduleDirName,
+        'uploadPath' => XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
+        'uploadUrl'  => XOOPS_UPLOAD_URL . '/' . $moduleDirName,
     ],
-    //    'copyFiles'     => array(
-    //        EXTCAL_UPLOAD_PATH,
-    //        EXTCAL_UPLOAD_PATH . '/etablissement'
-    //    ),
+    'uploadFolders' => [
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images',
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images/thumbnails'
+    ],
+    'copyBlankFiles'     => [
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images',
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images/thumbnails'
+    ],
+
+    'copyTestFolders' => [
+        [
+            XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/testdata/images',
+            XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images',
+        ],
+        [
+            XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/testdata/thumbs',
+            XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/thumbs',
+        ]
+    ],
 
     'templateFolders' => [
         '/templates/',
@@ -53,8 +63,14 @@ return [
         '/include/update_functions.php',
         '/include/install_functions.php'
     ],
-];
+    'oldFolders'        => [
+        '/images',
+        '/css',
+        '/js',
+        '/tcpdf',
+        '/images',
+    ],
+    'modCopyright'    => "<a href='https://xoops.org' title='XOOPS Project' target='_blank'>
+                     <img src='" . XOOPS_URL . '/modules/' . $moduleDirName  . '_AUTHOR_LOGOIMG' . '\' alt=\'XOOPS Project\' /></a>',
 
-// module information
-$mod_copyright = "<a href='https://xoops.org' title='XOOPS Project' target='_blank'>
-                     <img src='" . EXTCAL_AUTHOR_LOGOIMG . "' alt='XOOPS Project'></a>";
+];

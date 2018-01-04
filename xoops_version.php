@@ -18,6 +18,9 @@
  */
 
 // defined('XOOPS_ROOT_PATH') || die('XOOPS Root Path not defined');
+
+include __DIR__ . '/preloads/autoloader.php';
+
 require_once __DIR__ . '/include/constantes.php';
 require_once __DIR__ . '/include/agenda_fnc.php';
 require_once __DIR__ . '/class/config.php';
@@ -69,14 +72,13 @@ $i                     = 0;
 
 if (isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule'])
     && 'extcal' === $GLOBALS['xoopsModule']->getVar('dirname')) {
-    /*
-        $user = isset($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser'] : null;
-        $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-        if ($catHandler->haveSubmitRight($user)) {
-            $modversion['sub'][0]['name'] = _MI_EXTCAL_SUBMIT_EVENT;
-            $modversion['sub'][0]['url'] = _EXTCAL_FILE_NEW_EVENT;
-        }
-    */
+    $user = isset($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser'] : null;
+    $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+    if ($catHandler->haveSubmitRight($user)) {
+        $modversion['sub'][0]['name'] = _MI_EXTCAL_SUBMIT_EVENT;
+        $modversion['sub'][0]['url'] = _EXTCAL_FILE_NEW_EVENT;
+    }
+
     $tTabs = getNavBarTabs();
     //    while (list($key, $value) = each($tTabs)) {
     foreach ($tTabs as $key => $value) {

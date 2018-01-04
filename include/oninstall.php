@@ -86,7 +86,7 @@ function xoops_module_install_extcal(XoopsModule $xoopsModule)
     //    $moduleDirName = $xoopsModule->getVar('dirname');
     $configurator = include $GLOBALS['xoops']->path('modules/' . $moduleDirName . '/include/config.php');
 
-    /** @var ExtcalUtility $utilityClass */
+    /** @var Extcal\Utility $utilityClass */
     $utilityClass = ucfirst($moduleDirName) . 'Utility';
     if (!class_exists($utilityClass)) {
         xoops_load('utility', $moduleDirName);

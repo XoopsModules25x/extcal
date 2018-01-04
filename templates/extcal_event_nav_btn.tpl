@@ -7,7 +7,7 @@
             <span style="font-weight:bold;"><{$navig.this.name}></span>
         </td>
         <td style="width:33%;padding-top: 4px;">
-            <a href="<{$xoops_url}>/modules/extcal/<{$params.file}>?<{$navig.next.uri}>"><{$navig.next.name}>&nbsp;&nbsp;&gt;&gt;</a>
+            <a href="<{$xoops_url}>/modules/extcal/<{$params.file}>?<{$navig.next.uri}>"><{$navig.next.name}>&nbsp;&nbsp;>></a>
         </td>
     </tr>
 </table>

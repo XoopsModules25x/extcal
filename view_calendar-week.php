@@ -1,5 +1,7 @@
 <?php
 
+use XoopsModules\Extcal;
+
 include __DIR__ . '/../../mainfile.php';
 require_once __DIR__ . '/include/constantes.php';
 $params                                  = ['view' => _EXTCAL_NAV_CALWEEK, 'file' => _EXTCAL_FILE_CALWEEK];
@@ -25,11 +27,11 @@ $day    = date('j', $dayTS);
 //echo $dayTS . '   dayTS-2 <br>';
 //echo gmdate("Y-m-d\TH:i:s\Z", $dayTS). '   dayTS-2 <br>';
 
-$form = new XoopsSimpleForm('', 'navigSelectBox', $params['file'], 'get');
+$form = new \XoopsSimpleForm('', 'navigSelectBox', $params['file'], 'get');
 $form->addElement(getListYears($year, $xoopsModuleConfig['agenda_nb_years_before'], $xoopsModuleConfig['agenda_nb_years_after']));
 $form->addElement(getListMonths($month));
 $form->addElement(getListDays($day));
-$form->addElement(ExtcalUtility::getListCategories($cat));
+$form->addElement(Extcal\Utility::getListCategories($cat));
 $form->addElement(new XoopsFormButton('', 'form_submit', _SUBMIT, 'submit'));
 
 // Assigning the form to the template

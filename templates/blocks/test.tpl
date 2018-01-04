@@ -160,7 +160,7 @@
                         Listings</a>
                     <a class="menuMain " href="http://localhost/xtest256final/modules/lexikon/"
                        title="Lexikon">Lexikon</a>
-                    <a class="menuMain " href="http://localhost/xtest256final/modules/mastop_go2/" title="Mastop Go2">Mastop
+                    <a class="menuMain " href="http://localhost/xtest256final/modules/mastopgo2/" title="Mastop Go2">Mastop
                         Go2</a>
                     <a class="menuMain " href="http://localhost/xtest256final/modules/mycomments/" title="My comments">My
                         comments</a>
@@ -181,7 +181,7 @@
                     <a class="menuMain " href="http://localhost/xtest256final/modules/planet/" title="Planet">Planet</a>
                     <a class="menuMain " href="http://localhost/xtest256final/modules/portfolio/" title="Portfolio">Portfolio</a>
                     <a class="menuMain " href="http://localhost/xtest256final/modules/publisher/" title="Publisher">Publisher</a>
-                    <a class="menuMain " href="http://localhost/xtest256final/modules/rw_banner/" title="rw-banner">rw-banner</a>
+                    <a class="menuMain " href="http://localhost/xtest256final/modules/rwbanner/" title="rw-banner">rw-banner</a>
                     <a class="menuMain " href="http://localhost/xtest256final/modules/simplenewsletter/"
                        title="SimpleNewsletter">SimpleNewsletter</a>
                     <a class="menuMain " href="http://localhost/xtest256final/modules/smartfaq/" title="SmartFAQ">SmartFAQ</a>

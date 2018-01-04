@@ -17,6 +17,8 @@
  * @author       XOOPS Development Team,
  */
 
+use XoopsModules\Extcal;
+
 // Include xoops admin header
 require_once __DIR__ . '/../../../include/cp_header.php';
 require_once __DIR__ . '/../class/ExtcalPersistableObjectHandler.php';
@@ -48,7 +50,7 @@ if ($xoopsUser) {
 xoops_loadLanguage('admin', 'system');
 xoops_loadLanguage('admin', $xoopsModule->getVar('dirname', 'e'));
 xoops_loadLanguage('modinfo', $xoopsModule->getVar('dirname', 'e'));
-$myts = MyTextSanitizer::getInstance();
+$myts = \MyTextSanitizer::getInstance();
 
 //appel des class
 $etablissementHandler = xoops_getModuleHandler(_EXTCAL_CLS_ETABLISSEMENT, _EXTCAL_MODULE);
@@ -98,7 +100,7 @@ switch ($op) {
         $etablissement_arr = $etablissementHandler->getObjects($criteria);
         $numrows           = $etablissementHandler->getCount($criteria);
         if ($numrows > $limit) {
-            $pagenav = new XoopsPageNav($numrows, $limit, $start, 'start', 'op=liste&limit=' . $limit);
+            $pagenav = new \XoopsPageNav($numrows, $limit, $start, 'start', 'op=liste&limit=' . $limit);
             $pagenav = $pagenav->renderNav(4);
         } else {
             $pagenav = '';
@@ -206,7 +208,7 @@ switch ($op) {
         $delimg = @$_REQUEST['delimg'];
         $delimg = isset($delimg) ? (int)$delimg : 0;
         if (0 == $delimg && !empty($_REQUEST['xoops_upload_file'][0])) {
-            $upload = new XoopsMediaUploader($uploaddir_etablissement, [
+            $upload = new \XoopsMediaUploader($uploaddir_etablissement, [
                 'image/gif',
                 'image/jpeg',
                 'image/pjpeg',

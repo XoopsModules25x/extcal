@@ -73,7 +73,7 @@ class ExtcalFileHandler extends ExtcalPersistableObjectHandler
             $allowedMimeType[] = $mimeType[$fileExt];
         }
 
-        $uploader = new XoopsMediaUploader(XOOPS_ROOT_PATH . '/uploads/extcal', $allowedMimeType, 3145728);
+        $uploader = new \XoopsMediaUploader(XOOPS_ROOT_PATH . '/uploads/extcal', $allowedMimeType, 3145728);
         $uploader->setPrefix($userId . '-' . $eventId . '_');
         if ($uploader->fetchMedia('event_file')) {
             if (!$uploader->upload()) {

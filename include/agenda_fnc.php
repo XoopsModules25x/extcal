@@ -19,7 +19,7 @@ define('_EXTCAL_FORMAT_AGENDA_KEYD', 'Y-m-d');
 define('_EXTCAL_FORMAT_AGENDA_KEYT', 'H:i');
 
 require_once __DIR__ . '/constantes.php';
-require_once __DIR__ . '/../class/utility.php';
+require_once __DIR__ . '/../class/Utility.php';
 
 $moduleDirName = basename(dirname(__DIR__));
 xoops_loadLanguage('main', $moduleDirName);
@@ -226,7 +226,7 @@ function orderEvents($event1, $event2)
 function getListYears($year, $nbYearsBefore = 0, $nbYearsAfter = 5, $addNone = false, $name = 'year')
 {
     // Year selectbox
-    $select = new XoopsFormSelect('', $name, $year);
+    $select = new \XoopsFormSelect('', $name, $year);
     if ($addNone) {
         $select->addOption(0, ' ');
     }
@@ -254,7 +254,7 @@ function getListMonths($month, $addNone = false, $name = 'month')
     // Month selectbox
     $extcalTimeHandler = ExtcalTime::getHandler();
 
-    $select = new XoopsFormSelect('', $name, $month);
+    $select = new \XoopsFormSelect('', $name, $month);
     if ($addNone) {
         $select->addOption(0, ' ');
     }
@@ -276,7 +276,7 @@ function getListMonths($month, $addNone = false, $name = 'month')
 function getListDays($day, $addNone = false)
 {
     // Day selectbox
-    $select = new XoopsFormSelect('', 'day', $day);
+    $select = new \XoopsFormSelect('', 'day', $day);
     if ($addNone) {
         $select->addOption(0, ' ');
     }

@@ -38,50 +38,43 @@ function tableExists($tablename)
 /**
  *
  * Prepares system prior to attempting to install module
- * @param XoopsModule $xoopsModule {@link XoopsModule}
+ * @param XoopsModule $module {@link XoopsModule}
  *
  * @return bool true if ready to install, false if not
  */
-function xoops_module_pre_update_extcal(XoopsModule $xoopsModule)
+function xoops_module_pre_update_extcal(XoopsModule $module)
 {
+    /** @var Extcal\Helper $helper */
+    /** @var Extcal\Utility $utility */
     $moduleDirName = basename(dirname(__DIR__));
-    $utilityClass  = ucfirst($moduleDirName) . 'Utility';
-    if (!class_exists($utilityClass)) {
-        xoops_load('utility', $moduleDirName);
-    }
-    //check for minimum XOOPS version
-    if (!$utilityClass::checkVerXoops($xoopsModule)) {
-        return false;
-    }
+    $helper       = Extcal\Helper::getInstance();
+    $utility      = new Extcal\Utility();
 
-    // check for minimum PHP version
-    if (!$utilityClass::checkVerPhp($xoopsModule)) {
-        return false;
-    }
-
-    return true;
+    $xoopsSuccess = $utility::checkVerXoops($module);
+    $phpSuccess   = $utility::checkVerPhp($module);
+    return $xoopsSuccess && $phpSuccess;
 }
 
 /**
  *
  * Performs tasks required during update of the module
- * @param XoopsModule $xoopsModule {@link XoopsModule}
+ * @param XoopsModule $module {@link XoopsModule}
  * @param null        $previousVersion
  *
  * @return bool true if update successful, false if not
  */
 
-function xoops_module_update_extcal(XoopsModule $xoopsModule, $previousVersion = null)
+function xoops_module_update_extcal(XoopsModule $module, $previousVersion = null)
 {
     //    global $xoopsDB;
     $moduleDirName = basename(dirname(__DIR__));
 
-    $newVersion = $xoopsModule->getVar('version') * 100;
+    $newVersion = $module->getVar('version') * 100;
     if ($newVersion == $previousVersion) {
         return true;
     }
 
-    $fld = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/versions/';
+    $fld = XOOPS_ROOT_PATH . '/modules/' . $module->getVar('dirname') . '/versions/';
     $cls = 'extcal_%1$s';
 
     $version = [
@@ -105,18 +98,21 @@ function xoops_module_update_extcal(XoopsModule $xoopsModule, $previousVersion =
             if (is_readable($f)) {
                 echo "mise à jour version : {$key} = {$val}<br>";
                 require_once $f;
-                $cl = new $name($xoopsModule, ['previousVersion' => $previousVersion]);
+                $cl = new $name($module, ['previousVersion' => $previousVersion]);
             }
         }
     }
 
+    $capsDirName   = strtoupper($moduleDirName);
+
+    /** @var Extcal\Helper $helper */
+    /** @var Extcal\Utility $utility */
+    /** @var Extcal\Configurator $configurator */
+    $helper  = Extcal\Helper::getInstance();
+    $utility = new Extcal\Utility();
+    $configurator = new Extcal\Configurator();
+
     if ($previousVersion < 240) {
-        $configurator = include __DIR__ . '/config.php';
-        /** @var ExtcalUtility $utilityClass */
-        $utilityClass = ucfirst($moduleDirName) . 'Utility';
-        if (!class_exists($utilityClass)) {
-            xoops_load('utility', $moduleDirName);
-        }
 
         //delete old HTML templates
         if (count($configurator['templateFolders']) > 0) {
@@ -159,19 +155,19 @@ function xoops_module_update_extcal(XoopsModule $xoopsModule, $previousVersion =
         //---------------------
 
         //delete .html entries from the tpl table
-        $sql = 'DELETE FROM ' . $xoopsDB->prefix('tplfile') . " WHERE `tpl_module` = '" . $xoopsModule->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
+        $sql = 'DELETE FROM ' . $xoopsDB->prefix('tplfile') . " WHERE `tpl_module` = '" . $module->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
         $xoopsDB->queryF($sql);
 
         // Load class XoopsFile ====================
         xoops_load('XoopsFile');
 
         //delete /images directory ============
-        $imagesDirectory = $GLOBALS['xoops']->path('modules/' . $xoopsModule->getVar('dirname', 'n') . '/images/');
+        $imagesDirectory = $GLOBALS['xoops']->path('modules/' . $module->getVar('dirname', 'n') . '/images/');
         $folderHandler   = XoopsFile::getHandler('folder', $imagesDirectory);
         $folderHandler->delete($imagesDirectory);
     }
 
     $gpermHandler = xoops_getHandler('groupperm');
 
-    return $gpermHandler->deleteByModule($xoopsModule->getVar('mid'), 'item_read');
+    return $gpermHandler->deleteByModule($module->getVar('mid'), 'item_read');
 }

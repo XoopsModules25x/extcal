@@ -32,30 +32,30 @@ $orderby3  = isset($_POST['orderby3']) ? $_POST['orderby3'] : '';
 
 //---------------------------------------------------------------
 $search              = [];
-$exp                 = new XoopsFormText(_MD_EXTCAL_EXPRESSION, 'searchExp', 80, 80, $searchExp);
+$exp                 = new \XoopsFormText(_MD_EXTCAL_EXPRESSION, 'searchExp', 80, 80, $searchExp);
 $search['searchExp'] = $exp->render();
-$search['andor']     = ExtcalUtility::getListAndOr('andor', '', $andor)->render();
+$search['andor']     = Extcal\Utility::getListAndOr('andor', '', $andor)->render();
 //$search['year']  = getListYears($year,$xoopsModuleConfig['agenda_nb_years_before'],$xoopsModuleConfig['agenda_nb_years_after'], true)->render();
 $search['year']  = getListYears($year, 2, 5, true)->render();
 $search['month'] = getListMonths($month, true)->render();
 $search['day']   = getListDays($day, true)->render();
 
 //$search['cat']   = implode('', getCheckeCategories());
-$search['cat'] = ExtcalUtility::getListCategories($cat, true, 'cat')->render();
+$search['cat'] = Extcal\Utility::getListCategories($cat, true, 'cat')->render();
 
-$search['orderby1'] = ExtcalUtility::getListOrderBy('orderby1', '', $orderby1, false)->render();
-$search['orderby2'] = ExtcalUtility::getListOrderBy('orderby2', '', $orderby2, true)->render();
-$search['orderby3'] = ExtcalUtility::getListOrderBy('orderby3', '', $orderby3, true)->render();
+$search['orderby1'] = Extcal\Utility::getListOrderBy('orderby1', '', $orderby1, false)->render();
+$search['orderby2'] = Extcal\Utility::getListOrderBy('orderby2', '', $orderby2, true)->render();
+$search['orderby3'] = Extcal\Utility::getListOrderBy('orderby3', '', $orderby3, true)->render();
 
 //echoArray($search,true);
 $xoopsTpl->assign('search', $search);
 /***************************************************************/
 
-// $form = new XoopsSimpleForm('', 'navigSelectBox', $params['file'], 'get');
+// $form = new \XoopsSimpleForm('', 'navigSelectBox', $params['file'], 'get');
 // // $form->addElement(getListYears($year,$xoopsModuleConfig['agenda_nb_years_before'],$xoopsModuleConfig['agenda_nb_years_after'], true));
 // // $form->addElement(getListMonths($month, rtue));
 // $form->addElement(getListCategories($cat));
-// $form->addElement(ExtcalUtility::getListOrderBy($orderby));
+// $form->addElement(Extcal\Utility::getListOrderBy($orderby));
 //
 // $form->addElement(new XoopsFormText(_MD_EXTCAL_SEARCH_EXP, 'searchExp', 80, 80, $searchExp));
 //
@@ -131,14 +131,14 @@ for ($h = 0, $count = count($recurrents); $h < $count; ++$h) {
     //
     //    $recurEvents['cat']['cat_name']        = $categoryObject->vars['cat_name']['value'];
     //    $recurEvents['cat']['cat_color']       = $categoryObject->vars['cat_color']['value'];
-    //    $recurEvents['cat']['cat_light_color'] = ExtcalUtility::getLighterColor($categoryObject->vars['cat_color']['value'], _EXTCAL_INFOBULLE_RGB_MIN, _EXTCAL_INFOBULLE_RGB_MAX);
+    //    $recurEvents['cat']['cat_light_color'] = Extcal\Utility::getLighterColor($categoryObject->vars['cat_color']['value'], _EXTCAL_INFOBULLE_RGB_MIN, _EXTCAL_INFOBULLE_RGB_MAX);
 
     // Formating date
     $eventHandler->formatEventsDate($recurEvents, $xoopsModuleConfig['event_date_week']);
     foreach ($recurEvents as $val) {
         $val['cat']['cat_name']        = $categoryObject->vars['cat_name']['value'];
         $val['cat']['cat_color']       = $categoryObject->vars['cat_color']['value'];
-        $val['cat']['cat_light_color'] = ExtcalUtility::getLighterColor($categoryObject->vars['cat_color']['value'], _EXTCAL_INFOBULLE_RGB_MIN, _EXTCAL_INFOBULLE_RGB_MAX);
+        $val['cat']['cat_light_color'] = Extcal\Utility::getLighterColor($categoryObject->vars['cat_color']['value'], _EXTCAL_INFOBULLE_RGB_MIN, _EXTCAL_INFOBULLE_RGB_MAX);
         $recurEventsArray[]            = $val;
     }
 }

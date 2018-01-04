@@ -1,5 +1,7 @@
 <?php
 
+use XoopsModules\Extcal;
+
 include __DIR__ . '/../../mainfile.php';
 require_once __DIR__ . '/include/constantes.php';
 $params                                  = ['view' => _EXTCAL_NAV_CALMONTH, 'file' => _EXTCAL_FILE_CALMONTH];
@@ -12,10 +14,10 @@ $month = isset($_GET['month']) ? (int)$_GET['month'] : date('n');
 $cat   = isset($_GET['cat']) ? (int)$_GET['cat'] : 0;
 /* ========================================================================== */
 
-$form = new XoopsSimpleForm('', 'navigSelectBox', $params['file'], 'get');
+$form = new \XoopsSimpleForm('', 'navigSelectBox', $params['file'], 'get');
 $form->addElement(getListYears($year, $xoopsModuleConfig['agenda_nb_years_before'], $xoopsModuleConfig['agenda_nb_years_after']));
 $form->addElement(getListMonths($month));
-$form->addElement(ExtcalUtility::getListCategories($cat));
+$form->addElement(Extcal\Utility::getListCategories($cat));
 $form->addElement(new XoopsFormButton('', 'form_submit', _SUBMIT, 'submit'));
 
 // Assigning the form to the template

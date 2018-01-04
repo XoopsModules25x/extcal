@@ -72,7 +72,7 @@ class ExtcalEtablissement extends XoopsObject
 
         require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
-        $form = new XoopsThemeForm($title, 'form', $action, 'post', true);
+        $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
 
         $form->addElement(new XoopsFormText(_MD_EXTCAL_ETABLISSEMENT_NOM, 'nom', 50, 255, $this->getVar('nom')), true);
@@ -95,21 +95,21 @@ class ExtcalEtablissement extends XoopsObject
         $form->addElement(new XoopsFormText(_MD_EXTCAL_ETABLISSEMENT_MAP, 'map', 150, 255, $this->getVar('map')), false);
 
         //Logo
-        $file_tray = new XoopsFormElementTray(sprintf(_MD_EXTCAL_FORM_IMG, 2), '');
+        $file_tray = new \XoopsFormElementTray(sprintf(_MD_EXTCAL_FORM_IMG, 2), '');
         if ('' != $this->getVar('logo')) {
             $file_tray->addElement(new XoopsFormLabel('', "<img src='" . XOOPS_URL . '/uploads/extcal/etablissement/' . $this->getVar('logo') . "' name='image' id='image' alt=''><br><br>"));
-            $check_del_img = new XoopsFormCheckBox('', 'delimg');
+            $check_del_img = new \XoopsFormCheckBox('', 'delimg');
             $check_del_img->addOption(1, _MD_EXTCAL_DEL_IMG);
             $file_tray->addElement($check_del_img);
-            $file_img = new XoopsFormFile(_MD_EXTCAL_IMG, 'attachedimage', 3145728);
+            $file_img = new \XoopsFormFile(_MD_EXTCAL_IMG, 'attachedimage', 3145728);
             unset($check_del_img);
         } else {
-            $file_img = new XoopsFormFile('', 'attachedimage', 3145728);
+            $file_img = new \XoopsFormFile('', 'attachedimage', 3145728);
         }
         $file_img->setExtra("size ='40'");
         $file_tray->addElement($file_img);
         $msg        = sprintf(_MD_EXTCAL_IMG_CONFIG, (int)(3145728 / 1000), 500, 500);
-        $file_label = new XoopsFormLabel('', '<br>' . $msg);
+        $file_label = new \XoopsFormLabel('', '<br>' . $msg);
         $file_tray->addElement($file_label);
         $form->addElement($file_tray);
         $form->addElement(new XoopsFormHidden('file', $this->getVar('logo')));

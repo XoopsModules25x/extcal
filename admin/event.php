@@ -17,12 +17,14 @@
  * @author       XOOPS Development Team,
  */
 
+use XoopsModules\Extcal;
+
 require_once __DIR__ . '/../../../include/cp_header.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 require_once __DIR__ . '/../class/form/extcalform.php';
 require_once __DIR__ . '/admin_header.php';
-require_once __DIR__ . '/../class/utility.php';
+require_once __DIR__ . '/../class/Utility.php';
 
 $gepeto = array_merge($_GET, $_POST);
 //while (list($k, $v) = each($gepeto)) {
@@ -91,7 +93,7 @@ switch ($op) {
 
         //exit;
         ///////////////////////////////////////////////////////////////////////////////
-        ExtcalUtility::extcal_loadImg($_REQUEST, $event_picture1, $event_picture2);
+        Extcal\Utility::extcal_loadImg($_REQUEST, $event_picture1, $event_picture2);
         ///////////////////////////////////////////////////////////////////////////////
         $data = [
             'event_title'         => $_POST['event_title'],
@@ -156,7 +158,7 @@ switch ($op) {
         // require_once (XOOPS_ROOT_PATH . '/class/xoopsform/tc_calendar/formtccalendar.php');
         //
         //        // Call the calendar constructor - use the desired form and format, according to the instructions/samples provided on triconsole.com
-        //        $dateBirthday = new XoopsTcCalendar("datez1", true, false);
+        //        $dateBirthday = new \XoopsTcCalendar("datez1", true, false);
         //        //$dateBirthday->setIcon("/images/iconCalendar.gif");
         //        $dateBirthday->setIcon("/class/xoopsform/tc_calendar/images/iconCalendar.gif");
         //        //$dateBirthday->rtl=false;
@@ -396,7 +398,7 @@ switch ($op) {
                 echo '</tr>';
             }
             //---------------------------------------------------------
-            $pageNav = new XoopsPageNav($eventHandler->getCountNewEvent(), $nbEventsByPage, $start);
+            $pageNav = new \XoopsPageNav($eventHandler->getCountNewEvent(), $nbEventsByPage, $start);
 
             echo '<tr><td colspan="2" style="text-align: right;">';
             echo $pageNav->renderNav(2);

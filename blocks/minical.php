@@ -19,7 +19,7 @@
 
 global $extcalConfig, $xoopsUser;
 require_once __DIR__ . '/../include/constantes.php';
-require_once __DIR__ . '/../class/utility.php';
+require_once __DIR__ . '/../class/Utility.php';
 require_once __DIR__ . '/../class/tableForm.php';
 //---------------------------------------------------------------------------
 /**
@@ -264,7 +264,7 @@ function bExtcalMinicalEdit($options)
 
     $xfValue = [];
 
-    $form = new XoopsTableForm(_OPTIONS, '', '');
+    $form = new \XoopsTableForm(_OPTIONS, '', '');
     //$form->setExtra('enctype="multipart/form-data"');
 
     //============================================================
@@ -277,7 +277,7 @@ function bExtcalMinicalEdit($options)
     $form->insertBreak('<div style="text-align: center;font-weight: bold;">' . _MB_EXTCAL_OPT_SLIDE_SHOW . '</div>', 'head');
 
     $k           = 0;
-    $xfValue[$k] = new XoopsFormRadio(_MB_EXTCAL_DISPLAY_IMG, "options[{$k}]", $options[$k]);
+    $xfValue[$k] = new \XoopsFormRadio(_MB_EXTCAL_DISPLAY_IMG, "options[{$k}]", $options[$k]);
     $xfValue[$k]->addOption(1, _YES);
     $xfValue[$k]->addOption(0, _NO);
 
@@ -291,7 +291,7 @@ function bExtcalMinicalEdit($options)
     }
 
     $k           = 1;
-    $xfValue[$k] = new XoopsFormSelect(_MB_EXTCAL_IMG_CAT, "options[{$k}]", $options[$k], 1, false);
+    $xfValue[$k] = new \XoopsFormSelect(_MB_EXTCAL_IMG_CAT, "options[{$k}]", $options[$k], 1, false);
     $xfValue[$k]->addOptionArray($t);
     $form->addElement($xfValue[$k], false);
     //---------------------------------------------------------------------
@@ -324,12 +324,12 @@ function bExtcalMinicalEdit($options)
     ];
 
     $k           = 7;
-    $xfValue[$k] = new XoopsFormSelect(_MB_EXTCAL_DISPLAY_MONTH, "options[{$k}]", $options[$k], 1, false);
+    $xfValue[$k] = new \XoopsFormSelect(_MB_EXTCAL_DISPLAY_MONTH, "options[{$k}]", $options[$k], 1, false);
     $xfValue[$k]->addOptionArray($t);
     $form->addElement($xfValue[$k], false);
     //---------------------------------------------------------------------
     $k           = 8;
-    $xfValue[$k] = new XoopsFormRadio(_MB_EXTCAL_DISPLAY_SUBMIT_LINK, "options[{$k}]", $options[$k]);
+    $xfValue[$k] = new \XoopsFormRadio(_MB_EXTCAL_DISPLAY_SUBMIT_LINK, "options[{$k}]", $options[$k]);
     $xfValue[$k]->addOption(1, _YES);
     $xfValue[$k]->addOption(0, _NO);
 
@@ -344,13 +344,13 @@ function bExtcalMinicalEdit($options)
     //function XoopsFormSelect($caption, $name, $value = null, $size = 1, $multiple = false)
 
     $k           = 9;
-    $xfValue[$k] = new XoopsFormSelect(_MB_EXTCAL_CAT_TO_USE, "options[{$k}]", explode(',', $options[$k]), 8, true);
+    $xfValue[$k] = new \XoopsFormSelect(_MB_EXTCAL_CAT_TO_USE, "options[{$k}]", explode(',', $options[$k]), 8, true);
     $xfValue[$k]->setDescription(_MB_EXTCAL_CAT_TO_USE_DESC);
     $xfValue[$k]->addOptionArray($t);
     $form->addElement($xfValue[$k], false);
     //---------------------------------------------------------------------
     $k           = 10;
-    $xfValue[$k] = new XoopsFormColorPicker(_MB_EXTCAL_BGCOLOR, "options[{$k}]", $options[$k]);
+    $xfValue[$k] = new \XoopsFormColorPicker(_MB_EXTCAL_BGCOLOR, "options[{$k}]", $options[$k]);
     $form->addElement($xfValue[$k], false);
 
     //=====================================================================
@@ -360,7 +360,7 @@ function bExtcalMinicalEdit($options)
     $t = array_merge([' ' => _NONE], $t);
 
     $k           = 11;
-    $xfValue[$k] = new XoopsFormSelect(_MB_EXTCAL_HORLOGE, "options[{$k}]", $options[$k], 1, false);
+    $xfValue[$k] = new \XoopsFormSelect(_MB_EXTCAL_HORLOGE, "options[{$k}]", $options[$k], 1, false);
     $xfValue[$k]->addOptionArray($t);
     $form->addElement($xfValue[$k], false);
 
@@ -382,7 +382,7 @@ function bExtcalMinicalEdit($options)
                $t[] = $val->render();
               }
              return implode("\n", $t);
-    
+
             return extcal_buildHtmlArray($xfValue, _OPTIONS);
     */
 }

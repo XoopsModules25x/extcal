@@ -38,8 +38,8 @@ $eventMemberHandler    = xoops_getModuleHandler(_EXTCAL_CLS_MEMBER, _EXTCAL_MODU
 $eventNotMemberHandler = xoops_getModuleHandler(_EXTCAL_CLS_NOT_MEMBER, _EXTCAL_MODULE);
 $permHandler           = ExtcalPerm::getHandler();
 require_once __DIR__ . '/class/etablissement.php';
-require_once __DIR__ . '/class/utility.php';
-$myts = MyTextSanitizer::getInstance(); // MyTextSanitizer object
+require_once __DIR__ . '/class/Utility.php';
+$myts = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
 
 if (!function_exists('clear_unicodeslashes')) {
     /**
@@ -213,7 +213,7 @@ $xoopsTpl->assign('tNavBar', $tNavBar);
 /*  test modofication status    JJD
   $k = 'status';
   $isStatus = _EXTCAL_STATUS_DESINSCRIPTION;
-  $xfStatus = new XoopsFormSelect('', $k, $isStatus, 1, false) ;
+  $xfStatus = new \XoopsFormSelect('', $k, $isStatus, 1, false) ;
   $tStatus = array(_EXTCAL_STATUS_NONE    => _MD_EXTCAL_LIB_NONE,
                    _EXTCAL_STATUS_COME    => _MD_EXTCAL_LIB_COME,
                    _EXTCAL_STATUS_NOTCOME => _MD_EXTCAL_LIB_NOTCOME);

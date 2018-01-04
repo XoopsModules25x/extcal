@@ -138,7 +138,7 @@ switch ($step) {
         $titleOfForm = _AM_EXTCAL_VIEW_PERMISSION;
         $permName    = 'extcal_cat_view';
         $permDesc    = _AM_EXTCAL_VIEW_PERMISSION_DESC;
-        $form        = new XoopsGroupPermForm($titleOfForm, $moduleId, $permName, $permDesc, 'admin/permissions.php');
+        $form        = new \XoopsGroupPermForm($titleOfForm, $moduleId, $permName, $permDesc, 'admin/permissions.php');
         foreach ($cats as $cat) {
             $form->addItem($cat->getVar('cat_id'), $cat->getVar('cat_name'));
         }
@@ -176,7 +176,7 @@ switch ($step) {
         $titleOfForm = _AM_EXTCAL_SUBMIT_PERMISSION;
         $permName    = 'extcal_cat_submit';
         $permDesc    = _AM_EXTCAL_SUBMIT_PERMISSION_DESC;
-        $form        = new XoopsGroupPermForm($titleOfForm, $moduleId, $permName, $permDesc, 'admin/permissions.php');
+        $form        = new \XoopsGroupPermForm($titleOfForm, $moduleId, $permName, $permDesc, 'admin/permissions.php');
         foreach ($cats as $cat) {
             $form->addItem($cat->getVar('cat_id'), $cat->getVar('cat_name'));
         }
@@ -213,7 +213,7 @@ switch ($step) {
         $titleOfForm = _AM_EXTCAL_AUTOAPPROVE_PERMISSION;
         $permName    = 'extcal_cat_autoapprove';
         $permDesc    = _AM_EXTCAL_AUTOAPPROVE_PERMISSION_DESC;
-        $form        = new XoopsGroupPermForm($titleOfForm, $moduleId, $permName, $permDesc, 'admin/permissions.php');
+        $form        = new \XoopsGroupPermForm($titleOfForm, $moduleId, $permName, $permDesc, 'admin/permissions.php');
         foreach ($cats as $cat) {
             $form->addItem($cat->getVar('cat_id'), $cat->getVar('cat_name'));
         }
@@ -250,7 +250,7 @@ switch ($step) {
         $titleOfForm = _AM_EXTCAL_EDIT_PERMISSION;
         $permName    = 'extcal_cat_edit';
         $permDesc    = _AM_EXTCAL_EDIT_PERMISSION_DESC;
-        $form        = new XoopsGroupPermForm($titleOfForm, $moduleId, $permName, $permDesc, 'admin/permissions.php');
+        $form        = new \XoopsGroupPermForm($titleOfForm, $moduleId, $permName, $permDesc, 'admin/permissions.php');
         foreach ($cats as $cat) {
             $form->addItem($cat->getVar('cat_id'), $cat->getVar('cat_name'));
         }

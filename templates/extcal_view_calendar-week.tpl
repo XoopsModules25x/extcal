@@ -7,7 +7,7 @@
         <td colspan="3" class="even"><span style="font-weight:bold;"><{$navig.this.name}></span>
         </td>
         <td colspan="2" class="even"><a href="<{$xoops_url}>/modules/extcal/<{$params.file}>?<{$navig.next.uri}>"><{$navig.next.name}>
-                &gt;&gt;</a></td>
+                >></a></td>
     </tr>
     <tr style="text-align:center;" class="head">
         <{foreach item=weekdayName from=$weekdayNames}>

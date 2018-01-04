@@ -9,6 +9,8 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
+use XoopsModules\Extcal;
+
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
  * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
@@ -36,10 +38,10 @@ $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
 $xoTheme->addScript('modules/extcal/include/ToolTips.js');
 $xoTheme->addStylesheet('modules/extcal/assets/css/infobulle.css');
 
-$form = new XoopsSimpleForm('', 'navigSelectBox', $params['file'], 'get');
+$form = new \XoopsSimpleForm('', 'navigSelectBox', $params['file'], 'get');
 $form->addElement(getListYears($year, $xoopsModuleConfig['agenda_nb_years_before'], $xoopsModuleConfig['agenda_nb_years_after']));
 
-$form->addElement(ExtcalUtility::getListCategories($cat));
+$form->addElement(Extcal\Utility::getListCategories($cat));
 $form->addElement(new XoopsFormButton('', 'form_submit', _SUBMIT, 'submit'));
 
 // Assigning the form to the template

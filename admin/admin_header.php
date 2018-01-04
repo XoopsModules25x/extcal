@@ -17,34 +17,42 @@
  * @author       XOOPS Development Team,
  */
 
+use XoopsModules\Extcal;
+
 require_once __DIR__ . '/../../../include/cp_header.php';
 require_once $GLOBALS['xoops']->path('www/class/xoopsformloader.php');
 
+include __DIR__ . '/../preloads/autoloader.php';
+
 $moduleDirName = basename(dirname(__DIR__));
 
-//require_once __DIR__ . '/../class/utility.php';
+/** @var Extcal\Helper $helper */
+$helper = Extcal\Helper::getInstance();
+/** @var Xmf\Module\Admin $adminObject */
+$adminObject = \Xmf\Module\Admin::getInstance();
+$utility = new Extcal\Utility();
+
+
+
+//require_once __DIR__ . '/../class/Utility.php';
 //require_once __DIR__ . '/../include/common.php';
 
-if (false !== ($moduleHelper = Xmf\Module\Helper::getHelper($moduleDirName))) {
-} else {
-    $moduleHelper = Xmf\Module\Helper::getHelper('system');
-}
 $adminObject = \Xmf\Module\Admin::getInstance();
 
 $pathIcon16    = \Xmf\Module\Admin::iconUrl('', 16);
 $pathIcon32    = \Xmf\Module\Admin::iconUrl('', 32);
-$pathModIcon32 = $moduleHelper->getModule()->getInfo('modicons32');
+$pathModIcon32 = $helper->getModule()->getInfo('modicons32');
 
 // Load language files
-$moduleHelper->loadLanguage('admin');
-$moduleHelper->loadLanguage('modinfo');
-$moduleHelper->loadLanguage('main');
+$helper->loadLanguage('admin');
+$helper->loadLanguage('modinfo');
+$helper->loadLanguage('main');
 
-$myts = MyTextSanitizer::getInstance();
+$myts = \MyTextSanitizer::getInstance();
 
 if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {
     require_once $GLOBALS['xoops']->path('class/template.php');
-    $xoopsTpl = new XoopsTpl();
+    $xoopsTpl = new \XoopsTpl();
 }
 
 /** @var ExtcalCatHandler $catHandler */

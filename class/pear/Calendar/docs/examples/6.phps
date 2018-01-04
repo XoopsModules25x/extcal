@@ -98,7 +98,7 @@ echo ( "?y=".$Month->thisYear()."&amp;m=".
 <td></td><td></td><td></td><td></td><td></td>
 <td>
 <anchor>
-&gt;&gt;
+>>
 <go href="<?php
 echo ( "?y=".$Month->thisYear()."&amp;m=".
         $Month->nextMonth()."&amp;d=".$Month->thisDay()."&amp;mime=wml" );
@@ -192,7 +192,7 @@ echo ( "?y=".$Month->thisYear()."&amp;m=".
 <a href="<?php
 echo ( "?y=".$Month->thisYear()."&amp;m=".
         $Month->nextMonth()."&amp;d=".$Month->thisDay() );
-?>">&gt;&gt;</a>
+?>">>></a>
 </td>
 </tr>
 </table>

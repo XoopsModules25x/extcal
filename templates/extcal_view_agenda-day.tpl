@@ -6,7 +6,7 @@
                 &lt;&lt;&nbsp;&nbsp;<{$navig.prev.name}></a></td>
         <td class="even" style="width:33%;"><span style="font-weight:bold;"><{$navig.this.name}></span>
         </td>
-        <td class="even" style="width:33%;"><a href="<{$xoops_url}>/modules/extcal/<{$params.file}>?<{$navig.next.uri}>"><{$navig.next.name}>&nbsp;&nbsp;&gt;&gt;</a>
+        <td class="even" style="width:33%;"><a href="<{$xoops_url}>/modules/extcal/<{$params.file}>?<{$navig.next.uri}>"><{$navig.next.name}>&nbsp;&nbsp;>></a>
         </td>
     </tr>
 
