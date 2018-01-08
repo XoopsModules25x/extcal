@@ -52,7 +52,7 @@ class Perm
             if (!$module) {
                 return false;
             }
-            $authorizedCat[$perm][$userId] = $groupPermHandler->getItemIds($perm, $this->_getUserGroup($user), $module->getVar('mid'));
+            $authorizedCat[$perm][$userId] = $groupPermHandler->getItemIds($perm, $this->getUserGroup($user), $module->getVar('mid'));
         }
 
         return $authorizedCat[$perm][$userId];

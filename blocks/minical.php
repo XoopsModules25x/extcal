@@ -165,8 +165,8 @@ function bExtcalMinicalShow($options)
      */
     // Flag current day
     $selectedDays = [
-        new Calendar_Day(date('Y', xoops_getUserTimestamp(time(), $timeHandler->_getUserTimeZone($GLOBALS['xoopsUser']))), date('n', xoops_getUserTimestamp(time(), $timeHandler->_getUserTimeZone($GLOBALS['xoopsUser']))),
-                         date('j', xoops_getUserTimestamp(time(), $timeHandler->_getUserTimeZone($GLOBALS['xoopsUser'])))),
+        new Calendar_Day(date('Y', xoops_getUserTimestamp(time(), $timeHandler->getUserTimeZone($GLOBALS['xoopsUser']))), date('n', xoops_getUserTimestamp(time(), $timeHandler->getUserTimeZone($GLOBALS['xoopsUser']))),
+                         date('j', xoops_getUserTimestamp(time(), $timeHandler->getUserTimeZone($GLOBALS['xoopsUser'])))),
     ];
 
     // Build calendar object
@@ -478,8 +478,8 @@ function bExtcalMinicalAddEventToArray($event, &$eventsArray, $timeHandler, $sta
     $weight = $event['cat']['cat_weight'];
 
     // Calculating the start and the end of the event
-    $startEvent = xoops_getUserTimestamp($event['event_start'], $timeHandler->_getUserTimeZone($GLOBALS['xoopsUser']));
-    $endEvent   = xoops_getUserTimestamp($event['event_end'], $timeHandler->_getUserTimeZone($GLOBALS['xoopsUser']));
+    $startEvent = xoops_getUserTimestamp($event['event_start'], $timeHandler->getUserTimeZone($GLOBALS['xoopsUser']));
+    $endEvent   = xoops_getUserTimestamp($event['event_end'], $timeHandler->getUserTimeZone($GLOBALS['xoopsUser']));
     // Extcal\Utility::echoTsu($event['event_start'],"event['event_start']");
     // Extcal\Utility::echoTsu($event['event_end'],"event['event_end']");
 

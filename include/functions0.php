@@ -477,6 +477,6 @@ function eclaircirCouleur($color, $plancher, $plafond)
 
     //$ct = new ColorTools();
     //return $ct->eclaircir($color,$plancher,$plafond);
-    return colorTools::eclaircir($color, $plancher, $plafond);
+    return Extcal\colorTools::eclaircir($color, $plancher, $plafond);
 }
 /**************************************************************************/

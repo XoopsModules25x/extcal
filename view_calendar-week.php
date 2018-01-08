@@ -87,7 +87,7 @@ foreach ($events as $event) {
 */
 // Flag current day
 $selectedDays = [
-    new Calendar_Day(date('Y', xoops_getUserTimestamp(time(), $timeHandler->_getUserTimeZone($xoopsUser))), date('n', xoops_getUserTimestamp(time(), $timeHandler->_getUserTimeZone($xoopsUser))), date('j', xoops_getUserTimestamp(time(), $timeHandler->_getUserTimeZone($xoopsUser)))),
+    new Calendar_Day(date('Y', xoops_getUserTimestamp(time(), $timeHandler->getUserTimeZone($xoopsUser))), date('n', xoops_getUserTimestamp(time(), $timeHandler->getUserTimeZone($xoopsUser))), date('j', xoops_getUserTimestamp(time(), $timeHandler->getUserTimeZone($xoopsUser)))),
 ];
 
 // Build calendar object

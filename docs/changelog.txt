@@ -322,7 +322,7 @@ Désactiver la traduction instantanéeÀ propos de Google TraductionMobileConfid
   * Number of days for each of the two views agenda.
 - Rename all files and php template of views with the addition of the prefix 'view' for easy maintenance;
 - Replacement of table '$ lang' in the template by the equivalent '$ smarty; const'
-- Modification of functions and _getEventWeekCriteria getEventWeek.
+- Modification of functions and getEventWeekCriteria getEventWeek.
   addition of parameters to recover $ nbJours events on a beach
   other than 7 days; '$ nbjours' must be> 0; attention to the display of more than 20 days
   weeks in the calendar may not be practical.

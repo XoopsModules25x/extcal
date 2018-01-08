@@ -30,19 +30,18 @@ require_once __DIR__ . '/../include/constantes.php';
  */
 class EventHandler extends ExtcalPersistableObjectHandler
 {
-    private $_extcalPerm;
-    private $_extcalTime;
-    private $_extcalConfig;
+    private $extcalPerm;
+    private $extcalTime;
+//    private $extcalConfig;
 
     /**
      * @param $db
      */
     public function __construct(\XoopsDatabase $db)
     {
-        $this->_extcalPerm = Extcal\Perm::getHandler();
-        $this->_extcalTime = Extcal\Time::getHandler();
-        //         $extcalConfig = Extcal\Config::getHandler();
-        //         $this->_extcalConfig = $extcalConfig->getModuleConfig();
+        $this->extcalPerm = Extcal\Perm::getHandler();
+        $this->extcalTime = Extcal\Time::getHandler();
+//        $this->extcalConfig = Extcal\Config::getHandler();
         parent::__construct($db, 'extcal_event', Event::class, 'event_id');
     }
 
@@ -223,14 +222,14 @@ class EventHandler extends ExtcalPersistableObjectHandler
     public function formatEventDate(&$event, $pattern)
     {
         if (!$event['event_isrecur']) {
-            $event['formated_event_start'] = $this->_extcalTime->getFormatedDate($pattern, $event['event_start']);
-            $event['formated_event_end']   = $this->_extcalTime->getFormatedDate($pattern, $event['event_end']);
+            $event['formated_event_start'] = $this->extcalTime->getFormatedDate($pattern, $event['event_start']);
+            $event['formated_event_end']   = $this->extcalTime->getFormatedDate($pattern, $event['event_end']);
         } else {
-            $event['formated_event_start'] = $this->_extcalTime->getFormatedDate($pattern, $event['event_start']);
-            $event['formated_event_end']   = $this->_extcalTime->getFormatedDate($pattern, $event['event_end']);
-            $event['formated_reccur_rule'] = $this->_extcalTime->getFormatedReccurRule($event['event_recur_rules']);
+            $event['formated_event_start'] = $this->extcalTime->getFormatedDate($pattern, $event['event_start']);
+            $event['formated_event_end']   = $this->extcalTime->getFormatedDate($pattern, $event['event_end']);
+            $event['formated_reccur_rule'] = $this->extcalTime->getFormatedReccurRule($event['event_recur_rules']);
         }
-        $event['formated_event_submitdate'] = $this->_extcalTime->getFormatedDate($pattern, $event['event_submitdate']);
+        $event['formated_event_submitdate'] = $this->extcalTime->getFormatedDate($pattern, $event['event_submitdate']);
     }
 
     //JJD - to valid modif
@@ -272,8 +271,8 @@ class EventHandler extends ExtcalPersistableObjectHandler
     {
         $user = $GLOBALS['xoopsUser'];
 
-        $data['event_start'] = userTimeToServerTime($data['event_start'], $this->_extcalTime->_getUserTimeZone($user));
-        $data['event_end']   = userTimeToServerTime($data['event_end'], $this->_extcalTime->_getUserTimeZone($user));
+        $data['event_start'] = userTimeToServerTime($data['event_start'], $this->extcalTime->getUserTimeZone($user));
+        $data['event_end']   = userTimeToServerTime($data['event_end'], $this->extcalTime->getUserTimeZone($user));
     }
 
     /**
@@ -283,9 +282,9 @@ class EventHandler extends ExtcalPersistableObjectHandler
     {
         $user = $GLOBALS['xoopsUser'];
 
-        $data['event_start']      = xoops_getUserTimestamp($data['event_start'], $this->_extcalTime->_getUserTimeZone($user));
-        $data['event_end']        = xoops_getUserTimestamp($data['event_end'], $this->_extcalTime->_getUserTimeZone($user));
-        $data['event_submitdate'] = xoops_getUserTimestamp($data['event_submitdate'], $this->_extcalTime->_getUserTimeZone($user));
+        $data['event_start']      = xoops_getUserTimestamp($data['event_start'], $this->extcalTime->getUserTimeZone($user));
+        $data['event_end']        = xoops_getUserTimestamp($data['event_end'], $this->extcalTime->getUserTimeZone($user));
+        $data['event_submitdate'] = xoops_getUserTimestamp($data['event_submitdate'], $this->extcalTime->getUserTimeZone($user));
     }
 
     /**
@@ -320,7 +319,6 @@ class EventHandler extends ExtcalPersistableObjectHandler
     public function getEventsOnPeriode($criteres)
     {
         //Extcal\Utility::echoArray($criteres);
-        global $extcalConfig;
         $myts = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
 
         $eventsU = $this->getEventsUniques($criteres);
@@ -338,7 +336,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
         //        while (list($k, $v) = each($events)) {
         foreach ($events as $k => $v) {
             $ordre[] = (int)$v['event_start'];
-            $this->formatEventDate($v, $extcalConfig['event_date_week']);
+            $this->formatEventDate($v, Extcal\Helper::getInstance()->getConfig('event_date_week'));
             //$v['cat']['cat_light_color'] = $v['cat']['cat_color'];
             $v['cat']['cat_light_color'] = Extcal\Utility::getLighterColor($v['cat']['cat_color'], _EXTCAL_INFOBULLE_RGB_MIN, _EXTCAL_INFOBULLE_RGB_MAX);
             if ('' == $v['event_icone']) {
@@ -361,7 +359,6 @@ class EventHandler extends ExtcalPersistableObjectHandler
     public function getEventsUniques($criteres)
     {
         $cat = 0;
-        global $extcalConfig;
         //        while (list($k, $v) = each($criteres)) {
         foreach ($criteres as $k => $v) {
             $$k = $v;
@@ -379,47 +376,47 @@ class EventHandler extends ExtcalPersistableObjectHandler
         switch ($periode) {
 
             case _EXTCAL_EVENTS_CALENDAR_WEEK:
-                $criteriaCompo = $this->_getEventWeekCriteria($day, $month, $year, $cat, $nbDays);
-                if (!$extcalConfig['diplay_past_event_cal']) {
+                $criteriaCompo = $this->getEventWeekCriteria($day, $month, $year, $cat, $nbDays);
+                if (!Extcal\Helper::getInstance()->getConfig('diplay_past_event_cal')) {
                     $criteriaCompo->add(new \Criteria('event_end', time(), '>'));
                 }
                 break;
 
             case _EXTCAL_EVENTS_WEEK:
             case _EXTCAL_EVENTS_AGENDA_WEEK:
-                $criteriaCompo = $this->_getEventWeekCriteria($day, $month, $year, $cat, $nbDays);
-                if (!$extcalConfig['diplay_past_event_list']) {
+                $criteriaCompo = $this->getEventWeekCriteria($day, $month, $year, $cat, $nbDays);
+                if (!Extcal\Helper::getInstance()->getConfig('diplay_past_event_list')) {
                     $criteriaCompo->add(new \Criteria('event_end', time(), '>'));
                 }
                 break;
 
             case _EXTCAL_EVENTS_CALENDAR_MONTH:
-                $criteriaCompo = $this->_getEventMonthCriteria($month, $year, $cat);
+                $criteriaCompo = $this->getEventMonthCriteria($month, $year, $cat);
 
-                if (!$extcalConfig['diplay_past_event_cal']) {
+                if (!Extcal\Helper::getInstance()->getConfig('diplay_past_event_cal')) {
                     $criteriaCompo->add(new \Criteria('event_end', time(), '>'));
                 }
                 break;
 
             case _EXTCAL_EVENTS_MONTH:
-                $criteriaCompo = $this->_getEventMonthCriteria($month, $year, $cat);
+                $criteriaCompo = $this->getEventMonthCriteria($month, $year, $cat);
 
-                if (!$extcalConfig['diplay_past_event_list']) {
+                if (!Extcal\Helper::getInstance()->getConfig('diplay_past_event_list')) {
                     $criteriaCompo->add(new \Criteria('event_end', time(), '>'));
                 }
                 break;
 
             case _EXTCAL_EVENTS_DAY:
-                $criteriaCompo = $this->_getEventDayCriteria($day, $month, $year, $cat);
+                $criteriaCompo = $this->getEventDayCriteria($day, $month, $year, $cat);
 
                 break;
 
             case _EXTCAL_EVENTS_YEAR:
-                $criteriaCompo = $this->_getEventYearCriteria($year, $cat);
+                $criteriaCompo = $this->getEventYearCriteria($year, $cat);
                 break;
 
             case _EXTCAL_EVENTS_UPCOMING:
-                $criteriaCompo = $this->_getEventWeekCriteria($day, $month, $year, $cat, $nbDays);
+                $criteriaCompo = $this->getEventWeekCriteria($day, $month, $year, $cat, $nbDays);
                 break;
 
         }
@@ -443,8 +440,6 @@ class EventHandler extends ExtcalPersistableObjectHandler
 
     public function getEventsRecurents($criteres)
     {
-        global $extcalConfig;
-
         //        while (list($k, $v) = each($criteres)) {
         foreach ($criteres as $k => $v) {
             $$k = $v;
@@ -468,16 +463,16 @@ class EventHandler extends ExtcalPersistableObjectHandler
             case _EXTCAL_EVENTS_CALENDAR_WEEK:
             case _EXTCAL_EVENTS_AGENDA_WEEK:
             case _EXTCAL_EVENTS_UPCOMING:
-                $start = userTimeToServerTime(mktime(0, 0, 0, $month, $day, $year), $this->_extcalTime->_getUserTimeZone($user));
-                $end   = userTimeToServerTime(mktime(0, 0, 0, $month, $day + $nbDays + 1, $year), $this->_extcalTime->_getUserTimeZone($user));
+                $start = userTimeToServerTime(mktime(0, 0, 0, $month, $day, $year), $this->extcalTime->getUserTimeZone($user));
+                $end   = userTimeToServerTime(mktime(0, 0, 0, $month, $day + $nbDays + 1, $year), $this->extcalTime->getUserTimeZone($user));
                 //$end = $start + (($nbDays + 1 )* _EXTCAL_TS_DAY);
-                //$end = userTimeToServerTime(mktime(0, 0, 0, $month, $day+(($nbJours)+1 * _EXTCAL_TS_DAY), $year), $this->_extcalTime->_getUserTimeZone($user));;
+                //$end = userTimeToServerTime(mktime(0, 0, 0, $month, $day+(($nbJours)+1 * _EXTCAL_TS_DAY), $year), $this->extcalTime->getUserTimeZone($user));;
                 break;
 
             case _EXTCAL_EVENTS_MONTH:
             case _EXTCAL_EVENTS_CALENDAR_MONTH:
-                $start = userTimeToServerTime(mktime(0, 0, 0, $month, 1, $year), $this->_extcalTime->_getUserTimeZone($user));
-                $end   = userTimeToServerTime(mktime(23, 59, 59, $month + 1, 1, $year) - _EXTCAL_TS_DAY, $this->_extcalTime->_getUserTimeZone($user));
+                $start = userTimeToServerTime(mktime(0, 0, 0, $month, 1, $year), $this->extcalTime->getUserTimeZone($user));
+                $end   = userTimeToServerTime(mktime(23, 59, 59, $month + 1, 1, $year) - _EXTCAL_TS_DAY, $this->extcalTime->getUserTimeZone($user));
 
                 $criteriaCompo->add(new \Criteria('event_start', $end, '<='));
                 //$criteriaCompo->add( new \Criteria('event_end', $start, '>='));
@@ -485,19 +480,19 @@ class EventHandler extends ExtcalPersistableObjectHandler
                 break;
 
             case _EXTCAL_EVENTS_DAY:
-                $start = userTimeToServerTime(mktime(0, 0, 0, $month, $day, $year), $this->_extcalTime->_getUserTimeZone($user));
-                $end   = userTimeToServerTime(mktime(0, 0, 0, $month, $day + 1, $year), $this->_extcalTime->_getUserTimeZone($user));
+                $start = userTimeToServerTime(mktime(0, 0, 0, $month, $day, $year), $this->extcalTime->getUserTimeZone($user));
+                $end   = userTimeToServerTime(mktime(0, 0, 0, $month, $day + 1, $year), $this->extcalTime->getUserTimeZone($user));
                 //$criteriaCompo->add( new \Criteria('event_start', $end, '<='));
 
                 break;
 
             case _EXTCAL_EVENTS_YEAR:
-                $start = userTimeToServerTime(mktime(0, 0, 0, 1, 1, $year), $this->_extcalTime->_getUserTimeZone($user));
-                $end   = userTimeToServerTime(mktime(0, 0, 0, 12, 31, $year), $this->_extcalTime->_getUserTimeZone($user));
+                $start = userTimeToServerTime(mktime(0, 0, 0, 1, 1, $year), $this->extcalTime->getUserTimeZone($user));
+                $end   = userTimeToServerTime(mktime(0, 0, 0, 12, 31, $year), $this->extcalTime->getUserTimeZone($user));
                 break;
 
         }
-        $formatDate = $extcalConfig['event_date_week'];
+        $formatDate = Extcal\Helper::getInstance()->getConfig('event_date_week');
         //--------------------------------------------------------------------------
         $criteriaCompo->add(new \Criteria('event_isrecur', 1, '='));
         $criteriaCompo->setOrder($sens);
@@ -560,8 +555,8 @@ class EventHandler extends ExtcalPersistableObjectHandler
     {
         $user = $GLOBALS['xoopsUser'];
 
-        $dayStart      = userTimeToServerTime(mktime(0, 0, 0, $month, $day, $year), $this->_extcalTime->_getUserTimeZone($user));
-        $dayEnd        = userTimeToServerTime(mktime(23, 59, 59, $month, $day, $year), $this->_extcalTime->_getUserTimeZone($user));
+        $dayStart      = userTimeToServerTime(mktime(0, 0, 0, $month, $day, $year), $this->extcalTime->getUserTimeZone($user));
+        $dayEnd        = userTimeToServerTime(mktime(23, 59, 59, $month, $day, $year), $this->extcalTime->getUserTimeZone($user));
         $criteriaCompo = $this->getListCriteriaCompo($dayStart, $dayEnd, $cat, $user);
 
         return $criteriaCompo;
@@ -584,9 +579,9 @@ class EventHandler extends ExtcalPersistableObjectHandler
 
         $userStartTime = mktime(0, 0, 0, $month, $day, $year);
         $userEndTime   = $userStartTime + (_EXTCAL_TS_DAY * $nbDays);
-        $weekStart     = userTimeToServerTime($userStartTime, $this->_extcalTime->_getUserTimeZone($user));
-        $weekEnd       = userTimeToServerTime($userEndTime, $this->_extcalTime->_getUserTimeZone($user));
-        $criteriaCompo = $this->_getCriteriaCompo($weekStart, $weekEnd, $cat, $user);
+        $weekStart     = userTimeToServerTime($userStartTime, $this->extcalTime->getUserTimeZone($user));
+        $weekEnd       = userTimeToServerTime($userEndTime, $this->extcalTime->getUserTimeZone($user));
+        $criteriaCompo = $this->getCriteriaCompo($weekStart, $weekEnd, $cat, $user);
 
         return $criteriaCompo;
     }
@@ -606,9 +601,9 @@ class EventHandler extends ExtcalPersistableObjectHandler
 
         $userStartTime = mktime(0, 0, 0, $month, 1, $year);
         $userEndTime   = mktime(23, 59, 59, $month + 1, 0, $year);
-        $monthStart    = userTimeToServerTime($userStartTime, $this->_extcalTime->_getUserTimeZone($user));
-        $monthEnd      = userTimeToServerTime($userEndTime, $this->_extcalTime->_getUserTimeZone($user));
-        $criteriaCompo = $this->_getCriteriaCompo($monthStart, $monthEnd, $cat, $user);
+        $monthStart    = userTimeToServerTime($userStartTime, $this->extcalTime->getUserTimeZone($user));
+        $monthEnd      = userTimeToServerTime($userEndTime, $this->extcalTime->getUserTimeZone($user));
+        $criteriaCompo = $this->getCriteriaCompo($monthStart, $monthEnd, $cat, $user);
 
         return $criteriaCompo;
     }
@@ -619,7 +614,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
      * @param     $year
      * @param int $cat
      *
-     * @return CriteriaCompo
+     * @return \CriteriaCompo
      */
     public function getEventYearCriteria($year, $cat = 0)
     {
@@ -627,8 +622,8 @@ class EventHandler extends ExtcalPersistableObjectHandler
 
         $userStartTime = mktime(0, 0, 0, 1, 1, $year);
         $userEndTime   = mktime(23, 59, 59, 12, 31, $year);
-        $yearStart     = userTimeToServerTime($userStartTime, $this->_extcalTime->_getUserTimeZone($user));
-        $yearEnd       = userTimeToServerTime($userEndTime, $this->_extcalTime->_getUserTimeZone($user));
+        $yearStart     = userTimeToServerTime($userStartTime, $this->extcalTime->getUserTimeZone($user));
+        $yearEnd       = userTimeToServerTime($userEndTime, $this->extcalTime->getUserTimeZone($user));
         $criteriaCompo = $this->getListCriteriaCompo($yearStart, $yearEnd, $cat, $user);
 
         return $criteriaCompo;
@@ -652,7 +647,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
      * @return \CriteriaCompo
      */
 
-    public function getCriteriaCompo($start, $end, $cat = 0, &$user)
+    public function getCriteriaCompo($start, $end, $cat = 0, $user)
     {
         $criteriaNoRecur = new \CriteriaCompo();
         $criteriaNoRecur->add(new \Criteria('event_start', $end, '<='));
@@ -687,12 +682,10 @@ class EventHandler extends ExtcalPersistableObjectHandler
      *
      * @return \CriteriaCompo
      */
-    public function getCalendarCriteriaCompo($start, $end, $cat = 0, &$user)
+    public function getCalendarCriteriaCompo($start, $end, $cat = 0, $user)
     {
-        global $extcalConfig;
-        $criteriaCompo = $this->_getCriteriaCompo($start, $end, $cat, $user);
-        //if (!$this->_extcalConfig['diplay_past_event_cal']) {
-        if (!$extcalConfig['diplay_past_event_cal']) {
+        $criteriaCompo = $this->getCriteriaCompo($start, $end, $cat, $user);
+        if (!Extcal\Helper::getInstance()->getConfig('diplay_past_event_cal')) {
             $criteriaCompo->add(new \Criteria('event_end', time(), '>'));
         }
 
@@ -707,12 +700,10 @@ class EventHandler extends ExtcalPersistableObjectHandler
      *
      * @return \CriteriaCompo
      */
-    public function getListCriteriaCompo($start, $end, $cat = 0, &$user)
+    public function getListCriteriaCompo($start, $end, $cat = 0, $user)
     {
-        global $extcalConfig;
-        $criteriaCompo = $this->_getCriteriaCompo($start, $end, $cat, $user);
-        // if (!$this->_extcalConfig['diplay_past_event_list']) {
-        if (!$extcalConfig['diplay_past_event_list']) {
+        $criteriaCompo = $this->getCriteriaCompo($start, $end, $cat, $user);
+        if (!Extcal\Helper::getInstance()->getConfig('diplay_past_event_list')) {
             $criteriaCompo->add(new \Criteria('event_end', time(), '>'));
         }
 
@@ -872,7 +863,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
      */
     public function addCatPermCriteria(\CriteriaElement $criteria, $user)
     {
-        $authorizedAccessCats = $this->_extcalPerm->getAuthorizedCat($user, 'extcal_cat_view');
+        $authorizedAccessCats = $this->extcalPerm->getAuthorizedCat($user, 'extcal_cat_view');
         $count                = count($authorizedAccessCats);
         if ($count > 0) {
             $in = '(' . $authorizedAccessCats[0];
@@ -957,8 +948,8 @@ class EventHandler extends ExtcalPersistableObjectHandler
             $url                 = $event->getVar('event_url', 'e');
             $email               = $event->getVar('event_email', 'e');
             $event_address       = $event->getVar('event_address', 'e');
-            $startDateValue      = xoops_getUserTimestamp($event->getVar('event_start'), $this->_extcalTime->_getUserTimeZone($GLOBALS['xoopsUser']));
-            $endDateValue        = xoops_getUserTimestamp($event->getVar('event_end'), $this->_extcalTime->_getUserTimeZone($GLOBALS['xoopsUser']));
+            $startDateValue      = xoops_getUserTimestamp($event->getVar('event_start'), $this->extcalTime->getUserTimeZone($GLOBALS['xoopsUser']));
+            $endDateValue        = xoops_getUserTimestamp($event->getVar('event_end'), $this->extcalTime->getUserTimeZone($GLOBALS['xoopsUser']));
             $event_picture1      = $event->getVar('event_picture1');
             $event_picture2      = $event->getVar('event_picture2');
             $event_price         = $event->getVar('event_price');
@@ -1448,11 +1439,9 @@ class EventHandler extends ExtcalPersistableObjectHandler
                 break;
 
             case 'weekly':
-                global $extcalConfig;
-
-                // Getting the first weekday TS
+                  // Getting the first weekday TS
                 $startWeekTS = mktime(0, 0, 0, date('n', $data['event_recur_start']), date('j', $data['event_recur_start']), date('Y', $data['event_recur_start']));
-                $offset      = date('w', $startWeekTS) - $extcalConfig['week_start_day'];
+                $offset      = date('w', $startWeekTS) - Extcal\Helper::getInstance()->getConfig('week_start_day');
                 $startWeekTS -= ($offset * _EXTCAL_TS_DAY);
 
                 $recurEnd = $startWeekTS + ($parm['rrule_weekly_interval'] * _EXTCAL_TS_WEEK) - 1;
@@ -1484,7 +1473,6 @@ class EventHandler extends ExtcalPersistableObjectHandler
      */
     public function getRecurEventToDisplay($event, $periodStart, $periodEnd)
     {
-        global $extcalConfig;
 
         $recuEvents   = [];
         $eventOptions = explode('|', $event['event_recur_rules']);
@@ -1529,7 +1517,6 @@ class EventHandler extends ExtcalPersistableObjectHandler
                 break;
 
             case 'weekly':
-                global $extcalConfig;
 
                 array_shift($eventOptions);
                 $rRuleInterval = $eventOptions[0];
@@ -1540,7 +1527,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
 
                 // Getting the first weekday TS
                 $startWeekTS = mktime(0, 0, 0, date('n', $event['event_recur_start']), date('j', $event['event_recur_start']), date('Y', $event['event_recur_start']));
-                $offset      = date('w', $startWeekTS) - $extcalConfig['week_start_day'];
+                $offset      = date('w', $startWeekTS) - Extcal\Helper::getInstance()->getConfig('week_start_day');
                 $startWeekTS = $startWeekTS - ($offset * _EXTCAL_TS_DAY) + _EXTCAL_TS_WEEK;
 
                 $occurEventStart = $event['event_recur_start'];
@@ -2335,7 +2322,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $tw[] = 'te.cat_id = tc.cat_id';
         $tw[] = 'event_approved = 1';
 
-        $authorizedAccessCats = $this->_extcalPerm->getAuthorizedCat($user, 'extcal_cat_view');
+        $authorizedAccessCats = $this->extcalPerm->getAuthorizedCat($user, 'extcal_cat_view');
         $inCat                = 'te.cat_id IN (0)';
         if (count($authorizedAccessCats) > 0) {
             $inCat = 'te.cat_id IN (' . implode(',', $authorizedAccessCats) . ')';
@@ -2476,7 +2463,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $tCat   = $xoopsDB->prefix('extcal_cat');
         $sql    = "SELECT {$tEvent}.*, {$tCat}.cat_name AS categorie, {$tCat}.cat_color " . " FROM {$tEvent}, {$tCat}" . " WHERE {$tEvent}.cat_id = {$tCat}.cat_id AND event_approved = '1'";
 
-        $authorizedAccessCats = $this->_extcalPerm->getAuthorizedCat($user, 'extcal_cat_view');
+        $authorizedAccessCats = $this->extcalPerm->getAuthorizedCat($user, 'extcal_cat_view');
         $count                = count($authorizedAccessCats);
         if ($count > 0) {
             $in = '(' . $authorizedAccessCats[0];

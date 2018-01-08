@@ -57,7 +57,7 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
         $catId = $this->getInsertId();
 
         // Retriving permission mask
-        /** @var XoopsGroupPermHandler $groupPermissionHandler */
+        /** @var \XoopsGroupPermHandler $groupPermissionHandler */
         $groupPermissionHandler = xoops_getHandler('groupperm');
         $moduleId               = $GLOBALS['xoopsModule']->getVar('mid');
 
@@ -199,11 +199,11 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
     }
 
     /**
-     * @param XoopsUser|string $xoopsUser
+     * @param \XoopsUser|string $xoopsUser
      *
      * @return bool
      */
-    public function haveSubmitRight(&$xoopsUser)
+    public function haveSubmitRight($xoopsUser)
     {
         return count($this->_extcalPerm->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) > 0;
     }
