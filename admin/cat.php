@@ -26,7 +26,7 @@ require_once __DIR__ . '/admin_header.php';
 //require_once __DIR__ . '/../class/Utility.php';
 require_once __DIR__ . '/../include/constantes.php';
 
-$gepeto = array_merge($_GET, $_POST);
+//$gepeto = array_merge($_GET, $_POST);
 //while (list($key, $value) = each($gepeto)) {
 //foreach ($gepeto as $key => $value) {
 //    $$k = $value;
@@ -35,8 +35,8 @@ $gepeto = array_merge($_GET, $_POST);
 //if (!isset($op)) {
 //    $op = '';
 //}
-
-if(Request::hasVar('op' )) {
+$op = 'list';
+if(Request::hasVar('op', 'GET' )) {
     $op = Request::getString('op', '');
     $cat_id = Request::getInt('cat_id', 0);
 }
@@ -48,29 +48,36 @@ if(Request::hasVar('op' )) {
 switch ($op) {
     case 'enreg':
         // Modify cat
+        $varArr = [
+            'cat_name'   => Request::getString('cat_name', '', 'POST'),
+            'cat_desc'   => Request::getText('cat_desc', '', 'POST'),
+            'cat_weight' => Request::getInt('cat_weight', 0, 'POST'),
+            'cat_color'  => substr(Request::getString('cat_color', '', 'POST'), 1),
+            'cat_icone'  => Request::getInt('cat_icone', 0, 'POST')
+        ];
         if (isset($cat_id)) {
-            /** @var ExtcalCatHandler $catHandler */
+            /** @var CategoryHandler $catHandler */
             // $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-            $varArr = [
-                'cat_name'   => $cat_name,
-                'cat_desc'   => $cat_desc,
-                'cat_weight' => $cat_weight,
-                'cat_color'  => substr($cat_color, 1),
-                'cat_icone'  => $cat_icone,
-            ];
+//            $varArr = [
+//                'cat_name'   => Request::getString('cat_name', '', 'POST'),
+//                'cat_desc'   => Request::getText('cat_desc', '', 'POST'),
+//                'cat_weight' => Request::getInt('cat_weight', 0, 'POST'),
+//                'cat_color'  => substr(Request::getString('cat_color', '', 'POST'), 1),
+//                'cat_icone'  => Request::getInt('cat_icone', 0, 'POST')
+//            ];
 
             $catHandler->modifyCat($cat_id, $varArr);
             redirect_header('cat.php', 3, _AM_EXTCAL_CAT_EDITED, false);
             // Create new cat
         } else {
             // $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-            $varArr = [
-                'cat_name'   => $cat_name,
-                'cat_desc'   => $cat_desc,
-                'cat_weight' => $cat_weight,
-                'cat_color'  => substr($cat_color, 1),
-                'cat_icone'  => $cat_icone,
-            ];
+//            $varArr = [
+//                'cat_name'   => $cat_name,
+//                'cat_desc'   => $cat_desc,
+//                'cat_weight' => $cat_weight,
+//                'cat_color'  => substr($cat_color, 1),
+//                'cat_icone'  => $cat_icone,
+//            ];
             $catHandler->createCat($varArr);
             redirect_header('cat.php', 3, _AM_EXTCAL_CAT_CREATED, false);
         }
@@ -84,20 +91,20 @@ switch ($op) {
         //$cat        = $catHandler->getCat($cat_id, true);
 
         $form = new \XoopsThemeForm(_AM_EXTCAL_ADD_CATEGORY, 'add_cat', 'cat.php?op=enreg', 'post', true);
-        $form->addElement(new XoopsFormText(_AM_EXTCAL_NAME, 'cat_name', 30, 255), true);
-        $form->addElement(new XoopsFormDhtmlTextArea(_AM_EXTCAL_DESCRIPTION, 'cat_desc', ''), false);
-        $form->addElement(new XoopsFormText(_AM_EXTCAL_WEIGHT, 'cat_weight', 30, 5, 0), false);
-        $form->addElement(new XoopsFormColorPicker(_AM_EXTCAL_COLOR, 'cat_color', '#FF0000'));
+        $form->addElement( new \XoopsFormText(_AM_EXTCAL_NAME, 'cat_name', 30, 255), true);
+        $form->addElement( new \XoopsFormDhtmlTextArea(_AM_EXTCAL_DESCRIPTION, 'cat_desc', ''), false);
+        $form->addElement( new \XoopsFormText(_AM_EXTCAL_WEIGHT, 'cat_weight', 30, 5, 0), false);
+        $form->addElement( new \XoopsFormColorPicker(_AM_EXTCAL_COLOR, 'cat_color', '#FF0000'));
 
         $file_path = __DIR__ . '/../assets/css/images';
-        $tf        = XoopsLists::getImgListAsArray($file_path);
+        $tf        = \XoopsLists::getImgListAsArray($file_path);
         array_unshift($tf, _MD_EXTCAL_NONE);
         //$xfIcones = new \XoopsFormSelect(_AM_EXTCAL_ICONE, "cat_icone", $cat->getVar('cat_icone'), '');
         $xfIcones = new \XoopsFormSelect(_AM_EXTCAL_ICONE, 'cat_icone', '', '');
         $xfIcones->addOptionArray($tf);
         $form->addElement($xfIcones, false);
 
-        $form->addElement(new XoopsFormButton('', 'form_submit', _SUBMIT, 'submit'), false);
+        $form->addElement( new \XoopsFormButton('', 'form_submit', _SUBMIT, 'submit'), false);
 
         $form->display();
 
@@ -117,20 +124,20 @@ switch ($op) {
         echo '<fieldset><legend style="font-weight:bold; color:#990000;">' . _AM_EXTCAL_EDIT_CATEGORY . '</legend>';
 
         $form = new \XoopsThemeForm(_AM_EXTCAL_ADD_CATEGORY, 'add_cat', 'cat.php?op=enreg', 'post', true);
-        $form->addElement(new XoopsFormText(_AM_EXTCAL_NAME, 'cat_name', 30, 255, $cat->getVar('cat_name')), true);
-        $form->addElement(new XoopsFormDhtmlTextArea(_AM_EXTCAL_DESCRIPTION, 'cat_desc', $cat->getVar('cat_desc')), false);
-        $form->addElement(new XoopsFormText(_AM_EXTCAL_WEIGHT, 'cat_weight', 30, 5, $cat->getVar('cat_weight')), false);
-        $form->addElement(new XoopsFormColorPicker(_AM_EXTCAL_COLOR, 'cat_color', '#' . $cat->getVar('cat_color')));
+        $form->addElement( new \XoopsFormText(_AM_EXTCAL_NAME, 'cat_name', 30, 255, $cat->getVar('cat_name')), true);
+        $form->addElement( new \XoopsFormDhtmlTextArea(_AM_EXTCAL_DESCRIPTION, 'cat_desc', $cat->getVar('cat_desc')), false);
+        $form->addElement( new \XoopsFormText(_AM_EXTCAL_WEIGHT, 'cat_weight', 30, 5, $cat->getVar('cat_weight')), false);
+        $form->addElement( new \XoopsFormColorPicker(_AM_EXTCAL_COLOR, 'cat_color', '#' . $cat->getVar('cat_color')));
 
         $file_path = __DIR__ . '/../assets/css/images';
-        $tf        = XoopsLists::getImgListAsArray($file_path);
+        $tf        = \XoopsLists::getImgListAsArray($file_path);
         array_unshift($tf, _MD_EXTCAL_NONE);
         $xfIcones = new \XoopsFormSelect(_AM_EXTCAL_ICONE, 'cat_icone', $cat->getVar('cat_icone'), '');
         $xfIcones->addOptionArray($tf);
         $form->addElement($xfIcones, false);
 
-        $form->addElement(new XoopsFormHidden('cat_id', $cat->getVar('cat_id')), false);
-        $form->addElement(new XoopsFormButton('', 'form_submit', _SUBMIT, 'submit'), false);
+        $form->addElement( new \XoopsFormHidden('cat_id', $cat->getVar('cat_id')), false);
+        $form->addElement( new \XoopsFormButton('', 'form_submit', _SUBMIT, 'submit'), false);
         $form->display();
 
         echo '</fieldset>';
@@ -170,15 +177,15 @@ switch ($op) {
     //                 . _AM_EXTCAL_EDIT_CATEGORY . '</legend>';
     //
     //             $form = new \XoopsThemeForm(_AM_EXTCAL_ADD_CATEGORY, 'add_cat', 'cat.php?op=enreg', 'post', true);
-    //             $form->addElement(new XoopsFormText(_AM_EXTCAL_NAME, 'cat_name', 30, 255, $cat->getVar('cat_name')), true);
-    //             $form->addElement(new XoopsFormDhtmlTextArea(_AM_EXTCAL_DESCRIPTION, 'cat_desc', $cat->getVar('cat_desc')), false);
-    //             $form->addElement(new XoopsFormText(_AM_EXTCAL_WEIGHT, 'cat_weight', 30, 5, $cat->getVar('cat_weight')), false);
+    //             $form->addElement( new \XoopsFormText(_AM_EXTCAL_NAME, 'cat_name', 30, 255, $cat->getVar('cat_name')), true);
+    //             $form->addElement( new \XoopsFormDhtmlTextArea(_AM_EXTCAL_DESCRIPTION, 'cat_desc', $cat->getVar('cat_desc')), false);
+    //             $form->addElement( new \XoopsFormText(_AM_EXTCAL_WEIGHT, 'cat_weight', 30, 5, $cat->getVar('cat_weight')), false);
     //             $form->addElement(
-    //                 new XoopsFormColorPicker(_AM_EXTCAL_COLOR, 'cat_color',
+    //                  new \XoopsFormColorPicker(_AM_EXTCAL_COLOR, 'cat_color',
     //                     '#' . $cat->getVar('cat_color'))
     //             );
-    //             $form->addElement(new XoopsFormHidden('cat_id', $cat->getVar('cat_id')), false);
-    //             $form->addElement(new XoopsFormButton("", "form_submit", _SEND, "submit"), false);
+    //             $form->addElement( new \XoopsFormHidden('cat_id', $cat->getVar('cat_id')), false);
+    //             $form->addElement( new \XoopsFormButton("", "form_submit", _SEND, "submit"), false);
     //             $form->display();
     //
     //             echo '</fieldset>';
@@ -238,8 +245,8 @@ switch ($op) {
     //
     //         $form->addElement($catSelect, true);
     //         $button = new \XoopsFormElementTray('');
-    //         $button->addElement(new XoopsFormButton("", "form_modify", _EDIT, "submit"), false);
-    //         $button->addElement(new XoopsFormButton("", "form_delete", _DELETE, "submit"), false);
+    //         $button->addElement( new \XoopsFormButton("", "form_modify", _EDIT, "submit"), false);
+    //         $button->addElement( new \XoopsFormButton("", "form_delete", _DELETE, "submit"), false);
     //         $form->addElement($button, false);
     //         $form->display();
     //
@@ -249,11 +256,11 @@ switch ($op) {
     //             . _AM_EXTCAL_ADD_CATEGORY . '</legend>';
     //
     //         $form = new \XoopsThemeForm(_AM_EXTCAL_ADD_CATEGORY, 'add_cat', 'cat.php?op=enreg', 'post', true);
-    //         $form->addElement(new XoopsFormText(_AM_EXTCAL_NAME, 'cat_name', 30, 255), true);
-    //         $form->addElement(new XoopsFormDhtmlTextArea(_AM_EXTCAL_DESCRIPTION, 'cat_desc', ''), false);
-    //         $form->addElement(new XoopsFormText(_AM_EXTCAL_WEIGHT, 'cat_weight', 30, 5, $cat->getVar('cat_weight')), false);
-    //         $form->addElement(new XoopsFormColorPicker(_AM_EXTCAL_COLOR, 'cat_color'));
-    //         $form->addElement(new XoopsFormButton("", "form_submit", _SEND, "submit"), false);
+    //         $form->addElement( new \XoopsFormText(_AM_EXTCAL_NAME, 'cat_name', 30, 255), true);
+    //         $form->addElement( new \XoopsFormDhtmlTextArea(_AM_EXTCAL_DESCRIPTION, 'cat_desc', ''), false);
+    //         $form->addElement( new \XoopsFormText(_AM_EXTCAL_WEIGHT, 'cat_weight', 30, 5, $cat->getVar('cat_weight')), false);
+    //         $form->addElement( new \XoopsFormColorPicker(_AM_EXTCAL_COLOR, 'cat_color'));
+    //         $form->addElement( new \XoopsFormButton("", "form_submit", _SEND, "submit"), false);
     //         $form->display();
     //
     //         echo '</fieldset><br>';

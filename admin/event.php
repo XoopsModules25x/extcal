@@ -22,9 +22,9 @@ use XoopsModules\Extcal;
 require_once __DIR__ . '/../../../include/cp_header.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-require_once __DIR__ . '/../class/form/extcalform.php';
+//require_once __DIR__ . '/../class/form/extcalform.php';
 require_once __DIR__ . '/admin_header.php';
-require_once __DIR__ . '/../class/Utility.php';
+//require_once __DIR__ . '/../class/Utility.php';
 
 $gepeto = array_merge($_GET, $_POST);
 //while (list($k, $v) = each($gepeto)) {
@@ -42,9 +42,9 @@ if (!isset($op)) {
  */
 function deleteEvents($ids)
 {
-    /** @var ExtcalEventHandler $eventHandler */
-    $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
-    $criteria     = new Criteria('event_id', "($ids)", 'IN');
+    /** @var EventHandler $eventHandler */
+    $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+    $criteria     =  new \Criteria('event_id', "($ids)", 'IN');
 
     //Supression des images
     $rst = $eventHandler->getAllEvents($criteria);
@@ -74,8 +74,8 @@ switch ($op) {
 
     case 'enreg':
 
-        $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
-        $fileHandler  = xoops_getModuleHandler(_EXTCAL_CLS_FILE, _EXTCAL_MODULE);
+        $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+        $fileHandler  = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_FILE);
         // $t = print_r($_POST,true);
         // echo "<pre>{$t}</pre><br>";
         // exit;
@@ -129,8 +129,9 @@ switch ($op) {
             // New event
         } else {
             $notificationHandler = xoops_getHandler('notification');
-            /** @var ExtcalCatHandler $catHandler */
-            $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+            /** @var Extcal\CategoryHandler $catHandler */
+//            $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+            $catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
 
             $data['event_submitter']  = $xoopsUser ? $xoopsUser->getVar('uid') : 0;
             $data['event_submitdate'] = time();
@@ -139,7 +140,7 @@ switch ($op) {
                 $fileHandler->createFile($eventHandler->getInsertId());
                 $cat = $catHandler->getCat($_POST['cat_id'], $xoopsUser, 'all');
                 $notificationHandler->triggerEvent('global', 0, 'new_event', ['EVENT_TITLE' => $_POST['event_title']]);
-                $notificationHandler->triggerEvent('cat', $_POST['cat_id'], 'new_event_cat', [
+                $notificationHandler->triggerEvent('category', $_POST['cat_id'], 'new_event_cat', [
                     'EVENT_TITLE' => $_POST['event_title'],
                     'CAT_NAME'    => $cat->getVar('cat_name'),
                 ]);
@@ -191,7 +192,7 @@ switch ($op) {
         //***************************************************************************************
 
         $eventId      = $_GET['event_id'];
-        $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
+        $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 
         echo '<fieldset><legend style="font-weight:bold; color:#990000;">' . _MD_EXTCAL_EDIT_EVENT . '</legend>';
 
@@ -209,7 +210,7 @@ switch ($op) {
 
         //$newEventId = 1;
         $eventId      = $_GET['event_id'];
-        $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
+        $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
         $event        = $eventHandler->getEvent($eventId);
         $t            = $event->getVars();
         $data         = [];
@@ -314,7 +315,7 @@ switch ($op) {
     default:
 
         //global $extcalConfig;
-        $extcalConfig      = ExtcalConfig::getHandler();
+        $extcalConfig      = Extcal\Config::getHandler();
         $xoopsModuleConfig = $extcalConfig->getModuleConfig();
 
         $start          = isset($_GET['start']) ? $_GET['start'] : 0;
@@ -328,7 +329,7 @@ switch ($op) {
         $adminObject->displayNavigation(basename(__FILE__));
         //***************************************************************************************
 
-        $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
+        $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
         $events       = $eventHandler->objectToArray($eventHandler->getNewEvent($start, $nbEventsByPage, 0, true), ['cat_id']);
         $eventHandler->formatEventsDate($events, _SHORTDATESTRING);
 
@@ -371,7 +372,7 @@ switch ($op) {
                 echo "<input type='hidden' name='deleteAllEvents[{$event['event_id']}]' value='1'>";
                 echo '</td>';
                 echo "<td align = 'center' width='5%'>" . $event['event_id'] . '</td>';
-                echo "<td  width='10%'>" . '<a href=cat.php?op=modify&amp;cat_id=' . $event['cat']['cat_id'] . '&form_modify' . '>' . $event['cat']['cat_name'] . '</a>' . '</td>';
+                echo "<td  width='10%'>" . '<a href=cat.php?op=modify&amp;cat_id=' . $event['Category']['cat_id'] . '&form_modify' . '>' . $event['Category']['cat_name'] . '</a>' . '</td>';
 
                 echo '<td>' . '<a href=event.php?op=modify&amp;event_id=' . $event['event_id'] . '>' . $event['event_title'] . '</a>' . '</td>';
 

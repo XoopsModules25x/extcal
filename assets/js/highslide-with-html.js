@@ -2410,7 +2410,7 @@ if (!hs) {
                 return;
             }
             try {
-                xhr = new XMLHttpRequest();
+                xhr =  new \XMLHttpRequest();
             }
             catch (e) {
                 try {

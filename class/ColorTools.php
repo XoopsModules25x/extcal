@@ -1,9 +1,9 @@
-<?php
+<?php namespace XoopsModules\Extcal;
 
 /**
  * Class ColorTools.
  */
-class colorTools
+class ColorTools
 {
     /**
      *

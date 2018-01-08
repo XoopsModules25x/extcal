@@ -1,4 +1,4 @@
-<?php
+<?php namespace XoopsModules\Extcal;
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -17,37 +17,24 @@
  * @author       XOOPS Development Team,
  */
 
+use XoopsModules\Extcal;
+
 // defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
-require_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
+// // require_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
+
 
 /**
- * Class ExtcalEventNotMember.
+ * Class EventNotMemberHandler.
  */
-class ExtcalEventNotMember extends XoopsObject
-{
-    /**
-     * ExtcalEventNotMember constructor.
-     */
-    public function __construct()
-    {
-        $this->initVar('eventnotmember_id', XOBJ_DTYPE_INT, null, false);
-        $this->initVar('event_id', XOBJ_DTYPE_INT, null, true);
-        $this->initVar('uid', XOBJ_DTYPE_INT, null, true);
-    }
-}
-
-/**
- * Class ExtcalEventNotMemberHandler.
- */
-class ExtcalEventNotMemberHandler extends ExtcalPersistableObjectHandler
+class EventNotMemberHandler extends ExtcalPersistableObjectHandler
 {
     /**
      * @param $db
      */
-    public function __construct(XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db)
     {
-        parent::__construct($db, 'extcal_eventnotmember', _EXTCAL_CLN_NOT_MEMBER, ['event_id', 'uid']);
+        parent::__construct($db, 'extcal_eventnotmember', EventNotMember::class, ['event_id', 'uid']);
     }
 
     /**
@@ -59,7 +46,7 @@ class ExtcalEventNotMemberHandler extends ExtcalPersistableObjectHandler
         $eventnotmember->setVars($varArr);
 
         if ($this->insert($eventnotmember, true)) {
-            $eventMemberHandler = xoops_getModuleHandler(_EXTCAL_CLS_MEMBER, _EXTCAL_MODULE);
+            $eventMemberHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_MEMBER);
             $eventMemberHandler->deleteById([$varArr['event_id'], $varArr['uid']]);
         }
     }
@@ -82,7 +69,7 @@ class ExtcalEventNotMemberHandler extends ExtcalPersistableObjectHandler
     public function getMembers($eventId)
     {
         $memberHandler  = xoops_getHandler('member');
-        $eventNotMember = $this->getObjects(new Criteria('event_id', $eventId));
+        $eventNotMember = $this->getObjects( new \Criteria('event_id', $eventId));
         $count          = count($eventNotMember);
         if ($count > 0) {
             $in = '(' . $eventNotMember[0]->getVar('uid');
@@ -91,9 +78,9 @@ class ExtcalEventNotMemberHandler extends ExtcalPersistableObjectHandler
                 $in .= ',' . $member->getVar('uid');
             }
             $in       .= ')';
-            $criteria = new Criteria('uid', $in, 'IN');
+            $criteria =  new \Criteria('uid', $in, 'IN');
         } else {
-            $criteria = new Criteria('uid', '(0)', 'IN');
+            $criteria =  new \Criteria('uid', '(0)', 'IN');
         }
 
         return $memberHandler->getUsers($criteria, true);
@@ -106,7 +93,7 @@ class ExtcalEventNotMemberHandler extends ExtcalPersistableObjectHandler
      */
     public function getNbMember($eventId)
     {
-        $criteria = new Criteria('event_id', $eventId);
+        $criteria =  new \Criteria('event_id', $eventId);
 
         return $this->getCount($criteria);
     }

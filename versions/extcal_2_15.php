@@ -27,12 +27,12 @@ class Extcal_2_15
      * @param XoopsModule $module
      * @param             $options
      */
-    public function __construct(XoopsModule $module, $options)
+    public function __construct(\XoopsModule $module, $options)
     {
         global $xoopsDB;
 
-        //$xoopsDB = XoopsDatabaseFactory::getDatabaseConnection();
-        $xoopsDB = XoopsDatabaseFactory::getDatabaseConnection();
+        //$xoopsDB = \XoopsDatabaseFactory::getDatabaseConnection();
+        $xoopsDB = \XoopsDatabaseFactory::getDatabaseConnection();
 
         $sql = 'ALTER TABLE `' . $xoopsDB->prefix('extcal_event') . "` CHANGE `event_approved` `event_approved` TINYINT( 1 ) NOT NULL DEFAULT '0' ;";
         $xoopsDB->query($sql);

@@ -17,6 +17,8 @@
  * @author       XOOPS Development Team,
  */
 
+use XoopsModules\Extcal;
+
 // defined('XOOPS_ROOT_PATH') || die('XOOPS Root Path not defined');
 
 include __DIR__ . '/preloads/autoloader.php';
@@ -32,7 +34,7 @@ setlocale(LC_TIME, $xoopsConfig['language']);
 //***************************************************************************************
 $modversion['version']          = '2.40';
 $modversion['module_status']    = 'Beta 1';
-$modversion['release_date']     = '2017/10/08';
+$modversion['release_date']     = '2018/01/08';
 $modversion['name']             = _MI_EXTCAL_NAME;
 $modversion['description']      = _MI_EXTCAL_DESC;
 $modversion['credits']          = 'Zoullou';
@@ -73,7 +75,8 @@ $i                     = 0;
 if (isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule'])
     && 'extcal' === $GLOBALS['xoopsModule']->getVar('dirname')) {
     $user = isset($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser'] : null;
-    $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+//    $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+    $catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
     if ($catHandler->haveSubmitRight($user)) {
         $modversion['sub'][0]['name'] = _MI_EXTCAL_SUBMIT_EVENT;
         $modversion['sub'][0]['url'] = _EXTCAL_FILE_NEW_EVENT;
@@ -208,7 +211,7 @@ $modversion['config'][$i]['options']     = [
 ];
 
 xoops_load('XoopsEditorHandler');
-$editorHandler = XoopsEditorHandler::getInstance();
+$editorHandler = \XoopsEditorHandler::getInstance();
 $editorList    = array_flip($editorHandler->getList());
 
 ++$i;

@@ -1,4 +1,4 @@
-<?php
+<?php namespace XoopsModules\Extcal\Form;
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -18,14 +18,16 @@
  */
 
 /**
- * Class ExtcalFormRRuleCheckBox.
+ * Class FormFileCheckBox.
  */
-class ExtcalFormRRuleCheckBox extends XoopsFormCheckBox
+class FormFileCheckBox extends \XoopsFormCheckBox
 {
     /**
      * @param      $caption
      * @param      $name
      * @param null $value
+     *
+     * @return FormFileCheckBox
      */
     public function __construct($caption, $name, $value = null)
     {
@@ -39,23 +41,16 @@ class ExtcalFormRRuleCheckBox extends XoopsFormCheckBox
      */
     public function render()
     {
-        $ret = '<table><tr>';
-        $i   = 0;
+        $ret = '';
         if (count($this->getOptions()) > 1 && '[]' !== substr($this->getName(), -2, 2)) {
             $newname = $this->getName() . '[]';
             $this->setName($newname);
         }
         foreach ($this->getOptions() as $value => $name) {
-            if (0 == (++$i) % 6) {
-                $ret .= '</tr><tr>';
-            }
-            $ret .= "<td><input type='checkbox' name='" . $this->getName() . "' value='" . $value . "'";
-            if (count($this->getValue()) > 0 && in_array($value, $this->getValue())) {
-                $ret .= ' checked';
-            }
-            $ret .= $this->getExtra() . '>' . $name . "</td>\n";
+            $ret .= "<input type='checkbox' name='" . $this->getName() . "' value='" . $value . "'";
+            $ret .= ' checked';
+            $ret .= $this->getExtra() . '>' . $name . "<br>\n";
         }
-        $ret .= '</tr></table>';
 
         return $ret;
     }

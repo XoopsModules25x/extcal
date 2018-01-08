@@ -1,4 +1,4 @@
-<?php
+<?php namespace XoopsModules\Extcal;
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -19,43 +19,20 @@
 
 // defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
-require_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
+// // require_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
 require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 
 /**
- * Class ExtcalFile.
+ * Class FileHandler.
  */
-class ExtcalFile extends XoopsObject
-{
-    /**
-     * ExtcalFile constructor.
-     */
-    public function __construct()
-    {
-        $this->initVar('file_id', XOBJ_DTYPE_INT, null, false);
-        $this->initVar('file_name', XOBJ_DTYPE_TXTBOX, null, false, 255);
-        $this->initVar('file_nicename', XOBJ_DTYPE_TXTBOX, null, false, 255);
-        $this->initVar('file_mimetype', XOBJ_DTYPE_TXTBOX, null, false, 255);
-        $this->initVar('file_size', XOBJ_DTYPE_INT, null, false);
-        $this->initVar('file_download', XOBJ_DTYPE_INT, null, false);
-        $this->initVar('file_date', XOBJ_DTYPE_INT, null, false);
-        $this->initVar('file_approved', XOBJ_DTYPE_INT, null, false);
-        $this->initVar('event_id', XOBJ_DTYPE_INT, null, false);
-        $this->initVar('uid', XOBJ_DTYPE_INT, null, false);
-    }
-}
-
-/**
- * Class ExtcalFileHandler.
- */
-class ExtcalFileHandler extends ExtcalPersistableObjectHandler
+class FileHandler extends ExtcalPersistableObjectHandler
 {
     /**
      * @param $db
      */
-    public function __construct(XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db)
     {
-        parent::__construct($db, 'extcal_file', _EXTCAL_CLN_FILE, 'file_id');
+        parent::__construct($db, 'extcal_file', File::class, 'file_id');
     }
 
     /**
@@ -116,9 +93,9 @@ class ExtcalFileHandler extends ExtcalPersistableObjectHandler
      */
     public function getEventFiles($eventId)
     {
-        $criteria = new CriteriaCompo();
-        $criteria->add(new Criteria('file_approved', 1));
-        $criteria->add(new Criteria('event_id', $eventId));
+        $criteria =  new \CriteriaCompo();
+        $criteria->add( new \Criteria('file_approved', 1));
+        $criteria->add( new \Criteria('event_id', $eventId));
 
         return $this->getObjects($criteria);
     }
@@ -128,9 +105,9 @@ class ExtcalFileHandler extends ExtcalPersistableObjectHandler
      */
     public function updateEventFile($eventId)
     {
-        $criteria = new CriteriaCompo();
-        $criteria->add(new Criteria('file_approved', 1));
-        $criteria->add(new Criteria('event_id', $eventId));
+        $criteria =  new \CriteriaCompo();
+        $criteria->add( new \Criteria('file_approved', 1));
+        $criteria->add( new \Criteria('event_id', $eventId));
 
         if (isset($_POST['filetokeep'])) {
             if (is_array($_POST['filetokeep'])) {
@@ -144,7 +121,7 @@ class ExtcalFileHandler extends ExtcalPersistableObjectHandler
             } else {
                 $in = '(' . $_POST['filetokeep'] . ')';
             }
-            $criteria->add(new Criteria('file_id', $in, 'NOT IN'));
+            $criteria->add( new \Criteria('file_id', $in, 'NOT IN'));
         }
 
         $files = $this->getObjects($criteria);

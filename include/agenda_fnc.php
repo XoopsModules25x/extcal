@@ -15,14 +15,17 @@
  * L'utilisation de ce formulaire d'adminitration suppose
  * que la classe correspondante de la table a été générées avec classGenerator
  **/
+
+use XoopsModules\Extcal;
+
 define('_EXTCAL_FORMAT_AGENDA_KEYD', 'Y-m-d');
 define('_EXTCAL_FORMAT_AGENDA_KEYT', 'H:i');
 
 require_once __DIR__ . '/constantes.php';
-require_once __DIR__ . '/../class/Utility.php';
+//require_once __DIR__ . '/../class/Utility.php';
 
 $moduleDirName = basename(dirname(__DIR__));
-xoops_loadLanguage('main', $moduleDirName);
+Extcal\Helper::getInstance()->loadLanguage('main');
 
 /*******************************************************************
  *
@@ -252,7 +255,7 @@ function getListYears($year, $nbYearsBefore = 0, $nbYearsAfter = 5, $addNone = f
 function getListMonths($month, $addNone = false, $name = 'month')
 {
     // Month selectbox
-    $extcalTimeHandler = ExtcalTime::getHandler();
+    $timeHandler = Extcal\Time::getHandler();
 
     $select = new \XoopsFormSelect('', $name, $month);
     if ($addNone) {
@@ -260,7 +263,7 @@ function getListMonths($month, $addNone = false, $name = 'month')
     }
 
     for ($i = 1; $i < 13; ++$i) {
-        $select->addOption($i, $extcalTimeHandler->getMonthName($i));
+        $select->addOption($i, $timeHandler->getMonthName($i));
     }
 
     return $select;
@@ -431,8 +434,8 @@ function getNavBarTabs($currentTab = '')
     }
 
     $user = isset($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser'] : null;
-    /** @var ExtcalCatHandler $catHandler */
-    $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+    /** @var CategoryHandler $catHandler */
+     $catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
     if ($catHandler->haveSubmitRight($user)) {
         $view = _EXTCAL_NAV_NEW_EVENT;
         if (in_array($view, $visibleTabs)) {

@@ -9,8 +9,6 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-use XoopsModules\Extcal;
-
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
  * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
@@ -18,6 +16,9 @@ use XoopsModules\Extcal;
  * @since
  * @author       XOOPS Development Team,
  */
+
+
+use XoopsModules\Extcal;
 
 include __DIR__ . '/../../mainfile.php';
 require_once __DIR__ . '/include/constantes.php';
@@ -30,8 +31,8 @@ $year = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
 $cat  = isset($_GET['cat']) ? (int)$_GET['cat'] : 0;
 
 // Getting eXtCal object's handler
-$catHandler   = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-$eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
+$catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+$eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 
 // Tooltips include
 /** @var xos_opal_Theme $xoTheme */
@@ -42,7 +43,7 @@ $form = new \XoopsSimpleForm('', 'navigSelectBox', $params['file'], 'get');
 $form->addElement(getListYears($year, $xoopsModuleConfig['agenda_nb_years_before'], $xoopsModuleConfig['agenda_nb_years_after']));
 
 $form->addElement(Extcal\Utility::getListCategories($cat));
-$form->addElement(new XoopsFormButton('', 'form_submit', _SUBMIT, 'submit'));
+$form->addElement( new \XoopsFormButton('', 'form_submit', _SUBMIT, 'submit'));
 
 // Assigning the form to the template
 $form->assign($xoopsTpl);

@@ -32,7 +32,7 @@
 
 <{if $list_position==0}>
     <form action="<{$navigSelectBox.action}>" method="<{$navigSelectBox.method}>" class="head">
-        <{foreachq item=element from=$navigSelectBox.elements}>
+        <{foreach item=element from=$navigSelectBox.elements}>
         <{$element.body}>
         <{/foreach}>
     </form>
@@ -58,7 +58,7 @@
 
 <{if $list_position==1}>
     <form action="<{$navigSelectBox.action}>" method="<{$navigSelectBox.method}>" class="head">
-        <{foreachq item=element from=$navigSelectBox.elements}>
+        <{foreach item=element from=$navigSelectBox.elements}>
         <{$element.body}>
         <{/foreach}>
     </form>

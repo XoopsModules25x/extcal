@@ -1,4 +1,4 @@
-<?php
+<?php namespace XoopsModules\Extcal;
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -15,25 +15,25 @@
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
- * @author       JJDai <http://xoops.kiolo.com>
- *
  */
-//----------------------------------------------------
-class Extcal_2_04
+
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+
+ // require_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
+
+/**
+ * Class Eventmember.
+ */
+class Eventmember extends \XoopsObject
 {
-    //----------------------------------------------------
-
     /**
-     * @param XoopsModule $module
-     * @param             $options
+     * Eventmember constructor.
      */
-    public function __construct(\XoopsModule $module, $options)
+    public function __construct()
     {
-        global $xoopsDB;
-
-        $sql = 'ALTER TABLE `' . $xoopsDB->prefix('extcal_event') . "` ADD `event_nbmember` TINYINT(4) NOT NULL DEFAULT '0' AFTER `event_submitdate` ;";
-        $xoopsDB->query($sql);
+        $this->initVar('eventmember_id', XOBJ_DTYPE_INT, null, false);
+        $this->initVar('event_id', XOBJ_DTYPE_INT, null, true);
+        $this->initVar('uid', XOBJ_DTYPE_INT, null, true);
+        $this->initVar('status', XOBJ_DTYPE_INT, 0, true);
     }
-
-    //-----------------------------------------------------------------
-}   // fin de la classe
+}

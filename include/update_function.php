@@ -24,7 +24,7 @@
  *
  * @return bool
  */
-function xoops_module_update_extcal(XoopsModule $xoopsModule, $previousVersion = null)
+function xoops_module_update_extcal(\XoopsModule $xoopsModule, $previousVersion = null)
 {
     $newVersion = $xoopsModule->getVar('version') * 100;
     if ($newVersion == $previousVersion) {
@@ -78,8 +78,8 @@ function xoops_module_update_extcal(XoopsModule $xoopsModule, $previousVersion =
     }
 
     /*
-        //$db = XoopsDatabaseFactory::getDatabaseConnection();
-        $xoopsDB = XoopsDatabaseFactory::getDatabaseConnection();
+        //$db = \XoopsDatabaseFactory::getDatabaseConnection();
+        $xoopsDB = \XoopsDatabaseFactory::getDatabaseConnection();
 
         $sql = "ALTER TABLE `".$db->prefix('extcal_event')."` ADD `event_organisateur` varchar( 255 ) NOT NULL AFTER `event_desc` ;";
         $db->query($sql);

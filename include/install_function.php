@@ -5,7 +5,7 @@
  *
  * @return bool
  */
-function xoops_module_install_extcal(XoopsModule $xoopsModule)
+function xoops_module_install_extcal(\XoopsModule $xoopsModule)
 {
 
     // Create eXtCal upload directory

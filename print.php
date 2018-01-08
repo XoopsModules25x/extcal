@@ -17,6 +17,8 @@
  * @author       XOOPS Development Team,
  */
 
+use XoopsModules\Extcal;
+
 include __DIR__ . '/../../mainfile.php';
 require_once __DIR__ . '/include/constantes.php';
 
@@ -27,12 +29,12 @@ if (!isset($_GET['event'])) {
 } else {
     $eventId = (int)$_GET['event'];
 }
-$eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
+$eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 $event        = $eventHandler->objectToArray($eventHandler->getEvent($eventId), ['cat_id']);
 
 //adding location
-/** @var ExtcalEtablissementHandler $locationHandler */
-$locationHandler = xoops_getModuleHandler('etablissement', _EXTCAL_MODULE);
+/** @var EtablissementHandler $locationHandler */
+$locationHandler = Extcal\Helper::getInstance()->getHandler('Etablissement');
 if ($event['event_etablissement'] > 0) {
     $location = $locationHandler->objectToArray($locationHandler->getEtablissement($event['event_etablissement'], true));
 }

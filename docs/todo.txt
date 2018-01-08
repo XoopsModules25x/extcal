@@ -23,7 +23,7 @@ To do list
 
 - Add a lightbox effect on the image of slidesow
   By cons when you click on the image in an event that displays the image on a new page: no effect "Ligth Box".
-  Is this due to my new XOOPS (2.5.1). Are there any particular manipulation to do? Or is it planned for a future release?
+  Is this due to my  new \XOOPS (2.5.1). Are there any particular manipulation to do? Or is it planned for a future release?
 
 - Why did not you set notifications in terms of registration (YES I will be / NO I will not be), and unsubscribe (passage of a yes to a no, or vice versa)
 

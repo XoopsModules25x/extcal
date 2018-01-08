@@ -1,11 +1,13 @@
 <?php
 
+use XoopsModules\Extcal;
+
 include __DIR__ . '/../../mainfile.php';
 require_once __DIR__ . '/include/constantes.php';
 require_once __DIR__ . '/header.php';
 
 require_once XOOPS_ROOT_PATH . '/class/template.php';
-$eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
+$eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 if (!isset($_GET['cat'])) {
     $cat = 0;
 } else {

@@ -31,14 +31,14 @@ define('_EXTCAL_CLS_MEMBER', 'eventmember');
 define('_EXTCAL_CLS_NOT_MEMBER', 'eventnotmember');
 define('_EXTCAL_CLS_ETABLISSEMENT', 'etablissement');
 
-define('_EXTCAL_CLN_CAT', 'ExtcalCat');
-define('_EXTCAL_CLN_FILE', 'ExtcalFile');
-define('_EXTCAL_CLN_MEMBER', 'ExtcalEventmember');
-define('_EXTCAL_CLN_NOT_MEMBER', 'ExtcalEventNotMember');
-define('_EXTCAL_CLN_ETABLISSEMENT', 'ExtcalEtablissement');
+define('_EXTCAL_CLN_CAT', 'Category');
+define('_EXTCAL_CLN_FILE', 'File');
+define('_EXTCAL_CLN_MEMBER', 'Eventmember');
+define('_EXTCAL_CLN_NOT_MEMBER', 'EventNotMember');
+define('_EXTCAL_CLN_ETABLISSEMENT', 'Etablissement');
 
 define('_EXTCAL_CLS_EVENT', 'event');
-define('_EXTCAL_CLN_EVENT', 'ExtcalEvent');
+define('_EXTCAL_CLN_EVENT', 'Event');
 
 //-------------------------------------------------------------------
 define('_EXTCAL_PEAR_ROOT_DEFAULT', __DIR__ . '/../class/pear');

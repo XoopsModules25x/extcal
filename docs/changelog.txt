@@ -1,4 +1,4 @@
-<h5>2.40 Beta 1  [NOT RELEASED]</h5>  Dev: Xoops 2.5.9, PHP 7.2.0
+<h5>2.40 Beta 1  [NOT RELEASED]</h5>  Dev: Xoops 2.5.9, PHP 7.2.1
 <hr>
 * fix dashboard (mamba)
 * Fix for days in local language (aerograf/mamba)
@@ -16,6 +16,10 @@
     &nbsp;&nbsp;- updated addInfoBoxLine entries (mamba)
     &nbsp;&nbsp;- displayNavigation(basename(__FILE__))  (mamba)
     &nbsp;&nbsp;- changed to ->displayButton('left') (mamba)
++ namespaces (mamba)
++ autoload (mamba)
+* replaced xoops_getModuleHandler() with Helper::getInstance()->getHandler() (geekwright/mamba)
+
 
 <h5>2.39 FINAL         [2016-10-18]</h5>
 <hr>
@@ -136,7 +140,7 @@
 - Réintrégation file update extcal_2_34.php omitted in the previous version
 - Fixed zoom in on photos to certeines
 - Fixed default value of 0 in the table event_etablissement event
-- Intancciation of extcalConfig <=> xoopsModuleConfig for blocks
+- Intancciation of Config <=> xoopsModuleConfig for blocks
 
 <h5>2.34                [2012-01-06] (JJD.fr)</h5>
 <hr>

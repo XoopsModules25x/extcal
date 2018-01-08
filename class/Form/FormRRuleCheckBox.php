@@ -1,4 +1,4 @@
-<?php
+<?php namespace XoopsModules\Extcal\Form;
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -17,17 +17,16 @@
  * @author       XOOPS Development Team,
  */
 
+
 /**
- * Class ExtcalFormFileCheckBox.
+ * Class FormRRuleCheckBox.
  */
-class ExtcalFormFileCheckBox extends XoopsFormCheckBox
+class FormRRuleCheckBox extends \XoopsFormCheckBox
 {
     /**
      * @param      $caption
      * @param      $name
      * @param null $value
-     *
-     * @return ExtcalFormFileCheckBox
      */
     public function __construct($caption, $name, $value = null)
     {
@@ -41,16 +40,23 @@ class ExtcalFormFileCheckBox extends XoopsFormCheckBox
      */
     public function render()
     {
-        $ret = '';
+        $ret = '<table><tr>';
+        $i   = 0;
         if (count($this->getOptions()) > 1 && '[]' !== substr($this->getName(), -2, 2)) {
             $newname = $this->getName() . '[]';
             $this->setName($newname);
         }
         foreach ($this->getOptions() as $value => $name) {
-            $ret .= "<input type='checkbox' name='" . $this->getName() . "' value='" . $value . "'";
-            $ret .= ' checked';
-            $ret .= $this->getExtra() . '>' . $name . "<br>\n";
+            if (0 == (++$i) % 6) {
+                $ret .= '</tr><tr>';
+            }
+            $ret .= "<td><input type='checkbox' name='" . $this->getName() . "' value='" . $value . "'";
+            if (count($this->getValue()) > 0 && in_array($value, $this->getValue())) {
+                $ret .= ' checked';
+            }
+            $ret .= $this->getExtra() . '>' . $name . "</td>\n";
         }
+        $ret .= '</tr></table>';
 
         return $ret;
     }

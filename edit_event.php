@@ -17,14 +17,14 @@
  * @author       XOOPS Development Team,
  */
 
+use XoopsModules\Extcal;
+
 include __DIR__ . '/../../mainfile.php';
 
 include XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include __DIR__ . '/class/form/extcalform.php';
-include __DIR__ . '/class/perm.php';
 require_once __DIR__ . '/include/constantes.php';
 
-$permHandler = ExtcalPerm::getHandler();
+$permHandler = Extcal\Perm::getHandler();
 $xoopsUser   = $xoopsUser ?: null;
 
 if (0 == count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit'))
@@ -54,7 +54,7 @@ if (!isset($_GET['action'])) {
 }
 
 // Getting eXtCal object's handler
-$eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
+$eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 
 include XOOPS_ROOT_PATH . '/header.php';
 

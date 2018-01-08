@@ -42,7 +42,7 @@ function tableExists($tablename)
  *
  * @return bool true if ready to install, false if not
  */
-function xoops_module_pre_update_extcal(XoopsModule $module)
+function xoops_module_pre_update_extcal(\XoopsModule $module)
 {
     /** @var Extcal\Helper $helper */
     /** @var Extcal\Utility $utility */
@@ -64,7 +64,7 @@ function xoops_module_pre_update_extcal(XoopsModule $module)
  * @return bool true if update successful, false if not
  */
 
-function xoops_module_update_extcal(XoopsModule $module, $previousVersion = null)
+function xoops_module_update_extcal(\XoopsModule $module, $previousVersion = null)
 {
     //    global $xoopsDB;
     $moduleDirName = basename(dirname(__DIR__));
@@ -163,7 +163,7 @@ function xoops_module_update_extcal(XoopsModule $module, $previousVersion = null
 
         //delete /images directory ============
         $imagesDirectory = $GLOBALS['xoops']->path('modules/' . $module->getVar('dirname', 'n') . '/images/');
-        $folderHandler   = XoopsFile::getHandler('folder', $imagesDirectory);
+        $folderHandler   = \XoopsFile::getHandler('folder', $imagesDirectory);
         $folderHandler->delete($imagesDirectory);
     }
 

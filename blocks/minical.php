@@ -17,10 +17,12 @@
  * @author       XOOPS Development Team,
  */
 
+use XoopsModules\Extcal;
+
 global $extcalConfig, $xoopsUser;
 require_once __DIR__ . '/../include/constantes.php';
-require_once __DIR__ . '/../class/Utility.php';
-require_once __DIR__ . '/../class/tableForm.php';
+//require_once __DIR__ . '/../class/Utility.php';
+//require_once __DIR__ . '/../class/tableForm.php';
 //---------------------------------------------------------------------------
 /**
  * @param $options
@@ -33,7 +35,7 @@ function bExtcalMinicalShow($options)
 
     extcal_getDefautminicalOption($options);
 
-    require_once __DIR__ . '/../class/config.php';
+//    require_once __DIR__ . '/../class/config.php';
 
     require_once _EXTCAL_PEAR_CALENDAR_ROOT . '/Util/Textual.php';
     require_once _EXTCAL_PEAR_CALENDAR_ROOT . '/Month/Weeks.php';
@@ -44,7 +46,7 @@ function bExtcalMinicalShow($options)
     // Retriving Image for block if enabled
     if (1 == $options[0]) {
         $imageHandler = xoops_getHandler('image');
-        $criteria     = new Criteria('imgcat_id', $options[1]);
+        $criteria     =  new \Criteria('imgcat_id', $options[1]);
         $criteria->setSort('RAND()');
         $criteria->setLimit($options[6]);
         $images         = $imageHandler->getObjects($criteria);
@@ -68,7 +70,7 @@ function bExtcalMinicalShow($options)
     $imageParam['frameWidth']  = $options[2];
 
     // Retriving module config
-    //     $extcalConfig = ExtcalConfig::getHandler();
+    //     $extcalConfig = Extcal\Config::getHandler();
     //$xoopsModuleConfig = $extcalConfig->getModuleConfig();
     //----------------------------------------------------
     //recupe de xoopsmoduleConfig
@@ -81,13 +83,15 @@ function bExtcalMinicalShow($options)
     }
     //----------------------------------------------------
     // Getting eXtCal object's handler
-    $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+//    $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+    $catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+
     $cats       = $catHandler->getAllCatById($xoopsUser);
     // $t = print_r($cats,true);
     // echo "zzz<pre>{$t}</pre>";
 
-    $eventHandler      = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
-    $extcalTimeHandler = ExtcalTime::getHandler();
+    $eventHandler      = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+    $timeHandler = Extcal\Time::getHandler();
 
     // Retriving month and year value according to block options
     //modif JJD
@@ -121,7 +125,7 @@ function bExtcalMinicalShow($options)
             'periode'      => _EXTCAL_EVENTS_MONTH,
             'month'        => $month,
             'year'         => $year,
-            'cat'          => $tCatSelected,
+            'category'          => $tCatSelected,
             'externalKeys' => 'cat_id',
         ];
         $events   = $eventHandler->getEventsOnPeriode($criteres);
@@ -142,15 +146,15 @@ function bExtcalMinicalShow($options)
     $eventsArray = [];
     foreach ($events as $event) {
         //echo "id->{$event['event_id']}<br>";
-        bExtcalMinicalAddEventToArray($event, $eventsArray, $extcalTimeHandler, $startMonth, $endMonth, $cats);
+        bExtcalMinicalAddEventToArray($event, $eventsArray, $timeHandler, $startMonth, $endMonth, $cats);
         //         if (!$event['event_isrecur']) {
-        //             bExtcalMinicalAddEventToArray($event, $eventsArray, $extcalTimeHandler, $startMonth, $endMonth, $cats);
+        //             bExtcalMinicalAddEventToArray($event, $eventsArray, $timeHandler, $startMonth, $endMonth, $cats);
         //         } else {
         //
         //             $recurEvents = $eventHandler->getRecurEventToDisplay($event, $startMonth, $endMonth);
         //             foreach ($recurEvents as $recurEvent)
         //             {
-        //                 bExtcalMinicalAddEventToArray($recurEvent, $eventsArray, $extcalTimeHandler, $startMonth, $endMonth, $cats);
+        //                 bExtcalMinicalAddEventToArray($recurEvent, $eventsArray, $timeHandler, $startMonth, $endMonth, $cats);
         //             }
         //         }
     }
@@ -162,9 +166,9 @@ function bExtcalMinicalShow($options)
     // Flag current day
     $selectedDays = [
         new Calendar_Day(
-            date('Y', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($GLOBALS['xoopsUser']))),
-            date('n', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($GLOBALS['xoopsUser']))),
-                         date('j', xoops_getUserTimestamp(time(), $extcalTimeHandler->_getUserTimeZone($GLOBALS['xoopsUser'])))
+            date('Y', xoops_getUserTimestamp(time(), $timeHandler->_getUserTimeZone($GLOBALS['xoopsUser']))),
+            date('n', xoops_getUserTimestamp(time(), $timeHandler->_getUserTimeZone($GLOBALS['xoopsUser']))),
+                         date('j', xoops_getUserTimestamp(time(), $timeHandler->_getUserTimeZone($GLOBALS['xoopsUser'])))
         ),
     ];
 
@@ -220,7 +224,7 @@ function bExtcalMinicalShow($options)
     $navig = [
         'page' => $extcalConfig['start_page'],
         'uri'  => 'year=' . $monthCalObj->thisYear() . '&amp;month=' . $monthCalObj->thisMonth(),
-        'name' => $extcalTimeHandler->getFormatedDate($extcalConfig['nav_date_month'], $monthCalObj->getTimestamp()),
+        'name' => $timeHandler->getFormatedDate($extcalConfig['nav_date_month'], $monthCalObj->getTimestamp()),
     ];
 
     $horloge             = [];
@@ -253,7 +257,7 @@ function bExtcalMinicalShow($options)
  */
 function bExtcalMinicalEdit($options)
 {
-    require_once __DIR__ . '/../class/form/spin/formspin.php';
+//    require_once __DIR__ . '/../class/form/spin/formspin.php';
     global $xoopsUser;
 
     //  $t = print_r(get_defined_vars(),true);
@@ -264,12 +268,12 @@ function bExtcalMinicalEdit($options)
 
     $xfValue = [];
 
-    $form = new \XoopsTableForm(_OPTIONS, '', '');
+    $form = new Extcal\TableForm(_OPTIONS, '', '');
     //$form->setExtra('enctype="multipart/form-data"');
 
     //============================================================
 
-    $catHandler      = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+    $catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
     $cats            = $catHandler->getAllCat($xoopsUser, 'extcal_cat_view');
     $imageCatHandler = xoops_getHandler('imagecategory');
 
@@ -296,23 +300,23 @@ function bExtcalMinicalEdit($options)
     $form->addElement($xfValue[$k], false);
     //---------------------------------------------------------------------
     $k           = 2;
-    $xfValue[$k] = new ExtcalFormSpin(_MB_EXTCAL_SS_WIDTH, "options[{$k}]", $options[$k], 100, 250, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
+    $xfValue[$k] = new Extcal\Form\Spin\FormSpin(_MB_EXTCAL_SS_WIDTH, "options[{$k}]", $options[$k], 100, 250, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
     $form->addElement($xfValue[$k], false);
     //---------------------------------------------------------------------
     $k           = 3;
-    $xfValue[$k] = new ExtcalFormSpin(_MB_EXTCAL_SS_HEIGHT, "options[{$k}]", $options[$k], 100, 250, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
+    $xfValue[$k] = new Extcal\Form\Spin\FormSpin(_MB_EXTCAL_SS_HEIGHT, "options[{$k}]", $options[$k], 100, 250, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
     $form->addElement($xfValue[$k], false);
     //---------------------------------------------------------------------
     $k           = 4;
-    $xfValue[$k] = new ExtcalFormSpin(_MB_EXTCAL_SS_TRANS_TIME, "options[{$k}]", $options[$k], 0, 12, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
+    $xfValue[$k] = new Extcal\Form\Spin\FormSpin(_MB_EXTCAL_SS_TRANS_TIME, "options[{$k}]", $options[$k], 0, 12, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
     $form->addElement($xfValue[$k], false);
     //---------------------------------------------------------------------
     $k           = 5;
-    $xfValue[$k] = new ExtcalFormSpin(_MB_EXTCAL_SS_PAUSE_TIME, "options[{$k}]", $options[$k], 0, 12, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
+    $xfValue[$k] = new Extcal\Form\Spin\FormSpin(_MB_EXTCAL_SS_PAUSE_TIME, "options[{$k}]", $options[$k], 0, 12, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
     $form->addElement($xfValue[$k], false);
     //---------------------------------------------------------------------
     $k           = 6;
-    $xfValue[$k] = new ExtcalFormSpin(_MB_EXTCAL_SS_NB_PHOTOS, "options[{$k}]", $options[$k], 0, 50, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
+    $xfValue[$k] = new Extcal\Form\Spin\FormSpin(_MB_EXTCAL_SS_NB_PHOTOS, "options[{$k}]", $options[$k], 0, 50, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
     $form->addElement($xfValue[$k], false);
     //=====================================================================
     $form->insertBreak('<div style="text-align: center;font-weight: bold;">' . _MB_EXTCAL_OPT_SHOW . '</div>', 'head');
@@ -356,7 +360,7 @@ function bExtcalMinicalEdit($options)
     //=====================================================================
     $form->insertBreak('<div style="text-align: center;font-weight: bold;">' . _MB_EXTCAL_HORLOGE_OPT . '</div>', 'head');
     //---------------------------------------------------------------------
-    $t = XoopsLists::getFileListAsArray(XOOPS_ROOT_PATH . _EXTCAL_PATH_HORLOGES);
+    $t = \XoopsLists::getFileListAsArray(XOOPS_ROOT_PATH . _EXTCAL_PATH_HORLOGES);
     $t = array_merge([' ' => _NONE], $t);
 
     $k           = 11;
@@ -366,11 +370,11 @@ function bExtcalMinicalEdit($options)
 
     //---------------------------------------------------------------------
     $k           = 12;
-    $xfValue[$k] = new ExtcalFormSpin(_MB_EXTCAL_WIDTH, "options[{$k}]", $options[$k], 50, 250, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
+    $xfValue[$k] = new Extcal\Form\Spin\FormSpin(_MB_EXTCAL_WIDTH, "options[{$k}]", $options[$k], 50, 250, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
     $form->addElement($xfValue[$k], false);
     //---------------------------------------------------------------------
     $k           = 13;
-    $xfValue[$k] = new ExtcalFormSpin(_MB_EXTCAL_HEIGHT, "options[{$k}]", $options[$k], 50, 250, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
+    $xfValue[$k] = new Extcal\Form\Spin\FormSpin(_MB_EXTCAL_HEIGHT, "options[{$k}]", $options[$k], 50, 250, 1, 0, 8, _MB_EXTCAL_PX, $imgFolder = '');
     $form->addElement($xfValue[$k], false);
     //---------------------------------------------------------------------
     //=====================================================================
@@ -394,7 +398,7 @@ function bExtcalMinicalEdit($options)
 function _makeXMLSlideshowConf($options)
 {
 
-    // create a new XML document
+    // create a  new \XML document
     $doc               = new DomDocument('1.0');
     $doc->formatOutput = true;
 
@@ -453,14 +457,14 @@ function _makeXMLSlideshowConf($options)
 /**
  * @param array      $event
  * @param array      $eventsArray
- * @param ExtcalTime $extcalTimeHandler
+ * @param Time $timeHandler
  * @param            $startMonth
  * @param            $endMonth
  * @param            $cats
  *
  * @return bool
  */
-function bExtcalMinicalAddEventToArray($event, &$eventsArray, $extcalTimeHandler, $startMonth, $endMonth, $cats)
+function bExtcalMinicalAddEventToArray($event, &$eventsArray, $timeHandler, $startMonth, $endMonth, $cats)
 {
     // ext_echoArray($event);
     // exit;
@@ -477,8 +481,8 @@ function bExtcalMinicalAddEventToArray($event, &$eventsArray, $extcalTimeHandler
     $weight = $event['cat']['cat_weight'];
 
     // Calculating the start and the end of the event
-    $startEvent = xoops_getUserTimestamp($event['event_start'], $extcalTimeHandler->_getUserTimeZone($GLOBALS['xoopsUser']));
-    $endEvent   = xoops_getUserTimestamp($event['event_end'], $extcalTimeHandler->_getUserTimeZone($GLOBALS['xoopsUser']));
+    $startEvent = xoops_getUserTimestamp($event['event_start'], $timeHandler->_getUserTimeZone($GLOBALS['xoopsUser']));
+    $endEvent   = xoops_getUserTimestamp($event['event_end'], $timeHandler->_getUserTimeZone($GLOBALS['xoopsUser']));
     // ext_echoTSU($event['event_start'],"event['event_start']");
     // ext_echoTSU($event['event_end'],"event['event_end']");
 

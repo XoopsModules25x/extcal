@@ -18,7 +18,7 @@ function extcal_notify_iteminfo($category, $itemId)
     }
 
     if ('event' === $category) {
-        $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
+        $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
         $event        = $eventHandler->getEvent($itemId, 0, true);
         $item['name'] = $event->getVar('event_title');
         $item['url']  = XOOPS_URL . '/modules/extcal/event.php?event=' . $event->getVar('event_id');

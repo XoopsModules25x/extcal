@@ -1,6 +1,6 @@
-<?php
+<?php namespace XoopsModules\Extcal\Form\Spin;
 /**
- * ExtcalFormSpin element  -  Spin button.
+ * FormSpin element  -  Spin button.
  *
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -16,7 +16,7 @@
  *
  * @author          Jean-Jacques DELALANDRE <JJD@kiolo.com>
  *
- * @version         ExtcalFormSpin v 1.2
+ * @version         FormSpin v 1.2
  */
 defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
@@ -30,9 +30,9 @@ xoops_load('XoopsFormElement');
  */
 
 /**
- * Class ExtcalFormSpin.
+ * Class FormSpin.
  */
-class ExtcalFormSpin extends XoopsFormElement
+class FormSpin extends \XoopsFormElement
 {
     /**
      * Value.

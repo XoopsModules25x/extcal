@@ -27,7 +27,7 @@ class Extcal_2_21
      * @param XoopsModule $module
      * @param             $options
      */
-    public function __construct(XoopsModule $module, $options)
+    public function __construct(\XoopsModule $module, $options)
     {
         global $xoopsDB;
 

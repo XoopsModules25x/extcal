@@ -40,7 +40,7 @@ class Utility
      */
     public static function extcal_getEvent($eventId)
     {
-        $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
+        $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
         $event        = $eventHandler->getEvent($eventId);
         $t            = $event->getVars();
         $data         = [];
@@ -124,7 +124,7 @@ class Utility
     {
         global $xoopsUser;
         // Category selectbox
-        $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+        $catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
 
         $catsList  = $catHandler->getAllCat($xoopsUser);
         $catSelect = new \XoopsFormSelect('', $name, $cat);
@@ -152,7 +152,7 @@ class Utility
         // Category selectbox
         //<option style="background-color:#00FFFF;">VARCHAR</option>
 
-        $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+         $catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
         $catsList   = $catHandler->getAllCat($xoopsUser);
 
         $t = [];
@@ -486,7 +486,7 @@ class Utility
      */
     public static function getLighterColor($color, $plancher, $plafond)
     {
-        require_once __DIR__ . '/colorTools.php';
+        require_once __DIR__ . '/ColorTools.php';
 
         //$ct = new ColorTools();
         //return $ct->eclaircir($color,$plancher,$plafond);

@@ -17,6 +17,8 @@
  * @author       XOOPS Development Team,
  */
 
+use XoopsModules\Extcal;
+
 include __DIR__ . '/../../mainfile.php';
 require_once __DIR__ . '/include/constantes.php';
 $params                                  = ['view' => _EXTCAL_NAV_NEW_EVENT, 'file' => _EXTCAL_FILE_NEW_EVENT];
@@ -32,13 +34,13 @@ if (!isset($_GET['event'])) {
 } else {
     $eventId = (int)$_GET['event'];
 }
-$eventHandler          = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
-$fileHandler           = xoops_getModuleHandler(_EXTCAL_CLS_FILE, _EXTCAL_MODULE);
-$eventMemberHandler    = xoops_getModuleHandler(_EXTCAL_CLS_MEMBER, _EXTCAL_MODULE);
-$eventNotMemberHandler = xoops_getModuleHandler(_EXTCAL_CLS_NOT_MEMBER, _EXTCAL_MODULE);
-$permHandler           = ExtcalPerm::getHandler();
-require_once __DIR__ . '/class/etablissement.php';
-require_once __DIR__ . '/class/Utility.php';
+$eventHandler          = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+$fileHandler           = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_FILE);
+$eventMemberHandler    = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_MEMBER);
+$eventNotMemberHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_NOT_MEMBER);
+$permHandler           = Extcal\Perm::getHandler();
+//require_once __DIR__ . '/class/etablissement.php';
+//require_once __DIR__ . '/class/Utility.php';
 $myts = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
 
 if (!function_exists('clear_unicodeslashes')) {
@@ -96,7 +98,7 @@ $xoopsTpl->assign('event_attachement', $eventFiles);
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 
 // Etablissement
-$etablissementHandler = xoops_getModuleHandler(_EXTCAL_CLS_ETABLISSEMENT, _EXTCAL_MODULE);
+$etablissementHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_ETABLISSEMENT);
 $etablissementObj     = $etablissementHandler->get($event['event_etablissement']);
 //$etablissement = $etablissementHandler->objectToArray($etablissementObj);
 $etablissement = $etablissementObj->vars;

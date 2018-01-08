@@ -18,7 +18,7 @@ $form = new \XoopsSimpleForm('', 'navigSelectBox', $params['file'], 'get');
 $form->addElement(getListYears($year, $xoopsModuleConfig['agenda_nb_years_before'], $xoopsModuleConfig['agenda_nb_years_after']));
 $form->addElement(getListMonths($month));
 $form->addElement(Extcal\Utility::getListCategories($cat));
-$form->addElement(new XoopsFormButton('', '', _SUBMIT, 'submit'));
+$form->addElement( new \XoopsFormButton('', '', _SUBMIT, 'submit'));
 
 // Assigning the form to the template
 $form->assign($xoopsTpl);
@@ -60,7 +60,7 @@ $endMonth   = mktime(23, 59, 59, $month, 31, $year);
 //     }
 // }
 
-// $criteria  = new criteria('event_isrecur',1);
+// $criteria  =  new \Criteria('event_isrecur',1);
 // $recurrents =  $eventHandler->getAllEvents($criteria, false);
 // //echoArray($recurrents,false,'<b>Evennements reccurents</b>');
 //
@@ -91,15 +91,15 @@ $nMonthCalObj = $monthCalObj->nextMonth('object');
 $navig        = [
     'prev' => [
         'uri'  => 'year=' . $pMonthCalObj->thisYear() . '&amp;month=' . $pMonthCalObj->thisMonth(),
-        'name' => $extcalTimeHandler->getFormatedDate($xoopsModuleConfig['nav_date_month'], $pMonthCalObj->getTimestamp()),
+        'name' => $timeHandler->getFormatedDate($xoopsModuleConfig['nav_date_month'], $pMonthCalObj->getTimestamp()),
     ],
     'this' => [
         'uri'  => 'year=' . $monthCalObj->thisYear() . '&amp;month=' . $monthCalObj->thisMonth(),
-        'name' => $extcalTimeHandler->getFormatedDate($xoopsModuleConfig['nav_date_month'], $monthCalObj->getTimestamp()),
+        'name' => $timeHandler->getFormatedDate($xoopsModuleConfig['nav_date_month'], $monthCalObj->getTimestamp()),
     ],
     'next' => [
         'uri'  => 'year=' . $nMonthCalObj->thisYear() . '&amp;month=' . $nMonthCalObj->thisMonth(),
-        'name' => $extcalTimeHandler->getFormatedDate($xoopsModuleConfig['nav_date_month'], $nMonthCalObj->getTimestamp()),
+        'name' => $timeHandler->getFormatedDate($xoopsModuleConfig['nav_date_month'], $nMonthCalObj->getTimestamp()),
     ],
 ];
 

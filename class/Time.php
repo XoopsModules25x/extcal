@@ -1,19 +1,21 @@
-<?php
+<?php namespace XoopsModules\Extcal;
+
+use XoopsModules\Extcal;
 
 // defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 require_once XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/calendar.php';
 
 $moduleDirName = basename(dirname(__DIR__));
-xoops_loadLanguage('main', $moduleDirName);
+Extcal\Helper::getInstance()->loadLanguage('main');
 
 /**
- * Class ExtcalTime.
+ * Class Time.
  */
-class ExtcalTime
+class Time
 {
     /**
-     * @return ExtcalTime
+     * @return Time
      */
     public static function getHandler()
     {

@@ -1,14 +1,14 @@
-<?php
+<?php namespace XoopsModules\Extcal;
 
 // defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
- * Class ExtcalConfig.
+ * Class Config.
  */
-class ExtcalConfig
+class Config
 {
     /**
-     * @return ExtcalConfig
+     * @return Config
      */
     public static function getHandler()
     {

@@ -17,13 +17,15 @@
  * @author       XOOPS Development Team,
  */
 
+use XoopsModules\Extcal;
+
 require_once __DIR__ . '/../../mainfile.php';
 require_once __DIR__ . '/include/constantes.php';
 $GLOBALS['xoopsOption']['template_main'] = 'extcal_etablissement.tpl';
 require_once __DIR__ . '/header.php';
 
 //require_once XOOPS_ROOT_PATH."/modules/extcal/class/etablissement.php";
-$etablissementHandler = xoops_getModuleHandler(_EXTCAL_CLS_ETABLISSEMENT, _EXTCAL_MODULE);
+$etablissementHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_ETABLISSEMENT);
 //require_once XOOPS_ROOT_PATH.'/header.php';
 
 $etablissement_id = isset($_REQUEST['etablissement_id']) ? $_REQUEST['etablissement_id'] : 0;
@@ -31,8 +33,8 @@ $etablissement_id = isset($_REQUEST['etablissement_id']) ? $_REQUEST['etablissem
 global $xoopsUser, $xoopsModuleConfig, $xoopsModule, $xoopsDB;
 
 //On regarde si le lien existe
-$criteria = new CriteriaCompo();
-$criteria->add(new Criteria('id', $etablissement_id, '='));
+$criteria =  new \CriteriaCompo();
+$criteria->add( new \Criteria('id', $etablissement_id, '='));
 $etablissement_exist = $etablissementHandler->getCount($criteria);
 
 if (0 == $etablissement_exist) {

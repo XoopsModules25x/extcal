@@ -17,17 +17,15 @@
  * @author       XOOPS Development Team,
  */
 
+use XoopsModules\Extcal;
+
 include XOOPS_ROOT_PATH . '/header.php';
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
 require_once __DIR__ . '/include/agenda_fnc.php';
-require_once __DIR__ . '/class/Utility.php';
 
-require_once __DIR__ . '/class/perm.php';
-require_once __DIR__ . '/class/form/extcalform.php';
-
-xoops_loadLanguage('modinfo', _EXTCAL_MODULE);
+Extcal\Helper::getInstance()->loadLanguage('modinfo');
 
 //------------------------------------------------------
 require_once _EXTCAL_PEAR_CALENDAR_ROOT . '/Util/Textual.php';
@@ -38,15 +36,20 @@ require_once _EXTCAL_PEAR_CALENDAR_ROOT . '/Day.php';
 
 //------------------------------------------------------
 // Getting eXtCal object's handler
-$catHandler        = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-$eventHandler      = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
-$extcalTimeHandler = ExtcalTime::getHandler();
-$permHandler       = ExtcalPerm::getHandler();
-$xoopsUser         = $xoopsUser ?: null;
+$catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+$eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+$timeHandler  = Extcal\Time::getHandler();
+$permHandler  = Extcal\Perm::getHandler();
+$xoopsUser    = $xoopsUser ?: null;
 //------------------------------------------------------
 // Tooltips include
 /** @var xos_opal_Theme $xoTheme */
-$xoTheme->addScript('modules/extcal/include/ToolTips.js');
-$xoTheme->addStylesheet('modules/extcal/assets/css/infobulle.css');
+if (!isset($GLOBALS['xoTheme']) || !is_object($GLOBALS['xoTheme'])) {
+    include_once $GLOBALS['xoops']->path("/class/theme.php");
+    $GLOBALS['xoTheme'] =  new \Xos_opal_Theme();
+}
+
+$GLOBALS['xoTheme']->addScript('modules/extcal/include/ToolTips.js');
+$GLOBALS['xoTheme']->addStylesheet('modules/extcal/assets/css/infobulle.css');
 
 //////////////////////////////////////////////////////////////

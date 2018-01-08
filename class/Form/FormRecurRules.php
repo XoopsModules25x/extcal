@@ -1,9 +1,10 @@
-<?php
+<?php namespace XoopsModules\Extcal\Form;
 
+use  XoopsModules\Extcal;
 /**
- * Class ExtcalFormRecurRules.
+ * Class FormRecurRules.
  */
-class ExtcalFormRecurRules extends XoopsFormElement
+class FormRecurRules extends \XoopsFormElement
 {
     // Initial value form reccur form
     public $_rrule_freq             = 'none';
@@ -159,7 +160,7 @@ class ExtcalFormRecurRules extends XoopsFormElement
         $ret        .= $formObject->render();
         $ret        .= ' ' . _MD_EXTCAL_YEARS . '<br>';
 
-        $formObject = new ExtcalFormRRuleCheckBox('', 'rrule_yearly_bymonths', $this->_rrule_yearly_bymonths);
+        $formObject = new Extcal\Form\FormRRuleCheckBox('', 'rrule_yearly_bymonths', $this->_rrule_yearly_bymonths);
         $formObject->addOption('1', _MD_EXTCAL_JAN);
         $formObject->addOption('2', _MD_EXTCAL_FEB);
         $formObject->addOption('3', _MD_EXTCAL_MAR);

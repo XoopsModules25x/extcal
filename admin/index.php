@@ -25,7 +25,6 @@ require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 /** @var Extcal\Utility $utilityClass */
 
-
 //$configurator = include __DIR__ . '/../include/config.php';
 
 $configurator = new common\Configurator();

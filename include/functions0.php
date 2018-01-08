@@ -15,6 +15,9 @@
  * L'utilisation de ce formulaire d'adminitration suppose
  * que la classe correspondante de la table a été générées avec classGenerator
  **/
+
+use XoopsModules\Extcal;
+
 require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 
 /**
@@ -24,7 +27,7 @@ require_once XOOPS_ROOT_PATH . '/class/uploader.php';
  */
 function extcal_getEvent($eventId)
 {
-    $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
+    $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
     $event        = $eventHandler->getEvent($eventId);
     $t            = $event->getVars();
     $data         = [];
@@ -108,7 +111,7 @@ function getListCategories($cat, $addNone = true, $name = 'cat')
 {
     global $xoopsUser;
     // Category selectbox
-    $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+     $catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
 
     $catsList  = $catHandler->getAllCat($xoopsUser);
     $catSelect = new \XoopsFormSelect('', $name, $cat);
@@ -136,7 +139,7 @@ function getCheckeCategories($name = 'cat', $cat)
     // Category selectbox
     //<option style="background-color:#00FFFF;">VARCHAR</option>
 
-    $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+     $catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
     $catsList   = $catHandler->getAllCat($xoopsUser);
 
     $t = [];
@@ -470,7 +473,7 @@ function ext_DateAdd2($date, $number, $interval = 'd')
  */
 function eclaircirCouleur($color, $plancher, $plafond)
 {
-    require_once __DIR__ . '/../class/colorTools.php';
+//    require_once __DIR__ . '/../class/ColorTools.php';
 
     //$ct = new ColorTools();
     //return $ct->eclaircir($color,$plancher,$plafond);

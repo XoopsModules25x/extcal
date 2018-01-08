@@ -47,8 +47,8 @@ switch ($op) {
                 //                $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
                 //                $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
                 //                $eventMemberHandler = xoops_getModuleHandler(_EXTCAL_CLS_MEMBER, _EXTCAL_MODULE);
-                $extcalTime        = ExtcalTime::getHandler();
-                $extcalConfig      = ExtcalConfig::getHandler();
+                $extcalTime        = Extcal\Time::getHandler();
+                $extcalConfig      = Extcal\Config::getHandler();
                 $xoopsModuleConfig = $extcalConfig->getModuleConfig();
 
                 $event = $eventHandler->getEvent($_POST['event_id'], $xoopsUser, true);
@@ -117,13 +117,13 @@ switch ($op) {
                 echo _AM_EXTCAL_INFO_SEND_NOTIF;
                 echo '</fieldset><br>';
                 $form = new \XoopsThemeForm(_AM_EXTCAL_SEND_NOTIFICATION, 'mailusers', 'index.php?op=notification&amp;fct=send', 'post', true);
-                $form->addElement(new XoopsFormText(_AM_EXTCAL_FROM_NAME, 'mail_fromname', 30, 255, $xoopsConfig['sitename']), true);
-                $form->addElement(new XoopsFormText(_AM_EXTCAL_FROM_EMAIL, 'mail_fromemail', 30, 255, $fromemail), true);
-                $form->addElement(new XoopsFormText($subjectCaption, 'mail_subject', 50, 255, _AM_EXTCAL_SEND_NOTIFICATION_SUBJECT), true);
-                $form->addElement(new XoopsFormTextArea($bodyCaption, 'mail_body', _AM_EXTCAL_SEND_NOTIFICATION_BODY, 10), true);
+                $form->addElement( new \XoopsFormText(_AM_EXTCAL_FROM_NAME, 'mail_fromname', 30, 255, $xoopsConfig['sitename']), true);
+                $form->addElement( new \XoopsFormText(_AM_EXTCAL_FROM_EMAIL, 'mail_fromemail', 30, 255, $fromemail), true);
+                $form->addElement( new \XoopsFormText($subjectCaption, 'mail_subject', 50, 255, _AM_EXTCAL_SEND_NOTIFICATION_SUBJECT), true);
+                $form->addElement( new \XoopsFormTextArea($bodyCaption, 'mail_body', _AM_EXTCAL_SEND_NOTIFICATION_BODY, 10), true);
                 $form->addElement($toCheckBox, true);
-                $form->addElement(new XoopsFormHidden('event_id', $_GET['event_id']), false);
-                $form->addElement(new XoopsFormButton('', 'mail_submit', _SUBMIT, 'submit'));
+                $form->addElement( new \XoopsFormHidden('event_id', $_GET['event_id']), false);
+                $form->addElement( new \XoopsFormButton('', 'mail_submit', _SUBMIT, 'submit'));
                 $form->display();
                 echo '</fieldset>';
 
@@ -144,11 +144,11 @@ switch ($op) {
         $adminObject = \Xmf\Module\Admin::getInstance();
         $adminObject->addInfoBox(_MI_EXTCAL_DASHBOARD);
         $adminObject->addInfoBoxLine(sprintf('<infolabel>' . _AM_EXTCAL_INDEX_CATEGORIES . '</infolabel>', $catHandler->getCount()), '', 'Green');
-        $adminObject->addInfoBoxLine(sprintf('<infolabel>' . _AM_EXTCAL_INDEX_EVENT . '</infolabel>', $eventHandler->getCount(new Criteria('event_approved', 1))), '', 'Green');
-        $adminObject->addInfoBoxLine(sprintf('<infolabel>' . _AM_EXTCAL_INDEX_PENDING . '</infolabel>', $eventHandler->getCount(new Criteria('event_approved', 0))), '', 'Red');
-        $criteriaCompo = new CriteriaCompo();
-        $criteriaCompo->add(new Criteria('event_approved', 1));
-        $criteriaCompo->add(new Criteria('event_start', time(), '>='));
+        $adminObject->addInfoBoxLine(sprintf('<infolabel>' . _AM_EXTCAL_INDEX_EVENT . '</infolabel>', $eventHandler->getCount( new \Criteria('event_approved', 1))), '', 'Green');
+        $adminObject->addInfoBoxLine(sprintf('<infolabel>' . _AM_EXTCAL_INDEX_PENDING . '</infolabel>', $eventHandler->getCount( new \Criteria('event_approved', 0))), '', 'Red');
+        $criteriaCompo =  new \CriteriaCompo();
+        $criteriaCompo->add( new \Criteria('event_approved', 1));
+        $criteriaCompo->add( new \Criteria('event_start', time(), '>='));
         $adminObject->addInfoBoxLine(sprintf('<infolabel>' . _AM_EXTCAL_INDEX_APPROVED . '</infolabel><infotext>', $eventHandler->getCount($criteriaCompo) . '</infotext>'), '', 'Green');
 
         $adminObject->addConfigBoxLine();
@@ -186,7 +186,7 @@ switch ($op) {
             foreach ($pendingEvent as $event) {
                 $class = (0 == ++$i % 2) ? 'even' : 'odd';
                 echo '<tr style="text-align:center;" class="' . $class . '">';
-                echo '<td>' . $event['cat']['cat_name'] . '</td>';
+                echo '<td>' . $event['Category']['cat_name'] . '</td>';
                 echo '<td>' . $event['event_title'] . '</td>';
                 echo '<td>' . $event['formated_event_start'] . '</td>';
                 echo '<td style="width:10%; text-align:center;">';

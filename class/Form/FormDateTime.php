@@ -1,18 +1,18 @@
-<?php
+<?php namespace XoopsModules\Extcal\Form;
 
 // defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
- * Class ExtcalFormDateTime.
+ * Class FormDateTime.
  */
-class ExtcalFormDateTime
+class FormDateTime
 {
     /**
-     * @param ExtcalThemeForm $form
+     * @param ThemeForm $form
      * @param int             $startTS
      * @param int             $endTS
      *
-     * @return ExtcalFormDateTime
+     * @return FormDateTime
      */
     public function __construct($form, $startTS = 0, $endTS = 0)
     {
@@ -57,7 +57,7 @@ class ExtcalFormDateTime
         $endElmtTray     = new \XoopsFormElementTray(_MD_EXTCAL_END_DATE, '<br>');
         $endDateElmtTray = new \XoopsFormElementTray('', '&nbsp;');
 
-        $endElmtTray->addElement(new XoopsFormRadioYN(_MD_EXTCAL_EVENT_END, 'have_end', 1));
+        $endElmtTray->addElement( new \XoopsFormRadioYN(_MD_EXTCAL_EVENT_END, 'have_end', 1));
 
         $endDate = new \XoopsFormTextDateSelect('', 'event_end[date]', 15, $endTS);
         $endDate->setExtra('onBlur=\'validDate("event_start[date]", "event_start[time]", "event_end[date]", "event_end[time]");\'');

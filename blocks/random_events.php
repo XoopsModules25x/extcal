@@ -17,6 +17,8 @@
  * @author       XOOPS Development Team,
  */
 
+use XoopsModules\Extcal;
+
 require_once __DIR__ . '/../include/constantes.php';
 
 /**
@@ -26,13 +28,13 @@ require_once __DIR__ . '/../include/constantes.php';
  */
 function bExtcalRandomShow($options)
 {
-    require_once __DIR__ . '/../class/config.php';
+//    require_once __DIR__ . '/../class/config.php';
 
     // Retriving module config
-    $extcalConfig      = ExtcalConfig::getHandler();
+    $extcalConfig      = Extcal\Config::getHandler();
     $xoopsModuleConfig = $extcalConfig->getModuleConfig();
 
-    $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
+    $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 
     $nbEvent     = $options[0];
     $titleLenght = $options[1];
@@ -60,7 +62,7 @@ function bExtcalRandomEdit($options)
 {
     global $xoopsUser;
 
-    $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+     $catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
 
     $cats = $catHandler->getAllCat($xoopsUser, 'extcal_cat_view');
 

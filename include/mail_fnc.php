@@ -22,7 +22,7 @@
 
 require_once __DIR__ . '/../../../class/uploader.php';
 require_once __DIR__ . '/../../../class/mail/phpmailer/class.phpmailer.php'; // First we require the PHPMailer libary in our script
-require_once __DIR__ . '/../class/Utility.php';
+//require_once __DIR__ . '/../class/Utility.php';
 require_once __DIR__ . '/constantes.php';
 require_once __DIR__ . '/../../../class/template.php';
 
@@ -64,7 +64,7 @@ function sendMail2member($mode, $event_id, $member_uid, $subject, $tplMessage)
     //--------------------------------------------------------------
     //Recuperation des données event,user et member
     //Recuperation des données de l'evennement
-    $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
+    $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
     $obj          = $eventHandler->getEvent($event_id);
     $event        = $eventHandler->objectToArray($obj);
     $eventHandler->formatEventDate($event, _MD_EXTCAL_FORMAT_DATE);

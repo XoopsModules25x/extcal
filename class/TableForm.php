@@ -1,4 +1,4 @@
-<?php
+<?php namespace XoopsModules\Extcal;
 /**
  **/
 
@@ -11,7 +11,7 @@ xoops_load('XoopsForm');
  *
  * Also adds JavaScript to validate required fields
  */
-class XoopsTableForm extends XoopsForm
+class TableForm extends \XoopsForm
 {
     /**
      * ad the balise html "table" to render.

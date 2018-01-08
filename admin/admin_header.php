@@ -21,6 +21,7 @@ use XoopsModules\Extcal;
 
 require_once __DIR__ . '/../../../include/cp_header.php';
 require_once $GLOBALS['xoops']->path('www/class/xoopsformloader.php');
+require_once __DIR__ . '/../include/constantes.php';
 
 include __DIR__ . '/../preloads/autoloader.php';
 
@@ -55,10 +56,11 @@ if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl))
     $xoopsTpl = new \XoopsTpl();
 }
 
-/** @var ExtcalCatHandler $catHandler */
-$catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-/** @var ExtcalEventHandler $eventHandler */
-$eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
-/** @var ExtcalEventmemberHandler $eventMemberHandler */
-$eventMemberHandler = xoops_getModuleHandler(_EXTCAL_CLS_MEMBER, _EXTCAL_MODULE);
+/** @var CategoryHandler $catHandler */
+//$catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+$catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+/** @var EventHandler $eventHandler */
+$eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+/** @var EventmemberHandler $eventMemberHandler */
+$eventMemberHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_MEMBER);
 //xoops_cp_header();

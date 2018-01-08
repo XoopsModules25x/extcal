@@ -32,7 +32,7 @@ trait VersionChecks
         if (null === $module) {
             $module = \XoopsModule::getByDirname($moduleDirName);
         }
-        xoops_loadLanguage('admin', $moduleDirName);
+        Extcal\Helper::getInstance()->loadLanguage('admin');
 
         //check for minimum XOOPS version
         $currentVer = substr(XOOPS_VERSION, 6); // get the numeric part of string
@@ -59,7 +59,7 @@ trait VersionChecks
      */
     public static function checkVerPhp(\XoopsModule $module)
     {
-        xoops_loadLanguage('admin', $module->dirname());
+        Extcal\Helper::getInstance()->loadLanguage('admin');
         // check for minimum PHP version
         $success = true;
         $verNum  = PHP_VERSION;

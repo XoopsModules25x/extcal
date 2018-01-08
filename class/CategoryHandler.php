@@ -1,4 +1,4 @@
-<?php
+<?php namespace XoopsModules\Extcal;
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -17,47 +17,30 @@
  * @author       XOOPS Development Team,
  */
 
+use XoopsModules\Extcal;
+
 // defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
-require_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
-require_once __DIR__ . '/perm.php';
-require_once __DIR__ . '/time.php';
+// // require_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
+//require_once __DIR__ . '/perm.php';
+//require_once __DIR__ . '/time.php';
+
 
 /**
- * Class ExtcalCat.
+ * Class CategoryHandler.
  */
-class ExtcalCat extends XoopsObject
-{
-    public $externalKey = [];
-
-    /**
-     * ExtcalCat constructor.
-     */
-    public function __construct()
-    {
-        $this->initVar('cat_id', XOBJ_DTYPE_INT, null, false);
-        $this->initVar('cat_name', XOBJ_DTYPE_TXTBOX, null, true, 255);
-        $this->initVar('cat_desc', XOBJ_DTYPE_TXTAREA, null, false);
-        $this->initVar('cat_color', XOBJ_DTYPE_TXTBOX, '000000', false, 255);
-        $this->initVar('cat_weight', XOBJ_DTYPE_INT, 0, false);
-        $this->initVar('cat_icone', XOBJ_DTYPE_TXTBOX, '', false, 50);
-    }
-}
-
-/**
- * Class ExtcalCatHandler.
- */
-class ExtcalCatHandler extends ExtcalPersistableObjectHandler
+class CategoryHandler extends ExtcalPersistableObjectHandler
 {
     public $_extcalPerm;
 
     /**
      * @param $db
      */
-    public function __construct(XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db)
     {
-        $this->_extcalPerm = ExtcalPerm::getHandler();
-        parent::__construct($db, 'extcal_cat', _EXTCAL_CLN_CAT, 'cat_id');
+        $this->_extcalPerm = Extcal\Perm::getHandler();
+//        parent::__construct($db, 'extcal_cat', _EXTCAL_CLN_CAT, 'cat_id');
+        parent::__construct($db, 'extcal_cat', Category::class, 'cat_id');
     }
 
     /**
@@ -78,9 +61,9 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
         $groupPermissionHandler = xoops_getHandler('groupperm');
         $moduleId               = $GLOBALS['xoopsModule']->getVar('mid');
 
-        $criteria = new CriteriaCompo();
-        $criteria->add(new Criteria('gperm_name', 'extcal_perm_mask'));
-        $criteria->add(new Criteria('gperm_modid', $moduleId));
+        $criteria =  new \CriteriaCompo();
+        $criteria->add( new \Criteria('gperm_name', 'extcal_perm_mask'));
+        $criteria->add( new \Criteria('gperm_modid', $moduleId));
         $permMask = $groupPermissionHandler->getObjects($criteria);
 
         // Retriving group list
@@ -141,8 +124,8 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
      */
     public function getCat($catId, $skipPerm = false)
     {
-        $criteriaCompo = new CriteriaCompo();
-        $criteriaCompo->add(new Criteria('cat_id', $catId));
+        $criteriaCompo =  new \CriteriaCompo();
+        $criteriaCompo->add( new \Criteria('cat_id', $catId));
         if (!$skipPerm) {
             $this->_addCatPermCriteria($criteriaCompo, $GLOBALS['xoopsUser']);
         }
@@ -162,7 +145,7 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
      */
     public function getAllCat($user, $perm = 'extcal_cat_view')
     {
-        $criteriaCompo = new CriteriaCompo();
+        $criteriaCompo =  new \CriteriaCompo();
         if ('all' !== $perm) {
             $this->_addCatPermCriteria($criteriaCompo, $user, $perm);
         }
@@ -178,7 +161,7 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
      */
     public function getAllCatById($user, $perm = 'all')
     {
-        $criteriaCompo = new CriteriaCompo();
+        $criteriaCompo =  new \CriteriaCompo();
         if ('all' !== $perm) {
             $this->_addCatPermCriteria($criteriaCompo, $user, $perm);
         }
@@ -194,11 +177,11 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
     }
 
     /**
-     * @param        $criteria
+     * @param   \CriteriaElement     $criteria
      * @param        $user
      * @param string $perm
      */
-    public function _addCatPermCriteria(&$criteria, &$user, $perm = 'extcal_cat_view')
+    public function _addCatPermCriteria(\CriteriaElement $criteria, $user, $perm = 'extcal_cat_view')
     {
         $authorizedAccessCats = $this->_extcalPerm->getAuthorizedCat($user, 'extcal_cat_view');
         $count                = count($authorizedAccessCats);
@@ -209,9 +192,9 @@ class ExtcalCatHandler extends ExtcalPersistableObjectHandler
                 $in .= ',' . $authorizedAccessCat;
             }
             $in .= ')';
-            $criteria->add(new Criteria('cat_id', $in, 'IN'));
+            $criteria->add( new \Criteria('cat_id', $in, 'IN'));
         } else {
-            $criteria->add(new Criteria('cat_id', '(0)', 'IN'));
+            $criteria->add( new \Criteria('cat_id', '(0)', 'IN'));
         }
     }
 

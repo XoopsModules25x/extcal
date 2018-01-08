@@ -1,14 +1,14 @@
-<?php
+<?php namespace XoopsModules\Extcal\Form;
 
-include __DIR__ . '/formdatetime.php';
-include __DIR__ . '/formrecurrules.php';
-include __DIR__ . '/formfilecheckbox.php';
-include __DIR__ . '/formrrulecheckbox.php';
+//include __DIR__ . '/formdatetime.php';
+//include __DIR__ . '/formrecurrules.php';
+//include __DIR__ . '/formfilecheckbox.php';
+//include __DIR__ . '/FormRRuleCheckBox.php';
 
 /**
- * Class ExtcalThemeForm.
+ * Class ThemeForm.
  */
-class ExtcalThemeForm extends XoopsThemeForm
+class ThemeForm extends \XoopsThemeForm
 {
     /**
      * create HTML to output the form as a theme-enabled table with validation.

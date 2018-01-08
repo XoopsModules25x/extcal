@@ -1,14 +1,14 @@
-<?php
+<?php namespace XoopsModules\Extcal;
 
 // defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
- * Class ExtcalPerm.
+ * Class Perm.
  */
-class ExtcalPerm
+class Perm
 {
     /**
-     * @return ExtcalPerm
+     * @return Perm
      */
     public static function getHandler()
     {

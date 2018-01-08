@@ -1,5 +1,5 @@
 <form action="<{$navigSelectBox.action}>" method="<{$navigSelectBox.method}>">
-    <{foreachq item=element from=$navigSelectBox.elements}>
+    <{foreach item=element from=$navigSelectBox.elements}>
     <{$element.body}>
     <{/foreach}>
 </form>
