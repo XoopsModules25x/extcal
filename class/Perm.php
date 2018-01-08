@@ -25,7 +25,7 @@ class Perm
      *
      * @return string
      */
-    public function _getUserGroup(&$user)
+    public function getUserGroup(&$user)
     {
         if (is_a($user, 'XoopsUser')) {
             return $user->getGroups();
@@ -35,7 +35,7 @@ class Perm
     }
 
     /**
-     * @param $user
+     * @param           $user
      * @param           $perm
      *
      * @return bool
@@ -46,7 +46,7 @@ class Perm
         $userId = $user ? $user->getVar('uid') : 0;
         if (!isset($authorizedCat[$perm][$userId])) {
             $groupPermHandler = xoops_getHandler('groupperm');
-            /** @var XoopsModuleHandler $moduleHandler */
+            /** @var \XoopsModuleHandler $moduleHandler */
             $moduleHandler = xoops_getHandler('module');
             $module        = $moduleHandler->getByDirname('extcal');
             if (!$module) {

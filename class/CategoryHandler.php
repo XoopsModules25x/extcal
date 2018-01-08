@@ -1,4 +1,5 @@
 <?php namespace XoopsModules\Extcal;
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -25,7 +26,6 @@ use XoopsModules\Extcal;
 //require_once __DIR__ . '/perm.php';
 //require_once __DIR__ . '/time.php';
 
-
 /**
  * Class CategoryHandler.
  */
@@ -39,7 +39,7 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
     public function __construct(\XoopsDatabase $db)
     {
         $this->_extcalPerm = Extcal\Perm::getHandler();
-//        parent::__construct($db, 'extcal_cat', _EXTCAL_CLN_CAT, 'cat_id');
+        //        parent::__construct($db, 'extcal_cat', _EXTCAL_CLN_CAT, 'cat_id');
         parent::__construct($db, 'extcal_cat', Category::class, 'cat_id');
     }
 
@@ -61,9 +61,9 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
         $groupPermissionHandler = xoops_getHandler('groupperm');
         $moduleId               = $GLOBALS['xoopsModule']->getVar('mid');
 
-        $criteria =  new \CriteriaCompo();
-        $criteria->add( new \Criteria('gperm_name', 'extcal_perm_mask'));
-        $criteria->add( new \Criteria('gperm_modid', $moduleId));
+        $criteria = new \CriteriaCompo();
+        $criteria->add(new \Criteria('gperm_name', 'extcal_perm_mask'));
+        $criteria->add(new \Criteria('gperm_modid', $moduleId));
         $permMask = $groupPermissionHandler->getObjects($criteria);
 
         // Retriving group list
@@ -124,10 +124,10 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
      */
     public function getCat($catId, $skipPerm = false)
     {
-        $criteriaCompo =  new \CriteriaCompo();
-        $criteriaCompo->add( new \Criteria('cat_id', $catId));
+        $criteriaCompo = new \CriteriaCompo();
+        $criteriaCompo->add(new \Criteria('cat_id', $catId));
         if (!$skipPerm) {
-            $this->_addCatPermCriteria($criteriaCompo, $GLOBALS['xoopsUser']);
+            $this->addCatPermCriteria($criteriaCompo, $GLOBALS['xoopsUser']);
         }
         $ret = $this->getObjects($criteriaCompo);
         if (isset($ret[0])) {
@@ -145,9 +145,9 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
      */
     public function getAllCat($user, $perm = 'extcal_cat_view')
     {
-        $criteriaCompo =  new \CriteriaCompo();
+        $criteriaCompo = new \CriteriaCompo();
         if ('all' !== $perm) {
-            $this->_addCatPermCriteria($criteriaCompo, $user, $perm);
+            $this->addCatPermCriteria($criteriaCompo, $user, $perm);
         }
 
         return $this->getObjects($criteriaCompo);
@@ -161,9 +161,9 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
      */
     public function getAllCatById($user, $perm = 'all')
     {
-        $criteriaCompo =  new \CriteriaCompo();
+        $criteriaCompo = new \CriteriaCompo();
         if ('all' !== $perm) {
-            $this->_addCatPermCriteria($criteriaCompo, $user, $perm);
+            $this->addCatPermCriteria($criteriaCompo, $user, $perm);
         }
 
         $t = $this->objectToArray($this->getObjects($criteriaCompo));
@@ -177,11 +177,11 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
     }
 
     /**
-     * @param   \CriteriaElement     $criteria
-     * @param        $user
-     * @param string $perm
+     * @param   \CriteriaElement $criteria
+     * @param                    $user
+     * @param string             $perm
      */
-    public function _addCatPermCriteria(\CriteriaElement $criteria, $user, $perm = 'extcal_cat_view')
+    public function addCatPermCriteria(\CriteriaElement $criteria, $user, $perm = 'extcal_cat_view')
     {
         $authorizedAccessCats = $this->_extcalPerm->getAuthorizedCat($user, 'extcal_cat_view');
         $count                = count($authorizedAccessCats);
@@ -192,9 +192,9 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
                 $in .= ',' . $authorizedAccessCat;
             }
             $in .= ')';
-            $criteria->add( new \Criteria('cat_id', $in, 'IN'));
+            $criteria->add(new \Criteria('cat_id', $in, 'IN'));
         } else {
-            $criteria->add( new \Criteria('cat_id', '(0)', 'IN'));
+            $criteria->add(new \Criteria('cat_id', '(0)', 'IN'));
         }
     }
 

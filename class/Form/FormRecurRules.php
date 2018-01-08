@@ -1,6 +1,7 @@
 <?php namespace XoopsModules\Extcal\Form;
 
 use  XoopsModules\Extcal;
+
 /**
  * Class FormRecurRules.
  */

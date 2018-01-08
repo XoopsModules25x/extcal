@@ -15,6 +15,9 @@
  * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
  * @author      mamba <mambax7@gmail.com>
  */
+
+
+
 trait VersionChecks
 {
     /**
@@ -23,7 +26,7 @@ trait VersionChecks
      * @static
      * @param \XoopsModule $module
      *
-     * @param null|string $requiredVer
+     * @param null|string  $requiredVer
      * @return bool true if meets requirements, false if not
      */
     public static function checkVerXoops(\XoopsModule $module = null, $requiredVer = null)
@@ -32,17 +35,17 @@ trait VersionChecks
         if (null === $module) {
             $module = \XoopsModule::getByDirname($moduleDirName);
         }
-        Extcal\Helper::getInstance()->loadLanguage('admin');
+        xoops_loadLanguage('admin', $moduleDirName);
 
         //check for minimum XOOPS version
         $currentVer = substr(XOOPS_VERSION, 6); // get the numeric part of string
         if (null === $requiredVer) {
             $requiredVer = '' . $module->getInfo('min_xoops'); //making sure it's a string
         }
-        $success     = true;
+        $success = true;
 
-        if (version_compare($currentVer, $requiredVer, '<')){
-            $success     = false;
+        if (version_compare($currentVer, $requiredVer, '<')) {
+            $success = false;
             $module->setErrors(sprintf(constant('CO_' . $moduleDirNameUpper . '_ERROR_BAD_XOOPS'), $requiredVer, $currentVer));
         }
 
@@ -59,7 +62,8 @@ trait VersionChecks
      */
     public static function checkVerPhp(\XoopsModule $module)
     {
-        Extcal\Helper::getInstance()->loadLanguage('admin');
+        $moduleDirName = basename(dirname(dirname(__DIR__)));
+        xoops_loadLanguage('admin', $moduleDirName);
         // check for minimum PHP version
         $success = true;
         $verNum  = PHP_VERSION;

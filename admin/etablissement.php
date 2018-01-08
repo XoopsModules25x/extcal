@@ -80,7 +80,7 @@ switch ($op) {
         $adminObject->displayNavigation(basename(__FILE__));
         //***************************************************************************************
 
-        $criteria =  new \CriteriaCompo();
+        $criteria = new \CriteriaCompo();
         if (isset($_REQUEST['limit'])) {
             $criteria->setLimit($_REQUEST['limit']);
             $limit = $_REQUEST['limit'];

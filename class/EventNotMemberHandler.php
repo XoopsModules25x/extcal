@@ -1,4 +1,5 @@
 <?php namespace XoopsModules\Extcal;
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -22,7 +23,6 @@ use XoopsModules\Extcal;
 // defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 // // require_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
-
 
 /**
  * Class EventNotMemberHandler.
@@ -69,7 +69,7 @@ class EventNotMemberHandler extends ExtcalPersistableObjectHandler
     public function getMembers($eventId)
     {
         $memberHandler  = xoops_getHandler('member');
-        $eventNotMember = $this->getObjects( new \Criteria('event_id', $eventId));
+        $eventNotMember = $this->getObjects(new \Criteria('event_id', $eventId));
         $count          = count($eventNotMember);
         if ($count > 0) {
             $in = '(' . $eventNotMember[0]->getVar('uid');
@@ -78,9 +78,9 @@ class EventNotMemberHandler extends ExtcalPersistableObjectHandler
                 $in .= ',' . $member->getVar('uid');
             }
             $in       .= ')';
-            $criteria =  new \Criteria('uid', $in, 'IN');
+            $criteria = new \Criteria('uid', $in, 'IN');
         } else {
-            $criteria =  new \Criteria('uid', '(0)', 'IN');
+            $criteria = new \Criteria('uid', '(0)', 'IN');
         }
 
         return $memberHandler->getUsers($criteria, true);
@@ -93,7 +93,7 @@ class EventNotMemberHandler extends ExtcalPersistableObjectHandler
      */
     public function getNbMember($eventId)
     {
-        $criteria =  new \Criteria('event_id', $eventId);
+        $criteria = new \Criteria('event_id', $eventId);
 
         return $this->getCount($criteria);
     }

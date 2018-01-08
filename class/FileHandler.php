@@ -1,4 +1,5 @@
 <?php namespace XoopsModules\Extcal;
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -93,9 +94,9 @@ class FileHandler extends ExtcalPersistableObjectHandler
      */
     public function getEventFiles($eventId)
     {
-        $criteria =  new \CriteriaCompo();
-        $criteria->add( new \Criteria('file_approved', 1));
-        $criteria->add( new \Criteria('event_id', $eventId));
+        $criteria = new \CriteriaCompo();
+        $criteria->add(new \Criteria('file_approved', 1));
+        $criteria->add(new \Criteria('event_id', $eventId));
 
         return $this->getObjects($criteria);
     }
@@ -105,9 +106,9 @@ class FileHandler extends ExtcalPersistableObjectHandler
      */
     public function updateEventFile($eventId)
     {
-        $criteria =  new \CriteriaCompo();
-        $criteria->add( new \Criteria('file_approved', 1));
-        $criteria->add( new \Criteria('event_id', $eventId));
+        $criteria = new \CriteriaCompo();
+        $criteria->add(new \Criteria('file_approved', 1));
+        $criteria->add(new \Criteria('event_id', $eventId));
 
         if (isset($_POST['filetokeep'])) {
             if (is_array($_POST['filetokeep'])) {
@@ -121,7 +122,7 @@ class FileHandler extends ExtcalPersistableObjectHandler
             } else {
                 $in = '(' . $_POST['filetokeep'] . ')';
             }
-            $criteria->add( new \Criteria('file_id', $in, 'NOT IN'));
+            $criteria->add(new \Criteria('file_id', $in, 'NOT IN'));
         }
 
         $files = $this->getObjects($criteria);
@@ -145,7 +146,7 @@ class FileHandler extends ExtcalPersistableObjectHandler
      */
     public function formatFilesSize(&$files)
     {
-        for ($i = 0, $iMax = count($files); $i < $iMax; ++$i) {
+        foreach ($files as $i => $iValue) {
             $this->formatFileSize($files[$i]);
         }
     }

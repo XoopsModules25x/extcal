@@ -18,6 +18,8 @@
  *
  */
 
+use XoopsModules\Extcal;
+
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof XoopsUser)
     || !$GLOBALS['xoopsUser']->IsAdmin()) {
     exit('Restricted access' . PHP_EOL);
@@ -46,9 +48,8 @@ function xoops_module_pre_update_extcal(\XoopsModule $module)
 {
     /** @var Extcal\Helper $helper */
     /** @var Extcal\Utility $utility */
-    $moduleDirName = basename(dirname(__DIR__));
-    $helper       = Extcal\Helper::getInstance();
-    $utility      = new Extcal\Utility();
+    $helper  = Extcal\Helper::getInstance();
+    $utility = new Extcal\Utility();
 
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
@@ -75,7 +76,7 @@ function xoops_module_update_extcal(\XoopsModule $module, $previousVersion = nul
     }
 
     $fld = XOOPS_ROOT_PATH . '/modules/' . $module->getVar('dirname') . '/versions/';
-    $cls = 'extcal_%1$s';
+    $cls = 'Extcal_%1$s';
 
     $version = [
         '2_04' => 204,
@@ -103,14 +104,14 @@ function xoops_module_update_extcal(\XoopsModule $module, $previousVersion = nul
         }
     }
 
-    $capsDirName   = strtoupper($moduleDirName);
+    $capsDirName = strtoupper($moduleDirName);
 
     /** @var Extcal\Helper $helper */
     /** @var Extcal\Utility $utility */
-    /** @var Extcal\Configurator $configurator */
-    $helper  = Extcal\Helper::getInstance();
-    $utility = new Extcal\Utility();
-    $configurator = new Extcal\Configurator();
+    /** @var Extcal\Common\Configurator $configurator */
+    $helper       = Extcal\Helper::getInstance();
+    $utility      = new Extcal\Utility();
+    $configurator = new Extcal\Common\Configurator();
 
     if ($previousVersion < 240) {
 

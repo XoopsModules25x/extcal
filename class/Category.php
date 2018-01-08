@@ -1,4 +1,5 @@
 <?php namespace XoopsModules\Extcal;
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -19,7 +20,7 @@
 
 // defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
- // require_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
+// require_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
 require_once __DIR__ . '/perm.php';
 require_once __DIR__ . '/time.php';
 

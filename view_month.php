@@ -18,7 +18,7 @@ $form = new \XoopsSimpleForm('', 'navigSelectBox', $params['file'], 'get');
 $form->addElement(getListYears($year, $xoopsModuleConfig['agenda_nb_years_before'], $xoopsModuleConfig['agenda_nb_years_after']));
 $form->addElement(getListMonths($month));
 $form->addElement(Extcal\Utility::getListCategories($cat));
-$form->addElement( new \XoopsFormButton('', '', _SUBMIT, 'submit'));
+$form->addElement(new \XoopsFormButton('', '', _SUBMIT, 'submit'));
 
 // Assigning the form to the template
 $form->assign($xoopsTpl);

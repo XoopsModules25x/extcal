@@ -19,7 +19,7 @@ $event_id   = $_POST['event'];
 $member_uid = $xoopsUser->getVar('uid');
 
 /*
-ext_echoArray($_POST);
+Extcal\Utility::echoArray($_POST);
 exit;
     [mode] => add
     [event] => 3

@@ -10,7 +10,7 @@ if (!isset($_GET['file'])) {
 } else {
     $fileId = (int)$_GET['file'];
 }
-/** @var FileHandler $fileHandler */
+/** @var Extcal\FileHandler $fileHandler */
 $fileHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_FILE);
 
 $file = $fileHandler->getFile($fileId);

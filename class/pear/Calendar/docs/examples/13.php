@@ -41,7 +41,7 @@ if (!isset($_GET['s'])) {
 switch (@$_GET['view']) {
     default:
         $_GET['view'] = 'calendar_year';
-        // no break
+    // no break
     case 'calendar_year':
         require_once CALENDAR_ROOT . 'Year.php';
         $c = new Calendar_Year($_GET['y']);

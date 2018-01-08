@@ -7,9 +7,8 @@ include __DIR__ . '/../../mainfile.php';
 require_once __DIR__ . '/include/constantes.php';
 require_once __DIR__ . '/include/mail_fnc.php';
 
-
 /*
-ext_echoArray($_POST);
+Extcal\Utility::echoArray($_POST);
 exit;
     [mode] => add
     [event] => 3

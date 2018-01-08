@@ -32,7 +32,7 @@ class Config
             $moduleConfig = $GLOBALS['xoopsModuleConfig'];
         } else {
             if (!isset($moduleConfig)) {
-                /** @var XoopsModuleHandler $moduleHandler */
+                /** @var \XoopsModuleHandler $moduleHandler */
                 $moduleHandler = xoops_getHandler('module');
                 $module        = $moduleHandler->getByDirname('extcal');
                 $configHandler = xoops_getHandler('config');

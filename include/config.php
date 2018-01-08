@@ -17,9 +17,8 @@
  * @author       XOOPS Development Team,
  */
 
-$moduleDirName = basename(dirname(__DIR__));
+$moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = strtoupper($moduleDirName);
-
 
 //Configurator
 return (object)[
@@ -32,12 +31,12 @@ return (object)[
         'uploadPath' => XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
         'uploadUrl'  => XOOPS_UPLOAD_URL . '/' . $moduleDirName,
     ],
-    'uploadFolders' => [
+    'uploadFolders'  => [
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images/thumbnails'
     ],
-    'copyBlankFiles'     => [
+    'copyBlankFiles' => [
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images/thumbnails'
     ],
@@ -63,7 +62,7 @@ return (object)[
         '/include/update_functions.php',
         '/include/install_functions.php'
     ],
-    'oldFolders'        => [
+    'oldFolders'      => [
         '/images',
         '/css',
         '/js',
@@ -71,6 +70,6 @@ return (object)[
         '/images',
     ],
     'modCopyright'    => "<a href='https://xoops.org' title='XOOPS Project' target='_blank'>
-                     <img src='" . XOOPS_URL . '/modules/' . $moduleDirName  . '_AUTHOR_LOGOIMG' . '\' alt=\'XOOPS Project\' /></a>',
+                     <img src='" . XOOPS_URL . '/modules/' . $moduleDirName . '_AUTHOR_LOGOIMG' . '\' alt=\'XOOPS Project\' /></a>',
 
 ];

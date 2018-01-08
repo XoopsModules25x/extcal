@@ -33,7 +33,7 @@ function bExtcalUpcomingByCategoryShow($options)
 {
     global $xoopsUser, $extcalConfig;
 
-//    require_once __DIR__ . '/../class/config.php';
+    //    require_once __DIR__ . '/../class/config.php';
 
     // Retriving module config
     //     $extcalConfig = Extcal\Config::getHandler();
@@ -56,23 +56,23 @@ function bExtcalUpcomingByCategoryShow($options)
     $eventHandler->formatEventsDate($events, $extcalConfig['event_date_month']);
 
     /***********************************************************/
-//    $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-    $catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    //    $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+    $catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
     $t          = $catHandler->objectToArray($catHandler->getAllCat($xoopsUser, 'all'));
     $tCats      = [];
-    for ($h = 0, $count = count($t); $h < $count; ++$h) {
-        $tCats[$t[$h]['cat_id']] = $t[$h];
+    foreach ($t as $h => $hValue) {
+        $tCats[$t[$h]['cat_id']] = $hValue;
     }
 
     $te = [];
 
-    for ($h = 0, $count = count($events); $h < $count; ++$h) {
+    foreach ($events as $h => $hValue) {
         $catId = $events[$h]['cat_id'];
         if (!isset($te[$catId])) {
             $te[$catId]           = $tCats[$catId];
             $te[$catId]['events'] = [];
         }
-        $te[$catId]['events'][] = $events[$h];
+        $te[$catId]['events'][] = $hValue;
     }
 
     return $te;
@@ -87,8 +87,8 @@ function bExtcalUpcomingByCategoryEdit($options)
 {
     global $xoopsUser;
 
-//    $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-    $catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    //    $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+    $catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
 
     $cats = $catHandler->getAllCat($xoopsUser, 'extcal_cat_view');
 

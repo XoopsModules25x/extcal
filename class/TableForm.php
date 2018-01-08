@@ -1,4 +1,5 @@
 <?php namespace XoopsModules\Extcal;
+
 /**
  **/
 
@@ -40,7 +41,7 @@ class TableForm extends \XoopsForm
      *
      * @internal param bool $encode To sanitizer the text?
      *
-     * @return array array of name/value pairs assigned to form elements
+     * @return bool|string array of name/value pairs assigned to form elements
      */
     public function getAddBaliseTable()
     {

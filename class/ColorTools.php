@@ -40,8 +40,8 @@ class ColorTools
         $plancherVert = 0,
         $plafondVert = 255,
         $plancherBleu = 0,
-        $plafondBleu = 255
-    ) {
+        $plafondBleu = 255)
+    {
         $t10 = static::hexa2rgbA($colorHexa);
 
         $t10[1] = static::bornerValeur($t10[1] + $incrementRouge, $plancherRouge, $plafondRouge);
@@ -70,7 +70,7 @@ class ColorTools
 
         $t10 = static::hexa2rgbA($colorHexa);
         // echo "<hr>";
-        // ext_echoArray($t10);
+        // Extcal\Utility::echoArray($t10);
         $max = $plancher;
         for ($h = 1; $h <= 3; ++$h) {
             if ($max < $t10[$h]) {
@@ -99,7 +99,7 @@ class ColorTools
         $t10[2] = static::bornerValeur($t10[2] + $min, $plancher, $plafond);
         $t10[3] = static::bornerValeur($t10[3] + $min, $plancher, $plafond);
 
-        // ext_echoArray($t10);
+        // Extcal\Utility::echoArray($t10);
 
         $newColorHexa = static::getHexaColorFromA($t10);
 

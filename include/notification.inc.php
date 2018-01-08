@@ -2,6 +2,8 @@
 
 // defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
+use XoopsModules\Extcal;
+
 /**
  * @param $category
  * @param $itemId

@@ -75,11 +75,11 @@ $i                     = 0;
 if (isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule'])
     && 'extcal' === $GLOBALS['xoopsModule']->getVar('dirname')) {
     $user = isset($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser'] : null;
-//    $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-    $catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    //    $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+    $catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
     if ($catHandler->haveSubmitRight($user)) {
         $modversion['sub'][0]['name'] = _MI_EXTCAL_SUBMIT_EVENT;
-        $modversion['sub'][0]['url'] = _EXTCAL_FILE_NEW_EVENT;
+        $modversion['sub'][0]['url']  = _EXTCAL_FILE_NEW_EVENT;
     }
 
     $tTabs = getNavBarTabs();

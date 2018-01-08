@@ -33,7 +33,7 @@ $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 $event        = $eventHandler->objectToArray($eventHandler->getEvent($eventId), ['cat_id']);
 
 //adding location
-/** @var EtablissementHandler $locationHandler */
+/** @var Extcal\EtablissementHandler $locationHandler */
 $locationHandler = Extcal\Helper::getInstance()->getHandler('Etablissement');
 if ($event['event_etablissement'] > 0) {
     $location = $locationHandler->objectToArray($locationHandler->getEtablissement($event['event_etablissement'], true));

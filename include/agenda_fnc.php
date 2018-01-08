@@ -140,8 +140,8 @@ function agenda_getEvents(
     $mPlage = 15,
     $nbJours = 1,
     $formatDate = 'd-m-Y',
-    $formatJour = 'H:i'
-) {
+    $formatJour = 'H:i')
+{
 
     //    $tAgenda = agenda_getCanevas($ts, 8, 20, $mPlage, $nbJours);
     $tAgenda = agenda_getCanevas($ts, $hStart, $hEnd - 1, $mPlage, $nbJours, $formatDate, $formatJour);
@@ -434,8 +434,8 @@ function getNavBarTabs($currentTab = '')
     }
 
     $user = isset($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser'] : null;
-    /** @var CategoryHandler $catHandler */
-     $catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    /** @var Extcal\CategoryHandler $catHandler */
+    $catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
     if ($catHandler->haveSubmitRight($user)) {
         $view = _EXTCAL_NAV_NEW_EVENT;
         if (in_array($view, $visibleTabs)) {
@@ -460,8 +460,8 @@ function getNavBarTabs($currentTab = '')
 
     array_multisort($tNavBar, SORT_ASC, SORT_NUMERIC, $ordre, SORT_ASC, SORT_NUMERIC);
 
-    //    ext_echoArray($tNavBar);
-    //    ext_echoArray($ordre);
+    //    Extcal\Utility::echoArray($tNavBar);
+    //    Extcal\Utility::echoArray($ordre);
     return $tNavBar;
 }
 

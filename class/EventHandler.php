@@ -1,4 +1,5 @@
 <?php namespace XoopsModules\Extcal;
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -17,15 +18,12 @@
  * @author       XOOPS Development Team,
  */
 
-use Punic\Exception;
+//use Punic\Exception;
 use XoopsModules\Extcal;
 
 // defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
-
 require_once __DIR__ . '/../include/constantes.php';
-
-
 
 /**
  * Class EventHandler.
@@ -56,9 +54,9 @@ class EventHandler extends ExtcalPersistableObjectHandler
     public function createEvent($data)
     {
         $event = $this->create();
-        $this->_checkDate($data);
-        $this->_userTimeToServerTime($data);
-        $this->_addRecurValue($data);
+        $this->checkDate($data);
+        $this->userTimeToServerTime($data);
+        $this->addRecurValue($data);
         $event->setVars($data);
 
         return $this->insert($event, true);
@@ -67,13 +65,13 @@ class EventHandler extends ExtcalPersistableObjectHandler
     /**
      * @param $data
      *
-     * @return XoopsObject
+     * @return \XoopsObject
      */
     public function createEventForPreview($data)
     {
         $event = $this->create();
-        $this->_checkDate($data);
-        $this->_addRecurValue($data);
+        $this->checkDate($data);
+        $this->addRecurValue($data);
         $event->setVars($data);
 
         return $event;
@@ -88,9 +86,9 @@ class EventHandler extends ExtcalPersistableObjectHandler
     public function modifyEvent($eventId, $data)
     {
         $event = $this->get($eventId);
-        $this->_checkDate($data);
-        $this->_userTimeToServerTime($data);
-        $this->_addRecurValue($data);
+        $this->checkDate($data);
+        $this->userTimeToServerTime($data);
+        $this->addRecurValue($data);
         $event->setVars($data);
 
         return $this->insert($event);
@@ -154,11 +152,11 @@ class EventHandler extends ExtcalPersistableObjectHandler
     {
         $user = $GLOBALS['xoopsUser'];
 
-        $criteriaCompo =  new \CriteriaCompo();
-        $criteriaCompo->add( new \Criteria('event_id', $eventId));
-        $criteriaCompo->add( new \Criteria('event_approved', 1));
+        $criteriaCompo = new \CriteriaCompo();
+        $criteriaCompo->add(new \Criteria('event_id', $eventId));
+        $criteriaCompo->add(new \Criteria('event_approved', 1));
         if (!$skipPerm) {
-            $this->_addCatPermCriteria($criteriaCompo, $user);
+            $this->addCatPermCriteria($criteriaCompo, $user);
         }
         $ret = $this->getObjects($criteriaCompo);
         if (isset($ret[0])) {
@@ -180,10 +178,10 @@ class EventHandler extends ExtcalPersistableObjectHandler
     {
         $user = $GLOBALS['xoopsUser'];
 
-        $criteriaCompo =  new \CriteriaCompo();
-        $criteriaCompo->add( new \Criteria('event_id', $eventId));
+        $criteriaCompo = new \CriteriaCompo();
+        $criteriaCompo->add(new \Criteria('event_id', $eventId));
         if (!$skipPerm) {
-            $this->_addCatPermCriteria($criteriaCompo, $user);
+            $this->addCatPermCriteria($criteriaCompo, $user);
         }
         $ret = $this->getObjects($criteriaCompo);
         if (isset($ret[0])) {
@@ -199,8 +197,11 @@ class EventHandler extends ExtcalPersistableObjectHandler
      */
     public function formatEventsDate(&$events, $pattern)
     {
-        $max = count($events);
-        for ($i = 0; $i < $max; ++$i) {
+        //        $max = count($events);
+        //        for ($i = 0; $i < $max; ++$i) {
+        //            $this->formatEventDate($events[$i], $pattern);
+        //        }
+        foreach ($events as $i => $iValue) {
             $this->formatEventDate($events[$i], $pattern);
         }
     }
@@ -233,7 +234,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
     }
 
     //JJD - to valid modif
-    //     function _checkDate(&$data)
+    //     function checkDate(&$data)
     //     {
     //
     //         list($year, $month, $day) = explode("-", $data['event_start']['date']);
@@ -254,7 +255,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
     /**
      * @param $data
      */
-    public function _checkDate(&$data)
+    public function checkDate(&$data)
     {
         $data['event_start'] = strtotime($data['event_start']['date']) + $data['event_start']['time'];
         $data['event_end']   = strtotime($data['event_end']['date']) + $data['event_end']['time'];
@@ -267,7 +268,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
     /**
      * @param $data
      */
-    private function _userTimeToServerTime(&$data)
+    private function userTimeToServerTime(&$data)
     {
         $user = $GLOBALS['xoopsUser'];
 
@@ -292,9 +293,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
      */
     public function serverTimeToUserTimes(&$events)
     {
-        $max = count($events);
-
-        for ($i = 0; $i < $max; ++$i) {
+        foreach ($events as $i => $iValue) {
             $this->serverTimeToUserTime($events[$i]);
         }
     }
@@ -302,7 +301,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
     /**
      * @param $data
      */
-    public function _addRecurValue(&$data)
+    public function addRecurValue(&$data)
     {
         $data['event_isrecur']     = $this->getIsRecur($_POST);
         $data['event_recur_rules'] = $this->getRecurRules($_POST);
@@ -320,7 +319,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
      */
     public function getEventsOnPeriode($criteres)
     {
-        //ext_echoArray($criteres);
+        //Extcal\Utility::echoArray($criteres);
         global $extcalConfig;
         $myts = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
 
@@ -330,7 +329,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
 
         //      $events = $eventsU;
 
-        //ext_echoArray($events);
+        //Extcal\Utility::echoArray($events);
 
         //Tri des evennement par date ascendante
         $ordre      = [];
@@ -382,7 +381,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
             case _EXTCAL_EVENTS_CALENDAR_WEEK:
                 $criteriaCompo = $this->_getEventWeekCriteria($day, $month, $year, $cat, $nbDays);
                 if (!$extcalConfig['diplay_past_event_cal']) {
-                    $criteriaCompo->add( new \Criteria('event_end', time(), '>'));
+                    $criteriaCompo->add(new \Criteria('event_end', time(), '>'));
                 }
                 break;
 
@@ -390,7 +389,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
             case _EXTCAL_EVENTS_AGENDA_WEEK:
                 $criteriaCompo = $this->_getEventWeekCriteria($day, $month, $year, $cat, $nbDays);
                 if (!$extcalConfig['diplay_past_event_list']) {
-                    $criteriaCompo->add( new \Criteria('event_end', time(), '>'));
+                    $criteriaCompo->add(new \Criteria('event_end', time(), '>'));
                 }
                 break;
 
@@ -398,7 +397,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
                 $criteriaCompo = $this->_getEventMonthCriteria($month, $year, $cat);
 
                 if (!$extcalConfig['diplay_past_event_cal']) {
-                    $criteriaCompo->add( new \Criteria('event_end', time(), '>'));
+                    $criteriaCompo->add(new \Criteria('event_end', time(), '>'));
                 }
                 break;
 
@@ -406,7 +405,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
                 $criteriaCompo = $this->_getEventMonthCriteria($month, $year, $cat);
 
                 if (!$extcalConfig['diplay_past_event_list']) {
-                    $criteriaCompo->add( new \Criteria('event_end', time(), '>'));
+                    $criteriaCompo->add(new \Criteria('event_end', time(), '>'));
                 }
                 break;
 
@@ -425,7 +424,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
 
         }
         //--------------------------------------------------------------------------
-        $criteriaCompo->add( new \Criteria('event_isrecur', 0, '='));
+        $criteriaCompo->add(new \Criteria('event_isrecur', 0, '='));
         $criteriaCompo->setOrder($sens);
 
         $result = $this->getObjects($criteriaCompo);
@@ -462,7 +461,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $user = $GLOBALS['xoopsUser'];
         //------------------------------------------------------
 
-        $criteriaCompo =  new \CriteriaCompo();
+        $criteriaCompo = new \CriteriaCompo();
 
         switch ($periode) {
             case _EXTCAL_EVENTS_WEEK:
@@ -480,7 +479,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
                 $start = userTimeToServerTime(mktime(0, 0, 0, $month, 1, $year), $this->_extcalTime->_getUserTimeZone($user));
                 $end   = userTimeToServerTime(mktime(23, 59, 59, $month + 1, 1, $year) - _EXTCAL_TS_DAY, $this->_extcalTime->_getUserTimeZone($user));
 
-                $criteriaCompo->add( new \Criteria('event_start', $end, '<='));
+                $criteriaCompo->add(new \Criteria('event_start', $end, '<='));
                 //$criteriaCompo->add( new \Criteria('event_end', $start, '>='));
 
                 break;
@@ -500,7 +499,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
         }
         $formatDate = $extcalConfig['event_date_week'];
         //--------------------------------------------------------------------------
-        $criteriaCompo->add( new \Criteria('event_isrecur', 1, '='));
+        $criteriaCompo->add(new \Criteria('event_isrecur', 1, '='));
         $criteriaCompo->setOrder($sens);
 
         $result = $this->getObjects($criteriaCompo);
@@ -514,7 +513,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
             //$te = $this->GetInterval($event, $start, $end);
             //$eventsR = array_merge($eventsR, $te);
             //echo 'event : ' . $event['event_id'] . '<br>';
-            //ext_echoArray($event);
+            //Extcal\Utility::echoArray($event);
             $recurEvents = $this->getRecurEventToDisplay($event, $start, $end);
             if (count($recurEvents) > 0) {
                 $eventsR = array_merge($eventsR, $recurEvents);
@@ -557,13 +556,13 @@ class EventHandler extends ExtcalPersistableObjectHandler
      * @return \CriteriaCompo
      */
     // Return the criteria compo object for a day
-    public function _getEventDayCriteria($day, $month, $year, $cat = 0)
+    public function getEventDayCriteria($day, $month, $year, $cat = 0)
     {
         $user = $GLOBALS['xoopsUser'];
 
         $dayStart      = userTimeToServerTime(mktime(0, 0, 0, $month, $day, $year), $this->_extcalTime->_getUserTimeZone($user));
         $dayEnd        = userTimeToServerTime(mktime(23, 59, 59, $month, $day, $year), $this->_extcalTime->_getUserTimeZone($user));
-        $criteriaCompo = $this->_getListCriteriaCompo($dayStart, $dayEnd, $cat, $user);
+        $criteriaCompo = $this->getListCriteriaCompo($dayStart, $dayEnd, $cat, $user);
 
         return $criteriaCompo;
     }
@@ -574,12 +573,12 @@ class EventHandler extends ExtcalPersistableObjectHandler
      * @param     $day
      * @param     $month
      * @param     $year
-     * @param     $cat
+     * @param int $cat
      * @param int $nbDays
      *
-     * @return CriteriaCompo
+     * @return \CriteriaCompo
      */
-    public function _getEventWeekCriteria($day, $month, $year, $cat=0, $nbDays = 7)
+    public function getEventWeekCriteria($day, $month, $year, $cat = 0, $nbDays = 7)
     {
         $user = $GLOBALS['xoopsUser'];
 
@@ -595,13 +594,13 @@ class EventHandler extends ExtcalPersistableObjectHandler
     // Return the criteria compo object for a month
 
     /**
-     * @param $month
-     * @param $year
-     * @param $cat
+     * @param     $month
+     * @param     $year
+     * @param int $cat
      *
-     * @return CriteriaCompo
+     * @return \CriteriaCompo
      */
-    public function _getEventMonthCriteria($month, $year, $cat=0)
+    public function getEventMonthCriteria($month, $year, $cat = 0)
     {
         $user = $GLOBALS['xoopsUser'];
 
@@ -622,7 +621,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
      *
      * @return CriteriaCompo
      */
-    public function _getEventYearCriteria($year, $cat = 0)
+    public function getEventYearCriteria($year, $cat = 0)
     {
         $user = $GLOBALS['xoopsUser'];
 
@@ -630,7 +629,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $userEndTime   = mktime(23, 59, 59, 12, 31, $year);
         $yearStart     = userTimeToServerTime($userStartTime, $this->_extcalTime->_getUserTimeZone($user));
         $yearEnd       = userTimeToServerTime($userEndTime, $this->_extcalTime->_getUserTimeZone($user));
-        $criteriaCompo = $this->_getListCriteriaCompo($yearStart, $yearEnd, $cat, $user);
+        $criteriaCompo = $this->getListCriteriaCompo($yearStart, $yearEnd, $cat, $user);
 
         return $criteriaCompo;
     }
@@ -653,68 +652,68 @@ class EventHandler extends ExtcalPersistableObjectHandler
      * @return \CriteriaCompo
      */
 
-    public function _getCriteriaCompo($start, $end, $cat=0, &$user)
+    public function getCriteriaCompo($start, $end, $cat = 0, &$user)
     {
-        $criteriaNoRecur =  new \CriteriaCompo();
-        $criteriaNoRecur->add( new \Criteria('event_start', $end, '<='));
-        $criteriaNoRecur->add( new \Criteria('event_end', $start, '>='));
-        $criteriaNoRecur->add( new \Criteria('event_isrecur', 0));
+        $criteriaNoRecur = new \CriteriaCompo();
+        $criteriaNoRecur->add(new \Criteria('event_start', $end, '<='));
+        $criteriaNoRecur->add(new \Criteria('event_end', $start, '>='));
+        $criteriaNoRecur->add(new \Criteria('event_isrecur', 0));
 
-        $criteriaRecur =  new \CriteriaCompo();
-        $criteriaRecur->add( new \Criteria('event_recur_start', $end, '<='));
-        $criteriaRecur->add( new \Criteria('event_recur_end', $start, '>='));
-        $criteriaRecur->add( new \Criteria('event_isrecur', 1));
+        $criteriaRecur = new \CriteriaCompo();
+        $criteriaRecur->add(new \Criteria('event_recur_start', $end, '<='));
+        $criteriaRecur->add(new \Criteria('event_recur_end', $start, '>='));
+        $criteriaRecur->add(new \Criteria('event_isrecur', 1));
 
-        $criteriaCompoDate =  new \CriteriaCompo();
+        $criteriaCompoDate = new \CriteriaCompo();
         $criteriaCompoDate->add($criteriaNoRecur, 'OR');
         $criteriaCompoDate->add($criteriaRecur, 'OR');
 
-        $criteriaCompo =  new \CriteriaCompo();
+        $criteriaCompo = new \CriteriaCompo();
         $criteriaCompo->add($criteriaCompoDate);
 
-        $criteriaCompo->add( new \Criteria('event_approved', 1));
-        $this->_addCatSelectCriteria($criteriaCompo, $cat);
-        $this->_addCatPermCriteria($criteriaCompo, $user);
+        $criteriaCompo->add(new \Criteria('event_approved', 1));
+        $this->addCatSelectCriteria($criteriaCompo, $cat);
+        $this->addCatPermCriteria($criteriaCompo, $user);
         $criteriaCompo->setSort('event_start');
 
         return $criteriaCompo;
     }
 
     /**
-     * @param $start
-     * @param $end
-     * @param $cat
-     * @param $user
+     * @param     $start
+     * @param     $end
+     * @param int $cat
+     * @param     $user
      *
-     * @return CriteriaCompo
+     * @return \CriteriaCompo
      */
-    public function _getCalendarCriteriaCompo($start, $end, $cat=0, &$user)
+    public function getCalendarCriteriaCompo($start, $end, $cat = 0, &$user)
     {
         global $extcalConfig;
         $criteriaCompo = $this->_getCriteriaCompo($start, $end, $cat, $user);
         //if (!$this->_extcalConfig['diplay_past_event_cal']) {
         if (!$extcalConfig['diplay_past_event_cal']) {
-            $criteriaCompo->add( new \Criteria('event_end', time(), '>'));
+            $criteriaCompo->add(new \Criteria('event_end', time(), '>'));
         }
 
         return $criteriaCompo;
     }
 
     /**
-     * @param $start
-     * @param $end
-     * @param $cat
-     * @param $user
+     * @param     $start
+     * @param     $end
+     * @param int $cat
+     * @param     $user
      *
-     * @return CriteriaCompo
+     * @return \CriteriaCompo
      */
-    public function _getListCriteriaCompo($start, $end, $cat=0, &$user)
+    public function getListCriteriaCompo($start, $end, $cat = 0, &$user)
     {
         global $extcalConfig;
         $criteriaCompo = $this->_getCriteriaCompo($start, $end, $cat, $user);
         // if (!$this->_extcalConfig['diplay_past_event_list']) {
         if (!$extcalConfig['diplay_past_event_list']) {
-            $criteriaCompo->add( new \Criteria('event_end', time(), '>'));
+            $criteriaCompo->add(new \Criteria('event_end', time(), '>'));
         }
 
         return $criteriaCompo;
@@ -732,24 +731,24 @@ class EventHandler extends ExtcalPersistableObjectHandler
     {
         $now = time();
 
-        $criteriaNoRecur =  new \CriteriaCompo();
-        $criteriaNoRecur->add( new \Criteria('event_start', $now, '>='));
-        $criteriaNoRecur->add( new \Criteria('event_isrecur', 0));
+        $criteriaNoRecur = new \CriteriaCompo();
+        $criteriaNoRecur->add(new \Criteria('event_start', $now, '>='));
+        $criteriaNoRecur->add(new \Criteria('event_isrecur', 0));
 
-        $criteriaRecur =  new \CriteriaCompo();
-        $criteriaRecur->add( new \Criteria('event_recur_start', $now, '>='));
-        $criteriaRecur->add( new \Criteria('event_isrecur', 1));
+        $criteriaRecur = new \CriteriaCompo();
+        $criteriaRecur->add(new \Criteria('event_recur_start', $now, '>='));
+        $criteriaRecur->add(new \Criteria('event_isrecur', 1));
 
-        $criteriaCompoDate =  new \CriteriaCompo();
+        $criteriaCompoDate = new \CriteriaCompo();
         $criteriaCompoDate->add($criteriaNoRecur, 'OR');
         $criteriaCompoDate->add($criteriaRecur, 'OR');
 
-        $criteriaCompo =  new \CriteriaCompo();
+        $criteriaCompo = new \CriteriaCompo();
         $criteriaCompo->add($criteriaCompoDate);
 
-        $criteriaCompo->add( new \Criteria('event_approved', 1));
-        $this->_addCatSelectCriteria($criteriaCompo, $cat);
-        $this->_addCatPermCriteria($criteriaCompo, $GLOBALS['xoopsUser']);
+        $criteriaCompo->add(new \Criteria('event_approved', 1));
+        $this->addCatSelectCriteria($criteriaCompo, $cat);
+        $this->addCatPermCriteria($criteriaCompo, $GLOBALS['xoopsUser']);
 
         //mb ---------- TESTING ---------------------------
         //        $eventsU = $this->getEventsUniques($criteriaNoRecur);
@@ -783,12 +782,12 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $dayStart = mktime(0, 0, 0, $month, $day, $year);
         $dayEnd   = mktime(0, 0, 0, $month, $day + 1, $year);
 
-        $criteriaCompo =  new \CriteriaCompo();
-        $this->_addCatSelectCriteria($criteriaCompo, $cat);
-        $this->_addCatPermCriteria($criteriaCompo, $GLOBALS['xoopsUser']);
-        $criteriaCompo->add( new \Criteria('event_end', $dayStart, '>='));
-        $criteriaCompo->add( new \Criteria('event_start', $dayEnd, '<'));
-        $criteriaCompo->add( new \Criteria('event_approved', 1));
+        $criteriaCompo = new \CriteriaCompo();
+        $this->addCatSelectCriteria($criteriaCompo, $cat);
+        $this->addCatPermCriteria($criteriaCompo, $GLOBALS['xoopsUser']);
+        $criteriaCompo->add(new \Criteria('event_end', $dayStart, '>='));
+        $criteriaCompo->add(new \Criteria('event_start', $dayEnd, '<'));
+        $criteriaCompo->add(new \Criteria('event_approved', 1));
         $criteriaCompo->setSort('event_start');
         $criteriaCompo->setLimit($nbEvent);
 
@@ -807,12 +806,12 @@ class EventHandler extends ExtcalPersistableObjectHandler
      */
     public function getNewEvent($start, $limit, $cat = 0, $skipPerm = false)
     {
-        $criteriaCompo =  new \CriteriaCompo();
-        $this->_addCatSelectCriteria($criteriaCompo, $cat);
+        $criteriaCompo = new \CriteriaCompo();
+        $this->addCatSelectCriteria($criteriaCompo, $cat);
         if (!$skipPerm) {
-            $this->_addCatPermCriteria($criteriaCompo, $GLOBALS['xoopsUser']);
+            $this->addCatPermCriteria($criteriaCompo, $GLOBALS['xoopsUser']);
         }
-        $criteriaCompo->add( new \Criteria('event_approved', 1));
+        $criteriaCompo->add(new \Criteria('event_approved', 1));
         $criteriaCompo->setSort('event_id');
         $criteriaCompo->setOrder('DESC');
         $criteriaCompo->setStart($start);
@@ -826,9 +825,9 @@ class EventHandler extends ExtcalPersistableObjectHandler
      */
     public function getCountNewEvent()
     {
-        $criteriaCompo =  new \CriteriaCompo();
-        $this->_addCatSelectCriteria($criteriaCompo, 0);
-        $criteriaCompo->add( new \Criteria('event_approved', 1));
+        $criteriaCompo = new \CriteriaCompo();
+        $this->addCatSelectCriteria($criteriaCompo, 0);
+        $criteriaCompo->add(new \Criteria('event_approved', 1));
         $criteriaCompo->setSort('event_id');
 
         return $this->getCount($criteriaCompo);
@@ -844,11 +843,11 @@ class EventHandler extends ExtcalPersistableObjectHandler
      */
     public function getRandomEvent($nbEvent, $cat = 0)
     {
-        $criteriaCompo =  new \CriteriaCompo();
-        $this->_addCatSelectCriteria($criteriaCompo, $cat);
-        $this->_addCatPermCriteria($criteriaCompo, $GLOBALS['xoopsUser']);
-        $criteriaCompo->add( new \Criteria('event_start', time(), '>='));
-        $criteriaCompo->add( new \Criteria('event_approved', 1));
+        $criteriaCompo = new \CriteriaCompo();
+        $this->addCatSelectCriteria($criteriaCompo, $cat);
+        $this->addCatPermCriteria($criteriaCompo, $GLOBALS['xoopsUser']);
+        $criteriaCompo->add(new \Criteria('event_start', time(), '>='));
+        $criteriaCompo->add(new \Criteria('event_approved', 1));
         $criteriaCompo->setSort('RAND()');
         $criteriaCompo->setLimit($nbEvent);
 
@@ -860,18 +859,18 @@ class EventHandler extends ExtcalPersistableObjectHandler
      */
     public function getPendingEvent()
     {
-        $criteriaCompo =  new \CriteriaCompo();
-        $criteriaCompo->add( new \Criteria('event_approved', 0));
+        $criteriaCompo = new \CriteriaCompo();
+        $criteriaCompo->add(new \Criteria('event_approved', 0));
         $criteriaCompo->setSort('event_start');
 
         return $this->getObjects($criteriaCompo);
     }
 
     /**
-     * @param $criteria
+     * @param \CriteriaElement $criteria
      * @param $user
      */
-    public function _addCatPermCriteria(&$criteria, &$user)
+    public function addCatPermCriteria(\CriteriaElement $criteria, $user)
     {
         $authorizedAccessCats = $this->_extcalPerm->getAuthorizedCat($user, 'extcal_cat_view');
         $count                = count($authorizedAccessCats);
@@ -882,9 +881,9 @@ class EventHandler extends ExtcalPersistableObjectHandler
                 $in .= ',' . $authorizedAccessCat;
             }
             $in .= ')';
-            $criteria->add( new \Criteria('cat_id', $in, 'IN'));
+            $criteria->add(new \Criteria('cat_id', $in, 'IN'));
         } else {
-            $criteria->add( new \Criteria('cat_id', '(0)', 'IN'));
+            $criteria->add(new \Criteria('cat_id', '(0)', 'IN'));
         }
     }
 
@@ -892,10 +891,10 @@ class EventHandler extends ExtcalPersistableObjectHandler
      * @param $criteria
      * @param $cats
      */
-    public function _addCatSelectCriteria(&$criteria, $cats=null)
+    public function addCatSelectCriteria(&$criteria, $cats = null)
     {
         if (!is_array($cats) && $cats > 0) {
-            $criteria->add( new \Criteria('cat_id', $cats));
+            $criteria->add(new \Criteria('cat_id', $cats));
         }
         if (is_array($cats)) {
             if (false === array_search(0, $cats)) {
@@ -905,7 +904,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
                     $in .= ',' . $cat;
                 }
                 $in .= ')';
-                $criteria->add( new \Criteria('cat_id', $in, 'IN'));
+                $criteria->add(new \Criteria('cat_id', $in, 'IN'));
             }
         }
     }
@@ -916,16 +915,16 @@ class EventHandler extends ExtcalPersistableObjectHandler
      * @param string $siteSide
      * @param string $mode
      * @param null   $data
-     * @return \ThemeForm|bool
+     * @return \XoopsModules\Extcal\Form\ThemeForm
      */
     public function getEventForm($siteSide = 'user', $mode = 'new', $data = null)
     {
         global $xoopsModuleConfig;
-        $catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+        $catHandler  = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
         $fileHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_FILE);
 
         /***************************************************/
-//        require_once __DIR__ . '/etablissement.php';
+        //        require_once __DIR__ . '/etablissement.php';
         if ('admin' === $siteSide) {
             $action = 'event.php?op=enreg';
             $cats   = $catHandler->getAllCat($GLOBALS['xoopsUser'], 'all');
@@ -1117,7 +1116,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
 
         //-----------------------------------------------
         // Title
-        $form->addElement( new \XoopsFormText(_MD_EXTCAL_TITLE, 'event_title', 80, 255, $title), true);
+        $form->addElement(new \XoopsFormText(_MD_EXTCAL_TITLE, 'event_title', 80, 255, $title), true);
         //-----------------------------------------------
         // Category select
         $catSelect = new \XoopsFormSelect(_MD_EXTCAL_CATEGORY, 'cat_id', $cat);
@@ -1137,7 +1136,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
         //etablissement
         $etablissementHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_ETABLISSEMENT);
         $etablissement_select = new \XoopsFormSelect(_MD_EXTCAL_ETABLISSEMENT, 'event_etablissement', $event_etablissement);
-        $criteria             =  new \CriteriaCompo();
+        $criteria             = new \CriteriaCompo();
         $criteria->setSort('nom');
         $criteria->setOrder('ASC');
 
@@ -1191,19 +1190,19 @@ class EventHandler extends ExtcalPersistableObjectHandler
         //Price and monnaie
         $monnaie_price = new \XoopsFormElementTray(_MD_EXTCAL_PRICE, '');
         //price
-        $monnaie_price->addElement( new \XoopsFormText('', 'event_price', 20, 255, $event_price));
+        $monnaie_price->addElement(new \XoopsFormText('', 'event_price', 20, 255, $event_price));
         //monnaie
         $monnaie = new \XoopsFormLabel(_MD_EXTCAL_DEVISE2, '');
         $monnaie_price->addElement($monnaie);
         $form->addElement($monnaie_price);
         //----------------------------------------------------------------
-        $form->addElement( new \XoopsFormText(_MD_EXTCAL_ORGANISATEUR, 'event_organisateur', 80, 255, $organisateur), false);
+        $form->addElement(new \XoopsFormText(_MD_EXTCAL_ORGANISATEUR, 'event_organisateur', 80, 255, $organisateur), false);
         // Contact
-        $form->addElement( new \XoopsFormText(_MD_EXTCAL_CONTACT, 'event_contact', 80, 255, $contact), false);
+        $form->addElement(new \XoopsFormText(_MD_EXTCAL_CONTACT, 'event_contact', 80, 255, $contact), false);
         // Url
-        $form->addElement( new \XoopsFormText(_MD_EXTCAL_URL, 'event_url', 80, 255, $url), false);
+        $form->addElement(new \XoopsFormText(_MD_EXTCAL_URL, 'event_url', 80, 255, $url), false);
         // Email
-        $form->addElement( new \XoopsFormText(_MD_EXTCAL_EMAIL, 'event_email', 80, 255, $email), false);
+        $form->addElement(new \XoopsFormText(_MD_EXTCAL_EMAIL, 'event_email', 80, 255, $email), false);
 
         // Address
         if (class_exists('XoopsFormEditor')) {
@@ -1237,18 +1236,18 @@ class EventHandler extends ExtcalPersistableObjectHandler
             }
             $fileElmtTray->addElement($eventFiles);
         }
-        $fileElmtTray->addElement( new \XoopsFormFile(_MD_EXTCAL_FILE_ATTACHEMENT, 'event_file', 3145728));
+        $fileElmtTray->addElement(new \XoopsFormFile(_MD_EXTCAL_FILE_ATTACHEMENT, 'event_file', 3145728));
         $form->addElement($fileElmtTray);
 
         if (isset($data['event_id'])) {
-            $form->addElement( new \XoopsFormHidden('event_id', $data['event_id']), false);
+            $form->addElement(new \XoopsFormHidden('event_id', $data['event_id']), false);
         }
         //Hack Kraven0
         ///////////////////////////////////////////////////////////////////////////////
         //Picture1
         $file_tray = new \XoopsFormElementTray(sprintf(_MD_EXTCAL_FORM_IMG, 1), '');
         if (!empty($event_picture1)) {
-            $file_tray->addElement( new \XoopsFormLabel('', "<img src='" . XOOPS_URL . '/uploads/extcal/' . $event_picture1 . "' name='image' id='image' alt=''><br><br>"));
+            $file_tray->addElement(new \XoopsFormLabel('', "<img src='" . XOOPS_URL . '/uploads/extcal/' . $event_picture1 . "' name='image' id='image' alt=''><br><br>"));
             $check_del_img = new \XoopsFormCheckBox('', 'delimg_1');
             $check_del_img->addOption(1, _MD_EXTCAL_DEL_IMG);
             $file_tray->addElement($check_del_img);
@@ -1263,12 +1262,12 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $file_label = new \XoopsFormLabel('', '<br>' . $msg);
         $file_tray->addElement($file_label);
         $form->addElement($file_tray);
-        $form->addElement( new \XoopsFormHidden('file1', $event_picture1));
+        $form->addElement(new \XoopsFormHidden('file1', $event_picture1));
         unset($file_img, $file_tray);
         //Picture2
         $file_tray = new \XoopsFormElementTray(sprintf(_MD_EXTCAL_FORM_IMG, 2), '');
         if (!empty($event_picture2)) {
-            $file_tray->addElement( new \XoopsFormLabel('', "<img src='" . XOOPS_URL . '/uploads/extcal/' . $event_picture2 . "' name='image' id='image' alt=''><br><br>"));
+            $file_tray->addElement(new \XoopsFormLabel('', "<img src='" . XOOPS_URL . '/uploads/extcal/' . $event_picture2 . "' name='image' id='image' alt=''><br><br>"));
             $check_del_img = new \XoopsFormCheckBox('', 'delimg_2');
             $check_del_img->addOption(1, _MD_EXTCAL_DEL_IMG);
             $file_tray->addElement($check_del_img);
@@ -1283,14 +1282,14 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $file_label = new \XoopsFormLabel('', '<br>' . $msg);
         $file_tray->addElement($file_label);
         $form->addElement($file_tray);
-        $form->addElement( new \XoopsFormHidden('file2', $event_picture2));
+        $form->addElement(new \XoopsFormHidden('file2', $event_picture2));
         unset($file_img, $file_tray);
         ///////////////////////////////////////////////////////////////////////////////
 
         $buttonElmtTray = new \XoopsFormElementTray('', '&nbsp;');
-        $buttonElmtTray->addElement( new \XoopsFormButton('', 'form_submit', _SUBMIT, 'submit'), false);
+        $buttonElmtTray->addElement(new \XoopsFormButton('', 'form_submit', _SUBMIT, 'submit'), false);
         if ('user' === $siteSide) {
-            $buttonElmtTray->addElement( new \XoopsFormButton('', 'form_preview', _MD_EXTCAL_PREVIEW, 'submit'), false);
+            $buttonElmtTray->addElement(new \XoopsFormButton('', 'form_preview', _MD_EXTCAL_PREVIEW, 'submit'), false);
         }
         $form->addElement($buttonElmtTray);
 
@@ -1318,7 +1317,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
      */
     public function getRecurRules($parm)
     {
-        //ext_echoArray($parm);exit;
+        //Extcal\Utility::echoArray($parm);exit;
 
         // If this isn't a reccuring event
         if (!$this->getIsRecur($parm)) {
@@ -1698,7 +1697,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
      *
      * @return int
      */
-    public function _getOccurTS($month, $year, $dayCode)
+    public function getOccurTS($month, $year, $dayCode)
     {
         if (0 === strpos($dayCode, 'MD')) {
             if ('' != substr($dayCode, 2)) {
@@ -2322,8 +2321,8 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $limit = 0,
         $offset = 0,
         $userId = 0,
-        $user = ''
-    ) {
+        $user = '')
+    {
         global $xoopsDB;
 
         //echo "<hr>{$andor}-{$limit}-{$offset}-{$userId}-{$user}<br>{$criteresPlus}";
@@ -2376,14 +2375,14 @@ class EventHandler extends ExtcalPersistableObjectHandler
                 'tc.cat_name',
             ];
             $t       = [];
-            for ($i = 0, $count = count($queryarray); $i < $count; ++$i) {
+            foreach ($queryarray as $i => $iValue) {
                 $t1[] = " %1\$s LIKE '#{$queryarray[$i]}#' ";
             }
 
             $flt = '(' . implode(" {$andor} ", $t1) . ')';
 
             $t = [];
-            for ($h = 0, $count = count($tFields); $h < $count; ++$h) {
+            foreach ($tFields as $h => $hValue) {
                 $t[] = sprintf($flt, $tFields[$h]);
             }
 
@@ -2396,9 +2395,9 @@ class EventHandler extends ExtcalPersistableObjectHandler
         //------------------------------------------------------------
         if (count($orderBy) > 0) {
             $t = [];
-            for ($h = 0, $count = count($orderBy); $h < $count; ++$h) {
-                if ('' != $orderBy[$h]) {
-                    $t[] = $orderBy[$h];
+            foreach ($orderBy as $hValue) {
+                if ('' != $hValue) {
+                    $t[] = $hValue;
                 }
             }
             if (count($t) > 0) {
@@ -2465,8 +2464,8 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $userId,
         $user,
         $criteresPlus = '',
-        $xoopsSearch = true
-    ) {
+        $xoopsSearch = true)
+    {
         global $xoopsDB;
         //echo "<hr>{$andor}-{$limit}-{$offset}-{$userId}-{$user}<br>{$criteresPlus}";
 
@@ -2507,14 +2506,14 @@ class EventHandler extends ExtcalPersistableObjectHandler
 
             $tFields = ['event_title', 'event_desc', 'event_contact', 'event_address', 'cat_name'];
             $t       = [];
-            for ($i = 0, $count = count($queryarray); $i < $count; ++$i) {
+            foreach ($queryarray as $i => $iValue) {
                 $t1[] = " %1\$s LIKE '#{$queryarray[$i]}#' ";
             }
 
             $flt = '(' . implode(" {$andor} ", $t1) . ')';
 
             $t = [];
-            for ($h = 0, $count = count($tFields); $h < $count; ++$h) {
+            foreach ($tFields as $h => $hValue) {
                 $t[] = sprintf($flt, $tFields[$h]);
             }
 

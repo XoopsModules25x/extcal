@@ -35,9 +35,9 @@ switch ($step) {
         $groupPermissionHandler = xoops_getHandler('groupperm');
 
         // Delete old public mask
-        $criteria =  new \CriteriaCompo();
-        $criteria->add( new \Criteria('gperm_name', 'extcal_perm_mask'));
-        $criteria->add( new \Criteria('gperm_modid', $moduleId));
+        $criteria = new \CriteriaCompo();
+        $criteria->add(new \Criteria('gperm_name', 'extcal_perm_mask'));
+        $criteria->add(new \Criteria('gperm_modid', $moduleId));
         $groupPermissionHandler->deleteAll($criteria);
 
         foreach ($_POST['perms']['extcal_perm_mask']['group'] as $groupId => $perms) {

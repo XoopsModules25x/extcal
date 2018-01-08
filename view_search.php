@@ -108,21 +108,21 @@ foreach ($events as $event) {
     }
 }
 
-$criteria =  new \CriteriaCompo();
-$criteria->add( new \Criteria('event_isrecur', 1));
+$criteria = new \CriteriaCompo();
+$criteria->add(new \Criteria('event_isrecur', 1));
 
 if ($cat > 0) {
-    $criteria->add( new \Criteria('cat_id', $cat));
+    $criteria->add(new \Criteria('cat_id', $cat));
 }
 
 //$criteria =  new \Criteria('event_isrecur', 1);
 
 $recurrents = $eventHandler->getAllEvents($criteria, false);
 //$catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-$catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+$catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
 
 //=========================================
-for ($h = 0, $count = count($recurrents); $h < $count; ++$h) {
+foreach ($recurrents as $h => $hValue) {
 
     //    $recurEvents = $eventHandler->getRecurEventToDisplay($event, $startMonth, $endMonth);
     $recurEvents = $eventHandler->getRecurEventToDisplay($recurrents[$h], $startMonth, $endMonth);

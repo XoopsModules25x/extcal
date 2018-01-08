@@ -18,6 +18,8 @@
  *
  */
 
+use XoopsModules\Extcal;
+
 /**
  *
  * Prepares system prior to attempting to install module

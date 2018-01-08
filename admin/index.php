@@ -45,7 +45,7 @@ if ($helper->getConfig('displaySampleButton')) {
 }
 
 require_once __DIR__ . '/../testdata/index.php';
-$adminObject->addItemButton(AM_XOOPSTUBE_ADD_SAMPLEDATA, '__DIR__ . /../../testdata/index.php?op=load', 'add');
+$adminObject->addItemButton(AM_EXTCAL_ADD_SAMPLEDATA, '__DIR__ . /../../testdata/index.php?op=load', 'add');
 $adminObject->displayButton('left', '');
 
 //------------- End Test Data ----------------------------

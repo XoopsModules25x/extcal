@@ -1,4 +1,5 @@
 <?php namespace XoopsModules\Extcal;
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -44,11 +45,12 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     /**
      * Constructor - called from child classes.
      *
-     * @param XoopsDatabase $db        {@link XoopsDatabase} object
-     * @param string        $tablename Name of database table
-     * @param string        $classname Name of Class, this handler is managing
-     * @param string        $keyname   Name of the property, holding the key
-     * @param bool          $idenfierName
+     * @param \XoopsDatabase $db        {@link XoopsDatabase}
+     *                                  object
+     * @param string         $tablename Name of database table
+     * @param string         $classname Name of Class, this handler is managing
+     * @param string         $keyname   Name of the property, holding the key
+     * @param bool           $idenfierName
      */
     public function __construct(\XoopsDatabase $db, $tablename, $classname, $keyname, $idenfierName = false)
     {
@@ -100,12 +102,12 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     public function get($id = null, $fields = null, $as_object = true) //get($id, $as_object = true)
     {
         if (is_array($this->keyName)) {
-            $criteria =  new \CriteriaCompo();
+            $criteria = new \CriteriaCompo();
             for ($i = 0, $iMax = count($this->keyName); $i < $iMax; ++$i) {
-                $criteria->add( new \Criteria($this->keyName[$i], (int)$id[$i]));
+                $criteria->add(new \Criteria($this->keyName[$i], (int)$id[$i]));
             }
         } else {
-            $criteria =  new \Criteria($this->keyName, (int)$id);
+            $criteria = new \Criteria($this->keyName, (int)$id);
         }
         $criteria->setLimit(1);
         $objectArray = $this->getObjects($criteria, false, true);
@@ -120,8 +122,8 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
      * retrieve objects from the database.
      *
      * @param \CriteriaElement $criteria {@link CriteriaElement} conditions to be met
-     * @param bool            $idAsKey  use the ID as key for the array?
-     * @param bool            $asObject return an array of objects?
+     * @param bool             $idAsKey  use the ID as key for the array?
+     * @param bool             $asObject return an array of objects?
      *
      * @return array
      */
@@ -151,7 +153,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     /**
      * Convert a database resultset to a returnable array.
      *
-     * @param XoopsObject $result  database resultset
+     * @param \XoopsObject $result  database resultset
      * @param bool        $idAsKey - should NOT be used with joint keys
      * @param bool        $asObject
      *
@@ -196,8 +198,8 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
      * Retrieve a list of objects as arrays - DON'T USE WITH JOINT KEYS.
      *
      * @param \CriteriaElement $criteria {@link CriteriaElement} conditions to be met
-     * @param int             $limit    Max number of objects to fetch
-     * @param int             $start    Which record to start at
+     * @param int              $limit    Max number of objects to fetch
+     * @param int              $start    Which record to start at
      *
      * @return array
      */
@@ -205,7 +207,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     {
         $ret = [];
         if (null === $criteria) {
-            $criteria =  new \CriteriaCompo();
+            $criteria = new \CriteriaCompo();
         }
 
         if ('' == $criteria->getSort()) {
@@ -316,9 +318,9 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     /**
      * insert a new object in the database.
      *
-     * @param XoopsObject $obj         reference to the object
-     * @param bool        $force       whether to force the query execution despite security settings
-     * @param bool        $checkObject check if the object is dirty and clean the attributes
+     * @param \XoopsObject $obj         reference to the object
+     * @param bool         $force       whether to force the query execution despite security settings
+     * @param bool         $checkObject check if the object is dirty and clean the attributes
      *
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
@@ -401,10 +403,10 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     /**
      * Change a value for objects with a certain criteria.
      *
-     * @param string          $fieldname  Name of the field
-     * @param string|array    $fieldvalue Value to write
-     * @param CriteriaElement $criteria   {@link CriteriaElement}
-     * @param bool            $force
+     * @param string           $fieldname  Name of the field
+     * @param string|array     $fieldvalue Value to write
+     * @param \CriteriaElement $criteria   {@link CriteriaElement}
+     * @param bool             $force
      *
      * @return bool
      */
@@ -463,10 +465,10 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     /**
      * delete all objects meeting the conditions.
      *
-     * @param CriteriaElement $criteria        {@link CriteriaElement}
+     * @param \CriteriaElement $criteria       {@link CriteriaElement}
      *                                         with conditions to meet
-     * @param bool            $force
-     * @param bool            $asObject
+     * @param bool             $force
+     * @param bool             $asObject
      *
      * @return bool
      */
@@ -619,8 +621,8 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     }
 
     /**
-     * @param null|CriteriaElement $criteria
-     * @param string               $sum
+     * @param \CriteriaElement $criteria
+     * @param string           $sum
      *
      * @return array|string
      */
@@ -660,8 +662,8 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     }
 
     /**
-     * @param null|CriteriaElement $criteria
-     * @param string               $max
+     * @param \CriteriaElement $criteria
+     * @param string           $max
      *
      * @return array|string
      */

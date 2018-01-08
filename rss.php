@@ -7,6 +7,7 @@ require_once __DIR__ . '/include/constantes.php';
 require_once __DIR__ . '/header.php';
 
 require_once XOOPS_ROOT_PATH . '/class/template.php';
+/** @var Extcal\EventHandler $eventHandler */
 $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 if (!isset($_GET['cat'])) {
     $cat = 0;

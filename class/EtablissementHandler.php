@@ -1,4 +1,5 @@
 <?php namespace XoopsModules\Extcal;
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -21,7 +22,6 @@
 // defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
-
 
 /**
  * Class EtablissementHandler.
@@ -46,11 +46,11 @@ class EtablissementHandler extends ExtcalPersistableObjectHandler
     {
         $user = $GLOBALS['xoopsUser'];
 
-        $criteriaCompo =  new \CriteriaCompo();
-        $criteriaCompo->add( new \Criteria('id', $etablissementId));
+        $criteriaCompo = new \CriteriaCompo();
+        $criteriaCompo->add(new \Criteria('id', $etablissementId));
 
         if (!$skipPerm) {
-            $this->_addCatPermCriteria($criteriaCompo, $user);
+            $this->addCatPermCriteria($criteriaCompo, $user);
         }
         $ret = $this->getObjects($criteriaCompo);
         if (isset($ret[0])) {
@@ -62,9 +62,9 @@ class EtablissementHandler extends ExtcalPersistableObjectHandler
 
     /**
      * @param \CriteriaElement $criteria
-     * @param null            $fields
-     * @param bool            $asObject
-     * @param bool            $id_as_key
+     * @param null             $fields
+     * @param bool             $asObject
+     * @param bool             $id_as_key
      *
      * @return array
      */
@@ -72,8 +72,7 @@ class EtablissementHandler extends ExtcalPersistableObjectHandler
         \CriteriaElement $criteria = null,
         $fields = null,
         $asObject = true,
-        $id_as_key = true
-    ) //getAll($criteria = null, $asObject = false)
+        $id_as_key = true) //getAll($criteria = null, $asObject = false)
     {
         $rst = $this->getObjects($criteria, $asObject);
         if ($asObject) {

@@ -45,8 +45,8 @@ $xoopsUser    = $xoopsUser ?: null;
 // Tooltips include
 /** @var xos_opal_Theme $xoTheme */
 if (!isset($GLOBALS['xoTheme']) || !is_object($GLOBALS['xoTheme'])) {
-    include_once $GLOBALS['xoops']->path("/class/theme.php");
-    $GLOBALS['xoTheme'] =  new \Xos_opal_Theme();
+    include_once $GLOBALS['xoops']->path('/class/theme.php');
+    $GLOBALS['xoTheme'] = new \xos_opal_Theme();
 }
 
 $GLOBALS['xoTheme']->addScript('modules/extcal/include/ToolTips.js');

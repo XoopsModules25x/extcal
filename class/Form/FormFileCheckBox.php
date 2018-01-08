@@ -1,4 +1,5 @@
 <?php namespace XoopsModules\Extcal\Form;
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -27,7 +28,6 @@ class FormFileCheckBox extends \XoopsFormCheckBox
      * @param      $name
      * @param null $value
      *
-     * @return FormFileCheckBox
      */
     public function __construct($caption, $name, $value = null)
     {

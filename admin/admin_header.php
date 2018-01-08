@@ -31,9 +31,7 @@ $moduleDirName = basename(dirname(__DIR__));
 $helper = Extcal\Helper::getInstance();
 /** @var Xmf\Module\Admin $adminObject */
 $adminObject = \Xmf\Module\Admin::getInstance();
-$utility = new Extcal\Utility();
-
-
+$utility     = new Extcal\Utility();
 
 //require_once __DIR__ . '/../class/Utility.php';
 //require_once __DIR__ . '/../include/common.php';
@@ -56,11 +54,11 @@ if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl))
     $xoopsTpl = new \XoopsTpl();
 }
 
-/** @var CategoryHandler $catHandler */
+/** @var Extcal\CategoryHandler $catHandler */
 //$catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-$catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
-/** @var EventHandler $eventHandler */
+$catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+/** @var Extcal\EventHandler $eventHandler */
 $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
-/** @var EventmemberHandler $eventMemberHandler */
+/** @var Extcal\EventmemberHandler $eventMemberHandler */
 $eventMemberHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_MEMBER);
 //xoops_cp_header();

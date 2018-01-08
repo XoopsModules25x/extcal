@@ -63,78 +63,78 @@ if (isset($_POST['update'])) {
         echo '<p>New timestamp is: ' . $Second->getTimestamp() . ' which could be used to update a database, for example';
     }
 } else {
-    $Year   = new Calendar_Year($_POST['y']);
-    $Month  = new Calendar_Month($_POST['y'], $_POST['m']);
-    $Day    = new Calendar_Day($_POST['y'], $_POST['m'], $_POST['d']);
-    $Hour   = new Calendar_Hour($_POST['y'], $_POST['m'], $_POST['d'], $_POST['h']);
-    $Minute = new Calendar_Minute($_POST['y'], $_POST['m'], $_POST['d'], $_POST['h'], $_POST['i']);
-    $Second = new Calendar_Second($_POST['y'], $_POST['m'], $_POST['d'], $_POST['h'], $_POST['i'], $_POST['s']); ?>
+$Year   = new Calendar_Year($_POST['y']);
+$Month  = new Calendar_Month($_POST['y'], $_POST['m']);
+$Day    = new Calendar_Day($_POST['y'], $_POST['m'], $_POST['d']);
+$Hour   = new Calendar_Hour($_POST['y'], $_POST['m'], $_POST['d'], $_POST['h']);
+$Minute = new Calendar_Minute($_POST['y'], $_POST['m'], $_POST['d'], $_POST['h'], $_POST['i']);
+$Second = new Calendar_Second($_POST['y'], $_POST['m'], $_POST['d'], $_POST['h'], $_POST['i'], $_POST['s']); ?>
 <p><span style="font-weight: bold;">Set the alarm clock</p></p>
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
     Year: <input type="text" name="y" value="<?php echo $_POST['y']; ?>" size="4">&nbsp;
     Month:<select name="m">
         <?php
         $selection = [$Month];
-    $Year->build($selection);
-    while ($Child = $Year->fetch()) {
-        if ($Child->isSelected()) {
-            echo '<option value="' . $Child->thisMonth() . '" selected>' . $Child->thisMonth() . "\n";
-        } else {
-            echo '<option value="' . $Child->thisMonth() . '">' . $Child->thisMonth() . "\n";
-        }
-    } ?>
+        $Year->build($selection);
+        while ($Child = $Year->fetch()) {
+            if ($Child->isSelected()) {
+                echo '<option value="' . $Child->thisMonth() . '" selected>' . $Child->thisMonth() . "\n";
+            } else {
+                echo '<option value="' . $Child->thisMonth() . '">' . $Child->thisMonth() . "\n";
+            }
+        } ?>
     </select>&nbsp;
     Day:<select name="d">
         <?php
         $selection = [$Day];
-    $Month->build($selection);
-    while ($Child = $Month->fetch()) {
-        if ($Child->isSelected()) {
-            echo '<option value="' . $Child->thisDay() . '" selected>' . $Child->thisDay() . "\n";
-        } else {
-            echo '<option value="' . $Child->thisDay() . '">' . $Child->thisDay() . "\n";
-        }
-    } ?>
+        $Month->build($selection);
+        while ($Child = $Month->fetch()) {
+            if ($Child->isSelected()) {
+                echo '<option value="' . $Child->thisDay() . '" selected>' . $Child->thisDay() . "\n";
+            } else {
+                echo '<option value="' . $Child->thisDay() . '">' . $Child->thisDay() . "\n";
+            }
+        } ?>
     </select>&nbsp;
     Hour:<select name="h">
         <?php
         $selection = [$Hour];
-    $Day->build($selection);
-    while ($Child = $Day->fetch()) {
-        if ($Child->isSelected()) {
-            echo '<option value="' . $Child->thisHour() . '" selected>' . $Child->thisHour() . "\n";
-        } else {
-            echo '<option value="' . $Child->thisHour() . '">' . $Child->thisHour() . "\n";
-        }
-    } ?>
+        $Day->build($selection);
+        while ($Child = $Day->fetch()) {
+            if ($Child->isSelected()) {
+                echo '<option value="' . $Child->thisHour() . '" selected>' . $Child->thisHour() . "\n";
+            } else {
+                echo '<option value="' . $Child->thisHour() . '">' . $Child->thisHour() . "\n";
+            }
+        } ?>
     </select>&nbsp;
     Minute:<select name="i">
         <?php
         $selection = [$Minute];
-    $Hour->build($selection);
-    while ($Child = $Hour->fetch()) {
-        if ($Child->isSelected()) {
-            echo '<option value="' . $Child->thisMinute() . '" selected>' . $Child->thisMinute() . "\n";
-        } else {
-            echo '<option value="' . $Child->thisMinute() . '">' . $Child->thisMinute() . "\n";
-        }
-    } ?>
+        $Hour->build($selection);
+        while ($Child = $Hour->fetch()) {
+            if ($Child->isSelected()) {
+                echo '<option value="' . $Child->thisMinute() . '" selected>' . $Child->thisMinute() . "\n";
+            } else {
+                echo '<option value="' . $Child->thisMinute() . '">' . $Child->thisMinute() . "\n";
+            }
+        } ?>
     </select>&nbsp;
     Second:<select name="s">
         <?php
         $selection = [$Second];
-    $Minute->build($selection);
-    while ($Child = $Minute->fetch()) {
-        if ($Child->isSelected()) {
-            echo '<option value="' . $Child->thisSecond() . '" selected>' . $Child->thisSecond() . "\n";
-        } else {
-            echo '<option value="' . $Child->thisSecond() . '">' . $Child->thisSecond() . "\n";
-        }
-    } ?>
+        $Minute->build($selection);
+        while ($Child = $Minute->fetch()) {
+            if ($Child->isSelected()) {
+                echo '<option value="' . $Child->thisSecond() . '" selected>' . $Child->thisSecond() . "\n";
+            } else {
+                echo '<option value="' . $Child->thisSecond() . '">' . $Child->thisSecond() . "\n";
+            }
+        } ?>
     </select>&nbsp;
     <input type="submit" name="update" value="Set Alarm"><br>
     <?php
-}
+    }
     ?>
     <?php echo '<p><b>Took: ' . (getmicrotime() - $start) . ' seconds</b></p>'; ?>
 </body>

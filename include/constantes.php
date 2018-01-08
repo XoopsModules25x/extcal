@@ -56,10 +56,12 @@ if (is_object($xoopsModule)) {
 $moduleHandler = xoops_getHandler('module');
 $module        = $moduleHandler->getByDirname('extcal');
 
+/** @var XoopsModules\Extcal\Config $extcalConfig */
 if ('extcal' === $name || is_object($module)) {
     if (is_object($xoopsModuleConfig)) {
         $extcalConfig = $xoopsModuleConfig;
     } else {
+        /** @var \XoopsConfigHandler $configHandler */
         $configHandler = xoops_getHandler('config');
         $extcalConfig  = $configHandler->getConfigList($module->getVar('mid'));
     }
@@ -106,10 +108,8 @@ define('_EXTCAL_NAV_AGENDA_DAY', 'agenda-day');
 define('_EXTCAL_NAV_SEARCH', 'search');
 define('_EXTCAL_NAV_NEW_EVENT', 'new-event');
 
-define(
-    '_EXTCAL_NAV_LIST',
-       _EXTCAL_NAV_CALMONTH . "\n" . _EXTCAL_NAV_CALWEEK . "\n" . _EXTCAL_NAV_YEAR . "\n" . _EXTCAL_NAV_MONTH . "\n" . _EXTCAL_NAV_WEEK . "\n" . _EXTCAL_NAV_DAY . "\n" . _EXTCAL_NAV_AGENDA_WEEK . "\n" . _EXTCAL_NAV_AGENDA_DAY . "\n" . _EXTCAL_NAV_SEARCH . "\n" . _EXTCAL_NAV_NEW_EVENT
-);
+define('_EXTCAL_NAV_LIST',
+       _EXTCAL_NAV_CALMONTH . "\n" . _EXTCAL_NAV_CALWEEK . "\n" . _EXTCAL_NAV_YEAR . "\n" . _EXTCAL_NAV_MONTH . "\n" . _EXTCAL_NAV_WEEK . "\n" . _EXTCAL_NAV_DAY . "\n" . _EXTCAL_NAV_AGENDA_WEEK . "\n" . _EXTCAL_NAV_AGENDA_DAY . "\n" . _EXTCAL_NAV_SEARCH . "\n" . _EXTCAL_NAV_NEW_EVENT);
 
 define('_EXTCAL_PREFIX_VIEW', 'view_');
 define('_EXTCAL_SUFFIX_VIEW', '.php');

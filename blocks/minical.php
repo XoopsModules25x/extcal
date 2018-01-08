@@ -35,7 +35,7 @@ function bExtcalMinicalShow($options)
 
     extcal_getDefautminicalOption($options);
 
-//    require_once __DIR__ . '/../class/config.php';
+    //    require_once __DIR__ . '/../class/config.php';
 
     require_once _EXTCAL_PEAR_CALENDAR_ROOT . '/Util/Textual.php';
     require_once _EXTCAL_PEAR_CALENDAR_ROOT . '/Month/Weeks.php';
@@ -46,7 +46,7 @@ function bExtcalMinicalShow($options)
     // Retriving Image for block if enabled
     if (1 == $options[0]) {
         $imageHandler = xoops_getHandler('image');
-        $criteria     =  new \Criteria('imgcat_id', $options[1]);
+        $criteria     = new \Criteria('imgcat_id', $options[1]);
         $criteria->setSort('RAND()');
         $criteria->setLimit($options[6]);
         $images         = $imageHandler->getObjects($criteria);
@@ -83,15 +83,15 @@ function bExtcalMinicalShow($options)
     }
     //----------------------------------------------------
     // Getting eXtCal object's handler
-//    $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-    $catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    //    $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+    $catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
 
-    $cats       = $catHandler->getAllCatById($xoopsUser);
+    $cats = $catHandler->getAllCatById($xoopsUser);
     // $t = print_r($cats,true);
     // echo "zzz<pre>{$t}</pre>";
 
-    $eventHandler      = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
-    $timeHandler = Extcal\Time::getHandler();
+    $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+    $timeHandler  = Extcal\Time::getHandler();
 
     // Retriving month and year value according to block options
     //modif JJD
@@ -125,14 +125,14 @@ function bExtcalMinicalShow($options)
             'periode'      => _EXTCAL_EVENTS_MONTH,
             'month'        => $month,
             'year'         => $year,
-            'category'          => $tCatSelected,
+            'category'     => $tCatSelected,
             'externalKeys' => 'cat_id',
         ];
         $events   = $eventHandler->getEventsOnPeriode($criteres);
     } else {
         $events = [];
     }
-    //ext_echoArray($events, 'minical');
+    //Extcal\Utility::echoArray($events, 'minical');
     /***************************************************************/
     //$eventHandler->formatEventDate($events, "l dS \of F Y h:i A");
 
@@ -158,18 +158,15 @@ function bExtcalMinicalShow($options)
         //             }
         //         }
     }
-    //ext_echoArray($eventsArray);
+    //Extcal\Utility::echoArray($eventsArray);
 
     /*
      *  Making an array to create tabbed output on the template
      */
     // Flag current day
     $selectedDays = [
-        new Calendar_Day(
-            date('Y', xoops_getUserTimestamp(time(), $timeHandler->_getUserTimeZone($GLOBALS['xoopsUser']))),
-            date('n', xoops_getUserTimestamp(time(), $timeHandler->_getUserTimeZone($GLOBALS['xoopsUser']))),
-                         date('j', xoops_getUserTimestamp(time(), $timeHandler->_getUserTimeZone($GLOBALS['xoopsUser'])))
-        ),
+        new Calendar_Day(date('Y', xoops_getUserTimestamp(time(), $timeHandler->_getUserTimeZone($GLOBALS['xoopsUser']))), date('n', xoops_getUserTimestamp(time(), $timeHandler->_getUserTimeZone($GLOBALS['xoopsUser']))),
+                         date('j', xoops_getUserTimestamp(time(), $timeHandler->_getUserTimeZone($GLOBALS['xoopsUser'])))),
     ];
 
     // Build calendar object
@@ -257,7 +254,7 @@ function bExtcalMinicalShow($options)
  */
 function bExtcalMinicalEdit($options)
 {
-//    require_once __DIR__ . '/../class/form/spin/formspin.php';
+    //    require_once __DIR__ . '/../class/form/spin/formspin.php';
     global $xoopsUser;
 
     //  $t = print_r(get_defined_vars(),true);
@@ -273,7 +270,7 @@ function bExtcalMinicalEdit($options)
 
     //============================================================
 
-    $catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    $catHandler      = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
     $cats            = $catHandler->getAllCat($xoopsUser, 'extcal_cat_view');
     $imageCatHandler = xoops_getHandler('imagecategory');
 
@@ -457,7 +454,7 @@ function _makeXMLSlideshowConf($options)
 /**
  * @param array      $event
  * @param array      $eventsArray
- * @param Time $timeHandler
+ * @param Extcal\Time       $timeHandler
  * @param            $startMonth
  * @param            $endMonth
  * @param            $cats
@@ -466,7 +463,7 @@ function _makeXMLSlideshowConf($options)
  */
 function bExtcalMinicalAddEventToArray($event, &$eventsArray, $timeHandler, $startMonth, $endMonth, $cats)
 {
-    // ext_echoArray($event);
+    // Extcal\Utility::echoArray($event);
     // exit;
     // $d1 = date("j, m, Y", $startMonth);
     // $d2 = date("j, m, Y", $endMonth);
@@ -483,8 +480,8 @@ function bExtcalMinicalAddEventToArray($event, &$eventsArray, $timeHandler, $sta
     // Calculating the start and the end of the event
     $startEvent = xoops_getUserTimestamp($event['event_start'], $timeHandler->_getUserTimeZone($GLOBALS['xoopsUser']));
     $endEvent   = xoops_getUserTimestamp($event['event_end'], $timeHandler->_getUserTimeZone($GLOBALS['xoopsUser']));
-    // ext_echoTSU($event['event_start'],"event['event_start']");
-    // ext_echoTSU($event['event_end'],"event['event_end']");
+    // Extcal\Utility::echoTsu($event['event_start'],"event['event_start']");
+    // Extcal\Utility::echoTsu($event['event_end'],"event['event_end']");
 
     //---------------------------------------------------------------
     if ($startEvent < $startMonth) {

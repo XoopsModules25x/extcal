@@ -33,8 +33,8 @@ $etablissement_id = isset($_REQUEST['etablissement_id']) ? $_REQUEST['etablissem
 global $xoopsUser, $xoopsModuleConfig, $xoopsModule, $xoopsDB;
 
 //On regarde si le lien existe
-$criteria =  new \CriteriaCompo();
-$criteria->add( new \Criteria('id', $etablissement_id, '='));
+$criteria = new \CriteriaCompo();
+$criteria->add(new \Criteria('id', $etablissement_id, '='));
 $etablissement_exist = $etablissementHandler->getCount($criteria);
 
 if (0 == $etablissement_exist) {

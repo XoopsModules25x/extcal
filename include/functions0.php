@@ -111,7 +111,7 @@ function getListCategories($cat, $addNone = true, $name = 'cat')
 {
     global $xoopsUser;
     // Category selectbox
-     $catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    $catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
 
     $catsList  = $catHandler->getAllCat($xoopsUser);
     $catSelect = new \XoopsFormSelect('', $name, $cat);
@@ -139,7 +139,7 @@ function getCheckeCategories($name = 'cat', $cat)
     // Category selectbox
     //<option style="background-color:#00FFFF;">VARCHAR</option>
 
-     $catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    $catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
     $catsList   = $catHandler->getAllCat($xoopsUser);
 
     $t = [];
@@ -251,15 +251,15 @@ function getList($name, $caption, $defaut, $options, $sep = ';')
  */
 function getDateBetweenDates($ts, $startMonth, $endMonth, $mode = 'w')
 {
-    $d = new DateTime($periodStart);
+    $d = new \DateTime($periodStart);
     $d->setTimestamp($ts);
 
     //echo "<br>affichage des periodes : <br>";
-    $begin = new DateTime();
+    $begin = new \DateTime();
     $begin->setTimestamp($startMonth);
     //echo $begin->format("d/m/Y à H\hi:s").'<br>'; // 03/10/2007 à 19h39:53
 
-    $end = new DateTime();
+    $end = new \DateTime();
     $end->setTimestamp($endMonth);
     //echo $end->format("d/m/Y à H\hi:s").'<br>'; // 03/10/2007 à 19h39:53
     //echo "<hr>";
@@ -473,10 +473,10 @@ function ext_DateAdd2($date, $number, $interval = 'd')
  */
 function eclaircirCouleur($color, $plancher, $plafond)
 {
-//    require_once __DIR__ . '/../class/ColorTools.php';
+    //    require_once __DIR__ . '/../class/ColorTools.php';
 
     //$ct = new ColorTools();
     //return $ct->eclaircir($color,$plancher,$plafond);
-    return ColorTools::eclaircir($color, $plancher, $plafond);
+    return colorTools::eclaircir($color, $plancher, $plafond);
 }
 /**************************************************************************/

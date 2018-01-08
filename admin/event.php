@@ -42,9 +42,9 @@ if (!isset($op)) {
  */
 function deleteEvents($ids)
 {
-    /** @var EventHandler $eventHandler */
+    /** @var Extcal\EventHandler $eventHandler */
     $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
-    $criteria     =  new \Criteria('event_id', "($ids)", 'IN');
+    $criteria     = new \Criteria('event_id', "($ids)", 'IN');
 
     //Supression des images
     $rst = $eventHandler->getAllEvents($criteria);
@@ -93,7 +93,7 @@ switch ($op) {
 
         //exit;
         ///////////////////////////////////////////////////////////////////////////////
-        Extcal\Utility::extcal_loadImg($_REQUEST, $event_picture1, $event_picture2);
+        Extcal\Utility::loadImg($_REQUEST, $event_picture1, $event_picture2);
         ///////////////////////////////////////////////////////////////////////////////
         $data = [
             'event_title'         => $_POST['event_title'],
@@ -130,8 +130,8 @@ switch ($op) {
         } else {
             $notificationHandler = xoops_getHandler('notification');
             /** @var Extcal\CategoryHandler $catHandler */
-//            $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-            $catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+            //            $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+            $catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
 
             $data['event_submitter']  = $xoopsUser ? $xoopsUser->getVar('uid') : 0;
             $data['event_submitdate'] = time();

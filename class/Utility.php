@@ -1,4 +1,5 @@
 <?php namespace XoopsModules\Extcal;
+
 /**
  * classGenerator
  * walls_watermarks.
@@ -17,7 +18,6 @@
  **/
 require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 
-use Xmf\Request;
 use XoopsModules\Extcal;
 use XoopsModules\Extcal\Common;
 
@@ -38,7 +38,7 @@ class Utility
      *
      * @return array
      */
-    public static function extcal_getEvent($eventId)
+    public static function getEvent($eventId)
     {
         $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
         $event        = $eventHandler->getEvent($eventId);
@@ -57,7 +57,7 @@ class Utility
      * @param $event_picture1
      * @param $event_picture2
      */
-    public static function extcal_loadImg(&$REQUEST, &$event_picture1, &$event_picture2)
+    public static function loadImg(&$REQUEST, &$event_picture1, &$event_picture2)
     {
         ///////////////////////////////////////////////////////////////////////////////
         $uploaddir_event = XOOPS_ROOT_PATH . '/uploads/extcal/';
@@ -118,13 +118,13 @@ class Utility
      * @param        $cat
      * @param bool   $addNone
      * @param string $name
-     * @return XoopsFormSelect
+     * @return \XoopsFormSelect
      */
     public static function getListCategories($cat, $addNone = true, $name = 'cat')
     {
         global $xoopsUser;
         // Category selectbox
-        $catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+        $catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
 
         $catsList  = $catHandler->getAllCat($xoopsUser);
         $catSelect = new \XoopsFormSelect('', $name, $cat);
@@ -152,7 +152,7 @@ class Utility
         // Category selectbox
         //<option style="background-color:#00FFFF;">VARCHAR</option>
 
-         $catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+        $catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
         $catsList   = $catHandler->getAllCat($xoopsUser);
 
         $t = [];
@@ -181,7 +181,7 @@ class Utility
      * @param string $caption
      * @param        $defaut
      * @param bool   $addNone
-     * @return XoopsFormSelect
+     * @return \XoopsFormSelect
      */
     public static function getListOrderBy($name = 'orderby', $caption = '', $defaut, $addNone = false)
     {
@@ -213,7 +213,7 @@ class Utility
      * @param string $name
      * @param string $caption
      * @param        $defaut
-     * @return XoopsFormSelect
+     * @return \XoopsFormSelect
      */
     public static function getListAndOr($name = 'andor', $caption = '', $defaut)
     {
@@ -235,7 +235,7 @@ class Utility
      * @param        $defaut
      * @param        $options
      * @param string $sep
-     * @return XoopsFormSelect
+     * @return \XoopsFormSelect
      */
     public static function getList($name, $caption, $defaut, $options, $sep = ';')
     {
@@ -246,7 +246,7 @@ class Utility
             $options = explode($sep, $options);
         }
 
-        for ($h = 0, $count = count($options); $h < $count; ++$h) {
+        foreach ($options as $h => $hValue) {
             $select->addOption($h, $options[$h]);
         }
 
@@ -260,24 +260,24 @@ class Utility
      * @param        $startMonth
      * @param        $endMonth
      * @param string $mode
-     * @return DateTime
+     * @return \DateTime
      */
     public static function getDateBetweenDates($ts, $startMonth, $endMonth, $mode = 'w')
     {
-        $d = new DateTime($periodStart);
+        $d = new \DateTime($periodStart);
         $d->setTimestamp($ts);
 
         //echo "<br>affichage des periodes : <br>";
-        $begin = new DateTime();
+        $begin = new \DateTime();
         $begin->setTimestamp($startMonth);
         //echo $begin->format("d/m/Y à H\hi:s").'<br>'; // 03/10/2007 à 19h39:53
 
-        $end = new DateTime();
+        $end = new \DateTime();
         $end->setTimestamp($endMonth);
         //echo $end->format("d/m/Y à H\hi:s").'<br>'; // 03/10/2007 à 19h39:53
         //echo "<hr>";
-        $interval = DateInterval::createFromDateString('next sunday');
-        $period   = new DatePeriod($begin, $interval, $end);
+        $interval = \DateInterval::createFromDateString('next sunday');
+        $period   = new \DatePeriod($begin, $interval, $end);
         //echoDateArray($period);
 
         //echo "<hr>{$interval}";
@@ -296,7 +296,7 @@ class Utility
 
         // <?php
         // $interval = DateInterval::createFromDateString('next sunday');
-        // $period = new DatePeriod($begin, $interval, $end);
+        // $period = new \DatePeriod($begin, $interval, $end);
         // foreach ($period as $dt) {
         //   echo $dt->format( "l Y-m-d H:i:s\n" );
     }
@@ -325,7 +325,7 @@ class Utility
      * @param        $t
      * @param string $msg
      */
-    public static function ext_echoArray($t, $msg = '')
+    public static function echoArray($t, $msg = '')
     {
         if ('' != $msg) {
             echo "<hr>{$msg}<hr>";
@@ -340,7 +340,7 @@ class Utility
      * @param        $line
      * @param string $msg
      */
-    public static function ext_echo($line, $msg = '')
+    public static function extEcho($line, $msg = '')
     {
         if ('' != $msg) {
             echo "<hr>{$msg}<hr>";
@@ -353,11 +353,11 @@ class Utility
      * @param        $tsName
      * @param string $msg
      */
-    public static function ext_echoTSN($tsName, $msg = '')
+    public static function echoTsn($tsName, $msg = '')
     {
         global $$tsName;
         $ts = $$tsName;
-        static::ext_echoTSU($ts, $tsName, $msg = '');
+        static::echoTsu($ts, $tsName, $msg = '');
     }
 
     /*****************************************************************/
@@ -366,7 +366,7 @@ class Utility
      * @param        $tsName
      * @param string $msg
      */
-    public static function ext_echoTSU($ts, $tsName, $msg = '')
+    public static function echoTsu($ts, $tsName, $msg = '')
     {
         if ('' != $msg) {
             echo "<hr>{$msg}<hr>";
@@ -383,7 +383,7 @@ class Utility
      *
      * @return int
      */
-    public static function ext_convert_date($date, $sep = '-')
+    public static function convertDate($date, $sep = '-')
     {
         $lstSep = '/ .';
 
@@ -405,7 +405,7 @@ class Utility
      *
      * @return int
      */
-    public static function ext_DateAdd($givendate, $day = 0, $mth = 0, $yr = 0)
+    public static function addDate($givendate, $day = 0, $mth = 0, $yr = 0)
     {
         //$cd = strtotime($givendate);
         $cd      = $givendate;
@@ -421,7 +421,7 @@ class Utility
      *
      * @return int
      */
-    public static function ext_DateAdd2($date, $number, $interval = 'd')
+    public static function addDate2($date, $number, $interval = 'd')
     {
         $date_time_array = getdate($date);
         $hours           = $date_time_array['hours'];
@@ -488,7 +488,7 @@ class Utility
     {
         require_once __DIR__ . '/ColorTools.php';
 
-        //$ct = new ColorTools();
+        //$ct = new \ColorTools();
         //return $ct->eclaircir($color,$plancher,$plafond);
         return ColorTools::eclaircir($color, $plancher, $plafond);
     }

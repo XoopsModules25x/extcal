@@ -67,7 +67,7 @@ class Calendar_Server
                 $errorMsg .= $error->toString() . "\n";
             }
 
-            return new SOAP_Fault($errorMsg, 'Client');
+            return new Soap_fault($errorMsg, 'Client');
         } else {
             $monthname = date('F Y', $Month->getTimestamp());
             $days      = [];
@@ -87,7 +87,7 @@ class Calendar_Server
     }
 }
 
-$server                    = new SOAP_Server();
+$server                    = new Soap_server();
 $server->_auto_translation = true;
 $calendar                  = new Calendar_Server();
 $server->addObjectMap($calendar, 'urn:PEAR_SOAP_Calendar');
