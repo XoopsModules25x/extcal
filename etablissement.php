@@ -81,7 +81,7 @@ $xoopsTpl->assign('etablissement', $etablissement);
 $date = mktime(0, 0, 0, date('m'), date('d'), date('y'));
 
 $requete = $xoopsDB->query('SELECT event_id, event_title, event_desc, event_picture1, event_start FROM ' . $xoopsDB->prefix('extcal_event') . " WHERE event_etablissement='" . $etablissement_id . "' AND event_start >='" . $date . "'");
-while ($donnees = $xoopsDB->fetchArray($requete)) {
+while (false !== ($donnees = $xoopsDB->fetchArray($requete))) {
     if ($donnees['event_desc'] > 210) {
         $event_desc = $donnees['event_desc'];
     } else {

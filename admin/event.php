@@ -22,9 +22,9 @@ use XoopsModules\Extcal;
 require_once __DIR__ . '/../../../include/cp_header.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-//require_once __DIR__ . '/../class/form/extcalform.php';
+// require_once __DIR__ . '/../class/form/extcalform.php';
 require_once __DIR__ . '/admin_header.php';
-//require_once __DIR__ . '/../class/Utility.php';
+// require_once __DIR__ . '/../class/Utility.php';
 
 $gepeto = array_merge($_GET, $_POST);
 //while (list($k, $v) = each($gepeto)) {

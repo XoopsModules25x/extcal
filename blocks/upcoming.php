@@ -28,7 +28,7 @@ require_once __DIR__ . '/../include/constantes.php';
  */
 function bExtcalUpcomingShow($options)
 {
-    //    require_once __DIR__ . '/../class/config.php';
+    //    // require_once __DIR__ . '/../class/config.php';
 
     // Retriving module config
     $extcalConfig      = Extcal\Config::getHandler();

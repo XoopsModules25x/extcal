@@ -473,7 +473,7 @@ function ext_DateAdd2($date, $number, $interval = 'd')
  */
 function eclaircirCouleur($color, $plancher, $plafond)
 {
-    //    require_once __DIR__ . '/../class/ColorTools.php';
+    //    // require_once __DIR__ . '/../class/ColorTools.php';
 
     //$ct = new ColorTools();
     //return $ct->eclaircir($color,$plancher,$plafond);

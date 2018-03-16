@@ -20,7 +20,7 @@
  * que la classe correspondante de la table a été générées avec classGenerator
  **/
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 //modif JJD
 define('_EXTCAL_MODULE', 'extcal');

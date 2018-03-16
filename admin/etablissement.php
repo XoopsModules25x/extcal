@@ -21,7 +21,7 @@ use XoopsModules\Extcal;
 
 // Include xoops admin header
 require_once __DIR__ . '/../../../include/cp_header.php';
-//require_once __DIR__ . '/../class/ExtcalPersistableObjectHandler.php';
+// require_once __DIR__ . '/../class/ExtcalPersistableObjectHandler.php';
 require_once __DIR__ . '/../../../kernel/module.php';
 require_once __DIR__ . '/../../../class/xoopsformloader.php';
 require_once __DIR__ . '/../../../class/tree.php';
@@ -29,7 +29,7 @@ require_once __DIR__ . '/../../../class/xoopslists.php';
 require_once __DIR__ . '/../../../class/pagenav.php';
 require_once __DIR__ . '/../../../class/xoopsform/grouppermform.php';
 require_once __DIR__ . '/../../../class/uploader.php';
-//require_once __DIR__ . '/../class/etablissement.php';
+// require_once __DIR__ . '/../class/etablissement.php';
 require_once __DIR__ . '/../include/constantes.php';
 
 require_once __DIR__ . '/admin_header.php';

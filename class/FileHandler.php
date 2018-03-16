@@ -18,7 +18,7 @@
  * @author       XOOPS Development Team,
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 // // require_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
 require_once XOOPS_ROOT_PATH . '/class/uploader.php';
@@ -125,7 +125,7 @@ class FileHandler extends ExtcalPersistableObjectHandler
             $criteria->add(new \Criteria('file_id', $in, 'NOT IN'));
         }
 
-        $files = $this->getObjects($criteria);
+        $files =& $this->getObjects($criteria);
         foreach ($files as $file) {
             $this->deleteFile($file);
         }

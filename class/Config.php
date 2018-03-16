@@ -1,6 +1,6 @@
 <?php namespace XoopsModules\Extcal;
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * Class Config.

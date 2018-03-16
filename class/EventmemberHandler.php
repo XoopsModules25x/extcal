@@ -20,7 +20,7 @@
 
 use XoopsModules\Extcal;
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 // // require_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
 
@@ -68,7 +68,7 @@ class EventmemberHandler extends ExtcalPersistableObjectHandler
     public function getMembers($eventId)
     {
         $memberHandler = xoops_getHandler('member');
-        $eventMember   = $this->getObjects(new \Criteria('event_id', $eventId));
+        $eventMember   =& $this->getObjects(new \Criteria('event_id', $eventId));
         $count         = count($eventMember);
         if ($count > 0) {
             $in = '(' . $eventMember[0]->getVar('uid');

@@ -24,7 +24,7 @@ use XoopsModules\Extcal;
 
 require_once __DIR__ . '/../../../class/uploader.php';
 require_once __DIR__ . '/../../../class/mail/phpmailer/class.phpmailer.php'; // First we require the PHPMailer libary in our script
-//require_once __DIR__ . '/../class/Utility.php';
+// require_once __DIR__ . '/../class/Utility.php';
 require_once __DIR__ . '/constantes.php';
 require_once __DIR__ . '/../../../class/template.php';
 
@@ -110,7 +110,7 @@ __sql__;
 
     $rst     = $xoopsDB->query($sql);
     $members = [];
-    while ($row = $xoopsDB->fetchArray($rst)) {
+    while (false !== ($row = $xoopsDB->fetchArray($rst))) {
         $row['status']        = _MD_EXTCAL_PRESENT;
         $members[$row['uid']] = $row;
     }
@@ -127,7 +127,7 @@ WHERE tm.uid = tu.uid
 __sql__;
 
     $rst = $xoopsDB->query($sql);
-    while ($row = $xoopsDB->fetchArray($rst)) {
+    while (false !== ($row = $xoopsDB->fetchArray($rst))) {
         $row['status']        = _MD_EXTCAL_ABSENT;
         $members[$row['uid']] = $row;
     }

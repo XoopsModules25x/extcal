@@ -20,7 +20,7 @@
 
 use XoopsModules\Extcal;
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 // // require_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
 //require_once __DIR__ . '/perm.php';
@@ -129,7 +129,7 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
         if (!$skipPerm) {
             $this->addCatPermCriteria($criteriaCompo, $GLOBALS['xoopsUser']);
         }
-        $ret = $this->getObjects($criteriaCompo);
+        $ret =& $this->getObjects($criteriaCompo);
         if (isset($ret[0])) {
             return $ret[0];
         } else {

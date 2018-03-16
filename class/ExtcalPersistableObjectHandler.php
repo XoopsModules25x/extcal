@@ -110,7 +110,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
             $criteria = new \Criteria($this->keyName, (int)$id);
         }
         $criteria->setLimit(1);
-        $objectArray = $this->getObjects($criteria, false, true);
+        $objectArray =& $this->getObjects($criteria, false, true);
         if (1 != count($objectArray)) {
             return $this->create();
         }
@@ -162,7 +162,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     public function convertResultSet($result, $idAsKey = false, $asObject = true)
     {
         $ret = [];
-        while ($myrow = $this->db->fetchArray($result)) {
+       while (false !== ($myrow = $this->db->fetchArray($result))) {
             $obj = $this->create(false);
             $obj->assignVars($myrow);
             if (!$idAsKey) {
@@ -233,7 +233,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
         }
 
         $myts = \MyTextSanitizer::getInstance();
-        while ($myrow = $this->db->fetchArray($result)) {
+       while (false !== ($myrow = $this->db->fetchArray($result))) {
             //identifiers should be textboxes, so sanitize them like that
             $ret[$myrow[$this->keyName]] = empty($this->identifierName) ? 1 : $myts->htmlSpecialChars($myrow[$this->identifierName]);
         }
@@ -275,7 +275,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
             return $count;
         } else {
             $ret = [];
-            while (list($id, $count) = $this->db->fetchRow($result)) {
+            while (false !== (list($id, $count) = $this->db->fetchRow($result))) {
                 $ret[$id] = $count;
             }
 
@@ -653,7 +653,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
             return $sum;
         } else {
             $ret = [];
-            while (list($id, $sum) = $this->db->fetchRow($result)) {
+            while (false !== (list($id, $sum) = $this->db->fetchRow($result))) {
                 $ret[$id] = $sum;
             }
 
@@ -694,7 +694,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
             return $max;
         } else {
             $ret = [];
-            while (list($id, $max) = $this->db->fetchRow($result)) {
+            while (false !== (list($id, $max) = $this->db->fetchRow($result))) {
                 $ret[$id] = $max;
             }
 

@@ -33,7 +33,7 @@ $helper = Extcal\Helper::getInstance();
 $adminObject = \Xmf\Module\Admin::getInstance();
 $utility     = new Extcal\Utility();
 
-//require_once __DIR__ . '/../class/Utility.php';
+// require_once __DIR__ . '/../class/Utility.php';
 //require_once __DIR__ . '/../include/common.php';
 
 $adminObject = \Xmf\Module\Admin::getInstance();
