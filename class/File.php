@@ -45,4 +45,3 @@ class File extends \XoopsObject
         $this->initVar('uid', XOBJ_DTYPE_INT, null, false);
     }
 }
-

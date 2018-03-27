@@ -40,13 +40,15 @@ $configurator = new common\Configurator();
 if ($helper->getConfig('displaySampleButton')) {
     xoops_loadLanguage('admin/modulesadmin', 'system');
     require_once __DIR__ . '/../testdata/index.php';
-    $adminObject->addItemButton(_AM_SYSTEM_MODULES_INSTALL_TESTDATA, '__DIR__ . /../../testdata/index.php?op=load', 'add');
+
+    $adminObject->addItemButton(constant('CO_' . $moduleDirNameUpper . '_' . 'ADD_SAMPLEDATA'), '__DIR__ . /../../testdata/index.php?op=load', 'add');
+
+    $adminObject->addItemButton(constant('CO_' . $moduleDirNameUpper . '_' . 'SAVE_SAMPLEDATA'), '__DIR__ . /../../testdata/index.php?op=save', 'add');
+
+    //    $adminObject->addItemButton(constant('CO_' . $moduleDirNameUpper . '_' . 'EXPORT_SCHEMA'), '__DIR__ . /../../testdata/index.php?op=exportschema', 'add');
+
     $adminObject->displayButton('left', '');
 }
-
-require_once __DIR__ . '/../testdata/index.php';
-$adminObject->addItemButton(AM_EXTCAL_ADD_SAMPLEDATA, '__DIR__ . /../../testdata/index.php?op=load', 'add');
-$adminObject->displayButton('left', '');
 
 //------------- End Test Data ----------------------------
 

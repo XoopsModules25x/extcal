@@ -137,13 +137,13 @@ $xoopsTpl->assign('list_position', $xoopsModuleConfig['list_position']);
 if ($xoopsUser) {
     $xoopsTpl->assign('isAdmin', $xoopsUser->isAdmin());
     $canEdit = false;
-    /* todo
-        $canEdit
-            =
-            $permHandler->isAllowed($xoopsUser, 'extcal_cat_edit', $event['cat']['cat_id'])
-                && $xoopsUser->getVar('uid') == $event['user']['uid'];
-        $xoopsTpl->assign('canEdit', $canEdit);
-    */
+/* todo
+    $canEdit
+        =
+        $permHandler->isAllowed($xoopsUser, 'extcal_cat_edit', $event['cat']['cat_id'])
+            && $xoopsUser->getVar('uid') == $event['user']['uid'];
+    $xoopsTpl->assign('canEdit', $canEdit);
+*/
 } else {
     $xoopsTpl->assign('isAdmin', false);
     $xoopsTpl->assign('canEdit', false);

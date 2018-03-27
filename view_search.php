@@ -146,7 +146,7 @@ foreach ($recurrents as $h => $hValue) {
     }
 }
 
-$eventsArray = array_merge((array)$eventsArray, (array)$recurEventsArray);
+$eventsArray = array_merge($eventsArray, $recurEventsArray);
 
 // Sort event array by event start
 //usort($eventsArray, "orderEvents");
@@ -198,13 +198,13 @@ $xoopsTpl->assign('num_tries', $num_tries);
 if ($xoopsUser) {
     $xoopsTpl->assign('isAdmin', $xoopsUser->isAdmin());
     $canEdit = false;
-    /* todo
-        $canEdit
-            =
-            $permHandler->isAllowed($xoopsUser, 'extcal_cat_edit', $event['cat']['cat_id'])
-                && $xoopsUser->getVar('uid') == $event['user']['uid'];
-        $xoopsTpl->assign('canEdit', $canEdit);
-    */
+/* todo
+    $canEdit
+        =
+        $permHandler->isAllowed($xoopsUser, 'extcal_cat_edit', $event['cat']['cat_id'])
+            && $xoopsUser->getVar('uid') == $event['user']['uid'];
+    $xoopsTpl->assign('canEdit', $canEdit);
+*/
 } else {
     $xoopsTpl->assign('isAdmin', false);
     $xoopsTpl->assign('canEdit', false);

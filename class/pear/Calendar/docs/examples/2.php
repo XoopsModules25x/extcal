@@ -129,7 +129,7 @@ $next   = $_SERVER['PHP_SELF'] . '?y=' . $NMonth->thisYear() . '&m=' . $NMonth->
             // Check to see if day is selected
             if ($Day->isSelected()) {
                 echo '<td class="selected">' . $Day->thisDay() . '</td>' . "\n";
-                // Check to see if day is empty
+            // Check to see if day is empty
             } elseif ($Day->isEmpty()) {
                 echo '<td class="empty">' . $Day->thisDay() . '</td>' . "\n";
             } else {

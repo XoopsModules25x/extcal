@@ -150,8 +150,8 @@ class FormSpin extends \XoopsFormElement
         $imgFolder = 'default',
         $styleText = '',
         $styleBordure = '',
-        $minMaxVisible = true)
-    {
+        $minMaxVisible = true
+    ) {
         $this->setName($name);
         $this->setCaption($caption);
         $this->setValue($value);

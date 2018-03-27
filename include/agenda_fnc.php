@@ -140,8 +140,8 @@ function agenda_getEvents(
     $mPlage = 15,
     $nbJours = 1,
     $formatDate = 'd-m-Y',
-    $formatJour = 'H:i')
-{
+    $formatJour = 'H:i'
+) {
 
     //    $tAgenda = agenda_getCanevas($ts, 8, 20, $mPlage, $nbJours);
     $tAgenda = agenda_getCanevas($ts, $hStart, $hEnd - 1, $mPlage, $nbJours, $formatDate, $formatJour);

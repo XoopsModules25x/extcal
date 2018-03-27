@@ -24,9 +24,9 @@ $Uri = new Calendar_Util_Uri('jahr', 'monat');
 $Uri->setFragments('jahr', 'monat');
 
 echo '"Vector" URIs<pre>';
-echo "Previous Uri:\t" . htmlentities($Uri->prev($Calendar, 'month')) . "\n";
-echo "This Uri:\t" . htmlentities($Uri->this($Calendar, 'month')) . "\n";
-echo "Next Uri:\t" . htmlentities($Uri->next($Calendar, 'month')) . "\n";
+echo "Previous Uri:\t" . htmlentities($Uri->prev($Calendar, 'month'), ENT_QUOTES | ENT_HTML5) . "\n";
+echo "This Uri:\t" . htmlentities($Uri->this($Calendar, 'month'), ENT_QUOTES | ENT_HTML5) . "\n";
+echo "Next Uri:\t" . htmlentities($Uri->next($Calendar, 'month'), ENT_QUOTES | ENT_HTML5) . "\n";
 echo '</pre>';
 
 // Switch to scalar URIs

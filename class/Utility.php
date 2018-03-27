@@ -493,5 +493,4 @@ class Utility
         return ColorTools::eclaircir($color, $plancher, $plafond);
     }
     /**************************************************************************/
-
 }

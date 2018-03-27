@@ -210,8 +210,8 @@ function extcal_SendMail(
     $mail_body,
     $bEcho = false,
     $mode = 0,
-    $sep = '|')
-{
+    $sep = '|'
+) {
     global $ModName, $signature, $mail_admin, $xoopsConfig, $xoopsDB, $xoopsModule;
 
     //$bEcho=false;

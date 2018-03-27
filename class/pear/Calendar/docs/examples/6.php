@@ -54,11 +54,11 @@ if (isset($_GET['mime']) && 'wml' === $_GET['mime']) {
             <table>
                 <?php
                 $Day->build();
-                while ($Hour = $Day->fetch()) {
-                    echo "<tr>\n";
-                    echo '<td>' . date('g a', $Hour->getTimestamp()) . "</td><td>Free time!</td>\n";
-                    echo "</tr>\n";
-                } ?>
+            while ($Hour = $Day->fetch()) {
+                echo "<tr>\n";
+                echo '<td>' . date('g a', $Hour->getTimestamp()) . "</td><td>Free time!</td>\n";
+                echo "</tr>\n";
+            } ?>
             </table>
             <?php
         } else {
@@ -76,21 +76,21 @@ if (isset($_GET['mime']) && 'wml' === $_GET['mime']) {
                 </tr>
                 <?php
                 $Month->build($selection);
-                while ($Day = $Month->fetch()) {
-                    if ($Day->isFirst()) {
-                        echo "<tr>\n";
-                    }
-                    if ($Day->isEmpty()) {
-                        echo "<td></td>\n";
-                    } elseif ($Day->isSelected()) {
-                        echo '<td><anchor><strong><u>' . $Day->thisDay() . "</u></strong>\n<go href=\"" . $_SERVER['PHP_SELF'] . '?viewday=true&amp;y=' . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . "&amp;mime=wml\">\n</anchor></td>\n";
-                    } else {
-                        echo '<td><anchor>' . $Day->thisDay() . "\n<go href=\"?viewday=true&amp;y=" . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . "&amp;mime=wml\"></anchor></td>\n";
-                    }
-                    if ($Day->isLast()) {
-                        echo "</tr>\n";
-                    }
-                } ?>
+            while ($Day = $Month->fetch()) {
+                if ($Day->isFirst()) {
+                    echo "<tr>\n";
+                }
+                if ($Day->isEmpty()) {
+                    echo "<td></td>\n";
+                } elseif ($Day->isSelected()) {
+                    echo '<td><anchor><strong><u>' . $Day->thisDay() . "</u></strong>\n<go href=\"" . $_SERVER['PHP_SELF'] . '?viewday=true&amp;y=' . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . "&amp;mime=wml\">\n</anchor></td>\n";
+                } else {
+                    echo '<td><anchor>' . $Day->thisDay() . "\n<go href=\"?viewday=true&amp;y=" . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . "&amp;mime=wml\"></anchor></td>\n";
+                }
+                if ($Day->isLast()) {
+                    echo "</tr>\n";
+                }
+            } ?>
                 <tr>
                     <td>
                         <anchor>
@@ -146,11 +146,11 @@ if (isset($_GET['mime']) && 'wml' === $_GET['mime']) {
         <table>
             <?php
             $Day->build();
-            while ($Hour = $Day->fetch()) {
-                echo "<tr>\n";
-                echo '<td>' . date('g a', $Hour->getTimestamp()) . "</td><td>Free time!</td>\n";
-                echo "</tr>\n";
-            } ?>
+        while ($Hour = $Day->fetch()) {
+            echo "<tr>\n";
+            echo '<td>' . date('g a', $Hour->getTimestamp()) . "</td><td>Free time!</td>\n";
+            echo "</tr>\n";
+        } ?>
         </table>
         <?php
     } else {
@@ -168,21 +168,21 @@ if (isset($_GET['mime']) && 'wml' === $_GET['mime']) {
             </tr>
             <?php
             $Month->build($selection);
-            while ($Day = $Month->fetch()) {
-                if ($Day->isFirst()) {
-                    echo "<tr>\n";
-                }
-                if ($Day->isEmpty()) {
-                    echo "<td></td>\n";
-                } elseif ($Day->isSelected()) {
-                    echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?viewday=true&amp;y=' . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . '&amp;wml"><strong><u>' . $Day->thisDay() . "</u></strong></a></td>\n";
-                } else {
-                    echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?viewday=true&amp;y=' . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . '">' . $Day->thisDay() . "</a></td>\n";
-                }
-                if ($Day->isLast()) {
-                    echo "</tr>\n";
-                }
-            } ?>
+        while ($Day = $Month->fetch()) {
+            if ($Day->isFirst()) {
+                echo "<tr>\n";
+            }
+            if ($Day->isEmpty()) {
+                echo "<td></td>\n";
+            } elseif ($Day->isSelected()) {
+                echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?viewday=true&amp;y=' . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . '&amp;wml"><strong><u>' . $Day->thisDay() . "</u></strong></a></td>\n";
+            } else {
+                echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?viewday=true&amp;y=' . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . '">' . $Day->thisDay() . "</a></td>\n";
+            }
+            if ($Day->isLast()) {
+                echo "</tr>\n";
+            }
+        } ?>
             <tr>
                 <td>
                     <a href="<?php

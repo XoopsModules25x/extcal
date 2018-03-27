@@ -40,8 +40,8 @@ class ColorTools
         $plancherVert = 0,
         $plafondVert = 255,
         $plancherBleu = 0,
-        $plafondBleu = 255)
-    {
+        $plafondBleu = 255
+    ) {
         $t10 = static::hexa2rgbA($colorHexa);
 
         $t10[1] = static::bornerValeur($t10[1] + $incrementRouge, $plancherRouge, $plafondRouge);

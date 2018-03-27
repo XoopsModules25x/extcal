@@ -28,13 +28,13 @@ class Helper extends \Xmf\Module\Helper
     public $debug;
 
     /**
-     * @internal param $debug
+     * 
      * @param bool $debug
      */
     protected function __construct($debug = false)
     {
         $this->debug   = $debug;
-        $this->dirname = basename(dirname(__DIR__));
+       $moduleDirName = basename(dirname(__DIR__));          parent::__construct($moduleDirName);
     }
 
     /**
@@ -76,5 +76,3 @@ class Helper extends \Xmf\Module\Helper
         return $ret;
     }
 }
-
-

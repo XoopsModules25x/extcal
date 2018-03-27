@@ -162,7 +162,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     public function convertResultSet($result, $idAsKey = false, $asObject = true)
     {
         $ret = [];
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $obj = $this->create(false);
             $obj->assignVars($myrow);
             if (!$idAsKey) {
@@ -233,7 +233,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
         }
 
         $myts = \MyTextSanitizer::getInstance();
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             //identifiers should be textboxes, so sanitize them like that
             $ret[$myrow[$this->keyName]] = empty($this->identifierName) ? 1 : $myts->htmlSpecialChars($myrow[$this->identifierName]);
         }

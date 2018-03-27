@@ -67,7 +67,7 @@ switch ($op) {
 
             $catHandler->modifyCat($cat_id, $varArr);
             redirect_header('cat.php', 3, _AM_EXTCAL_CAT_EDITED, false);
-            // Create new cat
+        // Create new cat
         } else {
             // $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
             //            $varArr = [

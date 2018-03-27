@@ -1473,7 +1473,6 @@ class EventHandler extends ExtcalPersistableObjectHandler
      */
     public function getRecurEventToDisplay($event, $periodStart, $periodEnd)
     {
-
         $recuEvents   = [];
         $eventOptions = explode('|', $event['event_recur_rules']);
 
@@ -2308,8 +2307,8 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $limit = 0,
         $offset = 0,
         $userId = 0,
-        $user = '')
-    {
+        $user = ''
+    ) {
         global $xoopsDB;
 
         //echo "<hr>{$andor}-{$limit}-{$offset}-{$userId}-{$user}<br>{$criteresPlus}";
@@ -2451,8 +2450,8 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $userId,
         $user,
         $criteresPlus = '',
-        $xoopsSearch = true)
-    {
+        $xoopsSearch = true
+    ) {
         global $xoopsDB;
         //echo "<hr>{$andor}-{$limit}-{$offset}-{$userId}-{$user}<br>{$criteresPlus}";
 
