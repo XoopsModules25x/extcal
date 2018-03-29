@@ -910,7 +910,8 @@ class EventHandler extends ExtcalPersistableObjectHandler
      */
     public function getEventForm($siteSide = 'user', $mode = 'new', $data = null)
     {
-        global $xoopsModuleConfig;
+        /** @var Extcal\Helper $helper */
+        $helper = Extcal\Helper::getInstance();
         $catHandler  = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
         $fileHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_FILE);
 
@@ -1164,9 +1165,9 @@ class EventHandler extends ExtcalPersistableObjectHandler
             $options['width']  = '100%';
             $options['height'] = '200px';
             if ($isAdmin) {
-                $descEditor = new \XoopsFormEditor(_MD_EXTCAL_DESCRIPTION, $xoopsModuleConfig['editorAdmin'], $options, $nohtml = false, $onfailure = 'textarea');
+                $descEditor = new \XoopsFormEditor(_MD_EXTCAL_DESCRIPTION, $helper->getConfig('editorAdmin'), $options, $nohtml = false, $onfailure = 'textarea');
             } else {
-                $descEditor = new \XoopsFormEditor(_MD_EXTCAL_DESCRIPTION, $xoopsModuleConfig['editorUser'], $options, $nohtml = false, $onfailure = 'textarea');
+                $descEditor = new \XoopsFormEditor(_MD_EXTCAL_DESCRIPTION, $helper->getConfig('editorUser'), $options, $nohtml = false, $onfailure = 'textarea');
             }
         } else {
             $descEditor = new \XoopsFormDhtmlTextArea(_MD_EXTCAL_DESCRIPTION, 'event_desc', $desc, '100%', '100%');
@@ -1204,9 +1205,9 @@ class EventHandler extends ExtcalPersistableObjectHandler
             $options['width']  = '100%';
             $options['height'] = '200px';
             if ($isAdmin) {
-                $addressEditor = new \XoopsFormEditor(_MD_EXTCAL_DESCRIPTION, $xoopsModuleConfig['editorAdmin'], $options, $nohtml = false, $onfailure = 'textarea');
+                $addressEditor = new \XoopsFormEditor(_MD_EXTCAL_DESCRIPTION, $helper->getConfig('editorAdmin'), $options, $nohtml = false, $onfailure = 'textarea');
             } else {
-                $addressEditor = new \XoopsFormEditor(_MD_EXTCAL_DESCRIPTION, $xoopsModuleConfig['editorUser'], $options, $nohtml = false, $onfailure = 'textarea');
+                $addressEditor = new \XoopsFormEditor(_MD_EXTCAL_DESCRIPTION, $helper->getConfig('editorUser'), $options, $nohtml = false, $onfailure = 'textarea');
             }
         } else {
             $addressEditor = new \XoopsFormDhtmlTextArea(_MD_EXTCAL_DESCRIPTION, 'event_address', $event_address, '100%', '100%');

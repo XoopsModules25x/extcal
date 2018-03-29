@@ -35,7 +35,7 @@ function bExtcalMinicalShow($options)
 
     extcal_getDefautminicalOption($options);
 
-    //    // require_once __DIR__ . '/../class/config.php';
+    //    // require_once __DIR__ . '/../class/Config.php';
 
     require_once _EXTCAL_PEAR_CALENDAR_ROOT . '/Util/Textual.php';
     require_once _EXTCAL_PEAR_CALENDAR_ROOT . '/Month/Weeks.php';

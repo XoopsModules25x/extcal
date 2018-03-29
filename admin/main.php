@@ -1,6 +1,8 @@
 <?php
 
 use XoopsModules\Extcal;
+/** @var Extcal\Helper $helper */
+$helper = Extcal\Helper::getInstance();
 
 require_once __DIR__ . '/../../../include/cp_header.php';
 include __DIR__ . '/../../../class/xoopsformloader.php';
@@ -51,7 +53,6 @@ switch ($op) {
                 //                $eventMemberHandler = xoops_getModuleHandler(_EXTCAL_CLS_MEMBER, _EXTCAL_MODULE);
                 $extcalTime        = Extcal\Time::getHandler();
                 $extcalConfig      = Extcal\Config::getHandler();
-                $xoopsModuleConfig = $extcalConfig->getModuleConfig();
 
                 $event = $eventHandler->getEvent($_POST['event_id'], $xoopsUser, true);
                 $cat   = $catHandler->getCat($event->getVar('cat_id'), $xoopsUser, 'all');
@@ -70,8 +71,8 @@ switch ($op) {
                 $tag = [
                     'EV_CAT'   => $cat->getVar('cat_name'),
                     'EV_TITLE' => $event->getVar('event_title'),
-                    'EV_START' => $extcalTime->getFormatedDate($xoopsModuleConfig['date_long'], $event->getVar('event_start')),
-                    'EV_END'   => $extcalTime->getFormatedDate($xoopsModuleConfig['date_long'], $event->getVar('event_end')),
+                    'EV_START' => $extcalTime->getFormatedDate($helper->getConfig('date_long'), $event->getVar('event_start')),
+                    'EV_END'   => $extcalTime->getFormatedDate($helper->getConfig('date_long'), $event->getVar('event_end')),
                     'EV_LINK'  => XOOPS_URL . '/modules/extcal/event.php?event=' . $event->getVar('event_id'),
                 ];
                 $xoopsMailer->assign($tag);

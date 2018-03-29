@@ -10,6 +10,8 @@
  */
 
 use XoopsModules\Extcal;
+/** @var Extcal\Helper $helper */
+$helper = Extcal\Helper::getInstance();
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
@@ -35,8 +37,8 @@ $cat   = isset($_GET['cat']) ? (int)$_GET['cat'] : 0;
 // Validate the date (day, month and year)
 $dayTS = mktime(0, 0, 0, $month, $day, $year);
 
-//$offset = $xoopsModuleConfig['week_start_day'] - date('w', $dayTS);
-$offset = date('w', $dayTS) + 7 - $xoopsModuleConfig['week_start_day'] < 7 ? date('w', $dayTS) + 7 - $xoopsModuleConfig['week_start_day'] : 0;
+//$offset = $helper->getConfig('week_start_day') - date('w', $dayTS);
+$offset = date('w', $dayTS) + 7 - $helper->getConfig('week_start_day') < 7 ? date('w', $dayTS) + 7 - $helper->getConfig('week_start_day') : 0;
 
 $dayTS -= ($offset * _EXTCAL_TS_DAY);
 $year  = date('Y', $dayTS);
@@ -44,7 +46,7 @@ $month = date('n', $dayTS);
 $day   = date('j', $dayTS);
 
 $form = new \XoopsSimpleForm('', 'navigSelectBox', $params['file'], 'get');
-$form->addElement(getListYears($year, $xoopsModuleConfig['agenda_nb_years_before'], $xoopsModuleConfig['agenda_nb_years_after']));
+$form->addElement(getListYears($year, $helper->getConfig('agenda_nb_years_before'), $helper->getConfig('agenda_nb_years_after')));
 $form->addElement(getListMonths($month));
 $form->addElement(getListDays($day));
 $form->addElement(Extcal\Utility::getListCategories($cat));

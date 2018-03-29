@@ -33,7 +33,7 @@ function bExtcalUpcomingByCategoryShow($options)
 {
     global $xoopsUser, $extcalConfig;
 
-    //    // require_once __DIR__ . '/../class/config.php';
+    //    // require_once __DIR__ . '/../class/Config.php';
 
     // Retriving module config
     //     $extcalConfig = Extcal\Config::getHandler();

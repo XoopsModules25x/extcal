@@ -18,6 +18,8 @@
  */
 
 use XoopsModules\Extcal;
+/** @var Extcal\Helper $helper */
+$helper = Extcal\Helper::getInstance();
 
 include __DIR__ . '/../../mainfile.php';
 $GLOBALS['xoopsOption']['template_main'] = 'extcal_post.tpl';
@@ -59,7 +61,7 @@ if (isset($_POST['form_preview'])) {
         'event_start'        => $_POST['event_start'],
         'have_end'           => $_POST['have_end'],
         'event_end'          => $_POST['event_end'],
-        'dohtml'             => (int)$xoopsModuleConfig['allow_html'],
+        'dohtml'             => (int)$helper->getConfig('allow_html'),
         'event_price'        => $_POST['event_price'],
         'event_organisateur' => $_POST['event_organisateur'],
         'event_icone'        => $_POST['event_icone'],
@@ -74,7 +76,7 @@ if (isset($_POST['form_preview'])) {
     $event = $eventHandler->objectToArray($event, ['cat_id'], 'p');
 
     // Adding formated date for start and end event
-    $eventHandler->formatEventDate($event, $xoopsModuleConfig['event_date_event']);
+    $eventHandler->formatEventDate($event, $helper->getConfig('event_date_event'));
 
     // Assigning event to the template
     $xoopsTpl->assign('event', $event);
@@ -119,7 +121,7 @@ if (isset($_POST['form_preview'])) {
     Extcal\Utility::loadImg($_REQUEST, $event_picture1, $event_picture2);
     ///////////////////////////////////////////////////////////////////////////////
 
-    require_once __DIR__ . '/class/perm.php';
+//    require_once __DIR__ . '/class/perm.php';
 
     /** @var Extcal\FileHandler $fileHandler */
     $fileHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_FILE);
@@ -144,7 +146,7 @@ if (isset($_POST['form_preview'])) {
         'event_picture2'      => @$event_picture2,
         'event_price'         => @$_POST['event_price'],
         'event_etablissement' => $_POST['event_etablissement'],
-        'dohtml'              => $xoopsModuleConfig['allow_html'],
+        'dohtml'              => $helper->getConfig('allow_html'),
         'event_icone'         => $_POST['event_icone'],
 
     ];

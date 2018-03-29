@@ -21,11 +21,11 @@
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 // require_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
-require_once __DIR__ . '/perm.php';
-require_once __DIR__ . '/time.php';
-require_once __DIR__ . '/config.php';
-require_once __DIR__ . '/ExtDateTime.php';
-require_once __DIR__ . '/utility.php';
+//require_once __DIR__ . '/perm.php';
+//require_once __DIR__ . '/time.php';
+//require_once __DIR__ . '/config.php';
+//require_once __DIR__ . '/ExtDateTime.php';
+//require_once __DIR__ . '/utility.php';
 require_once __DIR__ . '/../include/constantes.php';
 
 /**

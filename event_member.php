@@ -1,6 +1,9 @@
 <?php
 
+
 use XoopsModules\Extcal;
+/** @var Extcal\Helper $helper */
+$helper = Extcal\Helper::getInstance();
 
 include __DIR__ . '/../../mainfile.php';
 
@@ -30,7 +33,7 @@ exit;
 */
 
 //sendMail2member($mode, $event_id, $member_uid, $subject, $tplMessage)
-//sendMail2member($xoopsModuleConfig['email_Mode'], $event_id, $member_uid, $newStatus, $oldStatus, $message);
+//sendMail2member($helper->getConfig('email_Mode'), $event_id, $member_uid, $newStatus, $oldStatus, $message);
 sendMail2member(_EXTCAL_HEADER_HTML, $event_id, $member_uid, $userName, $message);
 
 // $t = print_r(get_defined_constants(), true);
@@ -43,7 +46,7 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header('index.php', 3, _NOPERM . '<br>' . implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
 }
 
-if ($xoopsUser && $xoopsModuleConfig['whos_going']) {
+if ($xoopsUser && $helper->getConfig('whos_going')) {
     // If param are right
     if ((int)$_POST['event'] > 0 && ('add' === $_POST['mode'] || 'remove' === $_POST['mode'])) {
         $eventHandler       = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);

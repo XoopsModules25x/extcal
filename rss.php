@@ -1,6 +1,8 @@
 <?php
 
 use XoopsModules\Extcal;
+/** @var Extcal\Helper $helper */
+$helper = Extcal\Helper::getInstance();
 
 include __DIR__ . '/../../mainfile.php';
 require_once __DIR__ . '/include/constantes.php';
@@ -20,9 +22,9 @@ if (function_exists('mb_http_output')) {
 header('Content-Type:text/xml; charset=utf-8');
 $tpl          = new \XoopsTpl();
 $tpl->caching = 0;
-$tpl->xoops_setCacheTime($xoopsModuleConfig['rss_cache_time'] * _EXTCAL_TS_MINUTE);
+$tpl->xoops_setCacheTime($helper->getConfig('rss_cache_time') * _EXTCAL_TS_MINUTE);
 if (!$tpl->is_cached('db:extcal_rss.tpl', $cat)) {
-    $events = $eventHandler->getUpcommingEvent($xoopsModuleConfig['rss_nb_event'], $cat);
+    $events = $eventHandler->getUpcommingEvent($helper->getConfig('rss_nb_event'), $cat);
     if (is_array($events)) {
         $tpl->assign('channel_title', xoops_utf8_encode(htmlspecialchars($xoopsConfig['sitename'], ENT_QUOTES)));
         $tpl->assign('channel_link', XOOPS_URL . '/');

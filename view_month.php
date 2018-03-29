@@ -1,6 +1,8 @@
 <?php
 
 use XoopsModules\Extcal;
+/** @var Extcal\Helper $helper */
+$helper = Extcal\Helper::getInstance();
 
 include __DIR__ . '/../../mainfile.php';
 require_once __DIR__ . '/include/constantes.php';
@@ -15,7 +17,7 @@ $cat   = isset($_GET['cat']) ? (int)$_GET['cat'] : 0;
 /* ========================================================================== */
 
 $form = new \XoopsSimpleForm('', 'navigSelectBox', $params['file'], 'get');
-$form->addElement(getListYears($year, $xoopsModuleConfig['agenda_nb_years_before'], $xoopsModuleConfig['agenda_nb_years_after']));
+$form->addElement(getListYears($year, $helper->getConfig('agenda_nb_years_before'), $helper->getConfig('agenda_nb_years_after')));
 $form->addElement(getListMonths($month));
 $form->addElement(Extcal\Utility::getListCategories($cat));
 $form->addElement(new \XoopsFormButton('', '', _SUBMIT, 'submit'));
@@ -38,7 +40,7 @@ $events   = $eventHandler->getEventsOnPeriode($criteres);
 $eventsArray = $events;
 
 // Formating date
-//$eventHandler->formatEventsDate($events, $xoopsModuleConfig['event_date_year']);
+//$eventHandler->formatEventsDate($events, $helper->getConfig('event_date_year'));
 
 // Treatment for recurring event
 $startMonth = mktime(0, 0, 0, $month, 1, $year);
@@ -48,14 +50,14 @@ $endMonth   = mktime(23, 59, 59, $month, 31, $year);
 // foreach ($events as $event) {
 //     if ($event['event_isrecur']==0) {
 //         // Formating date
-//         $eventHandler->formatEventDate($event, $xoopsModuleConfig['event_date_week']);
+//         $eventHandler->formatEventDate($event, $helper->getConfig('event_date_week'));
 //         $eventsArray[] = $event;
 //     } else {
 //         //$recurEvents = $eventHandler->getRecurEventToDisplay($event, $startMonth, $endMonth);
 //         // Formating date
-//         //$eventHandler->formatEventsDate($recurEvents, $xoopsModuleConfig['event_date_week']);
+//         //$eventHandler->formatEventsDate($recurEvents, $helper->getConfig('event_date_week'));
 //         //$eventsArray = array_merge($eventsArray, $recurEvents);
-//         $eventHandler->formatEventDate($event, $xoopsModuleConfig['event_date_week']);
+//         $eventHandler->formatEventDate($event, $helper->getConfig('event_date_week'));
 //         $eventsArray[] = $event;
 //     }
 // }
@@ -68,7 +70,7 @@ $endMonth   = mktime(23, 59, 59, $month, 31, $year);
 //         $recurEvents = $eventHandler->getRecurEventToDisplay($recurrents[$h], $startMonth, $endMonth);
 // //        echoArray($recurEvents,false,"liste des evennements a ajouter pour " . $recurrents[$h]['event_title']);
 //         // Formating date
-//         $eventHandler->formatEventsDate($recurEvents, $xoopsModuleConfig['event_date_week']);
+//         $eventHandler->formatEventsDate($recurEvents, $helper->getConfig('event_date_week'));
 //         $eventsArray = array_merge($eventsArray, $recurEvents);
 // }
 //
@@ -91,15 +93,15 @@ $nMonthCalObj = $monthCalObj->nextMonth('object');
 $navig        = [
     'prev' => [
         'uri'  => 'year=' . $pMonthCalObj->thisYear() . '&amp;month=' . $pMonthCalObj->thisMonth(),
-        'name' => $timeHandler->getFormatedDate($xoopsModuleConfig['nav_date_month'], $pMonthCalObj->getTimestamp()),
+        'name' => $timeHandler->getFormatedDate($helper->getConfig('nav_date_month'), $pMonthCalObj->getTimestamp()),
     ],
     'this' => [
         'uri'  => 'year=' . $monthCalObj->thisYear() . '&amp;month=' . $monthCalObj->thisMonth(),
-        'name' => $timeHandler->getFormatedDate($xoopsModuleConfig['nav_date_month'], $monthCalObj->getTimestamp()),
+        'name' => $timeHandler->getFormatedDate($helper->getConfig('nav_date_month'), $monthCalObj->getTimestamp()),
     ],
     'next' => [
         'uri'  => 'year=' . $nMonthCalObj->thisYear() . '&amp;month=' . $nMonthCalObj->thisMonth(),
-        'name' => $timeHandler->getFormatedDate($xoopsModuleConfig['nav_date_month'], $nMonthCalObj->getTimestamp()),
+        'name' => $timeHandler->getFormatedDate($helper->getConfig('nav_date_month'), $nMonthCalObj->getTimestamp()),
     ],
 ];
 
@@ -110,8 +112,8 @@ $xoopsTpl->assign('xoops_pagetitle', $xoopsModule->getVar('name') . ' ' . $navig
 $xoopsTpl->assign('navig', $navig);
 
 //Display tooltip
-$xoopsTpl->assign('showInfoBulle', $xoopsModuleConfig['showInfoBulle']);
-$xoopsTpl->assign('showId', $xoopsModuleConfig['showId']);
+$xoopsTpl->assign('showInfoBulle', $helper->getConfig('showInfoBulle'));
+$xoopsTpl->assign('showId', $helper->getConfig('showId'));
 
 // Assigning current form navig data to the template
 $xoopsTpl->assign('selectedCat', $cat);
@@ -122,7 +124,7 @@ $xoopsTpl->assign('params', $params);
 
 $tNavBar = getNavBarTabs($params['view']);
 $xoopsTpl->assign('tNavBar', $tNavBar);
-$xoopsTpl->assign('list_position', $xoopsModuleConfig['list_position']);
+$xoopsTpl->assign('list_position', $helper->getConfig('list_position'));
 // echoArray($tNavBar,true);
 
 //---------------------------------------------------------------

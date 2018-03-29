@@ -18,6 +18,8 @@
  */
 
 use XoopsModules\Extcal;
+/** @var Extcal\Helper $helper */
+$helper = Extcal\Helper::getInstance();
 
 include __DIR__ . '/../../mainfile.php';
 require_once __DIR__ . '/include/constantes.php';
@@ -40,7 +42,7 @@ if ($event['event_etablissement'] > 0) {
 }
 
 // Adding formated date for start and end event
-$eventHandler->formatEventDate($event, $xoopsModuleConfig['event_date_event']);
+$eventHandler->formatEventDate($event, $helper->getConfig('event_date_event'));
 
 echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">' . "\n";
 echo '<html xmlns="http://www.w3.org/1999/xhtml">' . "\n";

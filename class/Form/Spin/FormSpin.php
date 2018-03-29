@@ -482,7 +482,7 @@ class FormSpin extends \XoopsFormElement
      *************************************************************************/
     public function getFolder()
     {
-        $sSpinFolder = $GLOBALS['xoops']->url('modules/extcal/class/form/spin/');
+        $sSpinFolder = $GLOBALS['xoops']->url('modules/extcal/class/Form/Spin/');
 
         return $sSpinFolder;
     }

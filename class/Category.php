@@ -21,8 +21,8 @@
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 // require_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
-require_once __DIR__ . '/perm.php';
-require_once __DIR__ . '/time.php';
+//require_once __DIR__ . '/perm.php';
+//require_once __DIR__ . '/time.php';
 
 /**
  * Class Category.

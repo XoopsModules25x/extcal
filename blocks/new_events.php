@@ -28,11 +28,11 @@ require_once __DIR__ . '/../include/constantes.php';
  */
 function bExtcalNewShow($options)
 {
-    //    // require_once __DIR__ . '/../class/config.php';
+    //    // require_once __DIR__ . '/../class/Config.php';
 
-    // Retriving module config
-    $extcalConfig      = Extcal\Config::getHandler();
-    $xoopsModuleConfig = $extcalConfig->getModuleConfig();
+    /** @var Extcal\Helper $helper */
+    $helper = Extcal\Helper::getInstance();
+
 
     $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 
@@ -48,7 +48,7 @@ function bExtcalNewShow($options)
 
     $events = $eventHandler->objectToArray($eventHandler->getNewEvent(0, $nbEvent, $options));
     $eventHandler->serverTimeToUserTimes($events);
-    $eventHandler->formatEventsDate($events, $xoopsModuleConfig['event_date_month']);
+    $eventHandler->formatEventsDate($events, $helper->getConfig('event_date_month'));
 
     return $events;
 }

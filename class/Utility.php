@@ -486,7 +486,7 @@ class Utility
      */
     public static function getLighterColor($color, $plancher, $plafond)
     {
-        require_once __DIR__ . '/ColorTools.php';
+//        require_once __DIR__ . '/ColorTools.php';
 
         //$ct = new \ColorTools();
         //return $ct->eclaircir($color,$plancher,$plafond);

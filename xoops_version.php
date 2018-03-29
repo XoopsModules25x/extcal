@@ -27,7 +27,7 @@ $moduleDirName = basename(__DIR__);
 
 require_once __DIR__ . '/include/constantes.php';
 require_once __DIR__ . '/include/agenda_fnc.php';
-require_once __DIR__ . '/class/config.php';
+//require_once __DIR__ . '/class/Config.php';
 //$loc_de = setlocale (LC_ALL, 'french');
 
 //echo "local :" .  setlocale(LC_TIME, $xoopsConfig['language'])."</ br>";
