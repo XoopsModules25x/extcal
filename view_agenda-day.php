@@ -12,10 +12,10 @@ require_once __DIR__ . '/header.php';
 
 /* ========================================================================== */
 //recupe des variables get
-$year  = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
-$month = isset($_GET['month']) ? (int)$_GET['month'] : date('n');
-$day   = isset($_GET['day']) ? (int)$_GET['day'] : date('j');
-$cat   = isset($_GET['cat']) ? (int)$_GET['cat'] : 0;
+$year  = \Xmf\Request::getInt('year', date('Y'), 'GET');
+$month = \Xmf\Request::getInt('month', date('n'), 'GET');
+$day   = \Xmf\Request::getInt('day', date('j'), 'GET');
+$cat   = \Xmf\Request::getInt('cat', 0, 'GET');
 /* ========================================================================== */
 
 //echo "{$params['view']}-{$year}-{$month}-{$day}<hr>extcal_{$params['view']}.html<br>";

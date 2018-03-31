@@ -28,8 +28,8 @@ $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
 require_once __DIR__ . '/header.php';
 
 /* ========================================================================== */
-$year = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
-$cat  = isset($_GET['cat']) ? (int)$_GET['cat'] : 0;
+$year = \Xmf\Request::getInt('year', date('Y'), 'GET');
+$cat  = \Xmf\Request::getInt('cat', 0, 'GET');
 
 // Getting eXtCal object's handler
 $catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);

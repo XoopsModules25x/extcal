@@ -21,15 +21,15 @@ $num_tries = isset($_POST['num_tries']) ? $_POST['num_tries'] + 1 : 0;
 /***************************************************************/
 /*  ajout des elements de recherche                            */
 /***************************************************************/
-$searchExp = isset($_POST['searchExp']) ? $_POST['searchExp'] : '';
-$andor     = isset($_POST['andor']) ? $_POST['andor'] : '';
-$year      = isset($_POST['year']) ? (int)$_POST['year'] : date('Y');
-$month     = isset($_POST['month']) ? (int)$_POST['month'] : date('n');
-$day       = isset($_POST['day']) ? (int)$_POST['day'] : 0;
-$cat       = isset($_POST['cat']) ? (int)$_POST['cat'] : 0;
+$searchExp = \Xmf\Request::getString('searchExp', '', 'POST');
+$andor     = \Xmf\Request::getString('andor', '', 'POST');
+$year      = \Xmf\Request::getInt('year', date('Y'), 'POST');
+$month     = \Xmf\Request::getInt('month', date('n'), 'POST');
+$day       = \Xmf\Request::getInt('day', 0, 'POST');
+$cat       = \Xmf\Request::getInt('cat', 0, 'POST');
 $orderby1  = isset($_POST['orderby1']) ? $_POST['orderby1'] : 'cat_name ASC';
 $orderby2  = isset($_POST['orderby2']) ? $_POST['orderby2'] : 'event_title ASC';
-$orderby3  = isset($_POST['orderby3']) ? $_POST['orderby3'] : '';
+$orderby3  = \Xmf\Request::getString('orderby3', '', 'POST');
 /* ========================================================================== */
 
 //$orderby = isset($_GET['orderby']) ? (int)($_GET['orderby']) : 0;
