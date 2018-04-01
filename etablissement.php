@@ -28,7 +28,7 @@ require_once __DIR__ . '/header.php';
 $etablissementHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_ETABLISSEMENT);
 //require_once XOOPS_ROOT_PATH.'/header.php';
 
-$etablissement_id = \Xmf\Request::getInt('etablissement_id', 0, REQUEST);
+$etablissement_id = \Xmf\Request::getInt('etablissement_id', 0, 'REQUEST');
 
 global $xoopsUser, $xoopsModuleConfig, $xoopsModule, $xoopsDB;
 

@@ -319,7 +319,7 @@ switch ($op) {
         //global $extcalConfig;
         $extcalConfig      = Extcal\Config::getHandler();
 
-        $start          = \Xmf\Request::getInt('start', 0, GET);
+        $start          = \Xmf\Request::getInt('start', 0, 'GET');
         $nbEventsByPage = $helper->getConfig('nbEventsByPage');
 
         xoops_cp_header();
