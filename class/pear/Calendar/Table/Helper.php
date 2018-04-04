@@ -117,7 +117,7 @@ class Calendar_Table_Helper
     {
         $this->calendar = $calendar;
         $this->cE       = $calendar->getEngine();
-        if (is_null($firstDay)) {
+        if (null === $firstDay) {
             $firstDay = $this->cE->getFirstDayOfWeek($this->calendar->thisYear(), $this->calendar->thisMonth(), $this->calendar->thisDay());
         }
         $this->firstDay = $firstDay;
@@ -183,7 +183,7 @@ class Calendar_Table_Helper
     /**
      * Returns the order array of days in a week.
      *
-     * @return int
+     * @return array
      */
     public function getDaysOfWeek()
     {

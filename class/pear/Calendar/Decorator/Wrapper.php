@@ -81,7 +81,7 @@ class Calendar_Decorator_Wrapper extends Calendar_Decorator
      *
      * @param string $decorator name of Decorator class to wrap with
      *
-     * @return object instance of named decorator
+     * @return bool instance of named decorator
      */
     public function &fetch($decorator)
     {

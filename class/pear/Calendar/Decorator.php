@@ -242,7 +242,7 @@ class Calendar_Decorator
      *
      * @param array $sDates array containing Calendar objects to select (optional)
      *
-     * @return bool
+     * @return void
      * @abstract
      */
     public function build($sDates = [])

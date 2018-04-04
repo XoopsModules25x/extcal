@@ -114,22 +114,22 @@ class Calendar_Util_Uri
      */
     public function setFragments($y, $m = null, $d = null, $h = null, $i = null, $s = null)
     {
-        if (!is_null($y)) {
+        if (null !== $y) {
             $this->uris['Year'] = $y;
         }
-        if (!is_null($m)) {
+        if (null !== $m) {
             $this->uris['Month'] = $m;
         }
-        if (!is_null($d)) {
+        if (null !== $d) {
             $this->uris['Day'] = $d;
         }
-        if (!is_null($h)) {
+        if (null !== $h) {
             $this->uris['Hour'] = $h;
         }
-        if (!is_null($i)) {
+        if (null !== $i) {
             $this->uris['Minute'] = $i;
         }
-        if (!is_null($s)) {
+        if (null !== $s) {
             $this->uris['Second'] = $s;
         }
     }

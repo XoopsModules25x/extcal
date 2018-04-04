@@ -439,7 +439,7 @@ class Calendar_Engine_UnixTS /* implements Calendar_Engine_Interface */
     public function isToday($stamp)
     {
         static $today = null;
-        if (is_null($today)) {
+        if (null === $today) {
             $today_date = @date('Y n j');
             $today      = sscanf($today_date, '%d %d %d');
         }

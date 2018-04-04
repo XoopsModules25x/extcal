@@ -23,14 +23,14 @@ use XoopsModules\Extcal\Common;
 require_once __DIR__ . '/admin_header.php';
 // Display Admin header
 xoops_cp_header();
-/** @var Extcal\Utility $utilityClass */
+/** @var Extcal\Utility $utility */
 
 //$configurator = include __DIR__ . '/../include/config.php';
 
 $configurator = new common\Configurator();
 
 //foreach (array_keys($configurator['uploadFolders']) as $i) {
-//    $utilityClass::createFolder($configurator['uploadFolders'][$i]);
+//    $utility::createFolder($configurator['uploadFolders'][$i]);
 //    $adminObject->addConfigBoxLine($configurator['uploadFolders'][$i], 'folder');
 //    //    $adminObject->addConfigBoxLine(array($configurator['uploadFolders'][$i], '777'), 'chmod');
 //}

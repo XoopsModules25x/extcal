@@ -93,10 +93,11 @@ class MonthPayload_Decorator extends Calendar_Decorator
         if (count($events) > 0) {
             $this->setSelection($events);
         }
-        Calendar_Month_Weekdays::buildEmptyDaysBefore();
-        Calendar_Month_Weekdays::shiftDays();
-        Calendar_Month_Weekdays::buildEmptyDaysAfter();
-        Calendar_Month_Weekdays::setWeekMarkers();
+        $calMonthWeekdays = new Calendar_Month_Weekdays($this->year, $this->month);
+        $calMonthWeekdays->buildEmptyDaysBefore();
+        $calMonthWeekdays->shiftDays();
+        $calMonthWeekdays->buildEmptyDaysAfter();
+        $calMonthWeekdays->setWeekMarkers();
 
         return true;
     }

@@ -81,7 +81,7 @@ class Calendar_Engine_Factory
     /**
      * Returns an instance of the engine.
      *
-     * @return object instance of a calendar calculation engine
+     * @return bool instance of a calendar calculation engine
      */
     public static function &getEngine()
     {
@@ -298,7 +298,7 @@ class Calendar
      */
     public function toArray($stamp = null)
     {
-        if (is_null($stamp)) {
+        if (null === $stamp) {
             $stamp = $this->getTimestamp();
         }
 
@@ -469,14 +469,14 @@ class Calendar
     public function defineFirstDayOfWeek($firstDay = null)
     {
         if (defined('CALENDAR_FIRST_DAY_OF_WEEK')) {
-            if ((CALENDAR_FIRST_DAY_OF_WEEK != $firstDay) && !is_null($firstDay)) {
+            if ((CALENDAR_FIRST_DAY_OF_WEEK != $firstDay) && null !== $firstDay) {
                 $msg = 'CALENDAR_FIRST_DAY_OF_WEEK constant already defined.' . ' The $firstDay parameter will be ignored.';
                 trigger_error($msg, E_USER_WARNING);
             }
 
             return CALENDAR_FIRST_DAY_OF_WEEK;
         }
-        if (is_null($firstDay)) {
+        if (null === $firstDay) {
             $firstDay = $this->cE->getFirstDayOfWeek($this->thisYear(), $this->thisMonth(), $this->thisDay());
         }
         define('CALENDAR_FIRST_DAY_OF_WEEK', $firstDay);

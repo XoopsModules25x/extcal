@@ -481,7 +481,7 @@ class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
     public function isToday($stamp)
     {
         static $today = null;
-        if (is_null($today)) {
+        if (null === $today) {
             $today = new Date();
         }
         $date = self::stampCollection($stamp);
