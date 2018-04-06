@@ -23,18 +23,8 @@ function isUpToDate()
     return $GLOBALS['xoopsModule']->getVar('version') >= $version;
 }
 
-if (isset($_GET['op'])) {
-    $op = $_GET['op'];
-} else {
-    $op = 'default';
-    if (isset($_POST['op'])) {
-        $op = $_POST['op'];
-    }
-}
-$fct = 'default';
-if (isset($_GET['fct'])) {
-    $fct = $_GET['fct'];
-}
+$op  = \Xmf\Request::getCmd('op', 'default');
+$fct = \Xmf\Request::getString('fct', 'default', 'GET');
 
 switch ($op) {
     case 'notification':
@@ -125,7 +115,7 @@ switch ($op) {
                 $form->addElement(new \XoopsFormText($subjectCaption, 'mail_subject', 50, 255, _AM_EXTCAL_SEND_NOTIFICATION_SUBJECT), true);
                 $form->addElement(new \XoopsFormTextArea($bodyCaption, 'mail_body', _AM_EXTCAL_SEND_NOTIFICATION_BODY, 10), true);
                 $form->addElement($toCheckBox, true);
-                $form->addElement(new \XoopsFormHidden('event_id', $_GET['event_id']), false);
+                $form->addElement(new \XoopsFormHidden('event_id', \Xmf\Request::getInt('event_id', 0, 'GET'), false));
                 $form->addElement(new \XoopsFormButton('', 'mail_submit', _SUBMIT, 'submit'));
                 $form->display();
                 echo '</fieldset>';

@@ -42,16 +42,8 @@ include XOOPS_ROOT_PATH . '/header.php';
 $xoTheme->addScript('modules/extcal/include/ToolTips.js');
 $xoTheme->addStylesheet('modules/extcal/assets/css/infobulle.css');
 
-if (!isset($_GET['event'])) {
-    $eventId = 0;
-} else {
-    $eventId = (int)$_GET['event'];
-}
-if (!isset($_GET['action'])) {
-    $action = 'edit';
-} else {
-    $action = $_GET['action'];
-}
+$eventId = \Xmf\Request::getInt('event', 0, 'GET');
+$action = \Xmf\Request::getString('action', 'edit', 'GET');
 
 // Getting eXtCal object's handler
 $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);

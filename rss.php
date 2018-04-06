@@ -11,11 +11,9 @@ require_once __DIR__ . '/header.php';
 require_once XOOPS_ROOT_PATH . '/class/template.php';
 /** @var Extcal\EventHandler $eventHandler */
 $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
-if (!isset($_GET['cat'])) {
-    $cat = 0;
-} else {
-    $cat = (int)$_GET['cat'];
-}
+
+$cat = \Xmf\Request::getInt('cat', 0, 'GET');
+
 if (function_exists('mb_http_output')) {
     mb_http_output('pass');
 }

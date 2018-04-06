@@ -131,7 +131,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
      */
     public function getAllEvents($criteria = null, $asObject = false)
     {
-        $rst =& $this->getObjects($criteria, $asObject);
+        $rst = $this->getObjects($criteria, $asObject);
         if ($asObject) {
             return $rst;
         } else {
@@ -157,7 +157,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
         if (!$skipPerm) {
             $this->addCatPermCriteria($criteriaCompo, $user);
         }
-        $ret =& $this->getObjects($criteriaCompo);
+        $ret = $this->getObjects($criteriaCompo);
         if (isset($ret[0])) {
             return $ret[0];
         } else {
@@ -182,7 +182,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
         if (!$skipPerm) {
             $this->addCatPermCriteria($criteriaCompo, $user);
         }
-        $ret =& $this->getObjects($criteriaCompo);
+        $ret = $this->getObjects($criteriaCompo);
         if (isset($ret[0])) {
             return $ret[0];
         } else {
@@ -424,7 +424,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $criteriaCompo->add(new \Criteria('event_isrecur', 0, '='));
         $criteriaCompo->setOrder($sens);
 
-        $result =& $this->getObjects($criteriaCompo);
+        $result = $this->getObjects($criteriaCompo);
         $events = $this->objectToArray($result, $externalKeys);
         $this->serverTimeToUserTimes($events);
 
@@ -497,7 +497,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $criteriaCompo->add(new \Criteria('event_isrecur', 1, '='));
         $criteriaCompo->setOrder($sens);
 
-        $result =& $this->getObjects($criteriaCompo);
+        $result = $this->getObjects($criteriaCompo);
         $events = $this->objectToArray($result, $externalKeys);
         $this->serverTimeToUserTimes($events);
 

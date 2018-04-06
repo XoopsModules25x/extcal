@@ -5,11 +5,8 @@ use XoopsModules\Extcal;
 include __DIR__ . '/../../mainfile.php';
 require_once __DIR__ . '/include/constantes.php';
 
-if (!isset($_GET['file'])) {
-    $fileId = 0;
-} else {
-    $fileId = (int)$_GET['file'];
-}
+$fileId = \Xmf\Request::getInt('file', 0, 'GET');
+
 /** @var Extcal\FileHandler $fileHandler */
 $fileHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_FILE);
 

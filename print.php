@@ -26,11 +26,8 @@ require_once __DIR__ . '/include/constantes.php';
 
 require_once XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/calendar.php';
 
-if (!isset($_GET['event'])) {
-    $eventId = 0;
-} else {
-    $eventId = (int)$_GET['event'];
-}
+$eventId = \Xmf\Request::getInt('event', 0, 'GET');
+
 $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 $event        = $eventHandler->objectToArray($eventHandler->getEvent($eventId), ['cat_id']);
 

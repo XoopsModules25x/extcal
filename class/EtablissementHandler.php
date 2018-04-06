@@ -52,7 +52,7 @@ class EtablissementHandler extends ExtcalPersistableObjectHandler
         if (!$skipPerm) {
             $this->addCatPermCriteria($criteriaCompo, $user);
         }
-        $ret =& $this->getObjects($criteriaCompo);
+        $ret = $this->getObjects($criteriaCompo);
         if (isset($ret[0])) {
             return $ret[0];
         } else {
@@ -75,7 +75,7 @@ class EtablissementHandler extends ExtcalPersistableObjectHandler
         $id_as_key = true
     ) //getAll($criteria = null, $asObject = false)
     {
-        $rst =& $this->getObjects($criteria, $asObject);
+        $rst = $this->getObjects($criteria, $asObject);
         if ($asObject) {
             return $rst;
         } else {

@@ -110,7 +110,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
             $criteria = new \Criteria($this->keyName, (int)$id);
         }
         $criteria->setLimit(1);
-        $objectArray =& $this->getObjects($criteria, false, true);
+        $objectArray = $this->getObjects($criteria, false, true);
         if (1 != count($objectArray)) {
             return $this->create();
         }

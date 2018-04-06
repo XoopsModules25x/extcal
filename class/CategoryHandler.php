@@ -129,7 +129,7 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
         if (!$skipPerm) {
             $this->addCatPermCriteria($criteriaCompo, $GLOBALS['xoopsUser']);
         }
-        $ret =& $this->getObjects($criteriaCompo);
+        $ret = $this->getObjects($criteriaCompo);
         if (isset($ret[0])) {
             return $ret[0];
         } else {

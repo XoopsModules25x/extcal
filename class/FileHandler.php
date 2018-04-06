@@ -125,7 +125,7 @@ class FileHandler extends ExtcalPersistableObjectHandler
             $criteria->add(new \Criteria('file_id', $in, 'NOT IN'));
         }
 
-        $files =& $this->getObjects($criteria);
+        $files = $this->getObjects($criteria);
         foreach ($files as $file) {
             $this->deleteFile($file);
         }

@@ -32,7 +32,7 @@ include XOOPS_ROOT_PATH . '/include/comment_view.php';
 if (!isset($_GET['event'])) {
     $eventId = 0;
 } else {
-    $eventId = (int)$_GET['event'];
+    $eventId = \Xmf\Request::getInt('event', 0, 'GET');
 }
 $eventHandler          = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 $fileHandler           = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_FILE);

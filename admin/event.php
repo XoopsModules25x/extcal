@@ -124,7 +124,7 @@ switch ($op) {
             if (!$eventHandler->modifyEvent($_POST['event_id'], $data)) {
                 redirect_header('event.php', 3, _AM_EXTCAL_EVENT_EDIT_FAILED, false);
             } else {
-                $fileHandler->createFile((int)$_POST['event_id']);
+                $fileHandler->createFile(\Xmf\Request::getInt('event_id', 0, 'POST'));
                 redirect_header('event.php', 3, _AM_EXTCAL_EVENT_EDITED, false);
             }
 
