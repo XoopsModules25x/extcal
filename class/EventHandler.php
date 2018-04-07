@@ -916,7 +916,6 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $fileHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_FILE);
 
         /***************************************************/
-        //        require_once __DIR__ . '/etablissement.php';
         if ('admin' === $siteSide) {
             $action = 'event.php?op=enreg';
             $cats   = $catHandler->getAllCat($GLOBALS['xoopsUser'], 'all');
@@ -954,7 +953,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
             $event_picture1      = $event->getVar('event_picture1');
             $event_picture2      = $event->getVar('event_picture2');
             $event_price         = $event->getVar('event_price');
-            $event_etablissement = $event->getVar('event_etablissement');
+            $event_location = $event->getVar('event_location');
             $event_icone         = $event->getVar('event_icone');
 
             // Configuring recurring form
@@ -1025,7 +1024,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
             $event_picture1      = $data['event_picture1'];
             $event_picture2      = $data['event_picture2'];
             $event_price         = $data['event_price'];
-            $event_etablissement = $data['event_etablissement'];
+            $event_location = $data['event_location'];
             $event_icone         = $data['event_icone'];
 
             // Configuring recurring form
@@ -1096,7 +1095,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
             $event_picture1      = '';
             $event_picture2      = '';
             $event_price         = '';
-            $event_etablissement = '';
+            $event_location = '';
             $files               = [];
             $event_icone         = '';
         }
@@ -1125,25 +1124,25 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $xfIcones->addOptionArray($tf);
         $form->addElement($xfIcones, false);
         //-----------------------------------------------------------
-        //etablissement
-        $etablissementHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_ETABLISSEMENT);
-        $etablissement_select = new \XoopsFormSelect(_MD_EXTCAL_ETABLISSEMENT, 'event_etablissement', $event_etablissement);
+        //location
+        $locationHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_LOCATION);
+        $location_select = new \XoopsFormSelect(_MD_EXTCAL_LOCATION, 'event_location', $event_location);
         $criteria             = new \CriteriaCompo();
         $criteria->setSort('nom');
         $criteria->setOrder('ASC');
 
-        //$lstEtablissement = $etablissementHandler->getList($criteria);
-        $etablissement_arr = $etablissementHandler->getAll($criteria);
+        //$lstLocation = $locationHandler->getList($criteria);
+        $location_arr = $locationHandler->getAll($criteria);
         $tEts              = [];
         $tEts[0]           = _MD_EXTCAL_NONE;
-        foreach (array_keys($etablissement_arr) as $i) {
-            $tEts[$etablissement_arr[$i]->getVar('id')] = $etablissement_arr[$i]->getVar('nom');
-            //            $tEts[$etablissement_arr[$i]['id']] = $etablissement_arr[$i]['nom'];
+        foreach (array_keys($location_arr) as $i) {
+            $tEts[$location_arr[$i]->getVar('id')] = $location_arr[$i]->getVar('nom');
+            //            $tEts[$location_arr[$i]['id']] = $location_arr[$i]['nom'];
         }
         //array_unshift($tEts, _MD_EXTCAL_NONE);
 
-        $etablissement_select->addOptionArray($tEts);
-        $form->addElement($etablissement_select, true);
+        $location_select->addOptionArray($tEts);
+        $form->addElement($location_select, true);
 
         //-----------------------------------------------------------
 

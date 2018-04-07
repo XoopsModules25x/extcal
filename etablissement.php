@@ -21,28 +21,27 @@ use XoopsModules\Extcal;
 
 require_once __DIR__ . '/../../mainfile.php';
 require_once __DIR__ . '/include/constantes.php';
-$GLOBALS['xoopsOption']['template_main'] = 'extcal_etablissement.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'extcal_location.tpl';
 require_once __DIR__ . '/header.php';
 
-//require_once XOOPS_ROOT_PATH."/modules/extcal/class/etablissement.php";
-$etablissementHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_ETABLISSEMENT);
+$locationHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_LOCATION);
 //require_once XOOPS_ROOT_PATH.'/header.php';
 
-$etablissement_id = \Xmf\Request::getInt('etablissement_id', 0, 'REQUEST');
+$location_id = \Xmf\Request::getInt('location_id', 0, 'REQUEST');
 
 global $xoopsUser, $xoopsModuleConfig, $xoopsModule, $xoopsDB;
 
 //On regarde si le lien existe
 $criteria = new \CriteriaCompo();
-$criteria->add(new \Criteria('id', $etablissement_id, '='));
-$etablissement_exist = $etablissementHandler->getCount($criteria);
+$criteria->add(new \Criteria('id', $location_id, '='));
+$location_exist = $locationHandler->getCount($criteria);
 
-if (0 == $etablissement_exist) {
+if (0 == $location_exist) {
     redirect_header(XOOPS_URL . '/modules/extcal/index.php', 3, _NOPERM);
 }
 
-$view_etablissement = $etablissementHandler->getEtablissement($etablissement_id, true);
-$etablissement      = $etablissementHandler->objectToArray($view_etablissement);
+$view_location = $locationHandler->getLocation($location_id, true);
+$location      = $locationHandler->objectToArray($view_location);
 
 $isAdmin = false;
 if (isset($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->getVar('mid'))) {
@@ -58,29 +57,29 @@ $edit_delete = '';
 if (is_object($xoopsUser) && $isAdmin) {
     $edit_delete = '<a href="'
                    . XOOPS_URL
-                   . '/modules/extcal/admin/etablissement.php?op=edit_etablissement&etablissement_id='
-                   . $etablissement_id
+                   . '/modules/extcal/admin/Location.php?op=edit_location&location_id='
+                   . $location_id
                    . '"><img src="'
                    . $pathIcon16
                    . '/edit.png" width="16px" height="16px" border="0" title="'
-                   . _MD_EXTCAL_ETABLISSEMENT_EDIT
+                   . _MD_EXTCAL_LOCATION_EDIT
                    . '"></a><a href="'
                    . XOOPS_URL
-                   . '/modules/extcal/admin/etablissement.php?op=delete_etablissement&etablissement_id='
-                   . $etablissement_id
+                   . '/modules/extcal/admin/Location.php?op=delete_location&location_id='
+                   . $location_id
                    . '"><img src="'
                    . $pathIcon16
                    . '/delete.png" width="16px" height="16px" border="0" title="'
-                   . _MD_EXTCAL_ETABLISSEMENT_DELETE
+                   . _MD_EXTCAL_LOCATION_DELETE
                    . '"></a>';
 }
 $xoopsTpl->assign('edit_delete', $edit_delete);
 
-$xoopsTpl->assign('etablissement', $etablissement);
+$xoopsTpl->assign('location', $location);
 
 $date = mktime(0, 0, 0, date('m'), date('d'), date('y'));
 
-$requete = $xoopsDB->query('SELECT event_id, event_title, event_desc, event_picture1, event_start FROM ' . $xoopsDB->prefix('extcal_event') . " WHERE event_etablissement='" . $etablissement_id . "' AND event_start >='" . $date . "'");
+$requete = $xoopsDB->query('SELECT event_id, event_title, event_desc, event_picture1, event_start FROM ' . $xoopsDB->prefix('extcal_event') . " WHERE event_location='" . $location_id . "' AND event_start >='" . $date . "'");
 while (false !== ($donnees = $xoopsDB->fetchArray($requete))) {
     if ($donnees['event_desc'] > 210) {
         $event_desc = $donnees['event_desc'];

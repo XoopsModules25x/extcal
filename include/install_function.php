@@ -12,12 +12,12 @@ function xoops_module_install_extcal(\XoopsModule $xoopsModule)
     $dir = XOOPS_ROOT_PATH . '/uploads/extcal';
     if (!is_dir($dir)) {
         mkdir($dir);
-        mkdir($dir . '/etablissement');
+        mkdir($dir . '/location');
 
         // Copy index.html files on uploads folders
         $indexFile = __DIR__ . '/index.html';
         copy($indexFile, $dir . '/index.html');
-        copy($indexFile, $dir . '/etablissement/index.html');
+        copy($indexFile, $dir . '/location/index.html');
     }
 
     $moduleId               = $xoopsModule->getVar('mid');

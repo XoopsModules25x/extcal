@@ -23,11 +23,11 @@
     <tr>
         <td colspan="3" class="odd" style="padding-right:30px; padding-top:10px;">
             <div style="padding-right:0;">
-                <{if $etablissement.logo}>
+                <{if $location.logo}>
                     <a id="<{$id}>" class="highslide" onclick="return hs.expand(this)"
-                       href="<{$smarty.const.XOOPS_URL}>/uploads/extcal/etablissement/<{$etablissement.logo}>">
+                       href="<{$smarty.const.XOOPS_URL}>/uploads/extcal/location/<{$location.logo}>">
                         <img align=right style="border:1px solid #FFFFFF;margin-right:6px;"
-                             src="<{$smarty.const.XOOPS_URL}>/uploads/extcal/etablissement/<{$etablissement.logo}>"
+                             src="<{$smarty.const.XOOPS_URL}>/uploads/extcal/location/<{$location.logo}>"
                              height="150px">
                     </a>
                 <{elseif $smarty.const._EXTCAL_SHOW_NO_PICTURE}>
@@ -37,24 +37,24 @@
                 <{/if}>
             </div>
             <div style="font-size:16px; font-weight:bold; width:280px; overflow:hidden; margin-left:30px;">
-                <span style="text-decoration: underline;"><{$etablissement.nom}></span><br>
+                <span style="text-decoration: underline;"><{$location.nom}></span><br>
 
                 <div style="font-size:14px; ">
-                    <{if $etablissement.categorie}><{$etablissement.categorie}><br><{/if}>
-                    <{if $etablissement.adresse}><{$etablissement.adresse}><br><{/if}>
-                    <{if $etablissement.adresse2}><{$etablissement.adresse2}><br><{/if}>
-                    <{if $etablissement.cp}><{$etablissement.cp}><{/if}>
-                    - <{if $etablissement.ville}><{$etablissement.ville}><br><{/if}>
-                    <{if $etablissement.map!=''}>
-                        <a href="<{$etablissement.map}>"
-                           target="_blank"><{$smarty.const._MD_EXTCAL_ETABLISSEMENT_MAP2}></a>
+                    <{if $location.categorie}><{$location.categorie}><br><{/if}>
+                    <{if $location.adresse}><{$location.adresse}><br><{/if}>
+                    <{if $location.adresse2}><{$location.adresse2}><br><{/if}>
+                    <{if $location.cp}><{$location.cp}><{/if}>
+                    - <{if $location.ville}><{$location.ville}><br><{/if}>
+                    <{if $location.map!=''}>
+                        <a href="<{$location.map}>"
+                           target="_blank"><{$smarty.const._MD_EXTCAL_LOCATION_MAP2}></a>
                         <br>
                     <{/if}>
 
-                    <{if $etablissement.tel_fixe}><{$etablissement.tel_fixe}><br><{/if}>
-                    <{if $etablissement.tel_portable}><{$etablissement.tel_portable}><br><{/if}>
-                    <{if $etablissement.mail}><A href="mailto:<{$mail}>"><{$etablissement.mail}></A><br><{/if}>
-                    <{if $etablissement.site}><a href="<{$etablissement.site}>"
+                    <{if $location.tel_fixe}><{$location.tel_fixe}><br><{/if}>
+                    <{if $location.tel_portable}><{$location.tel_portable}><br><{/if}>
+                    <{if $location.mail}><A href="mailto:<{$mail}>"><{$location.mail}></A><br><{/if}>
+                    <{if $location.site}><a href="<{$location.site}>"
                                                  target="_blank"><{$smarty.const._MD_EXTCAL_VISIT_SITE}></a>
                         <br>
                     <{/if}>
@@ -65,12 +65,12 @@
 </table>
 <hr>
 <div style=" overflow:hidden;  font-weight:bold; margin-left:30px; text-align:left;">
-    <strong style="text-decoration: underline;"><{$smarty.const._MD_EXTCAL_ETABLISSEMENT_INFO_COMPL}></strong></u>
+    <strong style="text-decoration: underline;"><{$smarty.const._MD_EXTCAL_LOCATION_INFO_COMPL}></strong></u>
     <br><br>
-    <{if $etablissement.description}><{$etablissement.description}><br><br><{/if}>
-    <{if $etablissement.horaires}><{$etablissement.horaires}><br><{/if}>
-    <{if $etablissement.tarifs}><{$etablissement.tarifs}>&nbsp; <{$smarty.const._MD_EXTCAL_DEVISE2}><br><{/if}>
-    <{if $etablissement.divers}><{$etablissement.divers}><br><{/if}>
+    <{if $location.description}><{$location.description}><br><br><{/if}>
+    <{if $location.horaires}><{$location.horaires}><br><{/if}>
+    <{if $location.tarifs}><{$location.tarifs}>&nbsp; <{$smarty.const._MD_EXTCAL_DEVISE2}><br><{/if}>
+    <{if $location.divers}><{$location.divers}><br><{/if}>
 </div>
 
 <{*<tr>*}>
@@ -79,7 +79,7 @@
             <{*<tr>*}>
                 <{*<td width="50%" style="font-weight:bold">*}>
                 <{*</td>*}>
-                <{*<td>&nbsp;<strong><u><{$smarty.const._MD_EXTCAL_ETABLISSEMENT_EVENTS_VENIR}></strong></u><br><br>*}>
+                <{*<td>&nbsp;<strong><u><{$smarty.const._MD_EXTCAL_LOCATION_EVENTS_VENIR}></strong></u><br><br>*}>
                     <{*<div style="width: 400px; height: 300px; overflow-y: scroll; background-color:#FFFFFF; scrollbar-arrow-color:blue; scrollbar-face-color: #e7e7e7; scrollbar-3dlight-color: #a0a0a0; scrollbar-darkshadow-color:#888888">*}>
 
                         <{*<{foreach item=event from=$events}>*}>

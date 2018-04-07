@@ -29,13 +29,13 @@ define('_EXTCAL_CLS_CAT', 'cat');
 define('_EXTCAL_CLS_FILE', 'file');
 define('_EXTCAL_CLS_MEMBER', 'eventmember');
 define('_EXTCAL_CLS_NOT_MEMBER', 'eventnotmember');
-define('_EXTCAL_CLS_ETABLISSEMENT', 'etablissement');
+define('_EXTCAL_CLS_LOCATION', 'location');
 
 define('_EXTCAL_CLN_CAT', 'Category');
 define('_EXTCAL_CLN_FILE', 'File');
 define('_EXTCAL_CLN_MEMBER', 'Eventmember');
 define('_EXTCAL_CLN_NOT_MEMBER', 'EventNotMember');
-define('_EXTCAL_CLN_ETABLISSEMENT', 'Etablissement');
+define('_EXTCAL_CLN_LOCATION', 'Location');
 
 define('_EXTCAL_CLS_EVENT', 'event');
 define('_EXTCAL_CLN_EVENT', 'Event');

@@ -32,10 +32,10 @@ $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 $event        = $eventHandler->objectToArray($eventHandler->getEvent($eventId), ['cat_id']);
 
 //adding location
-/** @var Extcal\EtablissementHandler $locationHandler */
-$locationHandler = Extcal\Helper::getInstance()->getHandler('Etablissement');
-if ($event['event_etablissement'] > 0) {
-    $location = $locationHandler->objectToArray($locationHandler->getEtablissement($event['event_etablissement'], true));
+/** @var Extcal\LocationHandler $locationHandler */
+$locationHandler = Extcal\Helper::getInstance()->getHandler('Location');
+if ($event['event_location'] > 0) {
+    $location = $locationHandler->objectToArray($locationHandler->getLocation($event['event_location'], true));
 }
 
 // Adding formated date for start and end event
@@ -74,7 +74,7 @@ if ('' != $event['event_desc']) {
     echo '<td style="border:1px solid black;">' . $event['event_desc'] . '</td>' . "\n";
 }
 if ('' != $event['event_price']) {
-    echo '<td style="border:1px solid black;">' . _MD_EXTCAL_ETABLISSEMENT_PRICE . $event['event_price'] . ' ' . _MD_EXTCAL_DEVISE2 . '</td>' . "\n";
+    echo '<td style="border:1px solid black;">' . _MD_EXTCAL_LOCATION_PRICE . $event['event_price'] . ' ' . _MD_EXTCAL_DEVISE2 . '</td>' . "\n";
 }
 echo '</tr>' . "\n";
 
@@ -95,7 +95,7 @@ if ('' != $event['event_contact']) {
 }
 
 //show location
-if ($event['event_etablissement'] = 0) {
+if ($event['event_location'] = 0) {
     echo '<tr>' . "\n";
 
     //    echo($location['nom']);
@@ -103,12 +103,12 @@ if ($event['event_etablissement'] = 0) {
     //    var_dump($event);
 
     echo '<td style="border:1px solid black;">' . "\n";
-    echo '<b>' . _MD_EXTCAL_ETABLISSEMENT . '</b>' . "\n";
+    echo '<b>' . _MD_EXTCAL_LOCATION . '</b>' . "\n";
     if ('' != $location['categorie']) {
         echo '<span style="font-weight:normal;"> (' . $location['categorie'] . ') <br>' . "\n";
     }
     if ('' != $location['logo']) {
-        echo '<img align=right style="border:1px solid #FFFFFF;margin-right:6px" src=' . XOOPS_URL . '/uploads/extcal/etablissement/' . $location['logo'] . ' height="75px">' . '' . "\n";
+        echo '<img align=right style="border:1px solid #FFFFFF;margin-right:6px" src=' . XOOPS_URL . '/uploads/extcal/location/' . $location['logo'] . ' height="75px">' . '' . "\n";
     }
 
     echo '<span style="font-weight:normal;">' . $location['nom'] . '<br>' . "\n";
@@ -136,15 +136,15 @@ if ($event['event_etablissement'] = 0) {
     echo '<td style="border:1px solid black;">' . "\n";
 
     if ('' != $location['tel_fixe']) {
-        echo '<b>' . _MD_EXTCAL_ETABLISSEMENT_TEL_FIXE . ' :</b>' . $location['tel_fixe'] . '<br>' . "\n";
+        echo '<b>' . _MD_EXTCAL_LOCATION_TEL_FIXE . ' :</b>' . $location['tel_fixe'] . '<br>' . "\n";
     }
     if ('' != $location['tel_portable']) {
-        echo '<b>' . _MD_EXTCAL_ETABLISSEMENT_TEL_PORTABLE . ' :</b>' . $location['tel_portable'] . '<br>' . "\n";
+        echo '<b>' . _MD_EXTCAL_LOCATION_TEL_PORTABLE . ' :</b>' . $location['tel_portable'] . '<br>' . "\n";
     }
 
     echo '<b>' . _MD_EXTCAL_EMAIL . ' :</b> <a href="mailto:' . $location['mail'] . '">' . $location['mail'] . '</a><br>' . "\n";
     echo '<b>' . _MD_EXTCAL_URL . ' :</b> <a href="' . $location['site'] . '">' . $location['site'] . '</a>' . '<br>' . "\n";
-    echo '<b>' . _MD_EXTCAL_ETABLISSEMENT_MAP . ' :</b> <a href="' . $location['map'] . '">' . _MD_EXTCAL_ETABLISSEMENT_MAP2 . '</a>' . "\n";
+    echo '<b>' . _MD_EXTCAL_LOCATION_MAP . ' :</b> <a href="' . $location['map'] . '">' . _MD_EXTCAL_LOCATION_MAP2 . '</a>' . "\n";
 
     echo '</td>' . "\n";
     echo '</tr>' . "\n";

@@ -57,8 +57,8 @@ define('_MI_EXTCAL_EMAIL_MODE_DESC', 'Select Email Format that you want to use')
 define('_MI_EXTCAL_EMAIL_MODE_HTML', 'HTML Format');
 define('_MI_EXTCAL_EMAIL_MODE_NONE', 'No email');
 define('_MI_EXTCAL_EMAIL_MODE_TEXT', 'Plain text');
-define('_MI_EXTCAL_ETABLISSEMENT', 'Location');
-define('_MI_EXTCAL_ETABLISSEMENTS', 'Locations');
+define('_MI_EXTCAL_LOCATION', 'Location');
+define('_MI_EXTCAL_LOCATIONS', 'Locations');
 define('_MI_EXTCAL_EVENT', 'Event');
 define('_MI_EXTCAL_EVENT_NOTIFY', 'Event');
 define('_MI_EXTCAL_EVENT_NOTIFYDSC', 'Event notification');

@@ -64,7 +64,7 @@ class Event extends \XoopsObject
         $this->initVar('event_picture2', XOBJ_DTYPE_TXTBOX, null, false);
         //$this->initVar("event_price",XOBJ_DTYPE_OTHER,null,false,10);
         $this->initVar('event_price', XOBJ_DTYPE_TXTBOX, '', false);
-        $this->initVar('event_etablissement', XOBJ_DTYPE_INT, 5, false);
+        $this->initVar('event_location', XOBJ_DTYPE_INT, 5, false);
         $this->initVar('event_icone', XOBJ_DTYPE_TXTBOX, '', false);
 
         $this->externalKey['cat_id']          = [

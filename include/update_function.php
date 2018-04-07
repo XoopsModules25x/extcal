@@ -41,7 +41,7 @@ function xoops_module_update_extcal(\XoopsModule $xoopsModule, $previousVersion 
         copy($indexFile, $dir . '/index.html');
     }
 
-    $dir = XOOPS_ROOT_PATH . '/uploads/extcal/etablissement';
+    $dir = XOOPS_ROOT_PATH . '/uploads/extcal/location';
     if (!is_dir($dir)) {
         mkdir($dir, 0777);
         copy($indexFile, $dir . '/index.html');
@@ -85,14 +85,14 @@ function xoops_module_update_extcal(\XoopsModule $xoopsModule, $previousVersion 
         $db->query($sql);
         ///////////
         // Create eXtcal upload directory
-        $dir = XOOPS_ROOT_PATH."/uploads/extcal/etablissement";
+        $dir = XOOPS_ROOT_PATH."/uploads/extcal/location";
         if(!is_dir($dir))
             mkdir($dir, 0777);
             chmod($dir, 0777);
 
         // Copy index.html files on uploads folders
         $indexFile = XOOPS_ROOT_PATH."/modules/extcal/include/index.html";
-        copy($indexFile, XOOPS_ROOT_PATH."/uploads/extcal/etablissement/index.html");
+        copy($indexFile, XOOPS_ROOT_PATH."/uploads/extcal/location/index.html");
 
         */
 

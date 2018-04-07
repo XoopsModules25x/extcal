@@ -24,30 +24,30 @@
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
 /**
- * Class EtablissementHandler.
+ * Class LocationHandler.
  */
-class EtablissementHandler extends ExtcalPersistableObjectHandler
+class LocationHandler extends ExtcalPersistableObjectHandler
 {
     /**
      * @param $db
      */
     public function __construct(\XoopsDatabase $db)
     {
-        parent::__construct($db, 'extcal_etablissement', Etablissement::class, 'id', 'nom');
+        parent::__construct($db, 'extcal_location', Location::class, 'id', 'nom');
     }
 
     /**
-     * @param      $etablissementId
+     * @param      $locationId
      * @param bool $skipPerm
      *
      * @return bool
      */
-    public function getEtablissement($etablissementId, $skipPerm = false)
+    public function getLocation($locationId, $skipPerm = false)
     {
         $user = $GLOBALS['xoopsUser'];
 
         $criteriaCompo = new \CriteriaCompo();
-        $criteriaCompo->add(new \Criteria('id', $etablissementId));
+        $criteriaCompo->add(new \Criteria('id', $locationId));
 
         if (!$skipPerm) {
             $this->addCatPermCriteria($criteriaCompo, $user);

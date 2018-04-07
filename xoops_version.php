@@ -104,7 +104,7 @@ $modversion['tables'] = [
     $moduleDirName . '_' . 'eventmember',
     $moduleDirName . '_' . 'eventnotmember',
     $moduleDirName . '_' . 'file',
-    $moduleDirName . '_' . 'etablissement'
+    $moduleDirName . '_' . 'location'
 ];
 
 // SQL
@@ -641,8 +641,8 @@ $modversion['templates'][$i]['description'] = '';
 $modversion['templates'][$i]['file']        = 'extcal_navbar.tpl';
 $modversion['templates'][$i]['description'] = '';
 ++$i;
-$modversion['templates'][$i]['file']        = 'extcal_etablissement.tpl';
-$modversion['templates'][$i]['description'] = 'etablissement';
+$modversion['templates'][$i]['file']        = 'extcal_location.tpl';
+$modversion['templates'][$i]['description'] = 'location';
 
 ++$i;
 $modversion['templates'][$i]['file']        = 'extcal_info_bulle.tpl';

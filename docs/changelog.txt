@@ -139,7 +139,7 @@
 <hr>
 - Réintrégation file update extcal_2_34.php omitted in the previous version
 - Fixed zoom in on photos to certeines
-- Fixed default value of 0 in the table event_etablissement event
+- Fixed default value of 0 in the table event_location event
 - Intancciation of Config <=> xoopsModuleConfig for blocks
 
 <h5>2.34                [2012-01-06] (JJD.fr)</h5>

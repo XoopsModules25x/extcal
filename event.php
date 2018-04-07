@@ -39,8 +39,6 @@ $fileHandler           = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_FI
 $eventMemberHandler    = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_MEMBER);
 $eventNotMemberHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_NOT_MEMBER);
 $permHandler           = Extcal\Perm::getHandler();
-//require_once __DIR__ . '/class/etablissement.php';
-//require_once __DIR__ . '/class/Utility.php';
 $myts = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
 
 if (!function_exists('clear_unicodeslashes')) {
@@ -97,15 +95,15 @@ $xoopsTpl->assign('event_attachement', $eventFiles);
 // Token to disallow direct posting on membre/nonmember page
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 
-// Etablissement
-$etablissementHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_ETABLISSEMENT);
-$etablissementObj     = $etablissementHandler->get($event['event_etablissement']);
-//$etablissement = $etablissementHandler->objectToArray($etablissementObj);
-$etablissement = $etablissementObj->vars;
-$xoopsTpl->assign('etablissement', $etablissement);
+// Location
+$locationHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_LOCATION);
+$locationObj     = $locationHandler->get($event['event_location']);
+//$location = $locationHandler->objectToArray($locationObj);
+$location = $locationObj->vars;
+$xoopsTpl->assign('location', $location);
 
-// $t =print_r($etablissementObj->vars,true);
-// echo "<hr>etablissement {$event['event_etablissement']}<hr><pre>{$t}</pre><hr>";
+// $t =print_r($locationObj->vars,true);
+// echo "<hr>location {$event['event_location']}<hr><pre>{$t}</pre><hr>";
 
 // ### For Who's Going function ###
 

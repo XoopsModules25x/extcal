@@ -66,11 +66,11 @@
             <div style="font-size:20px;font-weight:bold;width:280px;overflow:hidden;"><u><{$event.event_title}></u>
             </div>
             <div style="margin-right:5px;"><br><span
-                        style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_ETABLISSEMENT_DATE}> </strong></span><br><{$event.formated_event_start}>
+                        style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_LOCATION_DATE}> </strong></span><br><{$event.formated_event_start}>
                 <br><br>
 
                 <{if $event.event_desc != ''}>
-                    <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_ETABLISSEMENT_DESCRIPTION}>
+                    <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_LOCATION_DESCRIPTION}>
                             :</strong></span>
                     <br>
                     <{$event_desc}>
@@ -79,7 +79,7 @@
                 <{/if}>
 
                 <{if $event.event_address != ''}>
-                    <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_ETABLISSEMENT_ADRESSE}>
+                    <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_LOCATION_ADRESSE}>
                             :</strong></span>
                     <br>
                     <{$event_address}>
@@ -95,36 +95,36 @@
     </tr>
 </table>
 <div style="border-bottom:1px solid #CCCCCC;"></div>
-<{if $etablissement.id.value != 0}>
+<{if $location.id.value != 0}>
     <table border="0" width="100%" class="outer">
         <tr>
             <td width="_EXTCAL_TS_MINUTE%" class="odd">
-                <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_ETABLISSEMENT_LIEU}></strong></span><br>
-                <a href="./etablissement.php?etablissement_id=<{$event.event_etablissement}>">
-                    <span style="font-size:14px;"><{$etablissement.nom.value}></span>
+                <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_LOCATION_LIEU}></strong></span><br>
+                <a href="./Location.php?location_id=<{$event.event_location}>">
+                    <span style="font-size:14px;"><{$location.nom.value}></span>
                 </a>
                 <br>
-                <{if $etablissement.adresse.value}><{$etablissement.adresse.value}><br><{/if}>
-                <{if $etablissement.ville.value}><{$etablissement.ville.value}><br><{/if}>
-                <{if $etablissement.telephone.value}><{$etablissement.telephone.value}><br><{/if}>
-                <{if $etablissement.site.value}>
-                    <a href="<{$etablissement.site.value}>" target="_blank">
+                <{if $location.adresse.value}><{$location.adresse.value}><br><{/if}>
+                <{if $location.ville.value}><{$location.ville.value}><br><{/if}>
+                <{if $location.telephone.value}><{$location.telephone.value}><br><{/if}>
+                <{if $location.site.value}>
+                    <a href="<{$location.site.value}>" target="_blank">
                         <{$smarty.const._MD_EXTCAL_VISIT_SITE}>
                     </a>
                     <br>
                 <{/if}>
-                <{if $etablissement.map.value}>
-                    <a href='<{$etablissement.map.value}>' target='blanck'><{$smarty.const._MD_EXTCAL_LOCALISATION}></a>
+                <{if $location.map.value}>
+                    <a href='<{$location.map.value}>' target='blanck'><{$smarty.const._MD_EXTCAL_LOCALISATION}></a>
                     <br>
                 <{/if}>
             </td>
             <td width="20%" class="odd">
-                <{if $etablissement.logo.value}>
+                <{if $location.logo.value}>
                     <div class="highslide-gallery">
-                        <a href="<{$xoops_url}>/uploads/extcal/etablissement/<{$etablissement.logo.value}>"
+                        <a href="<{$xoops_url}>/uploads/extcal/location/<{$location.logo.value}>"
                            class="highslide" onclick="return hs.expand(this)">
                             <img align="left" style="margin-right:10px;"
-                                 src="<{$xoops_url}>/uploads/extcal/etablissement/<{$etablissement.logo.value}>"
+                                 src="<{$xoops_url}>/uploads/extcal/location/<{$location.logo.value}>"
                                  height="150px">
                         </a>
 
@@ -161,7 +161,7 @@
 
         <{if $event.event_price}>
             <td width="50%" class="odd"><br>
-                <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_ETABLISSEMENT_TARIFS}>
+                <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_LOCATION_TARIFS}>
                         :</strong></span><br>
                 <{$event.event_price}>
                 <{$smarty.const._MD_EXTCAL_DEVISE2}>

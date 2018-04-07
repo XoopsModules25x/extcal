@@ -114,7 +114,7 @@ switch ($op) {
             'event_picture1'      => @$event_picture1,
             'event_picture2'      => @$event_picture2,
             'event_price'         => @$_POST['event_price'],
-            'event_etablissement' => $_POST['event_etablissement'],
+            'event_location' => $_POST['event_location'],
             'dohtml'              => $extcalConfig['allow_html'],
             'event_icone'         => $_POST['event_icone'],
         ];

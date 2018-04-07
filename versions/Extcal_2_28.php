@@ -30,7 +30,7 @@ class Extcal_2_28
     {
         global $xoopsDB;
 
-        $this->addTable_etablissement();
+        $this->addTable_location();
         $this->alterTable_event();
     }
 
@@ -47,18 +47,18 @@ ALTER TABLE `{$tbl}`
   add  `event_picture1` varchar(255) NOT NULL,
   add  `event_picture2` varchar(255) NOT NULL,
   add  `event_price` varchar(255) NOT NULL default '',
-  add  `event_etablissement` int(5) NOT NULL DEFAULT '1';
+  add  `event_location` int(5) NOT NULL DEFAULT '1';
 __sql__;
 
         $xoopsDB->queryF($sql);
     }
 
     //----------------------------------------------------
-    public function addTable_etablissement()
+    public function addTable_location()
     {
         global $xoopsDB;
 
-        $tbl = $xoopsDB->prefix('extcal_etablissement');
+        $tbl = $xoopsDB->prefix('extcal_location');
 
         $sql = <<<__sql__
 CREATE TABLE `{$tbl}` (

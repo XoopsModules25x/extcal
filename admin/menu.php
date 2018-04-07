@@ -44,9 +44,9 @@ $adminmenu[] = [
     'icon'  => $pathIcon32 . '/event.png'
 ];
 $adminmenu[] = [
-    'title' => _MI_EXTCAL_ETABLISSEMENTS,
-    'link'  => 'admin/etablissement.php',
-    'icon'  => $pathModIcon32 . '/etablissement.png'
+    'title' => _MI_EXTCAL_LOCATIONS,
+    'link'  => 'admin/Location.php',
+    'icon'  => $pathModIcon32 . '/location.png'
 ];
 $adminmenu[] = [
     'title' => _MI_EXTCAL_PERMISSIONS,
