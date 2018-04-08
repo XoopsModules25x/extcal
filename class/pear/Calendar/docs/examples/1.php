@@ -11,7 +11,7 @@ function getmicrotime()
     return (float)$usec + (float)$sec;
 }
 
-if (!@include 'Calendar/Calendar.php') {
+if (!@include __DIR__ . '/Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 

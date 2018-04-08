@@ -2,11 +2,11 @@
 /**
  * Description: a SOAP Calendar Server.
  */
-if (!@include 'SOAP/Server.php') {
+if (!@include __DIR__ . '/SOAP/Server.php') {
     die('You must have PEAR::SOAP installed');
 }
 
-if (!@include 'Calendar/Calendar.php') {
+if (!@include __DIR__ . '/Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 
@@ -95,7 +95,7 @@ $server->addObjectMap($calendar, 'urn:PEAR_SOAP_Calendar');
 if ('POST' === strtoupper($_SERVER['REQUEST_METHOD'])) {
     $server->service($GLOBALS['HTTP_RAW_POST_DATA']);
 } else {
-    require_once 'SOAP/Disco.php';
+    require_once __DIR__ . '/SOAP/Disco.php';
     $disco = new SOAP_DISCO_Server($server, 'PEAR_SOAP_Calendar');
     if (isset($_SERVER['QUERY_STRING']) && 0 == strcasecmp($_SERVER['QUERY_STRING'], 'wsdl')) {
         header('Content-type: text/xml');

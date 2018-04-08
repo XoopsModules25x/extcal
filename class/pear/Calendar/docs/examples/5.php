@@ -12,7 +12,7 @@ function getmicrotime()
 
 $start = getmicrotime();
 
-if (!@include 'Calendar/Calendar.php') {
+if (!@include __DIR__ . '/Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 require_once CALENDAR_ROOT . 'Year.php';

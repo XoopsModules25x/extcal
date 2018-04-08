@@ -15,7 +15,7 @@ function getmicrotime()
 // Switch to PEAR::Date engine
 define('CALENDAR_ENGINE', 'PearDate');
 
-if (!@include 'Calendar/Calendar.php') {
+if (!@include __DIR__ . '/Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 
