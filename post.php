@@ -18,10 +18,11 @@
  */
 
 use XoopsModules\Extcal;
+
+include  dirname(dirname(__DIR__)) . '/mainfile.php';
+
 /** @var Extcal\Helper $helper */
 $helper = Extcal\Helper::getInstance();
-
-include __DIR__ . '/../../mainfile.php';
 $GLOBALS['xoopsOption']['template_main'] = 'extcal_post.tpl';
 
 include XOOPS_ROOT_PATH . '/class/xoopsformloader.php';

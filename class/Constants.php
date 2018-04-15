@@ -50,7 +50,7 @@ class Constants
     const _EXTCAL_CLN_EVENT = 'Event';
 
     //-------------------------------------------------------------------
-//    const _EXTCAL_PEAR_ROOT_DEFAULT = __DIR__ . '/../class/pear';
+//    const _EXTCAL_PEAR_ROOT_DEFAULT =  dirname(__DIR__) . '/class/pear';
     //const _EXTCAL_PEAR_ROOT = 'F:/wamp/www/xfr254b/xoops_lib/Frameworks/pear' );
 
 //    const _EXTCAL_PEAR_ROOT = $pear_path;

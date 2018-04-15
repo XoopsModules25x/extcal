@@ -1,12 +1,13 @@
 <?php
 
 use XoopsModules\Extcal;
-/** @var Extcal\Helper $helper */
-$helper = Extcal\Helper::getInstance();
 
-include __DIR__ . '/../../mainfile.php';
+include  dirname(dirname(__DIR__)) . '/mainfile.php';
 
 //modif JJD
 require_once __DIR__ . '/include/constantes.php';
+
+/** @var Extcal\Helper $helper */
+$helper = Extcal\Helper::getInstance();
 
 header("Location: {$helper->getConfig('start_page')}");

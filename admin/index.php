@@ -25,7 +25,7 @@ require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 /** @var Extcal\Utility $utility */
 
-//$configurator = include __DIR__ . '/../include/config.php';
+//$configurator = include  dirname(__DIR__) . '/include/config.php';
 
 $configurator = new common\Configurator();
 
@@ -39,7 +39,7 @@ $configurator = new common\Configurator();
 
 if ($helper->getConfig('displaySampleButton')) {
     xoops_loadLanguage('admin/modulesadmin', 'system');
-    require_once __DIR__ . '/../testdata/index.php';
+    require_once  dirname(__DIR__) . '/testdata/index.php';
 
     $adminObject->addItemButton(constant('CO_' . $moduleDirNameUpper . '_' . 'ADD_SAMPLEDATA'), '__DIR__ . /../../testdata/index.php?op=load', 'add');
 

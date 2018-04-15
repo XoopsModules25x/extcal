@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../../include/constantes.php';
+require_once  dirname(dirname(__DIR__)) . '/include/constantes.php';
 define('_MI_EXTCAL_NAME', 'eXtCal');
 define('_MI_EXTCAL_ABOUT', 'About');
 define('_MI_EXTCAL_AFTER', 'After');

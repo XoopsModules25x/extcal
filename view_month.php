@@ -1,11 +1,13 @@
 <?php
 
 use XoopsModules\Extcal;
+
+include  dirname(dirname(__DIR__)) . '/mainfile.php';
+require_once __DIR__ . '/include/constantes.php';
+
 /** @var Extcal\Helper $helper */
 $helper = Extcal\Helper::getInstance();
 
-include __DIR__ . '/../../mainfile.php';
-require_once __DIR__ . '/include/constantes.php';
 $params                                  = ['view' => _EXTCAL_NAV_MONTH, 'file' => _EXTCAL_FILE_MONTH];
 $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
 require_once __DIR__ . '/header.php';

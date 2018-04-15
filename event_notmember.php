@@ -1,10 +1,7 @@
 <?php
 
 use XoopsModules\Extcal;
-/** @var Extcal\Helper $helper */
-$helper = Extcal\Helper::getInstance();
-
-include __DIR__ . '/../../mainfile.php';
+include  dirname(dirname(__DIR__)) . '/mainfile.php';
 
 require_once __DIR__ . '/include/constantes.php';
 require_once __DIR__ . '/include/mail_fnc.php';
@@ -19,6 +16,9 @@ exit;
     [event] => 3
 
 */
+
+/** @var Extcal\Helper $helper */
+$helper = Extcal\Helper::getInstance();
 
 $event_id   = $_POST['event'];
 $member_uid = $xoopsUser->getVar('uid');

@@ -19,7 +19,7 @@
 
 use XoopsModules\Extcal;
 
-require_once __DIR__ . '/../../mainfile.php';
+require_once  dirname(dirname(__DIR__)) . '/mainfile.php';
 require_once __DIR__ . '/include/constantes.php';
 $GLOBALS['xoopsOption']['template_main'] = 'extcal_location.tpl';
 require_once __DIR__ . '/header.php';

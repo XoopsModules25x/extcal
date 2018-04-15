@@ -135,7 +135,7 @@ function xoops_module_update_extcal(\XoopsModule $module, $previousVersion = nul
 
         //  ---  COPY blank.png FILES ---------------
         if (count($configurator['copyFiles']) > 0) {
-            $file = __DIR__ . '/../assets/images/blank.png';
+            $file =  dirname(__DIR__) . '/assets/images/blank.png';
             foreach (array_keys($configurator['copyFiles']) as $i) {
                 $dest = $configurator['copyFiles'][$i] . '/blank.png';
                 $utility::copyFile($file, $dest);
@@ -167,7 +167,7 @@ function xoops_module_update_extcal(\XoopsModule $module, $previousVersion = nul
         $folderHandler   = \XoopsFile::getHandler('folder', $imagesDirectory);
         $folderHandler->delete($imagesDirectory);
     }
-
+    /** @var \XoopsGroupPermHandler $grouppermHandler */
     $grouppermHandler = xoops_getHandler('groupperm');
 
     return $grouppermHandler->deleteByModule($module->getVar('mid'), 'item_read');

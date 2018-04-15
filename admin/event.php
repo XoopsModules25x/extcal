@@ -18,15 +18,16 @@
  */
 
 use XoopsModules\Extcal;
-/** @var Extcal\Helper $helper */
-$helper = Extcal\Helper::getInstance();
 
-require_once __DIR__ . '/../../../include/cp_header.php';
+require_once  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-// require_once __DIR__ . '/../class/form/extcalform.php';
+// require_once  dirname(__DIR__) . '/class/form/extcalform.php';
 require_once __DIR__ . '/admin_header.php';
-// require_once __DIR__ . '/../class/Utility.php';
+// require_once  dirname(__DIR__) . '/class/Utility.php';
+
+/** @var Extcal\Helper $helper */
+$helper = Extcal\Helper::getInstance();
 
 $gepeto = array_merge($_GET, $_POST);
 //while (list($k, $v) = each($gepeto)) {
@@ -130,6 +131,7 @@ switch ($op) {
 
             // New event
         } else {
+            /** @var \XoopsNotificationHandler $notificationHandler */
             $notificationHandler = xoops_getHandler('notification');
             /** @var Extcal\CategoryHandler $catHandler */
             //            $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);

@@ -26,7 +26,7 @@
 //require_once __DIR__ . '/config.php';
 //require_once __DIR__ . '/ExtDateTime.php';
 //require_once __DIR__ . '/utility.php';
-require_once __DIR__ . '/../include/constantes.php';
+require_once  dirname(__DIR__) . '/include/constantes.php';
 
 /**
  * Class Event.

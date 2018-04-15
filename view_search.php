@@ -1,10 +1,8 @@
 <?php
 
 use XoopsModules\Extcal;
-/** @var Extcal\Helper $helper */
-$helper = Extcal\Helper::getInstance();
 
-include __DIR__ . '/../../mainfile.php';
+include  dirname(dirname(__DIR__)) . '/mainfile.php';
 require_once __DIR__ . '/include/constantes.php';
 $params                                  = [
     'view' => _EXTCAL_NAV_SEARCH,
@@ -12,6 +10,9 @@ $params                                  = [
 ];
 $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
 require_once __DIR__ . '/header.php';
+
+/** @var Extcal\Helper $helper */
+$helper = Extcal\Helper::getInstance();
 
 $recurEventsArray = [];
 //needed to save the state of the form, so we don't show on the first time the list of available events

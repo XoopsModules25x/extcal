@@ -20,11 +20,11 @@
 use Xmf\Request;
 use XoopsModules\Extcal;
 
-require_once __DIR__ . '/../../../include/cp_header.php';
-include __DIR__ . '/../../../class/xoopsformloader.php';
+require_once  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+include  dirname(dirname(dirname(__DIR__))) . '/class/xoopsformloader.php';
 require_once __DIR__ . '/admin_header.php';
-// require_once __DIR__ . '/../class/Utility.php';
-require_once __DIR__ . '/../include/constantes.php';
+// require_once  dirname(__DIR__) . '/class/Utility.php';
+require_once  dirname(__DIR__) . '/include/constantes.php';
 
 //$gepeto = array_merge($_GET, $_POST);
 //while (list($key, $value) = each($gepeto)) {
@@ -95,7 +95,7 @@ switch ($op) {
         $form->addElement(new \XoopsFormText(_AM_EXTCAL_WEIGHT, 'cat_weight', 30, 5, 0), false);
         $form->addElement(new \XoopsFormColorPicker(_AM_EXTCAL_COLOR, 'cat_color', '#FF0000'));
 
-        $file_path = __DIR__ . '/../assets/css/images';
+        $file_path =  dirname(__DIR__) . '/assets/css/images';
         $tf        = \XoopsLists::getImgListAsArray($file_path);
         array_unshift($tf, _MD_EXTCAL_NONE);
         //$xfIcones = new \XoopsFormSelect(_AM_EXTCAL_ICONE, "cat_icone", $cat->getVar('cat_icone'), '');
@@ -128,7 +128,7 @@ switch ($op) {
         $form->addElement(new \XoopsFormText(_AM_EXTCAL_WEIGHT, 'cat_weight', 30, 5, $cat->getVar('cat_weight')), false);
         $form->addElement(new \XoopsFormColorPicker(_AM_EXTCAL_COLOR, 'cat_color', '#' . $cat->getVar('cat_color')));
 
-        $file_path = __DIR__ . '/../assets/css/images';
+        $file_path =  dirname(__DIR__) . '/assets/css/images';
         $tf        = \XoopsLists::getImgListAsArray($file_path);
         array_unshift($tf, _MD_EXTCAL_NONE);
         $xfIcones = new \XoopsFormSelect(_AM_EXTCAL_ICONE, 'cat_icone', $cat->getVar('cat_icone'), '');

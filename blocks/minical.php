@@ -20,9 +20,9 @@
 use XoopsModules\Extcal;
 
 global $extcalConfig, $xoopsUser;
-require_once __DIR__ . '/../include/constantes.php';
-// require_once __DIR__ . '/../class/Utility.php';
-// require_once __DIR__ . '/../class/tableForm.php';
+require_once  dirname(__DIR__) . '/include/constantes.php';
+// require_once  dirname(__DIR__) . '/class/Utility.php';
+// require_once  dirname(__DIR__) . '/class/tableForm.php';
 //---------------------------------------------------------------------------
 /**
  * @param $options
@@ -35,7 +35,7 @@ function bExtcalMinicalShow($options)
 
     extcal_getDefautminicalOption($options);
 
-    //    // require_once __DIR__ . '/../class/Config.php';
+    //    // require_once  dirname(__DIR__) . '/class/Config.php';
 
     require_once _EXTCAL_PEAR_CALENDAR_ROOT . '/Util/Textual.php';
     require_once _EXTCAL_PEAR_CALENDAR_ROOT . '/Month/Weeks.php';
@@ -257,7 +257,7 @@ function bExtcalMinicalShow($options)
  */
 function bExtcalMinicalEdit($options)
 {
-    //    // require_once __DIR__ . '/../class/form/spin/formspin.php';
+    //    // require_once  dirname(__DIR__) . '/class/form/spin/formspin.php';
     global $xoopsUser;
 
     //  $t = print_r(get_defined_vars(),true);

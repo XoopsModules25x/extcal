@@ -1,11 +1,9 @@
 <?php
 
 use XoopsModules\Extcal;
-/** @var Extcal\Helper $helper */
-$helper = Extcal\Helper::getInstance();
 
-require_once __DIR__ . '/../../../include/cp_header.php';
-include __DIR__ . '/../../../class/xoopsformloader.php';
+require_once  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+include  dirname(dirname(dirname(__DIR__))) . '/class/xoopsformloader.php';
 require_once __DIR__ . '/admin_header.php';
 
 function extgalleryLastVersion()
@@ -22,6 +20,9 @@ function isUpToDate()
 
     return $GLOBALS['xoopsModule']->getVar('version') >= $version;
 }
+
+/** @var Extcal\Helper $helper */
+$helper = Extcal\Helper::getInstance();
 
 $op  = \Xmf\Request::getCmd('op', 'default');
 $fct = \Xmf\Request::getString('fct', 'default', 'GET');

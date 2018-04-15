@@ -19,7 +19,7 @@
 
 use XoopsModules\Extcal;
 
-require_once __DIR__ . '/../include/constantes.php';
+require_once  dirname(__DIR__) . '/include/constantes.php';
 
 /******************************************************/
 /* Ajour JJD - Evenements par categries               */
@@ -33,7 +33,7 @@ function bExtcalUpcomingByCategoryShow($options)
 {
     global $xoopsUser, $extcalConfig;
 
-    //    // require_once __DIR__ . '/../class/Config.php';
+    //    // require_once  dirname(__DIR__) . '/class/Config.php';
 
     // Retriving module config
     //     $extcalConfig = Extcal\Config::getHandler();

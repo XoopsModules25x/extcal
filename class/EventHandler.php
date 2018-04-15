@@ -23,7 +23,7 @@ use XoopsModules\Extcal;
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-require_once __DIR__ . '/../include/constantes.php';
+require_once  dirname(__DIR__) . '/include/constantes.php';
 
 /**
  * Class EventHandler.
@@ -1117,7 +1117,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $form->addElement($catSelect, true);
         //-----------------------------------------------------------
 
-        $file_path = __DIR__ . '/../assets/css/images';
+        $file_path =  dirname(__DIR__) . '/assets/css/images';
         $tf        = \XoopsLists::getImgListAsArray($file_path);
         array_unshift($tf, _MD_EXTCAL_NONE);
         $xfIcones = new \XoopsFormSelect(_MD_EXTCAL_ICONE, 'event_icone', $event_icone, '');

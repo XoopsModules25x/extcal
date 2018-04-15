@@ -18,13 +18,15 @@
  */
 
 use XoopsModules\Extcal;
-/** @var Extcal\Helper $helper */
-$helper = Extcal\Helper::getInstance();
 
-include __DIR__ . '/../../mainfile.php';
+include  dirname(dirname(__DIR__)) . '/mainfile.php';
 require_once __DIR__ . '/include/constantes.php';
 
 require_once XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/calendar.php';
+
+/** @var Extcal\Helper $helper */
+$helper = Extcal\Helper::getInstance();
+
 
 $eventId = \Xmf\Request::getInt('event', 0, 'GET');
 

@@ -19,7 +19,7 @@
 
 use XoopsModules\Extcal;
 
-include __DIR__ . '/../../mainfile.php';
+include  dirname(dirname(__DIR__)) . '/mainfile.php';
 
 include XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once __DIR__ . '/include/constantes.php';

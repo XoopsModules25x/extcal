@@ -2,13 +2,14 @@
 
 
 use XoopsModules\Extcal;
-/** @var Extcal\Helper $helper */
-$helper = Extcal\Helper::getInstance();
 
-include __DIR__ . '/../../mainfile.php';
+include  dirname(dirname(__DIR__)) . '/mainfile.php';
 
 require_once __DIR__ . '/include/constantes.php';
 require_once __DIR__ . '/include/mail_fnc.php';
+
+/** @var Extcal\Helper $helper */
+$helper = Extcal\Helper::getInstance();
 
 // $member_uid = 1;
 // $event_id = 393;

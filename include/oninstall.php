@@ -30,17 +30,15 @@ use XoopsModules\Extcal;
 function xoops_module_pre_install_extcal(\XoopsModule $module)
 {
     $moduleDirName = basename(dirname(__DIR__));
-    $className     = ucfirst($moduleDirName) . 'Utility';
-    if (!class_exists($className)) {
-        xoops_load('utility', $moduleDirName);
-    }
+    $utility     = new Extcal\Utility();
+
     //check for minimum XOOPS version
-    if (!$className::checkVerXoops($module)) {
+    if (!$utility::checkVerXoops($module)) {
         return false;
     }
 
     // check for minimum PHP version
-    if (!$className::checkVerPhp($module)) {
+    if (!$utility::checkVerPhp($module)) {
         return false;
     }
 
@@ -89,10 +87,7 @@ function xoops_module_install_extcal(\XoopsModule $xoopsModule)
     $configurator = include $GLOBALS['xoops']->path('modules/' . $moduleDirName . '/include/config.php');
 
     /** @var Extcal\Utility $utility */
-    $utility = ucfirst($moduleDirName) . 'Utility';
-    if (!class_exists($utility)) {
-        xoops_load('utility', $moduleDirName);
-    }
+    $utility = new \XoopsModules\Extcal\Utility();
 
     if (count($configurator['uploadFolders']) > 0) {
         //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
@@ -101,7 +96,7 @@ function xoops_module_install_extcal(\XoopsModule $xoopsModule)
         }
     }
     if (count($configurator['copyFiles']) > 0) {
-        $file = __DIR__ . '/../assets/images/blank.png';
+        $file =  dirname(__DIR__) . '/assets/images/blank.png';
         foreach (array_keys($configurator['copyFiles']) as $i) {
             $dest = $configurator['copyFiles'][$i] . '/blank.png';
             $utility::copyFile($file, $dest);

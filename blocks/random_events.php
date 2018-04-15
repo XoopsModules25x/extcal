@@ -19,7 +19,7 @@
 
 use XoopsModules\Extcal;
 
-require_once __DIR__ . '/../include/constantes.php';
+require_once  dirname(__DIR__) . '/include/constantes.php';
 
 /**
  * @param $options
@@ -28,7 +28,7 @@ require_once __DIR__ . '/../include/constantes.php';
  */
 function bExtcalRandomShow($options)
 {
-    //    // require_once __DIR__ . '/../class/Config.php';
+    //    // require_once  dirname(__DIR__) . '/class/Config.php';
 
     /** @var Extcal\Helper $helper */
     $helper = Extcal\Helper::getInstance();

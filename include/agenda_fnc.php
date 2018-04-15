@@ -22,7 +22,7 @@ define('_EXTCAL_FORMAT_AGENDA_KEYD', 'Y-m-d');
 define('_EXTCAL_FORMAT_AGENDA_KEYT', 'H:i');
 
 require_once __DIR__ . '/constantes.php';
-// require_once __DIR__ . '/../class/Utility.php';
+// require_once  dirname(__DIR__) . '/class/Utility.php';
 
 $moduleDirName = basename(dirname(__DIR__));
 Extcal\Helper::getInstance()->loadLanguage('main');
