@@ -3,7 +3,7 @@
 use XoopsModules\Extcal;
 
 require_once  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
-include  dirname(dirname(dirname(__DIR__))) . '/class/xoopsformloader.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/class/xoopsformloader.php';
 require_once __DIR__ . '/admin_header.php';
 
 function extgalleryLastVersion()

@@ -11,7 +11,7 @@ function getmicrotime()
 
 $start = getmicrotime();
 
-if (!@include __DIR__ . '/Calendar/Calendar.php') {
+if (!@require_once __DIR__   . '/Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 
@@ -39,12 +39,12 @@ $Year->build();
         caption.year {
             font-weight: bold;
             font-size: 120%;
-            font-color: navy;
+            font-color: #000080;
         }
 
         caption.month {
             font-size: 110%;
-            font-color: navy;
+            font-color: #000080;
         }
 
         table.month {

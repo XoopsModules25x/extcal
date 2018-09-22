@@ -2,7 +2,7 @@
 
 use XoopsModules\Extcal;
 
-include  dirname(dirname(__DIR__)) . '/mainfile.php';
+require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 require_once __DIR__ . '/include/constantes.php';
 require_once __DIR__ . '/header.php';
 
@@ -12,7 +12,7 @@ $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 $permHandler = Extcal\Perm::getHandler();
 $xoopsUser   = $xoopsUser ?: null;
 if (count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) > 0) {
-    include XOOPS_ROOT_PATH . '/header.php';
+    require_once XOOPS_ROOT_PATH . '/header.php';
 
     // Title of the page
     $xoopsTpl->assign('xoops_pagetitle', _MI_EXTCAL_SUBMIT_EVENT);
@@ -22,7 +22,7 @@ if (count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) > 0) 
 
     //$form->display();
 
-    include XOOPS_ROOT_PATH . '/footer.php';
+    require_once XOOPS_ROOT_PATH . '/footer.php';
 } else {
     redirect_header('index.php', 3);
 }

@@ -25,9 +25,9 @@ require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 /** @var Extcal\Utility $utility */
 
-//$configurator = include  dirname(__DIR__) . '/include/config.php';
+//$configurator = require_once dirname(__DIR__) . '/include/config.php';
 
-$configurator = new common\Configurator();
+$configurator = new Common\Configurator();
 
 //foreach (array_keys($configurator['uploadFolders']) as $i) {
 //    $utility::createFolder($configurator['uploadFolders'][$i]);

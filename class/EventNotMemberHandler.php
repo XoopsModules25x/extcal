@@ -30,9 +30,9 @@ use XoopsModules\Extcal;
 class EventNotMemberHandler extends ExtcalPersistableObjectHandler
 {
     /**
-     * @param $db
+     * @param \XoopsDatabase|null $db
      */
-    public function __construct(\XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db = null)
     {
         parent::__construct($db, 'extcal_eventnotmember', EventNotMember::class, ['event_id', 'uid']);
     }

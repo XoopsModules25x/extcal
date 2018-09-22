@@ -1,9 +1,9 @@
 <?php namespace XoopsModules\Extcal\Form;
 
-//include __DIR__ . '/formdatetime.php';
-//include __DIR__ . '/formrecurrules.php';
-//include __DIR__ . '/formfilecheckbox.php';
-//include __DIR__ . '/FormRRuleCheckBox.php';
+//require_once __DIR__   . '/formdatetime.php';
+//require_once __DIR__   . '/formrecurrules.php';
+//require_once __DIR__   . '/formfilecheckbox.php';
+//require_once __DIR__   . '/FormRRuleCheckBox.php';
 
 /**
  * Class ThemeForm.

@@ -60,10 +60,10 @@ if (!defined('PCL_TAR')) {
     // This library should be called by each script before the include of PhpZip
     // Library in order to limit the potential 'lib' directory path problem.
     if (!defined('PCLERROR_LIB')) {
-        include $gPcltarLibDir . '/pclerror.lib.php';
+        require_once $gPcltarLibDir . '/pclerror.lib.php';
     }
     if (!defined('PCLTRACE_LIB')) {
-        include $gPcltarLibDir . '/pcltrace.lib.php';
+        require_once $gPcltarLibDir . '/pcltrace.lib.php';
     }
 
     // --------------------------------------------------------------------------------

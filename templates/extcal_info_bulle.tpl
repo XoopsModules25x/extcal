@@ -1,5 +1,5 @@
 <{if $showInfoBulle}>
-    <div style="height:12px; width:12px; background-color:#<{$event.cat.cat_color}>; border:1px solid black; float:left; margin-right:5px;">
+    <div style="height:12px; width:12px; background-color:#<{$event.cat.cat_color}>; border:1px solid #000000; float:left; margin-right:5px;">
     </div>
     <a class="tooltip54" href="<{$xoops_url}>/modules/extcal/event.php?event=<{$event.event_id}>">
         <{if $showId}>(#<{$event.event_id}>)<{/if}> <{$event.event_title}><br>
@@ -18,7 +18,7 @@
     <a href="<{$xoops_url}>/modules/extcal/event.php?event=<{$event.event_id}>">
         <{if $showId}>(#<{$event.event_id}>)<{/if}> <{$event.event_title}>
     </a>
-    <div style="height:12px; width:12px; background-color:#<{$event.cat.cat_color}>; border:1px solid black; float:left; margin-right:5px;"
+    <div style="height:12px; width:12px; background-color:#<{$event.cat.cat_color}>; border:1px solid #000000; float:left; margin-right:5px;"
 
          title='<{if $showId}>(#<{$event.event_id}>)<{/if}>  <{$event.formated_event_start}> - <{$event.formated_event_end}> : <{$event.event_title}>'>
     </div>

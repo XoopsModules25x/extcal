@@ -79,7 +79,7 @@ if (strtoupper($_SERVER['REQUEST_METHOD'])=='POST') {
 } else {
     require_once 'SOAP/Disco.php';
     $disco = new SOAP_DISCO_Server($server, "PEAR_SOAP_Calendar");
-    if (isset($_SERVER['QUERY_STRING']) &&
+    if (\Xmf\Request::hasVar('QUERY_STRING', 'SERVER') &&
         strcasecmp($_SERVER['QUERY_STRING'], 'wsdl')==0) {
         header("Content-type: text/xml");
         echo $disco->getWSDL();

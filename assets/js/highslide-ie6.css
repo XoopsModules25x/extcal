@@ -48,7 +48,7 @@
 
 /* Thumbstrip marker arrow trasparent background fix */
 .highslide-thumbstrip .highslide-marker {
-    border-color: white; /* match the background */
+    border-color: #ffffff; /* match the background */
 }
 
 .dark .highslide-thumbstrip-horizontal .highslide-marker {
@@ -82,5 +82,5 @@
 
 /* Special */
 .in-page .highslide-thumbstrip-horizontal .highslide-marker {
-    border-bottom: gray;
+    border-bottom: #808080;
 }

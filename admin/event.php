@@ -32,7 +32,7 @@ $helper = Extcal\Helper::getInstance();
 $gepeto = array_merge($_GET, $_POST);
 //while (list($k, $v) = each($gepeto)) {
 foreach ($gepeto as $k => $v) {
-    $$k = $v;
+    ${$k} =$v;
 }
 if (!isset($op)) {
     $op = '';
@@ -121,7 +121,7 @@ switch ($op) {
         ];
 
         // Event edited
-        if (isset($_POST['event_id'])) {
+        if (\Xmf\Request::hasVar('event_id', 'POST')) {
             if (!$eventHandler->modifyEvent($_POST['event_id'], $data)) {
                 redirect_header('event.php', 3, _AM_EXTCAL_EVENT_EDIT_FAILED, false);
             } else {
@@ -238,7 +238,7 @@ switch ($op) {
 
     case 'delete':
 
-        if (isset($_POST['confirm'])) {
+        if (\Xmf\Request::hasVar('confirm', 'POST')) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('index.php', 3, _NOPERM . '<br>' . implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
             }
@@ -375,7 +375,7 @@ switch ($op) {
                 echo "<input type='hidden' name='deleteAllEvents[{$event['event_id']}]' value='1'>";
                 echo '</td>';
                 echo "<td align = 'center' width='5%'>" . $event['event_id'] . '</td>';
-                echo "<td  width='10%'>" . '<a href=cat.php?op=modify&amp;cat_id=' . $event['Category']['cat_id'] . '&form_modify' . '>' . $event['Category']['cat_name'] . '</a>' . '</td>';
+                echo "<td  width='10%'>" . '<a href=cat.php?op=modify&amp;cat_id=' . $event['cat']['cat_id'] . '&form_modify' . '>' . $event['cat']['cat_name'] . '</a>' . '</td>';
 
                 echo '<td>' . '<a href=event.php?op=modify&amp;event_id=' . $event['event_id'] . '>' . $event['event_title'] . '</a>' . '</td>';
 

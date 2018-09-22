@@ -84,7 +84,7 @@ function xoops_module_install_extcal(\XoopsModule $xoopsModule)
     $groupPermissionHandler->addRight($moduleDirName . '_perm_mask', 4, XOOPS_GROUP_ADMIN, $moduleId);
 
     //    $moduleDirName = $xoopsModule->getVar('dirname');
-    $configurator = include $GLOBALS['xoops']->path('modules/' . $moduleDirName . '/include/config.php');
+    $configurator = require_once $GLOBALS['xoops']->path('modules/' . $moduleDirName . '/include/config.php');
 
     /** @var Extcal\Utility $utility */
     $utility = new \XoopsModules\Extcal\Utility();

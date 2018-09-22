@@ -32,10 +32,10 @@ function bExtcalDayShow($options)
 
 
     /** @var Extcal\Helper $helper */
-    $helper = Extcal\Helper::getInstance();
+    $helper = \XoopsModules\Extcal\Helper::getInstance();
 
     /** @var Extcal\EventHandler $eventHandler */
-    $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+    $eventHandler = \XoopsModules\Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 
     $nbEvent     = $options[0];
     $titleLenght = $options[1];
@@ -65,7 +65,7 @@ function bExtcalDayEdit($options)
 
     //    $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
     /** @var Extcal\CategoryHandler $catHandler */
-    $catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    $catHandler = \XoopsModules\Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
 
     $cats = $catHandler->getAllCat($xoopsUser, 'extcal_cat_view');
 

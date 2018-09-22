@@ -19,7 +19,7 @@ use XoopsModules\Extcal;
  * @author       XOOPS Development Team,
  */
 
-include  dirname(dirname(__DIR__)) . '/mainfile.php';
+require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 require_once __DIR__ . '/include/constantes.php';
 $params                                  = ['view' => _EXTCAL_NAV_DAY, 'file' => _EXTCAL_FILE_DAY];
 $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
@@ -175,4 +175,4 @@ $lang = [
 $xoopsTpl->assign('lang', $lang);
 $xoopsTpl->assign('view', 'day');
 
-include XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

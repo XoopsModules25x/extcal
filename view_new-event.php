@@ -1,6 +1,6 @@
 <?php
 
-include  dirname(dirname(__DIR__)) . '/mainfile.php';
+require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 require_once __DIR__ . '/include/constantes.php';
 $params                                  = ['view' => _EXTCAL_NAV_NEW_EVENT, 'file' => _EXTCAL_FILE_NEW_EVENT];
 $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
@@ -16,7 +16,7 @@ $action  = (isset($_GET['action']) ? $_GET['action'] : 'edit');
 
 //exit;
 if (count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) > 0) {
-    include XOOPS_ROOT_PATH . '/header.php';
+    require_once XOOPS_ROOT_PATH . '/header.php';
 
     // Title of the page
     $xoopsTpl->assign('xoops_pagetitle', _MI_EXTCAL_SUBMIT_EVENT);
@@ -58,7 +58,7 @@ if (count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) > 0) 
     $xoopsTpl->assign('lang', $lang);
     $xoopsTpl->assign('view', 'newevent');
 
-    include XOOPS_ROOT_PATH . '/footer.php';
+    require_once XOOPS_ROOT_PATH . '/footer.php';
 } else {
     redirect_header('index.php', 3);
 }

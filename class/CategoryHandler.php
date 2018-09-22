@@ -34,9 +34,9 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
     public $_extcalPerm;
 
     /**
-     * @param $db
+     * @param \XoopsDatabase|null $db
      */
-    public function __construct(\XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db = null)
     {
         $this->_extcalPerm = Extcal\Perm::getHandler();
         //        parent::__construct($db, 'extcal_cat', _EXTCAL_CLN_CAT, 'cat_id');

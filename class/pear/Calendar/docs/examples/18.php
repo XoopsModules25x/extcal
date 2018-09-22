@@ -2,7 +2,7 @@
 /**
  * Description: demonstrates using the Wrapper decorator.
  */
-if (!@include __DIR__ . '/Calendar/Calendar.php') {
+if (!@require_once __DIR__   . '/Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 require_once CALENDAR_ROOT . 'Month.php';

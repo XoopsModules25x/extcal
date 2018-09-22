@@ -104,7 +104,7 @@ function xoops_module_update_extcal(\XoopsModule $module, $previousVersion = nul
         }
     }
 
-    $capsDirName = strtoupper($moduleDirName);
+    $moduleDirNameUpper = strtoupper($moduleDirName);
 
     /** @var Extcal\Helper $helper */
     /** @var Extcal\Utility $utility */
@@ -113,7 +113,7 @@ function xoops_module_update_extcal(\XoopsModule $module, $previousVersion = nul
     $utility      = new Extcal\Utility();
     $configurator = new Extcal\Common\Configurator();
 
-    if ($previousVersion < 240) {
+    if ($previousVersion < 241) {
 
         //delete old HTML templates
         if (count($configurator['templateFolders']) > 0) {

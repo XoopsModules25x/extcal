@@ -33,8 +33,8 @@ require_once  dirname(__DIR__) . '/include/constantes.php';
 
 require_once __DIR__ . '/admin_header.php';
 
-//include_once("functions.php");
-//include_once("../include/functions.php");
+//require("functions.php");
+//require("../include/functions.php");
 
 if ($xoopsUser) {
     $xoopsModule = \XoopsModule::getByDirname('extcal');
@@ -57,7 +57,7 @@ $locationHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_LOCATION
 xoops_cp_header();
 
 $op = 'liste';
-if (isset($_REQUEST['op'])) {
+if (\Xmf\Request::hasVar('op', 'REQUEST')) {
     $op = $_REQUEST['op'];
 }
 
@@ -80,14 +80,14 @@ switch ($op) {
         //***************************************************************************************
 
         $criteria = new \CriteriaCompo();
-        if (isset($_REQUEST['limit'])) {
+        if (\Xmf\Request::hasVar('limit', 'REQUEST')) {
             $criteria->setLimit($_REQUEST['limit']);
             $limit = $_REQUEST['limit'];
         } else {
             $criteria->setLimit(10);
             $limit = 10;
         }
-        if (isset($_REQUEST['start'])) {
+        if (\Xmf\Request::hasVar('start', 'REQUEST')) {
             $criteria->setStart($_REQUEST['start']);
             $start = $_REQUEST['start'];
         } else {
@@ -147,7 +147,7 @@ switch ($op) {
     // permet de suprimmer le rapport de téléchargment brisé
     case 'delete_location':
         $obj = $locationHandler->get($_REQUEST['location_id']);
-        if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
+        if (\Xmf\Request::hasVar('ok', 'REQUEST') && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('Location.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
             }
@@ -178,7 +178,7 @@ switch ($op) {
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('Location.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
-        if (isset($_REQUEST['location_id'])) {
+        if (\Xmf\Request::hasVar('location_id', 'REQUEST')) {
             $obj = $locationHandler->get($_REQUEST['location_id']);
         } else {
             $obj = $locationHandler->create();
@@ -239,7 +239,7 @@ switch ($op) {
         if ($locationHandler->insert($obj)) {
         }
 
-        //include_once("../include/forms.php");
+        //require_once "../include/forms.php";
         echo $obj->getHtmlErrors();
         $form = $obj->getForm(false, 0);
         //echo "<hr>exit <<<<<<<<<<<<<<<<<<<<";exit;

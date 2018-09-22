@@ -17,7 +17,7 @@
  * @author       XOOPS Development Team,
  */
 
-include  dirname(dirname(__DIR__)) . '/mainfile.php';
+require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 $com_itemid = \Xmf\Request::getInt('com_itemid', 0, 'GET');
 if ($com_itemid > 0) {
     // Get link title
@@ -26,5 +26,5 @@ if ($com_itemid > 0) {
     $row            = $xoopsDB->fetchArray($result);
     $com_replytitle = $row['event_title'];
     $com_replytext  = $row['event_desc'];
-    include XOOPS_ROOT_PATH . '/include/comment_new.php';
+    require_once XOOPS_ROOT_PATH . '/include/comment_new.php';
 }

@@ -39,7 +39,7 @@ function bExtcalUpcomingByCategoryShow($options)
     //     $extcalConfig = Extcal\Config::getHandler();
     //     $xoopsModuleConfig = $extcalConfig->getModuleConfig();
 
-    $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+    $eventHandler = \XoopsModules\Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 
     $nbEvent     = $options[0];
     $titleLenght = $options[1];
@@ -57,7 +57,7 @@ function bExtcalUpcomingByCategoryShow($options)
 
     /***********************************************************/
     //    $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-    $catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    $catHandler = \XoopsModules\Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
     $t          = $catHandler->objectToArray($catHandler->getAllCat($xoopsUser, 'all'));
     $tCats      = [];
     foreach ($t as $h => $hValue) {
@@ -88,7 +88,7 @@ function bExtcalUpcomingByCategoryEdit($options)
     global $xoopsUser;
 
     //    $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-    $catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    $catHandler = \XoopsModules\Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
 
     $cats = $catHandler->getAllCat($xoopsUser, 'extcal_cat_view');
 

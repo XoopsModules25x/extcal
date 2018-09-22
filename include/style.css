@@ -23,9 +23,9 @@
 
 a.infobulle {
     position: relative;
-    color: black;
+    color: #000000;
     text-decoration: none;
-    border-bottom: 1px gray dotted; /* On souligne le texte. */
+    border-bottom: 1px #808080 dotted; /* On souligne le texte. */
     font-weight: 600;
 }
 
@@ -50,13 +50,13 @@ a.infobulle:hover span[infoBulle_zone1] {
     top: 5px; /* On positionne notre infobulle. */
     left: -15px;
 
-    background: white;
+    background: #ffffff;
 
-    color: green;
+    color: #008000;
     padding: 3px;
 
-    border: 1px solid green;
-    border-left: 4px solid green;
+    border: 1px solid #008000;
+    border-left: 4px solid #008000;
 
     font-size: 11px; /* On définit les propriétés de texte pour toutes les balises. */
     font-family: Tahoma, Verdana, Arial, serif;

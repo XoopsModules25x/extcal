@@ -22,12 +22,14 @@ use XoopsModules\Extcal;
 // require_once  dirname(__DIR__) . '/class/Helper.php';
 //require_once  dirname(__DIR__) . '/include/common.php';
 
-include  dirname(__DIR__) . '/preloads/autoloader.php';
+require_once dirname(__DIR__) . '/preloads/autoloader.php';
 
 $helper = Extcal\Helper::getInstance();
 
 $pathIcon32    = \Xmf\Module\Admin::menuIconPath('');
-$pathModIcon32 = $helper->getModule()->getInfo('modicons32');
+if (is_object($helper->getModule())) {
+    $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
+}
 
 $adminmenu[] = [
     'title' => _MI_EXTCAL_INDEX,
@@ -48,7 +50,7 @@ $adminmenu[] = [
 ];
 $adminmenu[] = [
     'title' => _MI_EXTCAL_LOCATIONS,
-    'link'  => 'admin/Location.php',
+    'link'  => 'admin/location.php',
     'icon'  => $pathModIcon32 . '/location.png'
 ];
 $adminmenu[] = [

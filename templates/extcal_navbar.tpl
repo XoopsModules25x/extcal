@@ -26,7 +26,7 @@
     }
 
     #extcal-nav #navlist li a#current {
-        border-bottom: 0 solid white;
+        border-bottom: 0 solid #ffffff;
     }
 </style>
 

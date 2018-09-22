@@ -23,7 +23,7 @@
 use XoopsModules\Extcal;
 
 require_once  dirname(dirname(dirname(__DIR__))) . '/class/uploader.php';
-require_once  dirname(dirname(dirname(__DIR__))) . '/class/mail/phpmailer/class.phpmailer.php'; // First we require the PHPMailer libary in our script
+require_once  dirname(dirname(dirname(__DIR__))) . '/class/mail/phpmailer/class.phpmailer.php'; // First we require_once the PHPMailer libary in our script
 // require_once  dirname(__DIR__) . '/class/Utility.php';
 require_once __DIR__ . '/constantes.php';
 require_once  dirname(dirname(dirname(__DIR__))) . '/class/template.php';

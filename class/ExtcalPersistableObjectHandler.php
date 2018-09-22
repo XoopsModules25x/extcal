@@ -45,7 +45,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     /**
      * Constructor - called from child classes.
      *
-     * @param \XoopsDatabase $db        {@link XoopsDatabase}
+     * @param \XoopsDatabase|null $db        {@link XoopsDatabase}
      *                                  object
      * @param string         $tablename Name of database table
      * @param string         $classname Name of Class, this handler is managing

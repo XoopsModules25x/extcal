@@ -35,9 +35,9 @@ class EventHandler extends ExtcalPersistableObjectHandler
 //    private $extcalConfig;
 
     /**
-     * @param $db
+     * @param \XoopsDatabase|null $db
      */
-    public function __construct(\XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db = null)
     {
         $this->extcalPerm = Extcal\Perm::getHandler();
         $this->extcalTime = Extcal\Time::getHandler();
@@ -361,7 +361,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $cat = 0;
         //        while (list($k, $v) = each($criteres)) {
         foreach ($criteres as $k => $v) {
-            $$k = $v;
+            ${$k} =$v;
         }
         if (!isset($nbDays)) {
             $nbDays = 7;
@@ -442,7 +442,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
     {
         //        while (list($k, $v) = each($criteres)) {
         foreach ($criteres as $k => $v) {
-            $$k = $v;
+            ${$k} =$v;
         }
         if (!isset($nbDays)) {
             $nbDays = 7;
@@ -912,8 +912,8 @@ class EventHandler extends ExtcalPersistableObjectHandler
     {
         /** @var Extcal\Helper $helper */
         $helper = Extcal\Helper::getInstance();
-        $catHandler  = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
-        $fileHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_FILE);
+        $catHandler  = $helper->getHandler(_EXTCAL_CLN_CAT);
+        $fileHandler = $helper->getHandler(_EXTCAL_CLN_FILE);
 
         /***************************************************/
         if ('admin' === $siteSide) {

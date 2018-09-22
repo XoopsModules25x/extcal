@@ -21,7 +21,7 @@ use Xmf\Request;
 use XoopsModules\Extcal;
 
 require_once  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
-include  dirname(dirname(dirname(__DIR__))) . '/class/xoopsformloader.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/class/xoopsformloader.php';
 require_once __DIR__ . '/admin_header.php';
 // require_once  dirname(__DIR__) . '/class/Utility.php';
 require_once  dirname(__DIR__) . '/include/constantes.php';
@@ -29,7 +29,7 @@ require_once  dirname(__DIR__) . '/include/constantes.php';
 //$gepeto = array_merge($_GET, $_POST);
 //while (list($key, $value) = each($gepeto)) {
 //foreach ($gepeto as $key => $value) {
-//    $$k = $value;
+//    ${$k} =$value;
 //}
 
 //if (!isset($op)) {

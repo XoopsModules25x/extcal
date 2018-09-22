@@ -19,7 +19,7 @@
 
 use XoopsModules\Extcal;
 
-include XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 

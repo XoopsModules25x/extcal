@@ -2,7 +2,7 @@
 
 use XoopsModules\Extcal;
 
-include  dirname(dirname(__DIR__)) . '/mainfile.php';
+require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 require_once __DIR__ . '/include/constantes.php';
 
 /** @var Extcal\Helper $helper */
@@ -165,4 +165,4 @@ $lang = [
 $xoopsTpl->assign('lang', $lang);
 $xoopsTpl->assign('view', 'month');
 
-include XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

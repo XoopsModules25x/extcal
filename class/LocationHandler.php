@@ -29,9 +29,9 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 class LocationHandler extends ExtcalPersistableObjectHandler
 {
     /**
-     * @param $db
+     * @param \XoopsDatabase|null $db
      */
-    public function __construct(\XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db = null)
     {
         parent::__construct($db, 'extcal_location', Location::class, 'id', 'nom');
     }

@@ -22,7 +22,7 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
 require_once __DIR__ . '/admin_header.php';
 
 $step = 'default';
-if (isset($_POST['step'])) {
+if (\Xmf\Request::hasVar('step', 'POST')) {
     $step = $_POST['step'];
 }
 

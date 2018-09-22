@@ -6,7 +6,7 @@
  * hit for extra method calls. For this example some simple functions could help
  * format the month while the days are accessed via the normal Month object.
  */
-if (!@include __DIR__ . '/Calendar/Calendar.php') {
+if (!@require_once __DIR__   . '/Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 require_once CALENDAR_ROOT . 'Month/Weekdays.php';

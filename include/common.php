@@ -19,7 +19,7 @@
 
 use XoopsModules\Extcal;
 
-include  dirname(__DIR__) . '/preloads/autoloader.php';
+require_once dirname(__DIR__) . '/preloads/autoloader.php';
 
 $moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = strtoupper($moduleDirName);

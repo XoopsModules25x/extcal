@@ -15,7 +15,7 @@ $start = getmicrotime();
 // Force UnixTs engine (default setting)
 define('CALENDAR_ENGINE', 'UnixTS');
 
-if (!@include __DIR__ . '/Calendar/Calendar.php') {
+if (!@require_once __DIR__   . '/Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 require_once CALENDAR_ROOT . 'Month/Weeks.php';
@@ -58,14 +58,14 @@ $next   = $_SERVER['PHP_SELF'] . '?y=' . $NMonth->thisYear() . '&m=' . $NMonth->
     <title> Calendar </title>
     <style text="text/css">
         table {
-            background-color: silver;
+            background-color: #c0c0c0;
         }
 
         caption {
             font-family: verdana, sans-serif;
 
             font-size: 12px;
-            background-color: white;
+            background-color: #ffffff;
         }
 
         .prevMonth {
@@ -81,7 +81,7 @@ $next   = $_SERVER['PHP_SELF'] . '?y=' . $NMonth->thisYear() . '&m=' . $NMonth->
         th {
             font-family: verdana, sans-serif;
             font-size: 11px;
-            color: navy;
+            color: #000080;
             text-align: right;
         }
 
@@ -92,11 +92,11 @@ $next   = $_SERVER['PHP_SELF'] . '?y=' . $NMonth->thisYear() . '&m=' . $NMonth->
         }
 
         .selected {
-            background-color: yellow;
+            background-color: #ffff00;
         }
 
         .empty {
-            color: white;
+            color: #ffffff;
         }
     </style>
 </head>

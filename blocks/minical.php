@@ -84,13 +84,13 @@ function bExtcalMinicalShow($options)
     //----------------------------------------------------
     // Getting eXtCal object's handler
     //    $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-    $catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    $catHandler = \XoopsModules\Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
 
     $cats = $catHandler->getAllCatById($xoopsUser);
     // $t = print_r($cats,true);
     // echo "zzz<pre>{$t}</pre>";
 
-    $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+    $eventHandler = \XoopsModules\Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
     $timeHandler  = Extcal\Time::getHandler();
 
     // Retriving month and year value according to block options
@@ -273,7 +273,7 @@ function bExtcalMinicalEdit($options)
 
     //============================================================
 
-    $catHandler      = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    $catHandler      = \XoopsModules\Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
     $cats            = $catHandler->getAllCat($xoopsUser, 'extcal_cat_view');
     $imageCatHandler = xoops_getHandler('imagecategory');
 

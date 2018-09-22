@@ -2,11 +2,11 @@
 /**
  * Description: a SOAP Calendar Server.
  */
-if (!@include __DIR__ . '/SOAP/Server.php') {
+if (!@require_once __DIR__   . '/SOAP/Server.php') {
     die('You must have PEAR::SOAP installed');
 }
 
-if (!@include __DIR__ . '/Calendar/Calendar.php') {
+if (!@require_once __DIR__   . '/Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 
@@ -97,7 +97,7 @@ if ('POST' === strtoupper($_SERVER['REQUEST_METHOD'])) {
 } else {
     require_once __DIR__ . '/SOAP/Disco.php';
     $disco = new SOAP_DISCO_Server($server, 'PEAR_SOAP_Calendar');
-    if (isset($_SERVER['QUERY_STRING']) && 0 == strcasecmp($_SERVER['QUERY_STRING'], 'wsdl')) {
+    if (\Xmf\Request::hasVar('QUERY_STRING', 'SERVER') && 0 == strcasecmp($_SERVER['QUERY_STRING'], 'wsdl')) {
         header('Content-type: text/xml');
         echo $disco->getWSDL();
     } else {

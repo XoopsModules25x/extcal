@@ -26,7 +26,7 @@
                 <{$cat.cat_id}>
             </td>
             <td>
-                <div style="height:12px; width:12px; background-color:#<{$cat.cat_color}>; border:1px solid black; float:left; margin-right:5px;">
+                <div style="height:12px; width:12px; background-color:#<{$cat.cat_color}>; border:1px solid #000000; float:left; margin-right:5px;">
                 </div>
                 <a class="tooltip" href="<{$smarty.const._EXTCAL_PATH_BO}>cat.php?op=edit&cat_id=<{$cat.cat_id}>"
                    title="<{$smarty.const._EDIT}>">

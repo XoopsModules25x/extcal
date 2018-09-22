@@ -64,7 +64,7 @@
                          src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180">
                 <{/if}>
 
-                <div style="float:right; background-color:#<{$event.cat.cat_color}>; border:1px solid white; margin-right:5px;">
+                <div style="float:right; background-color:#<{$event.cat.cat_color}>; border:1px solid #ffffff; margin-right:5px;">
                     &nbsp;
                 </div>
                 </div>

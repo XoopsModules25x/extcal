@@ -15,7 +15,7 @@ $start = getmicrotime();
 // Switch to PEAR::Date engine
 define('CALENDAR_ENGINE', 'PearDate');
 
-if (!@include __DIR__ . '/Calendar/Calendar.php') {
+if (!@require_once __DIR__   . '/Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 require_once CALENDAR_ROOT . 'Month/Weekdays.php';
@@ -59,13 +59,13 @@ $thisDate = new Date($month->thisMonth('timestamp'));
     <title> Calendar using PEAR::Date Engine </title>
     <style text="text/css">
         table {
-            background-color: silver;
+            background-color: #c0c0c0;
         }
 
         caption {
             font-family: verdana, sans-serif;
             font-size: 12px;
-            background-color: white;
+            background-color: #ffffff;
         }
 
         .prevMonth {
@@ -81,7 +81,7 @@ $thisDate = new Date($month->thisMonth('timestamp'));
         th {
             font-family: verdana, sans-serif;
             font-size: 11px;
-            color: navy;
+            color: #000080;
             text-align: right;
         }
 
@@ -92,7 +92,7 @@ $thisDate = new Date($month->thisMonth('timestamp'));
         }
 
         .selected {
-            background-color: yellow;
+            background-color: #ffff00;
         }
     </style>
 </head>

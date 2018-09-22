@@ -19,15 +19,15 @@
 
 use XoopsModules\Extcal;
 
-include  dirname(dirname(__DIR__)) . '/mainfile.php';
+require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 
 /** @var Extcal\Helper $helper */
 $helper = Extcal\Helper::getInstance();
 $GLOBALS['xoopsOption']['template_main'] = 'extcal_post.tpl';
 
-include XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-//include __DIR__ . '/class/form/extcalform.php';
-//include __DIR__ . '/class/perm.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+//require_once __DIR__   . '/class/form/extcalform.php';
+//require_once __DIR__   . '/class/perm.php';
 
 require_once __DIR__ . '/class/Utility.php';
 require_once __DIR__ . '/include/constantes.php';
@@ -43,8 +43,8 @@ if (!$permHandler->isAllowed($xoopsUser, 'extcal_cat_submit', \Xmf\Request::getI
 /** @var Extcal\EventHandler $eventHandler */
 $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 
-if (isset($_POST['form_preview'])) {
-    include XOOPS_ROOT_PATH . '/header.php';
+if (\Xmf\Request::hasVar('form_preview', 'POST')) {
+    require_once XOOPS_ROOT_PATH . '/header.php';
 
     // Title of the page
     $xoopsTpl->assign('xoops_pagetitle', _MI_EXTCAL_SUBMIT_EVENT);
@@ -98,8 +98,8 @@ if (isset($_POST['form_preview'])) {
     $xoopsTpl->assign('preview', true);
     $xoopsTpl->assign('formBody', $formBody);
 
-    include XOOPS_ROOT_PATH . '/footer.php';
-} elseif (isset($_POST['form_submit'])) {
+    require_once XOOPS_ROOT_PATH . '/footer.php';
+} elseif (\Xmf\Request::hasVar('form_submit', 'POST')) {
     if (!isset($_POST['rrule_weekly_interval'])) {
         $_POST['rrule_weekly_interval'] = 0;
     }
@@ -152,7 +152,7 @@ if (isset($_POST['form_preview'])) {
 
     ];
 
-    if (isset($_POST['event_id'])) {
+    if (\Xmf\Request::hasVar('event_id', 'POST')) {
         $eventHandler->modifyEvent(\Xmf\Request::getInt('event_id', 0, 'POST'), $data);
         $fileHandler->updateEventFile(\Xmf\Request::getInt('event_id', 0, 'POST'));
         $fileHandler->createFile(\Xmf\Request::getInt('event_id', 0, 'POST'));

@@ -34,7 +34,7 @@
 
                         <{include file="db:extcal_buttons_event.tpl"}>
 
-                        <div style="float:right; background-color:#<{$event.cat.cat_color}>; border:1px solid white; margin-right:5px;">
+                        <div style="float:right; background-color:#<{$event.cat.cat_color}>; border:1px solid #ffffff; margin-right:5px;">
                             &nbsp;
                         </div>
                     </div>

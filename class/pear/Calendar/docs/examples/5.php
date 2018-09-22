@@ -12,7 +12,7 @@ function getmicrotime()
 
 $start = getmicrotime();
 
-if (!@include __DIR__ . '/Calendar/Calendar.php') {
+if (!@require_once __DIR__   . '/Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 require_once CALENDAR_ROOT . 'Year.php';
@@ -50,7 +50,7 @@ if (!isset($_POST['s'])) {
 <body>
 <h1>Select and Update</h1>
 <?php
-if (isset($_POST['update'])) {
+if (\Xmf\Request::hasVar('update', 'POST')) {
     $Second = new Calendar_Second($_POST['y'], $_POST['m'], $_POST['d'], $_POST['h'], $_POST['i'], $_POST['s']);
     if (!$Second->isValid()) {
         $V =& $Second->getValidator();

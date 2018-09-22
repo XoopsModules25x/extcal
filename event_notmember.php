@@ -1,7 +1,7 @@
 <?php
 
 use XoopsModules\Extcal;
-include  dirname(dirname(__DIR__)) . '/mainfile.php';
+require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 
 require_once __DIR__ . '/include/constantes.php';
 require_once __DIR__ . '/include/mail_fnc.php';

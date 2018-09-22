@@ -31,10 +31,10 @@ function bExtcalNewShow($options)
     //    // require_once  dirname(__DIR__) . '/class/Config.php';
 
     /** @var Extcal\Helper $helper */
-    $helper = Extcal\Helper::getInstance();
+    $helper = \XoopsModules\Extcal\Helper::getInstance();
 
 
-    $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+    $eventHandler = \XoopsModules\Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 
     $nbEvent     = $options[0];
     $titleLenght = $options[1];
@@ -62,7 +62,7 @@ function bExtcalNewEdit($options)
 {
     global $xoopsUser;
 
-    $catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    $catHandler = \XoopsModules\Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
 
     $cats = $catHandler->getAllCat($xoopsUser, 'extcal_cat_view');
 
