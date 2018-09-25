@@ -53,6 +53,7 @@ function xoops_module_pre_update_extcal(\XoopsModule $module)
 
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
+
     return $xoopsSuccess && $phpSuccess;
 }
 
@@ -112,6 +113,9 @@ function xoops_module_update_extcal(\XoopsModule $module, $previousVersion = nul
     $helper       = Extcal\Helper::getInstance();
     $utility      = new Extcal\Utility();
     $configurator = new Extcal\Common\Configurator();
+
+    $migrator = new \XoopsModules\Extgallery\Common\Migrate($configurator);
+    $migrator->synchronizeSchema();
 
     if ($previousVersion < 241) {
 

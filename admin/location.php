@@ -123,14 +123,14 @@ switch ($op) {
                 $location_city      = $location_arr[$i]->getVar('ville');
                 $location_telephone = $location_arr[$i]->getVar('tel_fixe');
                 echo '<tr class="' . $class . '">';
-                echo '<td align="left">' . '<a href="Location.php?op=edit_location&location_id=' . $location_id . '">' . $location_nom . '</a>' . '</td>';
+                echo '<td align="left">' . '<a href="location.php?op=edit_location&location_id=' . $location_id . '">' . $location_nom . '</a>' . '</td>';
 
                 echo '<td align="center"><b>' . $location_adresse . '</td>';
                 echo '<td align="center"><b>' . $location_city . '</td>';
                 echo '<td align="center"><b>' . $location_telephone . '</td>';
                 echo '<td align="center" width="15%">';
-                echo '<a href="Location.php?op=edit_location&location_id=' . $location_id . '"><img src=' . $pathIcon16 . '/edit.png alt="' . _AM_EXTCAL_LOCATION_FORM_EDIT . '" title="' . _AM_EXTCAL_LOCATION_FORM_EDIT . '"></a> ';
-                echo '<a href="Location.php?op=delete_location&location_id=' . $location_id . '"><img src=' . $pathIcon16 . '/delete.png alt="' . _AM_EXTCAL_LOCATION_FORM_DELETE . '" title="' . _AM_EXTCAL_LOCATION_FORM_DELETE . '"></a> ';
+                echo '<a href="location.php?op=edit_location&location_id=' . $location_id . '"><img src=' . $pathIcon16 . '/edit.png alt="' . _AM_EXTCAL_LOCATION_FORM_EDIT . '" title="' . _AM_EXTCAL_LOCATION_FORM_EDIT . '"></a> ';
+                echo '<a href="location.php?op=delete_location&location_id=' . $location_id . '"><img src=' . $pathIcon16 . '/delete.png alt="' . _AM_EXTCAL_LOCATION_FORM_DELETE . '" title="' . _AM_EXTCAL_LOCATION_FORM_DELETE . '"></a> ';
                 echo '</td>';
             }
             echo '</table><br>';
@@ -149,10 +149,10 @@ switch ($op) {
         $obj = $locationHandler->get($_REQUEST['location_id']);
         if (\Xmf\Request::hasVar('ok', 'REQUEST') && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
-                redirect_header('Location.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+                redirect_header('location.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
             }
             if ($locationHandler->delete($obj)) {
-                redirect_header('Location.php', 1, _AM_EXTCAL_REDIRECT_DELOK);
+                redirect_header('location.php', 1, _AM_EXTCAL_REDIRECT_DELOK);
             }
         } else {
             xoops_confirm([
@@ -176,7 +176,7 @@ switch ($op) {
 
     case 'save_location':
         if (!$GLOBALS['xoopsSecurity']->check()) {
-            redirect_header('Location.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+            redirect_header('location.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         if (\Xmf\Request::hasVar('location_id', 'REQUEST')) {
             $obj = $locationHandler->get($_REQUEST['location_id']);
@@ -243,7 +243,7 @@ switch ($op) {
         echo $obj->getHtmlErrors();
         $form = $obj->getForm(false, 0);
         //echo "<hr>exit <<<<<<<<<<<<<<<<<<<<";exit;
-        redirect_header('Location.php', 2, _AM_EXTCAL_FORMOK);
+        redirect_header('location.php', 2, _AM_EXTCAL_FORMOK);
 
         break;
 }

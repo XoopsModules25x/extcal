@@ -70,12 +70,14 @@ $adminmenu[] = [
     'icon'  => $pathIcon32 . '/block.png',
 ];
 
-$adminmenu[] = [
-    'title' => _MI_EXTCAL_ADMENU_MIGRATE,
-    'link'  => 'admin/migrate.php',
-    'icon'  => $pathIcon32 . '/database_go.png'
-];
+if ($helper->getConfig('displayDeveloperTools')) {
 
+    $adminmenu[] = [
+        'title' => _MI_EXTCAL_ADMENU_MIGRATE,
+        'link'  => 'admin/migrate.php',
+        'icon'  => $pathIcon32 . '/database_go.png'
+    ];
+}
 $adminmenu[] = [
     'title' => _MI_EXTCAL_ABOUT,
     'link'  => 'admin/about.php',

@@ -100,7 +100,7 @@
         <tr>
             <td width="_EXTCAL_TS_MINUTE%" class="odd">
                 <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_LOCATION_LIEU}></strong></span><br>
-                <a href="./Location.php?location_id=<{$event.event_location}>">
+                <a href="./location.php?location_id=<{$event.event_location}>">
                     <span style="font-size:14px;"><{$location.nom.value}></span>
                 </a>
                 <br>

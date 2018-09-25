@@ -57,7 +57,7 @@ $edit_delete = '';
 if (is_object($xoopsUser) && $isAdmin) {
     $edit_delete = '<a href="'
                    . XOOPS_URL
-                   . '/modules/extcal/admin/Location.php?op=edit_location&location_id='
+                   . '/modules/extcal/admin/location.php?op=edit_location&location_id='
                    . $location_id
                    . '"><img src="'
                    . $pathIcon16
@@ -65,7 +65,7 @@ if (is_object($xoopsUser) && $isAdmin) {
                    . _MD_EXTCAL_LOCATION_EDIT
                    . '"></a><a href="'
                    . XOOPS_URL
-                   . '/modules/extcal/admin/Location.php?op=delete_location&location_id='
+                   . '/modules/extcal/admin/location.php?op=delete_location&location_id='
                    . $location_id
                    . '"><img src="'
                    . $pathIcon16

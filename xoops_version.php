@@ -594,6 +594,17 @@ $modversion['config'][] = [
     'default'     => 1,
 ];
 
+/**
+ * Show Developer Tools?
+ */
+$modversion['config'][] = [
+    'name'        => 'displayDeveloperTools',
+    'title'       => '_MI_EXTCAL_SHOW_DEV_TOOLS',
+    'description' => '_MI_EXTCAL_SHOW_DEV_TOOLS_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
+];
 
 //modif JJD ------------------------------------------------------------
 
@@ -804,12 +815,12 @@ $modversion['notification']['event'][3]['mail_subject']  = _MI_EXTCAL_NEW_EVENT_
 
 // XoopsInfo
 $modversion['developer_website_url']  = 'http://www.zoullou.net/';
-$modversion['developer_website_name'] = 'eXtCal and eXtGallery module for XOOPS : Zoullou.net';
+$modversion['developer_website_name'] = 'eXtCal and EXTCALlery module for XOOPS : Zoullou.net';
 $modversion['download_website']       = 'http://www.zoullou.net/';
 $modversion['status_fileinfo']        = '';
 $modversion['demo_site_url']          = 'http://www.zoullou.net/modules/extcal/';
-$modversion['demo_site_name']         = 'eXtCal and eXtGallery module for XOOPS : Zoullou.net';
+$modversion['demo_site_name']         = 'eXtCal and EXTCALlery module for XOOPS : Zoullou.net';
 $modversion['support_site_url']       = 'http://www.zoullou.net/';
-$modversion['support_site_name']      = 'eXtCal and eXtGallery module for XOOPS : Zoullou.net';
+$modversion['support_site_name']      = 'eXtCal and EXTCALlery module for XOOPS : Zoullou.net';
 $modversion['submit_bug']             = 'http://sourceforge.net/tracker/?func=add&group_id=177145&atid=880070';
 $modversion['submit_feature']         = 'http://sourceforge.net/tracker/?func=add&group_id=177145&atid=880073';
