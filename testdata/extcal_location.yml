@@ -1,0 +1,18 @@
+-
+    id: '1'
+    nom: 'Sunset Restaurant'
+    description: 'Best Restaurant in New York'
+    logo: ''
+    categorie: Restaurant
+    adresse: '10th St.'
+    adresse2: ''
+    cp: '10002'
+    ville: 'New York'
+    tel_fixe: 123-536-8954
+    tel_portable: ''
+    mail: info@SunsetRestaurant.com
+    site: 'http://SunsetRestaurant.com'
+    horaires: ''
+    divers: ''
+    tarifs: '50'
+    map: ''
