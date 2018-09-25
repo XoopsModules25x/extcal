@@ -27,12 +27,10 @@ class Migrate extends \Xmf\Database\Migrate
 
     /**
      * Migrate constructor.
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
+     * @param \XoopsModules\Extcal\Common\Configurator $configurator
      */
     public function __construct(Extcal\Common\Configurator  $configurator)
     {   require_once  dirname(dirname(__DIR__)) . '/include/config.php';
-//        $config = getConfig();
         $this->renameTables            = $configurator->renameTables;
 
         $moduleDirName = basename(dirname(dirname(__DIR__)));
@@ -81,19 +79,7 @@ class Migrate extends \Xmf\Database\Migrate
      */
     private function moveDoColumns()
     {
-        $tableName    = 'tdmmoney_posts_text';
-        $srcTableName = 'tdmmoney_posts';
-        if (false !== $this->tableHandler->useTable($tableName)
-            && false !== $this->tableHandler->useTable($srcTableName)) {
-            $attributes = $this->tableHandler->getColumnAttributes($tableName, 'dohtml');
-            if (false === $attributes) {
-                $this->synchronizeTable($tableName);
-                $updateTable = $GLOBALS['xoopsDB']->prefix($tableName);
-                $joinTable   = $GLOBALS['xoopsDB']->prefix($srcTableName);
-                $sql         = "UPDATE `$updateTable` t1 INNER JOIN `$joinTable` t2 ON t1.post_id = t2.post_id \n" . "SET t1.dohtml = t2.dohtml,  t1.dosmiley = t2.dosmiley, t1.doxcode = t2.doxcode\n" . '  , t1.doimage = t2.doimage, t1.dobr = t2.dobr';
-                $this->tableHandler->addToQueue($sql);
-            }
-        }
+     //for an example, see newbb 5.0
     }
 
     /**
@@ -107,12 +93,14 @@ class Migrate extends \Xmf\Database\Migrate
      */
     protected function preSyncActions()
     {
-        // change 'bb' table prefix to 'tdmmoney'
-        $this->changePrefix();
-        // columns dohtml, dosmiley, doxcode, doimage and dobr moved between tables as some point
-        $this->moveDoColumns();
-        // Convert IP address columns from int to readable varchar(45) for IPv6
-        $this->convertIPAddresses('tdmmoney_posts', 'poster_ip');
-        $this->convertIPAddresses('tdmmoney_report', 'reporter_ip');
+        // change table prefix
+        if (is_array($this->renameTables) && 0 < count($this->renameTables)) {
+            $this->changePrefix();
+        }
+        //        // columns dohtml, dosmiley, doxcode, doimage and dobr moved between tables as some point
+        //        $this->moveDoColumns();
+        //        // Convert IP address columns from int to readable varchar(45) for IPv6
+        //        $this->convertIPAddresses('extgallery_posts', 'poster_ip');
+        //        $this->convertIPAddresses('extgallery_report', 'reporter_ip');
     }
 }
