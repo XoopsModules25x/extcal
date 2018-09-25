@@ -1,6 +1,12 @@
-<h5>2.40 Beta 2  [NOT RELEASED]</h5>  Dev: Xoops 2.5.9, PHP 7.2.10
+<h5>2.40 Beta 2  [NOT RELEASED]</h5>  Dev: Xoops 2.5.9, PHP 7.3.0 RC2
 <hr>
-- fixes, updates (mamba)
+- updates, cosmetics (mamba)
+- added sample data (mamba)
+- added Migrate class  (mamba)
+- added Blocks Admin (mamba)
+- added Blocks Admin (mamba)
+WORK IN PROGRESS
+
 
 <h5>2.40 Beta 1  [NOT RELEASED]</h5>  Dev: Xoops 2.5.9, PHP 7.2.10
 <hr>

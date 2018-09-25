@@ -46,6 +46,7 @@ $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
 $helper->loadLanguage('admin');
 $helper->loadLanguage('modinfo');
 $helper->loadLanguage('main');
+$helper->loadLanguage('common');
 
 $myts = \MyTextSanitizer::getInstance();
 

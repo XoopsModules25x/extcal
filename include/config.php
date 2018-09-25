@@ -71,6 +71,9 @@ function getConfig()
             '/tcpdf',
             '/images',
         ],
+        'renameTables' => [
+            //         'XX_archive'     => 'ZZZZ_archive',
+        ],
         'modCopyright'    => "<a href='https://xoops.org' title='XOOPS Project' target='_blank'>
                      <img src='" . XOOPS_URL . '/modules/' . $moduleDirName . '_AUTHOR_LOGOIMG' . '\' alt=\'XOOPS Project\' /></a>',
 

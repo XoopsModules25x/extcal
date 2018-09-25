@@ -24,6 +24,9 @@ use XoopsModules\Extcal;
 
 require_once dirname(__DIR__) . '/preloads/autoloader.php';
 
+$moduleDirName      = basename(dirname(__DIR__));
+$moduleDirNameUpper = strtoupper($moduleDirName);
+
 $helper = Extcal\Helper::getInstance();
 
 $pathIcon32    = \Xmf\Module\Admin::menuIconPath('');
@@ -57,6 +60,20 @@ $adminmenu[] = [
     'title' => _MI_EXTCAL_PERMISSIONS,
     'link'  => 'admin/permissions.php',
     'icon'  => $pathIcon32 . '/permissions.png'
+];
+
+// Blocks Admin
+$adminmenu[] = [
+            'title' => _MI_EXTCAL_BLOCKS_ADMIN, //'Block/Group Admin'
+//    'title' => constant('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS'),
+    'link'  => 'admin/blocksadmin.php',
+    'icon'  => $pathIcon32 . '/block.png',
+];
+
+$adminmenu[] = [
+    'title' => _MI_EXTCAL_ADMENU_MIGRATE,
+    'link'  => 'admin/migrate.php',
+    'icon'  => $pathIcon32 . '/database_go.png'
 ];
 
 $adminmenu[] = [

@@ -35,6 +35,8 @@ $configurator = new Common\Configurator();
 //    //    $adminObject->addConfigBoxLine(array($configurator['uploadFolders'][$i], '777'), 'chmod');
 //}
 
+$adminObject->displayNavigation(basename(__FILE__));
+
 //------------- Test Data ----------------------------
 
 if ($helper->getConfig('displaySampleButton')) {

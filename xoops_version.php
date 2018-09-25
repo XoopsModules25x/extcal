@@ -582,6 +582,19 @@ $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['size']        = 80;
 $modversion['config'][$i]['default']     = '';
 
+/**
+ * Make Sample button visible?
+ */
+$modversion['config'][] = [
+    'name'        => 'displaySampleButton',
+    'title'       => '_MI_EXTCAL_SHOW_SAMPLE_BUTTON',
+    'description' => '_MI_EXTCAL_SHOW_SAMPLE_BUTTON_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
+
 //modif JJD ------------------------------------------------------------
 
 // Templates

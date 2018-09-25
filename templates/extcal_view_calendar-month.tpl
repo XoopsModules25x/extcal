@@ -12,34 +12,35 @@
     </tr>
     <tr style="text-align:center;" class="head">
         <{foreach item=weekdayName from=$weekdayNames}>
-        <td><{$weekdayName}></td>
+            <td><{$weekdayName}></td>
         <{/foreach}>
     </tr>
     <{foreach item=row from=$tableRows}>
-    <tr>
-        <th style="text-align:center; vertical-align:middle;"><a
-                    href="<{$params.file}>?year=<{$row.weekInfo.year}>&amp;month=<{$row.weekInfo.month}>&amp;day=<{$row.weekInfo.day}>"><{$row.weekInfo.week}></a>
-        </th>
-        <{foreach item=cell from=$row.week}>
-        <td class="<{if $cell.isEmpty}>even<{else}>odd<{/if}>"
-            style="width:14%; height:80px; vertical-align:top;<{if $cell.isSelected}> background-color:#B6CDE4;<{/if}>">
-            <{if $cell.isEmpty}>&nbsp;
-            <{else}>
-                <a href="<{$xoops_url}>/modules/extcal/view_day.php?year=<{$year}>&amp;month=<{$month}>&amp;day=<{$cell.number}>"><{$cell.number}></a>
-                <br>
-            <{/if}>
+        <tr>
+            <th style="text-align:center; vertical-align:middle;"><a
+                        href="<{$params.file}>?year=<{$row.weekInfo.year}>&amp;month=<{$row.weekInfo.month}>&amp;day=<{$row.weekInfo.day}>"><{$row.weekInfo.week}></a>
+            </th>
+            <{foreach item=cell from=$row.week}>
+                <td class="<{if $cell.isEmpty}>even<{else}>odd<{/if}>"
+                    style="width:14%; height:80px; vertical-align:top;<{if $cell.isSelected}> background-color:#B6CDE4;<{/if}>">
+                    <{if $cell.isEmpty}>&nbsp;
+                    <{else}>
+                        <a href="<{$xoops_url}>/modules/extcal/view_day.php?year=<{$year}>&amp;month=<{$month}>&amp;day=<{$cell.number}>"><{$cell.number}></a>
+                        <br>
+                    <{/if}>
 
-            <{foreach item=event from=$cell.events}>
-                <{if $event}>
+                    <{foreach item=event from=$cell.events}>
+                        <{if $event}>
 
-                    <{include file="db:extcal_info_bulle.tpl"}>
-                    <div style="background-color:#<{$event.cat.cat_color}>; height:2px; font-size:2px;">
-                        &nbsp;</div>
-                <{/if}>
+                            <{include file="db:extcal_info_bulle.tpl"}>
+                            <div style="background-color:#<{$event.cat.cat_color}>; height:2px; font-size:2px;">
+                                &nbsp;
+                            </div>
+                        <{/if}>
+                    <{/foreach}>
+                </td>
             <{/foreach}>
-        </td>
-        <{/foreach}>
-    </tr>
+        </tr>
     <{/foreach}>
 </table>
 

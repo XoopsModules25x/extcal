@@ -165,3 +165,15 @@ define('_MI_EXTCAL_DIRNAME', basename(dirname(dirname(__DIR__))));
 define('_MI_EXTCAL_HELP_HEADER', __DIR__ . '/help/helpheader.tpl');
 define('_MI_EXTCAL_BACK_2_ADMIN', 'Back to Administration of ');
 define('_MI_EXTCAL_OVERVIEW', 'Overview');
+
+//help multi-page
+define('_MI_EXTCAL_DISCLAIMER', 'Disclaimer');
+define('_MI_EXTCAL_LICENSE', 'License');
+define('_MI_EXTCAL_SUPPORT', 'Support');
+
+define('_MI_EXTCAL_SHOW_SAMPLE_BUTTON', 'Show Sample Button?');
+define('_MI_EXTCAL_SHOW_SAMPLE_BUTTON_DESC', 'If yes, the "Add Sample Data" button will be visible to the Admin. It is Yes as a default for first installation.');
+
+
+define('_MI_EXTCAL_ADMENU_MIGRATE', 'Migrate');
+define('_MI_EXTCAL_BLOCKS_ADMIN', 'Blocks Admin');
