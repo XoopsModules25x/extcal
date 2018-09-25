@@ -1,0 +1,243 @@
+extcal_cat:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8mb4'
+    columns:
+        -
+            name: cat_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: cat_name
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: cat_desc
+            attributes: ' text '
+        -
+            name: cat_color
+            attributes: ' varchar(6)  NOT NULL '
+        -
+            name: cat_weight
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: cat_icone
+            attributes: ' varchar(50)  NOT NULL '
+    keys:
+        PRIMARY:
+            columns: cat_id
+            unique: true
+extcal_event:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8mb4'
+    columns:
+        -
+            name: event_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: cat_id
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: event_title
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+        -
+            name: event_desc
+            attributes: ' text '
+        -
+            name: event_organisateur
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+        -
+            name: event_contact
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+        -
+            name: event_url
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+        -
+            name: event_email
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+        -
+            name: event_address
+            attributes: ' text '
+        -
+            name: event_approved
+            attributes: ' tinyint(1)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: event_start
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: event_end
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: event_submitter
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: event_submitdate
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: event_nbmember
+            attributes: ' tinyint(4)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: event_isrecur
+            attributes: ' tinyint(1)  NOT NULL '
+        -
+            name: event_recur_rules
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: event_recur_start
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: event_recur_end
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: event_picture1
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: event_picture2
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: event_price
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+        -
+            name: event_location
+            attributes: ' int(5)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: dohtml
+            attributes: ' tinyint(1)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: event_icone
+            attributes: ' varchar(50)  NOT NULL '
+    keys:
+        PRIMARY:
+            columns: event_id
+            unique: true
+extcal_eventmember:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8mb4'
+    columns:
+        -
+            name: eventmember_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: event_id
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: uid
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: status
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+    keys:
+        eventmember:
+            columns: 'event_id, uid'
+            unique: true
+        PRIMARY:
+            columns: eventmember_id
+            unique: true
+extcal_eventnotmember:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8mb4'
+    columns:
+        -
+            name: eventnotmember_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: event_id
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: uid
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+    keys:
+        eventnotmember:
+            columns: 'event_id, uid'
+            unique: true
+        PRIMARY:
+            columns: eventnotmember_id
+            unique: true
+extcal_file:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8mb4'
+    columns:
+        -
+            name: file_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: file_name
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: file_nicename
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: file_mimetype
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: file_size
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: file_download
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: file_date
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: file_approved
+            attributes: ' tinyint(1)  NOT NULL '
+        -
+            name: event_id
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: uid
+            attributes: ' int(11)  NOT NULL '
+    keys:
+        PRIMARY:
+            columns: file_id
+            unique: true
+extcal_location:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8mb4'
+    columns:
+        -
+            name: id
+            attributes: ' int(5)  NOT NULL auto_increment'
+        -
+            name: nom
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: description
+            attributes: ' text '
+        -
+            name: logo
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: categorie
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: adresse
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: adresse2
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: cp
+            attributes: ' varchar(10)  NOT NULL '
+        -
+            name: ville
+            attributes: ' varchar(50)  NOT NULL '
+        -
+            name: tel_fixe
+            attributes: ' varchar(20)  NOT NULL '
+        -
+            name: tel_portable
+            attributes: ' varchar(20)  NOT NULL '
+        -
+            name: mail
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: site
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: horaires
+            attributes: ' text '
+        -
+            name: divers
+            attributes: ' text '
+        -
+            name: tarifs
+            attributes: ' text '
+        -
+            name: map
+            attributes: ' text '
+    keys:
+        PRIMARY:
+            columns: id
+            unique: true
