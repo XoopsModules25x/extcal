@@ -71,7 +71,6 @@ $adminmenu[] = [
 ];
 
 if ($helper->getConfig('displayDeveloperTools')) {
-
     $adminmenu[] = [
         'title' => _MI_EXTCAL_ADMENU_MIGRATE,
         'link'  => 'admin/migrate.php',

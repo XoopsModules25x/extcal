@@ -59,6 +59,5 @@ class Configurator
         $this->oldFolders      = $config->oldFolders;
         $this->renameTables    = $config->renameTables;
         $this->modCopyright    = $config->modCopyright;
-
     }
 }
