@@ -11,7 +11,7 @@ function getmicrotime()
 
 $start = getmicrotime();
 
-if (!@require_once __DIR__   . '/Calendar/Calendar.php') {
+if (!@require_once __DIR__ . '/Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 require_once CALENDAR_ROOT . 'Second.php';
@@ -41,7 +41,7 @@ echo '<p><b>Result:</b> ' . $Unit->thisYear() . '-' . $Unit->thisMonth() . '-' .
 if ($Unit->isValid()) {
     echo ' is valid!</p>';
 } else {
-    $V =& $Unit->getValidator();
+    $V = &$Unit->getValidator();
     echo ' is invalid:</p>';
     while ($error = $V->fetch()) {
         echo $error->toString() . '<br>';

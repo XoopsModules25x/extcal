@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extcal;
+<?php
+
+namespace XoopsModules\Extcal;
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
@@ -29,9 +31,9 @@ class Perm
     {
         if (is_a($user, 'XoopsUser')) {
             return $user->getGroups();
-        } else {
-            return XOOPS_GROUP_ANONYMOUS;
         }
+
+        return XOOPS_GROUP_ANONYMOUS;
     }
 
     /**
@@ -69,6 +71,6 @@ class Perm
     {
         $autorizedCat = $this->getAuthorizedCat($user, $perm);
 
-        return in_array($catId, $autorizedCat);
+        return in_array($catId, $autorizedCat, true);
     }
 }

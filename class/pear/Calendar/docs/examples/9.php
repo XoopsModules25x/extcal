@@ -2,7 +2,7 @@
 /**
  * Description: simple example on i18N.
  */
-if (!@require_once __DIR__   . '/Calendar/Calendar.php') {
+if (!@require_once __DIR__ . '/Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 require_once CALENDAR_ROOT . 'Day.php';

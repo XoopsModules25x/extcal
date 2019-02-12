@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Gbook;
+<?php
+
+namespace XoopsModules\Extcal;
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -50,27 +52,27 @@ class Constants
     const _EXTCAL_CLN_EVENT = 'Event';
 
     //-------------------------------------------------------------------
-//    const _EXTCAL_PEAR_ROOT_DEFAULT =  dirname(__DIR__) . '/class/pear';
+    //    const _EXTCAL_PEAR_ROOT_DEFAULT =  dirname(__DIR__) . '/class/pear';
     //const _EXTCAL_PEAR_ROOT = 'F:/wamp/www/xfr254b/xoops_lib/Frameworks/pear' );
 
-//    const _EXTCAL_PEAR_ROOT = $pear_path;
+    //    const _EXTCAL_PEAR_ROOT = $pear_path;
 
-//    const _EXTCAL_PEAR_CALENDAR_ROOT = _EXTCAL_PEAR_ROOT . '/Calendar';
-//    const CALENDAR_ROOT = _EXTCAL_PEAR_CALENDAR_ROOT . '/';
+    //    const _EXTCAL_PEAR_CALENDAR_ROOT = _EXTCAL_PEAR_ROOT . '/Calendar';
+    //    const CALENDAR_ROOT = _EXTCAL_PEAR_CALENDAR_ROOT . '/';
 
     //-------------------------------------------------------------------
     const _EXTCAL_SHOW_NO_PICTURE = false;
 
-//    const _EXTCAL_PATH_HORLOGES = '/modules/extcal/assets/images/horloges/';
-//    const _EXTCAL_PATH_ICONS16 = XOOPS_URL . '/Frameworks/moduleclasses/icons/16/';
-//    const _EXTCAL_PATH_ICONS32 = XOOPS_URL . '/Frameworks/moduleclasses/icons/32/';
-//    const _EXTCAL_PATH_FO = XOOPS_URL . '/modules/extcal/';
-//    const _EXTCAL_PATH_BO = _EXTCAL_PATH_FO . 'admin/';
-//    const _EXTCAL_PATH_LG = XOOPS_URL . '/modules/extcal/languages/';
+    //    const _EXTCAL_PATH_HORLOGES = '/modules/extcal/assets/images/horloges/';
+    //    const _EXTCAL_PATH_ICONS16 = XOOPS_URL . '/Frameworks/moduleclasses/icons/16/';
+    //    const _EXTCAL_PATH_ICONS32 = XOOPS_URL . '/Frameworks/moduleclasses/icons/32/';
+    //    const _EXTCAL_PATH_FO = XOOPS_URL . '/modules/extcal/';
+    //    const _EXTCAL_PATH_BO = _EXTCAL_PATH_FO . 'admin/';
+    //    const _EXTCAL_PATH_LG = XOOPS_URL . '/modules/extcal/languages/';
 
     const _EXTCAL_IMG_INTERVAL = 'interval04.png';
-//    const _EXTCAL_IMG_INTERVAL16 = _EXTCAL_PATH_ICONS16 . _EXTCAL_IMG_INTERVAL;
-//    const _EXTCAL_IMG_INTERVAL32 = _EXTCAL_PATH_ICONS32 . _EXTCAL_IMG_INTERVAL;
+    //    const _EXTCAL_IMG_INTERVAL16 = _EXTCAL_PATH_ICONS16 . _EXTCAL_IMG_INTERVAL;
+    //    const _EXTCAL_IMG_INTERVAL32 = _EXTCAL_PATH_ICONS32 . _EXTCAL_IMG_INTERVAL;
 
     //const _EXTCAL_DIRNAME =    $xoopsModule->getVar('dirname'));
 
@@ -85,39 +87,39 @@ class Constants
     const _EXTCAL_NAV_SEARCH = 'search';
     const _EXTCAL_NAV_NEW_EVENT = 'new-event';
 
-//    const _EXTCAL_NAV_LIST = _EXTCAL_NAV_CALMONTH
-//                             . "\n"
-//                             . _EXTCAL_NAV_CALWEEK
-//                             . "\n"
-//                             . _EXTCAL_NAV_YEAR
-//                             . "\n"
-//                             . _EXTCAL_NAV_MONTH
-//                             . "\n"
-//                             . _EXTCAL_NAV_WEEK
-//                             . "\n"
-//                             . _EXTCAL_NAV_DAY
-//                             . "\n"
-//                             . _EXTCAL_NAV_AGENDA_WEEK
-//                             . "\n"
-//                             . _EXTCAL_NAV_AGENDA_DAY
-//                             . "\n"
-//                             . _EXTCAL_NAV_SEARCH
-//                             . "\n"
-//                             . _EXTCAL_NAV_NEW_EVENT;
+    //    const _EXTCAL_NAV_LIST = _EXTCAL_NAV_CALMONTH
+    //                             . "\n"
+    //                             . _EXTCAL_NAV_CALWEEK
+    //                             . "\n"
+    //                             . _EXTCAL_NAV_YEAR
+    //                             . "\n"
+    //                             . _EXTCAL_NAV_MONTH
+    //                             . "\n"
+    //                             . _EXTCAL_NAV_WEEK
+    //                             . "\n"
+    //                             . _EXTCAL_NAV_DAY
+    //                             . "\n"
+    //                             . _EXTCAL_NAV_AGENDA_WEEK
+    //                             . "\n"
+    //                             . _EXTCAL_NAV_AGENDA_DAY
+    //                             . "\n"
+    //                             . _EXTCAL_NAV_SEARCH
+    //                             . "\n"
+    //                             . _EXTCAL_NAV_NEW_EVENT;
 
     const _EXTCAL_PREFIX_VIEW = 'view_';
     const _EXTCAL_SUFFIX_VIEW = '.php';
 
-//    const _EXTCAL_FILE_CALMONTH = _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_CALMONTH . _EXTCAL_SUFFIX_VIEW;
-//    const _EXTCAL_FILE_CALWEEK = _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_CALWEEK . _EXTCAL_SUFFIX_VIEW;
-//    const _EXTCAL_FILE_YEAR = _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_YEAR . _EXTCAL_SUFFIX_VIEW;
-//    const _EXTCAL_FILE_MONTH = _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_MONTH . _EXTCAL_SUFFIX_VIEW;
-//    const _EXTCAL_FILE_WEEK = _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_WEEK . _EXTCAL_SUFFIX_VIEW;
-//    const _EXTCAL_FILE_DAY = _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_DAY . _EXTCAL_SUFFIX_VIEW;
-//    const _EXTCAL_FILE_AGENDA_WEEK = _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_AGENDA_WEEK . _EXTCAL_SUFFIX_VIEW;
-//    const _EXTCAL_FILE_AGENDA_DAY = _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_AGENDA_DAY . _EXTCAL_SUFFIX_VIEW;
-//    const _EXTCAL_FILE_SEARCH = _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_SEARCH . _EXTCAL_SUFFIX_VIEW;
-//    const _EXTCAL_FILE_NEW_EVENT = _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_NEW_EVENT . _EXTCAL_SUFFIX_VIEW;
+    //    const _EXTCAL_FILE_CALMONTH = _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_CALMONTH . _EXTCAL_SUFFIX_VIEW;
+    //    const _EXTCAL_FILE_CALWEEK = _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_CALWEEK . _EXTCAL_SUFFIX_VIEW;
+    //    const _EXTCAL_FILE_YEAR = _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_YEAR . _EXTCAL_SUFFIX_VIEW;
+    //    const _EXTCAL_FILE_MONTH = _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_MONTH . _EXTCAL_SUFFIX_VIEW;
+    //    const _EXTCAL_FILE_WEEK = _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_WEEK . _EXTCAL_SUFFIX_VIEW;
+    //    const _EXTCAL_FILE_DAY = _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_DAY . _EXTCAL_SUFFIX_VIEW;
+    //    const _EXTCAL_FILE_AGENDA_WEEK = _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_AGENDA_WEEK . _EXTCAL_SUFFIX_VIEW;
+    //    const _EXTCAL_FILE_AGENDA_DAY = _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_AGENDA_DAY . _EXTCAL_SUFFIX_VIEW;
+    //    const _EXTCAL_FILE_SEARCH = _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_SEARCH . _EXTCAL_SUFFIX_VIEW;
+    //    const _EXTCAL_FILE_NEW_EVENT = _EXTCAL_PREFIX_VIEW . _EXTCAL_NAV_NEW_EVENT . _EXTCAL_SUFFIX_VIEW;
 
     const _EXTCAL_MULTILOADER = '/class/xoopsform/multiuploads/formmultiuploads.php';
 

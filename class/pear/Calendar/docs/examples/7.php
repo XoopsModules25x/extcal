@@ -2,11 +2,11 @@
 /**
  * Description: a SOAP Calendar Server.
  */
-if (!@require_once __DIR__   . '/SOAP/Server.php') {
+if (!@require_once __DIR__ . '/SOAP/Server.php') {
     die('You must have PEAR::SOAP installed');
 }
 
-if (!@require_once __DIR__   . '/Calendar/Calendar.php') {
+if (!@require_once __DIR__ . '/Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 
@@ -46,8 +46,6 @@ class Calendar_Server
         if (isset($this->__dispatch_map[$methodname])) {
             return $this->__dispatch_map[$methodname];
         }
-
-        return;
     }
 
     /**
@@ -68,22 +66,21 @@ class Calendar_Server
             }
 
             return new Soap_fault($errorMsg, 'Client');
-        } else {
-            $monthname = date('F Y', $Month->getTimestamp());
-            $days      = [];
-            $Month->build();
-            while ($Day = $Month->fetch()) {
-                $day    = [
-                    'isFirst' => (int)$Day->isFirst(),
-                    'isLast'  => (int)$Day->isLast(),
-                    'isEmpty' => (int)$Day->isEmpty(),
-                    'day'     => (int)$Day->thisDay(),
-                ];
-                $days[] = $day;
-            }
-
-            return ['monthname' => $monthname, 'days' => $days];
         }
+        $monthname = date('F Y', $Month->getTimestamp());
+        $days      = [];
+        $Month->build();
+        while ($Day = $Month->fetch()) {
+            $day    = [
+                'isFirst' => (int)$Day->isFirst(),
+                'isLast'  => (int)$Day->isLast(),
+                'isEmpty' => (int)$Day->isEmpty(),
+                'day'     => (int)$Day->thisDay(),
+            ];
+            $days[] = $day;
+        }
+
+        return ['monthname' => $monthname, 'days' => $days];
     }
 }
 
@@ -92,7 +89,7 @@ $server->_auto_translation = true;
 $calendar                  = new Calendar_Server();
 $server->addObjectMap($calendar, 'urn:PEAR_SOAP_Calendar');
 
-if ('POST' === strtoupper($_SERVER['REQUEST_METHOD'])) {
+if ('POST' === mb_strtoupper($_SERVER['REQUEST_METHOD'])) {
     $server->service($GLOBALS['HTTP_RAW_POST_DATA']);
 } else {
     require_once __DIR__ . '/SOAP/Disco.php';

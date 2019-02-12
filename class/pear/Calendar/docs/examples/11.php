@@ -3,7 +3,7 @@
  * Description: demonstrates a decorator used to "attach a payload" to a selection
  * to make it available when iterating over calendar children.
  */
-if (!@require_once __DIR__   . '/Calendar/Calendar.php') {
+if (!@require_once __DIR__ . '/Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 require_once CALENDAR_ROOT . 'Day.php';

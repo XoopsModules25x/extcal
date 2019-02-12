@@ -1,13 +1,12 @@
 <?php
 
 /**
- * @param XoopsModule $xoopsModule
+ * @param \XoopsModule $xoopsModule
  *
  * @return bool
  */
 function xoops_module_install_extcal(\XoopsModule $xoopsModule)
 {
-
     // Create eXtCal upload directory
     $dir = XOOPS_ROOT_PATH . '/uploads/extcal';
     if (!is_dir($dir)) {

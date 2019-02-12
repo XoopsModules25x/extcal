@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extcal;
+<?php
+
+namespace XoopsModules\Extcal;
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -46,11 +48,11 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
      * Constructor - called from child classes.
      *
      * @param \XoopsDatabase|null $db        {@link XoopsDatabase}
-     *                                  object
-     * @param string         $tablename Name of database table
-     * @param string         $classname Name of Class, this handler is managing
-     * @param string         $keyname   Name of the property, holding the key
-     * @param bool           $idenfierName
+     *                                       object
+     * @param string              $tablename Name of database table
+     * @param string              $classname Name of Class, this handler is managing
+     * @param string              $keyname   Name of the property, holding the key
+     * @param bool                $idenfierName
      */
     public function __construct(\XoopsDatabase $db, $tablename, $classname, $keyname, $idenfierName = false)
     {
@@ -65,6 +67,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
 
     /**
      * Constructor.
+     * @param mixed $isNew
      */
     //    public function ExtcalPersistableObjectHandler($db, $tablename, $classname, $keyname, $idenfierName = false)
     //    {
@@ -154,8 +157,8 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
      * Convert a database resultset to a returnable array.
      *
      * @param \XoopsObject $result  database resultset
-     * @param bool        $idAsKey - should NOT be used with joint keys
-     * @param bool        $asObject
+     * @param bool         $idAsKey - should NOT be used with joint keys
+     * @param bool         $asObject
      *
      * @return array
      */
@@ -170,7 +173,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
                     $ret[] = $obj;
                 } else {
                     $row  = [];
-                    $vars =& $obj->getVars();
+                    $vars = &$obj->getVars();
                     foreach (array_keys($vars) as $i) {
                         $row[$i] = $obj->getVar($i);
                     }
@@ -181,7 +184,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
                     $ret[$myrow[$this->keyName]] = $obj;
                 } else {
                     $row  = [];
-                    $vars =& $obj->getVars();
+                    $vars = &$obj->getVars();
                     foreach (array_keys($vars) as $i) {
                         $row[$i] = $obj->getVar($i);
                     }
@@ -273,14 +276,13 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
             list($count) = $this->db->fetchRow($result);
 
             return $count;
-        } else {
-            $ret = [];
-            while (false !== (list($id, $count) = $this->db->fetchRow($result))) {
-                $ret[$id] = $count;
-            }
-
-            return $ret;
         }
+        $ret = [];
+        while (false !== (list($id, $count) = $this->db->fetchRow($result))) {
+            $ret[$id] = $count;
+        }
+
+        return $ret;
     }
 
     /**
@@ -363,7 +365,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
             foreach ($cleanvars as $key => $value) {
                 if ((!is_array($this->keyName) && $key == $this->keyName)
                     || (is_array($this->keyName)
-                        && in_array($key, $this->keyName))) {
+                        && in_array($key, $this->keyName, true))) {
                     continue;
                 }
                 if (isset($notfirst)) {
@@ -504,12 +506,11 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
             }
 
             return $ret;
-        } else {
-            $object = new $this->className();
-            $object->assignVars($v);
-
-            return $object;
         }
+        $object = new $this->className();
+        $object->assignVars($v);
+
+        return $object;
     }
 
     /**
@@ -651,14 +652,13 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
             list($sum) = $this->db->fetchRow($result);
 
             return $sum;
-        } else {
-            $ret = [];
-            while (false !== (list($id, $sum) = $this->db->fetchRow($result))) {
-                $ret[$id] = $sum;
-            }
-
-            return $ret;
         }
+        $ret = [];
+        while (false !== (list($id, $sum) = $this->db->fetchRow($result))) {
+            $ret[$id] = $sum;
+        }
+
+        return $ret;
     }
 
     /**
@@ -692,14 +692,13 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
             list($max) = $this->db->fetchRow($result);
 
             return $max;
-        } else {
-            $ret = [];
-            while (false !== (list($id, $max) = $this->db->fetchRow($result))) {
-                $ret[$id] = $max;
-            }
-
-            return $ret;
         }
+        $ret = [];
+        while (false !== (list($id, $max) = $this->db->fetchRow($result))) {
+            $ret[$id] = $max;
+        }
+
+        return $ret;
     }
 
     /**

@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extcal\Form\Spin;
+<?php
+
+namespace XoopsModules\Extcal\Form\Spin;
 
 /**
  * FormSpin element  -  Spin button.
@@ -120,6 +122,7 @@ class FormSpin extends \XoopsFormElement
     protected $_loadJS = true;
 
     /*---------------------------------------------------------------*/
+
     /**
      * Constructor.
      *
@@ -150,8 +153,8 @@ class FormSpin extends \XoopsFormElement
         $imgFolder = 'default',
         $styleText = '',
         $styleBordure = '',
-        $minMaxVisible = true
-    ) {
+        $minMaxVisible = true)
+    {
         $this->setName($name);
         $this->setCaption($caption);
         $this->setValue($value);
@@ -168,6 +171,7 @@ class FormSpin extends \XoopsFormElement
     }
 
     /*-----------------------------------------------------------------*/
+
     /**
      * Get the values.
      */
@@ -187,6 +191,7 @@ class FormSpin extends \XoopsFormElement
     }
 
     /*-----------------------------------------------------------------*/
+
     /**
      * Get the min value.
      */
@@ -204,7 +209,9 @@ class FormSpin extends \XoopsFormElement
     {
         $this->_min = (int)$min;
     }
+
     /*-----------------------------------------------------------------*/
+
     /**
      * Get the max value - must be more great then min.
      */
@@ -224,6 +231,7 @@ class FormSpin extends \XoopsFormElement
     }
 
     /*-----------------------------------------------------------------*/
+
     /**
      * Get the small increment when click a short time on up down nutton.
      */
@@ -249,6 +257,7 @@ class FormSpin extends \XoopsFormElement
     }
 
     /*-----------------------------------------------------------------*/
+
     /**
      * Get the large increment when click a long time on up down nutton.
      */
@@ -271,6 +280,7 @@ class FormSpin extends \XoopsFormElement
     }
 
     /*-----------------------------------------------------------------*/
+
     /**
      * Get the size in nb car of the input text for the value.
      */
@@ -294,6 +304,7 @@ class FormSpin extends \XoopsFormElement
     }
 
     /*-----------------------------------------------------------------*/
+
     /**
      * @return string
      */
@@ -316,7 +327,9 @@ class FormSpin extends \XoopsFormElement
             $this->_imgFolder = $folder;
         }
     }
+
     /*-----------------------------------------------------------------*/
+
     /**
      * Get the label of unites between value and buttons.
      */
@@ -334,7 +347,9 @@ class FormSpin extends \XoopsFormElement
     {
         $this->_unite = $unite;
     }
+
     /*-----------------------------------------------------------------*/
+
     /**
      * Get the style CSS of the text.
      */
@@ -354,7 +369,9 @@ class FormSpin extends \XoopsFormElement
             $this->_styleText = $style;
         }
     }
+
     /*-----------------------------------------------------------------*/
+
     /**
      * Get the style CSS of the frame.
      */
@@ -374,7 +391,9 @@ class FormSpin extends \XoopsFormElement
             $this->_styleBordure = $style;
         }
     }
+
     /*-----------------------------------------------------------------*/
+
     /**
      * Get MinMaxVisible : show the button to go min and max value.
      */
@@ -392,6 +411,7 @@ class FormSpin extends \XoopsFormElement
     {
         $this->_minMaxVisible = $visible;
     }
+
     /**********************************************************************/
 
     /**
@@ -504,7 +524,7 @@ class FormSpin extends \XoopsFormElement
 
         if ('' != $value) {
             //            if (substr($value, 0, strlen($attribut)) != $attribut) {
-            if (0 !== strpos($value, $attribut)) {
+            if (0 !== mb_strpos($value, $attribut)) {
                 $r = "{$attribut}=\"{$value}\"";
             }
 

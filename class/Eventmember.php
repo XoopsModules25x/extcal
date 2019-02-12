@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extcal;
+<?php
+
+namespace XoopsModules\Extcal;
 
 /*
  * You may not change or alter any portion of this comment or credits

@@ -20,7 +20,7 @@
 use XoopsModules\Extcal;
 
 global $extcalConfig, $xoopsUser;
-require_once  dirname(__DIR__) . '/include/constantes.php';
+require_once dirname(__DIR__) . '/include/constantes.php';
 // require_once  dirname(__DIR__) . '/class/Utility.php';
 // require_once  dirname(__DIR__) . '/class/tableForm.php';
 //---------------------------------------------------------------------------
@@ -74,7 +74,7 @@ function bExtcalMinicalShow($options)
     //$xoopsModuleConfig = $extcalConfig->getModuleConfig();
     //----------------------------------------------------
     //recupe de xoopsmoduleConfig
-    /** @var XoopsModuleHandler $moduleHandler */
+    /** @var \XoopsModuleHandler $moduleHandler */
     $moduleHandler = xoops_getHandler('module');
     $module        = $moduleHandler->getByDirname('extcal');
     $configHandler = xoops_getHandler('config');
@@ -165,11 +165,8 @@ function bExtcalMinicalShow($options)
      */
     // Flag current day
     $selectedDays = [
-        new Calendar_Day(
-            date('Y', xoops_getUserTimestamp(time(), $timeHandler->getUserTimeZone($GLOBALS['xoopsUser']))),
-            date('n', xoops_getUserTimestamp(time(), $timeHandler->getUserTimeZone($GLOBALS['xoopsUser']))),
-                         date('j', xoops_getUserTimestamp(time(), $timeHandler->getUserTimeZone($GLOBALS['xoopsUser'])))
-        ),
+        new Calendar_Day(date('Y', xoops_getUserTimestamp(time(), $timeHandler->getUserTimeZone($GLOBALS['xoopsUser']))), date('n', xoops_getUserTimestamp(time(), $timeHandler->getUserTimeZone($GLOBALS['xoopsUser']))),
+                         date('j', xoops_getUserTimestamp(time(), $timeHandler->getUserTimeZone($GLOBALS['xoopsUser'])))),
     ];
 
     // Build calendar object
@@ -397,7 +394,6 @@ function bExtcalMinicalEdit($options)
  */
 function _makeXMLSlideshowConf($options)
 {
-
     // create a  new \XML document
     $doc               = new DomDocument('1.0');
     $doc->formatOutput = true;
@@ -455,12 +451,12 @@ function _makeXMLSlideshowConf($options)
 
 /**************************************************************************/
 /**
- * @param array      $event
- * @param array      $eventsArray
- * @param Extcal\Time       $timeHandler
- * @param            $startMonth
- * @param            $endMonth
- * @param            $cats
+ * @param array       $event
+ * @param array       $eventsArray
+ * @param Extcal\Time $timeHandler
+ * @param             $startMonth
+ * @param             $endMonth
+ * @param             $cats
  *
  * @return bool
  */

@@ -11,7 +11,7 @@ function getmicrotime()
 
 $start = getmicrotime();
 
-if (!@require_once __DIR__   . '/Calendar/Calendar.php') {
+if (!@require_once __DIR__ . '/Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 
@@ -29,7 +29,7 @@ $week_types = [
     'n_in_month',
 ];
 
-if (!isset($_GET['week_type']) || !in_array($_GET['week_type'], $week_types)) {
+if (!isset($_GET['week_type']) || !in_array($_GET['week_type'], $week_types, true)) {
     $_GET['week_type'] = 'n_in_year';
 }
 

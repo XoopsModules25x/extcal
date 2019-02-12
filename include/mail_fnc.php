@@ -22,11 +22,11 @@
 
 use XoopsModules\Extcal;
 
-require_once  dirname(dirname(dirname(__DIR__))) . '/class/uploader.php';
-require_once  dirname(dirname(dirname(__DIR__))) . '/class/mail/phpmailer/class.phpmailer.php'; // First we require_once the PHPMailer libary in our script
+require_once dirname(dirname(dirname(__DIR__))) . '/class/uploader.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/class/mail/phpmailer/class.phpmailer.php'; // First we require_once the PHPMailer libary in our script
 // require_once  dirname(__DIR__) . '/class/Utility.php';
 require_once __DIR__ . '/constantes.php';
-require_once  dirname(dirname(dirname(__DIR__))) . '/class/template.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/class/template.php';
 
 /********************************************************************
  *
@@ -210,8 +210,8 @@ function extcal_SendMail(
     $mail_body,
     $bEcho = false,
     $mode = 0,
-    $sep = '|'
-) {
+    $sep = '|')
+{
     global $ModName, $signature, $mail_admin, $xoopsConfig, $xoopsDB, $xoopsModule;
 
     //$bEcho=false;
@@ -320,9 +320,9 @@ function extcal_getHeader($mode, $emailSender)
     if (_EXTCAL_HEADER_HTML == $mode) {
         $header[] = 'MIME-Version: 1.0';
         $header[] = 'Content-type: text/html; charset=iso-8859-1';
-    } else {
-        //bin rien a prori
     }
+    //bin rien a prori
+
     $header[] = '';
 
     //$sHeader = implode("\r\n", $header);

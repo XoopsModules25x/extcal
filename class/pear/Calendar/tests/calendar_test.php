@@ -1,5 +1,4 @@
 <?php
-//
 
 require_once __DIR__ . '/simple_include.php';
 require_once __DIR__ . '/calendar_include.php';
@@ -19,12 +18,12 @@ class TestOfCalendar extends UnitTestCase
         parent::__construct($name);
     }
 
-    public function setUp()
+    protected function setUp()
     {
         $this->cal = new Calendar(2003, 10, 25, 13, 32, 43);
     }
 
-    public function tearDown()
+    protected function tearDown()
     {
         unset($this->cal);
     }

@@ -21,7 +21,7 @@ use XoopsModules\Extcal;
 
 // defined('XOOPS_ROOT_PATH') || die('XOOPS Root Path not defined');
 
-require_once __DIR__   . '/preloads/autoloader.php';
+require_once __DIR__ . '/preloads/autoloader.php';
 
 $moduleDirName = basename(__DIR__);
 
@@ -61,7 +61,7 @@ $modversion['modicons32'] = 'assets/images/icons/32';
 //about
 $modversion['module_website_url']  = 'www.xoops.org/';
 $modversion['module_website_name'] = 'XOOPS';
-$modversion['min_php']             = '5.6';
+$modversion['min_php']             = '5.5';
 $modversion['min_xoops']           = '2.5.9';
 // Admin things
 $modversion['hasAdmin']   = 1;
@@ -104,7 +104,7 @@ $modversion['tables'] = [
     $moduleDirName . '_' . 'eventmember',
     $moduleDirName . '_' . 'eventnotmember',
     $moduleDirName . '_' . 'file',
-    $moduleDirName . '_' . 'location'
+    $moduleDirName . '_' . 'location',
 ];
 
 // SQL

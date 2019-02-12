@@ -111,7 +111,7 @@ class Calendar_Table_Helper
      * Constructs Calendar_Table_Helper.
      *
      * @param object &$calendar Calendar_Month_Weekdays, Calendar_Month_Weeks, Calendar_Week
-     * @param int    $firstDay  (optional) first day of the week e.g. 1 for Monday
+     * @param int     $firstDay (optional) first day of the week e.g. 1 for Monday
      */
     public function __construct($calendar, $firstDay = null)
     {

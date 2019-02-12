@@ -39,9 +39,6 @@
  */
 
 /**
- */
-
-/**
  * Allows Calendar include path to be redefined.
  *
  * @ignore
@@ -95,10 +92,10 @@ class Calendar_Util_Textual
             $month = strftime($formats[$format], $stamp);
             switch ($format) {
                 case 'one':
-                    $month = substr($month, 0, 1);
+                    $month = mb_substr($month, 0, 1);
                     break;
                 case 'two':
-                    $month = substr($month, 0, 2);
+                    $month = mb_substr($month, 0, 2);
                     break;
             }
             $months[$i] = $month;
@@ -132,10 +129,10 @@ class Calendar_Util_Textual
             $day   = strftime($formats[$format], $stamp);
             switch ($format) {
                 case 'one':
-                    $day = substr($day, 0, 1);
+                    $day = mb_substr($day, 0, 1);
                     break;
                 case 'two':
-                    $day = substr($day, 0, 2);
+                    $day = mb_substr($day, 0, 2);
                     break;
             }
             $days[$i] = $day;

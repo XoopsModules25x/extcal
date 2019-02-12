@@ -18,7 +18,6 @@ use XoopsModules\Extcal;
  * @since
  * @author       XOOPS Development Team,
  */
-
 require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 require_once __DIR__ . '/include/constantes.php';
 $params                                  = ['view' => _EXTCAL_NAV_WEEK, 'file' => _EXTCAL_FILE_WEEK];
@@ -147,13 +146,13 @@ $xoopsTpl->assign('list_position', $extcalConfig['list_position']);
 if ($xoopsUser) {
     $xoopsTpl->assign('isAdmin', $xoopsUser->isAdmin());
     $canEdit = false;
-/* todo
-    $canEdit
-        =
-        $permHandler->isAllowed($xoopsUser, 'extcal_cat_edit', $event['cat']['cat_id'])
-            && $xoopsUser->getVar('uid') == $event['user']['uid'];
-    $xoopsTpl->assign('canEdit', $canEdit);
-*/
+    /* todo
+        $canEdit
+            =
+            $permHandler->isAllowed($xoopsUser, 'extcal_cat_edit', $event['cat']['cat_id'])
+                && $xoopsUser->getVar('uid') == $event['user']['uid'];
+        $xoopsTpl->assign('canEdit', $canEdit);
+    */
 } else {
     $xoopsTpl->assign('isAdmin', false);
     $xoopsTpl->assign('canEdit', false);

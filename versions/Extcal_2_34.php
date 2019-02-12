@@ -23,7 +23,7 @@ class Extcal_2_34
     //----------------------------------------------------
 
     /**
-     * @param XoopsModule $module
+     * @param \XoopsModule $module
      * @param             $options
      */
     public function __construct(\XoopsModule $module, $options)
@@ -47,6 +47,7 @@ __sql__;
         $xoopsDB->queryF($sql);
         //echo "<hr>{$sql}<hr>";
     }
+
     //----------------------------------------------------
 
     //-----------------------------------------------------------------

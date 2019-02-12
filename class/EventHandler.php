@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extcal;
+<?php
+
+namespace XoopsModules\Extcal;
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -23,7 +25,7 @@ use XoopsModules\Extcal;
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-require_once  dirname(__DIR__) . '/include/constantes.php';
+require_once dirname(__DIR__) . '/include/constantes.php';
 
 /**
  * Class EventHandler.
@@ -32,7 +34,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
 {
     private $extcalPerm;
     private $extcalTime;
-//    private $extcalConfig;
+    //    private $extcalConfig;
 
     /**
      * @param \XoopsDatabase|null $db
@@ -41,7 +43,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
     {
         $this->extcalPerm = Extcal\Perm::getHandler();
         $this->extcalTime = Extcal\Time::getHandler();
-//        $this->extcalConfig = Extcal\Config::getHandler();
+        //        $this->extcalConfig = Extcal\Config::getHandler();
         parent::__construct($db, 'extcal_event', Event::class, 'event_id');
     }
 
@@ -134,9 +136,9 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $rst = $this->getObjects($criteria, $asObject);
         if ($asObject) {
             return $rst;
-        } else {
-            return $this->objectToArray($rst);
         }
+
+        return $this->objectToArray($rst);
     }
 
     // Return one approved event selected by his id
@@ -160,9 +162,9 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $ret = $this->getObjects($criteriaCompo);
         if (isset($ret[0])) {
             return $ret[0];
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     // Return one event selected by his id (approve or not)
@@ -185,9 +187,9 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $ret = $this->getObjects($criteriaCompo);
         if (isset($ret[0])) {
             return $ret[0];
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -361,7 +363,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $cat = 0;
         //        while (list($k, $v) = each($criteres)) {
         foreach ($criteres as $k => $v) {
-            ${$k} =$v;
+            ${$k} = $v;
         }
         if (!isset($nbDays)) {
             $nbDays = 7;
@@ -374,14 +376,12 @@ class EventHandler extends ExtcalPersistableObjectHandler
         }
         //------------------------------------------------------
         switch ($periode) {
-
             case _EXTCAL_EVENTS_CALENDAR_WEEK:
                 $criteriaCompo = $this->getEventWeekCriteria($day, $month, $year, $cat, $nbDays);
                 if (!Extcal\Helper::getInstance()->getConfig('diplay_past_event_cal')) {
                     $criteriaCompo->add(new \Criteria('event_end', time(), '>'));
                 }
                 break;
-
             case _EXTCAL_EVENTS_WEEK:
             case _EXTCAL_EVENTS_AGENDA_WEEK:
                 $criteriaCompo = $this->getEventWeekCriteria($day, $month, $year, $cat, $nbDays);
@@ -389,7 +389,6 @@ class EventHandler extends ExtcalPersistableObjectHandler
                     $criteriaCompo->add(new \Criteria('event_end', time(), '>'));
                 }
                 break;
-
             case _EXTCAL_EVENTS_CALENDAR_MONTH:
                 $criteriaCompo = $this->getEventMonthCriteria($month, $year, $cat);
 
@@ -397,7 +396,6 @@ class EventHandler extends ExtcalPersistableObjectHandler
                     $criteriaCompo->add(new \Criteria('event_end', time(), '>'));
                 }
                 break;
-
             case _EXTCAL_EVENTS_MONTH:
                 $criteriaCompo = $this->getEventMonthCriteria($month, $year, $cat);
 
@@ -405,20 +403,16 @@ class EventHandler extends ExtcalPersistableObjectHandler
                     $criteriaCompo->add(new \Criteria('event_end', time(), '>'));
                 }
                 break;
-
             case _EXTCAL_EVENTS_DAY:
                 $criteriaCompo = $this->getEventDayCriteria($day, $month, $year, $cat);
 
                 break;
-
             case _EXTCAL_EVENTS_YEAR:
                 $criteriaCompo = $this->getEventYearCriteria($year, $cat);
                 break;
-
             case _EXTCAL_EVENTS_UPCOMING:
                 $criteriaCompo = $this->getEventWeekCriteria($day, $month, $year, $cat, $nbDays);
                 break;
-
         }
         //--------------------------------------------------------------------------
         $criteriaCompo->add(new \Criteria('event_isrecur', 0, '='));
@@ -442,7 +436,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
     {
         //        while (list($k, $v) = each($criteres)) {
         foreach ($criteres as $k => $v) {
-            ${$k} =$v;
+            ${$k} = $v;
         }
         if (!isset($nbDays)) {
             $nbDays = 7;
@@ -468,7 +462,6 @@ class EventHandler extends ExtcalPersistableObjectHandler
                 //$end = $start + (($nbDays + 1 )* _EXTCAL_TS_DAY);
                 //$end = userTimeToServerTime(mktime(0, 0, 0, $month, $day+(($nbJours)+1 * _EXTCAL_TS_DAY), $year), $this->extcalTime->getUserTimeZone($user));;
                 break;
-
             case _EXTCAL_EVENTS_MONTH:
             case _EXTCAL_EVENTS_CALENDAR_MONTH:
                 $start = userTimeToServerTime(mktime(0, 0, 0, $month, 1, $year), $this->extcalTime->getUserTimeZone($user));
@@ -478,19 +471,16 @@ class EventHandler extends ExtcalPersistableObjectHandler
                 //$criteriaCompo->add( new \Criteria('event_end', $start, '>='));
 
                 break;
-
             case _EXTCAL_EVENTS_DAY:
                 $start = userTimeToServerTime(mktime(0, 0, 0, $month, $day, $year), $this->extcalTime->getUserTimeZone($user));
                 $end   = userTimeToServerTime(mktime(0, 0, 0, $month, $day + 1, $year), $this->extcalTime->getUserTimeZone($user));
                 //$criteriaCompo->add( new \Criteria('event_start', $end, '<='));
 
                 break;
-
             case _EXTCAL_EVENTS_YEAR:
                 $start = userTimeToServerTime(mktime(0, 0, 0, 1, 1, $year), $this->extcalTime->getUserTimeZone($user));
                 $end   = userTimeToServerTime(mktime(0, 0, 0, 12, 31, $year), $this->extcalTime->getUserTimeZone($user));
                 break;
-
         }
         $formatDate = Extcal\Helper::getInstance()->getConfig('event_date_week');
         //--------------------------------------------------------------------------
@@ -859,7 +849,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
 
     /**
      * @param \CriteriaElement $criteria
-     * @param $user
+     * @param                  $user
      */
     public function addCatPermCriteria(\CriteriaElement $criteria, $user)
     {
@@ -888,7 +878,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
             $criteria->add(new \Criteria('cat_id', $cats));
         }
         if (is_array($cats)) {
-            if (false === array_search(0, $cats)) {
+            if (false === array_search(0, $cats, true)) {
                 $in = '(' . current($cats);
                 array_shift($cats);
                 foreach ($cats as $cat) {
@@ -911,7 +901,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
     public function getEventForm($siteSide = 'user', $mode = 'new', $data = null)
     {
         /** @var Extcal\Helper $helper */
-        $helper = Extcal\Helper::getInstance();
+        $helper      = Extcal\Helper::getInstance();
         $catHandler  = $helper->getHandler(_EXTCAL_CLN_CAT);
         $fileHandler = $helper->getHandler(_EXTCAL_CLN_FILE);
 
@@ -937,38 +927,36 @@ class EventHandler extends ExtcalPersistableObjectHandler
                 $event->setVar('event_title', $newTitle);
             }
 
-            $formTitle           = _MD_EXTCAL_EDIT_EVENT;
-            $formName            = 'modify_event';
-            $title               = $event->getVar('event_title', 'e');
-            $cat                 = $event->getVar('cat_id');
-            $desc                = $event->getVar('event_desc', 'e');
-            $nbMember            = $event->getVar('event_nbmember', 'e');
-            $organisateur        = $event->getVar('event_organisateur');
-            $contact             = $event->getVar('event_contact', 'e');
-            $url                 = $event->getVar('event_url', 'e');
-            $email               = $event->getVar('event_email', 'e');
-            $event_address       = $event->getVar('event_address', 'e');
-            $startDateValue      = xoops_getUserTimestamp($event->getVar('event_start'), $this->extcalTime->getUserTimeZone($GLOBALS['xoopsUser']));
-            $endDateValue        = xoops_getUserTimestamp($event->getVar('event_end'), $this->extcalTime->getUserTimeZone($GLOBALS['xoopsUser']));
-            $event_picture1      = $event->getVar('event_picture1');
-            $event_picture2      = $event->getVar('event_picture2');
-            $event_price         = $event->getVar('event_price');
+            $formTitle      = _MD_EXTCAL_EDIT_EVENT;
+            $formName       = 'modify_event';
+            $title          = $event->getVar('event_title', 'e');
+            $cat            = $event->getVar('cat_id');
+            $desc           = $event->getVar('event_desc', 'e');
+            $nbMember       = $event->getVar('event_nbmember', 'e');
+            $organisateur   = $event->getVar('event_organisateur');
+            $contact        = $event->getVar('event_contact', 'e');
+            $url            = $event->getVar('event_url', 'e');
+            $email          = $event->getVar('event_email', 'e');
+            $event_address  = $event->getVar('event_address', 'e');
+            $startDateValue = xoops_getUserTimestamp($event->getVar('event_start'), $this->extcalTime->getUserTimeZone($GLOBALS['xoopsUser']));
+            $endDateValue   = xoops_getUserTimestamp($event->getVar('event_end'), $this->extcalTime->getUserTimeZone($GLOBALS['xoopsUser']));
+            $event_picture1 = $event->getVar('event_picture1');
+            $event_picture2 = $event->getVar('event_picture2');
+            $event_price    = $event->getVar('event_price');
             $event_location = $event->getVar('event_location');
-            $event_icone         = $event->getVar('event_icone');
+            $event_icone    = $event->getVar('event_icone');
 
             // Configuring recurring form
             $eventOptions = explode('|', $event->getVar('event_recur_rules'));
             $reccurMode   = $eventOptions[0];
             array_shift($eventOptions);
             switch ($reccurMode) {
-
                 case 'daily':
 
                     $reccurOptions['rrule_freq']           = 'daily';
                     $reccurOptions['rrule_daily_interval'] = $eventOptions[0];
 
                     break;
-
                 case 'weekly':
 
                     $reccurOptions['rrule_freq']            = 'weekly';
@@ -977,20 +965,18 @@ class EventHandler extends ExtcalPersistableObjectHandler
                     $reccurOptions['rrule_weekly_bydays'] = $eventOptions;
 
                     break;
-
                 case 'monthly':
 
                     $reccurOptions['rrule_freq']             = 'monthly';
                     $reccurOptions['rrule_monthly_interval'] = $eventOptions[0];
                     array_shift($eventOptions);
-                    if (0 !== strpos($eventOptions[0], 'MD')) {
+                    if (0 !== mb_strpos($eventOptions[0], 'MD')) {
                         $reccurOptions['rrule_monthly_byday'] = $eventOptions[0];
                     } else {
-                        $reccurOptions['rrule_bymonthday'] = substr($eventOptions[0], 2);
+                        $reccurOptions['rrule_bymonthday'] = mb_substr($eventOptions[0], 2);
                     }
 
                     break;
-
                 case 'yearly':
 
                     $reccurOptions['rrule_freq']            = 'yearly';
@@ -1001,45 +987,42 @@ class EventHandler extends ExtcalPersistableObjectHandler
                     $reccurOptions['rrule_yearly_bymonths'] = $eventOptions;
 
                     break;
-
             }
 
             $files = $fileHandler->objectToArray($fileHandler->getEventFiles($data['event_id']));
             $fileHandler->formatFilesSize($files);
         } elseif ('preview' === $mode) {
-            $formTitle           = _MD_EXTCAL_SUBMIT_EVENT;
-            $formName            = 'submit_event';
-            $title               = $data['event_title'];
-            $cat                 = $data['cat_id'];
-            $desc                = $data['event_desc'];
-            $nbMember            = $data['event_nbmember'];
-            $organisateur        = $data['event_organisateur'];
-            $contact             = $data['event_contact'];
-            $url                 = $data['event_url'];
-            $email               = $data['event_email'];
-            $event_address       = $data['event_address'];
-            $startDateValue      = $data['event_start'];
-            $endDateValue        = $data['event_end'];
-            $eventEndOk          = $data['have_end'];
-            $event_picture1      = $data['event_picture1'];
-            $event_picture2      = $data['event_picture2'];
-            $event_price         = $data['event_price'];
+            $formTitle      = _MD_EXTCAL_SUBMIT_EVENT;
+            $formName       = 'submit_event';
+            $title          = $data['event_title'];
+            $cat            = $data['cat_id'];
+            $desc           = $data['event_desc'];
+            $nbMember       = $data['event_nbmember'];
+            $organisateur   = $data['event_organisateur'];
+            $contact        = $data['event_contact'];
+            $url            = $data['event_url'];
+            $email          = $data['event_email'];
+            $event_address  = $data['event_address'];
+            $startDateValue = $data['event_start'];
+            $endDateValue   = $data['event_end'];
+            $eventEndOk     = $data['have_end'];
+            $event_picture1 = $data['event_picture1'];
+            $event_picture2 = $data['event_picture2'];
+            $event_price    = $data['event_price'];
             $event_location = $data['event_location'];
-            $event_icone         = $data['event_icone'];
+            $event_icone    = $data['event_icone'];
 
             // Configuring recurring form
             $eventOptions = explode('|', $this->getRecurRules($_POST));
             $reccurMode   = $eventOptions[0];
             array_shift($eventOptions);
             switch ($reccurMode) {
-
                 case 'daily':
 
                     $reccurOptions['rrule_freq']           = 'daily';
                     $reccurOptions['rrule_daily_interval'] = $eventOptions[0];
 
                     break;
-
                 case 'weekly':
 
                     $reccurOptions['rrule_freq']            = 'weekly';
@@ -1048,20 +1031,18 @@ class EventHandler extends ExtcalPersistableObjectHandler
                     $reccurOptions['rrule_weekly_bydays'] = $eventOptions;
 
                     break;
-
                 case 'monthly':
 
                     $reccurOptions['rrule_freq']             = 'monthly';
                     $reccurOptions['rrule_monthly_interval'] = $eventOptions[0];
                     array_shift($eventOptions);
-                    if (0 !== strpos($eventOptions[0], 'MD')) {
+                    if (0 !== mb_strpos($eventOptions[0], 'MD')) {
                         $reccurOptions['rrule_monthly_byday'] = $eventOptions[0];
                     } else {
-                        $reccurOptions['rrule_bymonthday'] = substr($eventOptions[0], 2);
+                        $reccurOptions['rrule_bymonthday'] = mb_substr($eventOptions[0], 2);
                     }
 
                     break;
-
                 case 'yearly':
 
                     $reccurOptions['rrule_freq']            = 'yearly';
@@ -1072,32 +1053,31 @@ class EventHandler extends ExtcalPersistableObjectHandler
                     $reccurOptions['rrule_yearly_bymonths'] = $eventOptions;
 
                     break;
-
             }
 
             $files = $fileHandler->objectToArray($fileHandler->getEventFiles($data['event_id']));
             $fileHandler->formatFilesSize($files);
         } else {
-            $formTitle           = _MD_EXTCAL_SUBMIT_EVENT;
-            $formName            = 'submit_event';
-            $title               = '';
-            $cat                 = '';
-            $desc                = '';
-            $nbMember            = 0;
-            $organisateur        = '';
-            $contact             = '';
-            $url                 = '';
-            $email               = '';
-            $event_address       = '';
-            $startDateValue      = 0;
-            $endDateValue        = 0;
-            $eventEndOk          = 0;
-            $event_picture1      = '';
-            $event_picture2      = '';
-            $event_price         = '';
+            $formTitle      = _MD_EXTCAL_SUBMIT_EVENT;
+            $formName       = 'submit_event';
+            $title          = '';
+            $cat            = '';
+            $desc           = '';
+            $nbMember       = 0;
+            $organisateur   = '';
+            $contact        = '';
+            $url            = '';
+            $email          = '';
+            $event_address  = '';
+            $startDateValue = 0;
+            $endDateValue   = 0;
+            $eventEndOk     = 0;
+            $event_picture1 = '';
+            $event_picture2 = '';
+            $event_price    = '';
             $event_location = '';
-            $files               = [];
-            $event_icone         = '';
+            $files          = [];
+            $event_icone    = '';
         }
 
         // Create XoopsForm Object
@@ -1117,7 +1097,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $form->addElement($catSelect, true);
         //-----------------------------------------------------------
 
-        $file_path =  dirname(__DIR__) . '/assets/css/images';
+        $file_path = dirname(__DIR__) . '/assets/css/images';
         $tf        = \XoopsLists::getImgListAsArray($file_path);
         array_unshift($tf, _MD_EXTCAL_NONE);
         $xfIcones = new \XoopsFormSelect(_MD_EXTCAL_ICONE, 'event_icone', $event_icone, '');
@@ -1127,14 +1107,14 @@ class EventHandler extends ExtcalPersistableObjectHandler
         //location
         $locationHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_LOCATION);
         $location_select = new \XoopsFormSelect(_MD_EXTCAL_LOCATION, 'event_location', $event_location);
-        $criteria             = new \CriteriaCompo();
+        $criteria        = new \CriteriaCompo();
         $criteria->setSort('nom');
         $criteria->setOrder('ASC');
 
         //$lstLocation = $locationHandler->getList($criteria);
         $location_arr = $locationHandler->getAll($criteria);
-        $tEts              = [];
-        $tEts[0]           = _MD_EXTCAL_NONE;
+        $tEts         = [];
+        $tEts[0]      = _MD_EXTCAL_NONE;
         foreach (array_keys($location_arr) as $i) {
             $tEts[$location_arr[$i]->getVar('id')] = $location_arr[$i]->getVar('nom');
             //            $tEts[$location_arr[$i]['id']] = $location_arr[$i]['nom'];
@@ -1298,7 +1278,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
     {
         $recurFreq = ['daily', 'weekly', 'monthly', 'yearly'];
 
-        return in_array($parm['rrule_freq'], $recurFreq);
+        return in_array($parm['rrule_freq'], $recurFreq, true);
     }
 
     /**
@@ -1320,7 +1300,6 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $recurFreq = $parm['rrule_freq'];
 
         switch ($recurFreq) {
-
             case 'daily':
                 if (!isset($parm['rrule_daily_interval'])) {
                     $parm['rrule_daily_interval'] = 0;
@@ -1329,7 +1308,6 @@ class EventHandler extends ExtcalPersistableObjectHandler
                 $recurRules .= $parm['rrule_daily_interval'];
 
                 break;
-
             case 'weekly':
                 if (!isset($parm['rrule_weekly_interval'])) {
                     $parm['rrule_weekly_interval'] = 0;
@@ -1341,7 +1319,6 @@ class EventHandler extends ExtcalPersistableObjectHandler
                 }
 
                 break;
-
             case 'monthly':
                 if (!isset($parm['rrule_monthly_interval'])) {
                     $parm['rrule_monthly_interval'] = 0;
@@ -1355,7 +1332,6 @@ class EventHandler extends ExtcalPersistableObjectHandler
                 }
 
                 break;
-
             case 'yearly':
                 //JJD - to valid modif
                 //
@@ -1391,7 +1367,6 @@ class EventHandler extends ExtcalPersistableObjectHandler
                 }
 
                 break;
-
         }
 
         return $recurRules;
@@ -1405,7 +1380,6 @@ class EventHandler extends ExtcalPersistableObjectHandler
      */
     public function getRecurStart($data, $parm)
     {
-
         // If this isn't a reccuring event
         if (!$this->getIsRecur($parm)) {
             return 0;
@@ -1431,15 +1405,13 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $recurStart = $this->getRecurStart($data, $parm);
 
         switch ($recurFreq) {
-
             case 'daily':
                 $interval = $parm['rrule_daily_interval'];
                 $recurEnd = $recurStart + ($interval * _EXTCAL_TS_DAY) - 1;
 
                 break;
-
             case 'weekly':
-                  // Getting the first weekday TS
+                // Getting the first weekday TS
                 $startWeekTS = mktime(0, 0, 0, date('n', $data['event_recur_start']), date('j', $data['event_recur_start']), date('Y', $data['event_recur_start']));
                 $offset      = date('w', $startWeekTS) - Extcal\Helper::getInstance()->getConfig('week_start_day');
                 $startWeekTS -= ($offset * _EXTCAL_TS_DAY);
@@ -1447,17 +1419,14 @@ class EventHandler extends ExtcalPersistableObjectHandler
                 $recurEnd = $startWeekTS + ($parm['rrule_weekly_interval'] * _EXTCAL_TS_WEEK) - 1;
 
                 break;
-
             case 'monthly':
                 $recurEnd = $recurStart + ($parm['rrule_monthly_interval'] * 2678400) - 1;
 
                 break;
-
             case 'yearly':
                 $recurEnd = $recurStart + ($parm['rrule_yearly_interval'] * 32140800) - 1;
 
                 break;
-
         }
 
         return $recurEnd;
@@ -1477,7 +1446,6 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $eventOptions = explode('|', $event['event_recur_rules']);
 
         switch ($eventOptions[0]) {
-
             case 'daily':
                 array_shift($eventOptions);
                 $rRuleInterval = $eventOptions[0];
@@ -1514,7 +1482,6 @@ class EventHandler extends ExtcalPersistableObjectHandler
                 }
 
                 break;
-
             case 'weekly':
 
                 array_shift($eventOptions);
@@ -1541,7 +1508,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
                     // Add this event occurence only if it's on the period view and according to day
                     if ($occurEventStart <= $periodEnd // Event start falls within search period
                         && $occurEventEnd >= $periodStart // Event end falls within search period
-                        && in_array($dayArray[date('w', $occurEventStart)], $eventOptions)) {
+                        && in_array($dayArray[date('w', $occurEventStart)], $eventOptions, true)) {
                         // This week day is selected
 
                         $event['event_start'] = $occurEventStart;
@@ -1560,7 +1527,6 @@ class EventHandler extends ExtcalPersistableObjectHandler
                 }
 
                 break;
-
             case 'monthly':
                 array_shift($eventOptions);
                 $rRuleInterval = $eventOptions[0];
@@ -1611,7 +1577,6 @@ class EventHandler extends ExtcalPersistableObjectHandler
                 }
 
                 break;
-
             case 'yearly':
                 array_shift($eventOptions);
                 $rRuleInterval = $eventOptions[0];
@@ -1651,7 +1616,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
                      && // Event end falls within search period
                      ($occurEventEnd >= $periodStart)
                      && // This week day is selected
-                     in_array($month, $eventOptions)) {
+                     in_array($month, $eventOptions, true)) {
                         $event['event_start'] = $occurEventStart;
                         $event['event_end']   = $occurEventEnd;
 
@@ -1668,7 +1633,6 @@ class EventHandler extends ExtcalPersistableObjectHandler
                 }
 
                 break;
-
         }
 
         return $recuEvents;
@@ -1685,560 +1649,486 @@ class EventHandler extends ExtcalPersistableObjectHandler
      */
     public function getOccurTS($month, $year, $dayCode)
     {
-        if (0 === strpos($dayCode, 'MD')) {
-            if ('' != substr($dayCode, 2)) {
-                return mktime(0, 0, 0, $month, substr($dayCode, 2), $year);
-            } else {
+        if (0 === mb_strpos($dayCode, 'MD')) {
+            if ('' != mb_substr($dayCode, 2)) {
+                return mktime(0, 0, 0, $month, mb_substr($dayCode, 2), $year);
+            }
+
+            return 0;
+        }
+        switch ($dayCode) {
+            case '1SU':
+
+                $ts        = mktime(0, 0, 0, $month, 1, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (0 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (0 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '1MO':
+
+                $ts        = mktime(0, 0, 0, $month, 1, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (1 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (1 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '1TU':
+
+                $ts        = mktime(0, 0, 0, $month, 1, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (2 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (2 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '1WE':
+
+                $ts        = mktime(0, 0, 0, $month, 1, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (3 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (3 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '1TH':
+
+                $ts        = mktime(0, 0, 0, $month, 1, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (4 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (4 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '1FR':
+
+                $ts        = mktime(0, 0, 0, $month, 1, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (5 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (5 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '1SA':
+
+                $ts        = mktime(0, 0, 0, $month, 1, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (6 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (6 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '2SU':
+
+                $ts        = mktime(0, 0, 0, $month, 7, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (0 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (0 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '2MO':
+
+                $ts        = mktime(0, 0, 0, $month, 7, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (1 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (1 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '2TU':
+
+                $ts        = mktime(0, 0, 0, $month, 7, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (2 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (2 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '2WE':
+
+                $ts        = mktime(0, 0, 0, $month, 7, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (3 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (3 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '2TH':
+
+                $ts        = mktime(0, 0, 0, $month, 7, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (4 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (4 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '2FR':
+
+                $ts        = mktime(0, 0, 0, $month, 7, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (5 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (5 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '2SA':
+
+                $ts        = mktime(0, 0, 0, $month, 7, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (6 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (6 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '3SU':
+
+                $ts        = mktime(0, 0, 0, $month, 14, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (0 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (0 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '3MO':
+
+                $ts        = mktime(0, 0, 0, $month, 14, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (1 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (1 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '3TU':
+
+                $ts        = mktime(0, 0, 0, $month, 14, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (2 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (2 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '3WE':
+
+                $ts        = mktime(0, 0, 0, $month, 14, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (3 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (3 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '3TH':
+
+                $ts        = mktime(0, 0, 0, $month, 14, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (4 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (4 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '3FR':
+
+                $ts        = mktime(0, 0, 0, $month, 14, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (5 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (5 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '3SA':
+
+                $ts        = mktime(0, 0, 0, $month, 14, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (6 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (6 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '4SU':
+
+                $ts        = mktime(0, 0, 0, $month, 21, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (0 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (0 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '4MO':
+
+                $ts        = mktime(0, 0, 0, $month, 21, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (1 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (1 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '4TU':
+
+                $ts        = mktime(0, 0, 0, $month, 21, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (2 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (2 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '4WE':
+
+                $ts        = mktime(0, 0, 0, $month, 21, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (3 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (3 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '4TH':
+
+                $ts        = mktime(0, 0, 0, $month, 21, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (4 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (4 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '4FR':
+
+                $ts        = mktime(0, 0, 0, $month, 21, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (5 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (5 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '4SA':
+
+                $ts        = mktime(0, 0, 0, $month, 21, $year);
+                $dayOfWeek = date('w', $ts);
+                $ts        = (6 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
+                $i         = 0;
+                while (6 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * $i);
+                break;
+            case '-1SU':
+
+                $ts        = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
+                $dayOfWeek = date('w', $ts);
+                $i         = 0;
+                while (0 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+                if (0 == $i) {
+                    return $ts;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * ($i - 7));
+                break;
+            case '-1MO':
+
+                $ts        = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
+                $dayOfWeek = date('w', $ts);
+                $i         = 0;
+                while (1 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+                if (0 == $i) {
+                    return $ts;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * ($i - 7));
+                break;
+            case '-1TU':
+
+                $ts        = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
+                $dayOfWeek = date('w', $ts);
+                $i         = 0;
+                while (2 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+                if (0 == $i) {
+                    return $ts;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * ($i - 7));
+                break;
+            case '-1WE':
+
+                $ts        = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
+                $dayOfWeek = date('w', $ts);
+                $i         = 0;
+                while (3 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+                if (0 == $i) {
+                    return $ts;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * ($i - 7));
+                break;
+            case '-1TH':
+
+                $ts        = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
+                $dayOfWeek = date('w', $ts);
+                $i         = 0;
+                while (4 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+                if (0 == $i) {
+                    return $ts;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * ($i - 7));
+                break;
+            case '-1FR':
+
+                $ts        = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
+                $dayOfWeek = date('w', $ts);
+                $i         = 0;
+                while (5 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+                if (0 == $i) {
+                    return $ts;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * ($i - 7));
+                break;
+            case '-1SA':
+
+                $ts        = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
+                $dayOfWeek = date('w', $ts);
+                $i         = 0;
+                while (6 != $dayOfWeek % 7) {
+                    ++$dayOfWeek;
+                    ++$i;
+                }
+                if (0 == $i) {
+                    return $ts;
+                }
+
+                return $ts + (_EXTCAL_TS_DAY * ($i - 7));
+                break;
+            default:
                 return 0;
-            }
-        } else {
-            switch ($dayCode) {
-
-                case '1SU':
-
-                    $ts        = mktime(0, 0, 0, $month, 1, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (0 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (0 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '1MO':
-
-                    $ts        = mktime(0, 0, 0, $month, 1, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (1 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (1 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '1TU':
-
-                    $ts        = mktime(0, 0, 0, $month, 1, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (2 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (2 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '1WE':
-
-                    $ts        = mktime(0, 0, 0, $month, 1, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (3 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (3 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '1TH':
-
-                    $ts        = mktime(0, 0, 0, $month, 1, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (4 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (4 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '1FR':
-
-                    $ts        = mktime(0, 0, 0, $month, 1, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (5 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (5 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '1SA':
-
-                    $ts        = mktime(0, 0, 0, $month, 1, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (6 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (6 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '2SU':
-
-                    $ts        = mktime(0, 0, 0, $month, 7, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (0 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (0 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '2MO':
-
-                    $ts        = mktime(0, 0, 0, $month, 7, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (1 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (1 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '2TU':
-
-                    $ts        = mktime(0, 0, 0, $month, 7, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (2 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (2 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '2WE':
-
-                    $ts        = mktime(0, 0, 0, $month, 7, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (3 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (3 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '2TH':
-
-                    $ts        = mktime(0, 0, 0, $month, 7, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (4 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (4 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '2FR':
-
-                    $ts        = mktime(0, 0, 0, $month, 7, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (5 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (5 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '2SA':
-
-                    $ts        = mktime(0, 0, 0, $month, 7, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (6 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (6 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '3SU':
-
-                    $ts        = mktime(0, 0, 0, $month, 14, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (0 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (0 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '3MO':
-
-                    $ts        = mktime(0, 0, 0, $month, 14, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (1 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (1 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '3TU':
-
-                    $ts        = mktime(0, 0, 0, $month, 14, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (2 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (2 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '3WE':
-
-                    $ts        = mktime(0, 0, 0, $month, 14, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (3 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (3 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '3TH':
-
-                    $ts        = mktime(0, 0, 0, $month, 14, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (4 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (4 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '3FR':
-
-                    $ts        = mktime(0, 0, 0, $month, 14, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (5 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (5 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '3SA':
-
-                    $ts        = mktime(0, 0, 0, $month, 14, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (6 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (6 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '4SU':
-
-                    $ts        = mktime(0, 0, 0, $month, 21, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (0 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (0 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '4MO':
-
-                    $ts        = mktime(0, 0, 0, $month, 21, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (1 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (1 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '4TU':
-
-                    $ts        = mktime(0, 0, 0, $month, 21, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (2 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (2 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '4WE':
-
-                    $ts        = mktime(0, 0, 0, $month, 21, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (3 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (3 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '4TH':
-
-                    $ts        = mktime(0, 0, 0, $month, 21, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (4 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (4 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '4FR':
-
-                    $ts        = mktime(0, 0, 0, $month, 21, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (5 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (5 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '4SA':
-
-                    $ts        = mktime(0, 0, 0, $month, 21, $year);
-                    $dayOfWeek = date('w', $ts);
-                    $ts        = (6 == date('w', $ts)) ? $ts + (_EXTCAL_TS_DAY * 7) : $ts;
-                    $i         = 0;
-                    while (6 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * $i);
-
-                    break;
-
-                case '-1SU':
-
-                    $ts        = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
-                    $dayOfWeek = date('w', $ts);
-                    $i         = 0;
-                    while (0 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-                    if (0 == $i) {
-                        return $ts;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * ($i - 7));
-
-                    break;
-
-                case '-1MO':
-
-                    $ts        = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
-                    $dayOfWeek = date('w', $ts);
-                    $i         = 0;
-                    while (1 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-                    if (0 == $i) {
-                        return $ts;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * ($i - 7));
-
-                    break;
-
-                case '-1TU':
-
-                    $ts        = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
-                    $dayOfWeek = date('w', $ts);
-                    $i         = 0;
-                    while (2 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-                    if (0 == $i) {
-                        return $ts;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * ($i - 7));
-
-                    break;
-
-                case '-1WE':
-
-                    $ts        = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
-                    $dayOfWeek = date('w', $ts);
-                    $i         = 0;
-                    while (3 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-                    if (0 == $i) {
-                        return $ts;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * ($i - 7));
-
-                    break;
-
-                case '-1TH':
-
-                    $ts        = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
-                    $dayOfWeek = date('w', $ts);
-                    $i         = 0;
-                    while (4 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-                    if (0 == $i) {
-                        return $ts;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * ($i - 7));
-
-                    break;
-
-                case '-1FR':
-
-                    $ts        = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
-                    $dayOfWeek = date('w', $ts);
-                    $i         = 0;
-                    while (5 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-                    if (0 == $i) {
-                        return $ts;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * ($i - 7));
-
-                    break;
-
-                case '-1SA':
-
-                    $ts        = mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
-                    $dayOfWeek = date('w', $ts);
-                    $i         = 0;
-                    while (6 != $dayOfWeek % 7) {
-                        ++$dayOfWeek;
-                        ++$i;
-                    }
-                    if (0 == $i) {
-                        return $ts;
-                    }
-
-                    return $ts + (_EXTCAL_TS_DAY * ($i - 7));
-
-                    break;
-
-                default:
-                    return 0;
-
-                    break;
-
-            }
+                break;
         }
     }
 
@@ -2307,8 +2197,8 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $limit = 0,
         $offset = 0,
         $userId = 0,
-        $user = ''
-    ) {
+        $user = '')
+    {
         global $xoopsDB;
 
         //echo "<hr>{$andor}-{$limit}-{$offset}-{$userId}-{$user}<br>{$criteresPlus}";
@@ -2450,8 +2340,8 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $userId,
         $user,
         $criteresPlus = '',
-        $xoopsSearch = true
-    ) {
+        $xoopsSearch = true)
+    {
         global $xoopsDB;
         //echo "<hr>{$andor}-{$limit}-{$offset}-{$userId}-{$user}<br>{$criteresPlus}";
 

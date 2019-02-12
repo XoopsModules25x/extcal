@@ -16,7 +16,6 @@
  * @since
  * @author       XOOPS Development Team,
  * @author       JJDai <http://xoops.kiolo.com>
- *
  */
 //----------------------------------------------------
 class Extcal_2_21
@@ -24,7 +23,7 @@ class Extcal_2_21
     //----------------------------------------------------
 
     /**
-     * @param XoopsModule $module
+     * @param \XoopsModule $module
      * @param             $options
      */
     public function __construct(\XoopsModule $module, $options)

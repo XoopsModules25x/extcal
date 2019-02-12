@@ -1,5 +1,4 @@
 <?php
-//
 
 require_once __DIR__ . '/simple_include.php';
 require_once __DIR__ . '/calendar_include.php';
@@ -26,7 +25,7 @@ class TestOfDecorator extends UnitTestCase
         parent::__construct('Test of Calendar_Decorator');
     }
 
-    public function setUp()
+    protected function setUp()
     {
         $this->mockengine = new Mock_Calendar_Engine($this);
         $this->mockcal    = new Mock_Calendar_Second($this);
@@ -52,7 +51,7 @@ class TestOfDecorator extends UnitTestCase
         $this->mockcal->setReturnValue('getTimestamp', 12345);
     }
 
-    public function tearDown()
+    protected function tearDown()
     {
         unset($this->engine, $this->mockcal);
     }

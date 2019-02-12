@@ -20,11 +20,11 @@
 use Xmf\Request;
 use XoopsModules\Extcal;
 
-require_once  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
-require_once dirname(dirname(dirname(__DIR__))) . '/class/xoopsformloader.php';
 require_once __DIR__ . '/admin_header.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/class/xoopsformloader.php';
+
 // require_once  dirname(__DIR__) . '/class/Utility.php';
-require_once  dirname(__DIR__) . '/include/constantes.php';
+require_once dirname(__DIR__) . '/include/constantes.php';
 
 //$gepeto = array_merge($_GET, $_POST);
 //while (list($key, $value) = each($gepeto)) {
@@ -51,8 +51,8 @@ switch ($op) {
             'cat_name'   => Request::getString('cat_name', '', 'POST'),
             'cat_desc'   => Request::getText('cat_desc', '', 'POST'),
             'cat_weight' => Request::getInt('cat_weight', 0, 'POST'),
-            'cat_color'  => substr(Request::getString('cat_color', '', 'POST'), 1),
-            'cat_icone'  => Request::getInt('cat_icone', 0, 'POST')
+            'cat_color'  => mb_substr(Request::getString('cat_color', '', 'POST'), 1),
+            'cat_icone'  => Request::getInt('cat_icone', 0, 'POST'),
         ];
         if (isset($cat_id)) {
             /** @var Extcal\CategoryHandler $catHandler */
@@ -67,7 +67,7 @@ switch ($op) {
 
             $catHandler->modifyCat($cat_id, $varArr);
             redirect_header('cat.php', 3, _AM_EXTCAL_CAT_EDITED, false);
-        // Create new cat
+            // Create new cat
         } else {
             // $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
             //            $varArr = [
@@ -82,7 +82,6 @@ switch ($op) {
         }
 
         break;
-
     case 'new':
         xoops_cp_header();
 
@@ -95,7 +94,7 @@ switch ($op) {
         $form->addElement(new \XoopsFormText(_AM_EXTCAL_WEIGHT, 'cat_weight', 30, 5, 0), false);
         $form->addElement(new \XoopsFormColorPicker(_AM_EXTCAL_COLOR, 'cat_color', '#FF0000'));
 
-        $file_path =  dirname(__DIR__) . '/assets/css/images';
+        $file_path = dirname(__DIR__) . '/assets/css/images';
         $tf        = \XoopsLists::getImgListAsArray($file_path);
         array_unshift($tf, _MD_EXTCAL_NONE);
         //$xfIcones = new \XoopsFormSelect(_AM_EXTCAL_ICONE, "cat_icone", $cat->getVar('cat_icone'), '');
@@ -109,16 +108,14 @@ switch ($op) {
 
         require_once __DIR__ . '/admin_footer.php';
         break;
-
     case 'edit':
         xoops_cp_header();
 
         // $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
         if (isset($cat_id) && 0 != $cat_id) {
             $cat = $catHandler->getCat($cat_id, true);
-        } else {
-            //            $cat = $catHandler->getCat($cat_id, true);
         }
+        //            $cat = $catHandler->getCat($cat_id, true);
 
         echo '<fieldset><legend style="font-weight:bold; color:#990000;">' . _AM_EXTCAL_EDIT_CATEGORY . '</legend>';
 
@@ -128,7 +125,7 @@ switch ($op) {
         $form->addElement(new \XoopsFormText(_AM_EXTCAL_WEIGHT, 'cat_weight', 30, 5, $cat->getVar('cat_weight')), false);
         $form->addElement(new \XoopsFormColorPicker(_AM_EXTCAL_COLOR, 'cat_color', '#' . $cat->getVar('cat_color')));
 
-        $file_path =  dirname(__DIR__) . '/assets/css/images';
+        $file_path = dirname(__DIR__) . '/assets/css/images';
         $tf        = \XoopsLists::getImgListAsArray($file_path);
         array_unshift($tf, _MD_EXTCAL_NONE);
         $xfIcones = new \XoopsFormSelect(_AM_EXTCAL_ICONE, 'cat_icone', $cat->getVar('cat_icone'), '');
@@ -143,7 +140,6 @@ switch ($op) {
 
         xoops_cp_footer();
         break;
-
     case 'delete':
         if (!isset($confirm)) {
             xoops_cp_header();
@@ -163,7 +159,6 @@ switch ($op) {
             }
         }
         break;
-
     //     case 'modify':
     //
     //         if (isset($form_modify)) {

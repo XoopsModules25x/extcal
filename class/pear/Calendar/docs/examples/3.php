@@ -12,7 +12,7 @@ function getmicrotime()
 
 $start = getmicrotime();
 
-if (!@require_once __DIR__   . '/Calendar/Calendar.php') {
+if (!@require_once __DIR__ . '/Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 require_once CALENDAR_ROOT . 'Month/Weekdays.php';
@@ -108,7 +108,6 @@ $Month->build($selectedDays);
     </tr>
     <?php
     while ($Day = $Month->fetch()) {
-
         // Build a link string for each day
         $link = $_SERVER['PHP_SELF'] . '?y=' . $Day->thisYear() . '&m=' . $Day->thisMonth() . '&d=' . $Day->thisDay();
 

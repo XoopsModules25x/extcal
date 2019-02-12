@@ -209,7 +209,7 @@ class Calendar
         if (!isset($cE)) {
             $cE = Calendar_Engine_Factory::getEngine();
         }
-        $this->cE     =& $cE;
+        $this->cE     = &$cE;
         $this->year   = (int)$y;
         $this->month  = (int)$m;
         $this->day    = (int)$d;
@@ -324,7 +324,7 @@ class Calendar
      */
     public function returnValue($returnType, $format, $stamp, $default)
     {
-        switch (strtolower($format)) {
+        switch (mb_strtolower($format)) {
             case 'int':
                 return $default;
             case 'array':
@@ -388,11 +388,10 @@ class Calendar
         $child = each($this->children);
         if ($child) {
             return $child['value'];
-        } else {
-            reset($this->children);
-
-            return false;
         }
+        reset($this->children);
+
+        return false;
     }
 
     /**
@@ -460,11 +459,10 @@ class Calendar
      *
      * @param int $firstDay first day of the week (0=sunday, 1=monday, ...)
      *
-     * @return int
-     *
      * @throws E_USER_WARNING this method throws a WARNING if the
      *                        CALENDAR_FIRST_DAY_OF_WEEK constant is already defined and
      *                        the $firstDay parameter is set to a different value
+     * @return int
      */
     public function defineFirstDayOfWeek($firstDay = null)
     {

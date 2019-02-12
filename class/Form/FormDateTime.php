@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extcal\Form;
+<?php
+
+namespace XoopsModules\Extcal\Form;
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
@@ -11,7 +13,6 @@ class FormDateTime
      * @param ThemeForm $form
      * @param int       $startTS
      * @param int       $endTS
-     *
      */
     public function __construct($form, $startTS = 0, $endTS = 0)
     {

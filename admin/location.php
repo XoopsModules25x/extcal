@@ -20,16 +20,16 @@
 use XoopsModules\Extcal;
 
 // Include xoops admin header
-require_once  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 // require_once  dirname(__DIR__) . '/class/ExtcalPersistableObjectHandler.php';
-require_once  dirname(dirname(dirname(__DIR__))) . '/kernel/module.php';
-require_once  dirname(dirname(dirname(__DIR__))) . '/class/xoopsformloader.php';
-require_once  dirname(dirname(dirname(__DIR__))) . '/class/tree.php';
-require_once  dirname(dirname(dirname(__DIR__))) . '/class/xoopslists.php';
-require_once  dirname(dirname(dirname(__DIR__))) . '/class/pagenav.php';
-require_once  dirname(dirname(dirname(__DIR__))) . '/class/xoopsform/grouppermform.php';
-require_once  dirname(dirname(dirname(__DIR__))) . '/class/uploader.php';
-require_once  dirname(__DIR__) . '/include/constantes.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/kernel/module.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/class/xoopsformloader.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/class/tree.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/class/xoopslists.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/class/pagenav.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/class/xoopsform/grouppermform.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/class/uploader.php';
+require_once dirname(__DIR__) . '/include/constantes.php';
 
 require_once __DIR__ . '/admin_header.php';
 
@@ -97,7 +97,7 @@ switch ($op) {
         $criteria->setSort('nom');
         $criteria->setOrder('ASC');
         $location_arr = $locationHandler->getObjects($criteria);
-        $numrows           = $locationHandler->getCount($criteria);
+        $numrows      = $locationHandler->getCount($criteria);
         if ($numrows > $limit) {
             $pagenav = new \XoopsPageNav($numrows, $limit, $start, 'start', 'op=liste&limit=' . $limit);
             $pagenav = $pagenav->renderNav(4);
@@ -116,7 +116,7 @@ switch ($op) {
             echo '</tr>';
             $class = 'odd';
             foreach (array_keys($location_arr) as $i) {
-                $class                   = ('even' === $class) ? 'odd' : 'even';
+                $class              = ('even' === $class) ? 'odd' : 'even';
                 $location_id        = $location_arr[$i]->getVar('id');
                 $location_nom       = $location_arr[$i]->getVar('nom');
                 $location_adresse   = $location_arr[$i]->getVar('adresse');
@@ -143,7 +143,6 @@ switch ($op) {
         $obj  = $locationHandler->create();
         $form = $obj->getForm(false);
         break;
-
     // permet de suprimmer le rapport de téléchargment brisé
     case 'delete_location':
         $obj = $locationHandler->get($_REQUEST['location_id']);
@@ -156,13 +155,12 @@ switch ($op) {
             }
         } else {
             xoops_confirm([
-                              'ok'               => 1,
+                              'ok'          => 1,
                               'location_id' => $_REQUEST['location_id'],
-                              'op'               => 'delete_location',
+                              'op'          => 'delete_location',
                           ], $_SERVER['REQUEST_URI'], _AM_EXTCAL_LOCATION_SURDEL . '<br>');
         }
         break;
-
     case 'edit_location':
         // @author   JJDAI
         //***************************************************************************************
@@ -173,7 +171,6 @@ switch ($op) {
         $obj  = $locationHandler->get($_REQUEST['location_id']);
         $form = $obj->getForm(false);
         break;
-
     case 'save_location':
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('location.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -227,7 +224,7 @@ switch ($op) {
                 $logo = $_REQUEST['file'];
             }
         } else {
-            $logo              = '';
+            $logo         = '';
             $url_location = XOOPS_ROOT_PATH . '/uploads/extcal/location/' . $_REQUEST['file'];
             if (is_file($url_location)) {
                 chmod($url_location, 0777);

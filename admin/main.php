@@ -2,9 +2,8 @@
 
 use XoopsModules\Extcal;
 
-require_once  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
-require_once dirname(dirname(dirname(__DIR__))) . '/class/xoopsformloader.php';
 require_once __DIR__ . '/admin_header.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/class/xoopsformloader.php';
 
 function extgalleryLastVersion()
 {
@@ -42,8 +41,8 @@ switch ($op) {
                 //                $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
                 //                $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
                 //                $eventMemberHandler = xoops_getModuleHandler(_EXTCAL_CLS_MEMBER, _EXTCAL_MODULE);
-                $extcalTime        = Extcal\Time::getHandler();
-                $extcalConfig      = Extcal\Config::getHandler();
+                $extcalTime   = Extcal\Time::getHandler();
+                $extcalConfig = Extcal\Config::getHandler();
 
                 $event = $eventHandler->getEvent($_POST['event_id'], $xoopsUser, true);
                 $cat   = $catHandler->getCat($event->getVar('cat_id'), $xoopsUser, 'all');
@@ -53,10 +52,10 @@ switch ($op) {
                 $xoopsMailer->setFromEmail($myts->oopsStripSlashesGPC($_POST['mail_fromemail']));
                 $xoopsMailer->setSubject($myts->oopsStripSlashesGPC($_POST['mail_subject']));
                 $xoopsMailer->setBody($myts->oopsStripSlashesGPC($_POST['mail_body']));
-                if (in_array('mail', $_POST['mail_send_to'])) {
+                if (in_array('mail', $_POST['mail_send_to'], true)) {
                     $xoopsMailer->useMail();
                 }
-                if (empty($_POST['mail_inactive']) && in_array('pm', $_POST['mail_send_to'])) {
+                if (empty($_POST['mail_inactive']) && in_array('pm', $_POST['mail_send_to'], true)) {
                     $xoopsMailer->usePM();
                 }
                 $tag = [
@@ -74,7 +73,6 @@ switch ($op) {
                 xoops_cp_footer();
 
                 break;
-
             case 'default':
             default:
                 xoops_cp_header();
@@ -126,7 +124,6 @@ switch ($op) {
                 break;
         }
         break;
-
     default:
     case 'default':
         // @author      Gregory Mage (Aka Mage)

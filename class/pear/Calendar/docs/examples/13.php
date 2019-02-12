@@ -15,7 +15,7 @@ function getmicrotime()
 // Switch to PEAR::Date engine
 define('CALENDAR_ENGINE', 'PearDate');
 
-if (!@require_once __DIR__   . '/Calendar/Calendar.php') {
+if (!@require_once __DIR__ . '/Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 
@@ -82,7 +82,7 @@ echo '<p>The first iteration is more "expensive", the calendar data
 $start = getmicrotime();
 $c->build();
 while ($e = $c->fetch()) {
-    $class  = strtolower(get_class($e));
+    $class  = mb_strtolower(get_class($e));
     $link   = '&y=' . $e->thisYear() . '&m=' . $e->thisMonth() . '&d=' . $e->thisDay() . '&h=' . $e->thisHour() . '&i=' . $e->thisMinute() . '&s=' . $e->thisSecond();
     $method = 'this' . str_replace('calendar_', '', $class);
     echo '<a href="' . $_SERVER['PHP_SELF'] . '?view=' . $class . $link . '">' . $e->{$method}() . '</a> : ';
@@ -99,7 +99,7 @@ echo '<p>This second iteration is faster, the data structures
         being re-used</p>';
 $start = getmicrotime();
 while ($e = $c->fetch()) {
-    $class  = strtolower(get_class($e));
+    $class  = mb_strtolower(get_class($e));
     $link   = '&y=' . $e->thisYear() . '&m=' . $e->thisMonth() . '&d=' . $e->thisDay() . '&h=' . $e->thisHour() . '&i=' . $e->thisMinute() . '&s=' . $e->thisSecond();
     $method = 'this' . str_replace('calendar_', '', $class);
     echo '<a href="' . $_SERVER['PHP_SELF'] . '?view=' . $class . $link . '">' . $e->{$method}() . '</a> : ';

@@ -22,12 +22,11 @@ use XoopsModules\Extcal;
 require_once dirname(__DIR__) . '/preloads/autoloader.php';
 
 $moduleDirName      = basename(dirname(__DIR__));
-$moduleDirNameUpper = strtoupper($moduleDirName);
+$moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
 /** @var \XoopsDatabase $db */
 /** @var Extcal\Helper $helper */
 /** @var Extcal\Utility $utility */
-
 $db      = \XoopsDatabaseFactory::getDatabaseConnection();
 $helper  = Extcal\Helper::getInstance();
 $utility = new Extcal\Utility();

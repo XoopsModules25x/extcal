@@ -1,5 +1,5 @@
 <?php
-//
+
 if (!defined('SIMPLE_TEST')) {
     define('SIMPLE_TEST', dirname(dirname(dirname(__DIR__))) . '/simpletest/');
 }

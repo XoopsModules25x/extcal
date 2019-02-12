@@ -1,5 +1,4 @@
 <?php
-//
 
 require_once __DIR__ . '/simple_include.php';
 require_once __DIR__ . '/calendar_include.php';
@@ -19,7 +18,7 @@ class TestOfPearDateEngine extends UnitTestCase
         parent::__construct('Test of Calendar_Engine_PearDate');
     }
 
-    public function setUp()
+    protected function setUp()
     {
         $this->engine = new Calendar_Engine_PearDate();
     }

@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extcal;
+<?php
+
+namespace XoopsModules\Extcal;
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -132,9 +134,9 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
         $ret = $this->getObjects($criteriaCompo);
         if (isset($ret[0])) {
             return $ret[0];
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**

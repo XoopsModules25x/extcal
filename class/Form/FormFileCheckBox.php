@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extcal\Form;
+<?php
+
+namespace XoopsModules\Extcal\Form;
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -27,7 +29,6 @@ class FormFileCheckBox extends \XoopsFormCheckBox
      * @param      $caption
      * @param      $name
      * @param null $value
-     *
      */
     public function __construct($caption, $name, $value = null)
     {
@@ -42,7 +43,7 @@ class FormFileCheckBox extends \XoopsFormCheckBox
     public function render()
     {
         $ret = '';
-        if (count($this->getOptions()) > 1 && '[]' !== substr($this->getName(), -2, 2)) {
+        if (count($this->getOptions()) > 1 && '[]' !== mb_substr($this->getName(), -2, 2)) {
             $newname = $this->getName() . '[]';
             $this->setName($newname);
         }

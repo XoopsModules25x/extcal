@@ -1,6 +1,5 @@
 <?php
 
-
 use XoopsModules\Extcal;
 
 require_once dirname(dirname(__DIR__)) . '/mainfile.php';

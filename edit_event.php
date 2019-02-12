@@ -43,7 +43,7 @@ $xoTheme->addScript('modules/extcal/include/ToolTips.js');
 $xoTheme->addStylesheet('modules/extcal/assets/css/infobulle.css');
 
 $eventId = \Xmf\Request::getInt('event', 0, 'GET');
-$action = \Xmf\Request::getString('action', 'edit', 'GET');
+$action  = \Xmf\Request::getString('action', 'edit', 'GET');
 
 // Getting eXtCal object's handler
 $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);

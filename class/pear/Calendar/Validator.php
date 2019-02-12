@@ -90,8 +90,8 @@ class Calendar_Validator
      */
     public function __construct(&$calendar)
     {
-        $this->calendar =& $calendar;
-        $this->cE       =& $calendar->getEngine();
+        $this->calendar = &$calendar;
+        $this->cE       = &$calendar->getEngine();
     }
 
     /**
@@ -273,11 +273,10 @@ class Calendar_Validator
         $error = each($this->errors);
         if ($error) {
             return $error['value'];
-        } else {
-            reset($this->errors);
-
-            return false;
         }
+        reset($this->errors);
+
+        return false;
     }
 }
 

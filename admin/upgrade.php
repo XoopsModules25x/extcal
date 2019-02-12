@@ -5,8 +5,8 @@ if (\Xmf\Request::hasVar('step', 'POST')) {
     $step = $_POST['step'];
 }
 
-require_once  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
-require_once __DIR__   . '/function.php';
+require_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/function.php';
 
 // Change this variable if you use a cloned version of eXtGallery
 $localModuleDir = 'extcal';
@@ -16,7 +16,7 @@ $versionFile    = 'http://www.zoullou.net/extcal.version';
 $downloadServer = 'http://downloads.sourceforge.net/zoullou/';
 
 $lastVersion       = @file_get_contents($versionFile);
-$lastVersionString = substr($lastVersion, 0, 1) . '.' . substr($lastVersion, 1, 1) . '.' . substr($lastVersion, 2, 1);
+$lastVersionString = mb_substr($lastVersion, 0, 1) . '.' . mb_substr($lastVersion, 1, 1) . '.' . mb_substr($lastVersion, 2, 1);
 $moduleFileName    = $moduleName . '-' . $lastVersionString . '.tar.gz';
 $langFileName      = $moduleName . '-lang-' . $lastVersionString . '_' . $xoopsConfig['language'] . '.tar.gz';
 
@@ -70,7 +70,6 @@ switch ($step) {
         xoops_cp_footer();
 
         break;
-
     case 'install':
         xoops_cp_header();
         adminMenu();
@@ -116,7 +115,6 @@ switch ($step) {
         xoops_cp_footer();
 
         break;
-
     default:
     case 'default':
         redirect_header('index.php', 3, '');

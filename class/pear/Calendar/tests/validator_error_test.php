@@ -1,5 +1,4 @@
 <?php
-//
 
 require_once __DIR__ . '/simple_include.php';
 require_once __DIR__ . '/calendar_include.php';
@@ -19,7 +18,7 @@ class TestOfValidationError extends UnitTestCase
         parent::__construct('Test of Validation Error');
     }
 
-    public function setUp()
+    protected function setUp()
     {
         $this->vError = new Calendar_Validation_Error('foo', 20, 'bar');
     }

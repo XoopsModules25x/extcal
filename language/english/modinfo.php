@@ -1,6 +1,6 @@
 <?php
 
-require_once  dirname(dirname(__DIR__)) . '/include/constantes.php';
+require_once dirname(dirname(__DIR__)) . '/include/constantes.php';
 define('_MI_EXTCAL_NAME', 'eXtCal');
 define('_MI_EXTCAL_ABOUT', 'About');
 define('_MI_EXTCAL_AFTER', 'After');
@@ -173,7 +173,6 @@ define('_MI_EXTCAL_SUPPORT', 'Support');
 
 define('_MI_EXTCAL_SHOW_SAMPLE_BUTTON', 'Show Sample Button?');
 define('_MI_EXTCAL_SHOW_SAMPLE_BUTTON_DESC', 'If yes, the "Add Sample Data" button will be visible to the Admin. It is Yes as a default for first installation.');
-
 
 define('_MI_EXTCAL_ADMENU_MIGRATE', 'Migrate');
 define('_MI_EXTCAL_BLOCKS_ADMIN', 'Blocks Admin');

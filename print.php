@@ -27,7 +27,6 @@ require_once XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/calen
 /** @var Extcal\Helper $helper */
 $helper = Extcal\Helper::getInstance();
 
-
 $eventId = \Xmf\Request::getInt('event', 0, 'GET');
 
 $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);

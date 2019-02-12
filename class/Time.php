@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extcal;
+<?php
+
+namespace XoopsModules\Extcal;
 
 use XoopsModules\Extcal;
 
@@ -145,18 +147,18 @@ class Time
             _CAL_OCTOBER,
             _CAL_NOVEMBER,
             _CAL_DECEMBER,
-            substr(_CAL_JANUARY, 0, 3) . ' ',
-            substr(_CAL_FEBRUARY, 0, 3) . ' ',
-            substr(_CAL_MARCH, 0, 3) . ' ',
-            substr(_CAL_APRIL, 0, 3) . ' ',
-            substr(_CAL_MAY, 0, 3) . ' ',
-            substr(_CAL_JUNE, 0, 3) . ' ',
-            substr(_CAL_JULY, 0, 3) . ' ',
-            substr(_CAL_AUGUST, 0, 3) . ' ',
-            substr(_CAL_SEPTEMBER, 0, 3) . ' ',
-            substr(_CAL_OCTOBER, 0, 3) . ' ',
-            substr(_CAL_NOVEMBER, 0, 3) . ' ',
-            substr(_CAL_DECEMBER, 0, 3) . ' ',
+            mb_substr(_CAL_JANUARY, 0, 3) . ' ',
+            mb_substr(_CAL_FEBRUARY, 0, 3) . ' ',
+            mb_substr(_CAL_MARCH, 0, 3) . ' ',
+            mb_substr(_CAL_APRIL, 0, 3) . ' ',
+            mb_substr(_CAL_MAY, 0, 3) . ' ',
+            mb_substr(_CAL_JUNE, 0, 3) . ' ',
+            mb_substr(_CAL_JULY, 0, 3) . ' ',
+            mb_substr(_CAL_AUGUST, 0, 3) . ' ',
+            mb_substr(_CAL_SEPTEMBER, 0, 3) . ' ',
+            mb_substr(_CAL_OCTOBER, 0, 3) . ' ',
+            mb_substr(_CAL_NOVEMBER, 0, 3) . ' ',
+            mb_substr(_CAL_DECEMBER, 0, 3) . ' ',
             _CAL_SUNDAY,
             _CAL_MONDAY,
             _CAL_TUESDAY,
@@ -164,13 +166,13 @@ class Time
             _CAL_THURSDAY,
             _CAL_FRIDAY,
             _CAL_SATURDAY,
-            substr(_CAL_SUNDAY, 0, 3) . ' ',
-            substr(_CAL_MONDAY, 0, 3) . ' ',
-            substr(_CAL_TUESDAY, 0, 3) . ' ',
-            substr(_CAL_WEDNESDAY, 0, 3) . ' ',
-            substr(_CAL_THURSDAY, 0, 3) . ' ',
-            substr(_CAL_FRIDAY, 0, 3) . ' ',
-            substr(_CAL_SATURDAY, 0, 3) . ' ',
+            mb_substr(_CAL_SUNDAY, 0, 3) . ' ',
+            mb_substr(_CAL_MONDAY, 0, 3) . ' ',
+            mb_substr(_CAL_TUESDAY, 0, 3) . ' ',
+            mb_substr(_CAL_WEDNESDAY, 0, 3) . ' ',
+            mb_substr(_CAL_THURSDAY, 0, 3) . ' ',
+            mb_substr(_CAL_FRIDAY, 0, 3) . ' ',
+            mb_substr(_CAL_SATURDAY, 0, 3) . ' ',
         ];
 
         return preg_replace($patterns, $replacements, date($format, $timestamp));
@@ -186,15 +188,12 @@ class Time
         $eventOptions = explode('|', $event_recur_rules);
 
         switch ($eventOptions[0]) {
-
             case 'daily':
 
                 $interval = $eventOptions[1];
 
                 return sprintf(_MD_EXTCAL_RR_DAILY, $interval);
-
                 break;
-
             case 'weekly':
 
                 $daysName = [
@@ -217,9 +216,7 @@ class Time
                 $ret = sprintf(_MD_EXTCAL_RR_WEEKLY, $day, $interval);
 
                 return $ret;
-
                 break;
-
             case 'monthly':
 
                 $monthDays = [
@@ -261,14 +258,12 @@ class Time
                 ];
 
                 $interval = $eventOptions[1];
-                if (0 === strpos($eventOptions[2], 'MD')) {
-                    return sprintf(_MD_EXTCAL_RR_MONTHLY, substr($eventOptions[2], 2), $interval);
-                } else {
-                    return sprintf(_MD_EXTCAL_RR_MONTHLY, $monthDays[$eventOptions[2]], $interval);
+                if (0 === mb_strpos($eventOptions[2], 'MD')) {
+                    return sprintf(_MD_EXTCAL_RR_MONTHLY, mb_substr($eventOptions[2], 2), $interval);
                 }
 
+                return sprintf(_MD_EXTCAL_RR_MONTHLY, $monthDays[$eventOptions[2]], $interval);
                 break;
-
             case 'yearly':
 
                 $monthDays = [
@@ -340,9 +335,7 @@ class Time
                 $ret = sprintf(_MD_EXTCAL_RR_YEARLY, $month, $dayString, $interval);
 
                 return $ret;
-
                 break;
-
         }
 
         return false;

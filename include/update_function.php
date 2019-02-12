@@ -16,10 +16,11 @@
  * @since
  * @author       XOOPS Development Team,
  *
+ * @param null|mixed $previousVersion
  */
 
 /**
- * @param XoopsModule $xoopsModule
+ * @param \XoopsModule $xoopsModule
  * @param null        $previousVersion
  *
  * @return bool

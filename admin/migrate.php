@@ -31,7 +31,6 @@
 
 use Xmf\Request;
 use XoopsModules\Extcal;
-use XoopsModules\Extcal\Common;
 
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();

@@ -285,7 +285,7 @@ class Calendar_Week extends Calendar
      */
     public function prevWeek($format = 'n_in_month')
     {
-        switch (strtolower($format)) {
+        switch (mb_strtolower($format)) {
             case 'int':
             case 'n_in_month':
                 return $this->firstWeek ? null : $this->thisWeek('n_in_month') - 1;
@@ -312,7 +312,7 @@ class Calendar_Week extends Calendar
      */
     public function thisWeek($format = 'n_in_month')
     {
-        switch (strtolower($format)) {
+        switch (mb_strtolower($format)) {
             case 'int':
             case 'n_in_month':
                 if ($this->firstWeek) {
@@ -346,7 +346,7 @@ class Calendar_Week extends Calendar
      */
     public function nextWeek($format = 'n_in_month')
     {
-        switch (strtolower($format)) {
+        switch (mb_strtolower($format)) {
             case 'int':
             case 'n_in_month':
                 return $this->lastWeek ? null : $this->thisWeek('n_in_month') + 1;

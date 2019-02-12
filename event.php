@@ -39,7 +39,7 @@ $fileHandler           = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_FI
 $eventMemberHandler    = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_MEMBER);
 $eventNotMemberHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_NOT_MEMBER);
 $permHandler           = Extcal\Perm::getHandler();
-$myts = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
+$myts                  = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
 
 if (!function_exists('clear_unicodeslashes')) {
     /**
@@ -109,7 +109,6 @@ $xoopsTpl->assign('location', $location);
 
 // If the who's goging function is enabled
 if ($extcalConfig['whos_going']) {
-
     // Retriving member's for this event
     $members = $eventMemberHandler->getMembers($eventId);
 
@@ -126,7 +125,6 @@ if ($extcalConfig['whos_going']) {
 
     // If the user is logged
     if ($xoopsUser) {
-
         // Initializing variable
         $eventmember['member']['show_button']     = true;
         $eventmember['member']['button_disabled'] = '';
@@ -152,7 +150,6 @@ if ($extcalConfig['whos_going']) {
 
 // If the who's not goging function is enabled
 if ($extcalConfig['whosnot_going']) {
-
     // Retriving not member's for this event
     $notmembers = $eventNotMemberHandler->getMembers($eventId);
 
@@ -169,7 +166,6 @@ if ($extcalConfig['whosnot_going']) {
 
     // If the user is logged
     if ($xoopsUser) {
-
         // Initializing variable
         $eventmember['notmember']['show_button']     = true;
         $eventmember['notmember']['button_disabled'] = '';

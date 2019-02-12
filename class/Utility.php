@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extcal;
+<?php
+
+namespace XoopsModules\Extcal;
 
 /**
  * classGenerator
@@ -19,7 +21,6 @@
 require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 
 use XoopsModules\Extcal;
-use XoopsModules\Extcal\Common;
 
 /**
  * Class Utility
@@ -33,6 +34,7 @@ class Utility
     use Common\FilesManagement; // Files Management Trait
 
     //--------------- Custom module methods -----------------------------
+
     /**
      * @param $eventId
      *
@@ -160,7 +162,7 @@ class Utility
             $cat_id    = $catList->getVar('cat_id');
             $name      = $catList->getVar('cat_name');
             $cat_color = $catList->getVar('cat_color');
-            $checked   = in_array($cat_id, $cat) ? 'checked' : '';
+            $checked   = in_array($cat_id, $cat, true) ? 'checked' : '';
             $cat       = ''
                          . "<div style='float:left; margin-left:5px;'>"
                          . "<input type='checkbox' name='{$name}[{$cat_id}]' value='1' {$checked}>"
@@ -282,7 +284,6 @@ class Utility
 
         //echo "<hr>{$interval}";
         return $d;
-
         //echo mktime($heure, $minute, $seconde, $mois, $jour, $an);
 
         //
@@ -310,6 +311,7 @@ class Utility
     Sunday 2009-12-06 00:00:00
     ...
     */
+
     /**
      * @param $period
      */
@@ -321,6 +323,7 @@ class Utility
     }
 
     /*****************************************************************/
+
     /**
      * @param        $t
      * @param string $msg
@@ -336,6 +339,7 @@ class Utility
     }
 
     /*****************************************************************/
+
     /**
      * @param        $line
      * @param string $msg
@@ -349,6 +353,7 @@ class Utility
     }
 
     /*****************************************************************/
+
     /**
      * @param        $tsName
      * @param string $msg
@@ -361,6 +366,7 @@ class Utility
     }
 
     /*****************************************************************/
+
     /**
      * @param        $ts
      * @param        $tsName
@@ -377,6 +383,7 @@ class Utility
 
     /*****************************************************************/
     /*****************************************************************/
+
     /**
      * @param        $date
      * @param string $sep
@@ -387,9 +394,9 @@ class Utility
     {
         $lstSep = '/ .';
 
-        for ($h = 0, $count = strlen($lstSep); $h < $count; ++$h) {
-            $sep2replace = substr($lstSep, $h, 1);
-            if (strpos($date, $sep2replace)) {
+        for ($h = 0, $count = mb_strlen($lstSep); $h < $count; ++$h) {
+            $sep2replace = mb_substr($lstSep, $h, 1);
+            if (mb_strpos($date, $sep2replace)) {
                 $date = str_replace($sep2replace, $sep, $date);
             }
 
@@ -432,7 +439,6 @@ class Utility
         $year            = $date_time_array['year'];
 
         switch ($interval) {
-
             case 'yyyy':
                 $year += $number;
                 break;
@@ -477,6 +483,7 @@ class Utility
     // }
 
     /**************************************************************************/
+
     /**
      * @param $color
      * @param $plancher
@@ -486,11 +493,12 @@ class Utility
      */
     public static function getLighterColor($color, $plancher, $plafond)
     {
-//        require_once __DIR__ . '/ColorTools.php';
+        //        require_once __DIR__ . '/ColorTools.php';
 
         //$ct = new \ColorTools();
         //return $ct->eclaircir($color,$plancher,$plafond);
         return ColorTools::eclaircir($color, $plancher, $plafond);
     }
+
     /**************************************************************************/
 }

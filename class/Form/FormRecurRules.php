@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extcal\Form;
+<?php
+
+namespace XoopsModules\Extcal\Form;
 
 use  XoopsModules\Extcal;
 

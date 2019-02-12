@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extcal\Common;
+<?php
+
+namespace XoopsModules\Extcal\Common;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -17,7 +19,6 @@
  * @author      XOOPS Development Team
  * @package     Publisher
  * @since       1.05
- *
  */
 
 // require_once dirname(dirname(__DIR__)) . '/include/common.php';
@@ -43,8 +44,8 @@ class Configurator
      */
     public function __construct()
     {
-        $moduleDirName = basename(dirname(dirname(__DIR__)));
-        $moduleDirNameUpper   = strtoupper($moduleDirName);
+        $moduleDirName      = basename(dirname(dirname(__DIR__)));
+        $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
         require dirname(dirname(__DIR__)) . '/include/config.php';
         $config = getConfig();

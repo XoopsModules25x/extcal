@@ -1,5 +1,5 @@
 <?php
-//
+
 define('CALENDAR_FIRST_DAY_OF_WEEK', 0); //force firstDay = Sunday
 
 require_once __DIR__ . '/simple_include.php';

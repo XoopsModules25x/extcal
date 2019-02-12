@@ -44,7 +44,7 @@ if ($xoopsUser && $helper->getConfig('whosnot_going')) {
             sendMail2member($mode, $event_id, $member_uid, _MD_EXTCAL_SUBJECT_3, _MD_EXTCAL_MSG_3);
             $rediredtMessage = _MD_EXTCAL_WHOSNOT_GOING_ADDED_TO_EVENT;
 
-        // If the user have to be remove
+            // If the user have to be remove
         } else {
             if ('remove' === $_POST['mode']) {
                 $eventNotMemberHandler->deleteEventNotMember([\Xmf\Request::getInt('event', 0, 'POST'), $xoopsUser->getVar('uid')]);

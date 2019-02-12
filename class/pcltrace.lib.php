@@ -234,12 +234,12 @@ if (!defined('PCLTRACE_LIB')) {
 
         // ----- Extract the function name in the list
         // ----- Remove the function name in the list
-        if (!($v_name = strrchr($g_pcl_trace_name, ','))) {
+        if (!($v_name = mb_strrchr($g_pcl_trace_name, ','))) {
             $v_name           = $g_pcl_trace_name;
             $g_pcl_trace_name = '';
         } else {
-            $g_pcl_trace_name = substr($g_pcl_trace_name, 0, -strlen($v_name));
-            $v_name           = substr($v_name, -strlen($v_name) + 1);
+            $g_pcl_trace_name = mb_substr($g_pcl_trace_name, 0, -mb_strlen($v_name));
+            $v_name           = mb_substr($v_name, -mb_strlen($v_name) + 1);
         }
 
         // ----- Decrement the index

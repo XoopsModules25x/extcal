@@ -1,5 +1,4 @@
 <?php
-//
 
 require_once __DIR__ . '/simple_include.php';
 require_once __DIR__ . '/calendar_include.php';
@@ -23,7 +22,7 @@ class TestOfTableHelper extends UnitTestCase
         parent::__construct('Test of Calendar_Table_Helper');
     }
 
-    public function setUp()
+    protected function setUp()
     {
         $this->mockengine = new Mock_Calendar_Engine($this);
         $this->mockengine->setReturnValue('getMinYears', 1970);

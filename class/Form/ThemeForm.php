@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extcal\Form;
+<?php
+
+namespace XoopsModules\Extcal\Form;
 
 //require_once __DIR__   . '/formdatetime.php';
 //require_once __DIR__   . '/formrecurrules.php';

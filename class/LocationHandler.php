@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extcal;
+<?php
+
+namespace XoopsModules\Extcal;
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -55,9 +57,9 @@ class LocationHandler extends ExtcalPersistableObjectHandler
         $ret = $this->getObjects($criteriaCompo);
         if (isset($ret[0])) {
             return $ret[0];
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -72,14 +74,13 @@ class LocationHandler extends ExtcalPersistableObjectHandler
         \CriteriaElement $criteria = null,
         $fields = null,
         $asObject = true,
-        $id_as_key = true
-    ) //getAll($criteria = null, $asObject = false)
+        $id_as_key = true) //getAll($criteria = null, $asObject = false)
     {
         $rst = $this->getObjects($criteria, $asObject);
         if ($asObject) {
             return $rst;
-        } else {
-            return $this->objectToArray($rst);
         }
+
+        return $this->objectToArray($rst);
     }
 }

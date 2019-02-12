@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extcal;
+<?php
+
+namespace XoopsModules\Extcal;
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -26,7 +28,7 @@
 //require_once __DIR__ . '/config.php';
 //require_once __DIR__ . '/ExtDateTime.php';
 //require_once __DIR__ . '/utility.php';
-require_once  dirname(__DIR__) . '/include/constantes.php';
+require_once dirname(__DIR__) . '/include/constantes.php';
 
 /**
  * Class Event.
@@ -35,9 +37,6 @@ class Event extends \XoopsObject
 {
     public $externalKey = [];
 
-    /**
-     *
-     */
     public function __construct()
     {
         $this->initVar('event_id', XOBJ_DTYPE_INT, null, false);

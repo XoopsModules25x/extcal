@@ -1,13 +1,12 @@
-<?php namespace XoopsModules\Extcal;
+<?php
+
+namespace XoopsModules\Extcal;
 
 /**
  * Class ColorTools.
  */
 class ColorTools
 {
-    /**
-     *
-     */
     public function __construct()
     {
     }
@@ -40,8 +39,8 @@ class ColorTools
         $plancherVert = 0,
         $plafondVert = 255,
         $plancherBleu = 0,
-        $plafondBleu = 255
-    ) {
+        $plafondBleu = 255)
+    {
         $t10 = static::hexa2rgbA($colorHexa);
 
         $t10[1] = static::bornerValeur($t10[1] + $incrementRouge, $plancherRouge, $plafondRouge);
@@ -170,9 +169,9 @@ class ColorTools
         $tHex = ['', '', '', ''];
 
         $tHex[0] = $aColors[0];
-        $tHex[1] = substr('00' . dechex($aColors[1]), -2);
-        $tHex[2] = substr('00' . dechex($aColors[2]), -2);
-        $tHex[3] = substr('00' . dechex($aColors[3]), -2);
+        $tHex[1] = mb_substr('00' . dechex($aColors[1]), -2);
+        $tHex[2] = mb_substr('00' . dechex($aColors[2]), -2);
+        $tHex[3] = mb_substr('00' . dechex($aColors[3]), -2);
 
         $colorHexa = implode('', $tHex);
 
@@ -211,7 +210,7 @@ class ColorTools
     {
         $t = ['', '', '', ''];
 
-        if (0 === strpos($colorHexa, '#')) {
+        if (0 === mb_strpos($colorHexa, '#')) {
             $t[0]      = '#';
             $offsetCar = 1;
         } else {
@@ -219,9 +218,9 @@ class ColorTools
             $offsetCar = 0;
         }
 
-        $t[1] = hexdec(substr($colorHexa, $offsetCar + 0, 2));
-        $t[2] = hexdec(substr($colorHexa, $offsetCar + 2, 2));
-        $t[3] = hexdec(substr($colorHexa, $offsetCar + 4, 2));
+        $t[1] = hexdec(mb_substr($colorHexa, $offsetCar + 0, 2));
+        $t[2] = hexdec(mb_substr($colorHexa, $offsetCar + 2, 2));
+        $t[3] = hexdec(mb_substr($colorHexa, $offsetCar + 4, 2));
 
         return $t;
     }

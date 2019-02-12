@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extcal;
+<?php
+
+namespace XoopsModules\Extcal;
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -31,9 +33,6 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  */
 class Location extends \XoopsObject
 {
-    /**
-     *
-     */
     public function __construct()
     {
         //Toutes les attributs de la table

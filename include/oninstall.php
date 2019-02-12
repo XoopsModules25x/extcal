@@ -15,22 +15,20 @@
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
- *
  */
 
 use XoopsModules\Extcal;
 
 /**
- *
  * Prepares system prior to attempting to install module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param \XoopsModule $module {@link XoopsModule}
  *
  * @return bool true if ready to install, false if not
  */
 function xoops_module_pre_install_extcal(\XoopsModule $module)
 {
     $moduleDirName = basename(dirname(__DIR__));
-    $utility     = new Extcal\Utility();
+    $utility       = new Extcal\Utility();
 
     //check for minimum XOOPS version
     if (!$utility::checkVerXoops($module)) {
@@ -51,21 +49,19 @@ function xoops_module_pre_install_extcal(\XoopsModule $module)
 }
 
 /**
- *
  * Performs tasks required during installation of the module
- * @param XoopsModule $xoopsModule
+ * @param \XoopsModule $xoopsModule
  * @return bool true if installation successful, false if not
  * @internal param XoopsModule $module <a href='psi_element://XoopsModule'>XoopsModule</a>
- *
  */
 function xoops_module_install_extcal(\XoopsModule $xoopsModule)
 {
     $moduleDirName = basename(dirname(__DIR__));
 
     $moduleId = $xoopsModule->getVar('mid');
-    /** @var XoopsGroupPermHandler $groupPermissionHandler */
+    /** @var \XoopsGroupPermHandler $groupPermissionHandler */
     $groupPermissionHandler = xoops_getHandler('groupperm');
-    /** @var XoopsModuleHandler $moduleHandler */
+    /** @var \XoopsModuleHandler $moduleHandler */
     $configHandler = xoops_getHandler('config');
 
     /*
@@ -96,7 +92,7 @@ function xoops_module_install_extcal(\XoopsModule $xoopsModule)
         }
     }
     if (count($configurator['copyFiles']) > 0) {
-        $file =  dirname(__DIR__) . '/assets/images/blank.png';
+        $file = dirname(__DIR__) . '/assets/images/blank.png';
         foreach (array_keys($configurator['copyFiles']) as $i) {
             $dest = $configurator['copyFiles'][$i] . '/blank.png';
             $utility::copyFile($file, $dest);

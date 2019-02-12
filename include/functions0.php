@@ -147,7 +147,7 @@ function getCheckeCategories($name = 'cat', $cat)
         $cat_id    = $catList->getVar('cat_id');
         $name      = $catList->getVar('cat_name');
         $cat_color = $catList->getVar('cat_color');
-        $checked   = in_array($cat_id, $cat) ? 'checked' : '';
+        $checked   = in_array($cat_id, $cat, true) ? 'checked' : '';
         $cat       = ''
                      . "<div style='float:left; margin-left:5px;'>"
                      . "<input type='checkbox' name='{$name}[{$cat_id}]' value='1' {$checked}>"
@@ -269,7 +269,6 @@ function getDateBetweenDates($ts, $startMonth, $endMonth, $mode = 'w')
 
     //echo "<hr>{$interval}";
     return $d;
-
     //echo mktime($heure, $minute, $seconde, $mois, $jour, $an);
 
     //
@@ -374,9 +373,9 @@ function ext_convert_date($date, $sep = '-')
 {
     $lstSep = '/ .';
 
-    for ($h = 0, $count = strlen($lstSep); $h < $count; ++$h) {
-        $sep2replace = substr($lstSep, $h, 1);
-        if (strpos($date, $sep2replace)) {
+    for ($h = 0, $count = mb_strlen($lstSep); $h < $count; ++$h) {
+        $sep2replace = mb_substr($lstSep, $h, 1);
+        if (mb_strpos($date, $sep2replace)) {
             $date = str_replace($sep2replace, $sep, $date);
         }
 
@@ -419,7 +418,6 @@ function ext_DateAdd2($date, $number, $interval = 'd')
     $year            = $date_time_array['year'];
 
     switch ($interval) {
-
         case 'yyyy':
             $year += $number;
             break;

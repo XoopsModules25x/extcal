@@ -22,7 +22,7 @@ use XoopsModules\Extcal;
 require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 
 /** @var Extcal\Helper $helper */
-$helper = Extcal\Helper::getInstance();
+$helper                                  = Extcal\Helper::getInstance();
 $GLOBALS['xoopsOption']['template_main'] = 'extcal_post.tpl';
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
@@ -122,7 +122,7 @@ if (\Xmf\Request::hasVar('form_preview', 'POST')) {
     Extcal\Utility::loadImg($_REQUEST, $event_picture1, $event_picture2);
     ///////////////////////////////////////////////////////////////////////////////
 
-//    require_once __DIR__ . '/class/perm.php';
+    //    require_once __DIR__ . '/class/perm.php';
 
     /** @var Extcal\FileHandler $fileHandler */
     $fileHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_FILE);
@@ -130,26 +130,25 @@ if (\Xmf\Request::hasVar('form_preview', 'POST')) {
     $approve     = $permHandler->isAllowed($xoopsUser, 'extcal_cat_autoapprove', \Xmf\Request::getInt('cat_id', 0, 'POST'));
 
     $data = [
-        'event_title'         => $_POST['event_title'],
-        'cat_id'              => $_POST['cat_id'],
-        'event_desc'          => $_POST['event_desc'],
-        'event_nbmember'      => $_POST['event_nbmember'],
-        'event_organisateur'  => $_POST['event_organisateur'],
-        'event_contact'       => $_POST['event_contact'],
-        'event_url'           => $_POST['event_url'],
-        'event_email'         => $_POST['event_email'],
-        'event_address'       => $_POST['event_address'],
-        'event_approved'      => (false === $approve) ? 0 : 1,
-        'event_start'         => $_POST['event_start'],
-        'have_end'            => $_POST['have_end'],
-        'event_end'           => $_POST['event_end'],
-        'event_picture1'      => @$event_picture1,
-        'event_picture2'      => @$event_picture2,
-        'event_price'         => @$_POST['event_price'],
-        'event_location' => $_POST['event_location'],
-        'dohtml'              => $helper->getConfig('allow_html'),
-        'event_icone'         => $_POST['event_icone'],
-
+        'event_title'        => $_POST['event_title'],
+        'cat_id'             => $_POST['cat_id'],
+        'event_desc'         => $_POST['event_desc'],
+        'event_nbmember'     => $_POST['event_nbmember'],
+        'event_organisateur' => $_POST['event_organisateur'],
+        'event_contact'      => $_POST['event_contact'],
+        'event_url'          => $_POST['event_url'],
+        'event_email'        => $_POST['event_email'],
+        'event_address'      => $_POST['event_address'],
+        'event_approved'     => (false === $approve) ? 0 : 1,
+        'event_start'        => $_POST['event_start'],
+        'have_end'           => $_POST['have_end'],
+        'event_end'          => $_POST['event_end'],
+        'event_picture1'     => @$event_picture1,
+        'event_picture2'     => @$event_picture2,
+        'event_price'        => @$_POST['event_price'],
+        'event_location'     => $_POST['event_location'],
+        'dohtml'             => $helper->getConfig('allow_html'),
+        'event_icone'        => $_POST['event_icone'],
     ];
 
     if (\Xmf\Request::hasVar('event_id', 'POST')) {
