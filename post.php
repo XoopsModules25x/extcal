@@ -11,7 +11,7 @@
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
@@ -173,9 +173,9 @@ if (\Xmf\Request::hasVar('form_preview', 'POST')) {
         $notificationHandler = xoops_getHandler('notification');
         $notificationHandler->triggerEvent('global', 0, $notifyEvent, ['EVENT_TITLE' => $_POST['event_title']]);
         if (1 == $approve) {
-            //            $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-            $catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
-            $cat        = $catHandler->getCat(\Xmf\Request::getInt('cat_id', 0, 'POST'), $xoopsUser, 'all');
+            //            $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+            $categoryHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+            $cat        = $categoryHandler->getCat(\Xmf\Request::getInt('cat_id', 0, 'POST'), $xoopsUser, 'all');
             $notificationHandler->triggerEvent('cat', \Xmf\Request::getInt('cat_id', 0, 'POST'), 'new_event_cat', [
                 'EVENT_TITLE' => $_POST['event_title'],
                 'CAT_NAME'    => $cat->getVar('cat_name'),

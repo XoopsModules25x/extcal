@@ -11,7 +11,7 @@
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
@@ -71,7 +71,7 @@ function xoops_module_update_extcal(\XoopsModule $xoopsModule, $previousVersion 
             $f    = $fld . $name . '.php';
             //ext_echo ("<hr>{$f}<hr>");
             if (is_readable($f)) {
-                echo "mise à jour version : {$key} = {$val}<br>";
+                echo "Update to version : {$key} = {$val}<br>";
                 require_once $f;
                 $cl = new $name($xoopsModule, ['previousVersion' => $previousVersion]);
             }

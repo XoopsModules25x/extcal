@@ -11,7 +11,7 @@
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
@@ -216,7 +216,7 @@ switch ($op) {
                 $upload->fetchMedia($_REQUEST['xoops_upload_file'][0]);
                 if (!$upload->upload()) {
                     $errors = $upload->getErrors();
-                    redirect_header('javascript:history.go(-1)', 3, $errors);
+                    redirect_header('<script>javascript:history.go(-1)</script>', 3, $errors);
                 } else {
                     $logo = $upload->getSavedFileName();
                 }
@@ -236,7 +236,7 @@ switch ($op) {
         if ($locationHandler->insert($obj)) {
         }
 
-        //require_once "../include/forms.php";
+        //require_once  dirname(__DIR__) . "/include/forms.php";
         echo $obj->getHtmlErrors();
         $form = $obj->getForm(false, 0);
         //echo "<hr>exit <<<<<<<<<<<<<<<<<<<<";exit;

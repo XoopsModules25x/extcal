@@ -13,7 +13,7 @@ namespace XoopsModules\Extcal\Form\Spin;
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @copyright       XOOPS Project (https://xoops.org)
- * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+ * @license         GNU GPL 2 (https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  *
  * @since           2.0.0
  *
@@ -21,7 +21,7 @@ namespace XoopsModules\Extcal\Form\Spin;
  *
  * @version         FormSpin v 1.2
  */
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 xoops_load('XoopsFormElement');
 
@@ -183,7 +183,7 @@ class FormSpin extends \XoopsFormElement
     /**
      * Set the value.
      *
-     * @param  $value int
+     * @param int $value
      */
     public function setValue($value)
     {
@@ -203,7 +203,7 @@ class FormSpin extends \XoopsFormElement
     /**
      * Set the min value.
      *
-     * @param  $min int
+     * @param int $min
      */
     public function setMin($min)
     {
@@ -223,7 +223,7 @@ class FormSpin extends \XoopsFormElement
     /**
      * Set the max value - must be more great then min.
      *
-     * @param  $max int
+     * @param int $max
      */
     public function setMax($max)
     {
@@ -269,7 +269,7 @@ class FormSpin extends \XoopsFormElement
     /**
      * Set the large increment when click a long time on up down nutton.
      *
-     * @param  $largeIncrement int
+     * @param int $largeIncrement
      */
     public function setLargeIncrement($largeIncrement)
     {
@@ -293,7 +293,7 @@ class FormSpin extends \XoopsFormElement
      * Set the size in nb car of the input text for the value
      * must be 2 car min.
      *
-     * @param  $size mixed
+     * @param mixed $size
      */
     public function setSize($size)
     {
@@ -319,7 +319,7 @@ class FormSpin extends \XoopsFormElement
     /**
      * Set the shortname of the folder images.
      *
-     * @param  $folder string
+     * @param string $folder
      */
     public function setImgFolder($folder)
     {
@@ -341,7 +341,7 @@ class FormSpin extends \XoopsFormElement
     /**
      * Set the label of unites between value and buttons.
      *
-     * @param  $unite string
+     * @param string $unite
      */
     public function setUnite($unite)
     {
@@ -361,7 +361,7 @@ class FormSpin extends \XoopsFormElement
     /**
      * Set the style CSS of the text.
      *
-     * @param  $style string
+     * @param string $style
      */
     public function setStyleText($style)
     {
@@ -383,7 +383,7 @@ class FormSpin extends \XoopsFormElement
     /**
      * Set the style CSS of the frame.
      *
-     * @param  $style string
+     * @param string $style
      */
     public function setStyleBordure($style)
     {
@@ -405,7 +405,7 @@ class FormSpin extends \XoopsFormElement
     /**
      * Set  MinMaxVisible : show the button to go min and max value.
      *
-     * @param  $visible bool
+     * @param bool $visible
      */
     public function setMinMaxVisible($visible)
     {

@@ -121,7 +121,7 @@ while ($dayCalObj = $weekCalObj->fetch()) {
 $xoopsTpl->assign('week', $week);
 
 // Retriving categories
-$cats = $catHandler->objectToArray($catHandler->getAllCat($xoopsUser));
+$cats = $categoryHandler->objectToArray($categoryHandler->getAllCat($xoopsUser));
 // Assigning categories to the template
 $xoopsTpl->assign('cats', $cats);
 

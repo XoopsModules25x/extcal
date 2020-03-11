@@ -5,7 +5,7 @@ use XoopsModules\Extcal;
 require_once __DIR__ . '/admin_header.php';
 require_once dirname(dirname(dirname(__DIR__))) . '/class/xoopsformloader.php';
 
-function extgalleryLastVersion()
+function extcalLastVersion()
 {
     //return @file_get_contents("http://www.zoullou.net/extcal.version");  //the Website is not longer working
 }
@@ -15,7 +15,7 @@ function extgalleryLastVersion()
  */
 function isUpToDate()
 {
-    $version = extgalleryLastVersion();
+    $version = extcalLastVersion();
 
     return $GLOBALS['xoopsModule']->getVar('version') >= $version;
 }
@@ -38,24 +38,24 @@ switch ($op) {
 
                 $myts        = \MyTextSanitizer::getInstance();
                 $xoopsMailer = xoops_getMailer();
-                //                $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+                //                $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
                 //                $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
                 //                $eventMemberHandler = xoops_getModuleHandler(_EXTCAL_CLS_MEMBER, _EXTCAL_MODULE);
                 $extcalTime   = Extcal\Time::getHandler();
                 $extcalConfig = Extcal\Config::getHandler();
 
                 $event = $eventHandler->getEvent($_POST['event_id'], $xoopsUser, true);
-                $cat   = $catHandler->getCat($event->getVar('cat_id'), $xoopsUser, 'all');
+                $cat   = $categoryHandler->getCat($event->getVar('cat_id'), $xoopsUser, 'all');
 
                 $xoopsMailer->setToUsers($eventMemberHandler->getMembers($_POST['event_id']));
                 $xoopsMailer->setFromName($myts->oopsStripSlashesGPC($_POST['mail_fromname']));
                 $xoopsMailer->setFromEmail($myts->oopsStripSlashesGPC($_POST['mail_fromemail']));
                 $xoopsMailer->setSubject($myts->oopsStripSlashesGPC($_POST['mail_subject']));
                 $xoopsMailer->setBody($myts->oopsStripSlashesGPC($_POST['mail_body']));
-                if (in_array('mail', $_POST['mail_send_to'], true)) {
+                if (in_array('mail', $_POST['mail_send_to'])) {
                     $xoopsMailer->useMail();
                 }
-                if (empty($_POST['mail_inactive']) && in_array('pm', $_POST['mail_send_to'], true)) {
+                if (empty($_POST['mail_inactive']) && in_array('pm', $_POST['mail_send_to'])) {
                     $xoopsMailer->usePM();
                 }
                 $tag = [
@@ -130,11 +130,11 @@ switch ($op) {
         //***************************************************************************************
         xoops_cp_header();
         //        require_once XOOPS_ROOT_PATH . "/modules/extcal/class/admin.php";
-        //        $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+        //        $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
         //        $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
         $adminObject = \Xmf\Module\Admin::getInstance();
         $adminObject->addInfoBox(_MI_EXTCAL_DASHBOARD);
-        $adminObject->addInfoBoxLine(sprintf('<infolabel>' . _AM_EXTCAL_INDEX_CATEGORIES . '</infolabel>', $catHandler->getCount()), '', 'Green');
+        $adminObject->addInfoBoxLine(sprintf('<infolabel>' . _AM_EXTCAL_INDEX_CATEGORIES . '</infolabel>', $categoryHandler->getCount()), '', 'Green');
         $adminObject->addInfoBoxLine(sprintf('<infolabel>' . _AM_EXTCAL_INDEX_EVENT . '</infolabel>', $eventHandler->getCount(new \Criteria('event_approved', 1))), '', 'Green');
         $adminObject->addInfoBoxLine(sprintf('<infolabel>' . _AM_EXTCAL_INDEX_PENDING . '</infolabel>', $eventHandler->getCount(new \Criteria('event_approved', 0))), '', 'Red');
         $criteriaCompo = new \CriteriaCompo();

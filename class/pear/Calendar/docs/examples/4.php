@@ -49,7 +49,7 @@ if ($Unit->isValid()) {
 }
 ?>
     <p>Enter a date / time to validate:</p>
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
+    <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="get">
         Year: <input type="text" name="y" value="2039"><br>
         Month: <input type="text" name="m" value="13"><br>
         Day: <input type="text" name="d" value="32"><br>

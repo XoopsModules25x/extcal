@@ -164,7 +164,7 @@ $MonthDecorator = new MonthPayload_Decorator($Month);
 $MonthDecorator->build($events);
 
 ?>
-<!doctype html public "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
     <title> Calendar </title>

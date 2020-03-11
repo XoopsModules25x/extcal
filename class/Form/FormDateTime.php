@@ -2,7 +2,7 @@
 
 namespace XoopsModules\Extcal\Form;
 
-// defined('XOOPS_ROOT_PATH') || die('Restricted access');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
  * Class FormDateTime.

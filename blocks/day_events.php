@@ -11,7 +11,7 @@
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
@@ -62,11 +62,11 @@ function bExtcalDayEdit($options)
 {
     global $xoopsUser;
 
-    //    $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-    /** @var Extcal\CategoryHandler $catHandler */
-    $catHandler = \XoopsModules\Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    //    $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+    /** @var Extcal\CategoryHandler $categoryHandler */
+    $categoryHandler = \XoopsModules\Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
 
-    $cats = $catHandler->getAllCat($xoopsUser, 'extcal_cat_view');
+    $cats = $categoryHandler->getAllCat($xoopsUser, 'extcal_cat_view');
 
     $form = _MB_EXTCAL_DISPLAY . "&nbsp;\n";
     $form .= '<input name="options[0]" size="5" maxlength="255" value="' . $options[0] . '" type="text">&nbsp;' . _MB_EXTCAL_EVENT . '<br>';

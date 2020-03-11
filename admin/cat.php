@@ -11,7 +11,7 @@
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
@@ -55,8 +55,8 @@ switch ($op) {
             'cat_icone'  => Request::getInt('cat_icone', 0, 'POST'),
         ];
         if (isset($cat_id)) {
-            /** @var Extcal\CategoryHandler $catHandler */
-            // $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+            /** @var Extcal\CategoryHandler $categoryHandler */
+            // $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
             //            $varArr = [
             //                'cat_name'   => Request::getString('cat_name', '', 'POST'),
             //                'cat_desc'   => Request::getText('cat_desc', '', 'POST'),
@@ -65,11 +65,11 @@ switch ($op) {
             //                'cat_icone'  => Request::getInt('cat_icone', 0, 'POST')
             //            ];
 
-            $catHandler->modifyCat($cat_id, $varArr);
+            $categoryHandler->modifyCat($cat_id, $varArr);
             redirect_header('cat.php', 3, _AM_EXTCAL_CAT_EDITED, false);
             // Create new cat
         } else {
-            // $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+            // $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
             //            $varArr = [
             //                'cat_name'   => $cat_name,
             //                'cat_desc'   => $cat_desc,
@@ -77,7 +77,7 @@ switch ($op) {
             //                'cat_color'  => substr($cat_color, 1),
             //                'cat_icone'  => $cat_icone,
             //            ];
-            $catHandler->createCat($varArr);
+            $categoryHandler->createCat($varArr);
             redirect_header('cat.php', 3, _AM_EXTCAL_CAT_CREATED, false);
         }
 
@@ -85,8 +85,8 @@ switch ($op) {
     case 'new':
         xoops_cp_header();
 
-        // $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-        //$cat        = $catHandler->getCat($cat_id, true);
+        // $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+        //$cat        = $categoryHandler->getCat($cat_id, true);
 
         $form = new \XoopsThemeForm(_AM_EXTCAL_ADD_CATEGORY, 'add_cat', 'cat.php?op=enreg', 'post', true);
         $form->addElement(new \XoopsFormText(_AM_EXTCAL_NAME, 'cat_name', 30, 255), true);
@@ -111,11 +111,11 @@ switch ($op) {
     case 'edit':
         xoops_cp_header();
 
-        // $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+        // $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
         if (isset($cat_id) && 0 != $cat_id) {
-            $cat = $catHandler->getCat($cat_id, true);
+            $cat = $categoryHandler->getCat($cat_id, true);
         }
-        //            $cat = $catHandler->getCat($cat_id, true);
+        //            $cat = $categoryHandler->getCat($cat_id, true);
 
         echo '<fieldset><legend style="font-weight:bold; color:#990000;">' . _AM_EXTCAL_EDIT_CATEGORY . '</legend>';
 
@@ -153,8 +153,8 @@ switch ($op) {
             xoops_cp_footer();
         } else {
             if (1 == $confirm) {
-                // $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-                $catHandler->deleteCat($cat_id);
+                // $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+                $categoryHandler->deleteCat($cat_id);
                 redirect_header('cat.php', 3, _AM_EXTCAL_CAT_DELETED, false);
             }
         }
@@ -164,8 +164,8 @@ switch ($op) {
     //         if (isset($form_modify)) {
     //             xoops_cp_header();
     //
-    //             // $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-    //             $cat = $catHandler->getCat($cat_id, true);
+    //             // $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+    //             $cat = $categoryHandler->getCat($cat_id, true);
     //
     //             echo'<fieldset><legend style="font-weight:bold; color:#990000;">'
     //                 . _AM_EXTCAL_EDIT_CATEGORY . '</legend>';
@@ -202,8 +202,8 @@ switch ($op) {
     //                     xoops_cp_footer();
     //                 } else {
     //                     if (isset($confirm) && $confirm == 1) {
-    //                         // $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-    //                         $catHandler->deleteCat($cat_id);
+    //                         // $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+    //                         $categoryHandler->deleteCat($cat_id);
     //                         redirect_header("cat.php", 3, _AM_EXTCAL_CAT_DELETED, false);
     //                     }
     //                 }
@@ -222,8 +222,8 @@ switch ($op) {
     //         $adminObject->displayNavigation(basename(__FILE__));
     //         //***************************************************************************************
     //
-    //         // $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-    //         $cats = $catHandler->getAllCat($xoopsUser, 'all');
+    //         // $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+    //         $cats = $categoryHandler->getAllCat($xoopsUser, 'all');
     //
     //
     //         echo'<fieldset><legend style="font-weight:bold; color:#990000;">'
@@ -272,8 +272,8 @@ switch ($op) {
         $adminObject->addItemButton('Add Category', 'cat.php?op=new', 'add', '');
         $adminObject->displayButton('left', '');
 
-        // $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-        $cats = $catHandler->getAllCatById($xoopsUser);
+        // $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+        $cats = $categoryHandler->getAllCatById($xoopsUser);
 
         $xoopsTpl->assign('cats', $cats);
         //$xoopsTpl->assign("module_dirname",    $xoopsModule->getVar("dirname") );

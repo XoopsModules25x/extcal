@@ -67,7 +67,7 @@ function extcal_loadImg(&$REQUEST, &$event_picture1, &$event_picture2)
                 $upload->fetchMedia($REQUEST['xoops_upload_file'][$j]);
                 if (!$upload->upload()) {
                     $errors = $upload->getErrors();
-                    redirect_header('javascript:history.go(-1)', 3, $errors);
+                    redirect_header('<script>javascript:history.go(-1)</script>', 3, $errors);
                 } else {
                     if (1 == $j) {
                         $event_picture1 = $upload->getSavedFileName();
@@ -111,9 +111,9 @@ function getListCategories($cat, $addNone = true, $name = 'cat')
 {
     global $xoopsUser;
     // Category selectbox
-    $catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    $categoryHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
 
-    $catsList  = $catHandler->getAllCat($xoopsUser);
+    $catsList  = $categoryHandler->getAllCat($xoopsUser);
     $catSelect = new \XoopsFormSelect('', $name, $cat);
     if ($addNone) {
         $catSelect->addOption(0, ' ');
@@ -139,15 +139,15 @@ function getCheckeCategories($name = 'cat', $cat)
     // Category selectbox
     //<option style="background-color:#00FFFF;">VARCHAR</option>
 
-    $catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
-    $catsList   = $catHandler->getAllCat($xoopsUser);
+    $categoryHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    $catsList   = $categoryHandler->getAllCat($xoopsUser);
 
     $t = [];
     foreach ($catsList as $catList) {
         $cat_id    = $catList->getVar('cat_id');
         $name      = $catList->getVar('cat_name');
         $cat_color = $catList->getVar('cat_color');
-        $checked   = in_array($cat_id, $cat, true) ? 'checked' : '';
+        $checked   = in_array($cat_id, $cat) ? 'checked' : '';
         $cat       = ''
                      . "<div style='float:left; margin-left:5px;'>"
                      . "<input type='checkbox' name='{$name}[{$cat_id}]' value='1' {$checked}>"

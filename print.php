@@ -11,7 +11,7 @@
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
@@ -42,8 +42,8 @@ if ($event['event_location'] > 0) {
 // Adding formated date for start and end event
 $eventHandler->formatEventDate($event, $helper->getConfig('event_date_event'));
 
-echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">' . "\n";
-echo '<html xmlns="http://www.w3.org/1999/xhtml">' . "\n";
+echo '<!DOCTYPE html>' . "\n";
+echo '<html>' . "\n";
 echo '<head>' . "\n";
 echo '<meta http-equiv="content-type" content="text/html; charset=' . _CHARSET . '">' . "\n";
 echo '<title>' . $event['cat']['cat_name'] . ' - ' . $event['event_title'] . '</title>' . "\n";
@@ -96,7 +96,8 @@ if ('' != $event['event_contact']) {
 }
 
 //show location
-if ($event['event_location'] = 0) {
+$event['event_location'] = 0;
+if ($event['event_location']) {
     echo '<tr>' . "\n";
 
     //    echo($location['nom']);

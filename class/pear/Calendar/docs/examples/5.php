@@ -42,7 +42,7 @@ if (!isset($_POST['s'])) {
     $_POST['s'] = date('s');
 }
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
     <title> Select and Update </title>
@@ -70,7 +70,7 @@ $Hour   = new Calendar_Hour($_POST['y'], $_POST['m'], $_POST['d'], $_POST['h']);
 $Minute = new Calendar_Minute($_POST['y'], $_POST['m'], $_POST['d'], $_POST['h'], $_POST['i']);
 $Second = new Calendar_Second($_POST['y'], $_POST['m'], $_POST['d'], $_POST['h'], $_POST['i'], $_POST['s']); ?>
 <p><span style="font-weight: bold;">Set the alarm clock</p></p>
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+<form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
     Year: <input type="text" name="y" value="<?php echo $_POST['y']; ?>" size="4">&nbsp;
     Month:<select name="m">
         <?php

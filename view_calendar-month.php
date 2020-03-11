@@ -12,7 +12,7 @@ $params                                  = ['view' => _EXTCAL_NAV_CALMONTH, 'fil
 $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
 
 //require_once __DIR__   . '/preloads/autoloader.php';
-//$catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+//$categoryHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
 
 require_once __DIR__ . '/header.php';
 
@@ -115,7 +115,7 @@ while ($weekCalObj = $monthCalObj->fetch()) {
 $xoopsTpl->assign('tableRows', $tableRows);
 
 // Retriving categories
-$cats = $catHandler->objectToArray($catHandler->getAllCat($xoopsUser));
+$cats = $categoryHandler->objectToArray($categoryHandler->getAllCat($xoopsUser));
 // Assigning categories to the template
 $xoopsTpl->assign('cats', $cats);
 

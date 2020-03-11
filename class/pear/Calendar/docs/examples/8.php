@@ -36,7 +36,7 @@ if (PEAR::isError($month)) {
     die($month->toString());
 }
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
     <title> Calendar over the Wire </title>
@@ -72,7 +72,7 @@ if (PEAR::isError($month)) {
     <tr>
 </table>
 <p>Enter Year and Month to View:</p>
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
+<form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="get">
     Year: <input type="text" size="4" name="y" value="<?php echo $_GET['y']; ?>">&nbsp;
     Month: <input type="text" size="2" name="m" value="<?php echo $_GET['m']; ?>">&nbsp;
     <input type="submit" value="Fetch Calendar">

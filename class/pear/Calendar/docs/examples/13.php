@@ -85,7 +85,7 @@ while ($e = $c->fetch()) {
     $class  = mb_strtolower(get_class($e));
     $link   = '&y=' . $e->thisYear() . '&m=' . $e->thisMonth() . '&d=' . $e->thisDay() . '&h=' . $e->thisHour() . '&i=' . $e->thisMinute() . '&s=' . $e->thisSecond();
     $method = 'this' . str_replace('calendar_', '', $class);
-    echo '<a href="' . $_SERVER['PHP_SELF'] . '?view=' . $class . $link . '">' . $e->{$method}() . '</a> : ';
+    echo '<a href="' . $_SERVER['SCRIPT_NAME'] . '?view=' . $class . $link . '">' . $e->{$method}() . '</a> : ';
     if (0 == ($i % 10)) {
         echo '<br>';
     }
@@ -102,7 +102,7 @@ while ($e = $c->fetch()) {
     $class  = mb_strtolower(get_class($e));
     $link   = '&y=' . $e->thisYear() . '&m=' . $e->thisMonth() . '&d=' . $e->thisDay() . '&h=' . $e->thisHour() . '&i=' . $e->thisMinute() . '&s=' . $e->thisSecond();
     $method = 'this' . str_replace('calendar_', '', $class);
-    echo '<a href="' . $_SERVER['PHP_SELF'] . '?view=' . $class . $link . '">' . $e->{$method}() . '</a> : ';
+    echo '<a href="' . $_SERVER['SCRIPT_NAME'] . '?view=' . $class . $link . '">' . $e->{$method}() . '</a> : ';
     if (0 == ($i % 10)) {
         echo '<br>';
     }

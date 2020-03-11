@@ -14,7 +14,7 @@ function getmicrotime()
 $start = getmicrotime();
 
 //if (!@require_once dirname(dirname(__DIR__)) . '/Calendar.php') {
-if (!@require_once __DIR__ . '/Calendar/Calendar.php') {
+if (!@require __DIR__ . '/Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 require_once CALENDAR_ROOT . 'Month/Weekdays.php';
@@ -84,7 +84,7 @@ if (isset($_GET['mime']) && 'wml' === $_GET['mime']) {
                     if ($Day->isEmpty()) {
                         echo "<td></td>\n";
                     } elseif ($Day->isSelected()) {
-                        echo '<td><anchor><strong><u>' . $Day->thisDay() . "</u></strong>\n<go href=\"" . $_SERVER['PHP_SELF'] . '?viewday=true&amp;y=' . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . "&amp;mime=wml\">\n</anchor></td>\n";
+                        echo '<td><anchor><strong><u>' . $Day->thisDay() . "</u></strong>\n<go href=\"" . $_SERVER['SCRIPT_NAME'] . '?viewday=true&amp;y=' . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . "&amp;mime=wml\">\n</anchor></td>\n";
                     } else {
                         echo '<td><anchor>' . $Day->thisDay() . "\n<go href=\"?viewday=true&amp;y=" . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . "&amp;mime=wml\"></anchor></td>\n";
                     }
@@ -117,21 +117,21 @@ if (isset($_GET['mime']) && 'wml' === $_GET['mime']) {
 
             <?php
         } ?>
-        <p><a href="<?php echo $_SERVER['PHP_SELF']; ?>">Back to HTML</a></p>
+        <p><a href="<?php echo $_SERVER['SCRIPT_NAME']; ?>">Back to HTML</a></p>
         <?php echo '<p>Took: ' . (getmicrotime() - $start) . ' seconds</p>'; ?>
     </wml>
     <?php
     #-----------------------------------------------------------------------------#
 } else {
     ?>
-    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-    <html>
+    <!DOCTYPE html>
+    <html lang="en" xml:lang="en">
     <head>
         <title> HTML (+WML) Personal Planner </title>
     </head>
     <body>
     <h1>Personal Planner Rendered with HTML</h1>
-    <p>To view in WML, click <a href="<?php echo $_SERVER['PHP_SELF']; ?>?mime=wml">here</a> or place a ?mime=wml at the end of any URL.
+    <p>To view in WML, click <a href="<?php echo $_SERVER['SCRIPT_NAME']; ?>?mime=wml">here</a> or place a ?mime=wml at the end of any URL.
         Note that <a href="http://www.opera.com/download">Opera</a> supports WML natively and Mozilla / Firefox has the
         WMLBrowser
         plugin: <a href="http://wmlbrowser.mozdev.org">wmlbrowser.mozdev.org</a></p>
@@ -176,9 +176,9 @@ if (isset($_GET['mime']) && 'wml' === $_GET['mime']) {
                 if ($Day->isEmpty()) {
                     echo "<td></td>\n";
                 } elseif ($Day->isSelected()) {
-                    echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?viewday=true&amp;y=' . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . '&amp;wml"><strong><u>' . $Day->thisDay() . "</u></strong></a></td>\n";
+                    echo '<td><a href="' . $_SERVER['SCRIPT_NAME'] . '?viewday=true&amp;y=' . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . '&amp;wml"><strong><u>' . $Day->thisDay() . "</u></strong></a></td>\n";
                 } else {
-                    echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?viewday=true&amp;y=' . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . '">' . $Day->thisDay() . "</a></td>\n";
+                    echo '<td><a href="' . $_SERVER['SCRIPT_NAME'] . '?viewday=true&amp;y=' . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . '">' . $Day->thisDay() . "</a></td>\n";
                 }
                 if ($Day->isLast()) {
                     echo "</tr>\n";

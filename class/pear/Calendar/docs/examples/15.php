@@ -35,7 +35,7 @@ if (!$Validator->isValidWeek()) {
 }
 */
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE HTML>
 <html>
 <head>
     <title> Paging Weeks </title>
@@ -51,10 +51,10 @@ while ($Day = $Week->fetch()) {
 $days = $Week->fetchAll();
 
 $prevWeek     = $Week->prevWeek('array');
-$prevWeekLink = $_SERVER['PHP_SELF'] . '?y=' . $prevWeek['year'] . '&m=' . $prevWeek['month'] . '&d=' . $prevWeek['day'];
+$prevWeekLink = $_SERVER['SCRIPT_NAME'] . '?y=' . $prevWeek['year'] . '&m=' . $prevWeek['month'] . '&d=' . $prevWeek['day'];
 
 $nextWeek     = $Week->nextWeek('array');
-$nextWeekLink = $_SERVER['PHP_SELF'] . '?y=' . $nextWeek['year'] . '&m=' . $nextWeek['month'] . '&d=' . $nextWeek['day'];
+$nextWeekLink = $_SERVER['SCRIPT_NAME'] . '?y=' . $nextWeek['year'] . '&m=' . $nextWeek['month'] . '&d=' . $nextWeek['day'];
 ?>
 <p><a href="<?php echo $prevWeekLink; ?>"><<</a> | <a href="<?php echo $nextWeekLink; ?>">>></a></p>
 </body>

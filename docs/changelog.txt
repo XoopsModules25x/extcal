@@ -1,3 +1,27 @@
+<h5>2.40 RC 1  [NOT RELEASED]</h5>  Dev: Xoops 2.5.11, PHP 7.4.3
+<hr>
+- added check for $pathModIcon32 in menu (mamba)
+- added check for $helper->getModule() in menu (geekwright/mamba)
+- fixed import of sample data (mamba)
+- fixed "can edit" in Permissions template (mamba)
+- added statistics in dashboard (mamba)
+- added hiding option for import buttons (mamba)
+- disabled temporarily check for new version on GitHub (mamba)
+- code cosmetics (mamba)
+- renamed $catHandler to $categoryHandler (mamba)
+- added more Handlers initiation to headers (mamba)
+- renamed table extcal_etablissement to extcal_location (geekwright/mamba)
+- renamed column event_etablissement to event_location (geekwright/mamba)
+- changed ['PHP_SELF'] to ['SCRIPT_NAME'] (mamba)
+- reversed renaming of etablissement to location in /versions (mamba)
+- added config files in /config (mamba)
+- reversed to while (list()) (mamba)
+- reverted in_array() true check (mamba)
+-
+
+
+WORK IN PROGRESS
+
 <h5>2.40 Beta 2  [NOT RELEASED]</h5>  Dev: Xoops 2.5.9, PHP 7.3.0 RC2
 <hr>
 - updates, cosmetics (mamba)

@@ -14,7 +14,7 @@ namespace XoopsModules\Extcal;
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
@@ -23,7 +23,7 @@ namespace XoopsModules\Extcal;
 //use Punic\Exception;
 use XoopsModules\Extcal;
 
-// defined('XOOPS_ROOT_PATH') || die('Restricted access');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 require_once dirname(__DIR__) . '/include/constantes.php';
 
@@ -902,16 +902,16 @@ class EventHandler extends ExtcalPersistableObjectHandler
     {
         /** @var Extcal\Helper $helper */
         $helper      = Extcal\Helper::getInstance();
-        $catHandler  = $helper->getHandler(_EXTCAL_CLN_CAT);
+        $categoryHandler  = $helper->getHandler(_EXTCAL_CLN_CAT);
         $fileHandler = $helper->getHandler(_EXTCAL_CLN_FILE);
 
         /***************************************************/
         if ('admin' === $siteSide) {
             $action = 'event.php?op=enreg';
-            $cats   = $catHandler->getAllCat($GLOBALS['xoopsUser'], 'all');
+            $cats   = $categoryHandler->getAllCat($GLOBALS['xoopsUser'], 'all');
         } else {
             $action = 'post.php';
-            $cats   = $catHandler->getAllCat($GLOBALS['xoopsUser']);
+            $cats   = $categoryHandler->getAllCat($GLOBALS['xoopsUser']);
         }
         /***************************************************/
         $reccurOptions = [];
@@ -1278,7 +1278,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
     {
         $recurFreq = ['daily', 'weekly', 'monthly', 'yearly'];
 
-        return in_array($parm['rrule_freq'], $recurFreq, true);
+        return in_array($parm['rrule_freq'], $recurFreq);
     }
 
     /**
@@ -1508,7 +1508,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
                     // Add this event occurence only if it's on the period view and according to day
                     if ($occurEventStart <= $periodEnd // Event start falls within search period
                         && $occurEventEnd >= $periodStart // Event end falls within search period
-                        && in_array($dayArray[date('w', $occurEventStart)], $eventOptions, true)) {
+                        && in_array($dayArray[date('w', $occurEventStart)], $eventOptions)) {
                         // This week day is selected
 
                         $event['event_start'] = $occurEventStart;
@@ -1616,7 +1616,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
                      && // Event end falls within search period
                      ($occurEventEnd >= $periodStart)
                      && // This week day is selected
-                     in_array($month, $eventOptions, true)) {
+                     in_array($month, $eventOptions)) {
                         $event['event_start'] = $occurEventStart;
                         $event['event_end']   = $occurEventEnd;
 

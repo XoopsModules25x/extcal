@@ -27,7 +27,7 @@ $Year = new Calendar_Year($_GET['year']);
 
 $Year->build();
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
     <title> <?php echo $Year->thisYear(); ?> </title>

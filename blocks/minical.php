@@ -11,7 +11,7 @@
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
@@ -83,10 +83,10 @@ function bExtcalMinicalShow($options)
     }
     //----------------------------------------------------
     // Getting eXtCal object's handler
-    //    $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-    $catHandler = \XoopsModules\Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    //    $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+    $categoryHandler = \XoopsModules\Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
 
-    $cats = $catHandler->getAllCatById($xoopsUser);
+    $cats = $categoryHandler->getAllCatById($xoopsUser);
     // $t = print_r($cats,true);
     // echo "zzz<pre>{$t}</pre>";
 
@@ -270,8 +270,8 @@ function bExtcalMinicalEdit($options)
 
     //============================================================
 
-    $catHandler      = \XoopsModules\Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
-    $cats            = $catHandler->getAllCat($xoopsUser, 'extcal_cat_view');
+    $categoryHandler      = \XoopsModules\Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    $cats            = $categoryHandler->getAllCat($xoopsUser, 'extcal_cat_view');
     $imageCatHandler = xoops_getHandler('imagecategory');
 
     //=====================================================================
@@ -377,7 +377,7 @@ function bExtcalMinicalEdit($options)
     //=====================================================================
     return $form->render();
     /*
-              $t = array();
+              $t = [];
               //while (list($key,$val) = each($xfValue)) {
                 foreach ($xfValue as $key => $val) {
                $t[] = $val->render();

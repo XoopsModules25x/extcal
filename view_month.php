@@ -48,7 +48,7 @@ $eventsArray = $events;
 $startMonth = mktime(0, 0, 0, $month, 1, $year);
 $endMonth   = mktime(23, 59, 59, $month, 31, $year);
 
-// $eventsArray = array();
+// $eventsArray = [];
 // foreach ($events as $event) {
 //     if ($event['event_isrecur']==0) {
 //         // Formating date
@@ -84,7 +84,7 @@ $endMonth   = mktime(23, 59, 59, $month, 31, $year);
 $xoopsTpl->assign('events', $eventsArray);
 
 // Retriving categories
-$cats = $catHandler->objectToArray($catHandler->getAllCat($xoopsUser));
+$cats = $categoryHandler->objectToArray($categoryHandler->getAllCat($xoopsUser));
 // Assigning categories to the template
 $xoopsTpl->assign('cats', $cats);
 

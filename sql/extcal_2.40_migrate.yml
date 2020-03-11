@@ -1,5 +1,5 @@
 extcal_cat:
-    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8mb4'
+    options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8'
     columns:
         -
             name: cat_id
@@ -24,7 +24,7 @@ extcal_cat:
             columns: cat_id
             unique: true
 extcal_event:
-    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8mb4'
+    options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8'
     columns:
         -
             name: event_id
@@ -106,7 +106,7 @@ extcal_event:
             columns: event_id
             unique: true
 extcal_eventmember:
-    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8mb4'
+    options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8'
     columns:
         -
             name: eventmember_id
@@ -128,7 +128,7 @@ extcal_eventmember:
             columns: eventmember_id
             unique: true
 extcal_eventnotmember:
-    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8mb4'
+    options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8'
     columns:
         -
             name: eventnotmember_id
@@ -147,7 +147,7 @@ extcal_eventnotmember:
             columns: eventnotmember_id
             unique: true
 extcal_file:
-    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8mb4'
+    options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8'
     columns:
         -
             name: file_id
@@ -184,7 +184,7 @@ extcal_file:
             columns: file_id
             unique: true
 extcal_location:
-    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8mb4'
+    options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8'
     columns:
         -
             name: id

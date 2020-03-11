@@ -59,7 +59,7 @@ $endDay      = $startDay + _EXTCAL_TS_DAY;
 //
 // // Treatment for recurring event
 //
-// $eventsArray = array();
+// $eventsArray = [];
 // foreach ($events as $event) {
 //     if (!$event['event_isrecur']) {
 //         // Formating date
@@ -93,7 +93,7 @@ $xoopsTpl->assign('agenda', $tAgenda);
 //-------------------------------------------------------------------
 
 // Retriving categories
-$cats = $catHandler->objectToArray($catHandler->getAllCat($xoopsUser));
+$cats = $categoryHandler->objectToArray($categoryHandler->getAllCat($xoopsUser));
 // Assigning categories to the template
 $xoopsTpl->assign('cats', $cats);
 

@@ -11,7 +11,7 @@
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
@@ -80,7 +80,7 @@ function xoops_module_install_extcal(\XoopsModule $xoopsModule)
     $groupPermissionHandler->addRight($moduleDirName . '_perm_mask', 4, XOOPS_GROUP_ADMIN, $moduleId);
 
     //    $moduleDirName = $xoopsModule->getVar('dirname');
-    $configurator = require_once $GLOBALS['xoops']->path('modules/' . $moduleDirName . '/include/config.php');
+    $configurator = require_once $GLOBALS['xoops']->path('modules/' . $moduleDirName . '/config/config.php');
 
     /** @var Extcal\Utility $utility */
     $utility = new \XoopsModules\Extcal\Utility();

@@ -26,7 +26,7 @@
 //   engendrer.
 //   Il est entendu cependant que l'auteur a réalisé ce code par plaisir et n'y a
 //   caché aucun virus, ni malveillance.
-//   Cette libairie est distribuée sous la license GNU/GPL (http://www.gnu.org)
+//   Cette libairie est distribuée sous la license GNU/GPL (https://www.gnu.org)
 //
 //   * Auteur :
 //

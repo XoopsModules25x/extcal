@@ -301,7 +301,6 @@ class Calendar_Engine_Interface
     /**
      * Checks if the given day is the current day.
      *
-     * @param int timestamp (depending on implementation)
      * @param mixed $stamp
      */
     public function isToday($stamp)

@@ -29,7 +29,7 @@ $week_types = [
     'n_in_month',
 ];
 
-if (!isset($_GET['week_type']) || !in_array($_GET['week_type'], $week_types, true)) {
+if (!isset($_GET['week_type']) || !in_array($_GET['week_type'], $week_types)) {
     $_GET['week_type'] = 'n_in_year';
 }
 
@@ -37,7 +37,7 @@ $Year = new Calendar_Year($_GET['year']);
 
 $Year->build();
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
     <title> <?php echo $Year->thisYear(); ?> </title>

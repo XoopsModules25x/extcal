@@ -11,7 +11,7 @@
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
@@ -132,16 +132,16 @@ switch ($op) {
         } else {
             /** @var \XoopsNotificationHandler $notificationHandler */
             $notificationHandler = xoops_getHandler('notification');
-            /** @var Extcal\CategoryHandler $catHandler */
-            //            $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-            $catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+            /** @var Extcal\CategoryHandler $categoryHandler */
+            //            $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+            $categoryHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
 
             $data['event_submitter']  = $xoopsUser ? $xoopsUser->getVar('uid') : 0;
             $data['event_submitdate'] = time();
 
             if ($eventHandler->createEvent($data, $_POST)) {
                 $fileHandler->createFile($eventHandler->getInsertId());
-                $cat = $catHandler->getCat($_POST['cat_id'], $xoopsUser, 'all');
+                $cat = $categoryHandler->getCat($_POST['cat_id'], $xoopsUser, 'all');
                 $notificationHandler->triggerEvent('global', 0, 'new_event', ['EVENT_TITLE' => $_POST['event_title']]);
                 $notificationHandler->triggerEvent('category', $_POST['cat_id'], 'new_event_cat', [
                     'EVENT_TITLE' => $_POST['event_title'],
@@ -198,7 +198,8 @@ switch ($op) {
 
         echo '<fieldset><legend style="font-weight:bold; color:#990000;">' . _MD_EXTCAL_EDIT_EVENT . '</legend>';
 
-        if ($form = $eventHandler->getEventForm('admin', $action, ['event_id' => $eventId])) {
+    $form = $eventHandler->getEventForm('admin', $action, ['event_id' => $eventId]);
+    if ($form) {
             $form->display();
         }
 

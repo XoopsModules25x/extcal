@@ -13,20 +13,22 @@
                     </tr>
                 </table>
             </div>
-            <!--<div style="text-align:right;">-->
-            <!--<a href="<{$xoops_url}>/modules/extcal/print.php?event=<{$event.event_id}>">-->
-            <!--<img src="<{$smarty.const._EXTCAL_PATH_ICONS16}>/printer.png">-->
-            <!--</a>-->
-            <!--<{if $isAdmin || $canEdit}>-->
-            <!--<a href="edit_event.php?event=<{$event.event_id}>">-->
-            <!--<img src="<{$smarty.const._EXTCAL_PATH_ICONS16}>/edit.png">-->
-            <!--</a><{/if}>-->
-            <!--<{if $isAdmin}>-->
-            <!--<a href="admin/event.php?op=delete&event_id=<{$event.event_id}>">-->
-            <!--<img src="<{$smarty.const._EXTCAL_PATH_ICONS16}>/delete.png">-->
-            <!--</a>-->
-            <!--<{/if}>-->
-            <!--</div>-->
+            
+<{*            <div style="text-align:right;">*}>
+<{*            <a href="<{$xoops_url}>/modules/extcal/print.php?event=<{$event.event_id}>">*}>
+<{*            <img src="<{$smarty.const._EXTCAL_PATH_ICONS16}>/printer.png">*}>
+<{*            </a>*}>
+<{*            <{if $isAdmin || $canEdit}>*}>
+<{*            <a href="edit_event.php?event=<{$event.event_id}>">*}>
+<{*            <img src="<{$smarty.const._EXTCAL_PATH_ICONS16}>/edit.png">*}>
+<{*            </a><{/if}>*}>
+<{*            <{if $isAdmin}>*}>
+<{*            <a href="admin/event.php?op=delete&event_id=<{$event.event_id}>">*}>
+<{*            <img src="<{$smarty.const._EXTCAL_PATH_ICONS16}>/delete.png">*}>
+<{*            </a>*}>
+<{*            <{/if}>*}>
+<{*            </div>*}>
+            
         </th>
     </tr>
     <tr>

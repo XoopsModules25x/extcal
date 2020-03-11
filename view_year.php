@@ -11,7 +11,7 @@
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
@@ -33,7 +33,7 @@ $year = \Xmf\Request::getInt('year', date('Y'), 'GET');
 $cat  = \Xmf\Request::getInt('cat', 0, 'GET');
 
 // Getting eXtCal object's handler
-$catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+$categoryHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
 $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 
 // Tooltips include
@@ -69,7 +69,7 @@ $eventsArray = $events;
 // $startYear = mktime(0, 0, 0, 1, 1, $year);
 // $endYear = mktime(23, 59, 59, 12, 31, $year);
 //
-// $eventsArray = array();
+// $eventsArray = [];
 // foreach ($events as $event) {
 //     if (!$event['event_isrecur']) {
 //         // Formating date
@@ -93,7 +93,7 @@ $eventsArray = $events;
 $xoopsTpl->assign('events', $eventsArray);
 
 // Retriving categories
-$cats = $catHandler->objectToArray($catHandler->getAllCat($xoopsUser));
+$cats = $categoryHandler->objectToArray($categoryHandler->getAllCat($xoopsUser));
 
 // Assigning categories to the template
 $xoopsTpl->assign('cats', $cats);

@@ -37,7 +37,7 @@ class MonthDecorator extends Calendar_Decorator
         $prevStamp = parent::prevMonth(true);
 
         // Build the URL for the previous month
-        return $_SERVER['PHP_SELF'] . '?y=' . date('Y', $prevStamp) . '&m=' . date('n', $prevStamp) . '&d=' . date('j', $prevStamp);
+        return $_SERVER['SCRIPT_NAME'] . '?y=' . date('Y', $prevStamp) . '&m=' . date('n', $prevStamp) . '&d=' . date('j', $prevStamp);
     }
 
     /**
@@ -59,7 +59,7 @@ class MonthDecorator extends Calendar_Decorator
         $nextStamp = parent::nextMonth(true);
 
         // Build the URL for next month
-        return $_SERVER['PHP_SELF'] . '?y=' . date('Y', $nextStamp) . '&m=' . date('n', $nextStamp) . '&d=' . date('j', $nextStamp);
+        return $_SERVER['SCRIPT_NAME'] . '?y=' . date('Y', $nextStamp) . '&m=' . date('n', $nextStamp) . '&d=' . date('j', $nextStamp);
     }
 }
 
@@ -78,7 +78,7 @@ $MonthDecorator = new MonthDecorator($Month);
 $MonthDecorator->build();
 ?>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
     <title> A Simple Decorator </title>

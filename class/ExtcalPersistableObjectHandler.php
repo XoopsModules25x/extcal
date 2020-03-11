@@ -14,7 +14,7 @@ namespace XoopsModules\Extcal;
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
@@ -135,7 +135,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->table;
-        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
@@ -222,7 +222,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
             $sql .= ', ' . $this->identifierName;
         }
         $sql .= ' FROM ' . $this->table;
-        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
@@ -255,14 +255,14 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     {
         $field   = '';
         $groupby = false;
-        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             if ('' != $criteria->groupby) {
                 $groupby = true;
                 $field   = $criteria->groupby . ', '; //Not entirely secure unless you KNOW that no criteria's groupby clause is going to be mis-used
             }
         }
         $sql = 'SELECT ' . $field . 'COUNT(*) FROM ' . $this->table;
-        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->groupby) {
                 $sql .= $criteria->getGroupby();
@@ -278,7 +278,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
             return $count;
         }
         $ret = [];
-        while (false !== (list($id, $count) = $this->db->fetchRow($result))) {
+        while (list($id, $count) = $this->db->fetchRow($result)) {
             $ret[$id] = $count;
         }
 
@@ -365,7 +365,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
             foreach ($cleanvars as $key => $value) {
                 if ((!is_array($this->keyName) && $key == $this->keyName)
                     || (is_array($this->keyName)
-                        && in_array($key, $this->keyName, true))) {
+                        && in_array($key, $this->keyName))) {
                     continue;
                 }
                 if (isset($notfirst)) {
@@ -423,7 +423,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
             $setClause .= $this->db->quoteString($fieldvalue);
         }
         $sql = 'UPDATE ' . $this->table . ' SET ' . $setClause;
-        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         if (false !== $force) {
@@ -449,7 +449,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     public function updateFieldValue($fieldname, $fieldvalue, $criteria = null, $force = true)
     {
         $sql = 'UPDATE ' . $this->table . ' SET ' . $fieldname . ' = ' . $fieldvalue;
-        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         if (false !== $force) {
@@ -476,7 +476,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
      */
     public function deleteAll(\CriteriaElement $criteria = null, $force = true, $asObject = false)
     {
-        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql = 'DELETE FROM ' . $this->table;
             $sql .= ' ' . $criteria->renderWhere();
             if (!$this->db->query($sql)) {
@@ -631,14 +631,14 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     {
         $field   = '';
         $groupby = false;
-        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             if ('' != $criteria->groupby) {
                 $groupby = true;
                 $field   = $criteria->groupby . ', '; //Not entirely secure unless you KNOW that no criteria's groupby clause is going to be mis-used
             }
         }
         $sql = 'SELECT ' . $field . "SUM($sum) FROM " . $this->table;
-        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->groupby) {
                 $sql .= $criteria->getGroupby();
@@ -654,7 +654,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
             return $sum;
         }
         $ret = [];
-        while (false !== (list($id, $sum) = $this->db->fetchRow($result))) {
+        while (list($id, $sum) = $this->db->fetchRow($result)) {
             $ret[$id] = $sum;
         }
 
@@ -671,14 +671,14 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     {
         $field   = '';
         $groupby = false;
-        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             if ('' != $criteria->groupby) {
                 $groupby = true;
                 $field   = $criteria->groupby . ', '; //Not entirely secure unless you KNOW that no criteria's groupby clause is going to be mis-used
             }
         }
         $sql = 'SELECT ' . $field . "MAX($max) FROM " . $this->table;
-        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->groupby) {
                 $sql .= $criteria->getGroupby();
@@ -694,7 +694,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
             return $max;
         }
         $ret = [];
-        while (false !== (list($id, $max) = $this->db->fetchRow($result))) {
+        while (list($id, $max) = $this->db->fetchRow($result)) {
             $ret[$id] = $max;
         }
 
@@ -712,7 +712,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
         $field = '';
 
         $sql = 'SELECT ' . $field . "AVG($avg) FROM " . $this->table;
-        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);

@@ -11,7 +11,7 @@
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
@@ -36,8 +36,20 @@ require_once _EXTCAL_PEAR_CALENDAR_ROOT . '/Day.php';
 
 //------------------------------------------------------
 // Getting eXtCal object's handler
-$catHandler   = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+/** @var Extcal\CategoryHandler $categoryHandler */
+//$categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+$categoryHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+/** @var Extcal\EventHandler $eventHandler */
 $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+/** @var Extcal\EventmemberHandler $eventMemberHandler */
+$eventMemberHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_MEMBER);
+/** @var Extcal\EventNotMemberHandler $eventNotMemberHandler */
+$eventNotMemberHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_NOT_MEMBER);
+/** @var Extcal\FileHandler $fileHandler */
+$fileHandler     = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_FILE);
+/** @var Extcal\LocationHandler $locationHandler */
+$locationHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_LOCATION);
+
 $timeHandler  = Extcal\Time::getHandler();
 $permHandler  = Extcal\Perm::getHandler();
 $xoopsUser    = $xoopsUser ?: null;
