@@ -38,5 +38,8 @@ function xoops_module_install_extcal(\XoopsModule $xoopsModule)
     // Auto approve
     $groupPermissionHandler->addRight('extcal_perm_mask', 4, XOOPS_GROUP_ADMIN, $moduleId);
 
+    // Can Edit
+    $groupPermissionHandler->addRight('extcal_perm_mask', 8, XOOPS_GROUP_ADMIN, $moduleId);
+
     return true;
 }
