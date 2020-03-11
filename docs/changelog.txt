@@ -17,7 +17,8 @@
 - added config files in /config (mamba)
 - reversed to while (list()) (mamba)
 - reverted in_array() true check (mamba)
--
+- missing smarty variables in event.php (Tzvook)
+
 
 
 WORK IN PROGRESS
