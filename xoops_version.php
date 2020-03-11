@@ -71,7 +71,7 @@ $modversion['adminmenu']  = 'admin/menu.php';
 //Install/Uninstall Functions
 $modversion['onInstall']   = 'include/oninstall.php';
 $modversion['onUpdate']    = 'include/onupdate.php';
-$modversion['onUninstall'] = 'include/onuninstall.php';
+//$modversion['onUninstall'] = 'include/onuninstall.php';
 
 // Menu
 
