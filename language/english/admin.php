@@ -148,3 +148,13 @@ define('_AM_EXTCAL_FROM_NAME', '');
 define('_AM_EXTCAL_FROM_EMAIL', '');
 define('_AM_EXTCAL_SEND_NOTIFICATION_SUBJECT', '');
 define('_AM_EXTCAL_SEND_NOTIFICATION_BODY', '');
+
+
+//Index
+define('AM_EXTCAL_STATISTICS', 'Extcal statistics');
+define('AM_EXTCAL_THEREARE_EXTCAL_CAT', "<span class='bold'>%s</span> Categories in the database");
+define('AM_EXTCAL_THEREARE_EXTCAL_EVENT', "<span class='bold'>%s</span> Events in the database");
+define('AM_EXTCAL_THEREARE_EXTCAL_EVENTMEMBER', "<span class='bold'>%s</span> Event Member in the database");
+define('AM_EXTCAL_THEREARE_EXTCAL_EVENTNOTMEMBER', "<span class='bold'>%s</span> Event non-member in the database");
+define('AM_EXTCAL_THEREARE_EXTCAL_FILE', "<span class='bold'>%s</span> Files in the database");
+define('AM_EXTCAL_THEREARE_EXTCAL_LOCATION', "<span class='bold'>%s</span> Locations in the database");
