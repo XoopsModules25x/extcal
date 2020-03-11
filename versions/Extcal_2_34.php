@@ -30,14 +30,14 @@ class Extcal_2_34
     {
         global $xoopsDB;
 
-        $this->alterTable_location();
+        $this->alterTable_etablissement();
     }
 
     //----------------------------------------------------
-    public function alterTable_location()
+    public function alterTable_etablissement()
     {
         global $xoopsDB;
-        $tbl = $xoopsDB->prefix('extcal_location');
+        $tbl = $xoopsDB->prefix('extcal_etablissement');
 
         $sql = <<<__sql__
 ALTER TABLE `{$tbl}`
