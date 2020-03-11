@@ -11,7 +11,7 @@
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
@@ -22,18 +22,6 @@ use XoopsModules\Extcal;
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof \XoopsUser)
     || !$GLOBALS['xoopsUser']->IsAdmin()) {
     exit('Restricted access' . PHP_EOL);
-}
-
-/**
- * @param string $tablename
- *
- * @return bool
- */
-function tableExists($tablename)
-{
-    $result = $GLOBALS['xoopsDB']->queryF("SHOW TABLES LIKE '$tablename'");
-
-    return ($GLOBALS['xoopsDB']->getRowsNum($result) > 0) ? true : false;
 }
 
 /**
@@ -52,13 +40,22 @@ function xoops_module_pre_update_extcal(\XoopsModule $module)
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
 
-    return $xoopsSuccess && $phpSuccess;
+    //mb    return $xoopsSuccess && $phpSuccess;
+
+    //    XoopsLoad::load('migrate', 'extcal');
+    /** @var \XoopsModules\Extcal\Common\Configurator $configurator */
+    $configurator = new \XoopsModules\Extcal\Common\Configurator();
+
+    $migrator = new \XoopsModules\Extcal\Common\Migrate($configurator);
+    $migrator->synchronizeSchema();
+
+    return true;
 }
 
 /**
  * Performs tasks required during update of the module
  * @param \XoopsModule $module {@link XoopsModule}
- * @param null        $previousVersion
+ * @param null         $previousVersion
  *
  * @return bool true if update successful, false if not
  */
@@ -103,25 +100,24 @@ function xoops_module_update_extcal(\XoopsModule $module, $previousVersion = nul
 
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-    /** @var Extcal\Helper $helper */
-    /** @var Extcal\Utility $utility */
+    /** @var Extcal\Helper $helper */ /** @var Extcal\Utility $utility */
     /** @var Extcal\Common\Configurator $configurator */
     $helper       = Extcal\Helper::getInstance();
     $utility      = new Extcal\Utility();
     $configurator = new Extcal\Common\Configurator();
 
-    $migrator = new \XoopsModules\Extgallery\Common\Migrate($configurator);
+    $migrator = new \XoopsModules\Extcal\Common\Migrate($configurator);
     $migrator->synchronizeSchema();
 
-    if ($previousVersion < 241) {
+    if ($previousVersion < 240) {
         //delete old HTML templates
-        if (count($configurator['templateFolders']) > 0) {
-            foreach ($configurator['templateFolders'] as $folder) {
+        if (count($configurator->templateFolders) > 0) {
+            foreach ($configurator->templateFolders as $folder) {
                 $templateFolder = $GLOBALS['xoops']->path('modules/' . $moduleDirName . $folder);
                 if (is_dir($templateFolder)) {
                     $templateList = array_diff(scandir($templateFolder, SCANDIR_SORT_NONE), ['..', '.']);
                     foreach ($templateList as $k => $v) {
-                        $fileInfo = new \SplFileInfo($templateFolder . $v);
+                        $fileInfo = new SplFileInfo($templateFolder . $v);
                         if ('html' === $fileInfo->getExtension() && 'index.html' !== $fileInfo->getFilename()) {
                             if (file_exists($templateFolder . $v)) {
                                 unlink($templateFolder . $v);
@@ -133,19 +129,19 @@ function xoops_module_update_extcal(\XoopsModule $module, $previousVersion = nul
         }
 
         //  ---  COPY blank.png FILES ---------------
-        if (count($configurator['copyFiles']) > 0) {
-            $file = dirname(__DIR__) . '/assets/images/blank.png';
-            foreach (array_keys($configurator['copyFiles']) as $i) {
-                $dest = $configurator['copyFiles'][$i] . '/blank.png';
+        if (count($configurator->copyBlankFiles) > 0) {
+            $file = __DIR__ . '/../assets/images/blank.png';
+            foreach (array_keys($configurator->copyBlankFiles) as $i) {
+                $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
                 $utility::copyFile($file, $dest);
             }
         }
 
         //  ---  DELETE OLD FILES ---------------
-        if (count($configurator['oldFiles']) > 0) {
+        if (count($configurator->oldFiles) > 0) {
             //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
-            foreach (array_keys($configurator['oldFiles']) as $i) {
-                $tempFile = $GLOBALS['xoops']->path('modules/' . $moduleDirName . $configurator['oldFiles'][$i]);
+            foreach (array_keys($configurator->oldFiles) as $i) {
+                $tempFile = $GLOBALS['xoops']->path('modules/' . $moduleDirName . $configurator->oldFiles[$i]);
                 if (is_file($tempFile)) {
                     unlink($tempFile);
                 }
@@ -156,7 +152,7 @@ function xoops_module_update_extcal(\XoopsModule $module, $previousVersion = nul
 
         //delete .html entries from the tpl table
         $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $module->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
-        $xoopsDB->queryF($sql);
+        $GLOBALS['xoopsDB']->queryF($sql);
 
         // Load class XoopsFile ====================
         xoops_load('XoopsFile');
