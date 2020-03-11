@@ -70,7 +70,7 @@ class LocationHandler extends ExtcalPersistableObjectHandler
      *
      * @return array
      */
-    public function &getAll(
+    public function getAll(
         \CriteriaElement $criteria = null,
         $fields = null,
         $asObject = true,

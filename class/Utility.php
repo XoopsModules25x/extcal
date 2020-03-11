@@ -55,7 +55,7 @@ class Utility extends Common\SysUtility
      * @param $event_picture1
      * @param $event_picture2
      */
-    public static function loadImg(&$REQUEST, &$event_picture1, &$event_picture2)
+    public static function loadImg($REQUEST, &$event_picture1, &$event_picture2)
     {
         ///////////////////////////////////////////////////////////////////////////////
         $uploaddir_event = XOOPS_ROOT_PATH . '/uploads/extcal/';

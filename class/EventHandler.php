@@ -872,7 +872,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
      * @param $criteria
      * @param $cats
      */
-    public function addCatSelectCriteria(&$criteria, $cats = null)
+    public function addCatSelectCriteria($criteria, $cats = null)
     {
         if (!is_array($cats) && $cats > 0) {
             $criteria->add(new \Criteria('cat_id', $cats));

@@ -83,7 +83,7 @@ class FileHandler extends ExtcalPersistableObjectHandler
     /**
      * @param $file
      */
-    public function deleteFile(&$file)
+    public function deleteFile($file)
     {
         $this->_deleteFile($file);
         $this->deleteById($file->getVar('file_id'));
@@ -168,7 +168,7 @@ class FileHandler extends ExtcalPersistableObjectHandler
     /**
      * @param $file
      */
-    public function _deleteFile(&$file)
+    public function _deleteFile($file)
     {
         if (file_exists(XOOPS_ROOT_PATH . '/uploads/extcal/' . $file->getVar('file_name'))) {
             unlink(XOOPS_ROOT_PATH . '/uploads/extcal/' . $file->getVar('file_name'));

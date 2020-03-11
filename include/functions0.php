@@ -44,7 +44,7 @@ function extcal_getEvent($eventId)
  * @param $event_picture1
  * @param $event_picture2
  */
-function extcal_loadImg(&$REQUEST, &$event_picture1, &$event_picture2)
+function extcal_loadImg($REQUEST, &$event_picture1, &$event_picture2)
 {
     ///////////////////////////////////////////////////////////////////////////////
     $uploaddir_event = XOOPS_ROOT_PATH . '/uploads/extcal/';

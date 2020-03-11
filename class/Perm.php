@@ -27,7 +27,7 @@ class Perm
      *
      * @return string
      */
-    public function getUserGroup(&$user)
+    public function getUserGroup($user)
     {
         if ($user instanceof \XoopsUser) {
             return $user->getGroups();
@@ -67,7 +67,7 @@ class Perm
      *
      * @return bool
      */
-    public function isAllowed(&$user, $perm, $catId)
+    public function isAllowed($user, $perm, $catId)
     {
         $autorizedCat = $this->getAuthorizedCat($user, $perm);
 

@@ -27,36 +27,46 @@ use XoopsModules\Extcal;
  */
 function xoops_module_pre_install_extcal(\XoopsModule $module)
 {
-    $moduleDirName = basename(dirname(__DIR__));
-    $utility       = new Extcal\Utility();
+    include __DIR__ . '/common.php';
 
+    /** @var \XoopsModules\Extcal\Utility $utility */
+    $utility = new \XoopsModules\Extcal\Utility();
     //check for minimum XOOPS version
-    if (!$utility::checkVerXoops($module)) {
-        return false;
-    }
+    $xoopsSuccess = $utility::checkVerXoops($module);
 
     // check for minimum PHP version
-    if (!$utility::checkVerPhp($module)) {
-        return false;
+    $phpSuccess = $utility::checkVerPhp($module);
+
+    if ($xoopsSuccess && $phpSuccess) {
+        $moduleTables = &$module->getInfo('tables');
+        foreach ($moduleTables as $table) {
+            $GLOBALS['xoopsDB']->queryF('DROP TABLE IF EXISTS ' . $GLOBALS['xoopsDB']->prefix($table) . ';');
+        }
     }
 
-    $mod_tables = $module->getInfo('tables');
-    foreach ($mod_tables as $table) {
-        $GLOBALS['xoopsDB']->queryF('DROP TABLE IF EXISTS ' . $GLOBALS['xoopsDB']->prefix($table) . ';');
-    }
-
-    return true;
+    return $xoopsSuccess && $phpSuccess;
 }
 
 /**
  * Performs tasks required during installation of the module
- * @param \XoopsModule $xoopsModule
+ * @param \XoopsModule $module {@link XoopsModule}
+ *
  * @return bool true if installation successful, false if not
- * @internal param XoopsModule $module <a href='psi_element://XoopsModule'>XoopsModule</a>
  */
 function xoops_module_install_extcal(\XoopsModule $xoopsModule)
 {
+    require_once dirname(__DIR__) . '/preloads/autoloader.php';
+
     $moduleDirName = basename(dirname(__DIR__));
+
+    /** @var \XoopsModules\Extcal\Helper $helper */ /** @var \XoopsModules\Extcal\Utility $utility */
+    /** @var \XoopsModules\Extcal\Common\Configurator $configurator */
+    $helper       = \XoopsModules\Extcal\Helper::getInstance();
+    $utility      = new \XoopsModules\Extcal\Utility();
+    $configurator = new \XoopsModules\Extcal\Common\Configurator();
+    // Load language files
+    $helper->loadLanguage('admin');
+    $helper->loadLanguage('modinfo');
 
     $moduleId = $xoopsModule->getVar('mid');
     /** @var \XoopsGroupPermHandler $groupPermissionHandler */
@@ -79,25 +89,29 @@ function xoops_module_install_extcal(\XoopsModule $xoopsModule)
     // Auto approve
     $groupPermissionHandler->addRight($moduleDirName . '_perm_mask', 4, XOOPS_GROUP_ADMIN, $moduleId);
 
-    //    $moduleDirName = $xoopsModule->getVar('dirname');
-    $configurator = require_once $GLOBALS['xoops']->path('modules/' . $moduleDirName . '/config/config.php');
+    // Can Edit
+    $groupPermissionHandler->addRight($moduleDirName . '_perm_mask', 8, XOOPS_GROUP_ADMIN, $moduleId);
 
-    /** @var Extcal\Utility $utility */
-    $utility = new \XoopsModules\Extcal\Utility();
-
-    if (count($configurator['uploadFolders']) > 0) {
+    //  ---  CREATE FOLDERS ---------------
+    if (count($configurator->uploadFolders) > 0) {
         //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
-        foreach (array_keys($configurator['uploadFolders']) as $i) {
-            $utility::createFolder($configurator['uploadFolders'][$i]);
+        foreach (array_keys($configurator->uploadFolders) as $i) {
+            $utility::createFolder($configurator->uploadFolders[$i]);
         }
     }
-    if (count($configurator['copyFiles']) > 0) {
+
+    //  ---  COPY blank.png FILES ---------------
+    if (count($configurator->copyBlankFiles) > 0) {
         $file = dirname(__DIR__) . '/assets/images/blank.png';
-        foreach (array_keys($configurator['copyFiles']) as $i) {
-            $dest = $configurator['copyFiles'][$i] . '/blank.png';
+        foreach (array_keys($configurator->copyBlankFiles) as $i) {
+            $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
             $utility::copyFile($file, $dest);
         }
     }
+
+    //delete .html entries from the tpl table
+    $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $xoopsModule->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
+    $GLOBALS['xoopsDB']->queryF($sql);
 
     return true;
 }
