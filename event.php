@@ -11,7 +11,7 @@
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
@@ -206,6 +206,29 @@ $tNavBar = getNavBarTabs($params['view']);
 $xoopsTpl->assign('tNavBar', $tNavBar);
 //---------------------
 
+/*
+// TZV //
+// mb missing for xBootstrap templates by Tzvook
+$lang = ['start'      => _MD_EXTCAL_START,
+         'end'        => _MD_EXTCAL_END,
+         'calmonth'   => _MD_EXTCAL_NAV_CALMONTH,
+         'calweek'    => _MD_EXTCAL_NAV_CALWEEK,
+         'year'       => _MD_EXTCAL_NAV_YEAR,
+         'month'      => _MD_EXTCAL_NAV_MONTH,
+         'week'       => _MD_EXTCAL_NAV_WEEK,
+         'day'        => _MD_EXTCAL_NAV_DAY,
+         'agendaweek' => _MD_EXTCAL_NAV_AGENDA_WEEK,
+         'agendaday'  => _MD_EXTCAL_NAV_AGENDA_DAY,
+         'search'     => _MD_EXTCAL_NAV_SEARCH,
+         'newevent'   => _MD_EXTCAL_NAV_NEW_EVENT,
+];
+
+// Assigning language data to the template
+$xoopsTpl->assign('lang', $lang);
+$xoopsTpl->assign('view', 'event');
+
+*/
+
 /*  test modofication status    JJD
   $k = 'status';
   $isStatus = _EXTCAL_STATUS_DESINSCRIPTION;
@@ -222,6 +245,6 @@ $xoopsTpl->assign('tNavBar', $tNavBar);
 $xoTheme->addScript('browse.php?modules/extcal/assets/js/highslide.js');
 $xoTheme->addStylesheet('browse.php?modules/extcal/assets/js/highslide.css');
 
-//function XoopsFormDhtmlTextArea($caption, $name, $value = "", $rows = 5, $cols = 50, $hiddentext = "xoopsHiddenText", $options = array());
+//function XoopsFormDhtmlTextArea($caption, $name, $value = "", $rows = 5, $cols = 50, $hiddentext = "xoopsHiddenText", $options = []);
 
 require_once XOOPS_ROOT_PATH . '/footer.php';
