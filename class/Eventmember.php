@@ -14,13 +14,13 @@ namespace XoopsModules\Extcal;
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
  */
 
-// defined('XOOPS_ROOT_PATH') || die('Restricted access');
+
 
 // require_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
 
@@ -34,9 +34,9 @@ class Eventmember extends \XoopsObject
      */
     public function __construct()
     {
-        $this->initVar('eventmember_id', XOBJ_DTYPE_INT, null, false);
-        $this->initVar('event_id', XOBJ_DTYPE_INT, null, true);
-        $this->initVar('uid', XOBJ_DTYPE_INT, null, true);
-        $this->initVar('status', XOBJ_DTYPE_INT, 0, true);
+        $this->initVar('eventmember_id', \XOBJ_DTYPE_INT, null, false);
+        $this->initVar('event_id', \XOBJ_DTYPE_INT, null, true);
+        $this->initVar('uid', \XOBJ_DTYPE_INT, null, true);
+        $this->initVar('status', \XOBJ_DTYPE_INT, 0, true);
     }
 }

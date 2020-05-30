@@ -64,7 +64,7 @@ while ( $e = $c->fetch() ) {
     $link ="&y=".$e->thisYear()."&m=".$e->thisMonth()."&d=".$e->thisDay().
         "&h=".$e->thisHour()."&i=".$e->thisMinute()."&s=".$e->thisSecond();
     $method = 'this'.str_replace('calendar_','',$class);
-    echo ( "<a href=\"".$_SERVER['PHP_SELF']."?view=".$class.$link."\">".$e->{$method}()."</a> : " );
+    echo ( "<a href=\"".$_SERVER['SCRIPT_NAME']."?view=".$class.$link."\">".$e->{$method}()."</a> : " );
     if ( ($i % 10) == 0 ) {
         echo ( '<br>' );
     }
@@ -82,7 +82,7 @@ while ( $e = $c->fetch() ) {
     $link ="&y=".$e->thisYear()."&m=".$e->thisMonth()."&d=".$e->thisDay().
         "&h=".$e->thisHour()."&i=".$e->thisMinute()."&s=".$e->thisSecond();
     $method = 'this'.str_replace('calendar_','',$class);
-    echo ( "<a href=\"".$_SERVER['PHP_SELF']."?view=".$class.$link."\">".$e->{$method}()."</a> : " );
+    echo ( "<a href=\"".$_SERVER['SCRIPT_NAME']."?view=".$class.$link."\">".$e->{$method}()."</a> : " );
     if ( ($i % 10) == 0 ) {
         echo ( '<br>' );
     }

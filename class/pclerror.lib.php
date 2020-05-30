@@ -26,7 +26,7 @@
 //   engendrer.
 //   Il est entendu cependant que l'auteur a réalisé ce code par plaisir et n'y a
 //   caché aucun virus, ni malveillance.
-//   Cette libairie est distribuée sous la license GNU/GPL (http://www.gnu.org)
+//   Cette libairie est distribuée sous la license GNU/GPL (https://www.gnu.org)
 //
 //   * Auteur :
 //
@@ -86,7 +86,7 @@ if (!defined('PCLERROR_LIB')) {
         $v_message .= "<p align=center><span style='font-weight: bold; color: red; background-color: white; '>PclError Library has detected a fatal error on file '$p_file', line $p_line</span></p>";
         $v_message .= "<p align=center><span style='font-weight: bold; color: red; background-color: white;'>$p_error_string</span></p>";
         $v_message .= '</body></html>';
-        die($v_message);
+        exit($v_message);
     }
 
     // --------------------------------------------------------------------------------

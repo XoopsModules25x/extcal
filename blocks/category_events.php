@@ -11,13 +11,15 @@
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
  */
 
-use XoopsModules\Extcal;
+use XoopsModules\Extcal\{
+    Helper
+};
 
 require_once dirname(__DIR__) . '/include/constantes.php';
 
@@ -39,7 +41,7 @@ function bExtcalUpcomingByCategoryShow($options)
     //     $extcalConfig = Extcal\Config::getHandler();
     //     $xoopsModuleConfig = $extcalConfig->getModuleConfig();
 
-    $eventHandler = \XoopsModules\Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+    $eventHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 
     $nbEvent     = $options[0];
     $titleLenght = $options[1];
@@ -47,7 +49,7 @@ function bExtcalUpcomingByCategoryShow($options)
     array_shift($options);
 
     // Checking if no cat is selected
-    if (0 == $options[0] && 1 == count($options)) {
+    if (isset($options[0]) && 0 == $options[0] && 1 == count($options)) {
         $options = 0;
     }
 
@@ -56,9 +58,9 @@ function bExtcalUpcomingByCategoryShow($options)
     $eventHandler->formatEventsDate($events, $extcalConfig['event_date_month']);
 
     /***********************************************************/
-    //    $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-    $catHandler = \XoopsModules\Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
-    $t          = $catHandler->objectToArray($catHandler->getAllCat($xoopsUser, 'all'));
+    //    $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+    $categoryHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    $t          = $categoryHandler->objectToArray($categoryHandler->getAllCat($xoopsUser, 'all'));
     $tCats      = [];
     foreach ($t as $h => $hValue) {
         $tCats[$t[$h]['cat_id']] = $hValue;
@@ -87,10 +89,10 @@ function bExtcalUpcomingByCategoryEdit($options)
 {
     global $xoopsUser;
 
-    //    $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-    $catHandler = \XoopsModules\Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    //    $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+    $categoryHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
 
-    $cats = $catHandler->getAllCat($xoopsUser, 'extcal_cat_view');
+    $cats = $categoryHandler->getAllCat($xoopsUser, 'extcal_cat_view');
 
     $form = _MB_EXTCAL_DISPLAY . "&nbsp;\n";
     $form .= '<input name="options[0]" size="5" maxlength="255" value="' . $options[0] . '" type="text">&nbsp;' . _MB_EXTCAL_EVENT . '<br>';

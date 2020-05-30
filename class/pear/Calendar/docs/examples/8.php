@@ -1,14 +1,17 @@
 <?php
+
 /**
  * Description: client for the SOAP Calendar Server.
  */
 if (version_compare(PHP_VERSION, '5.0.0', '>')) {
-    die('PHP 5 has problems with PEAR::SOAP Client (8.0RC3)
-        - remove @ before include below to see why');
+    exit(
+    'PHP 5 has problems with PEAR::SOAP Client (8.0RC3)
+        - remove @ before include below to see why'
+    );
 }
 
 if (!@require_once __DIR__ . '/SOAP/Client.php') {
-    die('You must have PEAR::SOAP installed');
+    exit('You must have PEAR::SOAP installed');
 }
 
 // Just to save manaul modification...
@@ -33,10 +36,10 @@ $calendarClient = $wsdl->getProxy();
 $month = $calendarClient->getMonth((int)$_GET['y'], (int)$_GET['m']);
 
 if (PEAR::isError($month)) {
-    die($month->toString());
+    exit($month->toString());
 }
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
     <title> Calendar over the Wire </title>
@@ -72,7 +75,7 @@ if (PEAR::isError($month)) {
     <tr>
 </table>
 <p>Enter Year and Month to View:</p>
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
+<form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="get">
     Year: <input type="text" size="4" name="y" value="<?php echo $_GET['y']; ?>">&nbsp;
     Month: <input type="text" size="2" name="m" value="<?php echo $_GET['m']; ?>">&nbsp;
     <input type="submit" value="Fetch Calendar">

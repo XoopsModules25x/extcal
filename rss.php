@@ -2,11 +2,13 @@
 
 use XoopsModules\Extcal;
 
-require_once dirname(dirname(__DIR__)) . '/mainfile.php';
-require_once __DIR__ . '/include/constantes.php';
 require_once __DIR__ . '/header.php';
+require_once __DIR__ . '/include/constantes.php';
 
 require_once XOOPS_ROOT_PATH . '/class/template.php';
+
+error_reporting(0);
+$GLOBALS['xoopsLogger']->activated = false;
 
 /** @var Extcal\Helper $helper */
 $helper = Extcal\Helper::getInstance();
@@ -18,6 +20,7 @@ $cat = \Xmf\Request::getInt('cat', 0, 'GET');
 if (function_exists('mb_http_output')) {
     mb_http_output('pass');
 }
+
 header('Content-Type:text/xml; charset=utf-8');
 $tpl          = new \XoopsTpl();
 $tpl->caching = 0;
@@ -34,17 +37,20 @@ if (!$tpl->is_cached('db:extcal_rss.tpl', $cat)) {
         $tpl->assign('channel_category', 'Event');
         $tpl->assign('channel_generator', 'XOOPS');
         $tpl->assign('channel_language', _LANGCODE);
-        $tpl->assign('image_url', XOOPS_URL . '/modules/extcal/assets/images/extcal_logo.png');
+        $tpl->assign('image_url', XOOPS_URL . '/modules/extcal/assets/images/logoModule.png');
         $tpl->assign('image_width', 92);
         $tpl->assign('image_height', 52);
         foreach ($events as $event) {
-            $tpl->append('items', [
-                'title'       => xoops_utf8_encode(htmlspecialchars($event->getVar('event_title'), ENT_QUOTES)),
-                'link'        => XOOPS_URL . '/modules/extcal/event.php?event=' . $event->getVar('event_id'),
-                'guid'        => XOOPS_URL . '/modules/extcal/event.php?event=' . $event->getVar('event_id'),
-                'pubdate'     => formatTimestamp($event->getVar('event_start'), 'rss'),
-                'description' => xoops_utf8_encode(htmlspecialchars($event->getVar('event_desc'), ENT_QUOTES)),
-            ]);
+            $tpl->append(
+                'items',
+                [
+                    'title'       => xoops_utf8_encode(htmlspecialchars($event->getVar('event_title'), ENT_QUOTES)),
+                    'link'        => XOOPS_URL . '/modules/extcal/event.php?event=' . $event->getVar('event_id'),
+                    'guid'        => XOOPS_URL . '/modules/extcal/event.php?event=' . $event->getVar('event_id'),
+                    'pubdate'     => formatTimestamp($event->getVar('event_start'), 'rss'),
+                    'description' => xoops_utf8_encode(htmlspecialchars($event->getVar('event_desc'), ENT_QUOTES)),
+                ]
+            );
         }
     }
 }

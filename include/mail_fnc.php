@@ -11,7 +11,7 @@
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
@@ -210,8 +210,8 @@ function extcal_SendMail(
     $mail_body,
     $bEcho = false,
     $mode = 0,
-    $sep = '|')
-{
+    $sep = '|'
+) {
     global $ModName, $signature, $mail_admin, $xoopsConfig, $xoopsDB, $xoopsModule;
 
     //$bEcho=false;
@@ -270,9 +270,8 @@ function extcal_SendMail(
           ."mail_fromemail : {$mail_fromemail}<br>"
           ."mail_subject : {$mail_subject}<br>"
           ."mail_body : {$mail_body}<br><hr>";
-    */
-    //---------------------------
-    /*
+     //---------------------------
+
 
       $adresse = "jjd@kiolo.com";
       $bolOk = mail($adresse, "test envoi mail", "test envoi envoi mail via php");

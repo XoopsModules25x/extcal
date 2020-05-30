@@ -11,7 +11,7 @@
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
@@ -20,7 +20,7 @@
 use XoopsModules\Extcal;
 
 // Include xoops admin header
-require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+require_once __DIR__ . '/admin_header.php';
 // require_once  dirname(__DIR__) . '/class/ExtcalPersistableObjectHandler.php';
 require_once dirname(dirname(dirname(__DIR__))) . '/kernel/module.php';
 require_once dirname(dirname(dirname(__DIR__))) . '/class/xoopsformloader.php';
@@ -155,9 +155,9 @@ switch ($op) {
             }
         } else {
             xoops_confirm([
-                              'ok'          => 1,
-                              'location_id' => $_REQUEST['location_id'],
-                              'op'          => 'delete_location',
+                    'ok'          => 1,
+                    'location_id' => $_REQUEST['location_id'],
+                    'op'          => 'delete_location',
                           ], $_SERVER['REQUEST_URI'], _AM_EXTCAL_LOCATION_SURDEL . '<br>');
         }
         break;
@@ -216,16 +216,16 @@ switch ($op) {
                 $upload->fetchMedia($_REQUEST['xoops_upload_file'][0]);
                 if (!$upload->upload()) {
                     $errors = $upload->getErrors();
-                    redirect_header('javascript:history.go(-1)', 3, $errors);
+                    redirect_header('<script>javascript:history.go(-1)</script>', 3, $errors);
                 } else {
                     $logo = $upload->getSavedFileName();
                 }
             } elseif (!empty($_REQUEST['file'])) {
-                $logo = $_REQUEST['file'];
+                $logo = \Xmf\Request::getString('file', '');
             }
         } else {
             $logo         = '';
-            $url_location = XOOPS_ROOT_PATH . '/uploads/extcal/location/' . $_REQUEST['file'];
+            $url_location = XOOPS_ROOT_PATH . '/uploads/extcal/location/' . \Xmf\Request::getString('file', '');
             if (is_file($url_location)) {
                 chmod($url_location, 0777);
                 unlink($url_location);
@@ -236,7 +236,7 @@ switch ($op) {
         if ($locationHandler->insert($obj)) {
         }
 
-        //require_once "../include/forms.php";
+        //require_once  dirname(__DIR__) . "/include/forms.php";
         echo $obj->getHtmlErrors();
         $form = $obj->getForm(false, 0);
         //echo "<hr>exit <<<<<<<<<<<<<<<<<<<<";exit;

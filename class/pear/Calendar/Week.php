@@ -58,7 +58,7 @@ require_once CALENDAR_ROOT . 'Calendar.php';
  * require_once __DIR__ . '/Calendar/Week.php';
  * $Week = new Calendar_Week(2003, 10, 1); Oct 2003, 1st tabular week
  * echo '<tr>';
- * while ($Day = $Week->fetch()) {
+ * while (false !== ($Day = $Week->fetch())) {
  *     if ($Day->isEmpty()) {
  *         echo '<td>&nbsp;</td>';
  *     } else {

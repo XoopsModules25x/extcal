@@ -61,10 +61,12 @@ if ($xoopsUser && $helper->getConfig('whos_going')) {
                 sendMail2member($mode, $event_id, $member_uid, _MD_EXTCAL_SUBJECT_0, _MD_EXTCAL_MSG_0);
                 $rediredtMessage = _MD_EXTCAL_MAX_MEMBER_REACHED;
             } else {
-                $eventMemberHandler->createEventmember([
-                                                           'event_id' => \Xmf\Request::getInt('event', 0, 'POST'),
-                                                           'uid'      => $xoopsUser->getVar('uid'),
-                                                       ]);
+                $eventMemberHandler->createEventmember(
+                    [
+                        'event_id' => \Xmf\Request::getInt('event', 0, 'POST'),
+                        'uid'      => $xoopsUser->getVar('uid'),
+                    ]
+                );
                 sendMail2member($mode, $event_id, $member_uid, _MD_EXTCAL_SUBJECT_1, _MD_EXTCAL_MSG_1);
                 $rediredtMessage = _MD_EXTCAL_WHOS_GOING_ADDED_TO_EVENT;
             }

@@ -135,7 +135,7 @@ class TestOfMonthWeeksBuild extends TestOfMonthWeeks
         function testFetchAll()
         {
             $this->cal->build();
-            $children = array();
+            $children = [];
             $i = 1;
             while ( $Child = $this->cal->fetch() ) {
                 $children[$i]=$Child;

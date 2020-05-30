@@ -57,7 +57,7 @@ require_once CALENDAR_ROOT . 'Calendar.php';
  * require_once __DIR__ . '/Calendar/Year.php';
  * $Year = new Calendar_Year(2003, 10, 21); // 21st Oct 2003
  * $Year->build(); // Build Calendar_Month objects
- * while ($Month = $Year->fetch()) {
+ * while (false !== ($Month = $Year->fetch())) {
  *     echo $Month->thisMonth().'<br>';
  * }
  * </code>.

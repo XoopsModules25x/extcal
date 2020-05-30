@@ -39,11 +39,11 @@ $Month->build();
 
 // Construct strings for next/previous links
 $PMonth = $Month->prevMonth('object'); // Get previous month as object
-$prev = $_SERVER['PHP_SELF'].'?y='.$PMonth->thisYear().'&m='.$PMonth->thisMonth().'&d='.$PMonth->thisDay();
+$prev = $_SERVER['SCRIPT_NAME'].'?y='.$PMonth->thisYear().'&m='.$PMonth->thisMonth().'&d='.$PMonth->thisDay();
 $NMonth = $Month->nextMonth('object');
-$next = $_SERVER['PHP_SELF'].'?y='.$NMonth->thisYear().'&m='.$NMonth->thisMonth().'&d='.$NMonth->thisDay();
+$next = $_SERVER['SCRIPT_NAME'].'?y='.$NMonth->thisYear().'&m='.$NMonth->thisMonth().'&d='.$NMonth->thisDay();
 ?>
-<!doctype html public "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
 <title> Calendar </title>
@@ -107,7 +107,7 @@ while ($Week = $Month->fetch()) {
     while ($Day = $Week->fetch()) {
 
         // Build a link string for each day
-        $link = $_SERVER['PHP_SELF'].
+        $link = $_SERVER['SCRIPT_NAME'].
                     '?y='.$Day->thisYear().
                     '&m='.$Day->thisMonth().
                     '&d='.$Day->thisDay();

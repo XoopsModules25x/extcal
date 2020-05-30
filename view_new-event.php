@@ -1,5 +1,7 @@
 <?php
 
+use XoopsModules\Extcal\Locale;
+
 require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 require_once __DIR__ . '/include/constantes.php';
 $params                                  = ['view' => _EXTCAL_NAV_NEW_EVENT, 'file' => _EXTCAL_FILE_NEW_EVENT];
@@ -54,6 +56,7 @@ if (count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) > 0) 
         'search'     => _MD_EXTCAL_NAV_SEARCH,
         'newevent'   => _MD_EXTCAL_NAV_NEW_EVENT,
     ];
+
     // Assigning language data to the template
     $xoopsTpl->assign('lang', $lang);
     $xoopsTpl->assign('view', 'newevent');

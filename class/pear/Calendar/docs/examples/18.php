@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Description: demonstrates using the Wrapper decorator.
  */
@@ -38,6 +39,6 @@ $Wrapper->build();
 
 echo '<h2>The Wrapper decorator</h2>';
 echo '<i>Day numbers are rendered in bold</i><br> <br>';
-while ($DecoratedDay = $Wrapper->fetch('MyBoldDecorator')) {
+while (false !== ($DecoratedDay = $Wrapper->fetch('MyBoldDecorator'))) {
     echo $DecoratedDay->thisDay() . '<br>';
 }

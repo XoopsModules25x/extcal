@@ -2,9 +2,7 @@
 
 namespace XoopsModules\Extcal;
 
-// defined('XOOPS_ROOT_PATH') || die('Restricted access');
-
-/**
+ /**
  * Class Perm.
  */
 class Perm
@@ -27,9 +25,9 @@ class Perm
      *
      * @return string
      */
-    public function getUserGroup(&$user)
+    public function getUserGroup($user)
     {
-        if (is_a($user, 'XoopsUser')) {
+        if ($user instanceof \XoopsUser) {
             return $user->getGroups();
         }
 
@@ -47,9 +45,9 @@ class Perm
         static $authorizedCat;
         $userId = $user ? $user->getVar('uid') : 0;
         if (!isset($authorizedCat[$perm][$userId])) {
-            $groupPermHandler = xoops_getHandler('groupperm');
+            $groupPermHandler = \xoops_getHandler('groupperm');
             /** @var \XoopsModuleHandler $moduleHandler */
-            $moduleHandler = xoops_getHandler('module');
+            $moduleHandler = \xoops_getHandler('module');
             $module        = $moduleHandler->getByDirname('extcal');
             if (!$module) {
                 return false;
@@ -67,10 +65,10 @@ class Perm
      *
      * @return bool
      */
-    public function isAllowed(&$user, $perm, $catId)
+    public function isAllowed($user, $perm, $catId)
     {
         $autorizedCat = $this->getAuthorizedCat($user, $perm);
 
-        return in_array($catId, $autorizedCat, true);
+        return \in_array($catId, $autorizedCat);
     }
 }

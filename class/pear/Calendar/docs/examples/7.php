@@ -1,9 +1,10 @@
 <?php
+
 /**
  * Description: a SOAP Calendar Server.
  */
 if (!@require_once __DIR__ . '/SOAP/Server.php') {
-    die('You must have PEAR::SOAP installed');
+    exit('You must have PEAR::SOAP installed');
 }
 
 if (!@require_once __DIR__ . '/Calendar/Calendar.php') {
@@ -61,7 +62,7 @@ class Calendar_Server
         if (!$Month->isValid()) {
             $V        = $Month->getValidator();
             $errorMsg = '';
-            while ($error = $V->fetch()) {
+            while (false !== ($error = $V->fetch())) {
                 $errorMsg .= $error->toString() . "\n";
             }
 
@@ -70,7 +71,7 @@ class Calendar_Server
         $monthname = date('F Y', $Month->getTimestamp());
         $days      = [];
         $Month->build();
-        while ($Day = $Month->fetch()) {
+        while (false !== ($Day = $Month->fetch())) {
             $day    = [
                 'isFirst' => (int)$Day->isFirst(),
                 'isLast'  => (int)$Day->isLast(),

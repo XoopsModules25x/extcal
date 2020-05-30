@@ -44,7 +44,7 @@ function extcal_getEvent($eventId)
  * @param $event_picture1
  * @param $event_picture2
  */
-function extcal_loadImg(&$REQUEST, &$event_picture1, &$event_picture2)
+function extcal_loadImg($REQUEST, &$event_picture1, &$event_picture2)
 {
     ///////////////////////////////////////////////////////////////////////////////
     $uploaddir_event = XOOPS_ROOT_PATH . '/uploads/extcal/';
@@ -54,20 +54,22 @@ function extcal_loadImg(&$REQUEST, &$event_picture1, &$event_picture2)
         $delimg = @$REQUEST['delimg_' . $j . ''];
         $delimg = isset($delimg) ? (int)$delimg : 0;
         if (0 == $delimg && !empty($REQUEST['xoops_upload_file'][$j])) {
-            $upload = new \XoopsMediaUploader($uploaddir_event, [
+            $upload = new \XoopsMediaUploader(
+                $uploaddir_event, [
                 'image/gif',
                 'image/jpeg',
                 'image/pjpeg',
                 'image/x-png',
                 'image/png',
                 'image/jpg',
-            ], 3145728, null, null);
+            ], 3145728, null, null
+            );
             if ($upload->fetchMedia($REQUEST['xoops_upload_file'][$j])) {
                 $upload->setPrefix('event_');
                 $upload->fetchMedia($REQUEST['xoops_upload_file'][$j]);
                 if (!$upload->upload()) {
                     $errors = $upload->getErrors();
-                    redirect_header('javascript:history.go(-1)', 3, $errors);
+                    redirect_header('<script>javascript:history.go(-1)</script>', 3, $errors);
                 } else {
                     if (1 == $j) {
                         $event_picture1 = $upload->getSavedFileName();
@@ -111,9 +113,9 @@ function getListCategories($cat, $addNone = true, $name = 'cat')
 {
     global $xoopsUser;
     // Category selectbox
-    $catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    $categoryHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
 
-    $catsList  = $catHandler->getAllCat($xoopsUser);
+    $catsList  = $categoryHandler->getAllCat($xoopsUser);
     $catSelect = new \XoopsFormSelect('', $name, $cat);
     if ($addNone) {
         $catSelect->addOption(0, ' ');
@@ -139,15 +141,15 @@ function getCheckeCategories($name = 'cat', $cat)
     // Category selectbox
     //<option style="background-color:#00FFFF;">VARCHAR</option>
 
-    $catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
-    $catsList   = $catHandler->getAllCat($xoopsUser);
+    $categoryHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    $catsList   = $categoryHandler->getAllCat($xoopsUser);
 
     $t = [];
     foreach ($catsList as $catList) {
         $cat_id    = $catList->getVar('cat_id');
         $name      = $catList->getVar('cat_name');
         $cat_color = $catList->getVar('cat_color');
-        $checked   = in_array($cat_id, $cat, true) ? 'checked' : '';
+        $checked   = in_array($cat_id, $cat) ? 'checked' : '';
         $cat       = ''
                      . "<div style='float:left; margin-left:5px;'>"
                      . "<input type='checkbox' name='{$name}[{$cat_id}]' value='1' {$checked}>"
@@ -248,6 +250,8 @@ function getList($name, $caption, $defaut, $options, $sep = ';')
  * @param        $endMonth
  * @param string $mode
  * @return DateTime
+ * @throws \Exception
+ * @throws \Exception
  */
 function getDateBetweenDates($ts, $startMonth, $endMonth, $mode = 'w')
 {

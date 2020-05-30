@@ -4,11 +4,11 @@ namespace XoopsModules\Extcal;
 
 use XoopsModules\Extcal;
 
-// defined('XOOPS_ROOT_PATH') || die('Restricted access');
+
 
 require_once XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/calendar.php';
 
-$moduleDirName = basename(dirname(__DIR__));
+$moduleDirName = \basename(\dirname(__DIR__));
 Extcal\Helper::getInstance()->loadLanguage('main');
 
 /**
@@ -175,7 +175,7 @@ class Time
             mb_substr(_CAL_SATURDAY, 0, 3) . ' ',
         ];
 
-        return preg_replace($patterns, $replacements, date($format, $timestamp));
+        return \preg_replace($patterns, $replacements, \date($format, $timestamp));
     }
 
     /**
@@ -185,14 +185,14 @@ class Time
      */
     public function getFormatedReccurRule($event_recur_rules)
     {
-        $eventOptions = explode('|', $event_recur_rules);
+        $eventOptions = \explode('|', $event_recur_rules);
 
         switch ($eventOptions[0]) {
             case 'daily':
 
                 $interval = $eventOptions[1];
 
-                return sprintf(_MD_EXTCAL_RR_DAILY, $interval);
+                return \sprintf(\_MD_EXTCAL_RR_DAILY, $interval);
                 break;
             case 'weekly':
 
@@ -207,101 +207,101 @@ class Time
                 ];
 
                 $interval = $eventOptions[1];
-                array_shift($eventOptions);
-                array_shift($eventOptions);
+                \array_shift($eventOptions);
+                \array_shift($eventOptions);
                 $day = '';
                 foreach ($eventOptions as $option) {
                     $day .= ' ' . $daysName[$option] . ', ';
                 }
-                $ret = sprintf(_MD_EXTCAL_RR_WEEKLY, $day, $interval);
+                $ret = \sprintf(\_MD_EXTCAL_RR_WEEKLY, $day, $interval);
 
                 return $ret;
                 break;
             case 'monthly':
 
                 $monthDays = [
-                    '1MO'  => _MD_EXTCAL_1_MO,
-                    '1TU'  => _MD_EXTCAL_1_TU,
-                    '1WE'  => _MD_EXTCAL_1_WE,
-                    '1TH'  => _MD_EXTCAL_1_TH,
-                    '1FR'  => _MD_EXTCAL_1_FR,
-                    '1SA'  => _MD_EXTCAL_1_SA,
-                    '1SU'  => _MD_EXTCAL_1_SU,
-                    '2MO'  => _MD_EXTCAL_2_MO,
-                    '2TU'  => _MD_EXTCAL_2_TU,
-                    '2WE'  => _MD_EXTCAL_2_WE,
-                    '2TH'  => _MD_EXTCAL_2_TH,
-                    '2FR'  => _MD_EXTCAL_2_FR,
-                    '2SA'  => _MD_EXTCAL_2_SA,
-                    '2SU'  => _MD_EXTCAL_2_SU,
-                    '3MO'  => _MD_EXTCAL_3_MO,
-                    '3TU'  => _MD_EXTCAL_3_TU,
-                    '3WE'  => _MD_EXTCAL_3_WE,
-                    '3TH'  => _MD_EXTCAL_3_TH,
-                    '3FR'  => _MD_EXTCAL_3_FR,
-                    '3SA'  => _MD_EXTCAL_3_SA,
-                    '3SU'  => _MD_EXTCAL_3_SU,
-                    '4MO'  => _MD_EXTCAL_4_MO,
-                    '4TU'  => _MD_EXTCAL_4_TU,
-                    '4WE'  => _MD_EXTCAL_4_WE,
-                    '4TH'  => _MD_EXTCAL_4_TH,
-                    '4FR'  => _MD_EXTCAL_4_FR,
-                    '4SA'  => _MD_EXTCAL_4_SA,
-                    '4SU'  => _MD_EXTCAL_4_SU,
-                    '-1MO' => _MD_EXTCAL_LAST_MO,
-                    '-1TU' => _MD_EXTCAL_LAST_TU,
-                    '-1WE' => _MD_EXTCAL_LAST_WE,
-                    '-1TH' => _MD_EXTCAL_LAST_TH,
-                    '-1FR' => _MD_EXTCAL_LAST_FR,
-                    '-1SA' => _MD_EXTCAL_LAST_SA,
-                    '-1SU' => _MD_EXTCAL_LAST_SU,
+                    '1MO'  => \_MD_EXTCAL_1_MO,
+                    '1TU'  => \_MD_EXTCAL_1_TU,
+                    '1WE'  => \_MD_EXTCAL_1_WE,
+                    '1TH'  => \_MD_EXTCAL_1_TH,
+                    '1FR'  => \_MD_EXTCAL_1_FR,
+                    '1SA'  => \_MD_EXTCAL_1_SA,
+                    '1SU'  => \_MD_EXTCAL_1_SU,
+                    '2MO'  => \_MD_EXTCAL_2_MO,
+                    '2TU'  => \_MD_EXTCAL_2_TU,
+                    '2WE'  => \_MD_EXTCAL_2_WE,
+                    '2TH'  => \_MD_EXTCAL_2_TH,
+                    '2FR'  => \_MD_EXTCAL_2_FR,
+                    '2SA'  => \_MD_EXTCAL_2_SA,
+                    '2SU'  => \_MD_EXTCAL_2_SU,
+                    '3MO'  => \_MD_EXTCAL_3_MO,
+                    '3TU'  => \_MD_EXTCAL_3_TU,
+                    '3WE'  => \_MD_EXTCAL_3_WE,
+                    '3TH'  => \_MD_EXTCAL_3_TH,
+                    '3FR'  => \_MD_EXTCAL_3_FR,
+                    '3SA'  => \_MD_EXTCAL_3_SA,
+                    '3SU'  => \_MD_EXTCAL_3_SU,
+                    '4MO'  => \_MD_EXTCAL_4_MO,
+                    '4TU'  => \_MD_EXTCAL_4_TU,
+                    '4WE'  => \_MD_EXTCAL_4_WE,
+                    '4TH'  => \_MD_EXTCAL_4_TH,
+                    '4FR'  => \_MD_EXTCAL_4_FR,
+                    '4SA'  => \_MD_EXTCAL_4_SA,
+                    '4SU'  => \_MD_EXTCAL_4_SU,
+                    '-1MO' => \_MD_EXTCAL_LAST_MO,
+                    '-1TU' => \_MD_EXTCAL_LAST_TU,
+                    '-1WE' => \_MD_EXTCAL_LAST_WE,
+                    '-1TH' => \_MD_EXTCAL_LAST_TH,
+                    '-1FR' => \_MD_EXTCAL_LAST_FR,
+                    '-1SA' => \_MD_EXTCAL_LAST_SA,
+                    '-1SU' => \_MD_EXTCAL_LAST_SU,
                 ];
 
                 $interval = $eventOptions[1];
                 if (0 === mb_strpos($eventOptions[2], 'MD')) {
-                    return sprintf(_MD_EXTCAL_RR_MONTHLY, mb_substr($eventOptions[2], 2), $interval);
+                    return \sprintf(\_MD_EXTCAL_RR_MONTHLY, mb_substr($eventOptions[2], 2), $interval);
                 }
 
-                return sprintf(_MD_EXTCAL_RR_MONTHLY, $monthDays[$eventOptions[2]], $interval);
+                return \sprintf(\_MD_EXTCAL_RR_MONTHLY, $monthDays[$eventOptions[2]], $interval);
                 break;
             case 'yearly':
 
                 $monthDays = [
-                    '1MO'  => _MD_EXTCAL_1_MO,
-                    '1TU'  => _MD_EXTCAL_1_TU,
-                    '1WE'  => _MD_EXTCAL_1_WE,
-                    '1TH'  => _MD_EXTCAL_1_TH,
-                    '1FR'  => _MD_EXTCAL_1_FR,
-                    '1SA'  => _MD_EXTCAL_1_SA,
-                    '1SU'  => _MD_EXTCAL_1_SU,
-                    '2MO'  => _MD_EXTCAL_2_MO,
-                    '2TU'  => _MD_EXTCAL_2_TU,
-                    '2WE'  => _MD_EXTCAL_2_WE,
-                    '2TH'  => _MD_EXTCAL_2_TH,
-                    '2FR'  => _MD_EXTCAL_2_FR,
-                    '2SA'  => _MD_EXTCAL_2_SA,
-                    '2SU'  => _MD_EXTCAL_2_SU,
-                    '3MO'  => _MD_EXTCAL_3_MO,
-                    '3TU'  => _MD_EXTCAL_3_TU,
-                    '3WE'  => _MD_EXTCAL_3_WE,
-                    '3TH'  => _MD_EXTCAL_3_TH,
-                    '3FR'  => _MD_EXTCAL_3_FR,
-                    '3SA'  => _MD_EXTCAL_3_SA,
-                    '3SU'  => _MD_EXTCAL_3_SU,
-                    '4MO'  => _MD_EXTCAL_4_MO,
-                    '4TU'  => _MD_EXTCAL_4_TU,
-                    '4WE'  => _MD_EXTCAL_4_WE,
-                    '4TH'  => _MD_EXTCAL_4_TH,
-                    '4FR'  => _MD_EXTCAL_4_FR,
-                    '4SA'  => _MD_EXTCAL_4_SA,
-                    '4SU'  => _MD_EXTCAL_4_SU,
-                    '-1MO' => _MD_EXTCAL_LAST_MO,
-                    '-1TU' => _MD_EXTCAL_LAST_TU,
-                    '-1WE' => _MD_EXTCAL_LAST_WE,
-                    '-1TH' => _MD_EXTCAL_LAST_TH,
-                    '-1FR' => _MD_EXTCAL_LAST_FR,
-                    '-1SA' => _MD_EXTCAL_LAST_SA,
-                    '-1SU' => _MD_EXTCAL_LAST_SU,
+                    '1MO'  => \_MD_EXTCAL_1_MO,
+                    '1TU'  => \_MD_EXTCAL_1_TU,
+                    '1WE'  => \_MD_EXTCAL_1_WE,
+                    '1TH'  => \_MD_EXTCAL_1_TH,
+                    '1FR'  => \_MD_EXTCAL_1_FR,
+                    '1SA'  => \_MD_EXTCAL_1_SA,
+                    '1SU'  => \_MD_EXTCAL_1_SU,
+                    '2MO'  => \_MD_EXTCAL_2_MO,
+                    '2TU'  => \_MD_EXTCAL_2_TU,
+                    '2WE'  => \_MD_EXTCAL_2_WE,
+                    '2TH'  => \_MD_EXTCAL_2_TH,
+                    '2FR'  => \_MD_EXTCAL_2_FR,
+                    '2SA'  => \_MD_EXTCAL_2_SA,
+                    '2SU'  => \_MD_EXTCAL_2_SU,
+                    '3MO'  => \_MD_EXTCAL_3_MO,
+                    '3TU'  => \_MD_EXTCAL_3_TU,
+                    '3WE'  => \_MD_EXTCAL_3_WE,
+                    '3TH'  => \_MD_EXTCAL_3_TH,
+                    '3FR'  => \_MD_EXTCAL_3_FR,
+                    '3SA'  => \_MD_EXTCAL_3_SA,
+                    '3SU'  => \_MD_EXTCAL_3_SU,
+                    '4MO'  => \_MD_EXTCAL_4_MO,
+                    '4TU'  => \_MD_EXTCAL_4_TU,
+                    '4WE'  => \_MD_EXTCAL_4_WE,
+                    '4TH'  => \_MD_EXTCAL_4_TH,
+                    '4FR'  => \_MD_EXTCAL_4_FR,
+                    '4SA'  => \_MD_EXTCAL_4_SA,
+                    '4SU'  => \_MD_EXTCAL_4_SU,
+                    '-1MO' => \_MD_EXTCAL_LAST_MO,
+                    '-1TU' => \_MD_EXTCAL_LAST_TU,
+                    '-1WE' => \_MD_EXTCAL_LAST_WE,
+                    '-1TH' => \_MD_EXTCAL_LAST_TH,
+                    '-1FR' => \_MD_EXTCAL_LAST_FR,
+                    '-1SA' => \_MD_EXTCAL_LAST_SA,
+                    '-1SU' => \_MD_EXTCAL_LAST_SU,
                 ];
 
                 $monthName = [
@@ -321,18 +321,18 @@ class Time
 
                 $interval = $eventOptions[1];
                 $day      = $eventOptions[2];
-                array_shift($eventOptions);
-                array_shift($eventOptions);
-                array_shift($eventOptions);
+                \array_shift($eventOptions);
+                \array_shift($eventOptions);
+                \array_shift($eventOptions);
                 $month = '';
                 foreach ($eventOptions as $option) {
                     $month .= ' ' . $monthName[$option] . ', ';
                 }
                 $dayString = $day;
-                if (array_key_exists($day, $monthDays)) {
+                if (\array_key_exists($day, $monthDays)) {
                     $dayString = $monthDays[$day];
                 }
-                $ret = sprintf(_MD_EXTCAL_RR_YEARLY, $month, $dayString, $interval);
+                $ret = \sprintf(\_MD_EXTCAL_RR_YEARLY, $month, $dayString, $interval);
 
                 return $ret;
                 break;

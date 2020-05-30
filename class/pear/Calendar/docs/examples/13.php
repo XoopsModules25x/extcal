@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Description: same as 1.php, but using the PEAR::Date engine
  * Notice the use of the CALENDAR_ENGINE constant, which
@@ -81,11 +82,11 @@ echo '<p>The first iteration is more "expensive", the calendar data
         structures having to be built.</p>';
 $start = getmicrotime();
 $c->build();
-while ($e = $c->fetch()) {
+while (false !== ($e = $c->fetch())) {
     $class  = mb_strtolower(get_class($e));
     $link   = '&y=' . $e->thisYear() . '&m=' . $e->thisMonth() . '&d=' . $e->thisDay() . '&h=' . $e->thisHour() . '&i=' . $e->thisMinute() . '&s=' . $e->thisSecond();
     $method = 'this' . str_replace('calendar_', '', $class);
-    echo '<a href="' . $_SERVER['PHP_SELF'] . '?view=' . $class . $link . '">' . $e->{$method}() . '</a> : ';
+    echo '<a href="' . $_SERVER['SCRIPT_NAME'] . '?view=' . $class . $link . '">' . $e->{$method}() . '</a> : ';
     if (0 == ($i % 10)) {
         echo '<br>';
     }
@@ -98,11 +99,11 @@ echo '<h1>Second Iteration</h1>';
 echo '<p>This second iteration is faster, the data structures
         being re-used</p>';
 $start = getmicrotime();
-while ($e = $c->fetch()) {
+while (false !== ($e = $c->fetch())) {
     $class  = mb_strtolower(get_class($e));
     $link   = '&y=' . $e->thisYear() . '&m=' . $e->thisMonth() . '&d=' . $e->thisDay() . '&h=' . $e->thisHour() . '&i=' . $e->thisMinute() . '&s=' . $e->thisSecond();
     $method = 'this' . str_replace('calendar_', '', $class);
-    echo '<a href="' . $_SERVER['PHP_SELF'] . '?view=' . $class . $link . '">' . $e->{$method}() . '</a> : ';
+    echo '<a href="' . $_SERVER['SCRIPT_NAME'] . '?view=' . $class . $link . '">' . $e->{$method}() . '</a> : ';
     if (0 == ($i % 10)) {
         echo '<br>';
     }

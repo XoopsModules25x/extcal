@@ -14,7 +14,7 @@ namespace XoopsModules\Extcal\Form;
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
@@ -43,7 +43,7 @@ class FormFileCheckBox extends \XoopsFormCheckBox
     public function render()
     {
         $ret = '';
-        if (count($this->getOptions()) > 1 && '[]' !== mb_substr($this->getName(), -2, 2)) {
+        if (\count($this->getOptions()) > 1 && '[]' !== mb_substr($this->getName(), -2, 2)) {
             $newname = $this->getName() . '[]';
             $this->setName($newname);
         }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Description: demonstrates using the Uri util.
  */
@@ -44,6 +45,6 @@ $Uri->separator = '&amp;';
 $Uri->scalar    = false;
 ?>
 <p>
-    <a href="<?php echo $_SERVER['PHP_SELF'] . '?' . $Uri->prev($Calendar, 'month'); ?>">Prev</a> :
-    <a href="<?php echo $_SERVER['PHP_SELF'] . '?' . $Uri->next($Calendar, 'month'); ?>">Next</a>
+    <a href="<?php echo $_SERVER['SCRIPT_NAME'] . '?' . $Uri->prev($Calendar, 'month'); ?>">Prev</a> :
+    <a href="<?php echo $_SERVER['SCRIPT_NAME'] . '?' . $Uri->next($Calendar, 'month'); ?>">Next</a>
 </p>

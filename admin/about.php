@@ -1,4 +1,5 @@
 <?php
+
 /**
  * extCal module.
  *
@@ -10,7 +11,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL (http://www.gnu.org/licenses/gpl-2.0.html/)
+ * @license      GNU GPL (https://www.gnu.org/licenses/gpl-2.0.html/)
  *
  * @since        2.5.0
  *

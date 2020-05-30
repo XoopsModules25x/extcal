@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Description: a complete year.
  */
@@ -27,7 +28,7 @@ $Year = new Calendar_Year($_GET['year']);
 
 $Year->build();
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
     <title> <?php echo $Year->thisYear(); ?> </title>
@@ -84,7 +85,7 @@ $Year->build();
     </caption>
     <?php
     $i = 0;
-    while ($Month = $Year->fetch()) {
+    while (false !== ($Month = $Year->fetch())) {
         switch ($i) {
             case 0:
                 echo "<tr>\n";
@@ -103,7 +104,7 @@ $Year->build();
         echo '<caption class="month">' . date('F', $Month->thisMonth(true)) . '</caption>';
         echo "<tr>\n<th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th><th>S</th>\n</tr>";
         $Month->build();
-        while ($Day = $Month->fetch()) {
+        while (false !== ($Day = $Month->fetch())) {
             if ($Day->isFirst()) {
                 echo "<tr>\n";
             }

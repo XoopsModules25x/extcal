@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Description: generating elements of a form with PEAR::Calendar, using
  * selections as well as validating the submission.
@@ -42,7 +43,7 @@ if (!isset($_POST['s'])) {
     $_POST['s'] = date('s');
 }
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
     <title> Select and Update </title>
@@ -55,7 +56,7 @@ if (\Xmf\Request::hasVar('update', 'POST')) {
     if (!$Second->isValid()) {
         $V = &$Second->getValidator();
         echo '<p>Validation failed:</p>';
-        while ($error = $V->fetch()) {
+        while (false !== ($error = $V->fetch())) {
             echo $error->toString() . '<br>';
         }
     } else {
@@ -70,13 +71,13 @@ $Hour   = new Calendar_Hour($_POST['y'], $_POST['m'], $_POST['d'], $_POST['h']);
 $Minute = new Calendar_Minute($_POST['y'], $_POST['m'], $_POST['d'], $_POST['h'], $_POST['i']);
 $Second = new Calendar_Second($_POST['y'], $_POST['m'], $_POST['d'], $_POST['h'], $_POST['i'], $_POST['s']); ?>
 <p><span style="font-weight: bold;">Set the alarm clock</p></p>
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+<form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
     Year: <input type="text" name="y" value="<?php echo $_POST['y']; ?>" size="4">&nbsp;
     Month:<select name="m">
         <?php
         $selection = [$Month];
         $Year->build($selection);
-        while ($Child = $Year->fetch()) {
+        while (false !== ($Child = $Year->fetch())) {
             if ($Child->isSelected()) {
                 echo '<option value="' . $Child->thisMonth() . '" selected>' . $Child->thisMonth() . "\n";
             } else {
@@ -88,7 +89,7 @@ $Second = new Calendar_Second($_POST['y'], $_POST['m'], $_POST['d'], $_POST['h']
         <?php
         $selection = [$Day];
         $Month->build($selection);
-        while ($Child = $Month->fetch()) {
+        while (false !== ($Child = $Month->fetch())) {
             if ($Child->isSelected()) {
                 echo '<option value="' . $Child->thisDay() . '" selected>' . $Child->thisDay() . "\n";
             } else {
@@ -100,7 +101,7 @@ $Second = new Calendar_Second($_POST['y'], $_POST['m'], $_POST['d'], $_POST['h']
         <?php
         $selection = [$Hour];
         $Day->build($selection);
-        while ($Child = $Day->fetch()) {
+        while (false !== ($Child = $Day->fetch())) {
             if ($Child->isSelected()) {
                 echo '<option value="' . $Child->thisHour() . '" selected>' . $Child->thisHour() . "\n";
             } else {
@@ -112,7 +113,7 @@ $Second = new Calendar_Second($_POST['y'], $_POST['m'], $_POST['d'], $_POST['h']
         <?php
         $selection = [$Minute];
         $Hour->build($selection);
-        while ($Child = $Hour->fetch()) {
+        while (false !== ($Child = $Hour->fetch())) {
             if ($Child->isSelected()) {
                 echo '<option value="' . $Child->thisMinute() . '" selected>' . $Child->thisMinute() . "\n";
             } else {
@@ -124,7 +125,7 @@ $Second = new Calendar_Second($_POST['y'], $_POST['m'], $_POST['d'], $_POST['h']
         <?php
         $selection = [$Second];
         $Minute->build($selection);
-        while ($Child = $Minute->fetch()) {
+        while (false !== ($Child = $Minute->fetch())) {
             if ($Child->isSelected()) {
                 echo '<option value="' . $Child->thisSecond() . '" selected>' . $Child->thisSecond() . "\n";
             } else {

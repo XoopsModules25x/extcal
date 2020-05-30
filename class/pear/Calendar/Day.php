@@ -56,7 +56,7 @@ require_once CALENDAR_ROOT . 'Calendar.php';
  * <code>
  * require_once __DIR__ . '/Calendar/Day.php';
  * $Day = new Calendar_Day(2003, 10, 21); // Oct 21st 2003
- * while ($Hour = $Day->fetch()) {
+ * while (false !== ($Hour = $Day->fetch())) {
  *    echo $Hour->thisHour().'<br>';
  * }
  * </code>.

@@ -121,15 +121,15 @@ if ($cat > 0) {
 //$criteria =  new \Criteria('event_isrecur', 1);
 
 $recurrents = $eventHandler->getAllEvents($criteria, false);
-//$catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-$catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+//$categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+$categoryHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
 
 //=========================================
 foreach ($recurrents as $h => $hValue) {
     //    $recurEvents = $eventHandler->getRecurEventToDisplay($event, $startMonth, $endMonth);
     $recurEvents = $eventHandler->getRecurEventToDisplay($recurrents[$h], $startMonth, $endMonth);
 
-    $categoryObject = $catHandler->getCat($recurrents[$h]['cat_id']);
+    $categoryObject = $categoryHandler->getCat($recurrents[$h]['cat_id']);
 
     //    echo '------------ CATEGORY OBJECT ----------------------------';
     //    var_dump($categoryObject);
@@ -159,7 +159,7 @@ $xoopsTpl->assign('evenements_trouves', sprintf(_MD_EXTCAL_EVENTS_FOUND, count($
 $xoopsTpl->assign('events', $eventsArray);
 
 // Retriving categories and  Assigning categories to the template
-$cats = $catHandler->objectToArray($catHandler->getAllCat($xoopsUser));
+$cats = $categoryHandler->objectToArray($categoryHandler->getAllCat($xoopsUser));
 $xoopsTpl->assign('cats', $cats);
 
 // Making navig data

@@ -2,9 +2,9 @@
 
 namespace XoopsModules\Extcal;
 
-// defined('XOOPS_ROOT_PATH') || die('XOOPS Root Path not defined');
 
-xoops_load('XoopsForm');
+
+\xoops_load('XoopsForm');
 
 /**
  * Form that will output as a theme-enabled HTML table.
@@ -25,10 +25,10 @@ class TableForm extends \XoopsForm
      *
      * @param $addBaliseTable
      *
-     * @internal param string $name the "name" attribute of a form element
+     * @return string the "value" attribute assigned to a form element, null if not set
      * @internal param bool $encode To sanitizer the text?
      *
-     * @return string the "value" attribute assigned to a form element, null if not set
+     * @internal param string $name the "name" attribute of a form element
      */
     public function setAddBaliseTable($addBaliseTable)
     {
@@ -38,9 +38,9 @@ class TableForm extends \XoopsForm
     /**
      * gets the "value" attribute of all form elements.
      *
+     * @return bool|string array of name/value pairs assigned to form elements
      * @internal param bool $encode To sanitizer the text?
      *
-     * @return bool|string array of name/value pairs assigned to form elements
      */
     public function getAddBaliseTable()
     {
@@ -55,7 +55,7 @@ class TableForm extends \XoopsForm
      */
     public function insertBreak($extra = '', $class = '')
     {
-        $class = ('' != $class) ? " class='" . preg_replace('/[^A-Za-z0-9\s\s_-]/i', '', $class) . "'" : '';
+        $class = ('' != $class) ? " class='" . \preg_replace('/[^A-Za-z0-9\s\s_-]/i', '', $class) . "'" : '';
         // Fix for $extra tag not showing
         if ($extra) {
             $extra = '<tr><td colspan="2" ' . $class . '>' . $extra . '</td></tr>';
@@ -96,7 +96,7 @@ class TableForm extends \XoopsForm
         $hidden = '';
         $class  = 'even';
         foreach ($this->getElements() as $ele) {
-            if (!is_object($ele)) {
+            if (!\is_object($ele)) {
                 $ret .= $ele;
             } elseif (!$ele->isHidden()) {
                 if (!$ele->getNocolspan()) {

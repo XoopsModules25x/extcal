@@ -38,13 +38,13 @@ $month->build($selectedDays);
 
 // Construct strings for next/previous links
 $PMonth = $month->prevMonth('object'); // Get previous month as object
-$prev = $_SERVER['PHP_SELF'].'?y='.$PMonth->thisYear().'&m='.$PMonth->thisMonth().'&d='.$PMonth->thisDay();
+$prev = $_SERVER['SCRIPT_NAME'].'?y='.$PMonth->thisYear().'&m='.$PMonth->thisMonth().'&d='.$PMonth->thisDay();
 $NMonth = $month->nextMonth('object');
-$next = $_SERVER['PHP_SELF'].'?y='.$NMonth->thisYear().'&m='.$NMonth->thisMonth().'&d='.$NMonth->thisDay();
+$next = $_SERVER['SCRIPT_NAME'].'?y='.$NMonth->thisYear().'&m='.$NMonth->thisMonth().'&d='.$NMonth->thisDay();
 
 $thisDate = new Date($month->thisMonth('timestamp'));
 ?>
-<!doctype html public "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
 <title> Calendar using PEAR::Date Engine </title>
@@ -101,7 +101,7 @@ td {
 <?php
 while ($day = $month->fetch()) {
     // Build a link string for each day
-    $link = $_SERVER['PHP_SELF'].
+    $link = $_SERVER['SCRIPT_NAME'].
                 '?y='.$day->thisYear().
                 '&m='.$day->thisMonth().
                 '&d='.$day->thisDay();

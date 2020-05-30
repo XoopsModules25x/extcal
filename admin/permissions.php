@@ -11,22 +11,25 @@
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
  */
 
+use XoopsModules\Extcal\{
+    Helper
+};
+use Xmf\Request;
+
 require_once __DIR__ . '/admin_header.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
 
+/** @var Helper $helper */
 
-$step = 'default';
-if (\Xmf\Request::hasVar('step', 'POST')) {
-    $step = $_POST['step'];
-}
+$step = Request::getString('step', 'default');
 
-$moduleId = $xoopsModule->getVar('mid');
+$moduleId = $helper->getModule()->getVar('mid');
 
 switch ($step) {
     case 'enreg':
@@ -78,7 +81,7 @@ switch ($step) {
          */
         function getChecked($array, $v)
         {
-            if (in_array($v, $array, true)) {
+            if (in_array($v, $array)) {
                 return ' checked';
             }
 
@@ -127,8 +130,8 @@ switch ($step) {
         echo '</div></fieldset><br>';
 
         // Retriving category list for Group perm form
-        // $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-        $cats = $catHandler->getAllCat($xoopsUser, 'all');
+        // $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+        $cats = $categoryHandler->getAllCat($xoopsUser, 'all');
 
         /*
          * Access Form
@@ -160,7 +163,7 @@ switch ($step) {
         echo $permDesc;
         echo '</fieldset>';
 
-        if ($catHandler->getCount()) {
+        if ($categoryHandler->getCount()) {
             echo $form->render() . '<br>';
         } else {
             redirect_header('cat.php', 2, _AM_EXTCAL_NOPERMSSET, false);
@@ -197,7 +200,7 @@ switch ($step) {
         echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _AM_EXTCAL_INFORMATION . '</legend>';
         echo $permDesc;
         echo '</fieldset>';
-        if ($catHandler->getCount()) {
+        if ($categoryHandler->getCount()) {
             echo $form->render() . '<br>';
         } else {
             redirect_header('cat.php', 2, _AM_EXTCAL_NOPERMSSET, false);
@@ -234,7 +237,7 @@ switch ($step) {
         echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _AM_EXTCAL_INFORMATION . '</legend>';
         echo $permDesc;
         echo '</fieldset>';
-        if ($catHandler->getCount()) {
+        if ($categoryHandler->getCount()) {
             echo $form->render() . '<br>';
         } else {
             redirect_header('cat.php', 2, _AM_EXTCAL_NOPERMSSET, false);
@@ -271,7 +274,7 @@ switch ($step) {
         echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _AM_EXTCAL_INFORMATION . '</legend>';
         echo $permDesc;
         echo '</fieldset>';
-        if ($catHandler->getCount()) {
+        if ($categoryHandler->getCount()) {
             echo $form->render() . '<br>';
         } else {
             redirect_header('cat.php', 2, _AM_EXTCAL_NOPERMSSET, false);

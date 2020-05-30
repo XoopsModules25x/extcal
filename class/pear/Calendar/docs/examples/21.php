@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Description: a complete year with numeric week numbers.
  */
@@ -29,7 +30,7 @@ $week_types = [
     'n_in_month',
 ];
 
-if (!isset($_GET['week_type']) || !in_array($_GET['week_type'], $week_types, true)) {
+if (!isset($_GET['week_type']) || !in_array($_GET['week_type'], $week_types)) {
     $_GET['week_type'] = 'n_in_year';
 }
 
@@ -37,7 +38,7 @@ $Year = new Calendar_Year($_GET['year']);
 
 $Year->build();
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
     <title> <?php echo $Year->thisYear(); ?> </title>
@@ -108,7 +109,7 @@ $Year->build();
     </caption>
     <?php
     $i = 0;
-    while ($Month = $Year->fetch()) {
+    while (false !== ($Month = $Year->fetch())) {
         switch ($i) {
             case 0:
                 echo "<tr>\n";
@@ -128,12 +129,12 @@ $Year->build();
         echo '<colgroup><col class="weekNumbers"><col span="7"></colgroup>' . "\n";
         echo "<tr>\n<th>Week</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th><th>S</th>\n</tr>";
         $Month->build();
-        while ($Week = $Month->fetch()) {
+        while (false !== ($Week = $Month->fetch())) {
             echo "<tr>\n";
             echo '<td>' . $Week->thisWeek($_GET['week_type']) . "</td>\n";
             $Week->build();
 
-            while ($Day = $Week->fetch()) {
+            while (false !== ($Day = $Week->fetch())) {
                 if ($Day->isEmpty()) {
                     echo "<td>&nbsp;</td>\n";
                 } else {

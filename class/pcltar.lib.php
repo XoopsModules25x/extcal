@@ -1888,8 +1888,8 @@ if (!defined('PCL_TAR')) {
         $p_mode,
         $p_path,
         $p_tar_mode,
-        $p_remove_path)
-    {
+        $p_remove_path
+    ) {
         TrFctStart(__FILE__, __LINE__, 'PclTarHandleExtract', "archive='$p_tarname', list, mode=$p_mode, path=$p_path, tar_mode=$p_tar_mode, remove_path='$p_remove_path'");
         $v_result      = 1;
         $v_nb          = 0;
@@ -2301,8 +2301,8 @@ if (!defined('PCL_TAR')) {
         &$p_list_detail,
         $p_path,
         $p_remove_path,
-        $p_tar_mode)
-    {
+        $p_tar_mode
+    ) {
         TrFctStart(__FILE__, __LINE__, 'PclTarHandleExtractByIndexList', "archive='$p_tarname', index_string='$p_index_string', list, path=$p_path, remove_path='$p_remove_path', tar_mode=$p_tar_mode");
         $v_result = 1;
         $v_nb     = 0;
@@ -2410,8 +2410,8 @@ if (!defined('PCL_TAR')) {
         &$p_list_detail,
         $p_path,
         $p_remove_path,
-        $p_tar_mode)
-    {
+        $p_tar_mode
+    ) {
         TrFctStart(__FILE__, __LINE__, 'PclTarHandleExtractByIndex', "archive_descr='$p_tar', index_current=$p_index_current, index_start='$p_index_start', index_stop='$p_index_stop', list, path=$p_path, remove_path='$p_remove_path', tar_mode=$p_tar_mode");
         $v_result = 1;
         $v_nb     = 0;

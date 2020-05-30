@@ -21,18 +21,14 @@ namespace XoopsModules\Extcal;
 require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 
 use XoopsModules\Extcal;
+use XoopsModules\Extcal\Common;
+use XoopsModules\Extcal\Constants;
 
 /**
  * Class Utility
  */
-class Utility
+class Utility extends Common\SysUtility
 {
-    use Common\VersionChecks; //checkVerXoops, checkVerPhp Traits
-
-    use Common\ServerStats; // getServerStats Trait
-
-    use Common\FilesManagement; // Files Management Trait
-
     //--------------- Custom module methods -----------------------------
 
     /**
@@ -42,7 +38,7 @@ class Utility
      */
     public static function getEvent($eventId)
     {
-        $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+        $eventHandler = Extcal\Helper::getInstance()->getHandler(\_EXTCAL_CLN_EVENT);
         $event        = $eventHandler->getEvent($eventId);
         $t            = $event->getVars();
         $data         = [];
@@ -59,7 +55,7 @@ class Utility
      * @param $event_picture1
      * @param $event_picture2
      */
-    public static function loadImg(&$REQUEST, &$event_picture1, &$event_picture2)
+    public static function loadImg($REQUEST, &$event_picture1, &$event_picture2)
     {
         ///////////////////////////////////////////////////////////////////////////////
         $uploaddir_event = XOOPS_ROOT_PATH . '/uploads/extcal/';
@@ -69,20 +65,22 @@ class Utility
             $delimg = @$REQUEST['delimg_' . $j . ''];
             $delimg = isset($delimg) ? (int)$delimg : 0;
             if (0 == $delimg && !empty($REQUEST['xoops_upload_file'][$j])) {
-                $upload = new \XoopsMediaUploader($uploaddir_event, [
+                $upload = new \XoopsMediaUploader(
+                    $uploaddir_event, [
                     'image/gif',
                     'image/jpeg',
                     'image/pjpeg',
                     'image/x-png',
                     'image/png',
                     'image/jpg',
-                ], 3145728, null, null);
+                ], 3145728, null, null
+                );
                 if ($upload->fetchMedia($REQUEST['xoops_upload_file'][$j])) {
                     $upload->setPrefix('event_');
                     $upload->fetchMedia($REQUEST['xoops_upload_file'][$j]);
                     if (!$upload->upload()) {
                         $errors = $upload->getErrors();
-                        redirect_header('javascript:history.go(-1)', 3, $errors);
+                        \redirect_header('<script>javascript:history.go(-1)</script>', 3, $errors);
                     } else {
                         if (1 == $j) {
                             $event_picture1 = $upload->getSavedFileName();
@@ -104,9 +102,9 @@ class Utility
                 } elseif (2 == $j) {
                     $event_picture2 = '';
                 }
-                if (is_file($url_event)) {
-                    chmod($url_event, 0777);
-                    unlink($url_event);
+                if (\is_file($url_event)) {
+                    \chmod($url_event, 0777);
+                    \unlink($url_event);
                 }
             }
         }
@@ -126,9 +124,9 @@ class Utility
     {
         global $xoopsUser;
         // Category selectbox
-        $catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+        $categoryHandler = Extcal\Helper::getInstance()->getHandler(\_EXTCAL_CLN_CAT);
 
-        $catsList  = $catHandler->getAllCat($xoopsUser);
+        $catsList  = $categoryHandler->getAllCat($xoopsUser);
         $catSelect = new \XoopsFormSelect('', $name, $cat);
         if ($addNone) {
             $catSelect->addOption(0, ' ');
@@ -154,15 +152,15 @@ class Utility
         // Category selectbox
         //<option style="background-color:#00FFFF;">VARCHAR</option>
 
-        $catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
-        $catsList   = $catHandler->getAllCat($xoopsUser);
+        $categoryHandler = Extcal\Helper::getInstance()->getHandler(\_EXTCAL_CLN_CAT);
+        $catsList   = $categoryHandler->getAllCat($xoopsUser);
 
         $t = [];
         foreach ($catsList as $catList) {
             $cat_id    = $catList->getVar('cat_id');
             $name      = $catList->getVar('cat_name');
             $cat_color = $catList->getVar('cat_color');
-            $checked   = in_array($cat_id, $cat, true) ? 'checked' : '';
+            $checked   = \in_array($cat_id, $cat) ? 'checked' : '';
             $cat       = ''
                          . "<div style='float:left; margin-left:5px;'>"
                          . "<input type='checkbox' name='{$name}[{$cat_id}]' value='1' {$checked}>"
@@ -194,17 +192,17 @@ class Utility
             $select->addOption('', '');
         }
 
-        $select->addOption('year ASC', _MD_EXTCAL_YEAR . ' ' . _MD_EXTCAL_ORDER_BY_ASC);
-        $select->addOption('year DESC', _MD_EXTCAL_YEAR . ' ' . _MD_EXTCAL_ORDER_BY_DESC);
+        $select->addOption('year ASC', \_MD_EXTCAL_YEAR . ' ' . \_MD_EXTCAL_ORDER_BY_ASC);
+        $select->addOption('year DESC', \_MD_EXTCAL_YEAR . ' ' . \_MD_EXTCAL_ORDER_BY_DESC);
 
-        $select->addOption('month ASC', _MD_EXTCAL_MONTH . ' ' . _MD_EXTCAL_ORDER_BY_ASC);
-        $select->addOption('month DESC', _MD_EXTCAL_MONTH . ' ' . _MD_EXTCAL_ORDER_BY_DESC);
+        $select->addOption('month ASC', \_MD_EXTCAL_MONTH . ' ' . \_MD_EXTCAL_ORDER_BY_ASC);
+        $select->addOption('month DESC', \_MD_EXTCAL_MONTH . ' ' . \_MD_EXTCAL_ORDER_BY_DESC);
 
-        $select->addOption('event_title ASC', _MD_EXTCAL_ALPHA . ' ' . _MD_EXTCAL_ORDER_BY_ASC);
-        $select->addOption('event_title DESC', _MD_EXTCAL_ALPHA . ' ' . _MD_EXTCAL_ORDER_BY_DESC);
+        $select->addOption('event_title ASC', \_MD_EXTCAL_ALPHA . ' ' . \_MD_EXTCAL_ORDER_BY_ASC);
+        $select->addOption('event_title DESC', \_MD_EXTCAL_ALPHA . ' ' . \_MD_EXTCAL_ORDER_BY_DESC);
 
-        $select->addOption('cat_name ASC', _MD_EXTCAL_CATEGORY . ' ' . _MD_EXTCAL_ORDER_BY_ASC);
-        $select->addOption('cat_name DESC', _MD_EXTCAL_CATEGORY . ' ' . _MD_EXTCAL_ORDER_BY_DESC);
+        $select->addOption('cat_name ASC', \_MD_EXTCAL_CATEGORY . ' ' . \_MD_EXTCAL_ORDER_BY_ASC);
+        $select->addOption('cat_name DESC', \_MD_EXTCAL_CATEGORY . ' ' . \_MD_EXTCAL_ORDER_BY_DESC);
 
         return $select;
     }
@@ -223,8 +221,8 @@ class Utility
 
         $select = new \XoopsFormSelect($caption, $name, $defaut);
 
-        $select->addOption('AND', _MD_EXTCAL_AND);
-        $select->addOption('OR', _MD_EXTCAL_OR);
+        $select->addOption('AND', \_MD_EXTCAL_AND);
+        $select->addOption('OR', \_MD_EXTCAL_OR);
 
         return $select;
     }
@@ -244,8 +242,8 @@ class Utility
         global $xoopsUser;
 
         $select = new \XoopsFormSelect($caption, $name, $defaut);
-        if (!is_array($options)) {
-            $options = explode($sep, $options);
+        if (!\is_array($options)) {
+            $options = \explode($sep, $options);
         }
 
         foreach ($options as $h => $hValue) {
@@ -263,6 +261,8 @@ class Utility
      * @param        $endMonth
      * @param string $mode
      * @return \DateTime
+     * @throws \Exception
+     * @throws \Exception
      */
     public static function getDateBetweenDates($ts, $startMonth, $endMonth, $mode = 'w')
     {
@@ -334,8 +334,8 @@ class Utility
             echo "<hr>{$msg}<hr>";
         }
 
-        $txt = print_r($t, true);
-        echo '<pre>Number of items: ' . count($t) . "<br>{$txt}</pre>";
+        $txt = \print_r($t, true);
+        echo '<pre>Number of items: ' . \count($t) . "<br>{$txt}</pre>";
     }
 
     /*****************************************************************/
@@ -378,7 +378,7 @@ class Utility
             echo "<hr>{$msg}<hr>";
         }
 
-        echo 'date --->' . $tsName . ' = ' . $ts . ' - ' . date('d-m-Y H:m:s', $ts) . '<br>';
+        echo 'date --->' . $tsName . ' = ' . $ts . ' - ' . \date('d-m-Y H:m:s', $ts) . '<br>';
     }
 
     /*****************************************************************/
@@ -397,10 +397,10 @@ class Utility
         for ($h = 0, $count = mb_strlen($lstSep); $h < $count; ++$h) {
             $sep2replace = mb_substr($lstSep, $h, 1);
             if (mb_strpos($date, $sep2replace)) {
-                $date = str_replace($sep2replace, $sep, $date);
+                $date = \str_replace($sep2replace, $sep, $date);
             }
 
-            return strtotime($date);
+            return \strtotime($date);
         }
     }
 
@@ -416,9 +416,9 @@ class Utility
     {
         //$cd = strtotime($givendate);
         $cd      = $givendate;
-        $newdate = date('Y-m-d h:i:s', mktime(date('h', $cd), date('i', $cd), date('s', $cd), date('m', $cd) + $mth, date('d', $cd) + $day, date('Y', $cd) + $yr));
+        $newdate = \date('Y-m-d h:i:s', \mktime(\date('h', $cd), \date('i', $cd), \date('s', $cd), \date('m', $cd) + $mth, \date('d', $cd) + $day, \date('Y', $cd) + $yr));
 
-        return strtotime($newdate);
+        return \strtotime($newdate);
     }
 
     /**
@@ -430,7 +430,7 @@ class Utility
      */
     public static function addDate2($date, $number, $interval = 'd')
     {
-        $date_time_array = getdate($date);
+        $date_time_array = \getdate($date);
         $hours           = $date_time_array['hours'];
         $minutes         = $date_time_array['minutes'];
         $seconds         = $date_time_array['seconds'];
@@ -466,7 +466,7 @@ class Utility
                 $seconds += $number;
                 break;
         }
-        $timestamp = mktime($hours, $minutes, $seconds, $month, $day, $year);
+        $timestamp = \mktime($hours, $minutes, $seconds, $month, $day, $year);
 
         return $timestamp;
     }

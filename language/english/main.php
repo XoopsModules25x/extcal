@@ -79,7 +79,7 @@ define('_MD_EXTCAL_LOCATION_EVENTS_VENIR', 'Upcoming events');
 define('_MD_EXTCAL_LOCATION_FIN', 'End');
 define('_MD_EXTCAL_LOCATION_HORAIRES', 'Hours');
 define('_MD_EXTCAL_LOCATION_INFO_COMPL', 'Extra Info:');
-define('_MD_EXTCAL_LOCATION_LIEU', 'Location');
+define('_MD_EXTCAL_LOCATION_LIEU', 'Location'); //to be deleted in the next release
 define('_MD_EXTCAL_LOCATION_MAIL', 'Email');
 define('_MD_EXTCAL_LOCATION_MAP', 'Map URL link');
 define('_MD_EXTCAL_LOCATION_MAP2', 'View Map');

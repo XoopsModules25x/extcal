@@ -14,7 +14,7 @@ namespace XoopsModules\Extcal;
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
@@ -22,7 +22,7 @@ namespace XoopsModules\Extcal;
 
 use XoopsModules\Extcal;
 
-// defined('XOOPS_ROOT_PATH') || die('Restricted access');
+
 
 // // require_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
 //require_once __DIR__ . '/perm.php';
@@ -60,7 +60,7 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
 
         // Retriving permission mask
         /** @var \XoopsGroupPermHandler $groupPermissionHandler */
-        $groupPermissionHandler = xoops_getHandler('groupperm');
+        $groupPermissionHandler = \xoops_getHandler('groupperm');
         $moduleId               = $GLOBALS['xoopsModule']->getVar('mid');
 
         $criteria = new \CriteriaCompo();
@@ -69,7 +69,7 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
         $permMask = $groupPermissionHandler->getObjects($criteria);
 
         // Retriving group list
-        $memberHandler = xoops_getHandler('member');
+        $memberHandler = \xoops_getHandler('member');
         $glist         = $memberHandler->getGroupList();
 
         // Applying permission mask
@@ -179,17 +179,17 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
     }
 
     /**
-     * @param   \CriteriaElement $criteria
+     * @param \CriteriaElement   $criteria
      * @param                    $user
      * @param string             $perm
      */
     public function addCatPermCriteria(\CriteriaElement $criteria, $user, $perm = 'extcal_cat_view')
     {
         $authorizedAccessCats = $this->_extcalPerm->getAuthorizedCat($user, 'extcal_cat_view');
-        $count                = count($authorizedAccessCats);
+        $count                = \count($authorizedAccessCats);
         if ($count > 0) {
             $in = '(' . $authorizedAccessCats[0];
-            array_shift($authorizedAccessCats);
+            \array_shift($authorizedAccessCats);
             foreach ($authorizedAccessCats as $authorizedAccessCat) {
                 $in .= ',' . $authorizedAccessCat;
             }
@@ -207,6 +207,6 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
      */
     public function haveSubmitRight($xoopsUser)
     {
-        return count($this->_extcalPerm->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) > 0;
+        return \count($this->_extcalPerm->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) > 0;
     }
 }

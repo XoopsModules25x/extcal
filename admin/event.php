@@ -11,32 +11,42 @@
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
  */
 
-use XoopsModules\Extcal;
+use XoopsModules\Extcal\{
+    Helper,
+    EventHandler,
+    FileHandler,
+    Utility,
+    CategoryHandler,
+    EventmemberHandler,
+    Config,
+    LocationHandler
+};
+use Xmf\Request;
 
-require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
-require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+require_once __DIR__ . '/admin_header.php';
 require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 // require_once  dirname(__DIR__) . '/class/form/extcalform.php';
-require_once __DIR__ . '/admin_header.php';
+
 // require_once  dirname(__DIR__) . '/class/Utility.php';
 
-/** @var Extcal\Helper $helper */
-$helper = Extcal\Helper::getInstance();
+/** @var Helper $helper */
+$helper = Helper::getInstance();
 
+//TODO get individual variables
 $gepeto = array_merge($_GET, $_POST);
 //while (list($k, $v) = each($gepeto)) {
 foreach ($gepeto as $k => $v) {
     ${$k} = $v;
 }
-if (!isset($op)) {
-    $op = '';
-}
+
+$op = Request::getCmd('op', '');
+
 //--------------------------------------------------------------------
 /**
  * @param $ids
@@ -45,8 +55,8 @@ if (!isset($op)) {
  */
 function deleteEvents($ids)
 {
-    /** @var Extcal\EventHandler $eventHandler */
-    $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+    /** @var EventHandler $eventHandler */
+    $eventHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
     $criteria     = new \Criteria('event_id', "($ids)", 'IN');
 
     //Supression des images
@@ -76,8 +86,8 @@ function deleteEvents($ids)
 switch ($op) {
     case 'enreg':
 
-        $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
-        $fileHandler  = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_FILE);
+        $eventHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+        $fileHandler  = Helper::getInstance()->getHandler(_EXTCAL_CLN_FILE);
         // $t = print_r($_POST,true);
         // echo "<pre>{$t}</pre><br>";
         // exit;
@@ -95,58 +105,61 @@ switch ($op) {
 
         //exit;
         ///////////////////////////////////////////////////////////////////////////////
-        Extcal\Utility::loadImg($_REQUEST, $event_picture1, $event_picture2);
+        Utility::loadImg($_REQUEST, $event_picture1, $event_picture2);
         ///////////////////////////////////////////////////////////////////////////////
         $data = [
-            'event_title'        => $_POST['event_title'],
-            'cat_id'             => $_POST['cat_id'],
-            'event_desc'         => $_POST['event_desc'],
-            'event_nbmember'     => $_POST['event_nbmember'],
-            'event_organisateur' => $_POST['event_organisateur'],
-            'event_contact'      => $_POST['event_contact'],
-            'event_url'          => $_POST['event_url'],
-            'event_email'        => $_POST['event_email'],
-            'event_address'      => $_POST['event_address'],
+            'event_title'        => Request::getString('event_title', '', 'POST'),
+            'cat_id'             => Request::getInt('cat_id', 0, 'POST'),
+            'event_desc'         => Request::getString('event_desc', '', 'POST'),
+            'event_nbmember'     => Request::getInt('event_nbmember', 0, 'POST'),
+            'event_organisateur' => Request::getString('event_organisateur', '', 'POST'),
+            'event_contact'      => Request::getString('event_contact', '', 'POST'),
+            'event_url'          => Request::getString('event_url', '', 'POST'),
+            'event_email'        => Request::getString('event_email', '', 'POST'),
+            'event_address'      => Request::getString('event_address', '', 'POST'),
             'event_approved'     => 1,
-            'event_start'        => $_POST['event_start'],
-            'have_end'           => $_POST['have_end'],
-            'event_end'          => $_POST['event_end'],
+            'event_start'        => Request::getArray('event_start', [], 'POST'),
+            'have_end'           => Request::getInt('have_end', 0, 'POST'),
+            'event_end'          => Request::getArray('event_end', [], 'POST'),
             'event_picture1'     => @$event_picture1,
             'event_picture2'     => @$event_picture2,
-            'event_price'        => @$_POST['event_price'],
-            'event_location'     => $_POST['event_location'],
+            'event_price'        => @Request::getString('event_price', '', 'POST'),
+            'event_location'     => Request::getInt('event_location', 0, 'POST'),
             'dohtml'             => $extcalConfig['allow_html'],
-            'event_icone'        => $_POST['event_icone'],
+            'event_icone'        => Request::getString('event_icone', '', 'POST'),
         ];
 
         // Event edited
-        if (\Xmf\Request::hasVar('event_id', 'POST')) {
-            if (!$eventHandler->modifyEvent($_POST['event_id'], $data)) {
+        if (Request::hasVar('event_id', 'POST')) {
+            if (!$eventHandler->modifyEvent(Request::getInt('event_id', 0, 'POST'), $data)) {
                 redirect_header('event.php', 3, _AM_EXTCAL_EVENT_EDIT_FAILED, false);
             } else {
-                $fileHandler->createFile(\Xmf\Request::getInt('event_id', 0, 'POST'));
+                $fileHandler->createFile(Request::getInt('event_id', 0, 'POST'));
                 redirect_header('event.php', 3, _AM_EXTCAL_EVENT_EDITED, false);
             }
-
             // New event
         } else {
             /** @var \XoopsNotificationHandler $notificationHandler */
             $notificationHandler = xoops_getHandler('notification');
-            /** @var Extcal\CategoryHandler $catHandler */
-            //            $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-            $catHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+            /** @var CategoryHandler $categoryHandler */
+            $categoryHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
 
             $data['event_submitter']  = $xoopsUser ? $xoopsUser->getVar('uid') : 0;
             $data['event_submitdate'] = time();
 
-            if ($eventHandler->createEvent($data, $_POST)) {
+            if ($eventHandler->createEvent($data)) {
                 $fileHandler->createFile($eventHandler->getInsertId());
-                $cat = $catHandler->getCat($_POST['cat_id'], $xoopsUser, 'all');
-                $notificationHandler->triggerEvent('global', 0, 'new_event', ['EVENT_TITLE' => $_POST['event_title']]);
-                $notificationHandler->triggerEvent('category', $_POST['cat_id'], 'new_event_cat', [
-                    'EVENT_TITLE' => $_POST['event_title'],
-                    'CAT_NAME'    => $cat->getVar('cat_name'),
-                ]);
+                $cat = $categoryHandler->getCat(Request::getInt('cat_id', 0, 'POST'), $xoopsUser, 'all');
+                $notificationHandler->triggerEvent('global', 0, 'new_event', ['EVENT_TITLE' => Request::getString('event_title', '', 'POST')]);
+                $notificationHandler->triggerEvent(
+                    'category',
+                    $_POST['cat_id'],
+                    'new_event_cat',
+                    [
+                        'EVENT_TITLE' => Request::getString('event_title', '', 'POST'),
+                        'CAT_NAME'    => $cat->getVar('cat_name'),
+                    ]
+                );
                 redirect_header('event.php', 3, _AM_EXTCAL_EVENT_CREATED, false);
             } else {
                 redirect_header('event.php', 3, _AM_EXTCAL_EVENT_CREATE_FAILED, false);
@@ -194,11 +207,12 @@ switch ($op) {
         //***************************************************************************************
 
         $eventId      = $_GET['event_id'];
-        $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+        $eventHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 
         echo '<fieldset><legend style="font-weight:bold; color:#990000;">' . _MD_EXTCAL_EDIT_EVENT . '</legend>';
 
-        if ($form = $eventHandler->getEventForm('admin', $action, ['event_id' => $eventId])) {
+        $form = $eventHandler->getEventForm('admin', $action, ['event_id' => $eventId]);
+        if ($form) {
             $form->display();
         }
 
@@ -210,8 +224,8 @@ switch ($op) {
     case 'clone2': /* sur clique de l'icone du formulaire*/
 
         //$newEventId = 1;
-        $eventId      = $_GET['event_id'];
-        $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+        $eventId      = Request::getInt('event_id', 0, 'GET');
+        $eventHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
         $event        = $eventHandler->getEvent($eventId);
         $t            = $event->getVars();
         $data         = [];
@@ -234,13 +248,13 @@ switch ($op) {
         break;
     case 'delete':
 
-        if (\Xmf\Request::hasVar('confirm', 'POST')) {
+        if (Request::hasVar('confirm', 'POST')) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('index.php', 3, _NOPERM . '<br>' . implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
             }
             //             $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
             //             $eventHandler->deleteEvent($_POST['event_id']);
-            deleteEvents($_POST['event_id']);
+            deleteEvents(Request::getInt('event_id', 0, 'POST'));
             redirect_header('event.php', 3, _AM_EXTCAL_EVENT_DELETED, false);
         } else {
             xoops_cp_header();
@@ -251,7 +265,7 @@ switch ($op) {
             $adminObject->displayNavigation(basename(__FILE__));
             //***************************************************************************************
 
-            $hiddens = ['event_id' => $_GET['event_id'], 'form_delete' => '', 'confirm' => 1];
+            $hiddens = ['event_id' => Request::getInt('event_id', 0, 'GET'), 'form_delete' => '', 'confirm' => 1];
             xoops_confirm($hiddens, 'event.php?op=delete', _AM_EXTCAL_CONFIRM_DELETE_EVENT, _DELETE, 'event.php');
 
             xoops_cp_footer();
@@ -312,9 +326,9 @@ switch ($op) {
     default:
 
         //global $extcalConfig;
-        $extcalConfig = Extcal\Config::getHandler();
+        $extcalConfig = Config::getHandler();
 
-        $start          = \Xmf\Request::getInt('start', 0, 'GET');
+        $start          = Request::getInt('start', 0, 'GET');
         $nbEventsByPage = $helper->getConfig('nbEventsByPage');
 
         xoops_cp_header();
@@ -325,7 +339,7 @@ switch ($op) {
         $adminObject->displayNavigation(basename(__FILE__));
         //***************************************************************************************
 
-        $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+        $eventHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
         $events       = $eventHandler->objectToArray($eventHandler->getNewEvent($start, $nbEventsByPage, 0, true), ['cat_id']);
         $eventHandler->formatEventsDate($events, _SHORTDATESTRING);
 

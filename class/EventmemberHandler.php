@@ -14,7 +14,7 @@ namespace XoopsModules\Extcal;
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
@@ -22,7 +22,7 @@ namespace XoopsModules\Extcal;
 
 use XoopsModules\Extcal;
 
-// defined('XOOPS_ROOT_PATH') || die('Restricted access');
+
 
 // // require_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
 
@@ -47,7 +47,7 @@ class EventmemberHandler extends ExtcalPersistableObjectHandler
         $eventmember = $this->create();
         $eventmember->setVars($varArr);
         if ($this->insert($eventmember, true)) {
-            $eventNotMemberHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_NOT_MEMBER);
+            $eventNotMemberHandler = Extcal\Helper::getInstance()->getHandler(\_EXTCAL_CLN_NOT_MEMBER);
             $eventNotMemberHandler->deleteById([$varArr['event_id'], $varArr['uid']]);
         }
     }
@@ -69,12 +69,12 @@ class EventmemberHandler extends ExtcalPersistableObjectHandler
      */
     public function getMembers($eventId)
     {
-        $memberHandler = xoops_getHandler('member');
+        $memberHandler = \xoops_getHandler('member');
         $eventMember   = $this->getObjects(new \Criteria('event_id', $eventId));
-        $count         = count($eventMember);
+        $count         = \count($eventMember);
         if ($count > 0) {
             $in = '(' . $eventMember[0]->getVar('uid');
-            array_shift($eventMember);
+            \array_shift($eventMember);
             foreach ($eventMember as $member) {
                 $in .= ',' . $member->getVar('uid');
             }

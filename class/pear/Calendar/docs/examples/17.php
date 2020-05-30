@@ -54,7 +54,7 @@ $Textual = new Calendar_Decorator_Textual($Calendar);
     </tr>
     <?php
     $Calendar->build();
-    while ($Day = $Calendar->fetch()) {
+    while (false !== ($Day = $Calendar->fetch())) {
         if ($Day->isFirst()) {
             echo "<tr>\n";
         }

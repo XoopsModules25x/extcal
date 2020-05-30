@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Description: demonstrates a decorator used to "attach a payload" to a selection
  * to make it available when iterating over calendar children.
@@ -86,7 +87,7 @@ foreach ($result as $row) {
 // Build the hours in that day, passing the selection
 $Day->build($selection);
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
     <title> Passing a Selection Payload with a Decorator </title>
@@ -101,7 +102,7 @@ $Day->build($selection);
         <th>Entry</th>
     </tr>
     <?php
-    while ($Hour = $Day->fetch()) {
+    while (false !== ($Hour = $Day->fetch())) {
         $hour   = $Hour->thisHour();
         $minute = $Hour->thisMinute();
 

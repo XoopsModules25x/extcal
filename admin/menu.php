@@ -11,13 +11,15 @@
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
  */
 
-use XoopsModules\Extcal;
+use XoopsModules\Extcal\{
+    Helper
+};
 
 // require_once  dirname(__DIR__) . '/class/Helper.php';
 //require_once  dirname(__DIR__) . '/include/common.php';
@@ -27,7 +29,9 @@ require_once dirname(__DIR__) . '/preloads/autoloader.php';
 $moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-$helper = Extcal\Helper::getInstance();
+$helper = Helper::getInstance();
+$helper->loadLanguage('common');
+$helper->loadLanguage('feedback');
 
 $pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
 if (is_object($helper->getModule())) {
@@ -51,11 +55,16 @@ $adminmenu[] = [
     'link'  => 'admin/event.php',
     'icon'  => $pathIcon32 . '/event.png',
 ];
+
+
+if (isset($pathModIcon32)) {
 $adminmenu[] = [
     'title' => _MI_EXTCAL_LOCATIONS,
     'link'  => 'admin/location.php',
     'icon'  => $pathModIcon32 . '/location.png',
 ];
+}
+
 $adminmenu[] = [
     'title' => _MI_EXTCAL_PERMISSIONS,
     'link'  => 'admin/permissions.php',
@@ -70,7 +79,7 @@ $adminmenu[] = [
     'icon'  => $pathIcon32 . '/block.png',
 ];
 
-if ($helper->getConfig('displayDeveloperTools')) {
+if (is_object($helper->getModule()) && $helper->getConfig('displayDeveloperTools')) {
     $adminmenu[] = [
         'title' => _MI_EXTCAL_ADMENU_MIGRATE,
         'link'  => 'admin/migrate.php',

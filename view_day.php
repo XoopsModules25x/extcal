@@ -13,7 +13,7 @@ use XoopsModules\Extcal;
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
@@ -65,7 +65,7 @@ $eventsArray = $events;
 // Treatment for recurring event
 // $startDay = mktime(0, 0, 0, $month, $day, $year);
 // $endDay = $startDay + _EXTCAL_TS_DAY;
-//$eventsArray = array();
+//$eventsArray = [];
 
 // foreach ($events as $event) {
 //
@@ -90,7 +90,7 @@ $eventsArray = $events;
 $xoopsTpl->assign('events', $eventsArray);
 
 // Retriving categories
-$cats = $catHandler->objectToArray($catHandler->getAllCat($xoopsUser));
+$cats = $categoryHandler->objectToArray($categoryHandler->getAllCat($xoopsUser));
 // Assigning categories to the template
 $xoopsTpl->assign('cats', $cats);
 

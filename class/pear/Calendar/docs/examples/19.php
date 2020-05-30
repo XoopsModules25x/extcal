@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Description: demonstrates using the Weekday decorator.
  */
@@ -18,6 +19,6 @@ echo 'Tomorrow: ' . $WeekDay->nextWeekDay() . '<br>';
 
 $WeekDay->build();
 echo 'Hours today:<br>';
-while ($Hour = $WeekDay->fetch()) {
+while (false !== ($Hour = $WeekDay->fetch())) {
     echo $Hour->thisHour() . '<br>';
 }

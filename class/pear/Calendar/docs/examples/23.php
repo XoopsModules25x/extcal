@@ -49,7 +49,7 @@ $Calendar = new Calendar_Month_Weekdays(date('Y'), date('n'), 6);
     </tr>
     <?php
     $Calendar->build();
-    while ($Day = $Calendar->fetch()) {
+    while (false !== ($Day = $Calendar->fetch())) {
         if ($Day->isFirst()) {
             echo "<tr>\n";
         }

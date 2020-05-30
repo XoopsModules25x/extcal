@@ -57,7 +57,7 @@ require_once CALENDAR_ROOT . 'Calendar.php';
  * require_once __DIR__ . '/Calendar/Minute.php';
  * $Minute = new Calendar_Minute(2003, 10, 21, 15, 31); // Oct 21st 2003, 3:31pm
  * $Minute->build(); // Build Calendar_Second objects
- * while ($Second = $Minute->fetch()) {
+ * while (false !== ($Second = $Minute->fetch())) {
  *     echo $Second->thisSecond().'<br>';
  * }
  * </code>.

@@ -2,9 +2,7 @@
 
 namespace XoopsModules\Extcal;
 
-// defined('XOOPS_ROOT_PATH') || die('Restricted access');
-
-/**
+ /**
  * Class Config.
  */
 class Config
@@ -35,9 +33,9 @@ class Config
         } else {
             if (!isset($moduleConfig)) {
                 /** @var \XoopsModuleHandler $moduleHandler */
-                $moduleHandler = xoops_getHandler('module');
+                $moduleHandler = \xoops_getHandler('module');
                 $module        = $moduleHandler->getByDirname('extcal');
-                $configHandler = xoops_getHandler('config');
+                $configHandler = \xoops_getHandler('config');
                 $moduleConfig  = $configHandler->getConfigList($module->getVar('mid'));
             }
         }

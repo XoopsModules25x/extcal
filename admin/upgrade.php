@@ -99,7 +99,8 @@ switch ($step) {
         }
 
         // Delete template_c file
-        if ($handle = opendir(XOOPS_ROOT_PATH . '/templates_c')) {
+        $handle = opendir(XOOPS_ROOT_PATH . '/templates_c');
+        if ($handle) {
             while (false !== ($file = readdir($handle))) {
                 if ('.' !== $file && '..' !== $file && 'index.html' !== $file) {
                     unlink(XOOPS_ROOT_PATH . '/templates_c/' . $file);
