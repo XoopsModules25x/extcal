@@ -59,14 +59,14 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
         $catId = $this->getInsertId();
 
         // Retriving permission mask
-        /** @var \XoopsGroupPermHandler $groupPermissionHandler */
-        $groupPermissionHandler = \xoops_getHandler('groupperm');
+        /** @var \XoopsGroupPermHandler $grouppermHandler */
+        $grouppermHandler = \xoops_getHandler('groupperm');
         $moduleId               = $GLOBALS['xoopsModule']->getVar('mid');
 
         $criteria = new \CriteriaCompo();
         $criteria->add(new \Criteria('gperm_name', 'extcal_perm_mask'));
         $criteria->add(new \Criteria('gperm_modid', $moduleId));
-        $permMask = $groupPermissionHandler->getObjects($criteria);
+        $permMask = $grouppermHandler->getObjects($criteria);
 
         // Retriving group list
         $memberHandler = \xoops_getHandler('member');
@@ -75,16 +75,16 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
         // Applying permission mask
         foreach ($permMask as $perm) {
             if (1 == $perm->getVar('gperm_itemid')) {
-                $groupPermissionHandler->addRight('extcal_cat_view', $cat->getVar('cat_id'), $perm->getVar('gperm_groupid'), $moduleId);
+                $grouppermHandler->addRight('extcal_cat_view', $cat->getVar('cat_id'), $perm->getVar('gperm_groupid'), $moduleId);
             }
             if (2 == $perm->getVar('gperm_itemid')) {
-                $groupPermissionHandler->addRight('extcal_cat_submit', $cat->getVar('cat_id'), $perm->getVar('gperm_groupid'), $moduleId);
+                $grouppermHandler->addRight('extcal_cat_submit', $cat->getVar('cat_id'), $perm->getVar('gperm_groupid'), $moduleId);
             }
             if (4 == $perm->getVar('gperm_itemid')) {
-                $groupPermissionHandler->addRight('extcal_cat_autoapprove', $cat->getVar('cat_id'), $perm->getVar('gperm_groupid'), $moduleId);
+                $grouppermHandler->addRight('extcal_cat_autoapprove', $cat->getVar('cat_id'), $perm->getVar('gperm_groupid'), $moduleId);
             }
             if (8 == $perm->getVar('gperm_itemid')) {
-                $groupPermissionHandler->addRight('extcal_cat_edit', $cat->getVar('cat_id'), $perm->getVar('gperm_groupid'), $moduleId);
+                $grouppermHandler->addRight('extcal_cat_edit', $cat->getVar('cat_id'), $perm->getVar('gperm_groupid'), $moduleId);
             }
         }
 

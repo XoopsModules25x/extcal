@@ -34,17 +34,17 @@ $moduleId = $helper->getModule()->getVar('mid');
 switch ($step) {
     case 'enreg':
 
-        $groupPermissionHandler = xoops_getHandler('groupperm');
+        $grouppermHandler = xoops_getHandler('groupperm');
 
         // Delete old public mask
         $criteria = new \CriteriaCompo();
         $criteria->add(new \Criteria('gperm_name', 'extcal_perm_mask'));
         $criteria->add(new \Criteria('gperm_modid', $moduleId));
-        $groupPermissionHandler->deleteAll($criteria);
+        $grouppermHandler->deleteAll($criteria);
 
         foreach ($_POST['perms']['extcal_perm_mask']['group'] as $groupId => $perms) {
             foreach (array_keys($perms) as $perm) {
-                $groupPermissionHandler->addRight('extcal_perm_mask', $perm, $groupId, $moduleId);
+                $grouppermHandler->addRight('extcal_perm_mask', $perm, $groupId, $moduleId);
             }
         }
 
@@ -62,16 +62,16 @@ switch ($step) {
         //***************************************************************************************
 
         $memberHandler          = xoops_getHandler('member');
-        $groupPermissionHandler = xoops_getHandler('groupperm');
+        $grouppermHandler = xoops_getHandler('groupperm');
 
         // Retriving the group list
         $glist = $memberHandler->getGroupList();
 
         // Retriving Public category permission mask
-        $viewGroup        = $groupPermissionHandler->getGroupIds('extcal_perm_mask', 1, $moduleId);
-        $submitGroup      = $groupPermissionHandler->getGroupIds('extcal_perm_mask', 2, $moduleId);
-        $autoApproveGroup = $groupPermissionHandler->getGroupIds('extcal_perm_mask', 4, $moduleId);
-        $editGroup        = $groupPermissionHandler->getGroupIds('extcal_perm_mask', 8, $moduleId);
+        $viewGroup        = $grouppermHandler->getGroupIds('extcal_perm_mask', 1, $moduleId);
+        $submitGroup      = $grouppermHandler->getGroupIds('extcal_perm_mask', 2, $moduleId);
+        $autoApproveGroup = $grouppermHandler->getGroupIds('extcal_perm_mask', 4, $moduleId);
+        $editGroup        = $grouppermHandler->getGroupIds('extcal_perm_mask', 8, $moduleId);
 
         /**
          * @param $array
