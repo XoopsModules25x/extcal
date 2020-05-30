@@ -5,6 +5,9 @@
  *
  * @return bool
  */
+
+use XoopsModules\Extcal\Helper;
+
 function xoops_module_install_extcal(\XoopsModule $xoopsModule)
 {
     // Create eXtCal upload directory
@@ -19,8 +22,10 @@ function xoops_module_install_extcal(\XoopsModule $xoopsModule)
         copy($indexFile, $dir . '/location/index.html');
     }
 
-    $moduleId               = $xoopsModule->getVar('mid');
-    $groupPermissionHandler = xoops_getHandler('groupperm');
+    $helper = Helper::getInstance();
+
+    $moduleId               = $helper->getModule()->getVar('mid');
+    $grouppermHandler = xoops_getHandler('groupperm');
     $configHandler          = xoops_getHandler('config');
 
     /*
@@ -28,18 +33,18 @@ function xoops_module_install_extcal(\XoopsModule $xoopsModule)
      */
 
     // Access right
-    $groupPermissionHandler->addRight('extcal_perm_mask', 1, XOOPS_GROUP_ADMIN, $moduleId);
-    $groupPermissionHandler->addRight('extcal_perm_mask', 1, XOOPS_GROUP_USERS, $moduleId);
-    $groupPermissionHandler->addRight('extcal_perm_mask', 1, XOOPS_GROUP_ANONYMOUS, $moduleId);
+    $grouppermHandler->addRight('extcal_perm_mask', 1, XOOPS_GROUP_ADMIN, $moduleId);
+    $grouppermHandler->addRight('extcal_perm_mask', 1, XOOPS_GROUP_USERS, $moduleId);
+    $grouppermHandler->addRight('extcal_perm_mask', 1, XOOPS_GROUP_ANONYMOUS, $moduleId);
 
     // Can submit
-    $groupPermissionHandler->addRight('extcal_perm_mask', 2, XOOPS_GROUP_ADMIN, $moduleId);
+    $grouppermHandler->addRight('extcal_perm_mask', 2, XOOPS_GROUP_ADMIN, $moduleId);
 
     // Auto approve
-    $groupPermissionHandler->addRight('extcal_perm_mask', 4, XOOPS_GROUP_ADMIN, $moduleId);
+    $grouppermHandler->addRight('extcal_perm_mask', 4, XOOPS_GROUP_ADMIN, $moduleId);
 
     // Can Edit
-    $groupPermissionHandler->addRight('extcal_perm_mask', 8, XOOPS_GROUP_ADMIN, $moduleId);
+    $grouppermHandler->addRight('extcal_perm_mask', 8, XOOPS_GROUP_ADMIN, $moduleId);
 
     return true;
 }

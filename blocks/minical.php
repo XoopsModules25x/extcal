@@ -25,7 +25,7 @@ use XoopsModules\Extcal\{
     Form
 };
 
-global $extcalConfig, $xoopsUser;
+global $xoopsUser;
 require_once dirname(__DIR__) . '/include/constantes.php';
 
 //---------------------------------------------------------------------------
@@ -36,7 +36,7 @@ require_once dirname(__DIR__) . '/include/constantes.php';
  */
 function bExtcalMinicalShow($options)
 {
-    global $extcalConfig, $xoopsUser;
+    global  $xoopsUser;
 
     extcal_getDefautminicalOption($options);
 
@@ -76,21 +76,6 @@ function bExtcalMinicalShow($options)
     $imageParam['frameHeight'] = $options[3];
     $imageParam['frameWidth']  = $options[2];
 
-    // Retriving module config
-    //     $extcalConfig = Config::getHandler();
-    //$xoopsModuleConfig = $extcalConfig->getModuleConfig();
-    //----------------------------------------------------
-    //recupe de xoopsmoduleConfig
-    /** @var \XoopsModuleHandler $moduleHandler */
-    $moduleHandler = xoops_getHandler('module');
-    $module        = $moduleHandler->getByDirname('extcal');
-    $configHandler = xoops_getHandler('config');
-    if ($module) {
-        $extcalConfig = $configHandler->getConfigsByCat(0, $module->getVar('mid'));
-    }
-    //----------------------------------------------------
-    // Getting eXtCal object's handler
-    //    $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
     $categoryHandler = $helper->getHandler(_EXTCAL_CLN_CAT);
 
     $cats = $categoryHandler->getAllCatById($xoopsUser);
@@ -102,7 +87,7 @@ function bExtcalMinicalShow($options)
 
     // Retriving month and year value according to block options
     //modif JJD
-    $offset      = $extcalConfig['offsetMinical'];
+    $offset      = $helper->getConfig('offsetMinical');
     $monthToShow = mktime(0, 0, 0, date('m') + $offset, date('d'), date('Y'));
     $month       = date('n', $monthToShow);
     $year        = date('Y', $monthToShow);
@@ -180,7 +165,7 @@ function bExtcalMinicalShow($options)
     ];
 
     // Build calendar object
-    $monthCalObj = new Calendar_Month_Weeks($year, $month, $extcalConfig['week_start_day']);
+    $monthCalObj = new Calendar_Month_Weeks($year, $month, $helper->getConfig('week_start_day'));
     $monthCalObj->build();
 
     $tableRows = [];
@@ -222,16 +207,16 @@ function bExtcalMinicalShow($options)
     //     echo "<hr>L'identifiant de l'allemand sur ce système est '$loc_de'";
     //     echoArray($weekdayNames,true);
 
-    for ($i = 0; $i < $extcalConfig['week_start_day']; ++$i) {
+    for ($i = 0; $i < $helper->getConfig('week_start_day'); ++$i) {
         $weekdayName    = array_shift($weekdayNames);
         $weekdayNames[] = $weekdayName;
     }
 
     // Making navig data
     $navig = [
-        'page' => $extcalConfig['start_page'],
+        'page' => $helper->getConfig('start_page'),
         'uri'  => 'year=' . $monthCalObj->thisYear() . '&amp;month=' . $monthCalObj->thisMonth(),
-        'name' => $timeHandler->getFormatedDate($extcalConfig['nav_date_month'], $monthCalObj->getTimestamp()),
+        'name' => $timeHandler->getFormatedDate($helper->getConfig('nav_date_month'), $monthCalObj->getTimestamp()),
     ];
 
     $horloge             = [];

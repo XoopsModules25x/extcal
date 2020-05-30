@@ -17,17 +17,21 @@
  * @author       XOOPS Development Team,
  */
 
-use XoopsModules\Extcal;
+use XoopsModules\Extcal\{
+    Helper,
+    LocationHandler
+};
+use Xmf\Request;
 
-require_once dirname(dirname(__DIR__)) . '/mainfile.php';
+require_once __DIR__ . '/header.php';
 require_once __DIR__ . '/include/constantes.php';
 $GLOBALS['xoopsOption']['template_main'] = 'extcal_location.tpl';
-require_once __DIR__ . '/header.php';
 
-$locationHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_LOCATION);
+$helper = Helper::getInstance();
+$locationHandler = $helper->getHandler(_EXTCAL_CLN_LOCATION);
 //require_once XOOPS_ROOT_PATH.'/header.php';
 
-$location_id = \Xmf\Request::getInt('location_id', 0, 'REQUEST');
+$location_id = Request::getInt('location_id', 0, 'REQUEST');
 
 global $xoopsUser, $xoopsModuleConfig, $xoopsModule, $xoopsDB;
 
@@ -44,7 +48,7 @@ $view_location = $locationHandler->getLocation($location_id, true);
 $location      = $locationHandler->objectToArray($view_location);
 
 $isAdmin = false;
-if (isset($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->getVar('mid'))) {
+if (isset($xoopsUser) && $xoopsUser->isAdmin($helper->getModule()->getVar('mid'))) {
     $isAdmin = true;
 }
 

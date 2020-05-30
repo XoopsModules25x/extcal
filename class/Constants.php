@@ -71,7 +71,7 @@ interface Constants
     //    const _EXTCAL_IMG_INTERVAL16 = _EXTCAL_PATH_ICONS16 . _EXTCAL_IMG_INTERVAL;
     //    const _EXTCAL_IMG_INTERVAL32 = _EXTCAL_PATH_ICONS32 . _EXTCAL_IMG_INTERVAL;
 
-    //const _EXTCAL_DIRNAME =    $xoopsModule->getVar('dirname'));
+    //const _EXTCAL_DIRNAME =    $helper->getModule()->getVar('dirname'));
 
     public const _EXTCAL_NAV_CALMONTH = 'calendar-month';
     public const _EXTCAL_NAV_CALWEEK = 'calendar-week';

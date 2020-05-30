@@ -125,7 +125,7 @@ switch ($op) {
             'event_picture2'     => @$event_picture2,
             'event_price'        => @Request::getString('event_price', '', 'POST'),
             'event_location'     => Request::getInt('event_location', 0, 'POST'),
-            'dohtml'             => $extcalConfig['allow_html'],
+            'dohtml'             => $helper->getConfig('allow_html'),
             'event_icone'        => Request::getString('event_icone', '', 'POST'),
         ];
 
@@ -324,9 +324,6 @@ switch ($op) {
         break;
     case 'default':
     default:
-
-        //global $extcalConfig;
-        $extcalConfig = Config::getHandler();
 
         $start          = Request::getInt('start', 0, 'GET');
         $nbEventsByPage = $helper->getConfig('nbEventsByPage');

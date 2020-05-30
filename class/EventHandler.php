@@ -1133,7 +1133,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
         global $xoopsUser, $xoopsModule;
         $isAdmin = false;
         if (\is_object($xoopsUser)) {
-            $isAdmin = $xoopsUser->isAdmin($xoopsModule->getVar('mid'));
+            $isAdmin = $xoopsUser->isAdmin($helper->getModule()->getVar('mid'));
         }
 
         // Description

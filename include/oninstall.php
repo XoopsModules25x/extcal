@@ -68,29 +68,27 @@ function xoops_module_install_extcal(\XoopsModule $xoopsModule)
     $helper->loadLanguage('admin');
     $helper->loadLanguage('modinfo');
 
-    $moduleId = $xoopsModule->getVar('mid');
-    /** @var \XoopsGroupPermHandler $groupPermissionHandler */
-    $groupPermissionHandler = xoops_getHandler('groupperm');
-    /** @var \XoopsModuleHandler $moduleHandler */
-    $configHandler = xoops_getHandler('config');
+    $moduleId = $helper->getModule()->getVar('mid');
+    /** @var \XoopsGroupPermHandler $grouppermHandler */
+    $grouppermHandler = xoops_getHandler('groupperm');
 
     /*
      * Default public category permission mask
      */
 
     // Access right
-    $groupPermissionHandler->addRight($moduleDirName . '_perm_mask', 1, XOOPS_GROUP_ADMIN, $moduleId);
-    $groupPermissionHandler->addRight($moduleDirName . '_perm_mask', 1, XOOPS_GROUP_USERS, $moduleId);
-    $groupPermissionHandler->addRight($moduleDirName . '_perm_mask', 1, XOOPS_GROUP_ANONYMOUS, $moduleId);
+    $grouppermHandler->addRight($moduleDirName . '_perm_mask', 1, XOOPS_GROUP_ADMIN, $moduleId);
+    $grouppermHandler->addRight($moduleDirName . '_perm_mask', 1, XOOPS_GROUP_USERS, $moduleId);
+    $grouppermHandler->addRight($moduleDirName . '_perm_mask', 1, XOOPS_GROUP_ANONYMOUS, $moduleId);
 
     // Can submit
-    $groupPermissionHandler->addRight($moduleDirName . '_perm_mask', 2, XOOPS_GROUP_ADMIN, $moduleId);
+    $grouppermHandler->addRight($moduleDirName . '_perm_mask', 2, XOOPS_GROUP_ADMIN, $moduleId);
 
     // Auto approve
-    $groupPermissionHandler->addRight($moduleDirName . '_perm_mask', 4, XOOPS_GROUP_ADMIN, $moduleId);
+    $grouppermHandler->addRight($moduleDirName . '_perm_mask', 4, XOOPS_GROUP_ADMIN, $moduleId);
 
     // Can Edit
-    $groupPermissionHandler->addRight($moduleDirName . '_perm_mask', 8, XOOPS_GROUP_ADMIN, $moduleId);
+    $grouppermHandler->addRight($moduleDirName . '_perm_mask', 8, XOOPS_GROUP_ADMIN, $moduleId);
 
     //  ---  CREATE FOLDERS ---------------
     if (count($configurator->uploadFolders) > 0) {
@@ -110,7 +108,7 @@ function xoops_module_install_extcal(\XoopsModule $xoopsModule)
     }
 
     //delete .html entries from the tpl table
-    $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $xoopsModule->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
+    $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $helper->getModule()->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
     $GLOBALS['xoopsDB']->queryF($sql);
 
     return true;

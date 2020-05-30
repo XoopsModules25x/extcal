@@ -9,7 +9,7 @@ extcal_cat:
             attributes: ' varchar(255)  NOT NULL '
         -
             name: cat_desc
-            attributes: ' text '
+            attributes: ' text  DEFAULT ''NULL'' '
         -
             name: cat_color
             attributes: ' varchar(6)  NOT NULL '
@@ -34,25 +34,25 @@ extcal_event:
             attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
         -
             name: event_title
-            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''''''' '
         -
             name: event_desc
-            attributes: ' text '
+            attributes: ' text  DEFAULT ''NULL'' '
         -
             name: event_organisateur
-            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''''''' '
         -
             name: event_contact
-            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''''''' '
         -
             name: event_url
-            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''''''' '
         -
             name: event_email
-            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''''''' '
         -
             name: event_address
-            attributes: ' text '
+            attributes: ' text  DEFAULT ''NULL'' '
         -
             name: event_approved
             attributes: ' tinyint(1)  NOT NULL  DEFAULT ''0'' '
@@ -91,7 +91,7 @@ extcal_event:
             attributes: ' varchar(255)  NOT NULL '
         -
             name: event_price
-            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''''''' '
         -
             name: event_location
             attributes: ' int(5)  NOT NULL  DEFAULT ''0'' '
@@ -194,7 +194,7 @@ extcal_location:
             attributes: ' varchar(255)  NOT NULL '
         -
             name: description
-            attributes: ' text '
+            attributes: ' text  DEFAULT ''NULL'' '
         -
             name: logo
             attributes: ' varchar(255)  NOT NULL '
@@ -227,16 +227,16 @@ extcal_location:
             attributes: ' varchar(255)  NOT NULL '
         -
             name: horaires
-            attributes: ' text '
+            attributes: ' text  DEFAULT ''NULL'' '
         -
             name: divers
-            attributes: ' text '
+            attributes: ' text  DEFAULT ''NULL'' '
         -
             name: tarifs
-            attributes: ' text '
+            attributes: ' text  DEFAULT ''NULL'' '
         -
             name: map
-            attributes: ' text '
+            attributes: ' text  DEFAULT ''NULL'' '
     keys:
         PRIMARY:
             columns: id

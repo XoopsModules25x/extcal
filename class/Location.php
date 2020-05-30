@@ -62,7 +62,7 @@ class Location extends \XoopsObject
      */
     public function getForm($action = false)
     {
-        global $xoopsDB, $extcalConfig;
+        global $xoopsDB;
 
         if (false === $action) {
             $action = $_SERVER['REQUEST_URI'];

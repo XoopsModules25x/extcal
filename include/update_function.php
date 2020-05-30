@@ -15,9 +15,9 @@
  * @package      extcal
  * @since
  * @author       XOOPS Development Team,
- *
- * @param null|mixed $previousVersion
  */
+
+use XoopsModules\Extcal\Helper;
 
 /**
  * @param \XoopsModule $xoopsModule
@@ -27,7 +27,8 @@
  */
 function xoops_module_update_extcal(\XoopsModule $xoopsModule, $previousVersion = null)
 {
-    $newVersion = $xoopsModule->getVar('version') * 100;
+    $helper = Helper::getInstance();
+    $newVersion = $helper->getModule()->getVar('version') * 100;
     if ($newVersion == $previousVersion) {
         return true;
     }
@@ -49,7 +50,7 @@ function xoops_module_update_extcal(\XoopsModule $xoopsModule, $previousVersion 
     }
     //------------------------------------------------------------
 
-    $fld = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/versions/';
+    $fld = XOOPS_ROOT_PATH . '/modules/' . $helper->getModule()->getVar('dirname') . '/versions/';
     $cls = 'extcal_%1$s';
 
     $version = [

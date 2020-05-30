@@ -9,7 +9,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-use XoopsModules\Extcal;
+use XoopsModules\Extcal\{
+    Helper,
+    Utility,
+    CategoryHandler,
+    EventHandler
+};
+use Xmf\Request;
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
@@ -18,27 +24,29 @@ use XoopsModules\Extcal;
  * @since
  * @author       XOOPS Development Team,
  */
-require_once dirname(dirname(__DIR__)) . '/mainfile.php';
+
+require_once __DIR__ . '/header.php';
 require_once __DIR__ . '/include/constantes.php';
 $params                                  = ['view' => _EXTCAL_NAV_DAY, 'file' => _EXTCAL_FILE_DAY];
 $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
-require_once __DIR__ . '/header.php';
 
-/** @var Extcal\Helper $helper */
-$helper = Extcal\Helper::getInstance();
+/** @var CategoryHandler $categoryHandler */
+/** @var EventHandler $eventHandler */
+/** @var Helper $helper */
+$helper = Helper::getInstance();
 
 /* ========================================================================== */
-$year  = \Xmf\Request::getInt('year', date('Y'), 'GET');
-$month = \Xmf\Request::getInt('month', date('n'), 'GET');
-$day   = \Xmf\Request::getInt('day', date('j'), 'GET');
-$cat   = \Xmf\Request::getInt('cat', 0, 'GET');
+$year  = Request::getInt('year', date('Y'), 'GET');
+$month = Request::getInt('month', date('n'), 'GET');
+$day   = Request::getInt('day', date('j'), 'GET');
+$cat   = Request::getInt('cat', 0, 'GET');
 /* ========================================================================== */
 
 $form = new \XoopsSimpleForm('', 'navigSelectBox', $params['file'], 'get');
 $form->addElement(getListYears($year, $helper->getConfig('agenda_nb_years_before'), $helper->getConfig('agenda_nb_years_after')));
 $form->addElement(getListMonths($month));
 $form->addElement(getListDays($day));
-$form->addElement(Extcal\Utility::getListCategories($cat));
+$form->addElement(Utility::getListCategories($cat));
 $form->addElement(new \XoopsFormButton('', '', _SUBMIT, 'submit'));
 
 // Assigning the form to the template
@@ -115,7 +123,7 @@ $navig = [
 ];
 
 // Title of the page
-$xoopsTpl->assign('xoops_pagetitle', $xoopsModule->getVar('name') . ' ' . $navig['this']['name']);
+$xoopsTpl->assign('xoops_pagetitle', $helper->getModule()->getVar('name') . ' ' . $navig['this']['name']);
 
 // Assigning navig data to the template
 $xoopsTpl->assign('navig', $navig);

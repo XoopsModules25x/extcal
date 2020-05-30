@@ -17,14 +17,18 @@
  * @author       XOOPS Development Team,
  */
 
-use XoopsModules\Extcal;
+use XoopsModules\Extcal\{
+    Helper,
+    Perm
+};
+use Xmf\Request;
 
-require_once dirname(dirname(__DIR__)) . '/mainfile.php';
+require_once __DIR__ . '/header.php';
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once __DIR__ . '/include/constantes.php';
 
-$permHandler = Extcal\Perm::getHandler();
+$permHandler = Perm::getHandler();
 $xoopsUser   = $xoopsUser ?: null;
 
 if (0 == count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit'))
@@ -34,7 +38,7 @@ if (0 == count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit'))
 
 $params                                  = ['view' => _EXTCAL_NAV_NEW_EVENT, 'file' => _EXTCAL_FILE_NEW_EVENT];
 $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
-require_once XOOPS_ROOT_PATH . '/header.php';
+
 /* ========================================================================== */
 
 // Tooltips include
@@ -42,11 +46,11 @@ require_once XOOPS_ROOT_PATH . '/header.php';
 $xoTheme->addScript('modules/extcal/include/ToolTips.js');
 $xoTheme->addStylesheet('modules/extcal/assets/css/infobulle.css');
 
-$eventId = \Xmf\Request::getInt('event', 0, 'GET');
-$action  = \Xmf\Request::getString('action', 'edit', 'GET');
+$eventId = Request::getInt('event', 0, 'GET');
+$action  = Request::getString('action', 'edit', 'GET');
 
 // Getting eXtCal object's handler
-$eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+$eventHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 
 require_once XOOPS_ROOT_PATH . '/header.php';
 

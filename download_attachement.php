@@ -1,14 +1,19 @@
 <?php
 
-use XoopsModules\Extcal;
+use XoopsModules\Extcal\{
+    Helper,
+    FileHandler,
+    Perm
+};
+use Xmf\Request;
 
-require_once dirname(dirname(__DIR__)) . '/mainfile.php';
+require_once __DIR__ . '/header.php';
 require_once __DIR__ . '/include/constantes.php';
 
-$fileId = \Xmf\Request::getInt('file', 0, 'GET');
+$fileId = Request::getInt('file', 0, 'GET');
 
-/** @var Extcal\FileHandler $fileHandler */
-$fileHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_FILE);
+/** @var FileHandler $fileHandler */
+$fileHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_FILE);
 
 $file = $fileHandler->getFile($fileId);
 

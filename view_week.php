@@ -9,8 +9,6 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-use XoopsModules\Extcal;
-
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
  * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
@@ -18,20 +16,31 @@ use XoopsModules\Extcal;
  * @since
  * @author       XOOPS Development Team,
  */
-require_once dirname(dirname(__DIR__)) . '/mainfile.php';
+
+use XoopsModules\Extcal\{
+    Helper,
+    Utility,
+    CategoryHandler,
+    EventHandler
+};
+use Xmf\Request;
+
+require_once __DIR__ . '/header.php';
 require_once __DIR__ . '/include/constantes.php';
 $params                                  = ['view' => _EXTCAL_NAV_WEEK, 'file' => _EXTCAL_FILE_WEEK];
 $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
-require_once __DIR__ . '/header.php';
 
-/** @var Extcal\Helper $helper */
-$helper = Extcal\Helper::getInstance();
+global $xoopsUser, $xoopsTpl;
+/** @var CategoryHandler $categoryHandler */
+/** @var EventHandler $eventHandler */
+/** @var Helper $helper */
+$helper = Helper::getInstance();
 
 /* ========================================================================== */
-$year  = \Xmf\Request::getInt('year', date('Y'), 'GET');
-$month = \Xmf\Request::getInt('month', date('n'), 'GET');
-$day   = \Xmf\Request::getInt('day', date('j'), 'GET');
-$cat   = \Xmf\Request::getInt('cat', 0, 'GET');
+$year  = Request::getInt('year', date('Y'), 'GET');
+$month = Request::getInt('month', date('n'), 'GET');
+$day   = Request::getInt('day', date('j'), 'GET');
+$cat   = Request::getInt('cat', 0, 'GET');
 /* ========================================================================== */
 
 // Validate the date (day, month and year)
@@ -49,7 +58,7 @@ $form = new \XoopsSimpleForm('', 'navigSelectBox', $params['file'], 'get');
 $form->addElement(getListYears($year, $helper->getConfig('agenda_nb_years_before'), $helper->getConfig('agenda_nb_years_after')));
 $form->addElement(getListMonths($month));
 $form->addElement(getListDays($day));
-$form->addElement(Extcal\Utility::getListCategories($cat));
+$form->addElement(Utility::getListCategories($cat));
 $form->addElement(new \XoopsFormButton('', '', _SUBMIT, 'submit'));
 
 // Assigning the form to the template
@@ -70,7 +79,7 @@ $events   = $eventHandler->getEventsOnPeriode($criteres);
 /**********************************************************************/
 $eventsArray = $events;
 // Formating date
-// $eventHandler->formatEventsDate($events, $extcalConfig['event_date_year']);
+// $eventHandler->formatEventsDate($events, $helper->getConfig('event_date_year'));
 //
 // Treatment for recurring event
 // $startWeek = mktime(0, 0, 0, $month, $day, $year);
@@ -80,12 +89,12 @@ $eventsArray = $events;
 // foreach ($events as $event) {
 //     if (!$event['event_isrecur']) {
 //         // Formating date
-//         $eventHandler->formatEventDate($event, $extcalConfig['event_date_week']);
+//         $eventHandler->formatEventDate($event, $helper->getConfig('event_date_week'));
 //         $eventsArray[] = $event;
 //     } else {
 //         $recurEvents = $eventHandler->getRecurEventToDisplay($event, $startWeek, $endWeek);
 //         // Formating date
-//         $eventHandler->formatEventsDate($recurEvents, $extcalConfig['event_date_week']);
+//         $eventHandler->formatEventsDate($recurEvents, $helper->getConfig('event_date_week'));
 //         $eventsArray = array_merge($eventsArray, $recurEvents);
 //     }
 // }
@@ -102,33 +111,33 @@ $cats = $categoryHandler->objectToArray($categoryHandler->getAllCat($xoopsUser))
 $xoopsTpl->assign('cats', $cats);
 
 // Making navig data
-$weekCalObj  = new Calendar_Week($year, $month, $day, $extcalConfig['week_start_day']);
+$weekCalObj  = new Calendar_Week($year, $month, $day, $helper->getConfig('week_start_day'));
 $pWeekCalObj = $weekCalObj->prevWeek('object');
 $nWeekCalObj = $weekCalObj->nextWeek('object');
 $navig       = [
     'prev' => [
         'uri'  => 'year=' . $pWeekCalObj->thisYear() . '&amp;month=' . $pWeekCalObj->thisMonth() . '&amp;day=' . $pWeekCalObj->thisDay(),
-        'name' => $timeHandler->getFormatedDate($extcalConfig['nav_date_week'], $pWeekCalObj->getTimestamp()),
+        'name' => $timeHandler->getFormatedDate($helper->getConfig('nav_date_week'), $pWeekCalObj->getTimestamp()),
     ],
     'this' => [
         'uri'  => 'year=' . $weekCalObj->thisYear() . '&amp;month=' . $weekCalObj->thisMonth() . '&amp;day=' . $weekCalObj->thisDay(),
-        'name' => $timeHandler->getFormatedDate($extcalConfig['nav_date_week'], $weekCalObj->getTimestamp()),
+        'name' => $timeHandler->getFormatedDate($helper->getConfig('nav_date_week'), $weekCalObj->getTimestamp()),
     ],
     'next' => [
         'uri'  => 'year=' . $nWeekCalObj->thisYear() . '&amp;month=' . $nWeekCalObj->thisMonth() . '&amp;day=' . $nWeekCalObj->thisDay(),
-        'name' => $timeHandler->getFormatedDate($extcalConfig['nav_date_week'], $nWeekCalObj->getTimestamp()),
+        'name' => $timeHandler->getFormatedDate($helper->getConfig('nav_date_week'), $nWeekCalObj->getTimestamp()),
     ],
 ];
 
 // Title of the page
-$xoopsTpl->assign('xoops_pagetitle', $xoopsModule->getVar('name') . ' ' . $navig['this']['name']);
+$xoopsTpl->assign('xoops_pagetitle', $helper->getModule()->getVar('name') . ' ' . $navig['this']['name']);
 
 // Assigning navig data to the template
 $xoopsTpl->assign('navig', $navig);
 
 //Display tooltip
-$xoopsTpl->assign('showInfoBulle', $extcalConfig['showInfoBulle']);
-$xoopsTpl->assign('showId', $extcalConfig['showId']);
+$xoopsTpl->assign('showInfoBulle', $helper->getConfig('showInfoBulle'));
+$xoopsTpl->assign('showId', $helper->getConfig('showId'));
 
 // Assigning current form navig data to the template
 $xoopsTpl->assign('selectedCat', $cat);
@@ -139,7 +148,7 @@ $xoopsTpl->assign('params', $params);
 
 $tNavBar = getNavBarTabs($params['view']);
 $xoopsTpl->assign('tNavBar', $tNavBar);
-$xoopsTpl->assign('list_position', $extcalConfig['list_position']);
+$xoopsTpl->assign('list_position', $helper->getConfig('list_position'));
 // echoArray($tNavBar,true);
 
 //---------------------------------------------------------------

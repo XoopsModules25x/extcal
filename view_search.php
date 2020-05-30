@@ -1,18 +1,25 @@
 <?php
 
-use XoopsModules\Extcal;
+use XoopsModules\Extcal\{
+    Helper,
+    Utility,
+    CategoryHandler,
+    EventHandler
+};
+use Xmf\Request;
 
-require_once dirname(dirname(__DIR__)) . '/mainfile.php';
+require_once __DIR__ . '/header.php';
 require_once __DIR__ . '/include/constantes.php';
 $params                                  = [
     'view' => _EXTCAL_NAV_SEARCH,
     'file' => _EXTCAL_FILE_SEARCH,
 ];
 $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
-require_once __DIR__ . '/header.php';
 
-/** @var Extcal\Helper $helper */
-$helper = Extcal\Helper::getInstance();
+/** @var CategoryHandler $categoryHandler */
+/** @var EventHandler $eventHandler */
+/** @var Helper $helper */
+$helper = Helper::getInstance();
 
 $recurEventsArray = [];
 //needed to save the state of the form, so we don't show on the first time the list of available events
@@ -22,15 +29,15 @@ $num_tries = isset($_POST['num_tries']) ? $_POST['num_tries'] + 1 : 0;
 /***************************************************************/
 /*  ajout des elements de recherche                            */
 /***************************************************************/
-$searchExp = \Xmf\Request::getString('searchExp', '', 'POST');
-$andor     = \Xmf\Request::getString('andor', '', 'POST');
-$year      = \Xmf\Request::getInt('year', date('Y'), 'POST');
-$month     = \Xmf\Request::getInt('month', date('n'), 'POST');
-$day       = \Xmf\Request::getInt('day', 0, 'POST');
-$cat       = \Xmf\Request::getInt('cat', 0, 'POST');
+$searchExp = Request::getString('searchExp', '', 'POST');
+$andor     = Request::getString('andor', '', 'POST');
+$year      = Request::getInt('year', date('Y'), 'POST');
+$month     = Request::getInt('month', date('n'), 'POST');
+$day       = Request::getInt('day', 0, 'POST');
+$cat       = Request::getInt('cat', 0, 'POST');
 $orderby1  = isset($_POST['orderby1']) ? $_POST['orderby1'] : 'cat_name ASC';
 $orderby2  = isset($_POST['orderby2']) ? $_POST['orderby2'] : 'event_title ASC';
-$orderby3  = \Xmf\Request::getString('orderby3', '', 'POST');
+$orderby3  = Request::getString('orderby3', '', 'POST');
 /* ========================================================================== */
 
 //$orderby = isset($_GET['orderby']) ? (int)($_GET['orderby']) : 0;
@@ -39,18 +46,18 @@ $orderby3  = \Xmf\Request::getString('orderby3', '', 'POST');
 $search              = [];
 $exp                 = new \XoopsFormText(_MD_EXTCAL_EXPRESSION, 'searchExp', 80, 80, $searchExp);
 $search['searchExp'] = $exp->render();
-$search['andor']     = Extcal\Utility::getListAndOr('andor', '', $andor)->render();
+$search['andor']     = Utility::getListAndOr('andor', '', $andor)->render();
 //$search['year']  = getListYears($year,$helper->getConfig('agenda_nb_years_before'),$helper->getConfig('agenda_nb_years_after'), true)->render();
 $search['year']  = getListYears($year, 2, 5, true)->render();
 $search['month'] = getListMonths($month, true)->render();
 $search['day']   = getListDays($day, true)->render();
 
 //$search['cat']   = implode('', getCheckeCategories());
-$search['cat'] = Extcal\Utility::getListCategories($cat, true, 'cat')->render();
+$search['cat'] = Utility::getListCategories($cat, true, 'cat')->render();
 
-$search['orderby1'] = Extcal\Utility::getListOrderBy('orderby1', '', $orderby1, false)->render();
-$search['orderby2'] = Extcal\Utility::getListOrderBy('orderby2', '', $orderby2, true)->render();
-$search['orderby3'] = Extcal\Utility::getListOrderBy('orderby3', '', $orderby3, true)->render();
+$search['orderby1'] = Utility::getListOrderBy('orderby1', '', $orderby1, false)->render();
+$search['orderby2'] = Utility::getListOrderBy('orderby2', '', $orderby2, true)->render();
+$search['orderby3'] = Utility::getListOrderBy('orderby3', '', $orderby3, true)->render();
 
 //echoArray($search,true);
 $xoopsTpl->assign('search', $search);
@@ -60,7 +67,7 @@ $xoopsTpl->assign('search', $search);
 // // $form->addElement(getListYears($year,$helper->getConfig('agenda_nb_years_before'),$helper->getConfig('agenda_nb_years_after'), true));
 // // $form->addElement(getListMonths($month, rtue));
 // $form->addElement(getListCategories($cat));
-// $form->addElement(Extcal\Utility::getListOrderBy($orderby));
+// $form->addElement(Utility::getListOrderBy($orderby));
 //
 // $form->addElement( new \XoopsFormText(_MD_EXTCAL_SEARCH_EXP, 'searchExp', 80, 80, $searchExp));
 //
@@ -122,7 +129,7 @@ if ($cat > 0) {
 
 $recurrents = $eventHandler->getAllEvents($criteria, false);
 //$categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-$categoryHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+$categoryHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
 
 //=========================================
 foreach ($recurrents as $h => $hValue) {
@@ -136,14 +143,14 @@ foreach ($recurrents as $h => $hValue) {
     //
     //    $recurEvents['cat']['cat_name']        = $categoryObject->vars['cat_name']['value'];
     //    $recurEvents['cat']['cat_color']       = $categoryObject->vars['cat_color']['value'];
-    //    $recurEvents['cat']['cat_light_color'] = Extcal\Utility::getLighterColor($categoryObject->vars['cat_color']['value'], _EXTCAL_INFOBULLE_RGB_MIN, _EXTCAL_INFOBULLE_RGB_MAX);
+    //    $recurEvents['cat']['cat_light_color'] = Utility::getLighterColor($categoryObject->vars['cat_color']['value'], _EXTCAL_INFOBULLE_RGB_MIN, _EXTCAL_INFOBULLE_RGB_MAX);
 
     // Formating date
     $eventHandler->formatEventsDate($recurEvents, $helper->getConfig('event_date_week'));
     foreach ($recurEvents as $val) {
         $val['cat']['cat_name']        = $categoryObject->vars['cat_name']['value'];
         $val['cat']['cat_color']       = $categoryObject->vars['cat_color']['value'];
-        $val['cat']['cat_light_color'] = Extcal\Utility::getLighterColor($categoryObject->vars['cat_color']['value'], _EXTCAL_INFOBULLE_RGB_MIN, _EXTCAL_INFOBULLE_RGB_MAX);
+        $val['cat']['cat_light_color'] = Utility::getLighterColor($categoryObject->vars['cat_color']['value'], _EXTCAL_INFOBULLE_RGB_MIN, _EXTCAL_INFOBULLE_RGB_MAX);
         $recurEventsArray[]            = $val;
     }
 }
@@ -178,7 +185,7 @@ $xoopsTpl->assign('cats', $cats);
 //               );
 //
 // // Title of the page
-// $xoopsTpl->assign('xoops_pagetitle', $xoopsModule->getVar('name') . ' ' .
+// $xoopsTpl->assign('xoops_pagetitle', $helper->getModule()->getVar('name') . ' ' .
 //                                      $navig['this']['name']
 // );
 //

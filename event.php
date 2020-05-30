@@ -17,28 +17,32 @@
  * @author       XOOPS Development Team,
  */
 
-use XoopsModules\Extcal;
+use XoopsModules\Extcal\{
+    Helper,
+    Perm
+};
+use Xmf\Request;
 
-require_once dirname(dirname(__DIR__)) . '/mainfile.php';
-require_once __DIR__ . '/include/constantes.php';
-$params                                  = ['view' => _EXTCAL_NAV_NEW_EVENT, 'file' => _EXTCAL_FILE_NEW_EVENT];
-$GLOBALS['xoopsOption']['template_main'] = 'extcal_event.tpl';
 require_once __DIR__ . '/header.php';
+require_once __DIR__ . '/include/constantes.php';
+$params = ['view' => _EXTCAL_NAV_NEW_EVENT, 'file' => _EXTCAL_FILE_NEW_EVENT];
+$GLOBALS['xoopsOption']['template_main'] = 'extcal_event.tpl';
 
-//exit;
+/** @var Helper $helper */
+$helper = Helper::getInstance();
 
 require_once XOOPS_ROOT_PATH . '/include/comment_view.php';
 
 if (!isset($_GET['event'])) {
     $eventId = 0;
 } else {
-    $eventId = \Xmf\Request::getInt('event', 0, 'GET');
+    $eventId = Request::getInt('event', 0, 'GET');
 }
-$eventHandler          = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
-$fileHandler           = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_FILE);
-$eventMemberHandler    = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_MEMBER);
-$eventNotMemberHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_NOT_MEMBER);
-$permHandler           = Extcal\Perm::getHandler();
+$eventHandler          = Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+$fileHandler           = Helper::getInstance()->getHandler(_EXTCAL_CLN_FILE);
+$eventMemberHandler    = Helper::getInstance()->getHandler(_EXTCAL_CLN_MEMBER);
+$eventNotMemberHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_NOT_MEMBER);
+$permHandler           = Perm::getHandler();
 $myts                  = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
 
 if (!function_exists('clear_unicodeslashes')) {
@@ -67,11 +71,8 @@ if (!$eventObj) {
 $event = $eventHandler->objectToArray($eventObj, ['cat_id', 'event_submitter']);
 $eventHandler->serverTimeToUserTime($event);
 
-$configHandler = xoops_getHandler('config');
-$extcalConfig  = $configHandler->getConfigList($module->getVar('mid'));
-
 // Adding formated date for start and end event
-$eventHandler->formatEventDate($event, $extcalConfig['event_date_event']);
+$eventHandler->formatEventDate($event, $helper->getConfig('event_date_event'));
 
 // Assigning event to the template
 $xoopsTpl->assign('event', $event);
@@ -96,7 +97,7 @@ $xoopsTpl->assign('event_attachement', $eventFiles);
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 
 // Location
-$locationHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_LOCATION);
+$locationHandler = $helper->getHandler(_EXTCAL_CLN_LOCATION);
 $locationObj     = $locationHandler->get($event['event_location']);
 //$location = $locationHandler->objectToArray($locationObj);
 $location = $locationObj->vars;
@@ -108,7 +109,7 @@ $xoopsTpl->assign('location', $location);
 // ### For Who's Going function ###
 
 // If the who's goging function is enabled
-if ($extcalConfig['whos_going']) {
+if ($helper->getConfig('whos_going')) {
     // Retriving member's for this event
     $members = $eventMemberHandler->getMembers($eventId);
 
@@ -149,7 +150,7 @@ if ($extcalConfig['whos_going']) {
 // ### For Who's not Going function ###
 
 // If the who's not goging function is enabled
-if ($extcalConfig['whosnot_going']) {
+if ($helper->getConfig('whosnot_going')) {
     // Retriving not member's for this event
     $notmembers = $eventNotMemberHandler->getMembers($eventId);
 
@@ -182,7 +183,7 @@ if ($extcalConfig['whosnot_going']) {
 }
 
 // If who's going or not going function is enabled
-if ($extcalConfig['whos_going'] || $extcalConfig['whosnot_going']) {
+if ($helper->getConfig('whos_going') || $helper->getConfig('whosnot_going')) {
     $xoopsTpl->assign('eventmember', $eventmember);
 }
 
@@ -197,8 +198,8 @@ if ($xoopsUser) {
     $xoopsTpl->assign('canEdit', false);
 }
 
-$xoopsTpl->assign('whosGoing', $extcalConfig['whos_going']);
-$xoopsTpl->assign('whosNotGoing', $extcalConfig['whosnot_going']);
+$xoopsTpl->assign('whosGoing', $helper->getConfig('whos_going'));
+$xoopsTpl->assign('whosNotGoing', $helper->getConfig('whosnot_going'));
 
 //-------------
 $xoopsTpl->assign('params', $params);

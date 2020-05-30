@@ -55,7 +55,7 @@ function bExtcalUpcomingByCategoryShow($options)
 
     $events = $eventHandler->objectToArray($eventHandler->getUpcommingEvent($nbEvent, $options));
     $eventHandler->serverTimeToUserTimes($events);
-    $eventHandler->formatEventsDate($events, $extcalConfig['event_date_month']);
+    $eventHandler->formatEventsDate($events, $helper->getConfig('event_date_month'));
 
     /***********************************************************/
     //    $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);

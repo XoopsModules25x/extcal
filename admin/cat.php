@@ -272,7 +272,7 @@ switch ($op) {
         $cats = $categoryHandler->getAllCatById($xoopsUser);
 
         $xoopsTpl->assign('cats', $cats);
-        //$xoopsTpl->assign("module_dirname",    $xoopsModule->getVar("dirname") );
+        //$xoopsTpl->assign("module_dirname",    $helper->getModule()->getVar("dirname") );
 
         $xoopsTpl->display('db:admin/extcal_admin_cat_list.tpl');
         require_once __DIR__ . '/admin_footer.php';
