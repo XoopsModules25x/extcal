@@ -17,7 +17,10 @@
  * @author       XOOPS Development Team,
  */
 
-use XoopsModules\Extcal;
+use XoopsModules\Extcal\{
+    Helper,
+    EventHandler
+};
 
 require_once dirname(__DIR__) . '/include/constantes.php';
 
@@ -30,11 +33,16 @@ function bExtcalDayShow($options)
 {
     //    // require_once  dirname(__DIR__) . '/class/Config.php';
 
-    /** @var Extcal\Helper $helper */
-    $helper = \XoopsModules\Extcal\Helper::getInstance();
+    /** @var Helper $helper */
+    if (!class_exists(Helper::class)) {
+        return false;
+    }
 
-    /** @var Extcal\EventHandler $eventHandler */
-    $eventHandler = \XoopsModules\Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+    $helper = Helper::getInstance();
+    $helper->loadLanguage('main');
+
+    /** @var EventHandler $eventHandler */
+    $eventHandler = $helper->getHandler(_EXTCAL_CLN_EVENT);
 
     $nbEvent     = $options[0];
     $titleLenght = $options[1];

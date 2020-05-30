@@ -17,7 +17,10 @@
  * @author       XOOPS Development Team,
  */
 
-use XoopsModules\Extcal;
+use XoopsModules\Extcal\{
+    Helper,
+    EventHandler
+};
 
 require_once dirname(__DIR__) . '/include/constantes.php';
 
@@ -28,12 +31,16 @@ require_once dirname(__DIR__) . '/include/constantes.php';
  */
 function bExtcalUpcomingShow($options)
 {
-    //    // require_once  dirname(__DIR__) . '/class/Config.php';
+    /** @var Helper $helper */
+    if (!class_exists(Helper::class)) {
+        return false;
+    }
 
-    /** @var Extcal\Helper $helper */
-    $helper = \XoopsModules\Extcal\Helper::getInstance();
+    $helper = Helper::getInstance();
+    $helper->loadLanguage('main');
+    $helper->loadLanguage('blocks');
 
-    $eventHandler = \XoopsModules\Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+    $eventHandler = $helper->getHandler(_EXTCAL_CLN_EVENT);
 
     $nbEvent     = $options[0];
     $titleLenght = $options[1];
@@ -49,8 +56,6 @@ function bExtcalUpcomingShow($options)
     }
 
     //-------------------
-    //mb $events = $eventHandler->objectToArray($eventHandler->getUpcommingEvent($nbEvent, $options));
-
     /* ========================================================================== */
     $year  = \Xmf\Request::getInt('year', date('Y'), 'GET');
     $month = \Xmf\Request::getInt('month', date('n'), 'GET');
@@ -111,7 +116,15 @@ function bExtcalUpcomingEdit($options)
 {
     global $xoopsUser;
 
-    $categoryHandler = \XoopsModules\Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    /** @var Helper $helper */
+    if (!class_exists(Helper::class)) {
+        return false;
+    }
+
+    $helper = Helper::getInstance();
+    $helper->loadLanguage('main');
+    $helper->loadLanguage('blocks');
+    $categoryHandler = $helper->getHandler(_EXTCAL_CLN_CAT);
 
     $cats = $categoryHandler->getAllCat($xoopsUser, 'extcal_cat_view');
 

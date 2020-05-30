@@ -17,7 +17,12 @@
  * @author       XOOPS Development Team,
  */
 
-use XoopsModules\Extcal;
+use XoopsModules\Extcal\{
+    Helper,
+    CategoryHandler,
+    EventHandler
+};
+
 
 require_once dirname(__DIR__) . '/include/constantes.php';
 
@@ -28,12 +33,15 @@ require_once dirname(__DIR__) . '/include/constantes.php';
  */
 function bExtcalNewShow($options)
 {
-    //    // require_once  dirname(__DIR__) . '/class/Config.php';
+    /** @var Helper $helper */
+    if (!class_exists(Helper::class)) {
+        return false;
+    }
 
-    /** @var Extcal\Helper $helper */
-    $helper = \XoopsModules\Extcal\Helper::getInstance();
+    $helper = Helper::getInstance();
+    $helper->loadLanguage('main');
 
-    $eventHandler = \XoopsModules\Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+    $eventHandler = $helper->getHandler(_EXTCAL_CLN_EVENT);
 
     $nbEvent     = $options[0];
     $titleLenght = $options[1];
@@ -61,7 +69,10 @@ function bExtcalNewEdit($options)
 {
     global $xoopsUser;
 
-    $categoryHandler = \XoopsModules\Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    $helper = Helper::getInstance();
+    $helper->loadLanguage('main');
+    $helper->loadLanguage('blocks');
+    $categoryHandler = $helper->getHandler(_EXTCAL_CLN_CAT);
 
     $cats = $categoryHandler->getAllCat($xoopsUser, 'extcal_cat_view');
 

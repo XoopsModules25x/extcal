@@ -47,7 +47,13 @@ function bExtcalMinicalShow($options)
     //     require_once CALENDAR_ROOT . 'Month/Weeks.php';
     //     require_once CALENDAR_ROOT . 'Day.php';
 
+    /** @var Helper $helper */
+    if (!class_exists(Helper::class)) {
+        return false;
+    }
+
     $helper = Helper::getInstance();
+    $helper->loadLanguage('main');
 
     // Retriving Image for block if enabled
     if (isset($options[0]) && 1 == $options[0]) {

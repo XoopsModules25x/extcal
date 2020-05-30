@@ -35,7 +35,14 @@ function bExtcalUpcomingByCategoryShow($options)
 {
     global $xoopsUser;
 
+    /** @var Helper $helper */
+    if (!class_exists(Helper::class)) {
+        return false;
+    }
+
     $helper = Helper::getInstance();
+    $helper->loadLanguage('main');
+
     $eventHandler = $helper->getHandler(_EXTCAL_CLN_EVENT);
 
     $nbEvent     = $options[0];
