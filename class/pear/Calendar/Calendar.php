@@ -385,7 +385,11 @@ class Calendar
      */
     public function fetch()
     {
-        $child = each($this->children);
+//        $child = each($this->children);
+        $key   = key($this->children);
+        $child = ($key === null) ? false : [$key, current($this->children), 'key' => $key, 'value' => current($this->children)];
+        next($this->children);
+
         if ($child) {
             return $child['value'];
         }
