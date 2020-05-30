@@ -68,7 +68,7 @@ function xoops_module_install_extcal(\XoopsModule $xoopsModule)
     $helper->loadLanguage('admin');
     $helper->loadLanguage('modinfo');
 
-    $moduleId = $helper->getModule()->getVar('mid');
+    $moduleId = $xoopsModule->getVar('mid');
     /** @var \XoopsGroupPermHandler $grouppermHandler */
     $grouppermHandler = xoops_getHandler('groupperm');
 
@@ -108,7 +108,7 @@ function xoops_module_install_extcal(\XoopsModule $xoopsModule)
     }
 
     //delete .html entries from the tpl table
-    $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $helper->getModule()->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
+    $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $xoopsModule->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
     $GLOBALS['xoopsDB']->queryF($sql);
 
     return true;
