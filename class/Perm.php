@@ -45,6 +45,7 @@ class Perm
         static $authorizedCat;
         $userId = $user ? $user->getVar('uid') : 0;
         if (!isset($authorizedCat[$perm][$userId])) {
+            /** @var \XoopsGroupPermHandler $grouppermHandler */
             $groupPermHandler = \xoops_getHandler('groupperm');
             /** @var \XoopsModuleHandler $moduleHandler */
             $moduleHandler = \xoops_getHandler('module');

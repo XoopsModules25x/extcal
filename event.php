@@ -19,6 +19,12 @@
 
 use XoopsModules\Extcal\{
     Helper,
+    EventHandler,
+    EventmemberHandler,
+    EventNotMemberHandler,
+    FileHandler,
+    LocationHandler,
+    Time,
     Perm
 };
 use Xmf\Request;
@@ -28,6 +34,7 @@ require_once __DIR__ . '/include/constantes.php';
 $params = ['view' => _EXTCAL_NAV_NEW_EVENT, 'file' => _EXTCAL_FILE_NEW_EVENT];
 $GLOBALS['xoopsOption']['template_main'] = 'extcal_event.tpl';
 
+/** @var EventHandler $eventHandler */
 /** @var Helper $helper */
 $helper = Helper::getInstance();
 
@@ -38,11 +45,7 @@ if (!isset($_GET['event'])) {
 } else {
     $eventId = Request::getInt('event', 0, 'GET');
 }
-$eventHandler          = Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
-$fileHandler           = Helper::getInstance()->getHandler(_EXTCAL_CLN_FILE);
-$eventMemberHandler    = Helper::getInstance()->getHandler(_EXTCAL_CLN_MEMBER);
-$eventNotMemberHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_NOT_MEMBER);
-$permHandler           = Perm::getHandler();
+
 $myts                  = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
 
 if (!function_exists('clear_unicodeslashes')) {
@@ -97,7 +100,6 @@ $xoopsTpl->assign('event_attachement', $eventFiles);
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 
 // Location
-$locationHandler = $helper->getHandler(_EXTCAL_CLN_LOCATION);
 $locationObj     = $locationHandler->get($event['event_location']);
 //$location = $locationHandler->objectToArray($locationObj);
 $location = $locationObj->vars;

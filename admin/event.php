@@ -24,7 +24,6 @@ use XoopsModules\Extcal\{
     Utility,
     CategoryHandler,
     EventmemberHandler,
-    Config,
     LocationHandler
 };
 use Xmf\Request;

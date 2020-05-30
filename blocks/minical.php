@@ -19,7 +19,6 @@
 
 use XoopsModules\Extcal\{
     Helper,
-    Config,
     Time,
     TableForm,
     Form

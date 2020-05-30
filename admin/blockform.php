@@ -98,7 +98,7 @@ $cache_select->addOptionArray(
     ]
 );
 $form->addElement($cache_select);
-
+/** @var \XoopsGroupPermHandler $grouppermHandler */
 $grouppermHandler = xoops_getHandler('groupperm');
 $groups           = $grouppermHandler->getGroupIds('block_read', $block['bid']);
 

@@ -34,6 +34,7 @@ $moduleId = $helper->getModule()->getVar('mid');
 switch ($step) {
     case 'enreg':
 
+        /** @var \XoopsGroupPermHandler $grouppermHandler */
         $grouppermHandler = xoops_getHandler('groupperm');
 
         // Delete old public mask
