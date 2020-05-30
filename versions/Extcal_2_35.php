@@ -41,7 +41,7 @@ class Extcal_2_35
 
         $sql = <<<__sql__
 ALTER TABLE `{$tbl}`
- CHANGE `event_location` `event_location` INT( 5 ) NOT NULL DEFAULT '0';
+ CHANGE `event_etablissement` `event_etablissement` INT( 5 ) NOT NULL DEFAULT '0';
 __sql__;
 
         $xoopsDB->queryF($sql);
