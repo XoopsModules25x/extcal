@@ -150,10 +150,7 @@ switch ($op) {
                 $fileHandler->createFile($eventHandler->getInsertId());
                 $cat = $categoryHandler->getCat(Request::getInt('cat_id', 0, 'POST'), $xoopsUser, 'all');
                 $notificationHandler->triggerEvent('global', 0, 'new_event', ['EVENT_TITLE' => Request::getString('event_title', '', 'POST')]);
-                $notificationHandler->triggerEvent(
-                    'category',
-                    $_POST['cat_id'],
-                    'new_event_cat',
+                $notificationHandler->triggerEvent('category', Request::getInt('cat_id', 0, 'POST'),'new_event_cat',
                     [
                         'EVENT_TITLE' => Request::getString('event_title', '', 'POST'),
                         'CAT_NAME'    => $cat->getVar('cat_name'),

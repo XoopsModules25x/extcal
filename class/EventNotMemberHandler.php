@@ -75,6 +75,7 @@ class EventNotMemberHandler extends ExtcalPersistableObjectHandler
      */
     public function getMembers($eventId)
     {
+        /** @var \XoopsMemberHandler $memberHandler */
         $memberHandler  = \xoops_getHandler('member');
         $eventNotMember = $this->getObjects(new \Criteria('event_id', $eventId));
         $count          = \count($eventNotMember);

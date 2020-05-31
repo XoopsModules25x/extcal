@@ -2089,7 +2089,7 @@ if (!defined('PCL_TAR')) {
                         $v_extract_file       = 0;
                     } // ----- Look if file is write protected
                     else {
-                        if (!s_writable($v_header['filename'])) {
+                        if (!is_writable($v_header['filename'])) {
                             TrFctMessage(__FILE__, __LINE__, 2, 'Existing file ' . $v_header['filename'] . ' is write protected');
 
                             // ----- Change the file status
@@ -2602,7 +2602,7 @@ if (!defined('PCL_TAR')) {
                 $v_extract_file       = 0;
             } // ----- Look if file is write protected
             else {
-                if (!s_writable($v_header['filename'])) {
+                if (!is_writable($v_header['filename'])) {
                     TrFctMessage(__FILE__, __LINE__, 2, 'Existing file ' . $v_header['filename'] . ' is write protected');
 
                     // ----- Change the file status

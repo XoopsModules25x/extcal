@@ -1,7 +1,10 @@
 <?php
 
+use Xmf\Request;
 use XoopsModules\Extcal\{
     Helper,
+    EventHandler,
+    CategoryHandler,
     Time
 };
 
@@ -22,11 +25,14 @@ function isUpToDate()
     return $GLOBALS['xoopsModule']->getVar('version') >= $version;
 }
 
+/** @var CategoryHandler $categoryHandler */
+/** @var EventHandler $eventHandler */
+/** @var EventmemberHandler $eventmemberHandler */
 /** @var Helper $helper */
 $helper = Helper::getInstance();
 
-$op  = \Xmf\Request::getCmd('op', 'default');
-$fct = \Xmf\Request::getString('fct', 'default', 'GET');
+$op  = Request::getCmd('op', 'default');
+$fct = Request::getString('fct', 'default', 'GET');
 
 switch ($op) {
     case 'notification':
@@ -45,18 +51,18 @@ switch ($op) {
                 //                $eventmemberHandler = xoops_getModuleHandler(_EXTCAL_CLS_MEMBER, _EXTCAL_MODULE);
                 $extcalTime   = Time::getHandler();
 
-                $event = $eventHandler->getEvent($_POST['event_id'], $xoopsUser, true);
+                $event = $eventHandler->getEvent(Request::getInt('event_id', 0, 'POST'), $xoopsUser, true);
                 $cat   = $categoryHandler->getCat($event->getVar('cat_id'), $xoopsUser, 'all');
 
-                $xoopsMailer->setToUsers($eventmemberHandler->getMembers($_POST['event_id']));
-                $xoopsMailer->setFromName($myts->oopsStripSlashesGPC($_POST['mail_fromname']));
-                $xoopsMailer->setFromEmail($myts->oopsStripSlashesGPC($_POST['mail_fromemail']));
-                $xoopsMailer->setSubject($myts->oopsStripSlashesGPC($_POST['mail_subject']));
-                $xoopsMailer->setBody($myts->oopsStripSlashesGPC($_POST['mail_body']));
-                if (in_array('mail', $_POST['mail_send_to'])) {
+                $xoopsMailer->setToUsers($eventmemberHandler->getMembers(Request::getInt('event_id', 0, 'POST')));
+                $xoopsMailer->setFromName($myts->oopsStripSlashesGPC(Request::getString('mail_fromname', '', 'POST')));
+                $xoopsMailer->setFromEmail($myts->oopsStripSlashesGPC(Request::getString('mail_fromemail', '', 'POST')));
+                $xoopsMailer->setSubject($myts->oopsStripSlashesGPC(Request::getString('mail_subject', '', 'POST')));
+                $xoopsMailer->setBody($myts->oopsStripSlashesGPC(Request::getString('mail_body', '', 'POST')));
+                if (in_array('mail', Request::getString('mail_send_to', '', 'POST'))) {
                     $xoopsMailer->useMail();
                 }
-                if (empty($_POST['mail_inactive']) && in_array('pm', $_POST['mail_send_to'])) {
+                if (empty($_POST['mail_inactive']) && in_array('pm', Request::getString('mail_send_to', '', 'POST'))) {
                     $xoopsMailer->usePM();
                 }
                 $tag = [
@@ -115,7 +121,7 @@ switch ($op) {
                 $form->addElement(new \XoopsFormText($subjectCaption, 'mail_subject', 50, 255, _AM_EXTCAL_SEND_NOTIFICATION_SUBJECT), true);
                 $form->addElement(new \XoopsFormTextArea($bodyCaption, 'mail_body', _AM_EXTCAL_SEND_NOTIFICATION_BODY, 10), true);
                 $form->addElement($toCheckBox, true);
-                $form->addElement(new \XoopsFormHidden('event_id', \Xmf\Request::getInt('event_id', 0, 'GET'), false));
+                $form->addElement(new \XoopsFormHidden('event_id', Request::getInt('event_id', 0, 'GET'), false));
                 $form->addElement(new \XoopsFormButton('', 'mail_submit', _SUBMIT, 'submit'));
                 $form->display();
                 echo '</fieldset>';
@@ -133,7 +139,7 @@ switch ($op) {
         //        require_once XOOPS_ROOT_PATH . "/modules/extcal/class/admin.php";
         //        $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
         //        $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
-        $adminObject = \Xmf\Module\Admin::getInstance();
+        $adminObject = Module\Admin::getInstance();
         $adminObject->addInfoBox(_MI_EXTCAL_DASHBOARD);
         $adminObject->addInfoBoxLine(sprintf('<infolabel>' . _AM_EXTCAL_INDEX_CATEGORIES . '</infolabel>', $categoryHandler->getCount()), '', 'Green');
         $adminObject->addInfoBoxLine(sprintf('<infolabel>' . _AM_EXTCAL_INDEX_EVENT . '</infolabel>', $eventHandler->getCount(new \Criteria('event_approved', 1))), '', 'Green');

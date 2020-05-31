@@ -80,6 +80,8 @@ class LocationHandler extends ExtcalPersistableObjectHandler
             return $rst;
         }
 
-        return $this->objectToArray($rst);
+        $ret = $this->objectToArray($rst);
+
+        return $ret;
     }
 }

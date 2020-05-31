@@ -19,6 +19,8 @@
 
 use XoopsModules\Extcal\{
     Helper,
+    Category,
+    CategoryHandler,
     EventHandler
 };
 
@@ -71,8 +73,8 @@ function bExtcalDayEdit($options)
     global $xoopsUser;
 
     //    $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-    /** @var Extcal\CategoryHandler $categoryHandler */
-    $categoryHandler = \XoopsModules\Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    /** @var CategoryHandler $categoryHandler */
+    $categoryHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
 
     $cats = $categoryHandler->getAllCat($xoopsUser, 'extcal_cat_view');
 
@@ -87,7 +89,7 @@ function bExtcalDayEdit($options)
     } else {
         $form .= '<option value="0" selected="selected">' . _MB_EXTCAL_ALL_CAT . '</option>';
     }
-    /** @var Extcal\Category $cat */
+    /** @var Category $cat */
     foreach ($cats as $cat) {
         if (false === array_search($cat->getVar('cat_id'), $options, true)) {
             $form .= '<option value="' . $cat->getVar('cat_id') . '">' . $cat->getVar('cat_name') . '</option>';

@@ -108,7 +108,7 @@ class Location extends \XoopsObject
         }
         $file_img->setExtra("size ='40'");
         $file_tray->addElement($file_img);
-        $msg        = \sprintf(\_MD_EXTCAL_IMG_CONFIG, (int)(3145728 / 1000), 500, 500);
+        $msg        = \sprintf(\_MD_EXTCAL_IMG_CONFIG, (int)(3145728 / 1000), 500);
         $file_label = new \XoopsFormLabel('', '<br>' . $msg);
         $file_tray->addElement($file_label);
         $form->addElement($file_tray);

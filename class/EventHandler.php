@@ -24,6 +24,7 @@ namespace XoopsModules\Extcal;
 use Xmf\Request;
 use XoopsModules\Extcal\{
     Helper,
+    Event,
     Perm,
     Time,
     Form
@@ -918,6 +919,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $reccurOptions = [];
 
         if ('edit' === $mode || 'clone' === $mode) {
+            /** @var Event $event */
             if (!$event = $this->getEventWithNotApprove($data['event_id'])) {
                 return false;
             }
@@ -1230,7 +1232,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
         }
         $file_img->setExtra("size ='40'");
         $file_tray->addElement($file_img);
-        $msg        = \sprintf(\_MD_EXTCAL_IMG_CONFIG, (int)(400728 / 1000), 500, 500);
+        $msg        = \sprintf(\_MD_EXTCAL_IMG_CONFIG, (int)(400728 / 1000), 500);
         $file_label = new \XoopsFormLabel('', '<br>' . $msg);
         $file_tray->addElement($file_label);
         $form->addElement($file_tray);
@@ -1250,7 +1252,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
         }
         $file_img->setExtra("size ='40'");
         $file_tray->addElement($file_img);
-        $msg        = \sprintf(\_MD_EXTCAL_IMG_CONFIG, (int)(400728 / 1000), 500, 500);
+        $msg        = \sprintf(\_MD_EXTCAL_IMG_CONFIG, (int)(400728 / 1000), 500);
         $file_label = new \XoopsFormLabel('', '<br>' . $msg);
         $file_tray->addElement($file_label);
         $form->addElement($file_tray);
@@ -1547,7 +1549,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
 
                 // Parse all occurence of this event
                 while ($nbOccur < $rRuleInterval) {
-                    $eventDayOccurStart = $this->_getOccurTS($month, $year, $eventOptions[0]);
+                    $eventDayOccurStart = $this->getOccurTS($month, $year, $eventOptions[0]);
                     if (!$eventDayOccurStart) {
                         $eventDayOccurStart = \mktime(0, 0, 0, $month, $day, $year);
                     }
@@ -1604,7 +1606,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
 
                 // Parse all occurence of this event
                 while ($nbOccur < $rRuleInterval) {
-                    $eventDayOccurStart = $this->_getOccurTS($month, $year, $dayCode);
+                    $eventDayOccurStart = $this->getOccurTS($month, $year, $dayCode);
                     if (!$eventDayOccurStart) {
                         $eventDayOccurStart = \mktime(0, 0, 0, $month, $day, $year);
                     }
