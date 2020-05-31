@@ -20,6 +20,8 @@
 use Xmf\Request;
 use XoopsModules\Extcal;
 
+const CONFIRM = 'confirm';
+
 require_once __DIR__ . '/admin_header.php';
 require_once dirname(dirname(dirname(__DIR__))) . '/class/xoopsformloader.php';
 
@@ -33,8 +35,8 @@ if (Request::hasVar('op', 'GET')) {
     $cat_id = Request::getInt('cat_id', 0);
 }
 
-if (Request::hasVar('confirm', 'POST')) {
-    $confirm = Request::getInt('confirm', 0, 'POST');
+if (Request::hasVar(CONFIRM, 'POST')) {
+    $confirm = Request::getInt(CONFIRM, 0, 'POST');
 }
 
 // $t=print_r($gepeto,true);
@@ -140,7 +142,7 @@ switch ($op) {
             $hiddens = [
                 'cat_id'      => $cat_id,
                 'form_delete' => '',
-                'confirm'     => 1,
+                CONFIRM     => 1,
             ];
             xoops_confirm($hiddens, 'cat.php?op=delete', _AM_EXTCAL_CONFIRM_DELETE_CAT, _DELETE, 'cat.php');
 
@@ -189,7 +191,7 @@ switch ($op) {
     //         $adminObject->displayNavigation(basename(__FILE__));
     //         //***************************************************************************************
     //
-    //                     $hiddens = array('cat_id' => $cat_id, 'form_delete' => '', 'confirm' => 1);
+    //                     $hiddens = array('cat_id' => $cat_id, 'form_delete' => '', CONFIRM => 1);
     //                     xoops_confirm($hiddens, 'cat.php?op=modify', _AM_EXTCAL_CONFIRM_DELETE_CAT, _DELETE, 'cat.php');
     //
     //                     xoops_cp_footer();

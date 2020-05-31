@@ -154,5 +154,11 @@ interface Constants
     //2.37
     public const _EXTCAL_EVENTS_UPCOMING = 7;
 
+    public const EXTCAL_CATNAME = 'cat_name';
+    public const EXTCAL_CATDESC = 'cat_desc';
+    public const EXTCAL_CATWEIGHT = 'cat_weight';
+    public const EXTCAL_CATCOLOR = 'cat_color';
+    public const EXTCAL_CATICON = 'cat_icone';
+
     /**#@-*/
 }
