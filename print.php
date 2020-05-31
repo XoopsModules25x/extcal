@@ -49,18 +49,18 @@ echo '<meta http-equiv="content-type" content="text/html; charset=' . _CHARSET .
 echo '<title>' . $event['cat']['cat_name'] . ' - ' . $event['event_title'] . '</title>' . "\n";
 echo '</head>' . "\n";
 echo '<body onload="window.print()">' . "\n";
-echo '<table style="border:1px solid black; width:640px;" cellspacing="0" cellspadding="0">' . "\n";
+echo '<table style="border:1px solid #000000; width:640px;" cellspacing="0" cellspadding="0">' . "\n";
 echo '<tr>' . "\n";
-echo '<td colspan="2" style="font-size:1.2em; border:1px solid black;">' . "\n";
+echo '<td colspan="2" style="font-size:1.2em; border:1px solid #000000;">' . "\n";
 echo $event['event_title'] . "\n";
 echo '</td>' . "\n";
 echo '</tr>' . "\n";
 echo '<tr>' . "\n";
-echo '<td style="width:50%; border:1px solid black;">' . "\n";
+echo '<td style="width:50%; border:1px solid #000000;">' . "\n";
 echo '<b>' . $event['cat']['cat_name'] . '</b><br>' . "\n";
 echo '<span style="font-weight:normal;">' . $event['cat']['cat_desc'] . '</span>' . "\n";
 echo '</td>' . "\n";
-echo '<td style="border:1px solid black;">' . "\n";
+echo '<td style="border:1px solid #000000;">' . "\n";
 if (!$event['event_isrecur']) {
     echo '<b>' . _MD_EXTCAL_START . ' :</b> <span style="font-weight:normal;">' . $event['formated_event_start'] . '</span><br>' . "\n";
     echo '<b>' . _MD_EXTCAL_END . ' :</b> <span style="font-weight:normal;">' . $event['formated_event_end'] . '</span>' . "\n";
@@ -72,23 +72,23 @@ echo '</tr>' . "\n";
 
 echo '<tr>' . "\n";
 if ('' != $event['event_desc']) {
-    echo '<td style="border:1px solid black;">' . $event['event_desc'] . '</td>' . "\n";
+    echo '<td style="border:1px solid #000000;">' . $event['event_desc'] . '</td>' . "\n";
 }
 if ('' != $event['event_price']) {
-    echo '<td style="border:1px solid black;">' . _MD_EXTCAL_LOCATION_PRICE . $event['event_price'] . ' ' . _MD_EXTCAL_DEVISE2 . '</td>' . "\n";
+    echo '<td style="border:1px solid #000000;">' . _MD_EXTCAL_LOCATION_PRICE . $event['event_price'] . ' ' . _MD_EXTCAL_DEVISE2 . '</td>' . "\n";
 }
 echo '</tr>' . "\n";
 
 //show contact info
 if ('' != $event['event_contact']) {
     echo '<tr>' . "\n";
-    echo '<td style="border:1px solid black;">' . "\n";
+    echo '<td style="border:1px solid #000000;">' . "\n";
     echo '<b>' . _MD_EXTCAL_CONTACT_INFO . '</b><br>' . "\n";
     echo '<span style="font-weight:normal;">' . $event['event_organisateur'] . '<br>' . "\n";
     echo '<span style="font-weight:normal;">' . $event['event_contact'] . '<br>' . "\n";
     echo $event['event_address'] . '</span>' . "\n";
     echo '</td>' . "\n";
-    echo '<td style="border:1px solid black;">' . "\n";
+    echo '<td style="border:1px solid #000000;">' . "\n";
     echo '<b>' . _MD_EXTCAL_EMAIL . ' :</b> <a href="mailto:' . $event['event_email'] . '">' . $event['event_email'] . '</a><br>' . "\n";
     echo '<b>' . _MD_EXTCAL_URL . ' :</b> <a href="' . $event['event_url'] . '">' . $event['event_url'] . '</a>' . "\n";
     echo '</td>' . "\n";
@@ -103,7 +103,7 @@ if ($event['event_location'] = 0) {
     //    var_dump($location);
     //    var_dump($event);
 
-    echo '<td style="border:1px solid black;">' . "\n";
+    echo '<td style="border:1px solid #000000;">' . "\n";
     echo '<b>' . _MD_EXTCAL_LOCATION . '</b>' . "\n";
     if ('' != $location['categorie']) {
         echo '<span style="font-weight:normal;"> (' . $location['categorie'] . ') <br>' . "\n";
@@ -134,7 +134,7 @@ if ($event['event_location'] = 0) {
     }
 
     echo '</td>' . "\n";
-    echo '<td style="border:1px solid black;">' . "\n";
+    echo '<td style="border:1px solid #000000;">' . "\n";
 
     if ('' != $location['tel_fixe']) {
         echo '<b>' . _MD_EXTCAL_LOCATION_TEL_FIXE . ' :</b>' . $location['tel_fixe'] . '<br>' . "\n";
@@ -155,12 +155,12 @@ if ($event['event_location'] = 0) {
 if (('' != $event['event_picture1']) || ('' != $event['event_picture2'])) {
     echo '<tr>' . "\n";
     if ('' != $event['event_picture1']) {
-        echo '<td style="border:1px solid black;">' . "\n";
+        echo '<td style="border:1px solid #000000;">' . "\n";
         echo '<img align=left style="border:1px solid #FFFFFF;margin-right:6px" src=' . XOOPS_URL . '/uploads/extcal/' . $event['event_picture1'] . ' height="100px">' . '' . "\n";
         echo '</td>' . "\n";
     }
     if ('' != $event['event_picture2']) {
-        echo '<td style="border:1px solid black;">' . "\n";
+        echo '<td style="border:1px solid #000000;">' . "\n";
         echo '<img align=left style="border:1px solid #FFFFFF;margin-right:6px" src=' . XOOPS_URL . '/uploads/extcal/' . $event['event_picture2'] . ' height="100px">' . '' . "\n";
         echo '</td>' . "\n";
     }

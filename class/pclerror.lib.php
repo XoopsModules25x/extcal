@@ -83,8 +83,8 @@ if (!defined('PCLERROR_LIB')) {
         global $g_pcl_error_code;
 
         $v_message = '<html><body>';
-        $v_message .= "<p align=center><span style='font-weight: bold; color: red; background-color: white; '>PclError Library has detected a fatal error on file '$p_file', line $p_line</span></p>";
-        $v_message .= "<p align=center><span style='font-weight: bold; color: red; background-color: white;'>$p_error_string</span></p>";
+        $v_message .= "<p align=center><span style='font-weight: bold; color: #ff0000; background-color: #ffffff; '>PclError Library has detected a fatal error on file '$p_file', line $p_line</span></p>";
+        $v_message .= "<p align=center><span style='font-weight: bold; color: #ff0000; background-color: #ffffff;'>$p_error_string</span></p>";
         $v_message .= '</body></html>';
         exit($v_message);
     }

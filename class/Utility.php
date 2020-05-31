@@ -164,7 +164,7 @@ class Utility extends Common\SysUtility
             $cat       = ''
                          . "<div style='float:left; margin-left:5px;'>"
                          . "<input type='checkbox' name='{$name}[{$cat_id}]' value='1' {$checked}>"
-                         . "<div style='absolute:left;height:12px; width:6px; background-color:#{$cat_color}; border:1px solid black; float:left; margin-right:5px;' ></div>"
+                         . "<div style='absolute:left;height:12px; width:6px; background-color:#{$cat_color}; border:1px solid #000000; float:left; margin-right:5px;' ></div>"
                          . " {$name}"
                          . '</div>';
 
