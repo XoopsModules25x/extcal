@@ -19,15 +19,14 @@
 use XoopsModules\Extcal\{
     Helper,
     Time,
-    CategoryHandler,
-    Utility
+    CategoryHandler
+
 };
 
 define('_EXTCAL_FORMAT_AGENDA_KEYD', 'Y-m-d');
 define('_EXTCAL_FORMAT_AGENDA_KEYT', 'H:i');
 
 require_once __DIR__ . '/constantes.php';
-// require_once  dirname(__DIR__) . '/class/Utility.php';
 
 $moduleDirName = basename(dirname(__DIR__));
 Helper::getInstance()->loadLanguage('main');
@@ -458,16 +457,14 @@ function getNavBarTabs($currentTab = '')
     //    while (list($k, $v) = each($tNavBar)) {
     foreach ($tNavBar as $k => $v) {
         if (isset($tWeight[$k])) {
-            $ordre[] = (int)$tWeight[$k]; //ordre defini dans les option du module
+            $ordre[] = (int)$tWeight[$k]; //order defined in the module options
         } else {
-            $ordre[] = $v['weight']; // ordre par defaut ddefini dans le tableau $tNavBar
+            $ordre[] = $v['weight']; // default order defined in the $ tNavBar table
         }
     }
 
     array_multisort($tNavBar, SORT_ASC, SORT_NUMERIC, $ordre, SORT_ASC, SORT_NUMERIC);
 
-    //    Utility::echoArray($tNavBar);
-    //    Utility::echoArray($ordre);
     return $tNavBar;
 }
 
