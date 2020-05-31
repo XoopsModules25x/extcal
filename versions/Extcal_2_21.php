@@ -33,7 +33,9 @@ class Extcal_2_21
         // Create eXtcal upload directory if don't exist
         $dir = XOOPS_ROOT_PATH . '/uploads/extcal';
         if (!is_dir($dir)) {
-            mkdir($dir);
+            if (!mkdir($dir) && !is_dir($dir)) {
+                throw new \RuntimeException(sprintf('Directory "%s" was not created', $dir));
+            }
 
             // Copy index.html files on uploads folders
             $indexFile = __DIR__ . '/index.html';
