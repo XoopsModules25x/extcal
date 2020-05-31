@@ -82,6 +82,9 @@ class Helper extends \Xmf\Module\Helper
         return $ret;
     }
 
+    /**
+     * @return string
+     */
     public function getMyNameSpace()
     {
         return __NAMESPACE__;

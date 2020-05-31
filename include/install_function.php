@@ -8,6 +8,10 @@
 
 use XoopsModules\Extcal\Helper;
 
+/**
+ * @param \XoopsModule $xoopsModule
+ * @return bool
+ */
 function xoops_module_install_extcal(\XoopsModule $xoopsModule)
 {
     // Create eXtCal upload directory

@@ -54,6 +54,11 @@ class Migrate extends \Xmf\Database\Migrate
         }
     }
 
+    /**
+     * @param $tableName
+     * @param $columnName
+     * @param $newName
+     */
     private function renameColumn($tableName, $columnName, $newName)
     {
         if ($this->tableHandler->useTable($tableName)) {

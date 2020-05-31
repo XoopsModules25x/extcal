@@ -53,8 +53,7 @@ function xoops_module_pre_install_extcal(\XoopsModule $module)
 
 /**
  * Performs tasks required during installation of the module
- * @param \XoopsModule $module {@link XoopsModule}
- *
+ * @param \XoopsModule $xoopsModule
  * @return bool true if installation successful, false if not
  */
 function xoops_module_install_extcal(\XoopsModule $xoopsModule)
