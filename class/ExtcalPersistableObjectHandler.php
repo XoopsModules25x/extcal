@@ -135,7 +135,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->table;
-        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
+        if (isset($criteria) && $criteria !== null) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
@@ -255,7 +255,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     {
         $field   = '';
         $groupby = false;
-        if (isset($criteria) && $criteria instanceof \CriteriaCompo) {
+        if (isset($criteria) && $criteria !== null) {
             if ('' != $criteria->groupby) {
                 $groupby = true;
                 $field   = $criteria->groupby . ', '; //Not entirely secure unless you KNOW that no criteria's groupby clause is going to be mis-used
@@ -423,7 +423,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
             $setClause .= $this->db->quoteString($fieldvalue);
         }
         $sql = 'UPDATE ' . $this->table . ' SET ' . $setClause;
-        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
+        if (isset($criteria) && $criteria !== null) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         if (false !== $force) {
@@ -476,7 +476,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
      */
     public function deleteAll(\CriteriaCompo $criteria = null, $force = true, $asObject = false)
     {
-        if (isset($criteria) && $criteria instanceof \CriteriaCompo) {
+        if (isset($criteria) && $criteria !== null) {
             $sql = 'DELETE FROM ' . $this->table;
             $sql .= ' ' . $criteria->renderWhere();
             if (!$this->db->query($sql)) {
@@ -631,14 +631,14 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     {
         $field   = '';
         $groupby = false;
-        if (isset($criteria) && $criteria instanceof \CriteriaCompo) {
+        if (isset($criteria) && $criteria !== null) {
             if ('' != $criteria->groupby) {
                 $groupby = true;
                 $field   = $criteria->groupby . ', '; //Not entirely secure unless you KNOW that no criteria's groupby clause is going to be mis-used
             }
         }
         $sql = 'SELECT ' . $field . "SUM($sum) FROM " . $this->table;
-        if (isset($criteria) && $criteria instanceof \CriteriaCompo) {
+        if (isset($criteria) && $criteria !== null) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->groupby) {
                 $sql .= $criteria->getGroupby();
@@ -671,14 +671,14 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     {
         $field   = '';
         $groupby = false;
-        if (isset($criteria) && $criteria instanceof \CriteriaCompo) {
+        if (isset($criteria) && $criteria !== null) {
             if ('' != $criteria->groupby) {
                 $groupby = true;
                 $field   = $criteria->groupby . ', '; //Not entirely secure unless you KNOW that no criteria's groupby clause is going to be mis-used
             }
         }
         $sql = 'SELECT ' . $field . "MAX($max) FROM " . $this->table;
-        if (isset($criteria) && $criteria instanceof \CriteriaCompo) {
+        if (isset($criteria) && $criteria !== null) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->groupby) {
                 $sql .= $criteria->getGroupby();
@@ -712,7 +712,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
         $field = '';
 
         $sql = 'SELECT ' . $field . "AVG($avg) FROM " . $this->table;
-        if (isset($criteria) && $criteria instanceof \CriteriaCompo) {
+        if (isset($criteria) && $criteria !== null) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);
