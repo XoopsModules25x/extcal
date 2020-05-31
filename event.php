@@ -214,7 +214,7 @@ $tNavBar = getNavBarTabs($params['view']);
 $xoopsTpl->assign('tNavBar', $tNavBar);
 //---------------------
 
-/*
+
 // TZV //
 // mb missing for xBootstrap templates by Tzvook
 $lang = ['start'      => _MD_EXTCAL_START,
@@ -235,7 +235,7 @@ $lang = ['start'      => _MD_EXTCAL_START,
 $xoopsTpl->assign('lang', $lang);
 $xoopsTpl->assign('view', 'event');
 
-*/
+
 
 /*  test modofication status    JJD
   $k = 'status';
