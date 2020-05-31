@@ -48,9 +48,7 @@ function tableExists($tablename)
  */
 function xoops_module_pre_update_extcal(\XoopsModule $module)
 {
-    /** @var Helper $helper */
     /** @var Utility $utility */
-    $helper  = Helper::getInstance();
     $utility = new Utility();
 
     $xoopsSuccess = $utility::checkVerXoops($module);
@@ -122,10 +120,8 @@ function xoops_module_update_extcal(\XoopsModule $module, $previousVersion = nul
 
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-    /** @var Helper $helper */
     /** @var Utility $utility */
     /** @var Common\Configurator $configurator */
-    $helper       = Helper::getInstance();
     $utility      = new Utility();
     $configurator = new Common\Configurator();
 

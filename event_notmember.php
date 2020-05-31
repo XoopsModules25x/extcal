@@ -13,17 +13,6 @@ require_once __DIR__ . '/header.php';
 require_once __DIR__ . '/include/constantes.php';
 require_once __DIR__ . '/include/mail_fnc.php';
 
-/*
-Utility::echoArray($_POST);
-exit;
-    [mode] => add
-    [event] => 3
-
-    [mode] => remove
-    [event] => 3
-
-*/
-
 /** @var EventHandler $eventHandler */
 /** @var EventNotMemberHandler $eventNotMemberHandler */
 /** @var Helper $helper */
