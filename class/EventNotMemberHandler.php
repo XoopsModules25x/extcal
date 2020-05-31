@@ -48,8 +48,8 @@ class EventNotMemberHandler extends ExtcalPersistableObjectHandler
         $eventnotmember->setVars($varArr);
 
         if ($this->insert($eventnotmember, true)) {
-            $eventMemberHandler = Extcal\Helper::getInstance()->getHandler(\_EXTCAL_CLN_MEMBER);
-            $eventMemberHandler->deleteById([$varArr['event_id'], $varArr['uid']]);
+            $eventmemberHandler = Extcal\Helper::getInstance()->getHandler(\_EXTCAL_CLN_MEMBER);
+            $eventmemberHandler->deleteById([$varArr['event_id'], $varArr['uid']]);
         }
     }
 

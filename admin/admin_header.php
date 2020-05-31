@@ -69,8 +69,8 @@ if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof \XoopsTpl)
 $categoryHandler = $helper->getHandler(_EXTCAL_CLN_CAT);
 /** @var EventHandler $eventHandler */
 $eventHandler = $helper->getHandler(_EXTCAL_CLN_EVENT);
-/** @var EventmemberHandler $eventMemberHandler */
-$eventMemberHandler = $helper->getHandler(_EXTCAL_CLN_MEMBER);
+/** @var EventmemberHandler $eventmemberHandler */
+$eventmemberHandler = $helper->getHandler(_EXTCAL_CLN_MEMBER);
 /** @var EventNotMemberHandler $eventNotMemberHandler */
 $eventNotMemberHandler = $helper->getHandler(_EXTCAL_CLN_NOT_MEMBER);
 /** @var FileHandler $fileHandler */

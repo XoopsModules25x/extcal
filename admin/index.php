@@ -40,8 +40,8 @@ $countCategory = $categoryHandler->getCount();
 /** @var \XoopsPersistableObjectHandler $eventHandler */
 $countEvent = $eventHandler->getCount();
 //count "total eventmembers"
-/** @var \XoopsPersistableObjectHandler $eventMemberHandler */
-$countEventmember = $eventMemberHandler->getCount();
+/** @var \XoopsPersistableObjectHandler $eventmemberHandler */
+$countEventmember = $eventmemberHandler->getCount();
 //count "total eventnotmembers"
 /** @var \XoopsPersistableObjectHandler $eventNotMemberHandler */
 $countEventnotmember = $eventNotMemberHandler->getCount();

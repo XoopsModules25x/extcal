@@ -17,7 +17,11 @@
  * @author       XOOPS Development Team,
  */
 
-use XoopsModules\Extcal;
+use XoopsModules\Extcal\{
+    Helper,
+    Utility,
+    Common
+};
 
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof \XoopsUser)
     || !$GLOBALS['xoopsUser']->isAdmin()) {
@@ -44,10 +48,10 @@ function tableExists($tablename)
  */
 function xoops_module_pre_update_extcal(\XoopsModule $module)
 {
-    /** @var Extcal\Helper $helper */
-    /** @var Extcal\Utility $utility */
-    $helper  = Extcal\Helper::getInstance();
-    $utility = new Extcal\Utility();
+    /** @var Helper $helper */
+    /** @var Utility $utility */
+    $helper  = Helper::getInstance();
+    $utility = new Utility();
 
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
@@ -55,8 +59,8 @@ function xoops_module_pre_update_extcal(\XoopsModule $module)
     //mb    return $xoopsSuccess && $phpSuccess;
 
     //    XoopsLoad::load('migrate', 'extcal');
-    /** @var \XoopsModules\Extcal\Common\Configurator $configurator */
-    $configurator = new \XoopsModules\Extcal\Common\Configurator();
+    /** @var Common\Configurator $configurator */
+    $configurator = new Common\Configurator();
 
     //create upload folders
     $uploadFolders = $configurator->uploadFolders;
@@ -64,7 +68,7 @@ function xoops_module_pre_update_extcal(\XoopsModule $module)
         $utility::prepareFolder($value);
     }
 
-    $migrator = new \XoopsModules\Extcal\Common\Migrate($configurator);
+    $migrator = new Common\Migrate($configurator);
     $migrator->synchronizeSchema();
 
     return true;
@@ -118,14 +122,14 @@ function xoops_module_update_extcal(\XoopsModule $module, $previousVersion = nul
 
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-    /** @var Extcal\Helper $helper */ 
-    /** @var Extcal\Utility $utility */
-    /** @var Extcal\Common\Configurator $configurator */
-    $helper       = Extcal\Helper::getInstance();
-    $utility      = new Extcal\Utility();
-    $configurator = new Extcal\Common\Configurator();
+    /** @var Helper $helper */
+    /** @var Utility $utility */
+    /** @var Common\Configurator $configurator */
+    $helper       = Helper::getInstance();
+    $utility      = new Utility();
+    $configurator = new Common\Configurator();
 
-    $migrator = new \XoopsModules\Extcal\Common\Migrate($configurator);
+    $migrator = new Common\Migrate($configurator);
     $migrator->synchronizeSchema();
 
     if ($previousVersion < 241) {

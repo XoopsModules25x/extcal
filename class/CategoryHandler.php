@@ -20,27 +20,27 @@ namespace XoopsModules\Extcal;
  * @author       XOOPS Development Team,
  */
 
-use XoopsModules\Extcal;
+use XoopsModules\Extcal\{
+    Helper,
+    Perm,
+    Time
+};
 
-
-
-// // require_once __DIR__ . '/ExtcalPersistableObjectHandler.php';
-//require_once __DIR__ . '/perm.php';
-//require_once __DIR__ . '/time.php';
 
 /**
  * Class CategoryHandler.
  */
 class CategoryHandler extends ExtcalPersistableObjectHandler
 {
-    public $_extcalPerm;
+    public $extcalPerm;
 
     /**
      * @param \XoopsDatabase|null $db
      */
     public function __construct(\XoopsDatabase $db = null)
     {
-        $this->_extcalPerm = Extcal\Perm::getHandler();
+
+        $this->extcalPerm = Perm::getHandler();
         //        parent::__construct($db, 'extcal_cat', _EXTCAL_CLN_CAT, 'cat_id');
         parent::__construct($db, 'extcal_cat', Category::class, 'cat_id');
     }
@@ -50,7 +50,7 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
      *
      * @return bool
      */
-    public function createCat($data)
+    public function createCategory($data)
     {
         $cat = $this->create();
         $cat->setVars($data);
@@ -108,7 +108,7 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
     /**
      * @param $catId
      */
-    public function deleteCat($catId)
+    public function deleteCategory($catId)
     {
         /* TODO :
            - Delete all events in this category
@@ -185,7 +185,7 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
      */
     public function addCatPermCriteria(\CriteriaElement $criteria, $user, $perm = 'extcal_cat_view')
     {
-        $authorizedAccessCats = $this->_extcalPerm->getAuthorizedCat($user, 'extcal_cat_view');
+        $authorizedAccessCats = $this->extcalPerm->getAuthorizedCat($user, 'extcal_cat_view');
         $count                = \count($authorizedAccessCats);
         if ($count > 0) {
             $in = '(' . $authorizedAccessCats[0];
@@ -207,6 +207,6 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
      */
     public function haveSubmitRight($xoopsUser)
     {
-        return \count($this->_extcalPerm->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) > 0;
+        return \count($this->extcalPerm->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) > 0;
     }
 }

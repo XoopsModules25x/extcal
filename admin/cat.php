@@ -27,19 +27,14 @@ require_once dirname(__DIR__) . '/include/constantes.php';
 
 /** @var Extcal\CategoryHandler $categoryHandler */
 
-//$gepeto = array_merge($_GET, $_POST);
-//while (list($key, $value) = each($gepeto)) {
-//foreach ($gepeto as $key => $value) {
-//    ${$k} =$value;
-//}
-
-//if (!isset($op)) {
-//    $op = '';
-//}
 $op = 'list';
 if (Request::hasVar('op', 'GET')) {
-    $op     = Request::getString('op', '');
+    $op     = Request::getCmd('op', 'list');
     $cat_id = Request::getInt('cat_id', 0);
+}
+
+if (Request::hasVar('confirm', 'POST')) {
+    $confirm = Request::getInt('confirm', 0, 'POST');
 }
 
 // $t=print_r($gepeto,true);
@@ -53,9 +48,9 @@ switch ($op) {
             'cat_desc'   => Request::getText('cat_desc', '', 'POST'),
             'cat_weight' => Request::getInt('cat_weight', 0, 'POST'),
             'cat_color'  => mb_substr(Request::getString('cat_color', '', 'POST'), 1),
-            'cat_icone'  => Request::getInt('cat_icone', 0, 'POST'),
+            'cat_icone'  => Request::getString('cat_icone', '', 'POST'),
         ];
-        if (isset($cat_id)) {
+        if (isset($cat_id) && $cat_id > 0) {
             // $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
             //            $varArr = [
             //                'cat_name'   => Request::getString('cat_name', '', 'POST'),
@@ -77,7 +72,7 @@ switch ($op) {
             //                'cat_color'  => substr($cat_color, 1),
             //                'cat_icone'  => $cat_icone,
             //            ];
-            $categoryHandler->createCat($varArr);
+            $categoryHandler->createCategory($varArr);
             redirect_header('cat.php', 3, _AM_EXTCAL_CAT_CREATED, false);
         }
 
@@ -152,7 +147,7 @@ switch ($op) {
             xoops_cp_footer();
         } else {
             if (1 == $confirm) {
-                $categoryHandler->deleteCat($cat_id);
+                $categoryHandler->deleteCategory($cat_id);
                 redirect_header('cat.php', 3, _AM_EXTCAL_CAT_DELETED, false);
             }
         }
@@ -201,7 +196,7 @@ switch ($op) {
     //                 } else {
     //                     if (isset($confirm) && $confirm == 1) {
     //                         // $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-    //                         $categoryHandler->deleteCat($cat_id);
+    //                         $categoryHandler->deleteCategory($cat_id);
     //                         redirect_header("cat.php", 3, _AM_EXTCAL_CAT_DELETED, false);
     //                     }
     //                 }

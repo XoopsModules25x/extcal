@@ -52,8 +52,8 @@ require_once _EXTCAL_PEAR_CALENDAR_ROOT . '/Day.php';
 $categoryHandler = $helper->getHandler(_EXTCAL_CLN_CAT);
 /** @var EventHandler $eventHandler */
 $eventHandler = $helper->getHandler(_EXTCAL_CLN_EVENT);
-/** @var EventmemberHandler $eventMemberHandler */
-$eventMemberHandler = $helper->getHandler(_EXTCAL_CLN_MEMBER);
+/** @var EventmemberHandler $eventmemberHandler */
+$eventmemberHandler = $helper->getHandler(_EXTCAL_CLN_MEMBER);
 /** @var EventNotMemberHandler $eventNotMemberHandler */
 $eventNotMemberHandler = $helper->getHandler(_EXTCAL_CLN_NOT_MEMBER);
 /** @var FileHandler $fileHandler */
@@ -72,7 +72,7 @@ if (!isset($GLOBALS['xoTheme']) || !is_object($GLOBALS['xoTheme'])) {
     $GLOBALS['xoTheme'] = new \xos_opal_Theme();
 }
 
-$GLOBALS['xoTheme']->addScript('modules/extcal/include/ToolTips.js');
+$GLOBALS['xoTheme']->addScript('modules/extcal/assets/js/ToolTips.js');
 $GLOBALS['xoTheme']->addStylesheet('modules/extcal/assets/css/infobulle.css');
 
 //////////////////////////////////////////////////////////////

@@ -17,11 +17,12 @@
  * @author       XOOPS Development Team,
  */
 
+use Xmf\Request;
 use XoopsModules\Extcal\{
     Helper,
     LocationHandler
 };
-use Xmf\Request;
+
 
 require_once __DIR__ . '/header.php';
 require_once __DIR__ . '/include/constantes.php';

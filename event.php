@@ -35,6 +35,11 @@ $params = ['view' => _EXTCAL_NAV_NEW_EVENT, 'file' => _EXTCAL_FILE_NEW_EVENT];
 $GLOBALS['xoopsOption']['template_main'] = 'extcal_event.tpl';
 
 /** @var EventHandler $eventHandler */
+/** @var PermHandler $permHandler */
+/** @var FileHandler $fileHandler */
+/** @var LocationHandler $locationHandler */
+/** @var EventMemberHandler $eventmemberHandler */
+/** @var EventNotMemberHandler $eventNotMemberHandler */
 /** @var Helper $helper */
 $helper = Helper::getInstance();
 
@@ -113,7 +118,7 @@ $xoopsTpl->assign('location', $location);
 // If the who's goging function is enabled
 if ($helper->getConfig('whos_going')) {
     // Retriving member's for this event
-    $members = $eventMemberHandler->getMembers($eventId);
+    $members = $eventmemberHandler->getMembers($eventId);
 
     // Initializing variable
     $eventmember['member']['show_button'] = false;
@@ -142,7 +147,7 @@ if ($helper->getConfig('whos_going')) {
 
             // If this event is full
             if (0 != $event['event_nbmember']
-                && $eventMemberHandler->getNbMember($eventId) >= $event['event_nbmember']) {
+                && $eventmemberHandler->getNbMember($eventId) >= $event['event_nbmember']) {
                 $eventmember['member']['disabled'] = ' disabled="disabled"';
             }
         }

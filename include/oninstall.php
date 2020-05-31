@@ -17,7 +17,11 @@
  * @author       XOOPS Development Team,
  */
 
-use XoopsModules\Extcal;
+use XoopsModules\Extcal\{
+    Helper,
+    Utility,
+    Common
+};
 
 /**
  * Prepares system prior to attempting to install module
@@ -29,8 +33,8 @@ function xoops_module_pre_install_extcal(\XoopsModule $module)
 {
     include __DIR__ . '/common.php';
 
-    /** @var \XoopsModules\Extcal\Utility $utility */
-    $utility = new \XoopsModules\Extcal\Utility();
+    /** @var Utility $utility */
+    $utility = new Utility();
     //check for minimum XOOPS version
     $xoopsSuccess = $utility::checkVerXoops($module);
 
@@ -59,11 +63,12 @@ function xoops_module_install_extcal(\XoopsModule $xoopsModule)
 
     $moduleDirName = basename(dirname(__DIR__));
 
-    /** @var \XoopsModules\Extcal\Helper $helper */ /** @var \XoopsModules\Extcal\Utility $utility */
-    /** @var \XoopsModules\Extcal\Common\Configurator $configurator */
-    $helper       = \XoopsModules\Extcal\Helper::getInstance();
-    $utility      = new \XoopsModules\Extcal\Utility();
-    $configurator = new \XoopsModules\Extcal\Common\Configurator();
+    /** @var Helper $helper */
+    /** @var Utility $utility */
+    /** @var Common\Configurator $configurator */
+    $helper       = Helper::getInstance();
+    $utility      = new Utility();
+    $configurator = new Common\Configurator();
     // Load language files
     $helper->loadLanguage('admin');
     $helper->loadLanguage('modinfo');

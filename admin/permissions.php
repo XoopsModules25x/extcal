@@ -18,7 +18,8 @@
  */
 
 use XoopsModules\Extcal\{
-    Helper
+    Helper,
+    CategoryHandler
 };
 use Xmf\Request;
 
@@ -26,6 +27,7 @@ require_once __DIR__ . '/admin_header.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
 
 /** @var Helper $helper */
+/** @var CategoryHandler $categoryHandler */
 
 $step = Request::getString('step', 'default');
 
@@ -89,7 +91,7 @@ switch ($step) {
             return '';
         }
 
-        echo '<script type="text/javascript" src="../include/admin.js"></script>';
+        echo '<script type="text/javascript" src="../assets/js/admin.js"></script>';
 
         /*
          * Public category permission mask
@@ -131,7 +133,6 @@ switch ($step) {
         echo '</div></fieldset><br>';
 
         // Retriving category list for Group perm form
-        // $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
         $cats = $categoryHandler->getAllCat($xoopsUser, 'all');
 
         /*

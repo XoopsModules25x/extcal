@@ -39,14 +39,14 @@ switch ($op) {
                 $xoopsMailer = xoops_getMailer();
                 //                $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
                 //                $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
-                //                $eventMemberHandler = xoops_getModuleHandler(_EXTCAL_CLS_MEMBER, _EXTCAL_MODULE);
+                //                $eventmemberHandler = xoops_getModuleHandler(_EXTCAL_CLS_MEMBER, _EXTCAL_MODULE);
                 $extcalTime   = Extcal\Time::getHandler();
                 $extcalConfig = Extcal\Config::getHandler();
 
                 $event = $eventHandler->getEvent($_POST['event_id'], $xoopsUser, true);
                 $cat   = $categoryHandler->getCat($event->getVar('cat_id'), $xoopsUser, 'all');
 
-                $xoopsMailer->setToUsers($eventMemberHandler->getMembers($_POST['event_id']));
+                $xoopsMailer->setToUsers($eventmemberHandler->getMembers($_POST['event_id']));
                 $xoopsMailer->setFromName($myts->oopsStripSlashesGPC($_POST['mail_fromname']));
                 $xoopsMailer->setFromEmail($myts->oopsStripSlashesGPC($_POST['mail_fromemail']));
                 $xoopsMailer->setSubject($myts->oopsStripSlashesGPC($_POST['mail_subject']));

@@ -17,11 +17,11 @@
  * @author       XOOPS Development Team,
  */
 
+use Xmf\Request;
 use XoopsModules\Extcal\{
     Helper,
     Perm
 };
-use Xmf\Request;
 
 require_once __DIR__ . '/header.php';
 
@@ -43,7 +43,7 @@ $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
 
 // Tooltips include
 /** @var xos_opal_Theme $xoTheme */
-$xoTheme->addScript('modules/extcal/include/ToolTips.js');
+$xoTheme->addScript('modules/extcal/assets/js/ToolTips.js');
 $xoTheme->addStylesheet('modules/extcal/assets/css/infobulle.css');
 
 $eventId = Request::getInt('event', 0, 'GET');

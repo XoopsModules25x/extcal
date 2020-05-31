@@ -32,12 +32,12 @@ require_once dirname(dirname(dirname(__DIR__))) . '/class/template.php';
  *
  *******************************************************************
  * @param $mode
- * @param $event_id
- * @param $member_uid
+ * @param $eventId
+ * @param $memberUid
  * @param $subject
  * @param $tplMessage
  */
-function sendMail2member($mode, $event_id, $member_uid, $subject, $tplMessage)
+function sendMail2member($mode, $eventId, $memberUid, $subject, $tplMessage)
 {
     //mode = 0 pas d'entete
     //mode = 1 format text
@@ -47,8 +47,8 @@ function sendMail2member($mode, $event_id, $member_uid, $subject, $tplMessage)
     // $t = print_r($xoopsConfig, true);
     // echo "<pre>{$t}</pre>";
     /*
-    $member_uid = 1;
-    $event_id = 393;
+    $memberUid = 1;
+    $eventId = 393;
     $message = "Bonne journée à tous";
     $newStatus = 1;
     $oldStatus = 0;
@@ -67,7 +67,7 @@ function sendMail2member($mode, $event_id, $member_uid, $subject, $tplMessage)
     //Recuperation des données event,user et member
     //Recuperation des données de l'evennement
     $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
-    $obj          = $eventHandler->getEvent($event_id);
+    $obj          = $eventHandler->getEvent($eventId);
     $event        = $eventHandler->objectToArray($obj);
     $eventHandler->formatEventDate($event, _MD_EXTCAL_FORMAT_DATE);
 
@@ -90,7 +90,7 @@ __sql__;
     $sql = <<<__sql__
   SELECT if(tu.name='', tu.uname, tu.name) AS name,     tu.uname,   tu.email
   FROM {$tblUsers} tu
-  WHERE tu.uid = {$member_uid};
+  WHERE tu.uid = {$memberUid};
 __sql__;
 
     $rst    = $xoopsDB->query($sql);
@@ -105,7 +105,7 @@ SELECT tu.uid, if(tu.name='', tu.uname, tu.name) AS name,   tu.uname,   tu.email
 FROM {$tblMember} tm,
      {$tblUsers}  tu
 WHERE tm.uid = tu.uid
-  AND tm.event_id = {$event_id}
+  AND tm.event_id = {$eventId}
 __sql__;
 
     $rst     = $xoopsDB->query($sql);
@@ -123,7 +123,7 @@ SELECT tu.uid, if(tu.name='', tu.uname, tu.name) AS name,   tu.uname,   tu.email
 FROM {$tblNotMember} tm,
      {$tblUsers}  tu
 WHERE tm.uid = tu.uid
-  AND tm.event_id = {$event_id}
+  AND tm.event_id = {$eventId}
 __sql__;
 
     $rst = $xoopsDB->query($sql);

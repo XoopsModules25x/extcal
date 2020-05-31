@@ -14,16 +14,16 @@ require_once __DIR__ . '/include/mail_fnc.php';
 /** @var Helper $helper */
 $helper = Helper::getInstance();
 
-// $member_uid = 1;
-// $event_id = 393;
+// $memberUid = 1;
+// $eventId = 393;
 
 $message   = _MD_EXTCAL_MESSAGE;
 $newStatus = 1;
 $oldStatus = 0;
 $userName  = $xoopsUser->getVar('uname');
 
-$event_id   = $_POST['event'];
-$member_uid = $xoopsUser->getVar('uid');
+$eventId   = Request::getInt('event', 0, 'POST');
+$memberUid = $xoopsUser->getVar('uid');
 
 /*
 Utility::echoArray($_POST);
@@ -36,9 +36,9 @@ exit;
 
 */
 
-//sendMail2member($mode, $event_id, $member_uid, $subject, $tplMessage)
-//sendMail2member($helper->getConfig('email_Mode'), $event_id, $member_uid, $newStatus, $oldStatus, $message);
-sendMail2member(_EXTCAL_HEADER_HTML, $event_id, $member_uid, $userName, $message);
+//sendMail2member($mode, $eventId, $memberUid, $subject, $tplMessage)
+//sendMail2member($helper->getConfig('email_Mode'), $eventId, $memberUid, $newStatus, $oldStatus, $message);
+sendMail2member(_EXTCAL_HEADER_HTML, $eventId, $memberUid, $userName, $message);
 
 // $t = print_r(get_defined_constants(), true);
 // $t = print_r($xoopsConfig, true);
@@ -51,38 +51,39 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 }
 
 if ($xoopsUser && $helper->getConfig('whos_going')) {
+    $mode = Request::getString('mode', '', 'POST');
     // If param are right
-    if (Request::getInt('event', 0, 'POST') > 0 && ('add' === $_POST['mode'] || 'remove' === $_POST['mode'])) {
-        $eventHandler       = Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
-        $eventMemberHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_MEMBER);
+    if ($eventId > 0 && ('add' === $mode || 'remove' === $mode)) {
+        $eventHandler       = $helper->getHandler(_EXTCAL_CLN_EVENT);
+        $eventmemberHandler = $helper->getHandler(_EXTCAL_CLN_MEMBER);
 
         // If the user have to be added
-        if ('add' === $_POST['mode']) {
-            $event = $eventHandler->getEvent(Request::getInt('event', 0, 'POST'), $xoopsUser);
+        if ('add' === $mode) {
+            $event = $eventHandler->getEvent($eventId, $xoopsUser);
 
             if ($event->getVar('event_nbmember') > 0
-                && $eventMemberHandler->getNbMember(Request::getInt('event', 0, 'POST')) >= $event->getVar('event_nbmember')) {
-                sendMail2member($mode, $event_id, $member_uid, _MD_EXTCAL_SUBJECT_0, _MD_EXTCAL_MSG_0);
+                && $eventmemberHandler->getNbMember($eventId) >= $event->getVar('event_nbmember')) {
+                sendMail2member($mode, $eventId, $memberUid, _MD_EXTCAL_SUBJECT_0, _MD_EXTCAL_MSG_0);
                 $rediredtMessage = _MD_EXTCAL_MAX_MEMBER_REACHED;
             } else {
-                $eventMemberHandler->createEventmember(
+                $eventmemberHandler->createEventmember(
                     [
-                        'event_id' => Request::getInt('event', 0, 'POST'),
+                        'event_id' => $eventId,
                         'uid'      => $xoopsUser->getVar('uid'),
                     ]
                 );
-                sendMail2member($mode, $event_id, $member_uid, _MD_EXTCAL_SUBJECT_1, _MD_EXTCAL_MSG_1);
+                sendMail2member($mode, $eventId, $memberUid, _MD_EXTCAL_SUBJECT_1, _MD_EXTCAL_MSG_1);
                 $rediredtMessage = _MD_EXTCAL_WHOS_GOING_ADDED_TO_EVENT;
             }
             // If the user have to be remove
         } else {
-            if ('remove' === $_POST['mode']) {
-                $eventMemberHandler->deleteEventmember([Request::getInt('event', 0, 'POST'), $xoopsUser->getVar('uid')]);
-                sendMail2member($mode, $event_id, $member_uid, _MD_EXTCAL_SUBJECT_2, _MD_EXTCAL_MSG_2);
+            if ('remove' === $mode) {
+                $eventmemberHandler->deleteEventmember([$eventId, $xoopsUser->getVar('uid')]);
+                sendMail2member($mode, $eventId, $memberUid, _MD_EXTCAL_SUBJECT_2, _MD_EXTCAL_MSG_2);
                 $rediredtMessage = _MD_EXTCAL_WHOS_GOING_REMOVED_TO_EVENT;
             }
         }
-        redirect_header('event.php?event=' . $_POST['event'], 3, $rediredtMessage, false);
+        redirect_header('event.php?event=' . $eventId, 3, $rediredtMessage, false);
     } else {
         redirect_header('index.php', 3, _NOPERM, false);
     }

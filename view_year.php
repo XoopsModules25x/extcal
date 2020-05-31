@@ -44,7 +44,7 @@ $eventHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 
 // Tooltips include
 /** @var xos_opal_Theme $xoTheme */
-$xoTheme->addScript('modules/extcal/include/ToolTips.js');
+$xoTheme->addScript('modules/extcal/assets/js/ToolTips.js');
 $xoTheme->addStylesheet('modules/extcal/assets/css/infobulle.css');
 
 $form = new \XoopsSimpleForm('', 'navigSelectBox', $params['file'], 'get');
