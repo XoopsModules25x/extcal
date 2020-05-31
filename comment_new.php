@@ -18,6 +18,7 @@
  */
 require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 $com_itemid = \Xmf\Request::getInt('com_itemid', 0, 'GET');
+/** @var \XoopsMySQLDatabase $xoopsDB */
 if ($com_itemid > 0) {
     // Get link title
     $sql            = 'SELECT event_title, event_desc FROM ' . $xoopsDB->prefix('extcal_event') . ' WHERE event_id=' . $com_itemid . ' ';

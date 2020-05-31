@@ -21,7 +21,8 @@ use XoopsModules\Extcal\{
     Helper,
     Utility,
     CategoryHandler,
-    EventHandler
+    EventHandler,
+    Time
 };
 use Xmf\Request;
 
@@ -33,6 +34,7 @@ $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
 global $xoopsUser, $xoopsTpl;
 /** @var CategoryHandler $categoryHandler */
 /** @var EventHandler $eventHandler */
+/** @var Time $timeHandler */
 /** @var Helper $helper */
 $helper = Helper::getInstance();
 

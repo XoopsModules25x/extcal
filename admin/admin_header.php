@@ -35,6 +35,7 @@ require_once dirname(__DIR__) . '/include/constantes.php';
 require_once dirname(__DIR__) . '/preloads/autoloader.php';
 
 $moduleDirName = basename(dirname(__DIR__));
+$moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
 /** @var Helper $helper */
 $helper = Helper::getInstance();

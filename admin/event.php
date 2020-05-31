@@ -207,6 +207,7 @@ switch ($op) {
 
         echo '<fieldset><legend style="font-weight:bold; color:#990000;">' . _MD_EXTCAL_EDIT_EVENT . '</legend>';
 
+        /** @var \XoopsThemeForm $form */
         $form = $eventHandler->getEventForm('admin', $action, ['event_id' => $eventId]);
         if ($form) {
             $form->display();
@@ -426,6 +427,7 @@ switch ($op) {
         //Fin de la liste des evennement -------------------------------------
         echo '<fieldset><legend style="font-weight:bold; color:#990000;">' . _MD_EXTCAL_SUBMIT_EVENT . '</legend>';
 
+        /** @var \XoopsThemeForm $form */
         $form = $eventHandler->getEventForm('admin');
         $form->display();
 

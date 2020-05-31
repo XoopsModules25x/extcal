@@ -36,6 +36,8 @@ require_once dirname(dirname(dirname(__DIR__))) . '/class/xoopsform/grouppermfor
 require_once dirname(dirname(dirname(__DIR__))) . '/class/uploader.php';
 require_once dirname(__DIR__) . '/include/constantes.php';
 
+
+
 if ($xoopsUser) {
     $xoopsModule = \XoopsModule::getByDirname('extcal');
     if (!$xoopsUser->isAdmin($xoopsModule->mid())) {

@@ -4,7 +4,8 @@ use XoopsModules\Extcal\{
     Helper,
     Utility,
     CategoryHandler,
-    EventHandler
+    EventHandler,
+    Time
 };
 use Xmf\Request;
 
@@ -13,6 +14,9 @@ require_once __DIR__ . '/include/constantes.php';
 $params                                  = ['view' => _EXTCAL_NAV_AGENDA_WEEK, 'file' => _EXTCAL_FILE_AGENDA_WEEK];
 $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
 
+global $xoopsUser, $xoopsTpl;
+
+/** @var Time $timeHandler */
 /** @var CategoryHandler $categoryHandler */
 /** @var EventHandler $eventHandler */
 /** @var Helper $helper */

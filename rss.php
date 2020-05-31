@@ -12,6 +12,7 @@ require_once XOOPS_ROOT_PATH . '/class/template.php';
 
 error_reporting(0);
 $GLOBALS['xoopsLogger']->activated = false;
+global $xoopsConfig;
 
 /** @var Helper $helper */
 $helper = Helper::getInstance();

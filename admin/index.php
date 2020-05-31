@@ -21,7 +21,6 @@ use XoopsModules\Extcal\{
     Helper,
     Common,
     Utility
-
 };
 
 
@@ -29,11 +28,14 @@ require_once __DIR__ . '/admin_header.php';
 // Display Admin header
 xoops_cp_header();
 
+/** @var Xmf\Module\Admin $adminObject */
 /** @var Utility $utility */
 /** @var Helper $helper */
 
 $helper = Helper::getInstance();
 $configurator = new Common\Configurator();
+
+
 
 //foreach (array_keys($configurator['uploadFolders']) as $i) {
 //    $utility::createFolder($configurator['uploadFolders'][$i]);

@@ -36,6 +36,8 @@ require_once XOOPS_ROOT_PATH . '/header.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once __DIR__ . '/include/agenda_fnc.php';
 
+global $xoopsUser;
+
 $helper = Helper::getInstance();
 $helper->loadLanguage('modinfo');
 

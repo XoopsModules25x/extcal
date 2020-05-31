@@ -19,22 +19,24 @@
 
 use Xmf\Request;
 use XoopsModules\Extcal\{
-    CategoryHandler
+    CategoryHandler,
+    Form
 };
 
 const CONFIRM = 'confirm';
 
 require_once __DIR__ . '/admin_header.php';
 require_once dirname(dirname(dirname(__DIR__))) . '/class/xoopsformloader.php';
-
 require_once dirname(__DIR__) . '/include/constantes.php';
+
+global $xoopsUser, $xoopsTpl;
 
 /** @var CategoryHandler $categoryHandler */
 
 $op = 'list';
 if (Request::hasVar('op', 'GET')) {
     $op     = Request::getCmd('op', 'list');
-    $cat_id = Request::getInt('cat_id', 0);
+    $catId = Request::getInt('cat_id', 0);
 }
 
 if (Request::hasVar(CONFIRM, 'POST')) {
@@ -54,7 +56,7 @@ switch ($op) {
             'cat_color'  => mb_substr(Request::getString('cat_color', '', 'POST'), 1),
             'cat_icone'  => Request::getString('cat_icone', '', 'POST'),
         ];
-        if (isset($cat_id) && $cat_id > 0) {
+        if (isset($catId) && $catId > 0) {
             // $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
             //            $varArr = [
             //                'cat_name'   => Request::getString('cat_name', '', 'POST'),
@@ -64,7 +66,7 @@ switch ($op) {
             //                'cat_icone'  => Request::getInt('cat_icone', 0, 'POST')
             //            ];
 
-            $categoryHandler->modifyCat($cat_id, $varArr);
+            $categoryHandler->modifyCat($catId, $varArr);
             redirect_header('cat.php', 3, _AM_EXTCAL_CAT_EDITED, false);
             // Create new cat
         } else {
@@ -85,7 +87,7 @@ switch ($op) {
         xoops_cp_header();
 
         // $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-        //$cat        = $categoryHandler->getCat($cat_id, true);
+        //$cat        = $categoryHandler->getCat($catId, true);
 
         $form = new \XoopsThemeForm(_AM_EXTCAL_ADD_CATEGORY, 'add_cat', 'cat.php?op=enreg', 'post', true);
         $form->addElement(new \XoopsFormText(_AM_EXTCAL_NAME, 'cat_name', 30, 255), true);
@@ -102,7 +104,7 @@ switch ($op) {
         $form->addElement($xfIcones, false);
 
         $form->addElement(new \XoopsFormButton('', 'form_submit', _SUBMIT, 'submit'), false);
-
+        /** @var ThemeForm $form */
         $form->display();
 
         require_once __DIR__ . '/admin_footer.php';
@@ -110,13 +112,13 @@ switch ($op) {
     case 'edit':
         xoops_cp_header();
 
-        if (isset($cat_id) && 0 != $cat_id) {
-            $cat = $categoryHandler->getCat($cat_id, true);
+        if (isset($catId) && 0 != $catId) {
+            $cat = $categoryHandler->getCat($catId, true);
         }
-        //            $cat = $categoryHandler->getCat($cat_id, true);
+        //            $cat = $categoryHandler->getCat($catId, true);
 
         echo '<fieldset><legend style="font-weight:bold; color:#990000;">' . _AM_EXTCAL_EDIT_CATEGORY . '</legend>';
-
+        /** @var \XoopsThemeForm $form */
         $form = new \XoopsThemeForm(_AM_EXTCAL_ADD_CATEGORY, 'add_cat', 'cat.php?op=enreg', 'post', true);
         $form->addElement(new \XoopsFormText(_AM_EXTCAL_NAME, 'cat_name', 30, 255, $cat->getVar('cat_name')), true);
         $form->addElement(new \XoopsFormDhtmlTextArea(_AM_EXTCAL_DESCRIPTION, 'cat_desc', $cat->getVar('cat_desc')), false);
@@ -142,7 +144,7 @@ switch ($op) {
         if (!isset($confirm)) {
             xoops_cp_header();
             $hiddens = [
-                'cat_id'      => $cat_id,
+                'cat_id'      => $catId,
                 'form_delete' => '',
                 CONFIRM     => 1,
             ];
@@ -151,7 +153,7 @@ switch ($op) {
             xoops_cp_footer();
         } else {
             if (1 == $confirm) {
-                $categoryHandler->deleteCategory($cat_id);
+                $categoryHandler->deleteCategory($catId);
                 redirect_header('cat.php', 3, _AM_EXTCAL_CAT_DELETED, false);
             }
         }
@@ -162,7 +164,7 @@ switch ($op) {
     //             xoops_cp_header();
     //
     //             // $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-    //             $cat = $categoryHandler->getCat($cat_id, true);
+    //             $cat = $categoryHandler->getCat($catId, true);
     //
     //             echo'<fieldset><legend style="font-weight:bold; color:#990000;">'
     //                 . _AM_EXTCAL_EDIT_CATEGORY . '</legend>';
@@ -193,14 +195,14 @@ switch ($op) {
     //         $adminObject->displayNavigation(basename(__FILE__));
     //         //***************************************************************************************
     //
-    //                     $hiddens = array('cat_id' => $cat_id, 'form_delete' => '', CONFIRM => 1);
+    //                     $hiddens = array('cat_id' => $catId, 'form_delete' => '', CONFIRM => 1);
     //                     xoops_confirm($hiddens, 'cat.php?op=modify', _AM_EXTCAL_CONFIRM_DELETE_CAT, _DELETE, 'cat.php');
     //
     //                     xoops_cp_footer();
     //                 } else {
     //                     if (isset($confirm) && $confirm == 1) {
     //                         // $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-    //                         $categoryHandler->deleteCategory($cat_id);
+    //                         $categoryHandler->deleteCategory($catId);
     //                         redirect_header("cat.php", 3, _AM_EXTCAL_CAT_DELETED, false);
     //                     }
     //                 }

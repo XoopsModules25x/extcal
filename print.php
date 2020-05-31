@@ -26,6 +26,8 @@ use XoopsModules\Extcal\{
 require_once __DIR__ . '/header.php';
 require_once __DIR__ . '/include/constantes.php';
 
+global $xoopsConfig;
+
 require_once XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/calendar.php';
 
 /** @var Helper $helper */

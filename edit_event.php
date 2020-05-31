@@ -58,6 +58,7 @@ require_once XOOPS_ROOT_PATH . '/header.php';
 $xoopsTpl->assign('xoops_pagetitle', _MI_EXTCAL_SUBMIT_EVENT);
 
 // Display the submit form
+/** @var \XoopsThemeForm $form */
 $form = $eventHandler->getEventForm('user', $action, ['event_id' => $eventId]);
 $form->display();
 

@@ -1,9 +1,21 @@
 <?php
 
+use Xmf\Request;
+use XoopsModules\Extcal\{
+    Helper,
+    Utility,
+    EventHandler,
+    Perm
+};
+
 require_once __DIR__ . '/header.php';
 require_once __DIR__ . '/include/constantes.php';
 $params                                  = ['view' => _EXTCAL_NAV_NEW_EVENT, 'file' => _EXTCAL_FILE_NEW_EVENT];
 $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
+
+global $xoopsUser, $xoopsTpl;
+/** @var EventHandler $eventHandler */
+/** @var Perm $permHandler */
 
 /* ========================================================================== */
 //Extcal\Utility::echoArray($_GET);
@@ -14,6 +26,7 @@ $action  = ($_GET['action'] ?? 'edit');
 //------------------------------------------------------------------------------
 
 //exit;
+/** @var Perm $permHandler */
 if (count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) > 0) {
     require_once XOOPS_ROOT_PATH . '/header.php';
 

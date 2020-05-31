@@ -8,6 +8,8 @@ use XoopsModules\Extcal\{
 require_once __DIR__ . '/header.php';
 require_once __DIR__ . '/include/constantes.php';
 
+global $xoopsUser, $xoopsTpl;
+
 // Getting eXtCal object's handler
 $eventHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 

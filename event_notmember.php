@@ -13,6 +13,8 @@ require_once __DIR__ . '/header.php';
 require_once __DIR__ . '/include/constantes.php';
 require_once __DIR__ . '/include/mail_fnc.php';
 
+global $xoopsUser;
+
 /** @var EventHandler $eventHandler */
 /** @var EventNotMemberHandler $eventNotMemberHandler */
 /** @var Helper $helper */

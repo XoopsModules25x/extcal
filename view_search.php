@@ -15,6 +15,7 @@ $params                                  = [
     'file' => _EXTCAL_FILE_SEARCH,
 ];
 $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
+global $xoopsUser, $xoopsTpl;
 
 /** @var CategoryHandler $categoryHandler */
 /** @var EventHandler $eventHandler */
