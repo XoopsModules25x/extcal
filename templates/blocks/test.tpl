@@ -90,10 +90,16 @@
                     <form style="margin-top: 0;" action="http://localhost/xtest256final/user.php" method="post">
                         <{securityToken}><{*//mb*}>
                         Username: <br>
-                        <input type="text" name="uname" size="12" value="" maxlength="25"><br>
+                        <label>
+                            <input type="text" name="uname" size="12" value="" maxlength="25">
+                        </label><br>
                         Password: <br>
-                        <input type="password" name="pass" size="12" maxlength="32"><br>
-                        <input type="checkbox" name="rememberme" value="On" class="formButton">Remember me<br>
+                        <label>
+                            <input type="password" name="pass" size="12" maxlength="32">
+                        </label><br>
+                        <label>
+                            <input type="checkbox" name="rememberme" value="On" class="formButton">
+                        </label>Remember me<br>
                         <br>
                         <input type="hidden" name="xoops_redirect" value="/xtest256final/">
                         <input type="hidden" name="op" value="login">
@@ -215,11 +221,13 @@
             <div class="blockContent">
                 <div class="txtcenter">
                     <form action="http://localhost/xtest256final/index.php" method="post">
-                        <select name="xoops_theme_select" onchange="submit();" size="3">
-                            <option value="default" selected="selected">default</option>
-                            <option value="suico">suico</option>
-                            <option value="zetagenesis">zetagenesis</option>
-                        </select><br>(<strong>3</strong> themes)<br>
+                        <label>
+                            <select name="xoops_theme_select" onchange="submit();" size="3">
+                                <option value="default" selected="selected">default</option>
+                                <option value="suico">suico</option>
+                                <option value="zetagenesis">zetagenesis</option>
+                            </select>
+                        </label><br>(<strong>3</strong> themes)<br>
                     </form>
                 </div>
             </div>
