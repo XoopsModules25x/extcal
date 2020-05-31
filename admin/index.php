@@ -17,14 +17,22 @@
  * @author       XOOPS Development Team,
  */
 
-use XoopsModules\Extcal;
-use XoopsModules\Extcal\Common;
+use XoopsModules\Extcal\{
+    Helper,
+    Common,
+    Utility
+
+};
+
 
 require_once __DIR__ . '/admin_header.php';
 // Display Admin header
 xoops_cp_header();
-/** @var Extcal\Utility $utility */
 
+/** @var Utility $utility */
+/** @var Helper $helper */
+
+$helper = Helper::getInstance();
 $configurator = new Common\Configurator();
 
 //foreach (array_keys($configurator['uploadFolders']) as $i) {

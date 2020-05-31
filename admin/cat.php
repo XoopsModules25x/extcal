@@ -18,7 +18,9 @@
  */
 
 use Xmf\Request;
-use XoopsModules\Extcal;
+use XoopsModules\Extcal\{
+    CategoryHandler
+};
 
 const CONFIRM = 'confirm';
 
@@ -27,7 +29,7 @@ require_once dirname(dirname(dirname(__DIR__))) . '/class/xoopsformloader.php';
 
 require_once dirname(__DIR__) . '/include/constantes.php';
 
-/** @var Extcal\CategoryHandler $categoryHandler */
+/** @var CategoryHandler $categoryHandler */
 
 $op = 'list';
 if (Request::hasVar('op', 'GET')) {

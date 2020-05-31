@@ -23,11 +23,13 @@ namespace XoopsModules\Extcal\Common;
  * @author       Mamba <mambax7@gmail.com>
  */
 
+use Xmf\Request;
 use MyTextSanitizer;
 use XoopsFormDhtmlTextArea;
 use XoopsFormTextArea;
-use XoopsModules\Extcal;
-use XoopsModules\Extcal\Helper;
+use XoopsModules\Extcal\{
+    Helper
+};
 
 /**
  * Class SysUtility

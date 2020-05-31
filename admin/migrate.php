@@ -30,7 +30,10 @@
 // ------------------------------------------------------------------------- //
 
 use Xmf\Request;
-use XoopsModules\Extcal;
+use XoopsModules\Extcal\{
+    Helper,
+    Common
+};
 
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
@@ -53,11 +56,11 @@ EOF;
 
 //XoopsLoad::load('migrate', 'tdmmoney');
 
-/** @var Extcal\Common\Configurator $configurator */
-$configurator = new Extcal\Common\Configurator();
+/** @var Common\Configurator $configurator */
+$configurator = new Common\Configurator();
 
-/** @var \XoopsModules\Extcal\Common\Migrate $migrator */
-$migrator = new \XoopsModules\Extcal\Common\Migrate($configurator);
+/** @var Common\Migrate $migrator */
+$migrator = new Common\Migrate($configurator);
 
 $op        = Request::getCmd('op', 'show');
 $opShow    = Request::getCmd('show', null, 'POST');

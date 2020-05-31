@@ -1,6 +1,9 @@
 <?php
 
-use XoopsModules\Extcal;
+use XoopsModules\Extcal\{
+    Helper,
+    EventHandler
+};
 
 require_once __DIR__ . '/header.php';
 require_once __DIR__ . '/include/constantes.php';
@@ -10,10 +13,10 @@ require_once XOOPS_ROOT_PATH . '/class/template.php';
 error_reporting(0);
 $GLOBALS['xoopsLogger']->activated = false;
 
-/** @var Extcal\Helper $helper */
-$helper = Extcal\Helper::getInstance();
-/** @var Extcal\EventHandler $eventHandler */
-$eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+/** @var Helper $helper */
+$helper = Helper::getInstance();
+/** @var EventHandler $eventHandler */
+$eventHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 
 $cat = \Xmf\Request::getInt('cat', 0, 'GET');
 

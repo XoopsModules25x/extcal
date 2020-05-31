@@ -17,7 +17,10 @@
  * @author       XOOPS Development Team,
  */
 
-use XoopsModules\Extcal;
+use XoopsModules\Extcal\{
+    Helper,
+    CategoryHandler
+};
 
 
 
@@ -80,7 +83,7 @@ $i                     = 0;
 if (isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule'])
     && 'extcal' === $GLOBALS['xoopsModule']->getVar('dirname')) {
     $user = $GLOBALS['xoopsUser'] ?? null;
-    $categoryHandler = \XoopsModules\Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    $categoryHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
     if ($categoryHandler->haveSubmitRight($user)) {
         $modversion['sub'][0]['name'] = _MI_EXTCAL_SUBMIT_EVENT;
         $modversion['sub'][0]['url']  = _EXTCAL_FILE_NEW_EVENT;

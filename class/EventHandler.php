@@ -21,7 +21,13 @@ namespace XoopsModules\Extcal;
  */
 
 //use Punic\Exception;
-use XoopsModules\Extcal;
+use Xmf\Request;
+use XoopsModules\Extcal\{
+    Helper,
+    Perm,
+    Time,
+    Form
+};
 
 
 
@@ -34,7 +40,6 @@ class EventHandler extends ExtcalPersistableObjectHandler
 {
     private $extcalPerm;
     private $extcalTime;
-    //    private $extcalConfig;
 
     /**
      * @param \XoopsDatabase|null $db
@@ -44,9 +49,8 @@ class EventHandler extends ExtcalPersistableObjectHandler
         if (null === $db) {
             $db = \XoopsDatabaseFactory::getDatabaseConnection();
         }
-        $this->extcalPerm = Extcal\Perm::getHandler();
-        $this->extcalTime = Extcal\Time::getHandler();
-        //        $this->extcalConfig = Extcal\Config::getHandler();
+        $this->extcalPerm = Perm::getHandler();
+        $this->extcalTime = Time::getHandler();
         parent::__construct($db, 'extcal_event', Event::class, 'event_id');
     }
 
@@ -316,7 +320,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
      */
     public function getEventsOnPeriode($criteres)
     {
-        //Extcal\Utility::echoArray($criteres);
+        //Utility::echoArray($criteres);
         $myts = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
 
         $eventsU = $this->getEventsUniques($criteres);
@@ -325,7 +329,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
 
         //      $events = $eventsU;
 
-        //Extcal\Utility::echoArray($events);
+        //Utility::echoArray($events);
 
         //Tri des evennement par date ascendante
         $ordre      = [];
@@ -334,9 +338,9 @@ class EventHandler extends ExtcalPersistableObjectHandler
         //        while (list($k, $v) = each($events)) {
         foreach ($events as $k => $v) {
             $ordre[] = (int)$v['event_start'];
-            $this->formatEventDate($v, Extcal\Helper::getInstance()->getConfig('event_date_week'));
+            $this->formatEventDate($v, Helper::getInstance()->getConfig('event_date_week'));
             //$v['cat']['cat_light_color'] = $v['cat']['cat_color'];
-            $v['cat']['cat_light_color'] = Extcal\Utility::getLighterColor($v['cat']['cat_color'], \_EXTCAL_INFOBULLE_RGB_MIN, \_EXTCAL_INFOBULLE_RGB_MAX);
+            $v['cat']['cat_light_color'] = Utility::getLighterColor($v['cat']['cat_color'], \_EXTCAL_INFOBULLE_RGB_MIN, \_EXTCAL_INFOBULLE_RGB_MAX);
             if ('' == $v['event_icone']) {
                 $v['event_icone'] = $v['cat']['cat_icone'];
             }
@@ -374,28 +378,28 @@ class EventHandler extends ExtcalPersistableObjectHandler
         switch ($periode) {
             case \_EXTCAL_EVENTS_CALENDAR_WEEK:
                 $criteriaCompo = $this->getEventWeekCriteria($day, $month, $year, $cat, $nbDays);
-                if (!Extcal\Helper::getInstance()->getConfig('diplay_past_event_cal')) {
+                if (!Helper::getInstance()->getConfig('diplay_past_event_cal')) {
                     $criteriaCompo->add(new \Criteria('event_end', \time(), '>'));
                 }
                 break;
             case \_EXTCAL_EVENTS_WEEK:
             case \_EXTCAL_EVENTS_AGENDA_WEEK:
                 $criteriaCompo = $this->getEventWeekCriteria($day, $month, $year, $cat, $nbDays);
-                if (!Extcal\Helper::getInstance()->getConfig('diplay_past_event_list')) {
+                if (!Helper::getInstance()->getConfig('diplay_past_event_list')) {
                     $criteriaCompo->add(new \Criteria('event_end', \time(), '>'));
                 }
                 break;
             case \_EXTCAL_EVENTS_CALENDAR_MONTH:
                 $criteriaCompo = $this->getEventMonthCriteria($month, $year, $cat);
 
-                if (!Extcal\Helper::getInstance()->getConfig('diplay_past_event_cal')) {
+                if (!Helper::getInstance()->getConfig('diplay_past_event_cal')) {
                     $criteriaCompo->add(new \Criteria('event_end', \time(), '>'));
                 }
                 break;
             case \_EXTCAL_EVENTS_MONTH:
                 $criteriaCompo = $this->getEventMonthCriteria($month, $year, $cat);
 
-                if (!Extcal\Helper::getInstance()->getConfig('diplay_past_event_list')) {
+                if (!Helper::getInstance()->getConfig('diplay_past_event_list')) {
                     $criteriaCompo->add(new \Criteria('event_end', \time(), '>'));
                 }
                 break;
@@ -478,7 +482,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
                 $end   = \userTimeToServerTime(\mktime(0, 0, 0, 12, 31, $year), $this->extcalTime->getUserTimeZone($user));
                 break;
         }
-        $formatDate = Extcal\Helper::getInstance()->getConfig('event_date_week');
+        $formatDate = Helper::getInstance()->getConfig('event_date_week');
         //--------------------------------------------------------------------------
         $criteriaCompo->add(new \Criteria('event_isrecur', 1, '='));
         $criteriaCompo->setOrder($sens);
@@ -487,15 +491,16 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $events = $this->objectToArray($result, $externalKeys);
         $this->serverTimeToUserTimes($events);
 
-        //Balyage de tous les evennements récurrents et creation de toutes le events
+        //Scanning of all recurring events and creation of all events
         $eventsR = [];
         //        while (list($k, $event) = each($events)) {
         foreach ($events as $k => $event) {
             //$te = $this->GetInterval($event, $start, $end);
             //$eventsR = array_merge($eventsR, $te);
             //echo 'event : ' . $event['event_id'] . '<br>';
-            //Extcal\Utility::echoArray($event);
+            //Utility::echoArray($event);
             $recurEvents = $this->getRecurEventToDisplay($event, $start, $end);
+
             if (\count($recurEvents) > 0) {
                 $eventsR = \array_merge($eventsR, $recurEvents);
             }
@@ -671,7 +676,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
     public function getCalendarCriteriaCompo($start, $end, $cat = 0, $user)
     {
         $criteriaCompo = $this->getCriteriaCompo($start, $end, $cat, $user);
-        if (!Extcal\Helper::getInstance()->getConfig('diplay_past_event_cal')) {
+        if (!Helper::getInstance()->getConfig('diplay_past_event_cal')) {
             $criteriaCompo->add(new \Criteria('event_end', \time(), '>'));
         }
 
@@ -689,7 +694,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
     public function getListCriteriaCompo($start, $end, $cat = 0, $user)
     {
         $criteriaCompo = $this->getCriteriaCompo($start, $end, $cat, $user);
-        if (!Extcal\Helper::getInstance()->getConfig('diplay_past_event_list')) {
+        if (!Helper::getInstance()->getConfig('diplay_past_event_list')) {
             $criteriaCompo->add(new \Criteria('event_end', \time(), '>'));
         }
 
@@ -892,12 +897,12 @@ class EventHandler extends ExtcalPersistableObjectHandler
      * @param string $siteSide
      * @param string $mode
      * @param null   $data
-     * @return \XoopsModules\Extcal\Form\ThemeForm
+     * @return Form\ThemeForm
      */
     public function getEventForm($siteSide = 'user', $mode = 'new', $data = null)
     {
-        /** @var Extcal\Helper $helper */
-        $helper      = Extcal\Helper::getInstance();
+        /** @var Helper $helper */
+        $helper      = Helper::getInstance();
         $categoryHandler  = $helper->getHandler(\_EXTCAL_CLN_CAT);
         $fileHandler = $helper->getHandler(\_EXTCAL_CLN_FILE);
 
@@ -1077,7 +1082,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
         }
 
         // Create XoopsForm Object
-        $form = new Extcal\Form\ThemeForm($formTitle, 'event_form', $action, 'post', true);
+        $form = new Form\ThemeForm($formTitle, 'event_form', $action, 'post', true);
         // Add this extra to allow file upload
         $form->setExtra('enctype="multipart/form-data"');
 
@@ -1101,7 +1106,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $form->addElement($xfIcones, false);
         //-----------------------------------------------------------
         //location
-        $locationHandler = Extcal\Helper::getInstance()->getHandler(\_EXTCAL_CLN_LOCATION);
+        $locationHandler = Helper::getInstance()->getHandler(\_EXTCAL_CLN_LOCATION);
         $location_select = new \XoopsFormSelect(\_MD_EXTCAL_LOCATION, 'event_location', $event_location);
         $criteria        = new \CriteriaCompo();
         $criteria->setSort('nom');
@@ -1123,7 +1128,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
         //-----------------------------------------------------------
 
         // Start and end
-        new Extcal\Form\FormDateTime($form, $startDateValue, $endDateValue); //mb
+        new Form\FormDateTime($form, $startDateValue, $endDateValue); //mb
 
         global $xoopsUser, $xoopsModule;
         $isAdmin = false;
@@ -1190,13 +1195,13 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $form->addElement($addressEditor);
 
         // Recurence form
-        $form->addElement(new Extcal\Form\FormRecurRules($reccurOptions));
+        $form->addElement(new Form\FormRecurRules($reccurOptions));
         // File attachement
         $fileElmtTray = new \XoopsFormElementTray(\_MD_EXTCAL_FILE_ATTACHEMENT, '<br>');
 
         // If they are attached file to this event
         if (\count($files) > 0) {
-            $eventFiles = new Extcal\Form\FormFileCheckBox('', 'filetokeep');
+            $eventFiles = new Form\FormFileCheckBox('', 'filetokeep');
             foreach ($files as $file) {
                 $name = $file['file_nicename'] . ' (<i>' . $file['file_mimetype'] . '</i>) ' . $file['formated_file_size'];
                 $eventFiles->addOption($file['file_id'], $name);
@@ -1284,7 +1289,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
      */
     public function getRecurRules($parm)
     {
-        //Extcal\Utility::echoArray($parm);exit;
+        //Utility::echoArray($parm);exit;
 
         // If this isn't a reccuring event
         if (!$this->getIsRecur($parm)) {
@@ -1409,7 +1414,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
             case 'weekly':
                 // Getting the first weekday TS
                 $startWeekTS = \mktime(0, 0, 0, \date('n', $data['event_recur_start']), \date('j', $data['event_recur_start']), \date('Y', $data['event_recur_start']));
-                $offset      = \date('w', $startWeekTS) - Extcal\Helper::getInstance()->getConfig('week_start_day');
+                $offset      = \date('w', $startWeekTS) - Helper::getInstance()->getConfig('week_start_day');
                 $startWeekTS -= ($offset * \_EXTCAL_TS_DAY);
 
                 $recurEnd = $startWeekTS + ($parm['rrule_weekly_interval'] * \_EXTCAL_TS_WEEK) - 1;
@@ -1489,7 +1494,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
 
                 // Getting the first weekday TS
                 $startWeekTS = \mktime(0, 0, 0, \date('n', $event['event_recur_start']), \date('j', $event['event_recur_start']), \date('Y', $event['event_recur_start']));
-                $offset      = \date('w', $startWeekTS) - Extcal\Helper::getInstance()->getConfig('week_start_day');
+                $offset      = \date('w', $startWeekTS) - Helper::getInstance()->getConfig('week_start_day');
                 $startWeekTS = $startWeekTS - ($offset * \_EXTCAL_TS_DAY) + \_EXTCAL_TS_WEEK;
 
                 $occurEventStart = $event['event_recur_start'];
@@ -2155,7 +2160,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
         while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
             $myrow['cat']['cat_name']        = $myrow['cat_name'];
             $myrow['cat']['cat_color']       = $myrow['cat_color'];
-            $myrow['cat']['cat_light_color'] = Extcal\Utility::getLighterColor($myrow['cat']['cat_color'], \_EXTCAL_INFOBULLE_RGB_MIN, \_EXTCAL_INFOBULLE_RGB_MAX);
+            $myrow['cat']['cat_light_color'] = Utility::getLighterColor($myrow['cat']['cat_color'], \_EXTCAL_INFOBULLE_RGB_MIN, \_EXTCAL_INFOBULLE_RGB_MAX);
             if ('' == $myrow['event_icone']) {
                 $myrow['event_icone'] = $myrow['cat']['cat_icone'];
             }

@@ -20,9 +20,14 @@ namespace XoopsModules\Extcal;
  **/
 require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 
-use XoopsModules\Extcal;
-use XoopsModules\Extcal\Common;
-use XoopsModules\Extcal\Constants;
+use XoopsModules\Extcal\{
+    Helper,
+    EventHandler,
+    CategoryHandler,
+    Common,
+    Constants
+};
+
 
 /**
  * Class Utility
@@ -38,7 +43,7 @@ class Utility extends Common\SysUtility
      */
     public static function getEvent($eventId)
     {
-        $eventHandler = Extcal\Helper::getInstance()->getHandler(\_EXTCAL_CLN_EVENT);
+        $eventHandler = Helper::getInstance()->getHandler(\_EXTCAL_CLN_EVENT);
         $event        = $eventHandler->getEvent($eventId);
         $t            = $event->getVars();
         $data         = [];
@@ -124,7 +129,7 @@ class Utility extends Common\SysUtility
     {
         global $xoopsUser;
         // Category selectbox
-        $categoryHandler = Extcal\Helper::getInstance()->getHandler(\_EXTCAL_CLN_CAT);
+        $categoryHandler = Helper::getInstance()->getHandler(\_EXTCAL_CLN_CAT);
 
         $catsList  = $categoryHandler->getAllCat($xoopsUser);
         $catSelect = new \XoopsFormSelect('', $name, $cat);
@@ -152,7 +157,7 @@ class Utility extends Common\SysUtility
         // Category selectbox
         //<option style="background-color:#00FFFF;">VARCHAR</option>
 
-        $categoryHandler = Extcal\Helper::getInstance()->getHandler(\_EXTCAL_CLN_CAT);
+        $categoryHandler = Helper::getInstance()->getHandler(\_EXTCAL_CLN_CAT);
         $catsList   = $categoryHandler->getAllCat($xoopsUser);
 
         $t = [];

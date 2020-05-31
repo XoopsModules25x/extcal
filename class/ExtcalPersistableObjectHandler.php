@@ -20,7 +20,9 @@ namespace XoopsModules\Extcal;
  * @author       XOOPS Development Team,
  */
 
-use XoopsModules\Extcal;
+use XoopsModules\Extcal\{
+    Helper
+};
 
 /**
  * Persistable Object Handler class.
@@ -200,13 +202,13 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     /**
      * Retrieve a list of objects as arrays - DON'T USE WITH JOINT KEYS.
      *
-     * @param \CriteriaCompo $criteria {@link CriteriaCompo} conditions to be met
+     * @param \CriteriaCompo|\CriteriaElement|null $criteria {@link CriteriaCompo|\CriteriaElement} conditions to be met
      * @param int              $limit    Max number of objects to fetch
      * @param int              $start    Which record to start at
      *
      * @return array
      */
-    public function getList(\CriteriaCompo $criteria = null, $limit = 0, $start = 0)
+    public function getList(\CriteriaElement $criteria = null, $limit = 0, $start = 0)
     {
         $ret = [];
         if (null === $criteria) {
@@ -247,11 +249,11 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     /**
      * count objects matching a condition.
      *
-     * @param \CriteriaCompo $criteria {@link CriteriaCompo} to match
+     * @param \CriteriaCompo|\CriteriaElement $criteria {@link \CriteriaCompo|\CriteriaElement} to match
      *
      * @return int|array count of objects
      */
-    public function getCount(\CriteriaCompo $criteria = null)
+    public function getCount(\CriteriaElement $criteria = null)
     {
         $field   = '';
         $groupby = false;
@@ -262,7 +264,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
             }
         }
         $sql = 'SELECT ' . $field . 'COUNT(*) FROM ' . $this->table;
-        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
+        if (isset($criteria) && $criteria instanceof \CriteriaCompo) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->groupby) {
                 $sql .= $criteria->getGroupby();
@@ -467,14 +469,14 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     /**
      * delete all objects meeting the conditions.
      *
-     * @param \CriteriaCompo $criteria       {@link CriteriaCompo}
+     * @param \CriteriaCompo|\CriteriaElement $criteria       {@link \CriteriaCompo|\CriteriaElement}
      *                                         with conditions to meet
      * @param bool             $force
      * @param bool             $asObject
      *
      * @return bool
      */
-    public function deleteAll(\CriteriaCompo $criteria = null, $force = true, $asObject = false)
+    public function deleteAll(\CriteriaElement $criteria = null, $force = true, $asObject = false)
     {
         if (isset($criteria) && $criteria !== null) {
             $sql = 'DELETE FROM ' . $this->table;
@@ -544,7 +546,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
                             if ($externalKey['core']) {
                                 $handler = \xoops_getHandler($externalKey['className']);
                             } else {
-                                $handler = Extcal\Helper::getInstance()->getHandler($externalKey['className']);
+                                $handler = Helper::getInstance()->getHandler($externalKey['className']);
                             }
                             $getMethod                                       = $externalKey['getMethodeName'];
                             $cached[$externalKey['keyName']][$ret[$i][$key]] = $this->objectToArrayWithoutExternalKey($handler->$getMethod($ret[$i][$key], true), $format);
@@ -569,7 +571,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
                         if ($externalKey['core']) {
                             $handler = \xoops_getHandler($externalKey['className']);
                         } else {
-                            $handler = Extcal\Helper::getInstance()->getHandler($externalKey['className']);
+                            $handler = Helper::getInstance()->getHandler($externalKey['className']);
                         }
                         $getMethod                                   = $externalKey['getMethodeName'];
                         $cached[$externalKey['keyName']][$ret[$key]] = $this->objectToArrayWithoutExternalKey($handler->$getMethod($ret[$key], true), $format);

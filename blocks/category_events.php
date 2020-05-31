@@ -18,7 +18,9 @@
  */
 
 use XoopsModules\Extcal\{
-    Helper
+    Helper,
+    EventHandler,
+    CategoryHandler
 };
 
 require_once dirname(__DIR__) . '/include/constantes.php';

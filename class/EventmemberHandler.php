@@ -20,7 +20,9 @@ namespace XoopsModules\Extcal;
  * @author       XOOPS Development Team,
  */
 
-use XoopsModules\Extcal;
+use XoopsModules\Extcal\{
+    Helper
+};
 
 
 
@@ -50,7 +52,7 @@ class EventmemberHandler extends ExtcalPersistableObjectHandler
         $eventmember = $this->create();
         $eventmember->setVars($varArr);
         if ($this->insert($eventmember, true)) {
-            $eventNotMemberHandler = Extcal\Helper::getInstance()->getHandler(\_EXTCAL_CLN_NOT_MEMBER);
+            $eventNotMemberHandler = Helper::getInstance()->getHandler(\_EXTCAL_CLN_NOT_MEMBER);
             $eventNotMemberHandler->deleteById([$varArr['event_id'], $varArr['uid']]);
         }
     }

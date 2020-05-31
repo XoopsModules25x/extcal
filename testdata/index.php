@@ -14,25 +14,28 @@
  * @author          Michael Beck (aka Mamba)
  */
 
-use XoopsModules\Extcal;
-use XoopsModules\Extcal\Common;
-use XoopsModules\Extcal\Utility;
+use \Xmf\Request;
+use XoopsModules\Extcal\{
+    Helper,
+    Common,
+    Utility
+};
 
 require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 require dirname(__DIR__) . '/preloads/autoloader.php';
 
-$op = \Xmf\Request::getCmd('op', '');
+$op = Request::getCmd('op', '');
 
 $moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-$helper = Extcal\Helper::getInstance();
+$helper = Helper::getInstance();
 // Load language files
 $helper->loadLanguage('common');
 
 switch ($op) {
     case 'load':
-        if (\Xmf\Request::hasVar('ok', 'REQUEST') && 1 == $_REQUEST['ok']) {
+        if (Request::hasVar('ok', 'REQUEST') && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('../admin/index.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
             }
@@ -56,7 +59,7 @@ function loadSampleData()
     $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-    $utility      = new Extcal\Utility();
+    $utility      = new Utility();
     $configurator = new Common\Configurator();
 
     $tables = \Xmf\Module\Helper::getHelper($moduleDirName)->getModule()->getInfo('tables');
@@ -113,7 +116,7 @@ function exportSchema()
 
     try {
         // TODO set exportSchema
-        //        $migrate = new Extcal\Migrate($moduleDirName);
+        //        $migrate = new Migrate($moduleDirName);
         //        $migrate->saveCurrentSchema();
         //
         //        redirect_header('../admin/index.php', 1, constant('CO_' . $moduleDirNameUpper . '_' . 'EXPORT_SCHEMA_SUCCESS'));

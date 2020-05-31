@@ -1,6 +1,9 @@
 <?php
 
-use XoopsModules\Extcal;
+use XoopsModules\Extcal\{
+    Helper,
+    Time
+};
 
 require_once __DIR__ . '/admin_header.php';
 
@@ -19,8 +22,8 @@ function isUpToDate()
     return $GLOBALS['xoopsModule']->getVar('version') >= $version;
 }
 
-/** @var Extcal\Helper $helper */
-$helper = Extcal\Helper::getInstance();
+/** @var Helper $helper */
+$helper = Helper::getInstance();
 
 $op  = \Xmf\Request::getCmd('op', 'default');
 $fct = \Xmf\Request::getString('fct', 'default', 'GET');
@@ -40,8 +43,7 @@ switch ($op) {
                 //                $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
                 //                $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
                 //                $eventmemberHandler = xoops_getModuleHandler(_EXTCAL_CLS_MEMBER, _EXTCAL_MODULE);
-                $extcalTime   = Extcal\Time::getHandler();
-                $extcalConfig = Extcal\Config::getHandler();
+                $extcalTime   = Time::getHandler();
 
                 $event = $eventHandler->getEvent($_POST['event_id'], $xoopsUser, true);
                 $cat   = $categoryHandler->getCat($event->getVar('cat_id'), $xoopsUser, 'all');

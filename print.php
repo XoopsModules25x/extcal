@@ -17,24 +17,28 @@
  * @author       XOOPS Development Team,
  */
 
-use XoopsModules\Extcal;
+use XoopsModules\Extcal\{
+    Helper,
+    LocationHandler,
+    EventHandler
+};
 
 require_once __DIR__ . '/header.php';
 require_once __DIR__ . '/include/constantes.php';
 
 require_once XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/calendar.php';
 
-/** @var Extcal\Helper $helper */
-$helper = Extcal\Helper::getInstance();
+/** @var Helper $helper */
+$helper = Helper::getInstance();
 
 $eventId = \Xmf\Request::getInt('event', 0, 'GET');
 
-$eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+$eventHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 $event        = $eventHandler->objectToArray($eventHandler->getEvent($eventId), ['cat_id']);
 
 //adding location
-/** @var Extcal\LocationHandler $locationHandler */
-$locationHandler = Extcal\Helper::getInstance()->getHandler('Location');
+/** @var LocationHandler $locationHandler */
+$locationHandler = Helper::getInstance()->getHandler('Location');
 if ($event['event_location'] > 0) {
     $location = $locationHandler->objectToArray($locationHandler->getLocation($event['event_location'], true));
 }

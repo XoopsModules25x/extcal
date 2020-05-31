@@ -2,7 +2,10 @@
 
 
 
-use XoopsModules\Extcal;
+use XoopsModules\Extcal\{
+    Helper,
+    EventHandler
+};
 
 /**
  * @param $category
@@ -20,7 +23,7 @@ function extcal_notify_iteminfo($category, $itemId)
     }
 
     if ('event' === $category) {
-        $eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+        $eventHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
         $event        = $eventHandler->getEvent($itemId, 0, true);
         $item['name'] = $event->getVar('event_title');
         $item['url']  = XOOPS_URL . '/modules/extcal/event.php?event=' . $event->getVar('event_id');

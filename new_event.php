@@ -1,14 +1,17 @@
 <?php
 
-use XoopsModules\Extcal;
+use XoopsModules\Extcal\{
+    Helper,
+    Perm
+};
 
 require_once __DIR__ . '/header.php';
 require_once __DIR__ . '/include/constantes.php';
 
 // Getting eXtCal object's handler
-$eventHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+$eventHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 
-$permHandler = Extcal\Perm::getHandler();
+$permHandler = Perm::getHandler();
 $xoopsUser   = $xoopsUser ?: null;
 if (count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) > 0) {
     require_once XOOPS_ROOT_PATH . '/header.php';

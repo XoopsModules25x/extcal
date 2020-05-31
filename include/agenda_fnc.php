@@ -16,7 +16,12 @@
  * que la classe correspondante de la table a été générées avec classGenerator
  **/
 
-use XoopsModules\Extcal;
+use XoopsModules\Extcal\{
+    Helper,
+    Time,
+    CategoryHandler,
+    Utility
+};
 
 define('_EXTCAL_FORMAT_AGENDA_KEYD', 'Y-m-d');
 define('_EXTCAL_FORMAT_AGENDA_KEYT', 'H:i');
@@ -25,7 +30,7 @@ require_once __DIR__ . '/constantes.php';
 // require_once  dirname(__DIR__) . '/class/Utility.php';
 
 $moduleDirName = basename(dirname(__DIR__));
-Extcal\Helper::getInstance()->loadLanguage('main');
+Helper::getInstance()->loadLanguage('main');
 
 /*******************************************************************
  *
@@ -43,8 +48,8 @@ Extcal\Helper::getInstance()->loadLanguage('main');
 
 function agenda_getCanevas($ts, $hStart, $hEnd, $mPlage = 15, $nbJours = 1, $formatDate, $formatJour = 'H:i')
 {
-    /** @var Extcal\Helper $helper */
-    $helper = Extcal\Helper::getInstance();
+    /** @var Helper $helper */
+    $helper = Helper::getInstance();
     $jour   = date('d', $ts);
     $mois   = date('m', $ts);
     $an     = date('Y', $ts);
@@ -255,7 +260,7 @@ function getListYears($year, $nbYearsBefore = 0, $nbYearsAfter = 5, $addNone = f
 function getListMonths($month, $addNone = false, $name = 'month')
 {
     // Month selectbox
-    $timeHandler = Extcal\Time::getHandler();
+    $timeHandler = Time::getHandler();
 
     $select = new \XoopsFormSelect('', $name, $month);
     if ($addNone) {
@@ -326,8 +331,8 @@ function ext_loadLanguage($name)
 
 function getNavBarTabs($currentTab = '')
 {
-    /** @var Extcal\Helper $helper */
-    $helper = Extcal\Helper::getInstance();
+    /** @var Helper $helper */
+    $helper = Helper::getInstance();
 
     ext_loadLanguage('_MD_');
 
@@ -435,8 +440,8 @@ function getNavBarTabs($currentTab = '')
     }
 
     $user = $GLOBALS['xoopsUser'] ?? null;
-    /** @var Extcal\CategoryHandler $categoryHandler */
-    $categoryHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+    /** @var CategoryHandler $categoryHandler */
+    $categoryHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
     if ($categoryHandler->haveSubmitRight($user)) {
         $view = _EXTCAL_NAV_NEW_EVENT;
         if (in_array($view, $visibleTabs)) {
@@ -461,8 +466,8 @@ function getNavBarTabs($currentTab = '')
 
     array_multisort($tNavBar, SORT_ASC, SORT_NUMERIC, $ordre, SORT_ASC, SORT_NUMERIC);
 
-    //    Extcal\Utility::echoArray($tNavBar);
-    //    Extcal\Utility::echoArray($ordre);
+    //    Utility::echoArray($tNavBar);
+    //    Utility::echoArray($ordre);
     return $tNavBar;
 }
 
