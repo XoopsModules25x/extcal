@@ -42,7 +42,6 @@ $helper = Helper::getInstance();
 $adminObject = \Xmf\Module\Admin::getInstance();
 $utility     = new Utility();
 
-// require_once  dirname(__DIR__) . '/class/Utility.php';
 require_once dirname(__DIR__) . '/include/common.php';
 
 $adminObject = \Xmf\Module\Admin::getInstance();
@@ -77,5 +76,3 @@ $eventNotMemberHandler = $helper->getHandler(_EXTCAL_CLN_NOT_MEMBER);
 $fileHandler     = $helper->getHandler(_EXTCAL_CLN_FILE);
 /** @var LocationHandler $locationHandler */
 $locationHandler = $helper->getHandler(_EXTCAL_CLN_LOCATION);
-
-//xoops_cp_header();
