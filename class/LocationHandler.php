@@ -58,11 +58,7 @@ class LocationHandler extends ExtcalPersistableObjectHandler
             $this->addCatPermCriteria($criteriaCompo, $user);
         }
         $ret = $this->getObjects($criteriaCompo);
-        if (isset($ret[0])) {
-            return $ret[0];
-        }
-
-        return false;
+        return $ret[0] ?? false;
     }
 
     /**

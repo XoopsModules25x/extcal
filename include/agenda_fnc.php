@@ -434,7 +434,7 @@ function getNavBarTabs($currentTab = '')
         ];
     }
 
-    $user = isset($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser'] : null;
+    $user = $GLOBALS['xoopsUser'] ?? null;
     /** @var Extcal\CategoryHandler $categoryHandler */
     $categoryHandler = Extcal\Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
     if ($categoryHandler->haveSubmitRight($user)) {

@@ -35,8 +35,8 @@ $year      = Request::getInt('year', date('Y'), 'POST');
 $month     = Request::getInt('month', date('n'), 'POST');
 $day       = Request::getInt('day', 0, 'POST');
 $cat       = Request::getInt('cat', 0, 'POST');
-$orderby1  = isset($_POST['orderby1']) ? $_POST['orderby1'] : 'cat_name ASC';
-$orderby2  = isset($_POST['orderby2']) ? $_POST['orderby2'] : 'event_title ASC';
+$orderby1  = $_POST['orderby1'] ?? 'cat_name ASC';
+$orderby2  = $_POST['orderby2'] ?? 'event_title ASC';
 $orderby3  = Request::getString('orderby3', '', 'POST');
 /* ========================================================================== */
 

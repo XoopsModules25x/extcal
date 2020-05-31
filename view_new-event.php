@@ -8,8 +8,8 @@ $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
 /* ========================================================================== */
 //Extcal\Utility::echoArray($_GET);
 
-$eventId = (isset($_GET['event']) ? $_GET['event'] : 0);
-$action  = (isset($_GET['action']) ? $_GET['action'] : 'edit');
+$eventId = ($_GET['event'] ?? 0);
+$action  = ($_GET['action'] ?? 'edit');
 
 //------------------------------------------------------------------------------
 

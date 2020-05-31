@@ -163,11 +163,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
             $this->addCatPermCriteria($criteriaCompo, $user);
         }
         $ret = $this->getObjects($criteriaCompo);
-        if (isset($ret[0])) {
-            return $ret[0];
-        }
-
-        return false;
+        return $ret[0] ?? false;
     }
 
     // Return one event selected by his id (approve or not)
@@ -188,11 +184,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
             $this->addCatPermCriteria($criteriaCompo, $user);
         }
         $ret = $this->getObjects($criteriaCompo);
-        if (isset($ret[0])) {
-            return $ret[0];
-        }
-
-        return false;
+        return $ret[0] ?? false;
     }
 
     /**
