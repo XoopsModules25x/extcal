@@ -359,7 +359,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
                     $cleanvars[$this->keyName] = $this->db->genId($this->table . '_' . $this->keyName . '_seq');
                 }
             }
-            $sql = 'INSERT INTO ' . $this->table . ' (' . \implode(',', \array_keys($cleanvars)) . ') VALUES (' . \implode(',', \array_values($cleanvars)) . ')';
+            $sql = 'INSERT INTO ' . $this->table . ' (' . \implode(',', \array_keys($cleanvars)) . ') VALUES (' . \implode(',', $cleanvars) . ')';
         } else {
             $sql = 'UPDATE ' . $this->table . ' SET';
             foreach ($cleanvars as $key => $value) {
