@@ -31,9 +31,11 @@ $tpl->xoops_setCacheTime($helper->getConfig('rss_cache_time') * _EXTCAL_TS_MINUT
 if (!$tpl->is_cached('db:extcal_rss.tpl', $cat)) {
     $events = $eventHandler->getUpcommingEvent($helper->getConfig('rss_nb_event'), $cat);
     if (is_array($events)) {
-        $tpl->assign('channel_title', xoops_utf8_encode(htmlspecialchars($xoopsConfig['sitename'], ENT_QUOTES)));
+        $tempSitemap = htmlspecialchars($xoopsConfig['sitename'], ENT_QUOTES);
+        $tpl->assign('channel_title', xoops_utf8_encode($tempSitemap));
         $tpl->assign('channel_link', XOOPS_URL . '/');
-        $tpl->assign('channel_desc', xoops_utf8_encode(htmlspecialchars($xoopsConfig['slogan'], ENT_QUOTES)));
+        $tempSlogan = htmlspecialchars($xoopsConfig['slogan'], ENT_QUOTES);
+        $tpl->assign('channel_desc', xoops_utf8_encode($tempSlogan));
         $tpl->assign('channel_lastbuild', formatTimestamp(time(), 'rss'));
         $tpl->assign('channel_webmaster', $xoopsConfig['adminmail']);
         $tpl->assign('channel_editor', $xoopsConfig['adminmail']);
@@ -44,14 +46,16 @@ if (!$tpl->is_cached('db:extcal_rss.tpl', $cat)) {
         $tpl->assign('image_width', 92);
         $tpl->assign('image_height', 52);
         foreach ($events as $event) {
-            $tpl->append(
+            $tempTitle = htmlspecialchars($event->getVar('event_title'), ENT_QUOTES);
+            $tempDesc = htmlspecialchars($event->getVar('event_desc'), ENT_QUOTES);
+                $tpl->append(
                 'items',
                 [
-                    'title'       => xoops_utf8_encode(htmlspecialchars($event->getVar('event_title'), ENT_QUOTES)),
+                    'title'       => xoops_utf8_encode($tempTitle),
                     'link'        => XOOPS_URL . '/modules/extcal/event.php?event=' . $event->getVar('event_id'),
                     'guid'        => XOOPS_URL . '/modules/extcal/event.php?event=' . $event->getVar('event_id'),
                     'pubdate'     => formatTimestamp($event->getVar('event_start'), 'rss'),
-                    'description' => xoops_utf8_encode(htmlspecialchars($event->getVar('event_desc'), ENT_QUOTES)),
+                    'description' => xoops_utf8_encode($tempDesc),
                 ]
             );
         }
