@@ -26,9 +26,9 @@ namespace XoopsModules\Extcal\Form;
 class FormRRuleCheckBox extends \XoopsFormCheckBox
 {
     /**
-     * @param      $caption
-     * @param      $name
-     * @param null $value
+     * @param string            $caption
+     * @param string            $name
+     * @param null|string|array $value
      */
     public function __construct($caption, $name, $value = null)
     {

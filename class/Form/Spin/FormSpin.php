@@ -96,7 +96,7 @@ class FormSpin extends \XoopsFormElement
     /**
      *  minMaxVisible show buttons to go minimum and maximum.
      *
-     * @var int
+     * @var bool|int
      */
     protected $_minMaxVisible = true;
 

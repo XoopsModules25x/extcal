@@ -28,12 +28,10 @@ require_once dirname(__DIR__) . '/include/constantes.php';
 /**
  * @param $options
  *
- * @return mixed
+ * @return array|bool
  */
 function bExtcalRandomShow($options)
 {
-    //    // require_once  dirname(__DIR__) . '/class/Config.php';
-
     /** @var Helper $helper */
     if (!class_exists(Helper::class)) {
         return false;
@@ -41,7 +39,7 @@ function bExtcalRandomShow($options)
 
     $helper = Helper::getInstance();
     $helper->loadLanguage('main');
-
+    /** @var EventHandler $eventHandler */
     $eventHandler = $helper->getHandler(_EXTCAL_CLN_EVENT);
 
     $nbEvent     = $options[0];
@@ -71,6 +69,7 @@ function bExtcalRandomEdit($options)
     global $xoopsUser;
 
     $helper = Helper::getInstance();
+    /** @var CategoryHandler $categoryHandler */
     $categoryHandler = $helper->getHandler(_EXTCAL_CLN_CAT);
 
     $cats = $categoryHandler->getAllCat($xoopsUser, 'extcal_cat_view');

@@ -28,7 +28,7 @@ class FormFileCheckBox extends \XoopsFormCheckBox
     /**
      * @param      $caption
      * @param      $name
-     * @param null $value
+     * @param null|string|array $value
      */
     public function __construct($caption, $name, $value = null)
     {

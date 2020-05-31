@@ -29,7 +29,7 @@ require_once dirname(__DIR__) . '/include/constantes.php';
 /**
  * @param $options
  *
- * @return mixed
+ * @return array|bool
  */
 function bExtcalNewShow($options)
 {
@@ -53,6 +53,7 @@ function bExtcalNewShow($options)
         $options = 0;
     }
 
+    /** @var EventHandler $eventHandler */
     $events = $eventHandler->objectToArray($eventHandler->getNewEvent(0, $nbEvent, $options));
     $eventHandler->serverTimeToUserTimes($events);
     $eventHandler->formatEventsDate($events, $helper->getConfig('event_date_month'));
@@ -72,6 +73,7 @@ function bExtcalNewEdit($options)
     $helper = Helper::getInstance();
     $helper->loadLanguage('main');
     $helper->loadLanguage('blocks');
+    /** @var CategoryHandler $categoryHandler */
     $categoryHandler = $helper->getHandler(_EXTCAL_CLN_CAT);
 
     $cats = $categoryHandler->getAllCat($xoopsUser, 'extcal_cat_view');

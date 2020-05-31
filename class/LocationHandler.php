@@ -35,6 +35,9 @@ class LocationHandler extends ExtcalPersistableObjectHandler
      */
     public function __construct(\XoopsDatabase $db = null)
     {
+        if (null === $db) {
+            $db = \XoopsDatabaseFactory::getDatabaseConnection();
+        }
         parent::__construct($db, 'extcal_location', Location::class, 'id', 'nom');
     }
 

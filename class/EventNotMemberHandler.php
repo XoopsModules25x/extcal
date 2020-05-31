@@ -36,7 +36,10 @@ class EventNotMemberHandler extends ExtcalPersistableObjectHandler
      */
     public function __construct(\XoopsDatabase $db = null)
     {
-        parent::__construct($db, 'extcal_eventnotmember', EventNotMember::class, ['event_id', 'uid']);
+        if (null === $db) {
+            $db = \XoopsDatabaseFactory::getDatabaseConnection();
+        }
+        parent::__construct($db, 'extcal_eventnotmember', EventNotMember::class, 'event_id', 'uid');
     }
 
     /**
@@ -91,7 +94,7 @@ class EventNotMemberHandler extends ExtcalPersistableObjectHandler
     /**
      * @param $eventId
      *
-     * @return int
+     * @return int|array
      */
     public function getNbMember($eventId)
     {

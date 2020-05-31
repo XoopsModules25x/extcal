@@ -39,7 +39,9 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
      */
     public function __construct(\XoopsDatabase $db = null)
     {
-
+        if (null === $db) {
+            $db = \XoopsDatabaseFactory::getDatabaseConnection();
+        }
         $this->extcalPerm = Perm::getHandler();
         //        parent::__construct($db, 'extcal_cat', _EXTCAL_CLN_CAT, 'cat_id');
         parent::__construct($db, 'extcal_cat', Category::class, 'cat_id');
@@ -69,6 +71,7 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
         $permMask = $grouppermHandler->getObjects($criteria);
 
         // Retriving group list
+        /** @var \XoopsMemberHandler $memberHandler */
         $memberHandler = \xoops_getHandler('member');
         $glist         = $memberHandler->getGroupList();
 
@@ -132,11 +135,7 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
             $this->addCatPermCriteria($criteriaCompo, $GLOBALS['xoopsUser']);
         }
         $ret = $this->getObjects($criteriaCompo);
-        if (isset($ret[0])) {
-            return $ret[0];
-        }
-
-        return false;
+        return $ret[0] ?? false;
     }
 
     /**
@@ -179,11 +178,11 @@ class CategoryHandler extends ExtcalPersistableObjectHandler
     }
 
     /**
-     * @param \CriteriaElement   $criteria
+     * @param \CriteriaCompo   $criteria
      * @param                    $user
      * @param string             $perm
      */
-    public function addCatPermCriteria(\CriteriaElement $criteria, $user, $perm = 'extcal_cat_view')
+    public function addCatPermCriteria(\CriteriaCompo $criteria, $user, $perm = 'extcal_cat_view')
     {
         $authorizedAccessCats = $this->extcalPerm->getAuthorizedCat($user, 'extcal_cat_view');
         $count                = \count($authorizedAccessCats);

@@ -41,6 +41,9 @@ class EventHandler extends ExtcalPersistableObjectHandler
      */
     public function __construct(\XoopsDatabase $db = null)
     {
+        if (null === $db) {
+            $db = \XoopsDatabaseFactory::getDatabaseConnection();
+        }
         $this->extcalPerm = Extcal\Perm::getHandler();
         $this->extcalTime = Extcal\Time::getHandler();
         //        $this->extcalConfig = Extcal\Config::getHandler();
@@ -849,10 +852,10 @@ class EventHandler extends ExtcalPersistableObjectHandler
     }
 
     /**
-     * @param \CriteriaElement $criteria
+     * @param \CriteriaCompo $criteria
      * @param                  $user
      */
-    public function addCatPermCriteria(\CriteriaElement $criteria, $user)
+    public function addCatPermCriteria(\CriteriaCompo $criteria, $user)
     {
         $authorizedAccessCats = $this->extcalPerm->getAuthorizedCat($user, 'extcal_cat_view');
         $count                = \count($authorizedAccessCats);

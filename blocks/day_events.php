@@ -27,7 +27,7 @@ require_once dirname(__DIR__) . '/include/constantes.php';
 /**
  * @param $options
  *
- * @return mixed
+ * @return array|bool
  */
 function bExtcalDayShow($options)
 {

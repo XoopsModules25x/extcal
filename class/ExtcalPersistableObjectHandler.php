@@ -95,7 +95,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
      * retrieve an object.
      *
      * @param mixed $id ID of the object - or array of ids for joint keys. Joint keys MUST be given in the same order as in the constructor
-     * @param null  $fields
+     * @param null|array  $fields
      * @param bool  $as_object
      *
      * @return mixed reference to the object, FALSE if failed
@@ -200,13 +200,13 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     /**
      * Retrieve a list of objects as arrays - DON'T USE WITH JOINT KEYS.
      *
-     * @param \CriteriaElement $criteria {@link CriteriaElement} conditions to be met
+     * @param \CriteriaCompo $criteria {@link CriteriaCompo} conditions to be met
      * @param int              $limit    Max number of objects to fetch
      * @param int              $start    Which record to start at
      *
      * @return array
      */
-    public function getList(\CriteriaElement $criteria = null, $limit = 0, $start = 0)
+    public function getList(\CriteriaCompo $criteria = null, $limit = 0, $start = 0)
     {
         $ret = [];
         if (null === $criteria) {
@@ -247,15 +247,15 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     /**
      * count objects matching a condition.
      *
-     * @param \CriteriaElement $criteria {@link CriteriaElement} to match
+     * @param \CriteriaCompo $criteria {@link CriteriaCompo} to match
      *
      * @return int|array count of objects
      */
-    public function getCount(\CriteriaElement $criteria = null)
+    public function getCount(\CriteriaCompo $criteria = null)
     {
         $field   = '';
         $groupby = false;
-        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
+        if (isset($criteria) && $criteria instanceof \CriteriaCompo) {
             if ('' != $criteria->groupby) {
                 $groupby = true;
                 $field   = $criteria->groupby . ', '; //Not entirely secure unless you KNOW that no criteria's groupby clause is going to be mis-used
@@ -467,16 +467,16 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     /**
      * delete all objects meeting the conditions.
      *
-     * @param \CriteriaElement $criteria       {@link CriteriaElement}
+     * @param \CriteriaCompo $criteria       {@link CriteriaCompo}
      *                                         with conditions to meet
      * @param bool             $force
      * @param bool             $asObject
      *
      * @return bool
      */
-    public function deleteAll(\CriteriaElement $criteria = null, $force = true, $asObject = false)
+    public function deleteAll(\CriteriaCompo $criteria = null, $force = true, $asObject = false)
     {
-        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
+        if (isset($criteria) && $criteria instanceof \CriteriaCompo) {
             $sql = 'DELETE FROM ' . $this->table;
             $sql .= ' ' . $criteria->renderWhere();
             if (!$this->db->query($sql)) {
@@ -493,7 +493,7 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     /**
      * @param $data
      *
-     * @return array
+     * @return array|\XoopsObject
      */
     public function _toObject($data)
     {
@@ -622,23 +622,23 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     }
 
     /**
-     * @param \CriteriaElement $criteria
+     * @param \CriteriaCompo $criteria
      * @param string           $sum
      *
      * @return array|string
      */
-    public function getSum(\CriteriaElement $criteria = null, $sum = '*')
+    public function getSum(\CriteriaCompo $criteria = null, $sum = '*')
     {
         $field   = '';
         $groupby = false;
-        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
+        if (isset($criteria) && $criteria instanceof \CriteriaCompo) {
             if ('' != $criteria->groupby) {
                 $groupby = true;
                 $field   = $criteria->groupby . ', '; //Not entirely secure unless you KNOW that no criteria's groupby clause is going to be mis-used
             }
         }
         $sql = 'SELECT ' . $field . "SUM($sum) FROM " . $this->table;
-        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
+        if (isset($criteria) && $criteria instanceof \CriteriaCompo) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->groupby) {
                 $sql .= $criteria->getGroupby();
@@ -662,23 +662,23 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     }
 
     /**
-     * @param \CriteriaElement $criteria
+     * @param \CriteriaCompo $criteria
      * @param string           $max
      *
      * @return array|string
      */
-    public function getMax(\CriteriaElement $criteria = null, $max = '*')
+    public function getMax(\CriteriaCompo $criteria = null, $max = '*')
     {
         $field   = '';
         $groupby = false;
-        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
+        if (isset($criteria) && $criteria instanceof \CriteriaCompo) {
             if ('' != $criteria->groupby) {
                 $groupby = true;
                 $field   = $criteria->groupby . ', '; //Not entirely secure unless you KNOW that no criteria's groupby clause is going to be mis-used
             }
         }
         $sql = 'SELECT ' . $field . "MAX($max) FROM " . $this->table;
-        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
+        if (isset($criteria) && $criteria instanceof \CriteriaCompo) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->groupby) {
                 $sql .= $criteria->getGroupby();
@@ -702,17 +702,17 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     }
 
     /**
-     * @param null   $criteria
+     * @param null|\CriteriaCompo   $criteria
      * @param string $avg
      *
      * @return int
      */
-    public function getAvg($criteria = null, $avg = '*')
+    public function getAvg(\CriteriaCompo $criteria = null, $avg = '*')
     {
         $field = '';
 
         $sql = 'SELECT ' . $field . "AVG($avg) FROM " . $this->table;
-        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
+        if (isset($criteria) && $criteria instanceof \CriteriaCompo) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);

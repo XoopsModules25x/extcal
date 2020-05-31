@@ -19,7 +19,8 @@
 
 use XoopsModules\Extcal\{
     Helper,
-    EventHandler
+    EventHandler,
+    CategoryHandler
 };
 
 require_once dirname(__DIR__) . '/include/constantes.php';
@@ -27,7 +28,7 @@ require_once dirname(__DIR__) . '/include/constantes.php';
 /**
  * @param $options
  *
- * @return array
+ * @return array|bool
  */
 function bExtcalUpcomingShow($options)
 {
@@ -39,7 +40,7 @@ function bExtcalUpcomingShow($options)
     $helper = Helper::getInstance();
     $helper->loadLanguage('main');
     $helper->loadLanguage('blocks');
-
+    /** @var EventHandler $eventHandler */
     $eventHandler = $helper->getHandler(_EXTCAL_CLN_EVENT);
 
     $nbEvent     = $options[0];
@@ -124,6 +125,7 @@ function bExtcalUpcomingEdit($options)
     $helper = Helper::getInstance();
     $helper->loadLanguage('main');
     $helper->loadLanguage('blocks');
+    /** @var CategoryHandler $categoryHandler */
     $categoryHandler = $helper->getHandler(_EXTCAL_CLN_CAT);
 
     $cats = $categoryHandler->getAllCat($xoopsUser, 'extcal_cat_view');
