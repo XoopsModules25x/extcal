@@ -682,29 +682,29 @@ $modversion['config'][] = [
 //modif JJD ------------------------------------------------------------
 
 // Templates
-$modversion['templates'][] = [
-    ['file' => 'extcal_view_year.tpl', 'description' => ''],
-    ['file' => 'extcal_view_month.tpl', 'description' => ''],
-    ['file' => 'extcal_view_week.tpl', 'description' => ''],
-    ['file' => 'extcal_view_day.tpl', 'description' => ''],
-    ['file' => 'extcal_view_calendar-month.tpl', 'description' => ''],
-    ['file' => 'extcal_view_calendar-week.tpl', 'description' => ''],
-    ['file' => 'extcal_view_agenda-day.tpl', 'description' => ''],
-    ['file' => 'extcal_view_agenda-week.tpl', 'description' => ''],
-    ['file' => 'extcal_view_search.tpl', 'description' => 'search events'],
-    ['file' => 'extcal_view_new-event.tpl', 'description' => 'New event'],
+$modversion['templates'] = [
+    ['file' => 'extcal_buttons_event.tpl', 'description' => 'buttons event'],
+    ['file' => 'extcal_categorie.tpl', 'description' => 'Category'],
+    ['file' => 'extcal_event.tpl', 'description' => ''],
     ['file' => 'extcal_event_list1.tpl', 'description' => 'Events list'],
     ['file' => 'extcal_event_nav_btn.tpl', 'description' => 'navigation buttonsn'],
-    ['file' => 'extcal_event.tpl', 'description' => ''],
-    ['file' => 'extcal_post.tpl', 'description' => ''],
-    ['file' => 'extcal_rss.tpl', 'description' => ''],
-    ['file' => 'extcal_navbar.tpl', 'description' => ''],
-    ['file' => 'extcal_location.tpl', 'description' => 'location'],
-    ['file' => 'extcal_info_bulle.tpl', 'description' => 'Info bulle'],
-    ['file' => 'extcal_categorie.tpl', 'description' => 'Category'],
     ['file' => 'extcal_horloge.tpl', 'description' => 'Time'],
     ['file' => 'extcal_imgXoops.tpl', 'description' => 'Images Xoops'],
-    ['file' => 'extcal_buttons_event.tpl', 'description' => 'buttons event'],
+    ['file' => 'extcal_info_bulle.tpl', 'description' => 'Info bulle'],
+    ['file' => 'extcal_location.tpl', 'description' => 'location'],
+    ['file' => 'extcal_navbar.tpl', 'description' => ''],
+    ['file' => 'extcal_post.tpl', 'description' => ''],
+    ['file' => 'extcal_rss.tpl', 'description' => ''],
+    ['file' => 'extcal_view_agenda-day.tpl', 'description' => ''],
+    ['file' => 'extcal_view_agenda-week.tpl', 'description' => ''],
+    ['file' => 'extcal_view_calendar-month.tpl', 'description' => ''],
+    ['file' => 'extcal_view_calendar-week.tpl', 'description' => ''],
+    ['file' => 'extcal_view_day.tpl', 'description' => ''],
+    ['file' => 'extcal_view_month.tpl', 'description' => ''],
+    ['file' => 'extcal_view_new-event.tpl', 'description' => 'New event'],
+    ['file' => 'extcal_view_search.tpl', 'description' => 'search events'],
+    ['file' => 'extcal_view_week.tpl', 'description' => ''],
+    ['file' => 'extcal_view_year.tpl', 'description' => ''],
     //-------------------------------------------------------------
     ['file' => 'extcal_mail_member_text.tpl', 'description' => 'Mail text member inscription/desinscription'],
     ['file' => 'extcal_mail_member_html.tpl', 'description' => 'Mail html member inscription/desinscription'],
@@ -728,14 +728,15 @@ $modversion['blocks'][] = [
     'template' => 'extcal_block_minical.tpl',
 ];
 
-//++$i;
-//$modversion['blocks'][$i]['file'] = "spotlight_events.php";
-//$modversion['blocks'][$i]['name'] = _MI_EXTCAL_BNAME2;
-//$modversion['blocks'][$i]['description'] = _MI_EXTCAL_BNAME2_DESC;
-//$modversion['blocks'][$i]['show_func'] = "bExtcalSpotlightShow";
-//$modversion['blocks'][$i]['options'] = "0|0|0|1|0";
-//$modversion['blocks'][$i]['edit_func'] = "bExtcalSpotlightEdit";
-//$modversion['blocks'][$i]['template'] = 'extcal_block_spotlight.tpl';
+$modversion['blocks'][] = [
+    'file'        => "spotlight_events.php",
+    'name'        => _MI_EXTCAL_BNAME2,
+    'description' => _MI_EXTCAL_BNAME2_DESC,
+    'show_func'   => "bExtcalSpotlightShow",
+    'options'     => "0|0|0|1|0",
+    'edit_func'   => "bExtcalSpotlightEdit",
+    'template'    => 'extcal_block_spotlight.tpl',
+];
 
 $modversion['blocks'][] = [
     'file'        => 'upcoming.php',

@@ -147,7 +147,7 @@ switch ($op) {
         break;
     // permet de suprimmer le rapport de téléchargment brisé
     case 'delete_location':
-        $obj = $locationHandler->get($_REQUEST['location_id']);
+        $obj = $locationHandler->get(Request::getInt('location_id', 0));
         if (Request::hasVar('ok', 'REQUEST') && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('location.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -158,7 +158,7 @@ switch ($op) {
         } else {
             xoops_confirm([
                     'ok'          => 1,
-                    'location_id' => $_REQUEST['location_id'],
+                    'location_id' => Request::getInt('location_id', 0),
                     'op'          => 'delete_location',
                           ], $_SERVER['REQUEST_URI'], _AM_EXTCAL_LOCATION_SURDEL . '<br>');
         }
@@ -169,8 +169,8 @@ switch ($op) {
         $adminObject = Admin::getInstance();
         $adminObject->displayNavigation(basename(__FILE__));
         //***************************************************************************************
-        //Affichage du formulaire de création des téléchargements
-        $obj  = $locationHandler->get($_REQUEST['location_id']);
+        //Adisplay of the download creation form
+        $obj  = $locationHandler->get(Request::getInt('location_id', 0));
         $form = $obj->getForm(false);
         break;
     case 'save_location':
@@ -178,7 +178,7 @@ switch ($op) {
             redirect_header('location.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         if (Request::hasVar('location_id', 'REQUEST')) {
-            $obj = $locationHandler->get($_REQUEST['location_id']);
+            $obj = $locationHandler->get(Request::getInt('location_id', 0));
         } else {
             $obj = $locationHandler->create();
         }

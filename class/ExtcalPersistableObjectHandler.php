@@ -473,7 +473,6 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
      *                                         with conditions to meet
      * @param bool             $force
      * @param bool             $asObject
-     *
      * @return bool
      */
     public function deleteAll(\CriteriaElement $criteria = null, $force = true, $asObject = false)
