@@ -23,6 +23,8 @@ require __DIR__ . '/admin_header.php';
 $moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
 
+$helper->loadLanguage('blocksadmin');
+
 global $xoopsModule;
 
 if (!is_object($GLOBALS['xoopsUser']) || !is_object($xoopsModule)

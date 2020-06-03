@@ -39,7 +39,7 @@ setlocale(LC_TIME, $xoopsConfig['language']);
 //***************************************************************************************
 $modversion['version']          = '2.40';
 $modversion['module_status']    = 'RC 1';
-$modversion['release_date']     = '2020/05/30';
+$modversion['release_date']     = '2020/06/03';
 $modversion['name']             = _MI_EXTCAL_NAME;
 $modversion['description']      = _MI_EXTCAL_DESC;
 $modversion['credits']          = 'Zoullou';

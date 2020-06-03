@@ -22,6 +22,7 @@
 - replaced Config class with Helper calls (mamba)
 - renamed $groupPermissionHandler to $grouppermHandler (consistency) (mamba)
 - fixed setting Admin permissions on new category (alain01/mamba)
+- add missing language file  (alain01/mamba)
 
 
 <h5>2.40 Beta 2  [2020-09-21]</h5>  Dev: Xoops 2.5.9, PHP 7.3.0 RC2
