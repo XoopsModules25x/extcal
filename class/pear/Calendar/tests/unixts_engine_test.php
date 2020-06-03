@@ -1,8 +1,7 @@
 <?php
-//
 
-require_once __DIR__.'/simple_include.php';
-require_once __DIR__.'/calendar_include.php';
+require_once __DIR__ . '/simple_include.php';
+require_once __DIR__ . '/calendar_include.php';
 
 /**
  * Class TestOfUnixTsEngine.
@@ -19,7 +18,7 @@ class TestOfUnixTsEngine extends UnitTestCase
         parent::__construct('Test of Calendar_Engine_UnixTs');
     }
 
-    public function setUp()
+    protected function setUp()
     {
         $this->engine = new Calendar_Engine_UnixTS();
     }
@@ -46,7 +45,7 @@ class TestOfUnixTsEngine extends UnitTestCase
 
     public function testGetWeekDays()
     {
-        $this->assertEqual($this->engine->getWeekDays(), array(0, 1, 2, 3, 4, 5, 6));
+        $this->assertEqual($this->engine->getWeekDays(), [0, 1, 2, 3, 4, 5, 6]);
     }
 
     public function testGetDaysInWeek()
@@ -103,7 +102,7 @@ class TestOfUnixTsEngine extends UnitTestCase
 
     public function testGetMinYears()
     {
-        $test = strpos(PHP_OS, 'WIN') >= 0 ? 1970 : 1902;
+        $test = mb_strpos(PHP_OS, 'WIN') >= 0 ? 1970 : 1902;
         $this->assertEqual($this->engine->getMinYears(), $test);
     }
 

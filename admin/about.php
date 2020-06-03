@@ -1,4 +1,5 @@
 <?php
+
 /**
  * extCal module.
  *
@@ -9,17 +10,21 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright    XOOPS Project (http://xoops.org)
- * @license      GNU GPL (http://www.gnu.org/licenses/gpl-2.0.html/)
+ * @copyright    XOOPS Project (https://xoops.org)
+ * @license      GNU GPL (https://www.gnu.org/licenses/gpl-2.0.html/)
  *
  * @since        2.5.0
  *
  * @author       Mage, Mamba
  **/
-include_once __DIR__ . '/admin_header.php';
+
+/** @var Xmf\Module\Admin $adminObject */
+
+require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 
-echo $adminObject->addNavigation(basename(__FILE__));
-echo $adminObject->renderAbout('xoopsfoundation@gmail.com', false);
+$adminObject->displayNavigation(basename(__FILE__));
+$adminObject::setPaypal('xoopsfoundation@gmail.com');
+$adminObject->displayAbout(false);
 
-include_once __DIR__ . '/admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';

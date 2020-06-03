@@ -1,53 +1,93 @@
 <?php
+/*
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS_ROOT_PATH not defined!');
+/**
+ * @copyright    {@link https://xoops.org/ XOOPS Project}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @package      extcal
+ * @since
+ * @author       XOOPS Development Team,
+ */
 
-$moduleDirName = basename(dirname(__DIR__));
-/** @var XoopsModuleHandler $moduleHandler */
-$moduleHandler = xoops_getHandler('module');
-$module        = $moduleHandler->getByDirname($moduleDirName);
-$pathIcon32    = '../../' . $module->getInfo('sysicons32');
-$pathModIcon32 = './' . $module->getInfo('modicons32');
-xoops_loadLanguage('modinfo', $moduleDirName);
+use XoopsModules\Extcal\{
+    Helper
+};
 
-$xoopsModuleAdminPath = XOOPS_ROOT_PATH . '/' . $module->getInfo('dirmoduleadmin');
+// require_once  dirname(__DIR__) . '/class/Helper.php';
+//require_once  dirname(__DIR__) . '/include/common.php';
 
-if (!file_exists($fileinc = $xoopsModuleAdminPath . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/' . 'main.php')) {
-    $fileinc = $xoopsModuleAdminPath . '/language/english/main.php';
+require_once dirname(__DIR__) . '/preloads/autoloader.php';
+
+$moduleDirName      = basename(dirname(__DIR__));
+$moduleDirNameUpper = mb_strtoupper($moduleDirName);
+
+$helper = Helper::getInstance();
+$helper->loadLanguage('common');
+$helper->loadLanguage('feedback');
+
+$pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
+if (is_object($helper->getModule())) {
+    $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
 }
 
-include_once $fileinc;
-
-$adminmenu[] = array(
-    'title' => _AM_MODULEADMIN_HOME,
+$adminmenu[] = [
+    'title' => _MI_EXTCAL_INDEX,
     'link'  => 'admin/index.php',
-    'icon'  => $pathIcon32 . '/home.png'
-);
+    'icon'  => $pathIcon32 . '/home.png',
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_EXTCAL_CATEGORY,
     'link'  => 'admin/cat.php',
-    'icon'  => $pathIcon32 . '/category.png'
-);
+    'icon'  => $pathIcon32 . '/category.png',
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_EXTCAL_EVENT,
     'link'  => 'admin/event.php',
-    'icon'  => $pathIcon32 . '/event.png'
-);
-$adminmenu[] = array(
-    'title' => _MI_EXTCAL_ETABLISSEMENTS,
-    'link'  => 'admin/etablissement.php',
-    'icon'  => $pathModIcon32 . '/etablissement.png'
-);
-$adminmenu[] = array(
+    'icon'  => $pathIcon32 . '/event.png',
+];
+
+
+if (isset($pathModIcon32)) {
+$adminmenu[] = [
+    'title' => _MI_EXTCAL_LOCATIONS,
+    'link'  => 'admin/location.php',
+    'icon'  => $pathModIcon32 . '/location.png',
+];
+}
+
+$adminmenu[] = [
     'title' => _MI_EXTCAL_PERMISSIONS,
     'link'  => 'admin/permissions.php',
-    'icon'  => $pathIcon32 . '/permissions.png'
-);
+    'icon'  => $pathIcon32 . '/permissions.png',
+];
 
-$adminmenu[] = array(
-    'title' => _AM_MODULEADMIN_ABOUT,
+// Blocks Admin
+$adminmenu[] = [
+    'title' => _MI_EXTCAL_BLOCKS_ADMIN, //'Block/Group Admin'
+    //    'title' => constant('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS'),
+    'link'  => 'admin/blocksadmin.php',
+    'icon'  => $pathIcon32 . '/block.png',
+];
+
+if (is_object($helper->getModule()) && $helper->getConfig('displayDeveloperTools')) {
+    $adminmenu[] = [
+        'title' => _MI_EXTCAL_ADMENU_MIGRATE,
+        'link'  => 'admin/migrate.php',
+        'icon'  => $pathIcon32 . '/database_go.png',
+    ];
+}
+$adminmenu[] = [
+    'title' => _MI_EXTCAL_ABOUT,
     'link'  => 'admin/about.php',
-    'icon'  => $pathIcon32 . '/about.png'
-);
+    'icon'  => $pathIcon32 . '/about.png',
+];

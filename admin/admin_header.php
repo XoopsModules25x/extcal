@@ -1,56 +1,79 @@
 <?php
-//
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                  Copyright (c) 2000-2016 XOOPS.org                        //
-//                       <http://xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
+/*
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ */
 
-$path = dirname(dirname(dirname(__DIR__)));
-include_once $path . '/mainfile.php';
-include_once $path . '/include/cp_functions.php';
-require_once $path . '/include/cp_header.php';
+/**
+ * @copyright    {@link https://xoops.org/ XOOPS Project}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @package      extcal
+ * @since
+ * @author       XOOPS Development Team,
+ */
 
-global $xoopsModule;
+use XoopsModules\Extcal\{
+    Helper,
+    Utility,
+    CategoryHandler,
+    EventHandler,
+    EventmemberHandler,
+    EventNotMemberHandler,
+    FileHandler,
+    LocationHandler    
+};
+
+require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+require_once $GLOBALS['xoops']->path('www/class/xoopsformloader.php');
+require_once dirname(__DIR__) . '/include/constantes.php';
+
+require_once dirname(__DIR__) . '/preloads/autoloader.php';
 
 $moduleDirName = basename(dirname(__DIR__));
+$moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-xoops_load('XoopsRequest');
+/** @var Helper $helper */
+$helper = Helper::getInstance();
+/** @var Xmf\Module\Admin $adminObject */
+$adminObject = \Xmf\Module\Admin::getInstance();
+$utility     = new Utility();
+
+require_once dirname(__DIR__) . '/include/common.php';
+
+$adminObject = \Xmf\Module\Admin::getInstance();
+
+$pathIcon16    = \Xmf\Module\Admin::iconUrl('', 16);
+$pathIcon32    = \Xmf\Module\Admin::iconUrl('', 32);
+$pathModIcon32 = $helper->getModule()->getInfo('modicons32');
 
 // Load language files
-xoops_loadLanguage('admin', $moduleDirName);
-xoops_loadLanguage('modinfo', $moduleDirName);
-xoops_loadLanguage('main', $moduleDirName);
+$helper->loadLanguage('admin');
+$helper->loadLanguage('modinfo');
+$helper->loadLanguage('main');
+$helper->loadLanguage('common');
 
-$pathIcon16           = $GLOBALS['xoops']->url('www/' . $GLOBALS['xoopsModule']->getInfo('sysicons16'));
-$pathIcon32           = $GLOBALS['xoops']->url('www/' . $GLOBALS['xoopsModule']->getInfo('sysicons32'));
-$xoopsModuleAdminPath = $GLOBALS['xoops']->path('www/' . $GLOBALS['xoopsModule']->getInfo('dirmoduleadmin'));
-require_once $xoopsModuleAdminPath . '/moduleadmin.php';
 
-/** @var ExtcalCatHandler $catHandler */
-$catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-/** @var ExtcalEventHandler $eventHandler */
-$eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
-/** @var ExtcalEventmemberHandler $eventMemberHandler */
-$eventMemberHandler = xoops_getModuleHandler(_EXTCAL_CLS_MEMBER, _EXTCAL_MODULE);
-//xoops_cp_header();
-$adminObject = new ModuleAdmin();
+$myts = \MyTextSanitizer::getInstance();
+
+if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof \XoopsTpl)) {
+    require_once $GLOBALS['xoops']->path('class/template.php');
+    $xoopsTpl = new \XoopsTpl();
+}
+
+/** @var CategoryHandler $categoryHandler */
+$categoryHandler = $helper->getHandler(_EXTCAL_CLN_CAT);
+/** @var EventHandler $eventHandler */
+$eventHandler = $helper->getHandler(_EXTCAL_CLN_EVENT);
+/** @var EventmemberHandler $eventmemberHandler */
+$eventmemberHandler = $helper->getHandler(_EXTCAL_CLN_MEMBER);
+/** @var EventNotMemberHandler $eventNotMemberHandler */
+$eventNotMemberHandler = $helper->getHandler(_EXTCAL_CLN_NOT_MEMBER);
+/** @var FileHandler $fileHandler */
+$fileHandler     = $helper->getHandler(_EXTCAL_CLN_FILE);
+/** @var LocationHandler $locationHandler */
+$locationHandler = $helper->getHandler(_EXTCAL_CLN_LOCATION);

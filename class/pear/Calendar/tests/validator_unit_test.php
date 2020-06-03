@@ -1,8 +1,7 @@
 <?php
-//
 
-require_once __DIR__.'/simple_include.php';
-require_once __DIR__.'/calendar_include.php';
+require_once __DIR__ . '/simple_include.php';
+require_once __DIR__ . '/calendar_include.php';
 
 Mock::generate('Calendar_Engine_Interface', 'Mock_Calendar_Engine');
 Mock::generate('Calendar_Second', 'Mock_Calendar_Second');
@@ -23,7 +22,7 @@ class TestOfValidator extends UnitTestCase
         parent::__construct('Test of Validator');
     }
 
-    public function setUp()
+    protected function setUp()
     {
         $this->mockengine = new Mock_Calendar_Engine($this);
         $this->mockengine->setReturnValue('getMinYears', 1970);
@@ -37,7 +36,7 @@ class TestOfValidator extends UnitTestCase
         $this->mockcal->setReturnValue('getEngine', $this->mockengine);
     }
 
-    public function tearDown()
+    protected function tearDown()
     {
         unset($this->mockengine, $this->mocksecond);
     }
@@ -214,14 +213,14 @@ class TestOfValidatorLive extends UnitTestCase
 
     public function testYear()
     {
-        $Unit = new Calendar_Year(2038);
+        $Unit      = new Calendar_Year(2038);
         $Validator = $Unit->getValidator();
         $this->assertFalse($Validator->isValidYear());
     }
 
     public function testMonth()
     {
-        $Unit = new Calendar_Month(2000, 13);
+        $Unit      = new Calendar_Month(2000, 13);
         $Validator = $Unit->getValidator();
         $this->assertFalse($Validator->isValidMonth());
     }
@@ -236,28 +235,28 @@ class TestOfValidatorLive extends UnitTestCase
     */
     public function testDay()
     {
-        $Unit = new Calendar_Day(2000, 12, 32);
+        $Unit      = new Calendar_Day(2000, 12, 32);
         $Validator = $Unit->getValidator();
         $this->assertFalse($Validator->isValidDay());
     }
 
     public function testHour()
     {
-        $Unit = new Calendar_Hour(2000, 12, 20, 24);
+        $Unit      = new Calendar_Hour(2000, 12, 20, 24);
         $Validator = $Unit->getValidator();
         $this->assertFalse($Validator->isValidHour());
     }
 
     public function testMinute()
     {
-        $Unit = new Calendar_Minute(2000, 12, 20, 23, _EXTCAL_TS_MINUTE);
+        $Unit      = new Calendar_Minute(2000, 12, 20, 23, _EXTCAL_TS_MINUTE);
         $Validator = $Unit->getValidator();
         $this->assertFalse($Validator->isValidMinute());
     }
 
     public function testSecond()
     {
-        $Unit = new Calendar_Second(2000, 12, 20, 23, 59, _EXTCAL_TS_MINUTE);
+        $Unit      = new Calendar_Second(2000, 12, 20, 23, 59, _EXTCAL_TS_MINUTE);
         $Validator = $Unit->getValidator();
         $this->assertFalse($Validator->isValidSecond());
     }
@@ -267,7 +266,7 @@ class TestOfValidatorLive extends UnitTestCase
         $Unit = new Calendar_Second(2000, 13, 32, 24, _EXTCAL_TS_MINUTE, _EXTCAL_TS_MINUTE);
         $this->assertFalse($Unit->isValid());
         $Validator = $Unit->getValidator();
-        $i = 0;
+        $i         = 0;
         while ($Validator->fetch()) {
             ++$i;
         }

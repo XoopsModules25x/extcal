@@ -10,97 +10,110 @@
  */
 
 /**
- * @copyright    XOOPS Project http://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       XOOPS Development Team
+ * @copyright    {@link https://xoops.org/ XOOPS Project}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @package      extcal
+ * @since
+ * @author       XOOPS Development Team,
  */
 
+use XoopsModules\Extcal\{
+    Helper,
+    Utility,
+    Common
+};
+
 /**
- *
  * Prepares system prior to attempting to install module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param \XoopsModule $module {@link XoopsModule}
  *
  * @return bool true if ready to install, false if not
  */
-function xoops_module_pre_install_extcal(XoopsModule $module)
+function xoops_module_pre_install_extcal(\XoopsModule $module)
 {
-    $moduleDirName = basename(dirname(__DIR__));
-    $className     = ucfirst($moduleDirName) . 'Utilities';
-    if (!class_exists($className)) {
-        xoops_load('utilities', $moduleDirName);
-    }
+    include __DIR__ . '/common.php';
+
+    /** @var Utility $utility */
+    $utility = new Utility();
     //check for minimum XOOPS version
-    if (!$className::checkXoopsVer($module)) {
-        return false;
-    }
+    $xoopsSuccess = $utility::checkVerXoops($module);
 
     // check for minimum PHP version
-    if (!$className::checkPhpVer($module)) {
-        return false;
-    }
+    $phpSuccess = $utility::checkVerPhp($module);
 
-    $mod_tables =& $module->getInfo('tables');
-    foreach ($mod_tables as $table) {
+    if ($xoopsSuccess && $phpSuccess) {
+        $moduleTables = &$module->getInfo('tables');
+        foreach ($moduleTables as $table) {
         $GLOBALS['xoopsDB']->queryF('DROP TABLE IF EXISTS ' . $GLOBALS['xoopsDB']->prefix($table) . ';');
     }
+    }
 
-    return true;
+    return $xoopsSuccess && $phpSuccess;
 }
 
 /**
- *
  * Performs tasks required during installation of the module
- * @param XoopsModule $xoopsModule
+ * @param \XoopsModule $xoopsModule
  * @return bool true if installation successful, false if not
- * @internal param XoopsModule $module <a href='psi_element://XoopsModule'>XoopsModule</a>
- *
  */
-function xoops_module_install_extcal(XoopsModule $xoopsModule)
+function xoops_module_install_extcal(\XoopsModule $xoopsModule)
 {
+    require_once dirname(__DIR__) . '/preloads/autoloader.php';
+
     $moduleDirName = basename(dirname(__DIR__));
 
+    /** @var Helper $helper */
+    /** @var Utility $utility */
+    /** @var Common\Configurator $configurator */
+    $helper       = Helper::getInstance();
+    $utility      = new Utility();
+    $configurator = new Common\Configurator();
+    // Load language files
+    $helper->loadLanguage('admin');
+    $helper->loadLanguage('modinfo');
+
     $moduleId = $xoopsModule->getVar('mid');
-    /** @var XoopsGroupPermHandler $groupPermissionHandler */
-    $groupPermissionHandler = xoops_getHandler('groupperm');
-    /** @var XoopsConfigHandler $configHandler */
-    $configHandler = xoops_getHandler('config');
+    /** @var \XoopsGroupPermHandler $grouppermHandler */
+    $grouppermHandler = xoops_getHandler('groupperm');
 
     /*
      * Default public category permission mask
      */
 
     // Access right
-    $groupPermissionHandler->addRight($moduleDirName . '_perm_mask', 1, XOOPS_GROUP_ADMIN, $moduleId);
-    $groupPermissionHandler->addRight($moduleDirName . '_perm_mask', 1, XOOPS_GROUP_USERS, $moduleId);
-    $groupPermissionHandler->addRight($moduleDirName . '_perm_mask', 1, XOOPS_GROUP_ANONYMOUS, $moduleId);
+    $grouppermHandler->addRight($moduleDirName . '_perm_mask', 1, XOOPS_GROUP_ADMIN, $moduleId);
+    $grouppermHandler->addRight($moduleDirName . '_perm_mask', 1, XOOPS_GROUP_USERS, $moduleId);
+    $grouppermHandler->addRight($moduleDirName . '_perm_mask', 1, XOOPS_GROUP_ANONYMOUS, $moduleId);
 
     // Can submit
-    $groupPermissionHandler->addRight($moduleDirName . '_perm_mask', 2, XOOPS_GROUP_ADMIN, $moduleId);
+    $grouppermHandler->addRight($moduleDirName . '_perm_mask', 2, XOOPS_GROUP_ADMIN, $moduleId);
 
     // Auto approve
-    $groupPermissionHandler->addRight($moduleDirName . '_perm_mask', 4, XOOPS_GROUP_ADMIN, $moduleId);
+    $grouppermHandler->addRight($moduleDirName . '_perm_mask', 4, XOOPS_GROUP_ADMIN, $moduleId);
 
-    //    $moduleDirName = $xoopsModule->getVar('dirname');
-    $configurator = include $GLOBALS['xoops']->path('modules/' . $moduleDirName . '/include/config.php');
+    // Can Edit
+    $grouppermHandler->addRight($moduleDirName . '_perm_mask', 8, XOOPS_GROUP_ADMIN, $moduleId);
 
-    $classUtilities = ucfirst($moduleDirName) . 'Utilities';
-    if (!class_exists($classUtilities)) {
-        xoops_load('utilities', $moduleDirName);
-    }
-
-    if (count($configurator['uploadFolders']) > 0) {
+    //  ---  CREATE FOLDERS ---------------
+    if (count($configurator->uploadFolders) > 0) {
         //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
-        foreach (array_keys($configurator['uploadFolders']) as $i) {
-            $classUtilities::createFolder($configurator['uploadFolders'][$i]);
+        foreach (array_keys($configurator->uploadFolders) as $i) {
+            $utility::createFolder($configurator->uploadFolders[$i]);
         }
     }
-    if (count($configurator['copyFiles']) > 0) {
-        $file = __DIR__ . '/../assets/images/blank.png';
-        foreach (array_keys($configurator['copyFiles']) as $i) {
-            $dest = $configurator['copyFiles'][$i] . '/blank.png';
-            $classUtilities::copyFile($file, $dest);
+
+    //  ---  COPY blank.png FILES ---------------
+    if (count($configurator->copyBlankFiles) > 0) {
+        $file = dirname(__DIR__) . '/assets/images/blank.png';
+        foreach (array_keys($configurator->copyBlankFiles) as $i) {
+            $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
+            $utility::copyFile($file, $dest);
         }
     }
+
+    //delete .html entries from the tpl table
+    $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $xoopsModule->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
+    $GLOBALS['xoopsDB']->queryF($sql);
 
     return true;
 }

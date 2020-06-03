@@ -1,52 +1,65 @@
 <?php
+/*
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ */
 
-include __DIR__ . '/../../mainfile.php';
+/**
+ * @copyright    {@link https://xoops.org/ XOOPS Project}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @package      extcal
+ * @since
+ * @author       XOOPS Development Team,
+ */
 
-include XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include __DIR__ . '/class/form/extcalform.php';
-include __DIR__ . '/class/perm.php';
-include_once __DIR__ . '/include/constantes.php';
+use Xmf\Request;
+use XoopsModules\Extcal\{
+    Helper,
+    Perm
+};
 
-$permHandler = ExtcalPerm::getHandler();
+require_once __DIR__ . '/header.php';
+
+require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+require_once __DIR__ . '/include/constantes.php';
+
+$permHandler = Perm::getHandler();
 $xoopsUser   = $xoopsUser ?: null;
 
-if (count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) == 0
-    && count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_edit')) == 0
-) {
+if (0 == count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit'))
+    && 0 == count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_edit'))) {
     redirect_header('index.php', 3);
-    exit;
 }
 
-$params                                  = array('view' => _EXTCAL_NAV_NEW_EVENT, 'file' => _EXTCAL_FILE_NEW_EVENT);
+$params                                  = ['view' => _EXTCAL_NAV_NEW_EVENT, 'file' => _EXTCAL_FILE_NEW_EVENT];
 $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
-include XOOPS_ROOT_PATH . '/header.php';
+
 /* ========================================================================== */
 
 // Tooltips include
-$xoTheme->addScript('modules/extcal/include/ToolTips.js');
+/** @var xos_opal_Theme $xoTheme */
+$xoTheme->addScript('modules/extcal/assets/js/ToolTips.js');
 $xoTheme->addStylesheet('modules/extcal/assets/css/infobulle.css');
 
-if (!isset($_GET['event'])) {
-    $eventId = 0;
-} else {
-    $eventId = (int)$_GET['event'];
-}
-if (!isset($_GET['action'])) {
-    $action = 'edit';
-} else {
-    $action = $_GET['action'];
-}
+$eventId = Request::getInt('event', 0, 'GET');
+$action  = Request::getString('action', 'edit', 'GET');
 
 // Getting eXtCal object's handler
-$eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
+$eventHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 
-include XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
 
 // Title of the page
 $xoopsTpl->assign('xoops_pagetitle', _MI_EXTCAL_SUBMIT_EVENT);
 
 // Display the submit form
-$form = $eventHandler->getEventForm('user', $action, array('event_id' => $eventId));
+/** @var \XoopsThemeForm $form */
+$form = $eventHandler->getEventForm('user', $action, ['event_id' => $eventId]);
 $form->display();
 
-include XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

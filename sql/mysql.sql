@@ -32,7 +32,7 @@ CREATE TABLE `extcal_event` (
   `event_picture1`      VARCHAR(255) NOT NULL,
   `event_picture2`      VARCHAR(255) NOT NULL,
   `event_price`         VARCHAR(255) NOT NULL DEFAULT '',
-  `event_etablissement` INT(5)       NOT NULL DEFAULT '0',
+  `event_location` INT(5)       NOT NULL DEFAULT '0',
   `dohtml`              TINYINT(1)   NOT NULL DEFAULT '0',
   `event_icone`         VARCHAR(50)  NOT NULL,
   PRIMARY KEY (`event_id`)
@@ -73,7 +73,7 @@ CREATE TABLE `extcal_file` (
 )
   COMMENT = 'eXtCal By Zoullou';
 
-CREATE TABLE `extcal_etablissement` (
+CREATE TABLE `extcal_location` (
   `id`           INT(5)       NOT NULL AUTO_INCREMENT,
   `nom`          VARCHAR(255) NOT NULL,
   `description`  TEXT         NULL,

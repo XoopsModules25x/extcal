@@ -1,35 +1,34 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html xml:lang="en" lang="en">
 <head>
     <!-- Assign Theme name -->
 
     <!-- Title and meta -->
-    <meta http-equiv="content-language" content="en"/>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="content-language" content="en">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>Just Use it! - XOOPS Site</title>
-    <meta name="robots" content="index,follow"/>
+    <meta name="robots" content="index,follow">
     <meta name="keywords"
-          content="xoops, web applications, web 2.0, sns, news, technology, headlines, linux, software, download, downloads, free, community, forum, bulletin board, bbs, php, survey, polls, kernel, comment, comments, portal, odp, open source, opensource, FreeSoftware, gnu, gpl, license, Unix, *nix, mysql, sql, database, databases, web site, blog, wiki, module, modules, theme, themes, cms, content management"/>
+          content="xoops, web applications, web 2.0, sns, news, technology, headlines, linux, software, download, downloads, free, community, forum, bulletin board, bbs, php, survey, polls, kernel, comment, comments, portal, odp, open source, opensource, FreeSoftware, gnu, gpl, license, Unix, *nix, mysql, sql, database, databases, web site, blog, wiki, module, modules, theme, themes, cms, content management">
     <meta name="description"
-          content="XOOPS is a dynamic Object Oriented based open source portal script written in PHP."/>
-    <meta name="rating" content="general"/>
-    <meta name="author" content="XOOPS"/>
-    <meta name="copyright" content="Copyright"/>
-    <meta name="generator" content="XOOPS"/>
+          content="XOOPS is a dynamic Object Oriented based open source portal script written in PHP.">
+    <meta name="rating" content="general">
+    <meta name="author" content="XOOPS">
+    <meta name="copyright" content="Copyright">
+    <meta name="generator" content="XOOPS">
 
     <!-- Rss -->
-    <link rel="alternate" type="application/rss+xml" title="" href="http://localhost/xtest256final/backend.php"/>
+    <link rel="alternate" type="application/rss+xml" title="" href="http://localhost/xtest256final/backend.php">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/ico" href="http://localhost/xtest256final/themes/default/icons/favicon.ico"/>
-    <link rel="icon" type="image/png" href="http://localhost/xtest256final/themes/default/icons/favicon.png"/>
+    <link rel="shortcut icon" type="image/ico" href="http://localhost/xtest256final/themes/default/icons/favicon.ico">
+    <link rel="icon" type="image/png" href="http://localhost/xtest256final/themes/default/icons/favicon.png">
 
     <!-- Sheet Css -->
-    <link rel="stylesheet" type="text/css" media="all" title="Style sheet" href="http://localhost/xtest256final/xoops.css"/>
-    <link rel="stylesheet" type="text/css" media="all" title="Style sheet" href="http://localhost/xtest256final/themes/default/style.css"/>
+    <link rel="stylesheet" type="text/css" media="all" title="Style sheet" href="http://localhost/xtest256final/xoops.css">
+    <link rel="stylesheet" type="text/css" media="all" title="Style sheet" href="http://localhost/xtest256final/themes/default/style.css">
     <!--[if lte IE 8]>
-    <link rel="stylesheet" href="http://localhost/xtest256final/themes/default/styleIE8.css" type="text/css"/>
+    <link rel="stylesheet" href="http://localhost/xtest256final/themes/default/styleIE8.css" type="text/css">
     <![endif]-->
 
     <!-- customized header contents -->
@@ -37,9 +36,9 @@
     <script type="text/javascript" src="http://localhost/xtest256final/class/textsanitizer/image/image.js"></script>
     <script src="http://localhost/xtest256final/themes/zetagenesis/language/english/script.js"
             type="text/javascript"></script>
-    <link rel="stylesheet" href="http://localhost/xtest256final/language/english/style.css" type="text/css"/>
+    <link rel="stylesheet" href="http://localhost/xtest256final/language/english/style.css" type="text/css">
     <link rel="stylesheet" href="http://localhost/xtest256final/themes/zetagenesis/language/english/style.css"
-          type="text/css"/>
+          type="text/css">
 
 
 </head>
@@ -50,18 +49,18 @@
     <tr id="header">
         <td id="headerlogo">
             <a href="http://localhost/xtest256final/" title="XOOPS Site"><img
-                        src="http://localhost/xtest256final/themes/default/xoops-logo.png" alt="XOOPS Site"/></a>
+                        src="http://localhost/xtest256final/themes/default/xoops-logo.png" alt="XOOPS Site"></a>
         </td>
         <td id="headerbanner">
             <div id="xo-bannerfix">
                 <div id="xo-fixbanner"><a href="http://localhost/xtest256final/banners.php?op=click&amp;bid=1"
-                                          rel="external" title="http://www.xoops.org/"></a>
+                                          rel="external" title="https://xoops.org/"></a>
                 </div>
                 <object type="application/x-shockwave-flash" width="468" height="60"
                         data="http://localhost/xtest256final/images/banners/xoops_flashbanner2.swf"
                         style="z-index:100;">
-                    <param name="movie" value="http://localhost/xtest256final/images/banners/xoops_flashbanner2.swf"/>
-                    <param name="wmode" value="opaque"/>
+                    <param name="movie" value="http://localhost/xtest256final/images/banners/xoops_flashbanner2.swf">
+                    <param name="wmode" value="opaque">
                 </object>
             </div>
         </td>
@@ -89,15 +88,22 @@
             <div class="blockContent">
                 <div class="txtcenter">
                     <form style="margin-top: 0;" action="http://localhost/xtest256final/user.php" method="post">
+                        <{securityToken}><{*//mb*}>
                         Username: <br>
-                        <input type="text" name="uname" size="12" value="" maxlength="25"/><br>
+                        <label>
+                            <input type="text" name="uname" size="12" value="" maxlength="25">
+                        </label><br>
                         Password: <br>
-                        <input type="password" name="pass" size="12" maxlength="32"/><br>
-                        <input type="checkbox" name="rememberme" value="On" class="formButton"/>Remember me<br>
+                        <label>
+                            <input type="password" name="pass" size="12" maxlength="32">
+                        </label><br>
+                        <label>
+                            <input type="checkbox" name="rememberme" value="On" class="formButton">
+                        </label>Remember me<br>
                         <br>
-                        <input type="hidden" name="xoops_redirect" value="/xtest256final/"/>
-                        <input type="hidden" name="op" value="login"/>
-                        <input type="submit" value="User Login"/><br>
+                        <input type="hidden" name="xoops_redirect" value="/xtest256final/">
+                        <input type="hidden" name="op" value="login">
+                        <input type="submit" value="User Login"><br>
 
                     </form>
                     <br>
@@ -159,7 +165,7 @@
                         Listings</a>
                     <a class="menuMain " href="http://localhost/xtest256final/modules/lexikon/"
                        title="Lexikon">Lexikon</a>
-                    <a class="menuMain " href="http://localhost/xtest256final/modules/mastop_go2/" title="Mastop Go2">Mastop
+                    <a class="menuMain " href="http://localhost/xtest256final/modules/mastopgo2/" title="Mastop Go2">Mastop
                         Go2</a>
                     <a class="menuMain " href="http://localhost/xtest256final/modules/mycomments/" title="My comments">My
                         comments</a>
@@ -180,7 +186,7 @@
                     <a class="menuMain " href="http://localhost/xtest256final/modules/planet/" title="Planet">Planet</a>
                     <a class="menuMain " href="http://localhost/xtest256final/modules/portfolio/" title="Portfolio">Portfolio</a>
                     <a class="menuMain " href="http://localhost/xtest256final/modules/publisher/" title="Publisher">Publisher</a>
-                    <a class="menuMain " href="http://localhost/xtest256final/modules/rw_banner/" title="rw-banner">rw-banner</a>
+                    <a class="menuMain " href="http://localhost/xtest256final/modules/rwbanner/" title="rw-banner">rw-banner</a>
                     <a class="menuMain " href="http://localhost/xtest256final/modules/simplenewsletter/"
                        title="SimpleNewsletter">SimpleNewsletter</a>
                     <a class="menuMain " href="http://localhost/xtest256final/modules/smartfaq/" title="SmartFAQ">SmartFAQ</a>
@@ -215,11 +221,13 @@
             <div class="blockContent">
                 <div class="txtcenter">
                     <form action="http://localhost/xtest256final/index.php" method="post">
-                        <select name="xoops_theme_select" onchange="submit();" size="3">
-                            <option value="default" selected="selected">default</option>
-                            <option value="suico">suico</option>
-                            <option value="zetagenesis">zetagenesis</option>
-                        </select><br>(<strong>3</strong> themes)<br>
+                        <label>
+                            <select name="xoops_theme_select" onchange="submit();" size="3">
+                                <option value="default" selected="selected">default</option>
+                                <option value="suico">suico</option>
+                                <option value="zetagenesis">zetagenesis</option>
+                            </select>
+                        </label><br>(<strong>3</strong> themes)<br>
                     </form>
                 </div>
             </div>
@@ -271,7 +279,7 @@
                         <tr>
                             <td colspan="7">
                                 <img src="http://localhost/xtest256final/modules/extcal/assets/images/icons/addevent.gif"
-                                     alt="Add event"/> <a href="http://localhost/xtest256final/modules/extcal/view_new-event.php">Submit event</a>
+                                     alt="Add event"> <a href="http://localhost/xtest256final/modules/extcal/view_new-event.php">Submit event</a>
                             </td>
                         </tr>
                         <tr style="font-weight:bold;">

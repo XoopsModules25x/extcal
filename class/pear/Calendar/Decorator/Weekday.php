@@ -50,12 +50,12 @@ if (!defined('CALENDAR_ROOT')) {
 /**
  * Load Calendar decorator base class.
  */
-require_once CALENDAR_ROOT.'Decorator.php';
+require_once CALENDAR_ROOT . 'Decorator.php';
 
 /**
  * Load a Calendar_Day.
  */
-require_once CALENDAR_ROOT.'Day.php';
+require_once CALENDAR_ROOT . 'Day.php';
 
 /**
  * Decorator for fetching the day of the week
@@ -101,7 +101,7 @@ class Calendar_Decorator_Weekday extends Calendar_Decorator
      */
     public function setFirstDay($firstDay)
     {
-        $this->firstDay = (int) $firstDay;
+        $this->firstDay = (int)$firstDay;
     }
 
     /**
@@ -113,7 +113,7 @@ class Calendar_Decorator_Weekday extends Calendar_Decorator
      */
     public function prevWeekDay($format = 'int')
     {
-        $ts = $this->calendar->prevDay('timestamp');
+        $ts  = $this->calendar->prevDay('timestamp');
         $Day = new Calendar_Day(2000, 1, 1);
         $Day->setTimestamp($ts);
         $day = $this->calendar->cE->getDayOfWeek($Day->thisYear(), $Day->thisMonth(), $Day->thisDay());
@@ -131,7 +131,7 @@ class Calendar_Decorator_Weekday extends Calendar_Decorator
      */
     public function thisWeekDay($format = 'int')
     {
-        $ts = $this->calendar->thisDay('timestamp');
+        $ts  = $this->calendar->thisDay('timestamp');
         $day = $this->calendar->cE->getDayOfWeek($this->calendar->year, $this->calendar->month, $this->calendar->day);
         $day = $this->adjustWeekScale($day);
 
@@ -147,7 +147,7 @@ class Calendar_Decorator_Weekday extends Calendar_Decorator
      */
     public function nextWeekDay($format = 'int')
     {
-        $ts = $this->calendar->nextDay('timestamp');
+        $ts  = $this->calendar->nextDay('timestamp');
         $Day = new Calendar_Day(2000, 1, 1);
         $Day->setTimestamp($ts);
         $day = $this->calendar->cE->getDayOfWeek($Day->thisYear(), $Day->thisMonth(), $Day->thisDay());
@@ -168,8 +168,8 @@ class Calendar_Decorator_Weekday extends Calendar_Decorator
         $dayOfWeek -= $this->firstDay;
         if ($dayOfWeek >= 0) {
             return $dayOfWeek;
-        } else {
-            return $this->calendar->cE->getDaysInWeek($this->calendar->year, $this->calendar->month, $this->calendar->day) + $dayOfWeek;
         }
+
+        return $this->calendar->cE->getDaysInWeek($this->calendar->year, $this->calendar->month, $this->calendar->day) + $dayOfWeek;
     }
 }

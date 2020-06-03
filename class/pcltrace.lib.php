@@ -26,7 +26,7 @@
 //   engendrer.
 //   Il est entendu cependant que l'auteur a réalisé ce code par plaisir et n'y a
 //   caché aucun virus, ni malveillance.
-//   Cette libairie est distribuée sous la license GNU/GPL (http://www.gnu.org)
+//   Cette libairie est distribuée sous la license GNU/GPL (https://www.gnu.org)
 //
 //   * Auteur :
 //
@@ -46,10 +46,10 @@ if (!defined('PCLTRACE_LIB')) {
     // These values must be change by PclTrace library functions
     $g_pcl_trace_mode     = 'memory';
     $g_pcl_trace_filename = 'trace.txt';
-    $g_pcl_trace_name     = array();
+    $g_pcl_trace_name     = [];
     $g_pcl_trace_index    = 0;
     $g_pcl_trace_level    = 0;
-    //$g_pcl_trace_entries = array();
+    //$g_pcl_trace_entries = [];
 
     // --------------------------------------------------------------------------------
     // Function : TrOn($p_level, $p_mode, $p_filename)
@@ -86,7 +86,7 @@ if (!defined('PCLTRACE_LIB')) {
             case 'log':
                 $g_pcl_trace_mode = $p_mode;
                 break;
-            default :
+            default:
                 $g_pcl_trace_mode = 'logged';
         }
 
@@ -184,7 +184,7 @@ if (!defined('PCLTRACE_LIB')) {
         $g_pcl_trace_entries[$i]['type']    = '1'; // means start of function
 
         // ----- Update the message entry
-        if ($p_message != '') {
+        if ('' != $p_message) {
             $i                                  = count($g_pcl_trace_entries);
             $g_pcl_trace_entries[$i]['name']    = '';
             $g_pcl_trace_entries[$i]['param']   = '';
@@ -234,19 +234,19 @@ if (!defined('PCLTRACE_LIB')) {
 
         // ----- Extract the function name in the list
         // ----- Remove the function name in the list
-        if (!($v_name = strrchr($g_pcl_trace_name, ','))) {
+        if (!($v_name = mb_strrchr($g_pcl_trace_name, ','))) {
             $v_name           = $g_pcl_trace_name;
             $g_pcl_trace_name = '';
         } else {
-            $g_pcl_trace_name = substr($g_pcl_trace_name, 0, -strlen($v_name));
-            $v_name           = substr($v_name, -strlen($v_name) + 1);
+            $g_pcl_trace_name = mb_substr($g_pcl_trace_name, 0, -mb_strlen($v_name));
+            $v_name           = mb_substr($v_name, -mb_strlen($v_name) + 1);
         }
 
         // ----- Decrement the index
         --$g_pcl_trace_index;
 
         // ----- Update the message entry
-        if ($p_message != '') {
+        if ('' != $p_message) {
             $i                                  = count($g_pcl_trace_entries);
             $g_pcl_trace_entries[$i]['name']    = '';
             $g_pcl_trace_entries[$i]['param']   = '';
@@ -370,7 +370,7 @@ if (!defined('PCLTRACE_LIB')) {
         global $g_pcl_trace_entries;
 
         // ----- Look for disabled trace
-        if (($g_pcl_trace_level <= 0) || ($g_pcl_trace_mode !== 'memory')) {
+        if (($g_pcl_trace_level <= 0) || ('memory' !== $g_pcl_trace_mode)) {
             return;
         }
 
@@ -402,7 +402,7 @@ if (!defined('PCLTRACE_LIB')) {
 
             for ($j = 0; $j <= $g_pcl_trace_entries[$i]['index']; ++$j) {
                 if ($j == $g_pcl_trace_entries[$i]['index']) {
-                    if (($g_pcl_trace_entries[$i]['type'] == 1) || ($g_pcl_trace_entries[$i]['type'] == 2)) {
+                    if ((1 == $g_pcl_trace_entries[$i]['type']) || (2 == $g_pcl_trace_entries[$i]['type'])) {
                         echo "<td width=10><div align=center><span style='font-size: x-small; font-family: $v_font; '>+</span></div></td>";
                     }
                 } else {
@@ -472,14 +472,14 @@ if (!defined('PCLTRACE_LIB')) {
         global $g_pcl_trace_index;
         global $g_pcl_trace_entries;
 
-        if ($g_pcl_trace_mode === 'normal') {
+        if ('normal' === $g_pcl_trace_mode) {
             for ($i = 0; $i < $p_entry['index']; ++$i) {
                 echo '---';
             }
-            if ($p_entry['type'] == 1) {
+            if (1 == $p_entry['type']) {
                 echo '<b>' . $p_entry['name'] . '</b>(' . $p_entry['param'] . ') : ' . $p_entry['message'] . ' [' . $p_entry['file'] . ', ' . $p_entry['line'] . ']<br>';
             } else {
-                if ($p_entry['type'] == 2) {
+                if (2 == $p_entry['type']) {
                     echo '<b>' . $p_entry['name'] . '</b>()=' . $p_entry['param'] . ' : ' . $p_entry['message'] . ' [' . $p_entry['file'] . ', ' . $p_entry['line'] . ']<br>';
                 } else {
                     echo $p_entry['message'] . ' [' . $p_entry['file'] . ', ' . $p_entry['line'] . ']<br>';

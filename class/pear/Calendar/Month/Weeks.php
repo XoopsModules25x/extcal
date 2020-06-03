@@ -50,12 +50,12 @@ if (!defined('CALENDAR_ROOT')) {
 /**
  * Load Calendar base class.
  */
-require_once CALENDAR_ROOT.'Calendar.php';
+require_once CALENDAR_ROOT . 'Calendar.php';
 
 /**
  * Load base month.
  */
-require_once CALENDAR_ROOT.'Month.php';
+require_once CALENDAR_ROOT . 'Month.php';
 
 /**
  * Represents a Month and builds Weeks
@@ -114,11 +114,11 @@ class Calendar_Month_Weeks extends Calendar_Month
      *
      * @return bool
      */
-    public function build($sDates = array())
+    public function build($sDates = [])
     {
-        include_once CALENDAR_ROOT.'Table/Helper.php';
+        require_once CALENDAR_ROOT . 'Table/Helper.php';
         $this->tableHelper = new Calendar_Table_Helper($this, $this->firstDay);
-        include_once CALENDAR_ROOT.'Week.php';
+        require_once CALENDAR_ROOT . 'Week.php';
         $numWeeks = $this->tableHelper->getNumWeeks();
         for ($i = 1, $d = 1; $i <= $numWeeks; ++$i, $d += $this->cE->getDaysInWeek($this->thisYear(), $this->thisMonth(), $this->thisDay())) {
             $this->children[$i] = new Calendar_Week($this->year, $this->month, $d, $this->tableHelper->getFirstDay());
@@ -139,6 +139,7 @@ class Calendar_Month_Weeks extends Calendar_Month
      * Called from build().
      *
      * @param array $sDates Calendar_Week objects representing selected dates
+     * @return bool|void
      */
     public function setSelection($sDates)
     {

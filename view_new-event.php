@@ -1,31 +1,43 @@
 <?php
 
-include __DIR__ . '/../../mainfile.php';
-include_once __DIR__ . '/include/constantes.php';
-$params                                  = array('view' => _EXTCAL_NAV_NEW_EVENT, 'file' => _EXTCAL_FILE_NEW_EVENT);
+use Xmf\Request;
+use XoopsModules\Extcal\{
+    Helper,
+    Utility,
+    EventHandler,
+    Perm
+};
+
+require_once __DIR__ . '/header.php';
+require_once __DIR__ . '/include/constantes.php';
+$params                                  = ['view' => _EXTCAL_NAV_NEW_EVENT, 'file' => _EXTCAL_FILE_NEW_EVENT];
 $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
-include_once __DIR__ . '/header.php';
+
+global $xoopsUser, $xoopsTpl;
+/** @var EventHandler $eventHandler */
+/** @var Perm $permHandler */
 
 /* ========================================================================== */
-//ext_echoArray($_GET);
+//Extcal\Utility::echoArray($_GET);
 
-$eventId = (isset($_GET['event']) ? $_GET['event'] : 0);
-$action  = (isset($_GET['action']) ? $_GET['action'] : 'edit');
+$eventId = ($_GET['event'] ?? 0);
+$action  = ($_GET['action'] ?? 'edit');
 
 //------------------------------------------------------------------------------
 
 //exit;
+/** @var Perm $permHandler */
 if (count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) > 0) {
-    include XOOPS_ROOT_PATH . '/header.php';
+    require_once XOOPS_ROOT_PATH . '/header.php';
 
     // Title of the page
     $xoopsTpl->assign('xoops_pagetitle', _MI_EXTCAL_SUBMIT_EVENT);
 
     // Display the submit form
-    if ($eventId == 0) {
+    if (0 == $eventId) {
         $form = $eventHandler->getEventForm();
     } else {
-        $form = $eventHandler->getEventForm('user', $action, array('event_id' => $eventId));
+        $form = $eventHandler->getEventForm('user', $action, ['event_id' => $eventId]);
     }
     $xoopsTpl->assign('formEdit', $form->render());
 
@@ -40,7 +52,7 @@ if (count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) > 0) 
     //$form->display();
 
     //mb missing for xBootstrap templates by Angelo
-    $lang = array(
+    $lang = [
         'start'      => _MD_EXTCAL_START,
         'end'        => _MD_EXTCAL_END,
         'calmonth'   => _MD_EXTCAL_NAV_CALMONTH,
@@ -53,12 +65,13 @@ if (count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit')) > 0) 
         'agendaday'  => _MD_EXTCAL_NAV_AGENDA_DAY,
         'search'     => _MD_EXTCAL_NAV_SEARCH,
         'newevent'   => _MD_EXTCAL_NAV_NEW_EVENT,
-    );
+    ];
+
     // Assigning language data to the template
     $xoopsTpl->assign('lang', $lang);
     $xoopsTpl->assign('view', 'newevent');
 
-    include XOOPS_ROOT_PATH . '/footer.php';
+    require_once XOOPS_ROOT_PATH . '/footer.php';
 } else {
     redirect_header('index.php', 3);
 }

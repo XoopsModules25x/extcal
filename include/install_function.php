@@ -1,43 +1,55 @@
 <?php
 
 /**
- * @param XoopsModule $xoopsModule
+ * @param \XoopsModule $xoopsModule
  *
  * @return bool
  */
-function xoops_module_install_extcal(XoopsModule $xoopsModule)
-{
 
+use XoopsModules\Extcal\Helper;
+
+/**
+ * @param \XoopsModule $xoopsModule
+ * @return bool
+ */
+function xoops_module_install_extcal(\XoopsModule $xoopsModule)
+{
     // Create eXtCal upload directory
-    $dir = XOOPS_ROOT_PATH.'/uploads/extcal';
+    $dir = XOOPS_ROOT_PATH . '/uploads/extcal';
     if (!is_dir($dir)) {
         mkdir($dir);
-        mkdir($dir.'/etablissement');
+        mkdir($dir . '/location');
 
         // Copy index.html files on uploads folders
-        $indexFile = __DIR__.'/index.html';
-        copy($indexFile, $dir.'/index.html');
-        copy($indexFile, $dir.'/etablissement/index.html');
+        $indexFile = __DIR__ . '/index.html';
+        copy($indexFile, $dir . '/index.html');
+        copy($indexFile, $dir . '/location/index.html');
     }
 
-    $moduleId = $xoopsModule->getVar('mid');
-    $groupPermissionHandler = xoops_getHandler('groupperm');
-    $configHandler = xoops_getHandler('config');
+    $helper = Helper::getInstance();
+
+    $moduleId               = $xoopsModule->getVar('mid');
+    /** @var \XoopsGroupPermHandler $grouppermHandler */
+    $grouppermHandler = xoops_getHandler('groupperm');
+    $configHandler          = xoops_getHandler('config');
 
     /*
      * Default public category permission mask
      */
 
     // Access right
-    $groupPermissionHandler->addRight('extcal_perm_mask', 1, XOOPS_GROUP_ADMIN, $moduleId);
-    $groupPermissionHandler->addRight('extcal_perm_mask', 1, XOOPS_GROUP_USERS, $moduleId);
-    $groupPermissionHandler->addRight('extcal_perm_mask', 1, XOOPS_GROUP_ANONYMOUS, $moduleId);
+    $grouppermHandler->addRight('extcal_perm_mask', 1, XOOPS_GROUP_ADMIN, $moduleId);
+    $grouppermHandler->addRight('extcal_perm_mask', 1, XOOPS_GROUP_USERS, $moduleId);
+    $grouppermHandler->addRight('extcal_perm_mask', 1, XOOPS_GROUP_ANONYMOUS, $moduleId);
 
     // Can submit
-    $groupPermissionHandler->addRight('extcal_perm_mask', 2, XOOPS_GROUP_ADMIN, $moduleId);
+    $grouppermHandler->addRight('extcal_perm_mask', 2, XOOPS_GROUP_ADMIN, $moduleId);
 
     // Auto approve
-    $groupPermissionHandler->addRight('extcal_perm_mask', 4, XOOPS_GROUP_ADMIN, $moduleId);
+    $grouppermHandler->addRight('extcal_perm_mask', 4, XOOPS_GROUP_ADMIN, $moduleId);
+
+    // Can Edit
+    $grouppermHandler->addRight('extcal_perm_mask', 8, XOOPS_GROUP_ADMIN, $moduleId);
 
     return true;
 }

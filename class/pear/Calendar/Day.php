@@ -49,14 +49,14 @@ if (!defined('CALENDAR_ROOT')) {
 /**
  * Load Calendar base class.
  */
-require_once CALENDAR_ROOT.'Calendar.php';
+require_once CALENDAR_ROOT . 'Calendar.php';
 
 /**
  * Represents a Day and builds Hours.
  * <code>
  * require_once __DIR__ . '/Calendar/Day.php';
  * $Day = new Calendar_Day(2003, 10, 21); // Oct 21st 2003
- * while ($Hour = $Day->fetch()) {
+ * while (false !== ($Hour = $Day->fetch())) {
  *    echo $Hour->thisHour().'<br>';
  * }
  * </code>.
@@ -111,9 +111,9 @@ class Calendar_Day extends Calendar
      *
      * @return bool
      */
-    public function build($sDates = array())
+    public function build($sDates = [])
     {
-        include_once CALENDAR_ROOT.'Hour.php';
+        require_once CALENDAR_ROOT . 'Hour.php';
 
         $hID = $this->cE->getHoursInDay($this->year, $this->month, $this->day);
         for ($i = 0; $i < $hID; ++$i) {
@@ -130,14 +130,14 @@ class Calendar_Day extends Calendar
      * Called from build().
      *
      * @param array $sDates dates to be selected
+     * @return bool|void
      */
     public function setSelection($sDates)
     {
         foreach ($sDates as $sDate) {
             if ($this->year == $sDate->thisYear() && $this->month == $sDate->thisMonth()
-                && $this->day == $sDate->thisDay()
-            ) {
-                $key = (int) $sDate->thisHour();
+                && $this->day == $sDate->thisDay()) {
+                $key = (int)$sDate->thisHour();
                 if (isset($this->children[$key])) {
                     $sDate->setSelected();
                     $this->children[$key] = $sDate;

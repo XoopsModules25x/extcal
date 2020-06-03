@@ -55,16 +55,16 @@ define('_AM_EXTCAL_EDIT_CATEGORY', 'Edit category');
 define('_AM_EXTCAL_EDIT_OR_DELETE_CATEGORY', 'Edit or Delete category');
 define('_AM_EXTCAL_EDIT_PERMISSION', 'Edit permission');
 define('_AM_EXTCAL_EDIT_PERMISSION_DESC', 'Select categories where each group is allowed to edit there own event');
-define('_AM_EXTCAL_ERREUR_NO_ETABLISSEMENT', 'There is no location in the database');
-define('_AM_EXTCAL_ETABLISSEMENT', 'Venue');
-define('_AM_EXTCAL_ETABLISSEMENT_FORM_ACTION', 'Action');
-define('_AM_EXTCAL_ETABLISSEMENT_FORM_ADRESSE', 'Address');
-define('_AM_EXTCAL_ETABLISSEMENT_FORM_DELETE', 'Delete Location');
-define('_AM_EXTCAL_ETABLISSEMENT_FORM_EDIT', 'Edit settings');
-define('_AM_EXTCAL_ETABLISSEMENT_FORM_NOM', 'Name');
-define('_AM_EXTCAL_ETABLISSEMENT_FORM_TELEPHONE', 'Phone');
-define('_AM_EXTCAL_ETABLISSEMENT_SURDEL', 'Are you sure you want to delete');
-define('_AM_EXTCAL_ETABLISSEMENTS', 'Venues');
+define('_AM_EXTCAL_ERREUR_NO_LOCATION', 'There is no location in the database');
+define('_AM_EXTCAL_LOCATION', 'Venue');
+define('_AM_EXTCAL_LOCATION_FORM_ACTION', 'Action');
+define('_AM_EXTCAL_LOCATION_FORM_ADRESSE', 'Address');
+define('_AM_EXTCAL_LOCATION_FORM_DELETE', 'Delete Location');
+define('_AM_EXTCAL_LOCATION_FORM_EDIT', 'Edit settings');
+define('_AM_EXTCAL_LOCATION_FORM_NOM', 'Name');
+define('_AM_EXTCAL_LOCATION_FORM_TELEPHONE', 'Phone');
+define('_AM_EXTCAL_LOCATION_SURDEL', 'Are you sure you want to delete');
+define('_AM_EXTCAL_LOCATIONS', 'Venues');
 define('_AM_EXTCAL_EVENT', 'Event');
 define('_AM_EXTCAL_EVENT_CREATED', 'Event created');
 define('_AM_EXTCAL_EVENT_DELETED', 'Event successfully deleted.');
@@ -122,7 +122,7 @@ define('_AM_EXTCAL_MODULEADMIN_MISSING', 'Error: The ModuleAdmin class is missin
 //2.37
 define('_AM_EXTCAL_END_DATE', 'End Date');
 define('_AM_EXTCAL_EVENT_CLONED', 'Event successfully cloned.');
-define('_AM_EXTCAL_ETABLISSEMENT_FORM_CITY', 'City');
+define('_AM_EXTCAL_LOCATION_FORM_CITY', 'City');
 // 2.38
 define('_AM_EXTCAL_EVENT_EDIT_FAILED', 'Event Editing failed');
 define('_AM_EXTCAL_EVENT_CREATE_FAILED', "Couldn't create event");
@@ -148,3 +148,16 @@ define('_AM_EXTCAL_FROM_NAME', '');
 define('_AM_EXTCAL_FROM_EMAIL', '');
 define('_AM_EXTCAL_SEND_NOTIFICATION_SUBJECT', '');
 define('_AM_EXTCAL_SEND_NOTIFICATION_BODY', '');
+
+
+//Index
+define('AM_EXTCAL_STATISTICS', 'Extcal statistics');
+define('AM_EXTCAL_THEREARE_EXTCAL_CAT', "<span class='bold'>%s</span> Categories in the database");
+define('AM_EXTCAL_THEREARE_EXTCAL_EVENT', "<span class='bold'>%s</span> Events in the database");
+define('AM_EXTCAL_THEREARE_EXTCAL_EVENTMEMBER', "<span class='bold'>%s</span> Event Member in the database");
+define('AM_EXTCAL_THEREARE_EXTCAL_EVENTNOTMEMBER', "<span class='bold'>%s</span> Event non-member in the database");
+define('AM_EXTCAL_THEREARE_EXTCAL_FILE', "<span class='bold'>%s</span> Files in the database");
+define('AM_EXTCAL_THEREARE_EXTCAL_LOCATION', "<span class='bold'>%s</span> Locations in the database");
+
+//2.40
+define('_AM_EXTCAL_UPDATE_VERSION', 'Update to version: '); //mise à jour version :

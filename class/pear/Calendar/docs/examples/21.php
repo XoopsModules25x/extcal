@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Description: a complete year with numeric week numbers.
  */
@@ -6,17 +7,17 @@ function getmicrotime()
 {
     list($usec, $sec) = explode(' ', microtime());
 
-    return (float) $usec + (float) $sec;
+    return (float)$usec + (float)$sec;
 }
 
 $start = getmicrotime();
 
-if (!@include 'Calendar/Calendar.php') {
+if (!@require_once __DIR__ . '/Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 
-require_once CALENDAR_ROOT.'Year.php';
-require_once CALENDAR_ROOT.'Month/Weeks.php';
+require_once CALENDAR_ROOT . 'Year.php';
+require_once CALENDAR_ROOT . 'Month/Weeks.php';
 
 define('CALENDAR_MONTH_STATE', CALENDAR_USE_MONTH_WEEKS);
 
@@ -24,10 +25,10 @@ if (!isset($_GET['year'])) {
     $_GET['year'] = date('Y');
 }
 
-$week_types = array(
+$week_types = [
     'n_in_year',
     'n_in_month',
-);
+];
 
 if (!isset($_GET['week_type']) || !in_array($_GET['week_type'], $week_types)) {
     $_GET['week_type'] = 'n_in_year';
@@ -37,7 +38,7 @@ $Year = new Calendar_Year($_GET['year']);
 
 $Year->build();
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
     <title> <?php echo $Year->thisYear(); ?> </title>
@@ -49,12 +50,12 @@ $Year->build();
         caption.year {
             font-weight: bold;
             font-size: 120%;
-            font-color: navy;
+            font-color: #000080;
         }
 
         caption.month {
             font-size: 110%;
-            font-color: navy;
+            font-color: #000080;
         }
 
         table.month {
@@ -108,7 +109,7 @@ $Year->build();
     </caption>
     <?php
     $i = 0;
-    while ($Month = $Year->fetch()) {
+    while (false !== ($Month = $Year->fetch())) {
         switch ($i) {
             case 0:
                 echo "<tr>\n";
@@ -124,20 +125,20 @@ $Year->build();
         }
 
         echo "<td>\n<table class=\"month\">\n";
-        echo '<caption class="month">'.date('F', $Month->thisMonth(true)).'</caption>';
-        echo '<colgroup><col class="weekNumbers"><col span="7"></colgroup>'."\n";
+        echo '<caption class="month">' . date('F', $Month->thisMonth(true)) . '</caption>';
+        echo '<colgroup><col class="weekNumbers"><col span="7"></colgroup>' . "\n";
         echo "<tr>\n<th>Week</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th><th>S</th>\n</tr>";
         $Month->build();
-        while ($Week = $Month->fetch()) {
+        while (false !== ($Week = $Month->fetch())) {
             echo "<tr>\n";
-            echo '<td>'.$Week->thisWeek($_GET['week_type'])."</td>\n";
+            echo '<td>' . $Week->thisWeek($_GET['week_type']) . "</td>\n";
             $Week->build();
 
-            while ($Day = $Week->fetch()) {
+            while (false !== ($Day = $Week->fetch())) {
                 if ($Day->isEmpty()) {
                     echo "<td>&nbsp;</td>\n";
                 } else {
-                    echo '<td>'.$Day->thisDay()."</td>\n";
+                    echo '<td>' . $Day->thisDay() . "</td>\n";
                 }
             }
         }

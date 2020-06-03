@@ -1,10 +1,9 @@
 <?php
-//
 
-require_once __DIR__.'/simple_include.php';
-require_once __DIR__.'/calendar_include.php';
+require_once __DIR__ . '/simple_include.php';
+require_once __DIR__ . '/calendar_include.php';
 
-require_once __DIR__.'/./calendar_test.php';
+require_once __DIR__ . '/./calendar_test.php';
 
 /**
  * Class TestOfMonthWeeks.
@@ -31,14 +30,14 @@ class TestOfMonthWeeks extends TestOfCalendar
 
     public function testPrevDay_Array()
     {
-        $this->assertEqual(array(
-                               'year' => 2003,
-                               'month' => 9,
-                               'day' => 30,
-                               'hour' => 0,
+        $this->assertEqual([
+                               'year'   => 2003,
+                               'month'  => 9,
+                               'day'    => 30,
+                               'hour'   => 0,
                                'minute' => 0,
                                'second' => 0,
-                           ), $this->cal->prevDay('array'));
+                           ], $this->cal->prevDay('array'));
     }
 
     public function testThisDay()
@@ -136,7 +135,7 @@ class TestOfMonthWeeksBuild extends TestOfMonthWeeks
         function testFetchAll()
         {
             $this->cal->build();
-            $children = array();
+            $children = [];
             $i = 1;
             while ( $Child = $this->cal->fetch() ) {
                 $children[$i]=$Child;
@@ -147,10 +146,10 @@ class TestOfMonthWeeksBuild extends TestOfMonthWeeks
     */
     public function testSelection()
     {
-        include_once CALENDAR_ROOT.'Week.php';
-        $selection = array(new Calendar_Week(2003, 10, 12));
+        require_once CALENDAR_ROOT . 'Week.php';
+        $selection = [new Calendar_Week(2003, 10, 12)];
         $this->cal->build($selection);
-        $i = 1;
+        $i        = 1;
         $expected = (CALENDAR_FIRST_DAY_OF_WEEK == 0) ? 3 : 2;
         while ($Child = $this->cal->fetch()) {
             if ($i == $expected) {

@@ -1,5 +1,5 @@
 <table class="outer">
-    <{foreachq item=event from=$block}>
+    <{foreach item=event from=$block}>
     <tr class="<{cycle values=" even,odd"}>">
         <td>
             <a href="<{$xoops_url}>/modules/extcal/event.php?event=<{$event.event_id}>"

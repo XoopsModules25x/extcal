@@ -1,12 +1,14 @@
 <?php
 
 $step = 'default';
-if (isset($_POST['step'])) {
+if (\Xmf\Request::hasVar('step', 'POST')) {
     $step = $_POST['step'];
 }
 
-include_once __DIR__ . '/../../../include/cp_header.php';
-include __DIR__ . '/function.php';
+require_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/function.php';
+
+global $xoopsConfig;
 
 // Change this variable if you use a cloned version of eXtGallery
 $localModuleDir = 'extcal';
@@ -16,7 +18,7 @@ $versionFile    = 'http://www.zoullou.net/extcal.version';
 $downloadServer = 'http://downloads.sourceforge.net/zoullou/';
 
 $lastVersion       = @file_get_contents($versionFile);
-$lastVersionString = substr($lastVersion, 0, 1) . '.' . substr($lastVersion, 1, 1) . '.' . substr($lastVersion, 2, 1);
+$lastVersionString = mb_substr($lastVersion, 0, 1) . '.' . mb_substr($lastVersion, 1, 1) . '.' . mb_substr($lastVersion, 2, 1);
 $moduleFileName    = $moduleName . '-' . $lastVersionString . '.tar.gz';
 $langFileName      = $moduleName . '-lang-' . $lastVersionString . '_' . $xoopsConfig['language'] . '.tar.gz';
 
@@ -48,7 +50,7 @@ switch ($step) {
         }
 
         // English file are included on module package
-        if ($xoopsConfig['language'] !== 'english') {
+        if ('english' !== $xoopsConfig['language']) {
             if (!$handle = @fopen($downloadServer . $langFileName, 'r')) {
                 printf(_AM_EXTCAL_LG_FILE_DONT_EXIST, $downloadServer, $langFileName);
             } else {
@@ -65,12 +67,11 @@ switch ($step) {
             }
         }
 
-        xoops_confirm(array('step' => 'install'), 'upgrade.php', _AM_EXTCAL_DOWN_DONE, _AM_EXTCAL_INSTALL);
+        xoops_confirm(['step' => 'install'], 'upgrade.php', _AM_EXTCAL_DOWN_DONE, _AM_EXTCAL_INSTALL);
 
         xoops_cp_footer();
 
         break;
-
     case 'install':
         xoops_cp_header();
         adminMenu();
@@ -83,7 +84,7 @@ switch ($step) {
         }
 
         $gPcltarLibDir = XOOPS_ROOT_PATH . '/modules/' . $localModuleDir . '/class';
-        include __DIR__ . '/../class/pcltar.lib.php';
+        require_once dirname(__DIR__) . '/class/pcltar.lib.php';
 
         //TrOn(5);
 
@@ -100,9 +101,10 @@ switch ($step) {
         }
 
         // Delete template_c file
-        if ($handle = opendir(XOOPS_ROOT_PATH . '/templates_c')) {
+        $handle = opendir(XOOPS_ROOT_PATH . '/templates_c');
+        if ($handle) {
             while (false !== ($file = readdir($handle))) {
-                if ($file !== '.' && $file !== '..' && $file !== 'index.html') {
+                if ('.' !== $file && '..' !== $file && 'index.html' !== $file) {
                     unlink(XOOPS_ROOT_PATH . '/templates_c/' . $file);
                 }
             }
@@ -111,12 +113,11 @@ switch ($step) {
         }
         //TrDisplay();
 
-        xoops_confirm(array('dirname' => $localModuleDir, 'op' => 'update_ok', 'fct' => 'modulesadmin'), XOOPS_URL . '/modules/system/admin.php', _AM_EXTCAL_INSTALL_DONE, _AM_EXTCAL_UPDATE);
+        xoops_confirm(['dirname' => $localModuleDir, 'op' => 'update_ok', 'fct' => 'modulesadmin'], XOOPS_URL . '/modules/system/admin.php', _AM_EXTCAL_INSTALL_DONE, _AM_EXTCAL_UPDATE);
 
         xoops_cp_footer();
 
         break;
-
     default:
     case 'default':
         redirect_header('index.php', 3, '');

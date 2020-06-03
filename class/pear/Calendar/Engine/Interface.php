@@ -71,8 +71,6 @@ class Calendar_Engine_Interface
      * Returns a numeric year given a timestamp.
      *
      * @param int $stamp timestamp (depending on implementation)
-     *
-     * @return int year (e.g. 2003)
      */
     public function stampToYear($stamp)
     {
@@ -82,8 +80,6 @@ class Calendar_Engine_Interface
      * Returns a numeric month given a timestamp.
      *
      * @param int $stamp timestamp (depending on implementation)
-     *
-     * @return int month (e.g. 9)
      */
     public function stampToMonth($stamp)
     {
@@ -93,8 +89,6 @@ class Calendar_Engine_Interface
      * Returns a numeric day given a timestamp.
      *
      * @param int $stamp timestamp (depending on implementation)
-     *
-     * @return int day (e.g. 15)
      */
     public function stampToDay($stamp)
     {
@@ -104,8 +98,6 @@ class Calendar_Engine_Interface
      * Returns a numeric hour given a timestamp.
      *
      * @param int $stamp timestamp (depending on implementation)
-     *
-     * @return int hour (e.g. 13)
      */
     public function stampToHour($stamp)
     {
@@ -115,8 +107,6 @@ class Calendar_Engine_Interface
      * Returns a numeric minute given a timestamp.
      *
      * @param int $stamp timestamp (depending on implementation)
-     *
-     * @return int minute (e.g. 34)
      */
     public function stampToMinute($stamp)
     {
@@ -126,8 +116,6 @@ class Calendar_Engine_Interface
      * Returns a numeric second given a timestamp.
      *
      * @param int $stamp timestamp (depending on implementation)
-     *
-     * @return int second (e.g. 51)
      */
     public function stampToSecond($stamp)
     {
@@ -144,8 +132,6 @@ class Calendar_Engine_Interface
      * @param int $h hour (e.g. 13)
      * @param int $i minute (e.g. 34)
      * @param int $s second (e.g. 53)
-     *
-     * @return int (depends on implementation)
      */
     public function dateToStamp($y, $m, $d, $h, $i, $s)
     {
@@ -153,8 +139,6 @@ class Calendar_Engine_Interface
 
     /**
      * The upper limit on years that the Calendar Engine can work with.
-     *
-     * @return int (e.g. 2037)
      */
     public function getMaxYears()
     {
@@ -162,8 +146,6 @@ class Calendar_Engine_Interface
 
     /**
      * The lower limit on years that the Calendar Engine can work with.
-     *
-     * @return int (e.g 1902)
      */
     public function getMinYears()
     {
@@ -173,8 +155,6 @@ class Calendar_Engine_Interface
      * Returns the number of months in a year.
      *
      * @param int $y (optional) year to get months for
-     *
-     * @return int (e.g. 12)
      */
     public function getMonthsInYear($y = null)
     {
@@ -185,8 +165,6 @@ class Calendar_Engine_Interface
      *
      * @param int $y year (e.g. 2003)
      * @param int $m month (e.g. 9)
-     *
-     * @return int days in month
      */
     public function getDaysInMonth($y, $m)
     {
@@ -198,8 +176,6 @@ class Calendar_Engine_Interface
      *
      * @param int $y year (e.g. 2003)
      * @param int $m month (e.g. 9)
-     *
-     * @return int
      */
     public function getFirstDayInMonth($y, $m)
     {
@@ -211,8 +187,6 @@ class Calendar_Engine_Interface
      * @param int $y year (2003)
      * @param int $m month (9)
      * @param int $d day (4)
-     *
-     * @return int (e.g. 7)
      */
     public function getDaysInWeek($y = null, $m = null, $d = null)
     {
@@ -224,8 +198,6 @@ class Calendar_Engine_Interface
      * @param int $y year (2003)
      * @param int $m month (9)
      * @param int $d day (4)
-     *
-     * @return int week number
      */
     public function getWeekNInYear($y, $m, $d)
     {
@@ -238,8 +210,6 @@ class Calendar_Engine_Interface
      * @param int $m        month (9)
      * @param int $d        day (4)
      * @param int $firstDay first day of the week (default: 1 - monday)
-     *
-     * @return int week number
      */
     public function getWeekNInMonth($y, $m, $d, $firstDay = 1)
     {
@@ -250,8 +220,6 @@ class Calendar_Engine_Interface
      *
      * @param int $y year (2003)
      * @param int $m month (9)
-     *
-     * @return int weeks number
      */
     public function getWeeksInMonth($y, $m)
     {
@@ -263,8 +231,6 @@ class Calendar_Engine_Interface
      * @param int $y year (2003)
      * @param int $m month (9)
      * @param int $d day (4)
-     *
-     * @return int weekday number
      */
     public function getDayOfWeek($y, $m, $d)
     {
@@ -276,8 +242,6 @@ class Calendar_Engine_Interface
      * @param int $y year (2003)
      * @param int $m month (9)
      * @param int $d day (4)
-     *
-     * @return array list of numeric values of days in week, beginning 0
      */
     public function getWeekDays($y = null, $m = null, $d = null)
     {
@@ -291,7 +255,6 @@ class Calendar_Engine_Interface
      * @param int $m month (9)
      * @param int $d day (4)
      *
-     * @return int (e.g. 1 for Monday)
      *
      * @see    getWeekDays
      */
@@ -305,8 +268,6 @@ class Calendar_Engine_Interface
      * @param int $y year (2003)
      * @param int $m month (9)
      * @param int $d day (4)
-     *
-     * @return int (e.g. 24)
      */
     public function getHoursInDay($y = null, $m = null, $d = null)
     {
@@ -319,8 +280,6 @@ class Calendar_Engine_Interface
      * @param int $m month (9)
      * @param int $d day (4)
      * @param int $h hour
-     *
-     * @return int
      */
     public function getMinutesInHour($y = null, $m = null, $d = null, $h = null)
     {
@@ -334,8 +293,6 @@ class Calendar_Engine_Interface
      * @param int $d day (4)
      * @param int $h hour
      * @param int $i minute
-     *
-     * @return int
      */
     public function getSecondsInMinute($y = null, $m = null, $d = null, $h = null, $i = null)
     {
@@ -344,9 +301,7 @@ class Calendar_Engine_Interface
     /**
      * Checks if the given day is the current day.
      *
-     * @param int timestamp (depending on implementation)
-     *
-     * @return bool
+     * @param mixed $stamp
      */
     public function isToday($stamp)
     {

@@ -17,11 +17,11 @@
 }
 
 .highslide img {
-    border: 2px solid silver;
+    border: 2px solid #c0c0c0;
 }
 
 .highslide:hover img {
-    border-color: gray;
+    border-color: #808080;
 }
 
 .highslide-active-anchor img {
@@ -29,17 +29,17 @@
 }
 
 .highslide-gallery .highslide-active-anchor img {
-    border-color: black;
+    border-color: #000000;
     visibility: visible;
     cursor: default;
 }
 
 .highslide-image {
-    border: 2px solid white;
+    border: 2px solid #ffffff;
 }
 
 .highslide-wrapper, .highslide-outline {
-    background: white;
+    background: #ffffff;
 }
 
 .glossy-dark {
@@ -51,7 +51,7 @@
 
 .highslide-number {
     font-weight: bold;
-    color: gray;
+    color: #808080;
     font-size: .9em;
 }
 
@@ -70,7 +70,7 @@
 
 .highslide-dimming {
     /*position: absolute;*/
-    background: black;
+    background: #000000;
 }
 
 a.highslide-full-expand {
@@ -83,29 +83,29 @@ a.highslide-full-expand {
 
 .highslide-loading {
     display: block;
-    color: black;
+    color: #000000;
     font-size: 9px;
     font-weight: bold;
     text-transform: uppercase;
     text-decoration: none;
-    border: 1px solid white;
+    border: 1px solid #ffffff;
     padding: 3px 3px 3px 22px;
     /* background-image: url(../js/graphics/loader.white.gif); */
-    background: white url(data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH+GkNyZWF0ZWQgd2l0aCBhamF4bG9hZC5pbmZvACH5BAAKAAAAIf8LTkVUU0NBUEUyLjADAQAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQACgABACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkEAAoAAgAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkEAAoAAwAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkEAAoABAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQACgAFACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQACgAGACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAAKAAcALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==) no-repeat 3px 1px;
+    background: #ffffff url(data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH+GkNyZWF0ZWQgd2l0aCBhamF4bG9hZC5pbmZvACH5BAAKAAAAIf8LTkVUU0NBUEUyLjADAQAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQACgABACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkEAAoAAgAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkEAAoAAwAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkEAAoABAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQACgAFACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQACgAGACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAAKAAcALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==) no-repeat 3px 1px;
 }
 
 a.highslide-credits,
 a.highslide-credits i {
     padding: 2px;
-    color: silver;
+    color: #c0c0c0;
     text-decoration: none;
     font-size: 10px;
 }
 
 a.highslide-credits:hover,
 a.highslide-credits:hover i {
-    color: white;
-    background-color: gray;
+    color: #ffffff;
+    background-color: #808080;
 }
 
 .highslide-move, .highslide-move * {
@@ -159,7 +159,7 @@ a.highslide-credits:hover i {
     float: left;
     width: 106px;
     height: 106px;
-    border: 1px solid silver;
+    border: 1px solid #c0c0c0;
     background: #ededed;
     margin: 2px;
     padding: 0;
@@ -332,11 +332,11 @@ html > /**/ body .highslide-gallery ul img {
 }
 
 .highslide-html {
-    background-color: white;
+    background-color: #ffffff;
 }
 
 .mobile .highslide-html {
-    border: 1px solid silver;
+    border: 1px solid #c0c0c0;
 }
 
 .highslide-html-content {
@@ -366,13 +366,13 @@ html > /**/ body .highslide-gallery ul img {
 
 .highslide-header a {
     font-weight: bold;
-    color: gray;
+    color: #808080;
     text-transform: uppercase;
     text-decoration: none;
 }
 
 .highslide-header a:hover {
-    color: black;
+    color: #000000;
 }
 
 .highslide-header .highslide-move a {
@@ -508,7 +508,7 @@ html > /**/ body .highslide-gallery ul img {
 
 /* hs.wrapperClassName = 'wide-border' */
 .wide-border {
-    background: white;
+    background: #ffffff;
 }
 
 .wide-border .highslide-image {
@@ -525,9 +525,9 @@ html > /**/ body .highslide-gallery ul img {
 }
 
 .borderless .highslide-caption {
-    border-bottom: 1px solid white;
-    border-top: 1px solid white;
-    background: silver;
+    border-bottom: 1px solid #ffffff;
+    border-top: 1px solid #ffffff;
+    background: #c0c0c0;
 }
 
 /* hs.wrapperClassName = 'outer-glow' */
@@ -543,20 +543,20 @@ html > /**/ body .highslide-gallery ul img {
     border: 5px solid #444444;
     border-top: none;
     padding: 5px;
-    background-color: gray;
+    background-color: #808080;
 }
 
 /* hs.wrapperClassName = 'colored-border' */
 .colored-border {
-    background: white;
+    background: #ffffff;
 }
 
 .colored-border .highslide-image {
-    border: 2px solid green;
+    border: 2px solid #008000;
 }
 
 .colored-border .highslide-caption {
-    border: 2px solid green;
+    border: 2px solid #008000;
     border-top: none;
 }
 
@@ -566,12 +566,12 @@ html > /**/ body .highslide-gallery ul img {
 }
 
 .dark .highslide-image {
-    border-color: black black #202020 black;
-    background: gray;
+    border-color: #000000 #000000 #202020 #000000;
+    background: #808080;
 }
 
 .dark .highslide-caption {
-    color: white;
+    color: #ffffff;
     background: #111;
 }
 
@@ -586,14 +586,14 @@ html > /**/ body .highslide-gallery ul img {
     position: absolute;
     padding: 1em 0 0 0;
     background: none;
-    color: white;
+    color: #ffffff;
     border: none;
     font-weight: bold;
 }
 
 /* hs.wrapperClassName = 'controls-in-heading' */
 .controls-in-heading .highslide-heading {
-    color: gray;
+    color: #808080;
     font-weight: bold;
     height: 20px;
     overflow: hidden;
@@ -771,7 +771,7 @@ html > /**/ body .highslide-gallery ul img {
 }
 
 .text-controls a:hover span {
-    color: black;
+    color: #000000;
 }
 
 .text-controls a.disabled span {
@@ -862,7 +862,7 @@ html > /**/ body .highslide-gallery ul img {
 
 .highslide-thumbstrip img {
     display: block;
-    border: 1px solid gray;
+    border: 1px solid #808080;
     margin: 0 auto;
 }
 
@@ -932,7 +932,7 @@ html > /**/ body .highslide-gallery ul img {
     top: 47px;
     border-left-width: 6px;
     border-right-width: 6px;
-    border-bottom: 6px solid gray;
+    border-bottom: 6px solid #808080;
 }
 
 .highslide-viewport .highslide-thumbstrip-horizontal .highslide-marker {
@@ -940,7 +940,7 @@ html > /**/ body .highslide-gallery ul img {
 }
 
 .dark .highslide-thumbstrip-horizontal .highslide-marker, .highslide-viewport .highslide-thumbstrip-horizontal .highslide-marker {
-    border-bottom-color: white !important;
+    border-bottom-color: #ffffff !important;
 }
 
 .highslide-thumbstrip-vertical-overlay {
@@ -1000,11 +1000,11 @@ html > /**/ body .highslide-gallery ul img {
     margin-top: 8px;
     border-top-width: 6px;
     border-bottom-width: 6px;
-    border-left: 6px solid gray;
+    border-left: 6px solid #808080;
 }
 
 .dark .highslide-thumbstrip-vertical .highslide-marker, .highslide-viewport .highslide-thumbstrip-vertical .highslide-marker {
-    border-left-color: white;
+    border-left-color: #ffffff;
 }
 
 .highslide-viewport .highslide-thumbstrip-float {
@@ -1026,12 +1026,12 @@ html > /**/ body .highslide-gallery ul img {
 
 .highslide-thumbstrip-float img {
     display: inline;
-    border-color: silver;
+    border-color: #c0c0c0;
     max-height: 56px;
 }
 
 .highslide-thumbstrip-float .highslide-active-anchor img {
-    border-color: black;
+    border-color: #000000;
 }
 
 .highslide-thumbstrip-float .highslide-scroll-up div, .highslide-thumbstrip-float .highslide-scroll-down div {

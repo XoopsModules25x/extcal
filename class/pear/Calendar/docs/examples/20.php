@@ -7,21 +7,22 @@
 //if you use ISO-8601 dates, switch to PearDate engine
 define('CALENDAR_ENGINE', 'PearDate');
 
-if (!@include 'Calendar/Calendar.php') {
+if (!@require_once __DIR__ . '/Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 
-require_once CALENDAR_ROOT.'Month/Weekdays.php';
-require_once CALENDAR_ROOT.'Day.php';
-require_once CALENDAR_ROOT.'Decorator.php';
+require_once CALENDAR_ROOT . 'Month/Weekdays.php';
+require_once CALENDAR_ROOT . 'Day.php';
+require_once CALENDAR_ROOT . 'Decorator.php';
 
 // accepts multiple entries
+
 /**
  * Class DiaryEvent.
  */
 class DiaryEvent extends Calendar_Decorator
 {
-    public $entries = array();
+    public $entries = [];
 
     /**
      * @param $calendar
@@ -47,11 +48,10 @@ class DiaryEvent extends Calendar_Decorator
         $entry = each($this->entries);
         if ($entry) {
             return $entry['value'];
-        } else {
-            reset($this->entries);
-
-            return false;
         }
+        reset($this->entries);
+
+        return false;
     }
 }
 
@@ -73,15 +73,15 @@ class MonthPayload_Decorator extends Calendar_Decorator
      *
      * @return bool
      */
-    public function build($events = array())
+    public function build($events = [])
     {
-        require_once CALENDAR_ROOT.'Day.php';
-        require_once CALENDAR_ROOT.'Table/Helper.php';
+        require_once CALENDAR_ROOT . 'Day.php';
+        require_once CALENDAR_ROOT . 'Table/Helper.php';
 
         $this->tableHelper = new Calendar_Table_Helper($this, $this->firstDay);
-        $this->cE = $this->getEngine();
-        $this->year = $this->thisYear();
-        $this->month = $this->thisMonth();
+        $this->cE          = $this->getEngine();
+        $this->year        = $this->thisYear();
+        $this->month       = $this->thisMonth();
 
         $daysInMonth = $this->cE->getDaysInMonth($this->year, $this->month);
         for ($i = 1; $i <= $daysInMonth; ++$i) {
@@ -92,10 +92,11 @@ class MonthPayload_Decorator extends Calendar_Decorator
         if (count($events) > 0) {
             $this->setSelection($events);
         }
-        Calendar_Month_Weekdays::buildEmptyDaysBefore();
-        Calendar_Month_Weekdays::shiftDays();
-        Calendar_Month_Weekdays::buildEmptyDaysAfter();
-        Calendar_Month_Weekdays::setWeekMarkers();
+        $calMonthWeekdays = new Calendar_Month_Weekdays($this->year, $this->month);
+        $calMonthWeekdays->buildEmptyDaysBefore();
+        $calMonthWeekdays->shiftDays();
+        $calMonthWeekdays->buildEmptyDaysAfter();
+        $calMonthWeekdays->setWeekMarkers();
 
         return true;
     }
@@ -113,8 +114,7 @@ class MonthPayload_Decorator extends Calendar_Decorator
                 if (($stamp1 >= $event['start'] && $stamp1 < $event['end'])
                     || ($stamp2 >= $event['start']
                         && $stamp2 < $event['end'])
-                    || ($stamp1 <= $event['start'] && $stamp2 > $event['end'])
-                ) {
+                    || ($stamp1 <= $event['start'] && $stamp2 > $event['end'])) {
                     $this->children[$i]->addEntry($event);
                     $this->children[$i]->setSelected();
                 }
@@ -130,11 +130,10 @@ class MonthPayload_Decorator extends Calendar_Decorator
         $child = each($this->children);
         if ($child) {
             return $child['value'];
-        } else {
-            reset($this->children);
-
-            return false;
         }
+        reset($this->children);
+
+        return false;
     }
 }
 
@@ -142,30 +141,30 @@ class MonthPayload_Decorator extends Calendar_Decorator
 // you can switch Calendar Engine and the example still works
 $cal = new Calendar();
 
-$events = array();
+$events = [];
 //add some events
-$events[] = array(
+$events[] = [
     'start' => $cal->cE->dateToStamp(2004, 6, 1, 10),
-    'end' => $cal->cE->dateToStamp(2004, 6, 1, 12),
-    'desc' => 'Important meeting',
-);
-$events[] = array(
+    'end'   => $cal->cE->dateToStamp(2004, 6, 1, 12),
+    'desc'  => 'Important meeting',
+];
+$events[] = [
     'start' => $cal->cE->dateToStamp(2004, 6, 1, 21),
-    'end' => $cal->cE->dateToStamp(2004, 6, 1, 23, 59),
-    'desc' => 'Dinner with the boss',
-);
-$events[] = array(
+    'end'   => $cal->cE->dateToStamp(2004, 6, 1, 23, 59),
+    'desc'  => 'Dinner with the boss',
+];
+$events[] = [
     'start' => $cal->cE->dateToStamp(2004, 6, 5),
-    'end' => $cal->cE->dateToStamp(2004, 6, 10, 23, 59),
-    'desc' => 'Holidays!',
-);
+    'end'   => $cal->cE->dateToStamp(2004, 6, 10, 23, 59),
+    'desc'  => 'Holidays!',
+];
 
-$Month = new Calendar_Month_Weekdays(2004, 6);
+$Month          = new Calendar_Month_Weekdays(2004, 6);
 $MonthDecorator = new MonthPayload_Decorator($Month);
 $MonthDecorator->build($events);
 
 ?>
-<!doctype html public "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
     <title> Calendar </title>
@@ -230,7 +229,7 @@ $MonthDecorator->build($events);
 <h2>Sample Calendar Payload Decorator (using <?php echo CALENDAR_ENGINE; ?> engine)</h2>
 <table class="calendar" width="98%" cellspacing="0" cellpadding="0">
     <caption>
-        <?php echo $MonthDecorator->thisMonth().' / '.$MonthDecorator->thisYear(); ?>
+        <?php echo $MonthDecorator->thisMonth() . ' / ' . $MonthDecorator->thisYear(); ?>
     </caption>
     <tr>
         <th>Monday</th>
@@ -242,7 +241,7 @@ $MonthDecorator->build($events);
         <th>Sunday</th>
     </tr>
     <?php
-    while ($Day = $MonthDecorator->fetch()) {
+    while (false !== ($Day = $MonthDecorator->fetch())) {
         if ($Day->isFirst()) {
             echo "<tr>\n";
         }
@@ -254,14 +253,14 @@ $MonthDecorator->build($events);
             echo ' calCellEmpty';
         }
         echo '">';
-        echo '<div class="dayNumber">'.$Day->thisDay().'</div>';
+        echo '<div class="dayNumber">' . $Day->thisDay() . '</div>';
 
         if ($Day->isEmpty()) {
             echo '&nbsp;';
         } else {
             echo '<div class="dayContents"><ul>';
             while ($entry = $Day->getEntry()) {
-                echo '<li>'.$entry['desc'].'</li>';
+                echo '<li>' . $entry['desc'] . '</li>';
                 //you can print the time range as well
             }
             echo '</ul></div>';

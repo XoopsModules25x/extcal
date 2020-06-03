@@ -1,36 +1,46 @@
 <?php
-/**
- * classGenerator
- * walls_watermarks.
- *
+/*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- *
+ */
+
+/**
+ * @copyright    {@link https://xoops.org/ XOOPS Project}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @package      extcal
+ * @since
+ * @author       XOOPS Development Team,
  *
  * L'utilisation de ce formulaire d'adminitration suppose
  * que la classe correspondante de la table a été générées avec classGenerator
  **/
-include_once __DIR__ . '/../../../class/uploader.php';
-require __DIR__ . '/../../../class/mail/phpmailer/class.phpmailer.php'; // First we require the PHPMailer libary in our script
-include_once __DIR__ . '/../class/utilities.php';
-include_once __DIR__ . '/constantes.php';
-include_once __DIR__ . '/../../../class/template.php';
+
+use XoopsModules\Extcal\{
+    Helper,
+    Utility
+};
+
+require_once dirname(dirname(dirname(__DIR__))) . '/class/uploader.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/class/mail/phpmailer/class.phpmailer.php'; // First we require_once the PHPMailer libary in our script
+// require_once  dirname(__DIR__) . '/class/Utility.php';
+require_once __DIR__ . '/constantes.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/class/template.php';
 
 /********************************************************************
  *
  *******************************************************************
  * @param $mode
- * @param $event_id
- * @param $member_uid
+ * @param $eventId
+ * @param $memberUid
  * @param $subject
  * @param $tplMessage
  */
-function sendMail2member($mode, $event_id, $member_uid, $subject, $tplMessage)
+function sendMail2member($mode, $eventId, $memberUid, $subject, $tplMessage)
 {
     //mode = 0 pas d'entete
     //mode = 1 format text
@@ -40,8 +50,8 @@ function sendMail2member($mode, $event_id, $member_uid, $subject, $tplMessage)
     // $t = print_r($xoopsConfig, true);
     // echo "<pre>{$t}</pre>";
     /*
-    $member_uid = 1;
-    $event_id = 393;
+    $memberUid = 1;
+    $eventId = 393;
     $message = "Bonne journée à tous";
     $newStatus = 1;
     $oldStatus = 0;
@@ -59,13 +69,13 @@ function sendMail2member($mode, $event_id, $member_uid, $subject, $tplMessage)
     //--------------------------------------------------------------
     //Recuperation des données event,user et member
     //Recuperation des données de l'evennement
-    $eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
-    $obj          = $eventHandler->getEvent($event_id);
+    $eventHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
+    $obj          = $eventHandler->getEvent($eventId);
     $event        = $eventHandler->objectToArray($obj);
     $eventHandler->formatEventDate($event, _MD_EXTCAL_FORMAT_DATE);
 
     $submiter_uid = $event['event_submitter'];
-    // ext_echoArray($event,'event');
+    // Utility::echoArray($event,'event');
     //--------------------------------------------------------------
     //Recuperation des données du user createur de l'evennement
     $sql = <<<__sql__
@@ -77,19 +87,19 @@ __sql__;
     $rst      = $xoopsDB->query($sql);
     $submiter = $xoopsDB->fetchArray($rst);
     // echo "{$sql}<br>";
-    // ext_echoArray($submiter,'submiter');
+    // Utility::echoArray($submiter,'submiter');
     //--------------------------------------------------------------
     //Recuperation des données du membre inscrit
     $sql = <<<__sql__
   SELECT if(tu.name='', tu.uname, tu.name) AS name,     tu.uname,   tu.email
   FROM {$tblUsers} tu
-  WHERE tu.uid = {$member_uid};
+  WHERE tu.uid = {$memberUid};
 __sql__;
 
     $rst    = $xoopsDB->query($sql);
     $acteur = $xoopsDB->fetchArray($rst);
     //echo "{$sql}<br>";
-    // ext_echoArray($acteur,'acteur');
+    // Utility::echoArray($acteur,'acteur');
     //--------------------------------------------------------------
     //Recuperation des données des membres présents
     $sql = <<<__sql__
@@ -98,12 +108,12 @@ SELECT tu.uid, if(tu.name='', tu.uname, tu.name) AS name,   tu.uname,   tu.email
 FROM {$tblMember} tm,
      {$tblUsers}  tu
 WHERE tm.uid = tu.uid
-  AND tm.event_id = {$event_id}
+  AND tm.event_id = {$eventId}
 __sql__;
 
     $rst     = $xoopsDB->query($sql);
-    $members = array();
-    while ($row = $xoopsDB->fetchArray($rst)) {
+    $members = [];
+    while (false !== ($row = $xoopsDB->fetchArray($rst))) {
         $row['status']        = _MD_EXTCAL_PRESENT;
         $members[$row['uid']] = $row;
     }
@@ -116,16 +126,16 @@ SELECT tu.uid, if(tu.name='', tu.uname, tu.name) AS name,   tu.uname,   tu.email
 FROM {$tblNotMember} tm,
      {$tblUsers}  tu
 WHERE tm.uid = tu.uid
-  AND tm.event_id = {$event_id}
+  AND tm.event_id = {$eventId}
 __sql__;
 
     $rst = $xoopsDB->query($sql);
-    while ($row = $xoopsDB->fetchArray($rst)) {
+    while (false !== ($row = $xoopsDB->fetchArray($rst))) {
         $row['status']        = _MD_EXTCAL_ABSENT;
         $members[$row['uid']] = $row;
     }
 
-    // ext_echoArray($members,'members');
+    // Utility::echoArray($members,'members');
     // exit;
 
     //--------------------------------------------------------------
@@ -138,7 +148,7 @@ __sql__;
     //Chargement du template dans le dossier de langue
     //$f = _EXTCAL_PATH_LG . $xoopsConfig['language'] . '\mail_inscription.html';
     //$tpl = new tpl($f);
-    $tpl = new XoopsTpl();
+    $tpl = new \XoopsTpl();
 
     $tpl->assign('dateAction', date(_MD_EXTCAL_FORMAT_DATE));
     $tpl->assign('submiter', $submiter);
@@ -152,14 +162,15 @@ __sql__;
     $tpl->assign('br', '<br>');
 
     //--------------------------------------------------------------
-    $destinataires                     = array();
+    $destinataires                     = [];
     $destinataires[$submiter['email']] = $submiter['email'];
     $destinataires[$acteur['email']]   = $acteur['email'];
-    while (list($k, $row) = each($members)) {
+    //    while (list($k, $row) = each($members)) {
+    foreach ($members as $k => $row) {
         $destinataires[$row['email']] = $row['email'];
     }
 
-    // ext_echoArray($destinataires);
+    // Utility::echoArray($destinataires);
     // exit;
 
     $mail_fromName  = $xoopsConfig['sitename'];
@@ -171,7 +182,7 @@ __sql__;
     $sep   = '|';
 
     $template = 'extcal_mail_member_text.tpl';
-    if ($mode == _EXTCAL_HEADER_HTML) {
+    if (_EXTCAL_HEADER_HTML == $mode) {
         $template = 'extcal_mail_member_html.tpl';
     }
     $mail_body = $tpl->fetch('db:' . $template);
@@ -211,7 +222,7 @@ function extcal_SendMail(
 
     // $destinataires = array('jjd@kiolo.com','jjdelalandre@wanadoo.fr','admin@win-trading.com');
     //$mail_fromname = "test jjd hermes";
-    if ($mail_fromname == '') {
+    if ('' == $mail_fromname) {
         $mail_fromname = $mail_fromemail;
     }
 
@@ -224,13 +235,14 @@ function extcal_SendMail(
     }
     $header = extcal_getHeader(1, $mail_fromemail);
     //-----------------------------
-    $myts = MyTextSanitizer::getInstance();
+    $myts = \MyTextSanitizer::getInstance();
     //$xoopsMailer = getMailer();
     $xoopsMailer = xoops_getMailer();
 
     //$xoopsMailer->setToUsers($destinataires[$i]);
 
-    while (list($k, $v) = each($destinataires)) {
+    //    while (list($k, $v) = each($destinataires)) {
+    foreach ($destinataires as $k => $v) {
         //for ( $i = 0, $iMax = count($destinataires); $i < $iMax; ++$i) {
         //$xoopsMailer->setToUsers($destinataires[$i]);
         $xoopsMailer->setToEmails($v);
@@ -252,8 +264,8 @@ function extcal_SendMail(
     $xoopsMailer->send($bEcho);
 
     if ($bEcho) {
-        ExtcalUtilities::ext_echo($xoopsMailer->getSuccess());
-        ExtcalUtilities::ext_echo($xoopsMailer->getErrors());
+        Utility::extEcho($xoopsMailer->getSuccess());
+        Utility::extEcho($xoopsMailer->getErrors());
     }
     /*
 
@@ -261,9 +273,8 @@ function extcal_SendMail(
           ."mail_fromemail : {$mail_fromemail}<br>"
           ."mail_subject : {$mail_subject}<br>"
           ."mail_body : {$mail_body}<br><hr>";
-    */
-    //---------------------------
-    /*
+     //---------------------------
+
 
       $adresse = "jjd@kiolo.com";
       $bolOk = mail($adresse, "test envoi mail", "test envoi envoi mail via php");
@@ -295,25 +306,25 @@ function extcal_getHeader($mode, $emailSender)
     $d = date('d-m-Y h:m:h', time());
     //-----------------------------------------------------------
     //defini l'expediteur du mail
-    if ($emailSender == '') {
-        if ($xoopsConfig['adminmail'] == '') {
+    if ('' == $emailSender) {
+        if ('' == $xoopsConfig['adminmail']) {
             $emailSender = "webmaster@{$_SERVER['SERVER_NAME']}";
         } else {
             $emailSender = $xoopsConfig['adminmail'];
         }
     }
     //-----------------------------------------------------------
-    $header   = array();
+    $header   = [];
     $header[] = "From: {$emailSender}";
     $header[] = "Reply-To: {$emailSender}";
-    $header[] = 'X-Mailer: PHP/' . phpversion();
+    $header[] = 'X-Mailer: PHP/' . PHP_VERSION;
 
-    if ($mode == _EXTCAL_HEADER_HTML) {
+    if (_EXTCAL_HEADER_HTML == $mode) {
         $header[] = 'MIME-Version: 1.0';
         $header[] = 'Content-type: text/html; charset=iso-8859-1';
-    } else {
-        //bin rien a prori
     }
+    //bin rien a prori
+
     $header[] = '';
 
     //$sHeader = implode("\r\n", $header);

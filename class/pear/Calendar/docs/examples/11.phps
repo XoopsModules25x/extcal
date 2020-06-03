@@ -66,7 +66,7 @@ foreach ( $result as $row ) {
 // Build the hours in that day, passing the selection
 $Day->build($selection);
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
 <title> Passing a Selection Payload with a Decorator </title>

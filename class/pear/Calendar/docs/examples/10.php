@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Description: demonstrates a decorator to provide simple output formatting
  * on the month while still allowing the days to be accessed via the decorator
@@ -6,13 +7,14 @@
  * hit for extra method calls. For this example some simple functions could help
  * format the month while the days are accessed via the normal Month object.
  */
-if (!@include 'Calendar/Calendar.php') {
+if (!@require_once __DIR__ . '/Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
-require_once CALENDAR_ROOT.'Month/Weekdays.php';
-require_once CALENDAR_ROOT.'Decorator.php';
+require_once CALENDAR_ROOT . 'Month/Weekdays.php';
+require_once CALENDAR_ROOT . 'Decorator.php';
 
 // Decorate a Month with methods to improve formatting
+
 /**
  * Class MonthDecorator.
  */
@@ -36,7 +38,7 @@ class MonthDecorator extends Calendar_Decorator
         $prevStamp = parent::prevMonth(true);
 
         // Build the URL for the previous month
-        return $_SERVER['PHP_SELF'].'?y='.date('Y', $prevStamp).'&m='.date('n', $prevStamp).'&d='.date('j', $prevStamp);
+        return $_SERVER['SCRIPT_NAME'] . '?y=' . date('Y', $prevStamp) . '&m=' . date('n', $prevStamp) . '&d=' . date('j', $prevStamp);
     }
 
     /**
@@ -58,7 +60,7 @@ class MonthDecorator extends Calendar_Decorator
         $nextStamp = parent::nextMonth(true);
 
         // Build the URL for next month
-        return $_SERVER['PHP_SELF'].'?y='.date('Y', $nextStamp).'&m='.date('n', $nextStamp).'&d='.date('j', $nextStamp);
+        return $_SERVER['SCRIPT_NAME'] . '?y=' . date('Y', $nextStamp) . '&m=' . date('n', $nextStamp) . '&d=' . date('j', $nextStamp);
     }
 }
 
@@ -77,7 +79,7 @@ $MonthDecorator = new MonthDecorator($Month);
 $MonthDecorator->build();
 ?>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
     <title> A Simple Decorator </title>
@@ -87,14 +89,14 @@ $MonthDecorator->build();
 <table>
     <caption><?php echo $MonthDecorator->thisMonth(); ?></caption>
     <?php
-    while ($Day = $MonthDecorator->fetch()) {
+    while (false !== ($Day = $MonthDecorator->fetch())) {
         if ($Day->isFirst()) {
             echo "\n<tr>\n";
         }
         if ($Day->isEmpty()) {
             echo '<td>&nbsp;</td>';
         } else {
-            echo '<td>'.$Day->thisDay().'</td>';
+            echo '<td>' . $Day->thisDay() . '</td>';
         }
         if ($Day->isLast()) {
             echo "\n</tr>\n";

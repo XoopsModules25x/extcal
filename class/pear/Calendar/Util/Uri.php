@@ -67,7 +67,7 @@ class Calendar_Util_Uri
      *
      * @var array
      */
-    public $uris = array();
+    public $uris = [];
 
     /**
      * String to separate fragments with.
@@ -114,22 +114,22 @@ class Calendar_Util_Uri
      */
     public function setFragments($y, $m = null, $d = null, $h = null, $i = null, $s = null)
     {
-        if (!is_null($y)) {
+        if (null !== $y) {
             $this->uris['Year'] = $y;
         }
-        if (!is_null($m)) {
+        if (null !== $m) {
             $this->uris['Month'] = $m;
         }
-        if (!is_null($d)) {
+        if (null !== $d) {
             $this->uris['Day'] = $d;
         }
-        if (!is_null($h)) {
+        if (null !== $h) {
             $this->uris['Hour'] = $h;
         }
-        if (!is_null($i)) {
+        if (null !== $i) {
             $this->uris['Minute'] = $i;
         }
-        if (!is_null($s)) {
+        if (null !== $s) {
             $this->uris['Second'] = $s;
         }
     }
@@ -144,8 +144,8 @@ class Calendar_Util_Uri
      */
     public function prev($Calendar, $unit)
     {
-        $method = 'prev'.$unit;
-        $stamp = $Calendar->{$method}('timestamp');
+        $method = 'prev' . $unit;
+        $stamp  = $Calendar->{$method}('timestamp');
 
         return $this->buildUriString($Calendar, $method, $stamp);
     }
@@ -160,8 +160,8 @@ class Calendar_Util_Uri
      */
     public function this($Calendar, $unit)
     {
-        $method = 'this'.$unit;
-        $stamp = $Calendar->{$method}('timestamp');
+        $method = 'this' . $unit;
+        $stamp  = $Calendar->{$method}('timestamp');
 
         return $this->buildUriString($Calendar, $method, $stamp);
     }
@@ -176,8 +176,8 @@ class Calendar_Util_Uri
      */
     public function next($Calendar, $unit)
     {
-        $method = 'next'.$unit;
-        $stamp = $Calendar->{$method}('timestamp');
+        $method = 'next' . $unit;
+        $stamp  = $Calendar->{$method}('timestamp');
 
         return $this->buildUriString($Calendar, $method, $stamp);
     }
@@ -194,13 +194,13 @@ class Calendar_Util_Uri
     public function buildUriString($Calendar, $method, $stamp)
     {
         $uriString = '';
-        $cE = $Calendar->getEngine();
+        $cE        = $Calendar->getEngine();
         $separator = '';
         foreach ($this->uris as $unit => $uri) {
-            $call = 'stampTo'.$unit;
+            $call      = 'stampTo' . $unit;
             $uriString .= $separator;
             if (!$this->scalar) {
-                $uriString .= $uri.'=';
+                $uriString .= $uri . '=';
             }
             $uriString .= $cE->{$call}($stamp);
             $separator = $this->separator;

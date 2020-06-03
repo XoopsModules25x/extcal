@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Description: A "personal planner" with some WML for fun
  * Note this is done the stupid way - a giant if/else for WML or HTML
@@ -13,7 +14,8 @@ function getmicrotime()
 
 $start = getmicrotime();
 
-if (!@include 'Calendar/Calendar.php') {
+//if (!@require_once dirname(dirname(__DIR__)) . '/Calendar.php') {
+if (!@require __DIR__ . '/Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 require_once CALENDAR_ROOT . 'Month/Weekdays.php';
@@ -31,10 +33,10 @@ if (!isset($_GET['d'])) {
 
 $Month     = new Calendar_Month_Weekdays($_GET['y'], $_GET['m']);
 $Day       = new Calendar_Day($_GET['y'], $_GET['m'], $_GET['d']);
-$selection = array($Day);
+$selection = [$Day];
 
 #-----------------------------------------------------------------------------#
-if (isset($_GET['mime']) && $_GET['mime'] === 'wml') {
+if (isset($_GET['mime']) && 'wml' === $_GET['mime']) {
     header('Content-Type: text/vnd.wap.wml');
     echo '<?xml version="1.0"?>'; ?>
     <!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
@@ -48,20 +50,19 @@ if (isset($_GET['mime']) && $_GET['mime'] === 'wml') {
                 <anchor>
                     Back to Month View
                     <go href="<?php
-                    echo '?y=' . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . '&amp;mime=wml'; ?>"/>
+                    echo '?y=' . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . '&amp;mime=wml'; ?>">
                 </anchor>
             </p>
             <table>
                 <?php
                 $Day->build();
-                while ($Hour = $Day->fetch()) {
+                while (false !== ($Hour = $Day->fetch())) {
                     echo "<tr>\n";
                     echo '<td>' . date('g a', $Hour->getTimestamp()) . "</td><td>Free time!</td>\n";
                     echo "</tr>\n";
                 } ?>
             </table>
             <?php
-
         } else {
             ?>
             <p><strong><?php echo date('F Y', $Month->getTimestamp()); ?></strong></p>
@@ -77,17 +78,16 @@ if (isset($_GET['mime']) && $_GET['mime'] === 'wml') {
                 </tr>
                 <?php
                 $Month->build($selection);
-                while ($Day = $Month->fetch()) {
+                while (false !== ($Day = $Month->fetch())) {
                     if ($Day->isFirst()) {
                         echo "<tr>\n";
                     }
                     if ($Day->isEmpty()) {
                         echo "<td></td>\n";
                     } elseif ($Day->isSelected()) {
-                        echo '<td><anchor><strong><u>' . $Day->thisDay() . "</u></strong>\n<go href=\"" . $_SERVER['PHP_SELF'] . '?viewday=true&amp;y=' . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay()
-                             . "&amp;mime=wml\" />\n</anchor></td>\n";
+                        echo '<td><anchor><strong><u>' . $Day->thisDay() . "</u></strong>\n<go href=\"" . $_SERVER['SCRIPT_NAME'] . '?viewday=true&amp;y=' . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . "&amp;mime=wml\">\n</anchor></td>\n";
                     } else {
-                        echo '<td><anchor>' . $Day->thisDay() . "\n<go href=\"?viewday=true&amp;y=" . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . "&amp;mime=wml\" /></anchor></td>\n";
+                        echo '<td><anchor>' . $Day->thisDay() . "\n<go href=\"?viewday=true&amp;y=" . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . "&amp;mime=wml\"></anchor></td>\n";
                     }
                     if ($Day->isLast()) {
                         echo "</tr>\n";
@@ -98,7 +98,7 @@ if (isset($_GET['mime']) && $_GET['mime'] === 'wml') {
                         <anchor>
                             &lt;&lt;
                             <go href="<?php
-                            echo '?y=' . $Month->thisYear() . '&amp;m=' . $Month->prevMonth() . '&amp;d=' . $Month->thisDay() . '&amp;mime=wml'; ?>"/>
+                            echo '?y=' . $Month->thisYear() . '&amp;m=' . $Month->prevMonth() . '&amp;d=' . $Month->thisDay() . '&amp;mime=wml'; ?>">
                         </anchor>
                     </td>
                     <td></td>
@@ -110,30 +110,29 @@ if (isset($_GET['mime']) && $_GET['mime'] === 'wml') {
                         <anchor>
                             &gt;&gt;
                             <go href="<?php
-                            echo '?y=' . $Month->thisYear() . '&amp;m=' . $Month->nextMonth() . '&amp;d=' . $Month->thisDay() . '&amp;mime=wml'; ?>"/>
+                            echo '?y=' . $Month->thisYear() . '&amp;m=' . $Month->nextMonth() . '&amp;d=' . $Month->thisDay() . '&amp;mime=wml'; ?>">
                         </anchor>
                     </td>
                 </tr>
             </table>
 
             <?php
-
         } ?>
-        <p><a href="<?php echo $_SERVER['PHP_SELF']; ?>">Back to HTML</a></p>
+        <p><a href="<?php echo $_SERVER['SCRIPT_NAME']; ?>">Back to HTML</a></p>
         <?php echo '<p>Took: ' . (getmicrotime() - $start) . ' seconds</p>'; ?>
     </wml>
     <?php
     #-----------------------------------------------------------------------------#
 } else {
     ?>
-    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-    <html>
+    <!DOCTYPE html>
+    <html lang="en" xml:lang="en">
     <head>
         <title> HTML (+WML) Personal Planner </title>
     </head>
     <body>
     <h1>Personal Planner Rendered with HTML</h1>
-    <p>To view in WML, click <a href="<?php echo $_SERVER['PHP_SELF']; ?>?mime=wml">here</a> or place a ?mime=wml at the end of any URL.
+    <p>To view in WML, click <a href="<?php echo $_SERVER['SCRIPT_NAME']; ?>?mime=wml">here</a> or place a ?mime=wml at the end of any URL.
         Note that <a href="http://www.opera.com/download">Opera</a> supports WML natively and Mozilla / Firefox has the
         WMLBrowser
         plugin: <a href="http://wmlbrowser.mozdev.org">wmlbrowser.mozdev.org</a></p>
@@ -149,14 +148,13 @@ if (isset($_GET['mime']) && $_GET['mime'] === 'wml') {
         <table>
             <?php
             $Day->build();
-            while ($Hour = $Day->fetch()) {
+            while (false !== ($Hour = $Day->fetch())) {
                 echo "<tr>\n";
                 echo '<td>' . date('g a', $Hour->getTimestamp()) . "</td><td>Free time!</td>\n";
                 echo "</tr>\n";
             } ?>
         </table>
         <?php
-
     } else {
         ?>
         <p><strong><?php echo date('F Y', $Month->getTimestamp()); ?></strong></p>
@@ -172,16 +170,16 @@ if (isset($_GET['mime']) && $_GET['mime'] === 'wml') {
             </tr>
             <?php
             $Month->build($selection);
-            while ($Day = $Month->fetch()) {
+            while (false !== ($Day = $Month->fetch())) {
                 if ($Day->isFirst()) {
                     echo "<tr>\n";
                 }
                 if ($Day->isEmpty()) {
                     echo "<td></td>\n";
                 } elseif ($Day->isSelected()) {
-                    echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?viewday=true&amp;y=' . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . '&amp;wml"><strong><u>' . $Day->thisDay() . "</u></strong></a></td>\n";
+                    echo '<td><a href="' . $_SERVER['SCRIPT_NAME'] . '?viewday=true&amp;y=' . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . '&amp;wml"><strong><u>' . $Day->thisDay() . "</u></strong></a></td>\n";
                 } else {
-                    echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?viewday=true&amp;y=' . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . '">' . $Day->thisDay() . "</a></td>\n";
+                    echo '<td><a href="' . $_SERVER['SCRIPT_NAME'] . '?viewday=true&amp;y=' . $Day->thisYear() . '&amp;m=' . $Day->thisMonth() . '&amp;d=' . $Day->thisDay() . '">' . $Day->thisDay() . "</a></td>\n";
                 }
                 if ($Day->isLast()) {
                     echo "</tr>\n";
@@ -206,12 +204,10 @@ if (isset($_GET['mime']) && $_GET['mime'] === 'wml') {
         </table>
 
         <?php
-
     } ?>
 
     <?php echo '<p><b>Took: ' . (getmicrotime() - $start) . ' seconds</b></p>'; ?>
     </body>
     </html>
     <?php
-
 }

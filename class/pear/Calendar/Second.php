@@ -49,7 +49,7 @@ if (!defined('CALENDAR_ROOT')) {
 /**
  * Load Calendar base class.
  */
-require_once CALENDAR_ROOT.'Calendar.php';
+require_once CALENDAR_ROOT . 'Calendar.php';
 
 /**
  * Represents a Second<br>
@@ -86,7 +86,6 @@ class Calendar_Second extends Calendar
      */
     public function build()
     {
-        return;
     }
 
     /**
@@ -94,7 +93,6 @@ class Calendar_Second extends Calendar
      */
     public function fetch()
     {
-        return;
     }
 
     /**
@@ -102,7 +100,6 @@ class Calendar_Second extends Calendar
      */
     public function fetchAll()
     {
-        return;
     }
 
     /**
@@ -110,6 +107,5 @@ class Calendar_Second extends Calendar
      */
     public function size()
     {
-        return;
     }
 }

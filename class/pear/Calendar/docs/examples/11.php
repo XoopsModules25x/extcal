@@ -1,16 +1,18 @@
 <?php
+
 /**
  * Description: demonstrates a decorator used to "attach a payload" to a selection
  * to make it available when iterating over calendar children.
  */
-if (!@include 'Calendar/Calendar.php') {
+if (!@require_once __DIR__ . '/Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
-require_once CALENDAR_ROOT.'Day.php';
-require_once CALENDAR_ROOT.'Hour.php';
-require_once CALENDAR_ROOT.'Decorator.php';
+require_once CALENDAR_ROOT . 'Day.php';
+require_once CALENDAR_ROOT . 'Hour.php';
+require_once CALENDAR_ROOT . 'Decorator.php';
 
 // Decorator to "attach" functionality to selected hours
+
 /**
  * Class DiaryEvent.
  */
@@ -53,19 +55,19 @@ $sql = "
         FROM
             diary
         WHERE
-            eventtime >= '".$Day->thisDay(true)."'
+            eventtime >= '" . $Day->thisDay(true) . "'
         AND
-            eventtime < '".$Day->nextDay(true)."';";
+            eventtime < '" . $Day->nextDay(true) . "';";
 
 // An array simulating data from a database
-$result = array(
-    array('eventtime' => mktime(9, 0, 0, 10, 24, 2003), 'entry' => 'Meeting with sales team'),
-    array('eventtime' => mktime(11, 0, 0, 10, 24, 2003), 'entry' => 'Conference call with Widget Inc.'),
-    array('eventtime' => mktime(15, 0, 0, 10, 24, 2003), 'entry' => 'Presentation to board of directors'),
-);
+$result = [
+    ['eventtime' => mktime(9, 0, 0, 10, 24, 2003), 'entry' => 'Meeting with sales team'],
+    ['eventtime' => mktime(11, 0, 0, 10, 24, 2003), 'entry' => 'Conference call with Widget Inc.'],
+    ['eventtime' => mktime(15, 0, 0, 10, 24, 2003), 'entry' => 'Presentation to board of directors'],
+];
 
 // An array to place selected hours in
-$selection = array();
+$selection = [];
 
 // Loop through the "database result"
 foreach ($result as $row) {
@@ -85,7 +87,7 @@ foreach ($result as $row) {
 // Build the hours in that day, passing the selection
 $Day->build($selection);
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
     <title> Passing a Selection Payload with a Decorator </title>
@@ -100,8 +102,8 @@ $Day->build($selection);
         <th>Entry</th>
     </tr>
     <?php
-    while ($Hour = $Day->fetch()) {
-        $hour = $Hour->thisHour();
+    while (false !== ($Hour = $Day->fetch())) {
+        $hour   = $Hour->thisHour();
         $minute = $Hour->thisMinute();
 
         // Office hours only...
@@ -111,7 +113,7 @@ $Day->build($selection);
 
             // If the hour is selected, call the decorator method...
             if ($Hour->isSelected()) {
-                echo '<td bgcolor="silver">'.$Hour->getEntry()."</td>\n";
+                echo '<td bgcolor="silver">' . $Hour->getEntry() . "</td>\n";
             } else {
                 echo "<td>&nbsp;</td>\n";
             }

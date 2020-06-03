@@ -7,7 +7,7 @@
         <td colspan="3" class="even"><span style="font-weight:bold;"><{$navig.this.name}></span>
         </td>
         <td colspan="2" class="even"><a href="<{$xoops_url}>/modules/extcal/<{$params.file}>?<{$navig.next.uri}>"><{$navig.next.name}>
-                &gt;&gt;</a></td>
+                >></a></td>
     </tr>
     <tr style="text-align:center;" class="head">
         <{foreach item=weekdayName from=$weekdayNames}>
@@ -37,5 +37,5 @@
 
 <{include file="db:extcal_categorie.tpl"}>
 
-<div style="text-align:right;"><a href="<{$xoops_url}>/modules/extcal/rss.php?cat=<{$selectedCat}>"><img src="assets/images/icons/rss.gif" alt="RSS Feed"/></a></div>
+<div style="text-align:right;"><a href="<{$xoops_url}>/modules/extcal/rss.php?cat=<{$selectedCat}>"><img src="assets/images/icons/rss.gif" alt="RSS Feed"></a></div>
 <{include file='db:system_notification_select.tpl'}>

@@ -1,37 +1,70 @@
 <?php
+/*
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ */
 
-include __DIR__ . '/../../mainfile.php';
+/**
+ * @copyright    {@link https://xoops.org/ XOOPS Project}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @package      extcal
+ * @since
+ * @author       XOOPS Development Team,
+ */
+
+use Xmf\Request;
+use XoopsModules\Extcal\{
+    Helper,
+    EventHandler,
+    Form,
+    Utility,
+    FileHandler,
+    Perm
+};
+
+require_once __DIR__ . '/header.php';
+
+global $xoopsUser, $xoopsTpl;
+
+/** @var Time $timeHandler */
+/** @var Helper $helper */
+$helper                                  = Helper::getInstance();
 $GLOBALS['xoopsOption']['template_main'] = 'extcal_post.tpl';
 
-include XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include __DIR__ . '/class/form/extcalform.php';
-include __DIR__ . '/class/perm.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+//require_once __DIR__   . '/class/form/extcalform.php';
+//require_once __DIR__   . '/class/perm.php';
 
-include_once __DIR__ . '/class/utilities.php';
-include_once __DIR__ . '/include/constantes.php';
+require_once __DIR__ . '/class/Utility.php';
+require_once __DIR__ . '/include/constantes.php';
 
-$permHandler = ExtcalPerm::getHandler();
+$permHandler = Perm::getHandler();
 $xoopsUser   = $xoopsUser ?: null;
 
-if (!$permHandler->isAllowed($xoopsUser, 'extcal_cat_submit', (int)$_POST['cat_id'])) {
+if (!$permHandler->isAllowed($xoopsUser, 'extcal_cat_submit', Request::getInt('cat_id', 0, 'POST'))) {
     redirect_header('index.php', 3);
-    exit;
 }
 
 // Getting eXtCal object's handler
-$eventHandler = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
+/** @var EventHandler $eventHandler */
+$eventHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_EVENT);
 
-if (isset($_POST['form_preview'])) {
-    include XOOPS_ROOT_PATH . '/header.php';
+if (Request::hasVar('form_preview', 'POST')) {
+    require_once XOOPS_ROOT_PATH . '/header.php';
 
     // Title of the page
     $xoopsTpl->assign('xoops_pagetitle', _MI_EXTCAL_SUBMIT_EVENT);
 
-    $data = array(
+    $data = [
         'event_title'        => $_POST['event_title'],
-        'cat_id'             => (int)$_POST['cat_id'],
+        'cat_id'             => Request::getInt('cat_id', 0, 'POST'),
         'event_desc'         => $_POST['event_desc'],
-        'event_nbmember'     => (int)$_POST['event_nbmember'],
+        'event_nbmember'     => Request::getInt('event_nbmember', 0, 'POST'),
         'event_contact'      => $_POST['event_contact'],
         'event_url'          => $_POST['event_url'],
         'event_email'        => $_POST['event_email'],
@@ -40,22 +73,22 @@ if (isset($_POST['form_preview'])) {
         'event_start'        => $_POST['event_start'],
         'have_end'           => $_POST['have_end'],
         'event_end'          => $_POST['event_end'],
-        'dohtml'             => (int)$xoopsModuleConfig['allow_html'],
+        'dohtml'             => (int)$helper->getConfig('allow_html'),
         'event_price'        => $_POST['event_price'],
         'event_organisateur' => $_POST['event_organisateur'],
         'event_icone'        => $_POST['event_icone'],
-    );
+    ];
 
-    if (isset($_POST['event_id'])) {
-        $data['event_id'] = (int)$_POST['event_id'];
+    if (Request::hasVar('event_id', 'POST')) {
+        $data['event_id'] = Request::getInt('event_id', 0, 'POST');
     }
 
     // Creating tempory event object to apply Object data filtering
     $event = $eventHandler->createEventForPreview($data);
-    $event = $eventHandler->objectToArray($event, array('cat_id'), 'p');
+    $event = $eventHandler->objectToArray($event, ['cat_id'], 'p');
 
     // Adding formated date for start and end event
-    $eventHandler->formatEventDate($event, $xoopsModuleConfig['event_date_event']);
+    $eventHandler->formatEventDate($event, $helper->getConfig('event_date_event'));
 
     // Assigning event to the template
     $xoopsTpl->assign('event', $event);
@@ -66,21 +99,22 @@ if (isset($_POST['form_preview'])) {
     //     // Assigning language data to the template
     //     $xoopsTpl->assign('lang', $lang);
 
-    $event['cat_id']   = (int)$_POST['cat_id'];
+    $event['cat_id']   = Request::getInt('cat_id', 0, 'POST');
     $event['have_end'] = $_POST['have_end'];
 
     // Display the submit form
+    /** @var Form\ThemeForm $form */
     $form     = $eventHandler->getEventForm('user', 'preview', $event);
     $formBody = $form->render();
     $xoopsTpl->assign('preview', true);
     $xoopsTpl->assign('formBody', $formBody);
 
-    include XOOPS_ROOT_PATH . '/footer.php';
-} elseif (isset($_POST['form_submit'])) {
+    require_once XOOPS_ROOT_PATH . '/footer.php';
+} elseif (Request::hasVar('form_submit', 'POST')) {
     if (!isset($_POST['rrule_weekly_interval'])) {
         $_POST['rrule_weekly_interval'] = 0;
     }
-    // ext_echoArray($_POST, '',true);
+    // Utility::echoArray($_POST, '',true);
     // exit;
     // $ts = print_r($_POST,true);
     // echo "<pre>{$ts}</pre>";
@@ -96,42 +130,42 @@ if (isset($_POST['form_preview'])) {
     //        exit;
     //    }
     ///////////////////////////////////////////////////////////////////////////////
-    ExtcalUtilities::extcal_loadImg($_REQUEST, $event_picture1, $event_picture2);
+    Utility::loadImg($_REQUEST, $event_picture1, $event_picture2);
     ///////////////////////////////////////////////////////////////////////////////
 
-    include_once __DIR__ . '/class/perm.php';
+    //    require_once __DIR__ . '/class/perm.php';
 
-    $fileHandler = xoops_getModuleHandler(_EXTCAL_CLS_FILE, _EXTCAL_MODULE);
-    $permHandler = ExtcalPerm::getHandler();
-    $approve     = $permHandler->isAllowed($xoopsUser, 'extcal_cat_autoapprove', (int)$_POST['cat_id']);
+    /** @var FileHandler $fileHandler */
+    $fileHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_FILE);
+    $permHandler = Perm::getHandler();
+    $approve     = $permHandler->isAllowed($xoopsUser, 'extcal_cat_autoapprove', Request::getInt('cat_id', 0, 'POST'));
 
-    $data = array(
-        'event_title'         => $_POST['event_title'],
-        'cat_id'              => $_POST['cat_id'],
-        'event_desc'          => $_POST['event_desc'],
-        'event_nbmember'      => $_POST['event_nbmember'],
-        'event_organisateur'  => $_POST['event_organisateur'],
-        'event_contact'       => $_POST['event_contact'],
-        'event_url'           => $_POST['event_url'],
-        'event_email'         => $_POST['event_email'],
-        'event_address'       => $_POST['event_address'],
-        'event_approved'      => ($approve == false) ? 0 : 1,
-        'event_start'         => $_POST['event_start'],
-        'have_end'            => $_POST['have_end'],
-        'event_end'           => $_POST['event_end'],
-        'event_picture1'      => @$event_picture1,
-        'event_picture2'      => @$event_picture2,
-        'event_price'         => @$_POST['event_price'],
-        'event_etablissement' => $_POST['event_etablissement'],
-        'dohtml'              => $xoopsModuleConfig['allow_html'],
-        'event_icone'         => $_POST['event_icone'],
+    $data = [
+        'event_title'        => $_POST['event_title'],
+        'cat_id'             => $_POST['cat_id'],
+        'event_desc'         => $_POST['event_desc'],
+        'event_nbmember'     => $_POST['event_nbmember'],
+        'event_organisateur' => $_POST['event_organisateur'],
+        'event_contact'      => $_POST['event_contact'],
+        'event_url'          => $_POST['event_url'],
+        'event_email'        => $_POST['event_email'],
+        'event_address'      => $_POST['event_address'],
+        'event_approved'     => (false === $approve) ? 0 : 1,
+        'event_start'        => $_POST['event_start'],
+        'have_end'           => $_POST['have_end'],
+        'event_end'          => $_POST['event_end'],
+        'event_picture1'     => @$event_picture1,
+        'event_picture2'     => @$event_picture2,
+        'event_price'        => @$_POST['event_price'],
+        'event_location'     => $_POST['event_location'],
+        'dohtml'             => $helper->getConfig('allow_html'),
+        'event_icone'        => $_POST['event_icone'],
+    ];
 
-    );
-
-    if (isset($_POST['event_id'])) {
-        $eventHandler->modifyEvent((int)$_POST['event_id'], $data);
-        $fileHandler->updateEventFile((int)$_POST['event_id']);
-        $fileHandler->createFile((int)$_POST['event_id']);
+    if (Request::hasVar('event_id', 'POST')) {
+        $eventHandler->modifyEvent(Request::getInt('event_id', 0, 'POST'), $data);
+        $fileHandler->updateEventFile(Request::getInt('event_id', 0, 'POST'));
+        $fileHandler->createFile(Request::getInt('event_id', 0, 'POST'));
 
         redirect_header('event.php?event=' . $_POST['event_id'], 3, _MD_EXTCAL_EVENT_UPDATED, false);
     } else {
@@ -146,15 +180,22 @@ if (isset($_POST['form_preview'])) {
             $notifyEvent = 'new_event_pending';
         }
 
+        /** @var \XoopsNotificationHandler $notificationHandler */
         $notificationHandler = xoops_getHandler('notification');
-        $notificationHandler->triggerEvent('global', 0, $notifyEvent, array('EVENT_TITLE' => $_POST['event_title']));
-        if ($approve == 1) {
-            $catHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
-            $cat        = $catHandler->getCat((int)$_POST['cat_id'], $xoopsUser, 'all');
-            $notificationHandler->triggerEvent('cat', (int)$_POST['cat_id'], 'new_event_cat', array(
-                'EVENT_TITLE' => $_POST['event_title'],
-                'CAT_NAME'    => $cat->getVar('cat_name'),
-            ));
+        $notificationHandler->triggerEvent('global', 0, $notifyEvent, ['EVENT_TITLE' => $_POST['event_title']]);
+        if (1 == $approve) {
+            //            $categoryHandler = xoops_getModuleHandler(_EXTCAL_CLS_CAT, _EXTCAL_MODULE);
+            $categoryHandler = Helper::getInstance()->getHandler(_EXTCAL_CLN_CAT);
+            $cat        = $categoryHandler->getCat(Request::getInt('cat_id', 0, 'POST'), $xoopsUser, 'all');
+            $notificationHandler->triggerEvent(
+                'cat',
+                Request::getInt('cat_id', 0, 'POST'),
+                'new_event_cat',
+                [
+                    'EVENT_TITLE' => $_POST['event_title'],
+                    'CAT_NAME'    => $cat->getVar('cat_name'),
+                ]
+            );
         }
     }
 

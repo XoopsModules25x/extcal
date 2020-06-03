@@ -1,10 +1,9 @@
 <?php
-//
 
-require_once __DIR__.'/simple_include.php';
-require_once __DIR__.'/calendar_include.php';
+require_once __DIR__ . '/simple_include.php';
+require_once __DIR__ . '/calendar_include.php';
 
-require_once __DIR__.'/./calendar_test.php';
+require_once __DIR__ . '/./calendar_test.php';
 
 /**
  * Class TestOfMinute.
@@ -26,14 +25,14 @@ class TestOfMinute extends TestOfCalendar
 
     public function testPrevDay_Array()
     {
-        $this->assertEqual(array(
-                               'year' => 2003,
-                               'month' => 10,
-                               'day' => 24,
-                               'hour' => 0,
+        $this->assertEqual([
+                               'year'   => 2003,
+                               'month'  => 10,
+                               'day'    => 24,
+                               'hour'   => 0,
                                'minute' => 0,
                                'second' => 0,
-                           ), $this->cal->prevDay('array'));
+                           ], $this->cal->prevDay('array'));
     }
 
     public function testPrevSecond()
@@ -100,8 +99,8 @@ class TestOfMinuteBuild extends TestOfMinute
     public function testFetchAll()
     {
         $this->cal->build();
-        $children = array();
-        $i = 0;
+        $children = [];
+        $i        = 0;
         while ($Child = $this->cal->fetch()) {
             $children[$i] = $Child;
             ++$i;
@@ -111,12 +110,12 @@ class TestOfMinuteBuild extends TestOfMinute
 
     public function testSelection()
     {
-        require_once CALENDAR_ROOT.'Second.php';
-        $selection = array(new Calendar_Second(2003, 10, 25, 13, 32, 43));
+        require_once CALENDAR_ROOT . 'Second.php';
+        $selection = [new Calendar_Second(2003, 10, 25, 13, 32, 43)];
         $this->cal->build($selection);
         $i = 0;
         while ($Child = $this->cal->fetch()) {
-            if ($i == 43) {
+            if (43 == $i) {
                 break;
             }
             ++$i;

@@ -39,9 +39,6 @@
  */
 
 /**
- */
-
-/**
  * Allows Calendar include path to be redefined.
  *
  * @ignore
@@ -53,7 +50,7 @@ if (!defined('CALENDAR_ROOT')) {
 /**
  * Load Calendar decorator base class.
  */
-require_once CALENDAR_ROOT.'Decorator.php';
+require_once CALENDAR_ROOT . 'Decorator.php';
 
 /**
  * Static utlities to help with fetching textual representations of months and
@@ -80,25 +77,25 @@ class Calendar_Util_Textual
      */
     public static function monthNames($format = 'long')
     {
-        $formats = array(
-            'one' => '%b',
-            'two' => '%b',
+        $formats = [
+            'one'   => '%b',
+            'two'   => '%b',
             'short' => '%b',
-            'long' => '%B',
-        );
+            'long'  => '%B',
+        ];
         if (!array_key_exists($format, $formats)) {
             $format = 'long';
         }
-        $months = array();
+        $months = [];
         for ($i = 1; $i <= 12; ++$i) {
             $stamp = mktime(0, 0, 0, $i, 1, 2003);
             $month = strftime($formats[$format], $stamp);
             switch ($format) {
                 case 'one':
-                    $month = substr($month, 0, 1);
+                    $month = mb_substr($month, 0, 1);
                     break;
                 case 'two':
-                    $month = substr($month, 0, 2);
+                    $month = mb_substr($month, 0, 2);
                     break;
             }
             $months[$i] = $month;
@@ -117,25 +114,25 @@ class Calendar_Util_Textual
      */
     public static function weekdayNames($format = 'long')
     {
-        $formats = array(
-            'one' => '%a',
-            'two' => '%a',
+        $formats = [
+            'one'   => '%a',
+            'two'   => '%a',
             'short' => '%a',
-            'long' => '%A',
-        );
+            'long'  => '%A',
+        ];
         if (!array_key_exists($format, $formats)) {
             $format = 'long';
         }
-        $days = array();
+        $days = [];
         for ($i = 0; $i <= 6; ++$i) {
             $stamp = mktime(0, 0, 0, 11, $i + 2, 2003);
-            $day = strftime($formats[$format], $stamp);
+            $day   = strftime($formats[$format], $stamp);
             switch ($format) {
                 case 'one':
-                    $day = substr($day, 0, 1);
+                    $day = mb_substr($day, 0, 1);
                     break;
                 case 'two':
-                    $day = substr($day, 0, 2);
+                    $day = mb_substr($day, 0, 2);
                     break;
             }
             $days[$i] = $day;
@@ -204,10 +201,10 @@ class Calendar_Util_Textual
      */
     public static function prevDayName($Calendar, $format = 'long')
     {
-        $days = self::weekdayNames($format);
+        $days  = self::weekdayNames($format);
         $stamp = $Calendar->prevDay('timestamp');
-        $cE = $Calendar->getEngine();
-        include_once __DIR__.'/Date/Calc.php';
+        $cE    = $Calendar->getEngine();
+        require_once __DIR__ . '/Date/Calc.php';
         $day = Date_Calc::dayOfWeek($cE->stampToDay($stamp), $cE->stampToMonth($stamp), $cE->stampToYear($stamp));
 
         return $days[$day];
@@ -226,7 +223,7 @@ class Calendar_Util_Textual
     public static function thisDayName($Calendar, $format = 'long')
     {
         $days = self::weekdayNames($format);
-        include_once __DIR__.'/Date/Calc.php';
+        require_once __DIR__ . '/Date/Calc.php';
         $day = Date_Calc::dayOfWeek($Calendar->thisDay(), $Calendar->thisMonth(), $Calendar->thisYear());
 
         return $days[$day];
@@ -243,10 +240,10 @@ class Calendar_Util_Textual
      */
     public static function nextDayName($Calendar, $format = 'long')
     {
-        $days = self::weekdayNames($format);
+        $days  = self::weekdayNames($format);
         $stamp = $Calendar->nextDay('timestamp');
-        $cE = $Calendar->getEngine();
-        include_once __DIR__.'/Date/Calc.php';
+        $cE    = $Calendar->getEngine();
+        require_once __DIR__ . '/Date/Calc.php';
         $day = Date_Calc::dayOfWeek($cE->stampToDay($stamp), $cE->stampToMonth($stamp), $cE->stampToYear($stamp));
 
         return $days[$day];
@@ -278,7 +275,7 @@ class Calendar_Util_Textual
             } elseif (isset($Calendar->firstDay)) {
                 $firstDay = $Calendar->firstDay;
             }
-            $ordereddays = array();
+            $ordereddays = [];
             for ($i = $firstDay; $i < 7; ++$i) {
                 $ordereddays[] = $i;
             }
@@ -288,8 +285,8 @@ class Calendar_Util_Textual
         }
 
         $ordereddays = array_flip($ordereddays);
-        $i = 0;
-        $returndays = array();
+        $i           = 0;
+        $returndays  = [];
         foreach ($ordereddays as $key => $value) {
             $returndays[$i] = $days[$key];
             ++$i;

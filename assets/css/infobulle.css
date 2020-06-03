@@ -16,7 +16,9 @@
 .tooltip54:hover span {
     border-radius: 5px 5px;
     border-radius: 5px;
+    -webkit-box-shadow: 5px 5px 5px #000000;
     box-shadow: 5px 5px 5px #000000;
+    -webkit-box-shadow: 5px 5px #000000;
     box-shadow: 5px 5px #000000;
     font-family: Calibri, Tahoma, Geneva, sans-serif;
     position: absolute;

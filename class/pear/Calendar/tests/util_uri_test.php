@@ -1,8 +1,7 @@
 <?php
-//
 
-require_once __DIR__.'/simple_include.php';
-require_once __DIR__.'/calendar_include.php';
+require_once __DIR__ . '/simple_include.php';
+require_once __DIR__ . '/calendar_include.php';
 
 Mock::generate('Calendar_Day', 'Mock_Calendar_Day');
 Mock::generate('Calendar_Engine_Interface', 'Mock_Calendar_Engine');
@@ -22,7 +21,7 @@ class TestOfUtilUri extends UnitTestCase
         parent::__construct('Test of Calendar_Util_Uri');
     }
 
-    public function setUp()
+    protected function setUp()
     {
         $this->MockCal = new Mock_Calendar_Day($this);
         $this->MockCal->setReturnValue('getEngine', new Mock_Calendar_Engine($this));
@@ -37,14 +36,14 @@ class TestOfUtilUri extends UnitTestCase
 
     public function testScalarFragments()
     {
-        $Uri = new Calendar_Util_Uri('year', 'month', 'day', 'hour', 'minute', 'second');
+        $Uri         = new Calendar_Util_Uri('year', 'month', 'day', 'hour', 'minute', 'second');
         $Uri->scalar = true;
         $this->assertEqual('&amp;&amp;&amp;&amp;&amp;', $Uri->this($this->MockCal, 'second'));
     }
 
     public function testSetSeperator()
     {
-        $Uri = new Calendar_Util_Uri('year', 'month', 'day', 'hour', 'minute', 'second');
+        $Uri            = new Calendar_Util_Uri('year', 'month', 'day', 'hour', 'minute', 'second');
         $Uri->separator = '/';
         $this->assertEqual('year=/month=/day=/hour=/minute=/second=', $Uri->this($this->MockCal, 'second'));
     }

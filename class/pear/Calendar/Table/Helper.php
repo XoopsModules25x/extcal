@@ -84,14 +84,14 @@ class Calendar_Table_Helper
      *
      * @var array
      */
-    public $daysOfWeek = array();
+    public $daysOfWeek = [];
 
     /**
      * Days of the month built from days of the week.
      *
      * @var array
      */
-    public $daysOfMonth = array();
+    public $daysOfMonth = [];
 
     /**
      * Number of weeks in month.
@@ -111,13 +111,13 @@ class Calendar_Table_Helper
      * Constructs Calendar_Table_Helper.
      *
      * @param object &$calendar Calendar_Month_Weekdays, Calendar_Month_Weeks, Calendar_Week
-     * @param int    $firstDay  (optional) first day of the week e.g. 1 for Monday
+     * @param int     $firstDay (optional) first day of the week e.g. 1 for Monday
      */
     public function __construct($calendar, $firstDay = null)
     {
         $this->calendar = $calendar;
-        $this->cE = $calendar->getEngine();
-        if (is_null($firstDay)) {
+        $this->cE       = $calendar->getEngine();
+        if (null === $firstDay) {
             $firstDay = $this->cE->getFirstDayOfWeek($this->calendar->thisYear(), $this->calendar->thisMonth(), $this->calendar->thisDay());
         }
         $this->firstDay = $firstDay;
@@ -131,14 +131,14 @@ class Calendar_Table_Helper
     public function setFirstDay()
     {
         $weekDays = $this->cE->getWeekDays($this->calendar->thisYear(), $this->calendar->thisMonth(), $this->calendar->thisDay());
-        $endDays = array();
-        $tmpDays = array();
-        $begin = false;
+        $endDays  = [];
+        $tmpDays  = [];
+        $begin    = false;
         foreach ($weekDays as $day) {
             if ($begin) {
                 $endDays[] = $day;
             } elseif ($day === $this->firstDay) {
-                $begin = true;
+                $begin     = true;
                 $endDays[] = $day;
             } else {
                 $tmpDays[] = $day;
@@ -153,8 +153,8 @@ class Calendar_Table_Helper
     public function setDaysOfMonth()
     {
         $this->daysOfMonth = $this->daysOfWeek;
-        $daysInMonth = $this->cE->getDaysInMonth($this->calendar->thisYear(), $this->calendar->thisMonth());
-        $firstDayInMonth = $this->cE->getFirstDayInMonth($this->calendar->thisYear(), $this->calendar->thisMonth());
+        $daysInMonth       = $this->cE->getDaysInMonth($this->calendar->thisYear(), $this->calendar->thisMonth());
+        $firstDayInMonth   = $this->cE->getFirstDayInMonth($this->calendar->thisYear(), $this->calendar->thisMonth());
         $this->emptyBefore = 0;
         foreach ($this->daysOfMonth as $dayOfWeek) {
             if ($firstDayInMonth == $dayOfWeek) {
@@ -183,7 +183,7 @@ class Calendar_Table_Helper
     /**
      * Returns the order array of days in a week.
      *
-     * @return int
+     * @return array
      */
     public function getDaysOfWeek()
     {

@@ -1,5 +1,5 @@
 <table class="outer">
-    <{foreachq item=cat from=$block}>
+    <{foreach item=cat from=$block}>
 
     <tr class='head'>
 
@@ -9,7 +9,7 @@
         </td>
     </tr>
 
-    <{foreachq item=event from=$cat.events}>
+    <{foreach item=event from=$cat.events}>
 
     <tr class="<{cycle values=" even,odd"}>">
 

@@ -1,8 +1,7 @@
 <?php
-//
 
-require_once __DIR__.'/simple_include.php';
-require_once __DIR__.'/calendar_include.php';
+require_once __DIR__ . '/simple_include.php';
+require_once __DIR__ . '/calendar_include.php';
 
 Mock::generate('Calendar_Engine_Interface', 'Mock_Calendar_Engine');
 Mock::generate('Calendar_Second', 'Mock_Calendar_Second');
@@ -23,7 +22,7 @@ class TestOfTableHelper extends UnitTestCase
         parent::__construct('Test of Calendar_Table_Helper');
     }
 
-    public function setUp()
+    protected function setUp()
     {
         $this->mockengine = new Mock_Calendar_Engine($this);
         $this->mockengine->setReturnValue('getMinYears', 1970);
@@ -33,7 +32,7 @@ class TestOfTableHelper extends UnitTestCase
         $this->mockengine->setReturnValue('getHoursInDay', 24);
         $this->mockengine->setReturnValue('getMinutesInHour', _EXTCAL_TS_MINUTE);
         $this->mockengine->setReturnValue('getSecondsInMinute', _EXTCAL_TS_MINUTE);
-        $this->mockengine->setReturnValue('getWeekDays', array(0, 1, 2, 3, 4, 5, 6));
+        $this->mockengine->setReturnValue('getWeekDays', [0, 1, 2, 3, 4, 5, 6]);
         $this->mockengine->setReturnValue('getDaysInWeek', 7);
         $this->mockengine->setReturnValue('getFirstDayOfWeek', 1);
         $this->mockengine->setReturnValue('getFirstDayInMonth', 3);
@@ -58,19 +57,19 @@ class TestOfTableHelper extends UnitTestCase
     public function testGetDaysOfWeekMonday()
     {
         $Helper = new Calendar_Table_Helper($this->mockcal);
-        $this->assertEqual($Helper->getDaysOfWeek(), array(1, 2, 3, 4, 5, 6, 0));
+        $this->assertEqual($Helper->getDaysOfWeek(), [1, 2, 3, 4, 5, 6, 0]);
     }
 
     public function testGetDaysOfWeekSunday()
     {
         $Helper = new Calendar_Table_Helper($this->mockcal, 0);
-        $this->assertEqual($Helper->getDaysOfWeek(), array(0, 1, 2, 3, 4, 5, 6));
+        $this->assertEqual($Helper->getDaysOfWeek(), [0, 1, 2, 3, 4, 5, 6]);
     }
 
     public function testGetDaysOfWeekThursday()
     {
         $Helper = new Calendar_Table_Helper($this->mockcal, 4);
-        $this->assertEqual($Helper->getDaysOfWeek(), array(4, 5, 6, 0, 1, 2, 3));
+        $this->assertEqual($Helper->getDaysOfWeek(), [4, 5, 6, 0, 1, 2, 3]);
     }
 
     public function testGetNumWeeks()

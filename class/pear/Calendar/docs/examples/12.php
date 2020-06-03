@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Description: a complete year.
  */
@@ -6,16 +7,16 @@ function getmicrotime()
 {
     list($usec, $sec) = explode(' ', microtime());
 
-    return (float) $usec + (float) $sec;
+    return (float)$usec + (float)$sec;
 }
 
 $start = getmicrotime();
 
-if (!@include 'Calendar/Calendar.php') {
+if (!@require_once __DIR__ . '/Calendar/Calendar.php') {
     define('CALENDAR_ROOT', '../../');
 }
 
-require_once CALENDAR_ROOT.'Year.php';
+require_once CALENDAR_ROOT . 'Year.php';
 
 define('CALENDAR_MONTH_STATE', CALENDAR_USE_MONTH_WEEKDAYS);
 
@@ -27,7 +28,7 @@ $Year = new Calendar_Year($_GET['year']);
 
 $Year->build();
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
     <title> <?php echo $Year->thisYear(); ?> </title>
@@ -39,12 +40,12 @@ $Year->build();
         caption.year {
             font-weight: bold;
             font-size: 120%;
-            font-color: navy;
+            font-color: #000080;
         }
 
         caption.month {
             font-size: 110%;
-            font-color: navy;
+            font-color: #000080;
         }
 
         table.month {
@@ -84,7 +85,7 @@ $Year->build();
     </caption>
     <?php
     $i = 0;
-    while ($Month = $Year->fetch()) {
+    while (false !== ($Month = $Year->fetch())) {
         switch ($i) {
             case 0:
                 echo "<tr>\n";
@@ -100,17 +101,17 @@ $Year->build();
         }
 
         echo "<td>\n<table class=\"month\">\n";
-        echo '<caption class="month">'.date('F', $Month->thisMonth(true)).'</caption>';
+        echo '<caption class="month">' . date('F', $Month->thisMonth(true)) . '</caption>';
         echo "<tr>\n<th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th><th>S</th>\n</tr>";
         $Month->build();
-        while ($Day = $Month->fetch()) {
+        while (false !== ($Day = $Month->fetch())) {
             if ($Day->isFirst()) {
                 echo "<tr>\n";
             }
             if ($Day->isEmpty()) {
                 echo "<td>&nbsp;</td>\n";
             } else {
-                echo '<td>'.$Day->thisDay()."</td>\n";
+                echo '<td>' . $Day->thisDay() . "</td>\n";
             }
             if ($Day->isLast()) {
                 echo "</tr>\n";

@@ -49,7 +49,7 @@ if (!defined('CALENDAR_ROOT')) {
 /**
  * Load Calendar base class.
  */
-require_once CALENDAR_ROOT.'Calendar.php';
+require_once CALENDAR_ROOT . 'Calendar.php';
 
 /**
  * Represents a Month and builds Days
@@ -57,7 +57,7 @@ require_once CALENDAR_ROOT.'Calendar.php';
  * require_once __DIR__ . '/Calendar/Month.php';
  * $Month = new Calendar_Month(2003, 10); // Oct 2003
  * $Month->build(); // Build Calendar_Day objects
- * while ($Day = $Month->fetch()) {
+ * while (false !== ($Day = $Month->fetch())) {
  *     echo $Day->thisDay().'<br>';
  * }
  * </code>.
@@ -93,9 +93,9 @@ class Calendar_Month extends Calendar
      *
      * @return bool
      */
-    public function build($sDates = array())
+    public function build($sDates = [])
     {
-        include_once CALENDAR_ROOT.'Day.php';
+        require_once CALENDAR_ROOT . 'Day.php';
         $daysInMonth = $this->cE->getDaysInMonth($this->year, $this->month);
         for ($i = 1; $i <= $daysInMonth; ++$i) {
             $this->children[$i] = new Calendar_Day($this->year, $this->month, $i);
@@ -111,6 +111,7 @@ class Calendar_Month extends Calendar
      * Called from build().
      *
      * @param array $sDates Calendar_Day objects representing selected dates
+     * @return bool|void
      */
     public function setSelection($sDates)
     {
@@ -119,8 +120,8 @@ class Calendar_Month extends Calendar
                 $key = $sDate->thisDay();
                 if (isset($this->children[$key])) {
                     $sDate->setSelected();
-                    $class = strtolower(get_class($sDate));
-                    if ($class === 'calendar_day' || $class === 'calendar_decorator') {
+                    $class = mb_strtolower(get_class($sDate));
+                    if ('calendar_day' === $class || 'calendar_decorator' === $class) {
                         $sDate->setFirst($this->children[$key]->isFirst());
                         $sDate->setLast($this->children[$key]->isLast());
                     }
