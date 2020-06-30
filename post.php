@@ -35,7 +35,7 @@ global $xoopsUser, $xoopsTpl;
 /** @var Helper $helper */
 $helper                                  = Helper::getInstance();
 $GLOBALS['xoopsOption']['template_main'] = 'extcal_post.tpl';
-
+require_once XOOPS_ROOT_PATH . '/header.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 //require_once __DIR__   . '/class/form/extcalform.php';
 //require_once __DIR__   . '/class/perm.php';
