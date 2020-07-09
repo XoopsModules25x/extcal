@@ -12,59 +12,59 @@
 <tr><td rowspan="1" colspan="3">AddEventFrontEnd</td></tr>
 </thead><tbody>
 <tr>
-	<td>open</td>
-	<td>/xtest251/modules/extcal/admin/event.php</td>
-	<td></td>
+    <td>open</td>
+    <td>/xtest251/modules/extcal/admin/event.php</td>
+    <td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Go to module</td>
-	<td></td>
+    <td>clickAndWait</td>
+    <td>link=Go to module</td>
+    <td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Submit Event</td>
-	<td></td>
+    <td>clickAndWait</td>
+    <td>link=Submit Event</td>
+    <td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>event_title</td>
-	<td>Event2</td>
+    <td>type</td>
+    <td>event_title</td>
+    <td>Event2</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>event_desc</td>
-	<td></td>
+    <td>click</td>
+    <td>event_desc</td>
+    <td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>event_desc</td>
-	<td>This is event added from the front end</td>
+    <td>type</td>
+    <td>event_desc</td>
+    <td>This is event added from the front end</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>event_address</td>
-	<td></td>
+    <td>click</td>
+    <td>event_address</td>
+    <td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>event_address</td>
-	<td>www.xoops.org</td>
+    <td>type</td>
+    <td>event_address</td>
+    <td>www.xoops.org</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>document.forms[0].elements['rrule_freq'][1]</td>
-	<td></td>
+    <td>click</td>
+    <td>document.forms[0].elements['rrule_freq'][1]</td>
+    <td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>rrule_daily_interval</td>
-	<td>3</td>
+    <td>type</td>
+    <td>rrule_daily_interval</td>
+    <td>3</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>form_submit</td>
-	<td></td>
+    <td>clickAndWait</td>
+    <td>form_submit</td>
+    <td></td>
 </tr>
 
 </tbody></table>

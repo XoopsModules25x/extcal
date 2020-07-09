@@ -38,8 +38,8 @@ setlocale(LC_TIME, $xoopsConfig['language']);
 
 //***************************************************************************************
 $modversion['version']          = '2.40';
-$modversion['module_status']    = 'RC 1';
-$modversion['release_date']     = '2020/06/03';
+$modversion['module_status']    = 'RC 2';
+$modversion['release_date']     = '2020/07/08';
 $modversion['name']             = _MI_EXTCAL_NAME;
 $modversion['description']      = _MI_EXTCAL_DESC;
 $modversion['credits']          = 'Zoullou';
@@ -59,7 +59,7 @@ $modversion['modicons32'] = 'assets/images/icons/32';
 //about
 $modversion['module_website_url']  = 'www.xoops.org/';
 $modversion['module_website_name'] = 'XOOPS';
-$modversion['min_php']             = '7.2';
+$modversion['min_php']             = '7.1';
 $modversion['min_xoops']           = '2.5.10';
 $modversion['min_admin']           = '1.2';
 $modversion['min_db']              = ['mysql' => '5.5'];

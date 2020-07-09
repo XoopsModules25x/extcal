@@ -1,21 +1,17 @@
 <?php
 
-use XoopsModules\Extcal\{
-    Helper,
+use XoopsModules\Extcal\{Helper,
     Utility,
     CategoryHandler,
     EventHandler
 };
 use Xmf\Request;
 
-require_once __DIR__ . '/header.php';
 require_once __DIR__ . '/include/constantes.php';
-$params                                  = [
-    'view' => _EXTCAL_NAV_SEARCH,
-    'file' => _EXTCAL_FILE_SEARCH,
-];
+$params                                  = ['view' => _EXTCAL_NAV_SEARCH, 'file' => _EXTCAL_FILE_SEARCH];
 $GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
-require_once XOOPS_ROOT_PATH . '/header.php';
+require_once __DIR__ . '/header.php';
+
 global $xoopsUser, $xoopsTpl;
 
 /** @var CategoryHandler $categoryHandler */

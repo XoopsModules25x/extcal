@@ -23,10 +23,12 @@ use XoopsModules\Extcal\{
     Perm
 };
 
-require_once __DIR__ . '/header.php';
-
-require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once __DIR__ . '/include/constantes.php';
+$params                                  = ['view' => _EXTCAL_NAV_NEW_EVENT, 'file' => _EXTCAL_FILE_NEW_EVENT];
+$GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
+
+require_once __DIR__ . '/header.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
 $permHandler = Perm::getHandler();
 $xoopsUser   = $xoopsUser ?: null;
@@ -36,9 +38,7 @@ if (0 == count($permHandler->getAuthorizedCat($xoopsUser, 'extcal_cat_submit'))
     redirect_header('index.php', 3);
 }
 
-$params                                  = ['view' => _EXTCAL_NAV_NEW_EVENT, 'file' => _EXTCAL_FILE_NEW_EVENT];
-$GLOBALS['xoopsOption']['template_main'] = "extcal_view_{$params['view']}.tpl";
-require_once XOOPS_ROOT_PATH . '/header.php';
+
 
 /* ========================================================================== */
 

@@ -20,7 +20,7 @@
  * que la classe correspondante de la table a été générées avec classGenerator
  **/
 
-
+require dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
 
 //modif JJD
 define('_EXTCAL_MODULE', 'extcal');

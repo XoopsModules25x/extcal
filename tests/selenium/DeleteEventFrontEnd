@@ -12,19 +12,19 @@
 <tr><td rowspan="1" colspan="3">Delete Event from Front End</td></tr>
 </thead><tbody>
 <tr>
-	<td>open</td>
-	<td>/xtest251/modules/extcal/event.php?event=2</td>
-	<td></td>
+    <td>open</td>
+    <td>/xtest251/modules/extcal/event.php?event=2</td>
+    <td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='xo-content']/div[1]/a[3]/img</td>
-	<td></td>
+    <td>clickAndWait</td>
+    <td>//div[@id='xo-content']/div[1]/a[3]/img</td>
+    <td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>confirm_submit</td>
-	<td></td>
+    <td>clickAndWait</td>
+    <td>confirm_submit</td>
+    <td></td>
 </tr>
 </tbody></table>
 </body>
