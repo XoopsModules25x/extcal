@@ -164,18 +164,18 @@ class FormRecurRules extends \XoopsFormElement
         $ret        .= ' ' . \_MD_EXTCAL_YEARS . '<br>';
 
         $formObject = new Extcal\Form\FormRRuleCheckBox('', 'rrule_yearly_bymonths', $this->_rrule_yearly_bymonths);
-        $formObject->addOption('1', \_MD_EXTCAL_JAN);
-        $formObject->addOption('2', \_MD_EXTCAL_FEB);
-        $formObject->addOption('3', \_MD_EXTCAL_MAR);
-        $formObject->addOption('4', \_MD_EXTCAL_APR);
-        $formObject->addOption('5', \_MD_EXTCAL_MAY);
-        $formObject->addOption('6', \_MD_EXTCAL_JUN);
-        $formObject->addOption('7', \_MD_EXTCAL_JUL);
-        $formObject->addOption('8', \_MD_EXTCAL_AUG);
-        $formObject->addOption('9', \_MD_EXTCAL_SEP);
-        $formObject->addOption('10', \_MD_EXTCAL_OCT);
-        $formObject->addOption('11', \_MD_EXTCAL_NOV);
-        $formObject->addOption('12', \_MD_EXTCAL_DEC);
+        $formObject->addOption('1', \_MD_EXTCAL_JAN . '&nbsp;');
+        $formObject->addOption('2', \_MD_EXTCAL_FEB . '&nbsp;');
+        $formObject->addOption('3', \_MD_EXTCAL_MAR . '&nbsp;');
+        $formObject->addOption('4', \_MD_EXTCAL_APR . '&nbsp;');
+        $formObject->addOption('5', \_MD_EXTCAL_MAY . '&nbsp;');
+        $formObject->addOption('6', \_MD_EXTCAL_JUN . '&nbsp;');
+        $formObject->addOption('7', \_MD_EXTCAL_JUL . '&nbsp;');
+        $formObject->addOption('8', \_MD_EXTCAL_AUG . '&nbsp;');
+        $formObject->addOption('9', \_MD_EXTCAL_SEP . '&nbsp;');
+        $formObject->addOption('10', \_MD_EXTCAL_OCT . '&nbsp;');
+        $formObject->addOption('11', \_MD_EXTCAL_NOV . '&nbsp;');
+        $formObject->addOption('12', \_MD_EXTCAL_DEC . '&nbsp;');
         $ret .= $formObject->render();
         $ret .= '<br>';
 
