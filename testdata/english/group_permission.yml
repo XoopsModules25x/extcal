@@ -1,0 +1,130 @@
+-
+    gperm_groupid: '1'
+    gperm_itemid: '1'
+    gperm_modid: '209'
+    gperm_name: extcal_cat_edit
+-
+    gperm_groupid: '1'
+    gperm_itemid: '2'
+    gperm_modid: '209'
+    gperm_name: extcal_cat_submit
+-
+    gperm_groupid: '2'
+    gperm_itemid: '1'
+    gperm_modid: '209'
+    gperm_name: extcal_cat_submit
+-
+    gperm_groupid: '3'
+    gperm_itemid: '2'
+    gperm_modid: '209'
+    gperm_name: extcal_cat_view
+-
+    gperm_groupid: '3'
+    gperm_itemid: '1'
+    gperm_modid: '209'
+    gperm_name: extcal_cat_view
+-
+    gperm_groupid: '1'
+    gperm_itemid: '1'
+    gperm_modid: '209'
+    gperm_name: extcal_cat_submit
+-
+    gperm_groupid: '2'
+    gperm_itemid: '2'
+    gperm_modid: '209'
+    gperm_name: extcal_cat_view
+-
+    gperm_groupid: '2'
+    gperm_itemid: '1'
+    gperm_modid: '209'
+    gperm_name: extcal_cat_view
+-
+    gperm_groupid: '1'
+    gperm_itemid: '2'
+    gperm_modid: '209'
+    gperm_name: extcal_cat_view
+-
+    gperm_groupid: '1'
+    gperm_itemid: '1'
+    gperm_modid: '209'
+    gperm_name: extcal_cat_autoapprove
+-
+    gperm_groupid: '1'
+    gperm_itemid: '1'
+    gperm_modid: '209'
+    gperm_name: extcal_cat_view
+-
+    gperm_groupid: '1'
+    gperm_itemid: '2'
+    gperm_modid: '209'
+    gperm_name: extcal_cat_edit
+-
+    gperm_groupid: '1'
+    gperm_itemid: '2'
+    gperm_modid: '209'
+    gperm_name: extcal_cat_autoapprove
+-
+    gperm_groupid: '2'
+    gperm_itemid: '2'
+    gperm_modid: '209'
+    gperm_name: extcal_cat_submit
+-
+    gperm_groupid: '9'
+    gperm_itemid: '1'
+    gperm_modid: '209'
+    gperm_name: extcal_cat_view
+-
+    gperm_groupid: '9'
+    gperm_itemid: '2'
+    gperm_modid: '209'
+    gperm_name: extcal_cat_view
+-
+    gperm_groupid: '8'
+    gperm_itemid: '1'
+    gperm_modid: '209'
+    gperm_name: extcal_cat_view
+-
+    gperm_groupid: '8'
+    gperm_itemid: '2'
+    gperm_modid: '209'
+    gperm_name: extcal_cat_view
+-
+    gperm_groupid: '7'
+    gperm_itemid: '1'
+    gperm_modid: '209'
+    gperm_name: extcal_cat_view
+-
+    gperm_groupid: '7'
+    gperm_itemid: '2'
+    gperm_modid: '209'
+    gperm_name: extcal_cat_view
+-
+    gperm_groupid: '1'
+    gperm_itemid: '2'
+    gperm_modid: '209'
+    gperm_name: extcal_perm_mask
+-
+    gperm_groupid: '1'
+    gperm_itemid: '8'
+    gperm_modid: '209'
+    gperm_name: extcal_perm_mask
+-
+    gperm_groupid: '2'
+    gperm_itemid: '1'
+    gperm_modid: '209'
+    gperm_name: extcal_perm_mask
+-
+    gperm_groupid: '1'
+    gperm_itemid: '4'
+    gperm_modid: '209'
+    gperm_name: extcal_perm_mask
+-
+    gperm_groupid: '1'
+    gperm_itemid: '1'
+    gperm_modid: '209'
+    gperm_name: extcal_perm_mask
+-
+    gperm_groupid: '3'
+    gperm_itemid: '1'
+    gperm_modid: '209'
+    gperm_name: extcal_perm_mask

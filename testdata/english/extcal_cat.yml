@@ -4,11 +4,11 @@
     cat_desc: 'US Holidays'
     cat_color: ff0000
     cat_weight: '0'
-    cat_icone: 'Award.png'
+    cat_icone: Award.png
 -
     cat_id: '2'
     cat_name: 'Test Category2'
     cat_desc: 'This is a test Category for future events'
     cat_color: 00ccff
     cat_weight: '2'
-    cat_icone: 'Home.png'
+    cat_icone: Home.png
