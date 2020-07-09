@@ -41,7 +41,7 @@ class EventmemberHandler extends ExtcalPersistableObjectHandler
         if (null === $db) {
             $db = \XoopsDatabaseFactory::getDatabaseConnection();
         }
-        parent::__construct($db, 'extcal_eventmember', Eventmember::class, 'event_id', 'uid');
+        parent::__construct($db, 'extcal_eventmember', Eventmember::class, ['event_id', 'uid']);
     }
 
     /**
