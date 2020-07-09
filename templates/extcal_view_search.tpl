@@ -74,10 +74,7 @@
 </form>
 
 <{if $num_tries > 0}>
-
     <{include file="db:extcal_event_list1.tpl"}>
-
-
     <{include file="db:extcal_categorie.tpl"}>
 <{/if}>
 
