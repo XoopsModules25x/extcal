@@ -1210,7 +1210,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
             }
             $fileElmtTray->addElement($eventFiles);
         }
-        $fileElmtTray->addElement(new \XoopsFormFile(\_MD_EXTCAL_FILE_ATTACHEMENT, 'event_file', 3145728));
+        $fileElmtTray->addElement(new \XoopsFormFile('', 'event_file', 3145728));
         $form->addElement($fileElmtTray);
 
         if (isset($data['event_id'])) {
