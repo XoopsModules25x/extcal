@@ -12,19 +12,19 @@
 <tr><td rowspan="1" colspan="3">Deleted Event from Admin</td></tr>
 </thead><tbody>
 <tr>
-	<td>open</td>
-	<td>/xtest251/modules/extcal/admin/event.php</td>
-	<td></td>
+    <td>open</td>
+    <td>/xtest251/modules/extcal/admin/event.php</td>
+    <td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='xo-content']/fieldset[1]/fieldset[2]/table/tbody/tr[2]/td[5]/a[2]/img</td>
-	<td></td>
+    <td>clickAndWait</td>
+    <td>//div[@id='xo-content']/fieldset[1]/fieldset[2]/table/tbody/tr[2]/td[5]/a[2]/img</td>
+    <td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>confirm_submit</td>
-	<td></td>
+    <td>clickAndWait</td>
+    <td>confirm_submit</td>
+    <td></td>
 </tr>
 </tbody></table>
 </body>

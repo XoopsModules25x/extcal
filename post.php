@@ -27,6 +27,7 @@ use XoopsModules\Extcal\{
     Perm
 };
 
+$GLOBALS['xoopsOption']['template_main'] = 'extcal_post.tpl';
 require_once __DIR__ . '/header.php';
 
 global $xoopsUser, $xoopsTpl;
@@ -34,7 +35,6 @@ global $xoopsUser, $xoopsTpl;
 /** @var Time $timeHandler */
 /** @var Helper $helper */
 $helper                                  = Helper::getInstance();
-$GLOBALS['xoopsOption']['template_main'] = 'extcal_post.tpl';
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 //require_once __DIR__   . '/class/form/extcalform.php';

@@ -12,54 +12,54 @@
 <tr><td rowspan="1" colspan="3">Add Category</td></tr>
 </thead><tbody>
 <tr>
-	<td>open</td>
-	<td>/xtest251/modules/extcal/admin/cat.php</td>
-	<td></td>
+    <td>open</td>
+    <td>/xtest251/modules/extcal/admin/cat.php</td>
+    <td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//li[@id='current']/a/span</td>
-	<td></td>
+    <td>clickAndWait</td>
+    <td>//li[@id='current']/a/span</td>
+    <td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>cat_name</td>
-	<td>Category 1</td>
+    <td>type</td>
+    <td>cat_name</td>
+    <td>Category 1</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>cat_desc</td>
-	<td>This is Category 1 Description</td>
+    <td>type</td>
+    <td>cat_desc</td>
+    <td>This is Category 1 Description</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//input[@value=' ... ']</td>
-	<td></td>
+    <td>click</td>
+    <td>//input[@value=' ... ']</td>
+    <td></td>
 </tr>
 <tr>
-	<td>waitForPopUp</td>
-	<td></td>
-	<td>30000</td>
+    <td>waitForPopUp</td>
+    <td></td>
+    <td>30000</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//div[@id='p3']/table/tbody/tr[13]/td[1]/a/img</td>
-	<td></td>
+    <td>click</td>
+    <td>//div[@id='p3']/table/tbody/tr[13]/td[1]/a/img</td>
+    <td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='p3']/table/tbody/tr[13]/td[1]/a/img</td>
-	<td></td>
+    <td>clickAndWait</td>
+    <td>//div[@id='p3']/table/tbody/tr[13]/td[1]/a/img</td>
+    <td></td>
 </tr>
 <tr>
-	<td>selectWindow</td>
-	<td>null</td>
-	<td></td>
+    <td>selectWindow</td>
+    <td>null</td>
+    <td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>form_submit</td>
-	<td></td>
+    <td>clickAndWait</td>
+    <td>form_submit</td>
+    <td></td>
 </tr>
 </tbody></table>
 </body>

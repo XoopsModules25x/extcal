@@ -12,14 +12,14 @@
 <tr><td rowspan="1" colspan="3">ViewEvent</td></tr>
 </thead><tbody>
 <tr>
-	<td>open</td>
-	<td>/xtest251/modules/extcal/view_calendar-month.php</td>
-	<td></td>
+    <td>open</td>
+    <td>/xtest251/modules/extcal/view_calendar-month.php</td>
+    <td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Event2</td>
-	<td></td>
+    <td>clickAndWait</td>
+    <td>link=Event2</td>
+    <td></td>
 </tr>
 
 </tbody></table>

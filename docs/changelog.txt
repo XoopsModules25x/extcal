@@ -1,3 +1,15 @@
+<h5>2.40 RC 3  [2020-07-09]</h5>  Dev: Xoops 2.5.11, PHP 7.4.7
+<hr>
+- add missing templates (mage/mamba)
+
+<h5>2.40 RC 2  [2020-07-08]</h5>  Dev: Xoops 2.5.11, PHP 7.4.7
+<hr>
+- template names (mage/mamba)
+- test data permissions (mage/mamba + goffy)
+- fix remove event participant (mage/mamba) https://github.com/XoopsModules25x/extcal/issues/28
+- new event cosmetics (alain01/mamba) https://github.com/XoopsModules25x/extcal/issues/23
+
+
 <h5>2.40 RC 1  [2020-05-30]</h5>  Dev: Xoops 2.5.11, PHP 7.4.6
 <hr>
 - updated PEAR (mamba)
