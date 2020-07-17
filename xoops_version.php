@@ -578,6 +578,113 @@ $modversion['config'][] = [
     'default'     => 5,
 
 ];
+$modversion['config'][] = [
+    'name'        => 'break',
+    'title'       => '_MI_EXTCAL_SHOW_FORMOPTIONS',
+    'description' => '',
+    'formtype'    => 'line_break',
+    'valuetype'   => 'textbox',
+    'default'     => 'head',
+];
+
+$modversion['config'][] = [
+    'name'        => 'formShowIcon',
+    'title'       => '_MI_EXTCAL_FORMSHOW_ICON',
+    'description' => '_MI_EXTCAL_FORMSHOW_ICON_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
+$modversion['config'][] = [
+    'name'        => 'formShowLocation',
+    'title'       => '_MI_EXTCAL_FORMSHOW_LOCATION',
+    'description' => '_MI_EXTCAL_FORMSHOW_LOCATION_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
+$modversion['config'][] = [
+    'name'        => 'formShowPrice',
+    'title'       => '_MI_EXTCAL_FORMSHOW_PRICE',
+    'description' => '_MI_EXTCAL_FORMSHOW_PRICE_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
+$modversion['config'][] = [
+    'name'        => 'formShowOrganizer',
+    'title'       => '_MI_EXTCAL_FORMSHOW_ORGANIZER',
+    'description' => '_MI_EXTCAL_FORMSHOW_ORGANIZER_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
+$modversion['config'][] = [
+    'name'        => 'formShowContact',
+    'title'       => '_MI_EXTCAL_FORMSHOW_CONTACT',
+    'description' => '_MI_EXTCAL_FORMSHOW_CONTACT_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
+$modversion['config'][] = [
+    'name'        => 'formShowUrl',
+    'title'       => '_MI_EXTCAL_FORMSHOW_URL',
+    'description' => '_MI_EXTCAL_FORMSHOW_URL_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
+$modversion['config'][] = [
+    'name'        => 'formShowEmail',
+    'title'       => '_MI_EXTCAL_FORMSHOW_EMAIL',
+    'description' => '_MI_EXTCAL_FORMSHOW_EMAIL_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
+$modversion['config'][] = [
+    'name'        => 'formShowAddress',
+    'title'       => '_MI_EXTCAL_FORMSHOW_ADDRESS',
+    'description' => '_MI_EXTCAL_FORMSHOW_ADDRESS_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
+$modversion['config'][] = [
+    'name'        => 'formShowRecurence',
+    'title'       => '_MI_EXTCAL_FORMSHOW_RECURENCE',
+    'description' => '_MI_EXTCAL_FORMSHOW_RECURENCE_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
+$modversion['config'][] = [
+    'name'        => 'formShowFile',
+    'title'       => '_MI_EXTCAL_FORMSHOW_FILE',
+    'description' => '_MI_EXTCAL_FORMSHOW_FILE_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
+$modversion['config'][] = [
+    'name'        => 'formShowPicture',
+    'title'       => '_MI_EXTCAL_FORMSHOW_PICTURE',
+    'description' => '_MI_EXTCAL_FORMSHOW_PICTURE_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
 
 $modversion['config'][] = [
     'name'        => 'break' . $i,

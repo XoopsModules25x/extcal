@@ -56,13 +56,14 @@ $adminmenu[] = [
     'icon'  => $pathIcon32 . '/event.png',
 ];
 
-
-if (isset($pathModIcon32)) {
-$adminmenu[] = [
-    'title' => _MI_EXTCAL_LOCATIONS,
-    'link'  => 'admin/location.php',
-    'icon'  => $pathModIcon32 . '/location.png',
-];
+if ($helper->getConfig('formShowLocation', 1) == 1) {
+	if (isset($pathModIcon32)) {
+	$adminmenu[] = [
+		'title' => _MI_EXTCAL_LOCATIONS,
+		'link'  => 'admin/location.php',
+		'icon'  => $pathModIcon32 . '/location.png',
+	];
+	}
 }
 
 $adminmenu[] = [

@@ -34,7 +34,8 @@
     <tr>
         <td colspan="3" class="odd">
 
-            <{if $event.event_picture1}>
+            <{if $showPicture == 1}>
+			<{if $event.event_picture1}>
                 <div class="highslide-gallery">
                     <a href="<{$xoops_url}>/uploads/extcal/<{$event.event_picture1}>" class="highslide"
                        onclick="return hs.expand(this)">
@@ -63,6 +64,7 @@
                 <img align=left style="margin-right:6px;"
                      src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180">
             <{/if}>
+            <{/if}>
 
 
             <div style="font-size:20px;font-weight:bold;width:280px;overflow:hidden;"><u><{$event.event_title}></u>
@@ -81,12 +83,14 @@
                 <{/if}>
 
                 <{if $event.event_address != ''}>
+					<{if $showAddress == 1}>
                     <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_LOCATION_ADRESSE}>
                             :</strong></span>
                     <br>
                     <{$event_address}>
                     <br>
                     <br>
+					<{/if}>
                 <{/if}>
                 <!--<span style="font-size:0.8em;"><{$smarty.const._MD_EXTCAL_POSTED_BY}> <a href="<{$xoops_url}>/userinfo.php?uid=<{$event.user.uid}>"><{$event.user.uname}></a> <{$smarty.const._MD_EXTCAL_ON}> <{$event.formated_event_submitdate}></span>
             <p>
@@ -97,6 +101,7 @@
     </tr>
 </table>
 <div style="border-bottom:1px solid #CCCCCC;"></div>
+<{if $showLocation == 1}>
 <{if $location.id.value != 0}>
     <table border="0" width="100%" class="outer">
         <tr>
@@ -140,34 +145,45 @@
         </tr>
     </table>
 <{/if}>
+<{/if}>
 
 <table border="0" width="100%" class="outer">
 
     <tr>
         <td width="50%" class="odd" colspan='2'>
 
-            <{if $event.event_organisateur}>
+            <{if $showOrganizer == 1}>
+			<{if $event.event_organisateur}>
                 <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_ORGANISATEUR}></strong></span>
                 <br>
                 <{$event.event_organisateur}>
                 <br>
             <{/if}>
+            <{/if}>
+			<{if $showContact == 1}>
             <{if $event.event_contact}><{$event.event_contact}><br><{/if}>
+            <{/if}>
+			<{if $showEmail == 1}>
             <{if $event.event_email}><a href="mailto:<{$event.event_email}>"><{$event.event_email}></a><br><{/if}>
+			<{/if}>
+			<{if $showUrl == 1}>
             <{if $event.event_url}><a href="<{$event.event_url}>" target="_blank"><{$event.event_url}></a><br><{/if}>
+			<{/if}>
         </td>
 
     </tr>
 
     <tr>
 
-        <{if $event.event_price}>
+        <{if $showPrice == 1}>
+		<{if $event.event_price}>
             <td width="50%" class="odd"><br>
                 <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_LOCATION_TARIFS}>
                         :</strong></span><br>
                 <{$event.event_price}>
                 <{$smarty.const._MD_EXTCAL_DEVISE2}>
             </td>
+        <{/if}>
         <{/if}>
 
         <td class="odd"><br>
@@ -233,6 +249,7 @@
         <{$map}>
     </div>
 </table>
+<{if $showFile == 1}>
 <p style="text-align:right;">
     <{foreach item=eventFile from=$event_attachement}>
         <a href="download_attachement.php?file=<{$eventFile.file_id}>"><{$eventFile.file_nicename}>
@@ -240,7 +257,7 @@
         <br>
     <{/foreach}>
 </p>
-
+<{/if}>
 
 <{include file="db:extcal_buttons_event.tpl"}>
 
