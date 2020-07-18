@@ -152,6 +152,29 @@ define('_MI_EXTCAL_DAY_FRIDAY', 'Friday');
 define('_MI_EXTCAL_DAY_SATURDAY', 'Saturday');
 define('_MI_EXTCAL_DAY_SUNDAY', 'Sunday');
 define('_MI_EXTCAL_SHOW_OTHEROPTIONS', 'Other Options');
+define('_MI_EXTCAL_SHOW_FORMOPTIONS', 'Form Options');
+define('_MI_EXTCAL_FORMSHOW_ICON', 'Display the icon field in the form?');
+define('_MI_EXTCAL_FORMSHOW_ICON_DESC', '');
+define('_MI_EXTCAL_FORMSHOW_LOCATION', 'Display the location field in the form?');
+define('_MI_EXTCAL_FORMSHOW_LOCATION_DESC', '');
+define('_MI_EXTCAL_FORMSHOW_PRICE', 'Display the price field in the form?');
+define('_MI_EXTCAL_FORMSHOW_PRICE_DESC', '');
+define('_MI_EXTCAL_FORMSHOW_ORGANIZER', 'Display the organizer field in the form?');
+define('_MI_EXTCAL_FORMSHOW_ORGANIZER_DESC', '');
+define('_MI_EXTCAL_FORMSHOW_CONTACT', 'Display the contact field in the form?');
+define('_MI_EXTCAL_FORMSHOW_CONTACT_DESC', '');
+define('_MI_EXTCAL_FORMSHOW_URL', 'Display the url field in the form?');
+define('_MI_EXTCAL_FORMSHOW_URL_DESC', '');
+define('_MI_EXTCAL_FORMSHOW_EMAIL', 'Display the email field in the form?');
+define('_MI_EXTCAL_FORMSHOW_EMAIL_DESC', '');
+define('_MI_EXTCAL_FORMSHOW_ADDRESS', 'Display the address field in the form?');
+define('_MI_EXTCAL_FORMSHOW_ADDRESS_DESC', '');
+define('_MI_EXTCAL_FORMSHOW_RECURENCE', 'Display the recurence field in the form?');
+define('_MI_EXTCAL_FORMSHOW_RECURENCE_DESC', '');
+define('_MI_EXTCAL_FORMSHOW_FILE', 'Display the file field in the form?');
+define('_MI_EXTCAL_FORMSHOW_FILE_DESC', '');
+define('_MI_EXTCAL_FORMSHOW_PICTURE', 'Display pictures fields in the form?');
+define('_MI_EXTCAL_FORMSHOW_PICTURE_DESC', '');
 
 // 2.38
 

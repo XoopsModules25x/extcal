@@ -84,6 +84,18 @@ $eventHandler->serverTimeToUserTime($event);
 // Adding formated date for start and end event
 $eventHandler->formatEventDate($event, $helper->getConfig('event_date_event'));
 
+// Assign options form
+$xoopsTpl->assign('showIcon', $helper->getConfig('formShowIcon', 1));
+$xoopsTpl->assign('showLocation', $helper->getConfig('formShowLocation', 1));//
+$xoopsTpl->assign('showPrice', $helper->getConfig('formShowPrice', 1));//
+$xoopsTpl->assign('showOrganizer', $helper->getConfig('formShowOrganizer', 1));//
+$xoopsTpl->assign('showContact', $helper->getConfig('formShowContact', 1));//
+$xoopsTpl->assign('showUrl', $helper->getConfig('formShowUrl', 1));//
+$xoopsTpl->assign('showEmail', $helper->getConfig('formShowEmail', 1));//
+$xoopsTpl->assign('showAddress', $helper->getConfig('formShowAddress', 1));//
+$xoopsTpl->assign('showFile', $helper->getConfig('formShowFile', 1));//
+$xoopsTpl->assign('showPicture', $helper->getConfig('formShowPicture', 1));//
+
 // Assigning event to the template
 $xoopsTpl->assign('event', $event);
 $xoopsTpl->assign('event_desc', html_entity_decode($myts->displayTarea(clear_unicodeslashes($event['event_desc']), 1, 1, 1, 1, 1)));
