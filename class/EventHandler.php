@@ -1079,6 +1079,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
             $event_picture2 = '';
             $event_price    = '';
             $event_location = '';
+			$event_nbmember = '';
             $files          = [];
             $event_icone    = '';
         }
