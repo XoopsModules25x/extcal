@@ -175,6 +175,8 @@ define('_MI_EXTCAL_FORMSHOW_FILE', 'Display the file field in the form?');
 define('_MI_EXTCAL_FORMSHOW_FILE_DESC', '');
 define('_MI_EXTCAL_FORMSHOW_PICTURE', 'Display pictures fields in the form?');
 define('_MI_EXTCAL_FORMSHOW_PICTURE_DESC', '');
+define('_MI_EXTCAL_FORMSHOW_MEMBERLIMIT', 'Display member limit field in the form?');
+define('_MI_EXTCAL_FORMSHOW_MEMBERLIMIT_DESC', '');
 
 // 2.38
 

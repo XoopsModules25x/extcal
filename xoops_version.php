@@ -593,7 +593,7 @@ $modversion['config'][] = [
     'description' => '_MI_EXTCAL_FORMSHOW_ICON_DESC',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
-    'default'     => 1,
+    'default'     => 0,
 ];
 
 $modversion['config'][] = [
@@ -611,7 +611,7 @@ $modversion['config'][] = [
     'description' => '_MI_EXTCAL_FORMSHOW_PRICE_DESC',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
-    'default'     => 1,
+    'default'     => 0,
 ];
 
 $modversion['config'][] = [
@@ -629,7 +629,7 @@ $modversion['config'][] = [
     'description' => '_MI_EXTCAL_FORMSHOW_CONTACT_DESC',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
-    'default'     => 1,
+    'default'     => 0,
 ];
 
 $modversion['config'][] = [
@@ -638,7 +638,7 @@ $modversion['config'][] = [
     'description' => '_MI_EXTCAL_FORMSHOW_URL_DESC',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
-    'default'     => 1,
+    'default'     => 0,
 ];
 
 $modversion['config'][] = [
@@ -647,7 +647,7 @@ $modversion['config'][] = [
     'description' => '_MI_EXTCAL_FORMSHOW_EMAIL_DESC',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
-    'default'     => 1,
+    'default'     => 0,
 ];
 
 $modversion['config'][] = [
@@ -656,7 +656,7 @@ $modversion['config'][] = [
     'description' => '_MI_EXTCAL_FORMSHOW_ADDRESS_DESC',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
-    'default'     => 1,
+    'default'     => 0,
 ];
 
 $modversion['config'][] = [
@@ -665,7 +665,7 @@ $modversion['config'][] = [
     'description' => '_MI_EXTCAL_FORMSHOW_RECURENCE_DESC',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
-    'default'     => 1,
+    'default'     => 0,
 ];
 
 $modversion['config'][] = [
@@ -684,6 +684,15 @@ $modversion['config'][] = [
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
     'default'     => 1,
+];
+
+$modversion['config'][] = [
+    'name'        => 'formShowMemberLimit',
+    'title'       => '_MI_EXTCAL_FORMSHOW_MEMBERLIMIT',
+    'description' => '_MI_EXTCAL_FORMSHOW_MEMBERLIMIT_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
 ];
 
 $modversion['config'][] = [

@@ -1162,10 +1162,15 @@ class EventHandler extends ExtcalPersistableObjectHandler
         }
         $form->addElement($descEditor);
 
+        
+        if ($helper->getConfig('formShowMemberLimit', 1) == 1) {
         // Max registered member for this event
         $nbMemberElement = new \XoopsFormText(\_MD_EXTCAL_NBMEMBER, 'event_nbmember', 4, 4, $nbMember);
         $nbMemberElement->setDescription(\_MD_EXTCAL_NBMEMBER_DESC);
         $form->addElement($nbMemberElement, false);
+        } else {
+			$form->addElement(new \XoopsFormHidden('event_nbmember', $event_nbmember), false);
+		}
 
         //Price and monnaie
 		if ($helper->getConfig('formShowPrice', 1) == 1) {
