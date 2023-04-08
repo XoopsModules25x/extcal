@@ -3,6 +3,7 @@
 - moved to sematic versioning (goffy)
 - fixed html problems (goffy)
 - fixed problems with option params - made them required as they are always provided (goffy)
+- fixed smarty default errors (goffy)
 
 <h5>2.40 RC 3  [2020-07-09]</h5>  Dev: Xoops 2.5.11, PHP 7.4.7
 <hr>

@@ -33,7 +33,7 @@
                         <{if $event}>
 
                             <{include file="db:extcal_info_bulle.tpl"}>
-                            <div style="background-color:#<{$event.cat.cat_color}>; height:2px; font-size:2px;">
+                            <div style="background-color:#<{$event.cat.cat_color|default:''}>; height:2px; font-size:2px;">
                                 &nbsp;
                             </div>
                         <{/if}>

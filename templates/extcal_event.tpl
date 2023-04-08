@@ -8,8 +8,8 @@
             <div style="float:left;">
                 <table>
                     <tr>
-                        <td class="head" style="background-color:#<{$event.cat.cat_color}>; width:5px;"></td>
-                        <td style="width:200px;"><{$event.cat.cat_name}></td>
+                        <td class="head" style="background-color:#<{$event.cat.cat_color|default:false}>; width:5px;"></td>
+                        <td style="width:200px;"><{$event.cat.cat_name|default:false}></td>
                     </tr>
                 </table>
             </div>
@@ -34,8 +34,8 @@
     <tr>
         <td colspan="3" class="odd">
 
-            <{if $showPicture == 1}>
-			<{if $event.event_picture1}>
+            <{if $showPicture|default:false == 1}>
+			<{if $event.event_picture1|default:false}>
                 <div class="highslide-gallery">
                     <a href="<{$xoops_url}>/uploads/extcal/<{$event.event_picture1}>" class="highslide"
                        onclick="return hs.expand(this)">
@@ -52,7 +52,7 @@
                      alt='<{$smarty.const._EXTCAL_SHOW_NO_PICTURE}>' title='<{$smarty.const._EXTCAL_SHOW_NO_PICTURE}>'>
             <{/if}>
 
-            <{if $event.event_picture2}>
+            <{if $event.event_picture2|default:false}>
                 <div class="highslide-gallery">
                     <a href="<{$xoops_url}>/uploads/extcal/<{$event.event_picture2}>" class="highslide"
                        onclick="return hs.expand(this)">
@@ -71,13 +71,13 @@
             <{/if}>
 
 
-            <div style="font-size:20px;font-weight:bold;width:280px;overflow:hidden;"><u><{$event.event_title}></u>
+            <div style="font-size:20px;font-weight:bold;width:280px;overflow:hidden;"><u><{$event.event_title|default:false}></u>
             </div>
             <div style="margin-right:5px;"><br><span
-                        style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_LOCATION_DATE}> </strong></span><br><{$event.formated_event_start}>
+                        style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_LOCATION_DATE}> </strong></span><br><{$event.formated_event_start|default:false}>
                 <br><br>
 
-                <{if $event.event_desc != ''}>
+                <{if $event.event_desc|default:'' != ''}>
                     <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_LOCATION_DESCRIPTION}>
                             :</strong></span>
                     <br>
@@ -86,7 +86,7 @@
                     <br>
                 <{/if}>
 
-                <{if $event.event_address != ''}>
+                <{if $event.event_address|default:'' != ''}>
 					<{if $showAddress == 1}>
                     <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_LOCATION_ADRESSE}>
                             :</strong></span>
@@ -98,39 +98,39 @@
                 <{/if}>
                 <!--<span style="font-size:0.8em;"><{$smarty.const._MD_EXTCAL_POSTED_BY}> <a href="<{$xoops_url}>/userinfo.php?uid=<{$event.user.uid}>"><{$event.user.uname}></a> <{$smarty.const._MD_EXTCAL_ON}> <{$event.formated_event_submitdate}></span>
             <p>
-                <{$event.event_desc}>
+                <{$event.event_desc|default:''}>
             </p>-->
 
         </td>
     </tr>
 </table>
 <div style="border-bottom:1px solid #CCCCCC;"></div>
-<{if $showLocation == 1}>
-<{if $location.id.value != 0}>
+<{if $showLocation|default:false == 1}>
+<{if $location.id.value|default:false != 0}>
     <table style="border:0;width:100%" class="outer">
         <tr>
             <td style="width:_EXTCAL_TS_MINUTE%" class="odd">
                 <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_LOCATION}></strong></span><br>
-                <a href="./location.php?location_id=<{$event.event_location}>">
-                    <span style="font-size:14px;"><{$location.nom.value}></span>
+                <a href="./location.php?location_id=<{$event.event_location|default:''}>">
+                    <span style="font-size:14px;"><{$location.nom.value|default:false}></span>
                 </a>
                 <br>
-                <{if $location.adresse.value}><{$location.adresse.value}><br><{/if}>
-                <{if $location.ville.value}><{$location.ville.value}><br><{/if}>
-                <{if $location.telephone.value}><{$location.telephone.value}><br><{/if}>
-                <{if $location.site.value}>
+                <{if $location.adresse.value|default:false}><{$location.adresse.value}><br><{/if}>
+                <{if $location.ville.value|default:false}><{$location.ville.value}><br><{/if}>
+                <{if $location.telephone.value|default:false}><{$location.telephone.value}><br><{/if}>
+                <{if $location.site.value|default:false}>
                     <a href="<{$location.site.value}>" target="_blank">
                         <{$smarty.const._MD_EXTCAL_VISIT_SITE}>
                     </a>
                     <br>
                 <{/if}>
-                <{if $location.map.value}>
+                <{if $location.map.value|default:false}>
                     <a href='<{$location.map.value}>' target='blanck'><{$smarty.const._MD_EXTCAL_LOCALISATION}></a>
                     <br>
                 <{/if}>
             </td>
             <td style="width:20%" class="odd">
-                <{if $location.logo.value}>
+                <{if $location.logo.value|default:false}>
                     <div class="highslide-gallery">
                         <a href="<{$xoops_url}>/uploads/extcal/location/<{$location.logo.value}>"
                            class="highslide" onclick="return hs.expand(this)">
@@ -157,22 +157,22 @@
     <tr>
         <td style="width:50%" class="odd" colspan='2'>
 
-            <{if $showOrganizer == 1}>
-			<{if $event.event_organisateur}>
+            <{if $showOrganizer|default:false == 1}>
+			<{if $event.event_organisateur|default:false}>
                 <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_ORGANISATEUR}></strong></span>
                 <br>
                 <{$event.event_organisateur}>
                 <br>
             <{/if}>
             <{/if}>
-			<{if $showContact == 1}>
-            <{if $event.event_contact}><{$event.event_contact}><br><{/if}>
+			<{if $showContact|default:false == 1}>
+            <{if $event.event_contact|default:false}><{$event.event_contact}><br><{/if}>
             <{/if}>
-			<{if $showEmail == 1}>
-            <{if $event.event_email}><a href="mailto:<{$event.event_email}>"><{$event.event_email}></a><br><{/if}>
+			<{if $showEmail|default:false == 1}>
+            <{if $event.event_email|default:false}><a href="mailto:<{$event.event_email}>"><{$event.event_email}></a><br><{/if}>
 			<{/if}>
-			<{if $showUrl == 1}>
-            <{if $event.event_url}><a href="<{$event.event_url}>" target="_blank"><{$event.event_url}></a><br><{/if}>
+			<{if $showUrl|default:false == 1}>
+            <{if $event.event_url|default:false}><a href="<{$event.event_url}>" target="_blank"><{$event.event_url}></a><br><{/if}>
 			<{/if}>
         </td>
 
@@ -180,8 +180,8 @@
 
     <tr>
 
-        <{if $showPrice == 1}>
-		<{if $event.event_price}>
+        <{if $showPrice|default:false == 1}>
+		<{if $event.event_price|default:false}>
             <td style="width:50%" class="odd"><br>
                 <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_LOCATION_TARIFS}>
                         :</strong></span><br>
@@ -192,9 +192,9 @@
         <{/if}>
 
         <td class="odd"><br>
-            <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_START}></strong></span> <{$event.formated_event_start}>
+            <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_START}></strong></span> <{$event.formated_event_start|default:false}>
             <br>
-            <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_END}></strong></span> <{$event.formated_event_end}>
+            <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_END}></strong></span> <{$event.formated_event_end|default:false}>
             <br>
         </td>
     </tr>
@@ -204,35 +204,35 @@
 
 <table class="outer">
 
-    <{if $whosGoing}>
+    <{if $whosGoing|default:false}>
         <tr>
             <td colspan="3" class="even">
-                <b><{$smarty.const._MD_EXTCAL_WHOS_GOING}> (<{$eventmember.member.nbUser}>)
-                    :</b> <{foreach name=eventMemberList from=$eventmember.member.userList item=member}><{if $smarty.foreach.eventMemberList.first != 1}>, <{/if}>
+                <b><{$smarty.const._MD_EXTCAL_WHOS_GOING}> (<{$eventmember.member.nbUser|default:false}>)
+                    :</b> <{foreach name=eventMemberList from=$eventmember.member.userList|default:array() item=member}><{if $smarty.foreach.eventMemberList.first != 1}>, <{/if}>
                     <a href="<{$xoops_url}>/userinfo.php?uid=<{$member.uid}>"><{$member.uname}></a><{/foreach}>
-                <{if $eventmember.member.show_button}>
+                <{if $eventmember.member.show_button|default:false}>
                     <form style="display:inline;" method="post" action="event_member.php">
                         <{securityToken}><{*//mb*}>
-                        <input type="hidden" name="mode" value="<{$eventmember.member.joinevent_mode}>">
-                        <input type="hidden" name="event" value="<{$event.event_id}>">
-                        <input type="submit" value="<{$eventmember.member.button_text}>"<{$eventmember.member.button_disabled}>>
+                        <input type="hidden" name="mode" value="<{$eventmember.member.joinevent_mode|default:false}>">
+                        <input type="hidden" name="event" value="<{$event.event_id|default:false}>">
+                        <input type="submit" value="<{$eventmember.member.button_text|default:false}>"<{$eventmember.member.button_disabled|default:false}>>
                     </form>
                 <{/if}>
             </td>
         </tr>
     <{/if}>
-    <{if $whosNotGoing}>
+    <{if $whosNotGoing|default:false}>
         <tr>
             <td colspan="3" class="even">
-                <b><{$smarty.const._MD_EXTCAL_WHOSNOT_GOING}> (<{$eventmember.notmember.nbUser}>)
-                    :</b> <{foreach name=eventMemberList from=$eventmember.notmember.userList item=member}><{if $smarty.foreach.eventMemberList.first != 1}>, <{/if}>
+                <b><{$smarty.const._MD_EXTCAL_WHOSNOT_GOING}> (<{$eventmember.notmember.nbUser|default:false}>)
+                    :</b> <{foreach name=eventMemberList from=$eventmember.notmember.userList|default:array() item=member}><{if $smarty.foreach.eventMemberList.first != 1}>, <{/if}>
                     <a href="<{$xoops_url}>/userinfo.php?uid=<{$member.uid}>"><{$member.uname}></a><{/foreach}>
                 <{if $eventmember.notmember.show_button}>
                     <form style="display:inline;" method="post" action="event_notmember.php">
                         <{securityToken}><{*//mb*}>
-                        <input type="hidden" name="mode" value="<{$eventmember.notmember.joinevent_mode}>">
-                        <input type="hidden" name="event" value="<{$event.event_id}>">
-                        <input type="submit" value="<{$eventmember.notmember.button_text}>"<{$eventmember.notmember.button_disabled}>>
+                        <input type="hidden" name="mode" value="<{$eventmember.notmember.joinevent_mode|default:false}>">
+                        <input type="hidden" name="event" value="<{$event.event_id|default:false}>">
+                        <input type="submit" value="<{$eventmember.notmember.button_text|default:false}>"<{$eventmember.notmember.button_disabled|default:false}>>
                     </form>
                 <{/if}>
             </td>
@@ -243,7 +243,7 @@
     <{if false}>
         <tr>
             <td colspan="3" class="even">
-                <{$smarty.const._MD_EXTCAL_STATUS}> : <{$status}>
+                <{$smarty.const._MD_EXTCAL_STATUS}> : <{$status|default:false}>
                 <input type="submit" value="<{$smarty.const._MD_EXTCAL_VALIDATE}>">
             </td>
         </tr>
@@ -251,14 +251,14 @@
 
 
     <div id="map" style="text-align:center;visibility: hidden;"><br>
-        <{$map}>
+        <{$map|default:false}>
     </div>
 </table>
-<{if $showFile == 1}>
+<{if $showFile|default:false == 1}>
 <p style="text-align:right;">
     <{foreach item=eventFile from=$event_attachement}>
-        <a href="download_attachement.php?file=<{$eventFile.file_id}>"><{$eventFile.file_nicename}>
-            (<i><{$eventFile.file_mimetype}></i>) <{$eventFile.formated_file_size}></a>
+        <a href="download_attachement.php?file=<{$eventFile.file_id|default:false}>"><{$eventFile.file_nicename|default:false}>
+            (<i><{$eventFile.file_mimetype|default:false}></i>) <{$eventFile.formated_file_size|default:false}></a>
         <br>
     <{/foreach}>
 </p>
@@ -267,17 +267,17 @@
 <{include file="db:extcal_buttons_event.tpl"}>
 
 <div style="text-align: center; margin-top: 20px;">
-    <{$commentsnav}>
-    <{$lang_notice}>
+    <{$commentsnav|default:false}>
+    <{$lang_notice|default:false}>
 </div>
 
 <div style="margin-top: 10px;">
     <!-- start comments loop -->
-    <{if $comment_mode == "flat"}>
+    <{if $comment_mode|default:false == "flat"}>
         <{include file="db:system_comments_flat.tpl"}>
-    <{elseif $comment_mode == "thread"}>
+    <{elseif $comment_mode|default:false == "thread"}>
         <{include file="db:system_comments_thread.tpl"}>
-    <{elseif $comment_mode == "nest"}>
+    <{elseif $comment_mode|default:false == "nest"}>
         <{include file="db:system_comments_nest.tpl"}>
     <{/if}>
     <!-- end comments loop -->

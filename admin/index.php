@@ -142,7 +142,11 @@ if (count($pendingEvent) > 0) {
     foreach ($pendingEvent as $event) {
         $class = (0 == ++$i % 2) ? 'even' : 'odd';
         echo '<tr style="text-align:center;" class="' . $class . '">';
-        echo '<td>' . $event['cat']['cat_name'] . '</td>';
+        echo '<td>';
+        if (isset($event['cat']['cat_name'])) {
+            echo $event['cat']['cat_name'];
+        }
+        echo '</td>';
         echo '<td>' . $event['event_title'] . '</td>';
         echo '<td>' . $event['formated_event_start'] . '</td>';
         echo '<td style="width:10%; text-align:center;">';

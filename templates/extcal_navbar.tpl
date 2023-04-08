@@ -30,7 +30,7 @@
     }
 </style>
 
-<{if $list_position==0}>
+<{if $list_position|default:0 == 0 && $navigSelectBox|default:false}>
     <form action="<{$navigSelectBox.action}>" method="<{$navigSelectBox.method}>" class="head">
         <{foreach item=element from=$navigSelectBox.elements}>
             <{$element.body}>
@@ -55,8 +55,7 @@
     </ul>
 </div>
 
-
-<{if $list_position==1}>
+<{if $list_position|default:0 == 1 && $navigSelectBox|default:false}>
     <form action="<{$navigSelectBox.action}>" method="<{$navigSelectBox.method}>" class="head">
         <{foreach item=element from=$navigSelectBox.elements}>
             <{$element.body}>

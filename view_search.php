@@ -34,7 +34,7 @@ $month     = Request::getInt('month', date('n'), 'POST');
 $day       = Request::getInt('day', 0, 'POST');
 $cat       = Request::getInt('cat', 0, 'POST');
 $orderby1  = Request::getString('orderby1', 'cat_name ASC', 'POST');
-$orderby2  = Request::getString('orderby2', 'event_title AS', 'POST');
+$orderby2  = Request::getString('orderby2', 'event_title ASC', 'POST');
 $orderby3  = Request::getString('orderby3', '', 'POST');
 /* ========================================================================== */
 

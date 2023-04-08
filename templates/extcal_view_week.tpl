@@ -68,7 +68,7 @@
                          alt='<{$smarty.const._EXTCAL_SHOW_NO_PICTURE}>' title='<{$smarty.const._EXTCAL_SHOW_NO_PICTURE}>'>
                 <{/if}>
 
-                <div style="float:right; background-color:#<{$event.cat.cat_color}>; border:1px solid #ffffff; margin-right:5px;">
+                <div style="float:right; background-color:#<{$event.cat.cat_color|default:''}>; border:1px solid #ffffff; margin-right:5px;">
                     &nbsp;
                 </div>
                 </div>

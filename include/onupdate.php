@@ -66,8 +66,10 @@ function xoops_module_pre_update_extcal(\XoopsModule $module)
         $utility::prepareFolder($value);
     }
 
+    /* handled under: xoops_module_update_extcal
     $migrator = new Common\Migrate($configurator);
     $migrator->synchronizeSchema();
+    */
 
     return true;
 }
@@ -75,16 +77,17 @@ function xoops_module_pre_update_extcal(\XoopsModule $module)
 /**
  * Performs tasks required during update of the module
  * @param \XoopsModule $module {@link XoopsModule}
- * @param null         $previousVersion
+ * @param null         $prevVersion
  *
  * @return bool true if update successful, false if not
  */
-function xoops_module_update_extcal(\XoopsModule $module, $previousVersion = null)
+function xoops_module_update_extcal(\XoopsModule $module, $prevVersion = null)
 {
     //    global $xoopsDB;
     $moduleDirName = basename(dirname(__DIR__));
 
-    $newVersion = $module->getVar('version') * 100;
+    $newVersion = (int)\str_replace('.', '', $module->getVar('version'));
+    $previousVersion = (int)\str_replace('.', '', $prevVersion);
     if ($newVersion == $previousVersion) {
         return true;
     }
@@ -126,9 +129,9 @@ function xoops_module_update_extcal(\XoopsModule $module, $previousVersion = nul
     $configurator = new Common\Configurator();
 
     $migrator = new Common\Migrate($configurator);
-    $migrator->synchronizeSchema();
+    //$migrator->synchronizeSchema(); // TODO goffy: deactivate temporary, as it deletes columns from extcal_cat
 
-    if ($previousVersion < 241) {
+    if ($previousVersion < 240) {
         //delete old HTML templates
         if (count($configurator->templateFolders) > 0) {
             foreach ($configurator->templateFolders as $folder) {

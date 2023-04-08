@@ -341,7 +341,11 @@ class EventHandler extends ExtcalPersistableObjectHandler
             $ordre[] = (int)$v['event_start'];
             $this->formatEventDate($v, Helper::getInstance()->getConfig('event_date_week'));
             //$v['cat']['cat_light_color'] = $v['cat']['cat_color'];
-            $v['cat']['cat_light_color'] = Utility::getLighterColor($v['cat']['cat_color'], \_EXTCAL_INFOBULLE_RGB_MIN, \_EXTCAL_INFOBULLE_RGB_MAX);
+            if (isset($v['cat']['cat_light_color'])) {
+                $v['cat']['cat_light_color'] = Utility::getLighterColor($v['cat']['cat_color'], \_EXTCAL_INFOBULLE_RGB_MIN, \_EXTCAL_INFOBULLE_RGB_MAX);
+            } else {
+                $v['cat']['cat_light_color'] = '';
+            }
             if ('' == $v['event_icone']) {
                 $v['event_icone'] = $v['cat']['cat_icone'];
             }
@@ -2192,7 +2196,12 @@ class EventHandler extends ExtcalPersistableObjectHandler
         }
 
         $ret = [];
-        while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
+        if (!$xoopsDB->isResultSet($result)) {
+        throw new \RuntimeException(
+            \sprintf(_DB_QUERY_ERROR, $sql) . $xoopsDB->error(), E_USER_ERROR
+        );
+    }
+        while ($myrow = $xoopsDB->fetchArray($result)) {
             $myrow['cat']['cat_name']        = $myrow['cat_name'];
             $myrow['cat']['cat_color']       = $myrow['cat_color'];
             $myrow['cat']['cat_light_color'] = Utility::getLighterColor($myrow['cat']['cat_color'], \_EXTCAL_INFOBULLE_RGB_MIN, \_EXTCAL_INFOBULLE_RGB_MAX);
@@ -2344,7 +2353,12 @@ class EventHandler extends ExtcalPersistableObjectHandler
         $result = $this->getSearchEvents(0, 0, 0, 0, $queryarray, $andor, ['event_id DESC']);
 
         $i = 0;
-        while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
+        if (!$xoopsDB->isResultSet($result)) {
+            throw new \RuntimeException(
+                \sprintf(_DB_QUERY_ERROR, $sql) . $xoopsDB->error(), E_USER_ERROR
+            );
+        }
+        while ($myrow = $xoopsDB->fetchArray($result)) {
             $ret[$i]['image'] = 'assets/images/icons/extcal.gif';
             $ret[$i]['link']  = 'event.php?event=' . $myrow['event_id'];
             $ret[$i]['title'] = $myrow['event_title'];
