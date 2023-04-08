@@ -181,17 +181,15 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
                     }
                     $ret[] = $row;
                 }
+            } else if ($asObject) {
+                $ret[$myrow[$this->keyName]] = $obj;
             } else {
-                if ($asObject) {
-                    $ret[$myrow[$this->keyName]] = $obj;
-                } else {
-                    $row  = [];
-                    $vars = &$obj->getVars();
-                    foreach (\array_keys($vars) as $i) {
-                        $row[$i] = $obj->getVar($i);
-                    }
-                    $ret[$myrow[$this->keyName]] = $row;
+                $row  = [];
+                $vars = &$obj->getVars();
+                foreach (\array_keys($vars) as $i) {
+                    $row[$i] = $obj->getVar($i);
                 }
+                $ret[$myrow[$this->keyName]] = $row;
             }
             unset($obj);
         }
@@ -257,11 +255,9 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     {
         $field   = '';
         $groupby = false;
-        if (isset($criteria) && $criteria !== null) {
-            if ('' != $criteria->groupby) {
-                $groupby = true;
-                $field   = $criteria->groupby . ', '; //Not entirely secure unless you KNOW that no criteria's groupby clause is going to be mis-used
-            }
+        if (isset($criteria) && $criteria !== null && '' != $criteria->groupby) {
+            $groupby = true;
+            $field   = $criteria->groupby . ', '; //Not entirely secure unless you KNOW that no criteria's groupby clause is going to be mis-used
         }
         $sql = 'SELECT ' . $field . 'COUNT(*) FROM ' . $this->table;
         if (isset($criteria) && $criteria instanceof \CriteriaCompo) {
@@ -356,10 +352,8 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
             }
         }
         if ($obj->isNew()) {
-            if (!\is_array($this->keyName)) {
-                if ($cleanvars[$this->keyName] < 1) {
-                    $cleanvars[$this->keyName] = $this->db->genId($this->table . '_' . $this->keyName . '_seq');
-                }
+            if (!\is_array($this->keyName) && $cleanvars[$this->keyName] < 1) {
+                $cleanvars[$this->keyName] = $this->db->genId($this->table . '_' . $this->keyName . '_seq');
             }
             $sql = 'INSERT INTO ' . $this->table . ' (' . \implode(',', \array_keys($cleanvars)) . ') VALUES (' . \implode(',', $cleanvars) . ')';
         } else {
@@ -632,11 +626,9 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     {
         $field   = '';
         $groupby = false;
-        if (isset($criteria) && $criteria !== null) {
-            if ('' != $criteria->groupby) {
-                $groupby = true;
-                $field   = $criteria->groupby . ', '; //Not entirely secure unless you KNOW that no criteria's groupby clause is going to be mis-used
-            }
+        if (isset($criteria) && $criteria !== null && '' != $criteria->groupby) {
+            $groupby = true;
+            $field   = $criteria->groupby . ', '; //Not entirely secure unless you KNOW that no criteria's groupby clause is going to be mis-used
         }
         $sql = 'SELECT ' . $field . "SUM($sum) FROM " . $this->table;
         if (isset($criteria) && $criteria !== null) {
@@ -672,11 +664,9 @@ class ExtcalPersistableObjectHandler extends \XoopsPersistableObjectHandler //Xo
     {
         $field   = '';
         $groupby = false;
-        if (isset($criteria) && $criteria !== null) {
-            if ('' != $criteria->groupby) {
-                $groupby = true;
-                $field   = $criteria->groupby . ', '; //Not entirely secure unless you KNOW that no criteria's groupby clause is going to be mis-used
-            }
+        if (isset($criteria) && $criteria !== null && '' != $criteria->groupby) {
+            $groupby = true;
+            $field   = $criteria->groupby . ', '; //Not entirely secure unless you KNOW that no criteria's groupby clause is going to be mis-used
         }
         $sql = 'SELECT ' . $field . "MAX($max) FROM " . $this->table;
         if (isset($criteria) && $criteria !== null) {

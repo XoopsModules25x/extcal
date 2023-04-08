@@ -137,10 +137,8 @@ function xoops_module_update_extcal(\XoopsModule $module, $previousVersion = nul
                     $templateList = array_diff(scandir($templateFolder, SCANDIR_SORT_NONE), ['..', '.']);
                     foreach ($templateList as $k => $v) {
                         $fileInfo = new \SplFileInfo($templateFolder . $v);
-                        if ('html' === $fileInfo->getExtension() && 'index.html' !== $fileInfo->getFilename()) {
-                            if (file_exists($templateFolder . $v)) {
-                                unlink($templateFolder . $v);
-                            }
+                        if ('html' === $fileInfo->getExtension() && 'index.html' !== $fileInfo->getFilename() && file_exists($templateFolder . $v)) {
+                            unlink($templateFolder . $v);
                         }
                     }
                 }

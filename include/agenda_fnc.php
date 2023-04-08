@@ -45,7 +45,7 @@ Helper::getInstance()->loadLanguage('main');
  * @return array
  */
 
-function agenda_getCanevas($ts, $hStart, $hEnd, $mPlage = 15, $nbJours = 1, $formatDate, $formatJour = 'H:i')
+function agenda_getCanevas($ts, $hStart, $hEnd, $mPlage, $nbJours, $formatDate, $formatJour = 'H:i')
 {
     /** @var Helper $helper */
     $helper = Helper::getInstance();

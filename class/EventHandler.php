@@ -639,7 +639,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
      * @return \CriteriaCompo
      */
 
-    public function getCriteriaCompo($start, $end, $cat = 0, $user)
+    public function getCriteriaCompo($start, $end, $cat, $user)
     {
         $criteriaNoRecur = new \CriteriaCompo();
         $criteriaNoRecur->add(new \Criteria('event_start', $end, '<='));
@@ -674,7 +674,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
      *
      * @return \CriteriaCompo
      */
-    public function getCalendarCriteriaCompo($start, $end, $cat = 0, $user)
+    public function getCalendarCriteriaCompo($start, $end, $cat, $user)
     {
         $criteriaCompo = $this->getCriteriaCompo($start, $end, $cat, $user);
         if (!Helper::getInstance()->getConfig('diplay_past_event_cal')) {
@@ -692,7 +692,7 @@ class EventHandler extends ExtcalPersistableObjectHandler
      *
      * @return \CriteriaCompo
      */
-    public function getListCriteriaCompo($start, $end, $cat = 0, $user)
+    public function getListCriteriaCompo($start, $end, $cat, $user)
     {
         $criteriaCompo = $this->getCriteriaCompo($start, $end, $cat, $user);
         if (!Helper::getInstance()->getConfig('diplay_past_event_list')) {
@@ -879,16 +879,14 @@ class EventHandler extends ExtcalPersistableObjectHandler
         if (!\is_array($cats) && $cats > 0) {
             $criteria->add(new \Criteria('cat_id', $cats));
         }
-        if (\is_array($cats)) {
-            if (false === \array_search(0, $cats, true)) {
-                $in = '(' . \current($cats);
-                \array_shift($cats);
-                foreach ($cats as $cat) {
-                    $in .= ',' . $cat;
-                }
-                $in .= ')';
-                $criteria->add(new \Criteria('cat_id', $in, 'IN'));
+        if (\is_array($cats) && false === \array_search(0, $cats, true)) {
+            $in = '(' . \current($cats);
+            \array_shift($cats);
+            foreach ($cats as $cat) {
+                $in .= ',' . $cat;
             }
+            $in .= ')';
+            $criteria->add(new \Criteria('cat_id', $in, 'IN'));
         }
     }
 
@@ -2225,10 +2223,10 @@ class EventHandler extends ExtcalPersistableObjectHandler
      * @return mixed
      */
     public function getSearchEvents(
-        $year = 0,
-        $month = 0,
-        $day = 0,
-        $cat = 0,
+        $year,
+        $month,
+        $day,
+        $cat,
         $queryarray,
         $andor,
         $orderBy,
@@ -2487,42 +2485,40 @@ class EventHandler extends ExtcalPersistableObjectHandler
                 $eventsArray[$i][] = $event;
             }
             // This event start before this month and finish during
+        } else if ($startEvent < $startPeriod) {
+            $endFor = \date('j', $endEvent);
+            for ($i = 1; $i <= $endFor; ++$i) {
+                $event['status']   = ($i != $endFor) ? 'middle' : 'end';
+                $eventsArray[$i][] = $event;
+            }
+            // This event start during this month and finish after
         } else {
-            if ($startEvent < $startPeriod) {
-                $endFor = \date('j', $endEvent);
-                for ($i = 1; $i <= $endFor; ++$i) {
-                    $event['status']   = ($i != $endFor) ? 'middle' : 'end';
+            if ($endEvent > $endPeriod) {
+                $startFor = \date('j', $startEvent);
+                $endFor   = \date('t', \mktime(0, 0, 0, $month, 1, $year));
+                for ($i = $startFor; $i <= $endFor; ++$i) {
+                    $event['status']   = ($i == $startFor) ? 'start' : 'middle';
                     $eventsArray[$i][] = $event;
                 }
-                // This event start during this month and finish after
+                // This event start and finish during this month
             } else {
-                if ($endEvent > $endPeriod) {
-                    $startFor = \date('j', $startEvent);
-                    $endFor   = \date('t', \mktime(0, 0, 0, $month, 1, $year));
-                    for ($i = $startFor; $i <= $endFor; ++$i) {
-                        $event['status']   = ($i == $startFor) ? 'start' : 'middle';
-                        $eventsArray[$i][] = $event;
-                    }
-                    // This event start and finish during this month
-                } else {
-                    $startFor = \date('j', $startEvent);
-                    $endFor   = \date('j', $endEvent);
-                    for ($i = $startFor; $i <= $endFor; ++$i) {
-                        if ($startFor == $endFor) {
-                            $event['status'] = 'single';
+                $startFor = \date('j', $startEvent);
+                $endFor   = \date('j', $endEvent);
+                for ($i = $startFor; $i <= $endFor; ++$i) {
+                    if ($startFor == $endFor) {
+                        $event['status'] = 'single';
+                    } else {
+                        if ($i == $startFor) {
+                            $event['status'] = 'start';
                         } else {
-                            if ($i == $startFor) {
-                                $event['status'] = 'start';
+                            if ($i == $endFor) {
+                                $event['status'] = 'end';
                             } else {
-                                if ($i == $endFor) {
-                                    $event['status'] = 'end';
-                                } else {
-                                    $event['status'] = 'middle';
-                                }
+                                $event['status'] = 'middle';
                             }
                         }
-                        $eventsArray[$i][] = $event;
                     }
+                    $eventsArray[$i][] = $event;
                 }
             }
         }

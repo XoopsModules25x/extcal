@@ -86,12 +86,10 @@ class Utility extends Common\SysUtility
                     if (!$upload->upload()) {
                         $errors = $upload->getErrors();
                         \redirect_header('<script>javascript:history.go(-1)</script>', 3, $errors);
-                    } else {
-                        if (1 == $j) {
-                            $event_picture1 = $upload->getSavedFileName();
-                        } elseif (2 == $j) {
-                            $event_picture2 = $upload->getSavedFileName();
-                        }
+                    } else if (1 == $j) {
+                        $event_picture1 = $upload->getSavedFileName();
+                    } elseif (2 == $j) {
+                        $event_picture2 = $upload->getSavedFileName();
                     }
                 } elseif (!empty($REQUEST['file' . $j])) {
                     if (1 == $j) {
@@ -151,7 +149,7 @@ class Utility extends Common\SysUtility
      * @param        $cat
      * @return array
      */
-    public static function getCheckeCategories($name = 'cat', $cat)
+    public static function getCheckeCategories($name, $cat)
     {
         global $xoopsUser;
         // Category selectbox
@@ -188,7 +186,7 @@ class Utility extends Common\SysUtility
      * @param bool   $addNone
      * @return \XoopsFormSelect
      */
-    public static function getListOrderBy($name = 'orderby', $caption = '', $defaut, $addNone = false)
+    public static function getListOrderBy($name, $caption, $defaut, $addNone = false)
     {
         global $xoopsUser;
 
@@ -220,7 +218,7 @@ class Utility extends Common\SysUtility
      * @param        $defaut
      * @return \XoopsFormSelect
      */
-    public static function getListAndOr($name = 'andor', $caption = '', $defaut)
+    public static function getListAndOr($name, $caption, $defaut)
     {
         global $xoopsUser;
 

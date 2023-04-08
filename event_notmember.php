@@ -46,12 +46,10 @@ if ($xoopsUser && $helper->getConfig('whosnot_going')) {
             sendMail2member($mode, $eventId, $memberUid, _MD_EXTCAL_SUBJECT_3, _MD_EXTCAL_MSG_3);
             $rediredtMessage = _MD_EXTCAL_WHOSNOT_GOING_ADDED_TO_EVENT;
             // If the user have to be remove
-        } else {
-            if ('remove' === $mode) {
-                $eventNotMemberHandler->deleteEventNotMember([$eventId, $xoopsUser->getVar('uid')]);
-                sendMail2member($mode, $eventId, $memberUid, _MD_EXTCAL_SUBJECT_4, _MD_EXTCAL_MSG_4);
-                $rediredtMessage = _MD_EXTCAL_WHOSNOT_GOING_REMOVED_TO_EVENT;
-            }
+        } else if ('remove' === $mode) {
+            $eventNotMemberHandler->deleteEventNotMember([$eventId, $xoopsUser->getVar('uid')]);
+            sendMail2member($mode, $eventId, $memberUid, _MD_EXTCAL_SUBJECT_4, _MD_EXTCAL_MSG_4);
+            $rediredtMessage = _MD_EXTCAL_WHOSNOT_GOING_REMOVED_TO_EVENT;
         }
         redirect_header('event.php?event=' . $eventId, 3, $rediredtMessage, false);
     } else {
