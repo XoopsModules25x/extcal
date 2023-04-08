@@ -39,30 +39,34 @@
                 <div class="highslide-gallery">
                     <a href="<{$xoops_url}>/uploads/extcal/<{$event.event_picture1}>" class="highslide"
                        onclick="return hs.expand(this)">
-                        <img align="left" style="margin-right:10px;"
+                        <img style="text-align:left;margin-right:10px;"
+                             alt='<{$event.event_picture1}>' title='<{$event.event_picture1}>'
                              src="<{$xoops_url}>/uploads/extcal/<{$event.event_picture1}>" height="150px">
                     </a>
 
                     <div class="highslide-heading"></div>
                 </div>
             <{elseif $smarty.const._EXTCAL_SHOW_NO_PICTURE}>
-                <img align=left style="margin-right:6px;"
-                     src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180">
+                <img style="text-align:left;margin-right:6px;"
+                     src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180"
+                     alt='<{$smarty.const._EXTCAL_SHOW_NO_PICTURE}>' title='<{$smarty.const._EXTCAL_SHOW_NO_PICTURE}>'>
             <{/if}>
 
             <{if $event.event_picture2}>
                 <div class="highslide-gallery">
                     <a href="<{$xoops_url}>/uploads/extcal/<{$event.event_picture2}>" class="highslide"
                        onclick="return hs.expand(this)">
-                        <img align="left" style="margin-right:10px;"
+                        <img style="text-align:left;margin-right:10px;"
+                             alt='<{$event.event_picture2}>' title='<{$event.event_picture2}>'
                              src="<{$xoops_url}>/uploads/extcal/<{$event.event_picture2}>" height="150px">
                     </a>
 
                     <div class="highslide-heading"></div>
                 </div>
             <{elseif $smarty.const._EXTCAL_SHOW_NO_PICTURE}>
-                <img align=left style="margin-right:6px;"
-                     src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180">
+                <img style="text-align:left;margin-right:6px;"
+                     src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180"
+                     alt='<{$smarty.const._EXTCAL_SHOW_NO_PICTURE}>' title='<{$smarty.const._EXTCAL_SHOW_NO_PICTURE}>'>
             <{/if}>
             <{/if}>
 
@@ -103,9 +107,9 @@
 <div style="border-bottom:1px solid #CCCCCC;"></div>
 <{if $showLocation == 1}>
 <{if $location.id.value != 0}>
-    <table border="0" width="100%" class="outer">
+    <table style="border:0;width:100%" class="outer">
         <tr>
-            <td width="_EXTCAL_TS_MINUTE%" class="odd">
+            <td style="width:_EXTCAL_TS_MINUTE%" class="odd">
                 <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_LOCATION}></strong></span><br>
                 <a href="./location.php?location_id=<{$event.event_location}>">
                     <span style="font-size:14px;"><{$location.nom.value}></span>
@@ -125,21 +129,22 @@
                     <br>
                 <{/if}>
             </td>
-            <td width="20%" class="odd">
+            <td style="width:20%" class="odd">
                 <{if $location.logo.value}>
                     <div class="highslide-gallery">
                         <a href="<{$xoops_url}>/uploads/extcal/location/<{$location.logo.value}>"
                            class="highslide" onclick="return hs.expand(this)">
-                            <img align="left" style="margin-right:10px;"
+                            <img style="text-align:left;margin-right:10px;"
                                  src="<{$xoops_url}>/uploads/extcal/location/<{$location.logo.value}>"
-                                 height="150px">
+                                 height="150px" alt='<{$location.logo.value}>' title='<{$location.logo.value}>'>
                         </a>
 
                         <div class="highslide-heading"></div>
                     </div>
                 <{elseif $smarty.const._EXTCAL_SHOW_NO_PICTURE}>
-                    <img align=left style="margin-right:6px;"
-                         src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180">
+                    <img style="text-align:left;margin-right:6px;"
+                         src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180"
+                         alt='<{$smarty.const._EXTCAL_SHOW_NO_PICTURE}>' title='<{$smarty.const._EXTCAL_SHOW_NO_PICTURE}>'>
                 <{/if}>
             </td>
         </tr>
@@ -147,10 +152,10 @@
 <{/if}>
 <{/if}>
 
-<table border="0" width="100%" class="outer">
+<table style="border:0;width=100%" class="outer">
 
     <tr>
-        <td width="50%" class="odd" colspan='2'>
+        <td style="width:50%" class="odd" colspan='2'>
 
             <{if $showOrganizer == 1}>
 			<{if $event.event_organisateur}>
@@ -177,7 +182,7 @@
 
         <{if $showPrice == 1}>
 		<{if $event.event_price}>
-            <td width="50%" class="odd"><br>
+            <td style="width:50%" class="odd"><br>
                 <span style="text-decoration: underline;"><strong><{$smarty.const._MD_EXTCAL_LOCATION_TARIFS}>
                         :</strong></span><br>
                 <{$event.event_price}>
@@ -245,7 +250,7 @@
     <{/if}>
 
 
-    <div id="map" align="center" style="visibility: hidden;"><br>
+    <div id="map" style="text-align:center;visibility: hidden;"><br>
         <{$map}>
     </div>
 </table>

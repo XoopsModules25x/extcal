@@ -26,14 +26,15 @@
                 <{if $location.logo}>
                     <a id="<{$id}>" class="highslide" onclick="return hs.expand(this)"
                        href="<{$smarty.const.XOOPS_URL}>/uploads/extcal/location/<{$location.logo}>">
-                        <img align=right style="border:1px solid #FFFFFF;margin-right:6px;"
+                        <img style="text-align:right;border:1px solid #FFFFFF;margin-right:6px;"
                              src="<{$smarty.const.XOOPS_URL}>/uploads/extcal/location/<{$location.logo}>"
+                             alt='<{$location.logo}>' title='<{$location.logo}>'
                              height="150px">
                     </a>
                 <{elseif $smarty.const._EXTCAL_SHOW_NO_PICTURE}>
-                    <img align=right style="border:1px solid #FFFFFF;margin-right:6px;"
+                    <img style="text-align:right;border:1px solid #FFFFFF;margin-right:6px;"
                          src="<{$smarty.const.XOOPS_URL}>/modules/extcal/assets/images/no_picture.png" width="180"
-                         height="180">
+                         height="180" alt='<{$smarty.const._EXTCAL_SHOW_NO_PICTURE}>' title='<{$smarty.const._EXTCAL_SHOW_NO_PICTURE}>'>
                 <{/if}>
             </div>
             <div style="font-size:16px; font-weight:bold; width:280px; overflow:hidden; margin-left:30px;">
@@ -113,7 +114,7 @@
 
 
 <{*</table>*}>
-<div id="map" align="center" style="visibility: hidden;"><br>
+<div id="map" style="text-align:center;visibility: hidden;"><br>
     <{$map}>
 </div>
 <p style="text-align:right;">

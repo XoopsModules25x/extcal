@@ -22,7 +22,7 @@
         <{*<tr class="<{$colour}>">*}>
         <tr class="<{cycle values = "even,odd"}>">
 
-            <td align='center'>
+            <td style='text-align:center'>
                 <{$cat.cat_id}>
             </td>
             <td>
@@ -33,7 +33,7 @@
                     <{$cat.cat_name}>
                 </a>
             </td>
-            <td align='center'>
+            <td style='text-align:center'>
                 <{$cat.cat_weight}>
             </td>
 

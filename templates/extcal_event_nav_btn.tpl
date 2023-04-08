@@ -1,5 +1,5 @@
 <table class="outer" style="border-top: none;">
-    <tr class="head" style="text-align:center;" height="22px">
+    <tr class="head" style="text-align:center;height:22px">
         <td style="width:33%;padding-top: 4px;">
             <a href="<{$xoops_url}>/modules/extcal/<{$params.file}>?<{$navig.prev.uri}>">
                 &lt;&lt;&nbsp;&nbsp;<{$navig.prev.name}></a></td>

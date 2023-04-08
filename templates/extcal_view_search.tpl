@@ -4,7 +4,7 @@
     <{securityToken}><{*//mb*}>
     <table class="outer" style="border-top: none;">
         <tr>
-            <th align='center' colspan='2'>
+            <th style='text-align:center' colspan='2'>
                 <{$smarty.const._MD_EXTCAL_SERACH_CRITERIA}>
             </th>
         </tr>
@@ -53,7 +53,7 @@
 
         <input type="hidden" name="num_tries" value="<{$num_tries}>">
         <tr class="even">
-            <td colspan='2' align='center'>
+            <td colspan='2' style='text-align:center'>
                 <input type="submit" style='width:150px;' value="<{$smarty.const._MD_EXTCAL_SEARCH}>" name="B1">
                 <input type="button" style='width:150px;' value="<{$smarty.const._MD_CLEAR_CRITERIA}>" name="B2"
                        onclick="extcal_clear_criteres();">
@@ -65,7 +65,7 @@
     <{if $num_tries > 0}>
         <table class="outer" style="border-top: none;">
             <tr>
-                <th align='center'>
+                <th style='text-align:center'>
                     <{$evenements_trouves}>
                 </th>
             </tr>

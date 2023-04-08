@@ -168,7 +168,7 @@ $MonthDecorator->build($events);
 <html>
 <head>
     <title> Calendar </title>
-    <style text="text/css">
+    <style>
         table {
             border-collapse: collapse;
         }
@@ -227,7 +227,7 @@ $MonthDecorator->build($events);
 <body>
 
 <h2>Sample Calendar Payload Decorator (using <?php echo CALENDAR_ENGINE; ?> engine)</h2>
-<table class="calendar" width="98%" cellspacing="0" cellpadding="0">
+<table class="calendar" style="width:98%;border-spacing:0;padding=0">
     <caption>
         <?php echo $MonthDecorator->thisMonth() . ' / ' . $MonthDecorator->thisYear(); ?>
     </caption>

@@ -1,4 +1,4 @@
-<style type="text/css">
+<style>
     #extcal-nav #navlist {
         padding: 0 0;
         margin: 10px 0 0 0;

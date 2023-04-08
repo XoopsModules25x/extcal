@@ -5,7 +5,7 @@
 </head>
 
 <body>
-<div align='center' style="background: #CCCCCC;">
+<div style="text-align:center;background: #CCCCCC;">
     <b><{$xoopsConfig.sitename}></b><br>
     <i><{$xoopsConfig.slogan}></i><br>
     <b><{$event.event_title}></b>
@@ -25,11 +25,10 @@
 
 <hr>
 
-<table border="1px" width="100%" cellspacing="0" cellpadding="4" bordercolorlight="#C0C0C0" bordercolor="#FFFFFF"
-       bgcolor="#CCCCCC">
+<table style="border:1px;width=100%;border-spacing:0;padding:4px;table-border-color-light:#C0C0C0;border-color:#FFFFFF;background-color:#CCCCCC">
 
     <tr>
-        <td align='center' colspan='4'>
+        <td style='text-align:center' colspan='4'>
             <b><{$smarty.const._MD_EXTCAL_MEMBERS_LIST}><{$br}></b>
         </td>
     </tr>

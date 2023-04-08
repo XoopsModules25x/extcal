@@ -40,7 +40,8 @@
             </div>
         </div>
         <{elseif $smarty.const._EXTCAL_SHOW_NO_PICTURE}>
-            <img src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180"/>
+            <img src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180"
+                 alt='<{$smarty.const._EXTCAL_SHOW_NO_PICTURE}>' title='<{$smarty.const._EXTCAL_SHOW_NO_PICTURE}>'/>
         <{/if}>
     </div>
 </div>
@@ -98,7 +99,8 @@
     <{/if*}>
     <{if $location.logo.value}>
     <a href="<{$xoops_url}>/uploads/extcal/location/<{$location.logo.value}>">
-        <img src="<{$xoops_url}>/uploads/extcal/location/<{$location.logo.value}>" height="150px"/>
+        <img src="<{$xoops_url}>/uploads/extcal/location/<{$location.logo.value}>" height="150px"
+             alt='<{$location.logo.value}>' title='<{$location.logo.value}>'/>
     </a>
     <br>
     <{/if}>

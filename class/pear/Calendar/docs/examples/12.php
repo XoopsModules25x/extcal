@@ -32,7 +32,7 @@ $Year->build();
 <html>
 <head>
     <title> <?php echo $Year->thisYear(); ?> </title>
-    <style type="text/css">
+    <style>
         body {
             font-family: Georgia, serif;
         }

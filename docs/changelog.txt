@@ -1,6 +1,7 @@
 <h5>2.40 RC 3  [2020-07-09]</h5>  Dev: Xoops 2.5.11, PHP 7.4.7
 <hr>
 - add missing templates (mage/mamba)
+- fixed html probems (goffy)
 
 <h5>2.40 RC 2  [2020-07-08]</h5>  Dev: Xoops 2.5.11, PHP 7.4.7
 <hr>
