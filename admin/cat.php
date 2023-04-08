@@ -151,11 +151,9 @@ switch ($op) {
             xoops_confirm($hiddens, 'cat.php?op=delete', _AM_EXTCAL_CONFIRM_DELETE_CAT, _DELETE, 'cat.php');
 
             xoops_cp_footer();
-        } else {
-            if (1 == $confirm) {
-                $categoryHandler->deleteCategory($catId);
-                redirect_header('cat.php', 3, _AM_EXTCAL_CAT_DELETED, false);
-            }
+        } else if (1 == $confirm) {
+            $categoryHandler->deleteCategory($catId);
+            redirect_header('cat.php', 3, _AM_EXTCAL_CAT_DELETED, false);
         }
         break;
     //     case 'modify':

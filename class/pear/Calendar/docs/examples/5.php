@@ -61,7 +61,7 @@ if (\Xmf\Request::hasVar('update', 'POST')) {
         }
     } else {
         echo '<p>Validation success.</p>';
-        echo '<p>New timestamp is: ' . $Second->getTimestamp() . ' which could be used to update a database, for example';
+        echo '<p>New timestamp is: ' . $Second->getTimestamp() . ' which could be used to update a database, for example</p>';
     }
 } else {
 $Year   = new Calendar_Year($_POST['y']);
@@ -70,7 +70,7 @@ $Day    = new Calendar_Day($_POST['y'], $_POST['m'], $_POST['d']);
 $Hour   = new Calendar_Hour($_POST['y'], $_POST['m'], $_POST['d'], $_POST['h']);
 $Minute = new Calendar_Minute($_POST['y'], $_POST['m'], $_POST['d'], $_POST['h'], $_POST['i']);
 $Second = new Calendar_Second($_POST['y'], $_POST['m'], $_POST['d'], $_POST['h'], $_POST['i'], $_POST['s']); ?>
-<p><span style="font-weight: bold;">Set the alarm clock</p></p>
+<p><span style="font-weight: bold;">Set the alarm clock</p>
 <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
     Year: <input type="text" name="y" value="<?php echo $_POST['y']; ?>" size="4">&nbsp;
     Month:<select name="m">

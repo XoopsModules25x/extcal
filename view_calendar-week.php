@@ -120,7 +120,7 @@ while (false !== ($dayCalObj = $weekCalObj->fetch())) {
         'year'       => $dayCalObj->thisYear(),
         'isSelected' => $dayCalObj->isSelected(),
     ];
-    if (!$dayCalObj->isEmpty() && @count($eventsArray[$dayCalObj->thisDay()]) > 0) {
+    if (\is_array($eventsArray) && \is_array($dayCalObj) && !$dayCalObj->isEmpty() && \count($eventsArray[$dayCalObj->thisDay()]) > 0) {
         $week[$cellId]['events'] = $eventsArray[$dayCalObj->thisDay()];
     } else {
         $week[$cellId]['events'] = '';

@@ -4,7 +4,7 @@
 
 
 <table class="outer" style="border-top: none;">
-    <tr class="head" style="text-align:center;" height="22px">
+    <tr class="head" style="text-align:center;height:22px">
         <td style="width:33%;padding-top: 4px;">
             <a href="<{$xoops_url}>/modules/extcal/<{$params.file}>?<{$navig.prev.uri}>">
                 &lt;&lt;&nbsp;&nbsp;<{$navig.prev.name}></a>
@@ -38,33 +38,37 @@
                     <div class="highslide-gallery">
                         <a href="<{$xoops_url}>/uploads/extcal/<{$event.event_picture1}>" class="highslide"
                            onclick="return hs.expand(this)">
-                            <img align="left" style="margin-right:10px;"
-                                 src="<{$xoops_url}>/uploads/extcal/<{$event.event_picture1}>" height="150px">
+                            <img style="text-align:left;margin-right:10px;"
+                                 src="<{$xoops_url}>/uploads/extcal/<{$event.event_picture1}>" height="150px"
+                                 alt='<{$event.event_picture1}>' title='<{$event.event_picture1}>'>
                         </a>
 
                         <div class="highslide-heading"></div>
                     </div>
                 <{elseif $smarty.const._EXTCAL_SHOW_NO_PICTURE}>
-                    <img align=left style="margin-right:6px;"
-                         src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180">
+                    <img style="text-align:left;margin-right:6px;"
+                         src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180"
+                         alt='<{$smarty.const._EXTCAL_SHOW_NO_PICTURE}>' title='<{$smarty.const._EXTCAL_SHOW_NO_PICTURE}>'>
                 <{/if}>
 
                 <{if $event.event_picture2}>
                     <div class="highslide-gallery">
                         <a href="<{$xoops_url}>/uploads/extcal/<{$event.event_picture2}>" class="highslide"
                            onclick="return hs.expand(this)">
-                            <img align="left" style="margin-right:10px;"
-                                 src="<{$xoops_url}>/uploads/extcal/<{$event.event_picture2}>" height="150px">
+                            <img style="text-align:left;margin-right:10px;"
+                                 src="<{$xoops_url}>/uploads/extcal/<{$event.event_picture2}>" height="150px"
+                                 alt='<{$event.event_picture2}>' title='<{$event.event_picture2}>'>
                         </a>
 
                         <div class="highslide-heading"></div>
                     </div>
                 <{elseif $smarty.const._EXTCAL_SHOW_NO_PICTURE}>
-                    <img align=left style="margin-right:6px;"
-                         src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180">
+                    <img style="text-align:left;margin-right:6px;"
+                         src="<{$xoops_url}>/modules/extcal/assets/images/no_picture.png" height="180"
+                         alt='<{$smarty.const._EXTCAL_SHOW_NO_PICTURE}>' title='<{$smarty.const._EXTCAL_SHOW_NO_PICTURE}>'>
                 <{/if}>
 
-                <div style="float:right; background-color:#<{$event.cat.cat_color}>; border:1px solid #ffffff; margin-right:5px;">
+                <div style="float:right; background-color:#<{$event.cat.cat_color|default:''}>; border:1px solid #ffffff; margin-right:5px;">
                     &nbsp;
                 </div>
                 </div>

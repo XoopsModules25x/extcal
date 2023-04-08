@@ -37,13 +37,13 @@ require_once __DIR__ . '/include/agenda_fnc.php';
 setlocale(LC_TIME, $xoopsConfig['language']);
 
 //***************************************************************************************
-$modversion['version']          = '2.40';
-$modversion['module_status']    = 'RC 3';
-$modversion['release_date']     = '2020/07/09';
+$modversion['version']          = '2.5.0';
+$modversion['module_status']    = 'Alpha';
+$modversion['release_date']     = '2023/04/08';
 $modversion['name']             = _MI_EXTCAL_NAME;
 $modversion['description']      = _MI_EXTCAL_DESC;
 $modversion['credits']          = 'Zoullou';
-$modversion['author']           = 'Zoullou, Mage, Mamba, JJ Delalandre (JJDai)';
+$modversion['author']           = 'Zoullou, Mage, Mamba, JJ Delalandre (JJDai), Goffy';
 $modversion['nickname']         = '';
 $modversion['website']          = '';
 $modversion['license']          = 'GPL see LICENSE';
@@ -60,7 +60,7 @@ $modversion['modicons32'] = 'assets/images/icons/32';
 $modversion['module_website_url']  = 'www.xoops.org/';
 $modversion['module_website_name'] = 'XOOPS';
 $modversion['min_php']             = '7.1';
-$modversion['min_xoops']           = '2.5.10';
+$modversion['min_xoops']           = '2.5.11';
 $modversion['min_admin']           = '1.2';
 $modversion['min_db']              = ['mysql' => '5.5'];
 // Admin things

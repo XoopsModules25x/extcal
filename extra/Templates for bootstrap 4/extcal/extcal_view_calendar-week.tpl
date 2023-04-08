@@ -44,7 +44,8 @@
                     <{foreach item=event from=$day.events}>
                         <{if $event}>
                             <div style="font-size:0.8em; margin-top:5px;"><img
-                                        src="assets/images/icons/event-<{$event.status}>.gif"/> <a
+                                        src="assets/images/icons/event-<{$event.status}>.gif"
+                                        alt='<{$event.status}>' title='<{$event.status}>' > <a
                                         href="<{$xoops_url}>/modules/extcal/event.php?event=<{$event.event_id}>"
                                         class="extcalTips"
                                         title="<{$event.event_title}> :: <{$lang.start}> <{$event.formated_event_start}> <{$lang.end}> <{$event.formated_event_end}>"><{$event.event_title}></a>

@@ -3,11 +3,13 @@
     </div>
     <a class="tooltip54" href="<{$xoops_url}>/modules/extcal/event.php?event=<{$event.event_id}>">
         <{if $showId}>(#<{$event.event_id}>)<{/if}> <{$event.event_title}><br>
-        <span class="custom info" width350 style="background: #<{$event.cat.cat_light_color}>;">
+        <span class="custom info" width350 style="background: #<{$event.cat.cat_light_color|default:''}>;">
           <{if $event.event_icone}><img src="assets/css/images/<{$event.event_icone}>"  alt="" iconinfo><{/if}>
             <em><{if $showId}>(#<{$event.event_id}>)<{/if}> <{$event.event_title}></em>
             <{if $event.event_picture1!=""}>
-                <img src="<{$xoops_url}>/uploads/extcal/<{$event.event_picture1}>" alinea>
+                <img src="<{$xoops_url}>/uploads/extcal/<{$event.event_picture1}>"
+                     alt='<{$event.event_picture1}>' title='<{$event.event_picture1}>'
+                     alinea>
             <{/if}>
             <b><{$smarty.const._MD_EXTCAL_START}></b> <{$event.formated_event_start}><br>
           <b><{$smarty.const._MD_EXTCAL_END}></b> <{$event.formated_event_end}><br>

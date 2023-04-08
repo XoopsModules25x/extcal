@@ -45,7 +45,7 @@
 <body id="system" class="en">
 
 <!-- Start Header -->
-<table cellspacing="0">
+<table style="border-spacing:0">
     <tr id="header">
         <td id="headerlogo">
             <a href="http://localhost/xtest256final/" title="XOOPS Site"><img
@@ -71,7 +71,7 @@
 </table>
 <!-- End header -->
 
-<table cellspacing="0">
+<table style="border-spacing:0">
     <tr>
         <!-- Start left blocks loop -->
         <td id="leftcolumn">
@@ -79,7 +79,7 @@
             <div class="blockContent">
                 <div id="mainmenu">
                     <a class="menuMain maincurrent" href="http://localhost/xtest256final/publisher" target="_self"
-                       alt="zzzzzzzz" title="zzzzzzzz">
+                       title="zzzzzzzz">
                         zzzzzzzz
                     </a>
                 </div>
@@ -249,11 +249,11 @@
                         <a href="http://localhost/xtest256final/modules/lexikon/print.php?entryID=1"
                            target="_blank"><img
                                     src="http://localhost/xtest256final/modules/lexikon/assets/images/print.gif"
-                                    border="0" alt="Print in friendly format" width="16" height="16"></a>&nbsp;<a
+                                    style="border:0;width:16px;height:16px" alt="Print in friendly format" ></a>&nbsp;<a
                                 href="mailto:?subject=Have a look at this entry at XOOPS Site&amp;body=Here is an interesting entry I have found at XOOPS Site:  http://localhost/xtest256final/modules/lexikon/entry.php?entryID=1 "
                                 target="_blank"><img
                                     src="http://localhost/xtest256final/modules/lexikon/assets/images/friend.gif"
-                                    border="0" alt="Send this term to a friend" width="16" height="16"></a>&nbsp;
+                                    style="border:0;width:16px;height:16px" alt="Send this term to a friend"></a>&nbsp;
                         <a href="http://localhost/xtest256final/modules/lexikon/entry.php?entryID=1">Zzzzzzz</a></h5>
 
                     <div>Please wvwvwwzwzvw w zwZVZVZVZVrite here the definition.</div>
@@ -450,7 +450,7 @@
 </table>
 
 <!-- Start footer -->
-<table cellspacing="0">
+<table style="border-spacing:0">
     <tr id="footerbar">
         <td>Powered by XOOPS &#169; 2001-2013 <a href="http://xoops.sourceforge.net" rel="external"
                                                  title="The XOOPS Project">The XOOPS Project</a>

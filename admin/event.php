@@ -376,8 +376,12 @@ switch ($op) {
                 echo "<input type='hidden' name='deleteAllEvents[{$event['event_id']}]' value='1'>";
                 echo '</td>';
                 echo "<td align = 'center' width='5%'>" . $event['event_id'] . '</td>';
-                echo "<td  width='10%'>" . '<a href=cat.php?op=modify&amp;cat_id=' . $event['cat']['cat_id'] . '&form_modify' . '>' . $event['cat']['cat_name'] . '</a>' . '</td>';
-
+                echo "<td  width='10%'>";
+                if (isset($event['cat']['cat_id'])) {
+                    echo '<a href=cat.php?op=modify&amp;cat_id=' . $event['cat']['cat_id'] . '&form_modify' . '>'
+                        . $event['cat']['cat_name'] . '</a>';
+                }
+                echo '</td>';
                 echo '<td>' . '<a href=event.php?op=modify&amp;event_id=' . $event['event_id'] . '>' . $event['event_title'] . '</a>' . '</td>';
 
                 //                 if ($event['event_isrecur']) {

@@ -57,7 +57,7 @@ $next   = $_SERVER['SCRIPT_NAME'] . '?y=' . $NMonth->thisYear() . '&m=' . $NMont
 <html>
 <head>
     <title> Calendar </title>
-    <style text="text/css">
+    <style>
         table {
             background-color: #c0c0c0;
         }

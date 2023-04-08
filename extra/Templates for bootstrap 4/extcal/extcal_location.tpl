@@ -2,7 +2,8 @@
     <div class="row mb-3">
         <{if $location.logo|default:false}>
         <div class="col-12 col-md-6 mt-2">
-            <img class="img-fluid" src="<{$smarty.const.XOOPS_URL}>/uploads/extcal/location/<{$location.logo}>">
+            <img class="img-fluid" src="<{$smarty.const.XOOPS_URL}>/uploads/extcal/location/<{$location.logo}>"
+                 alt='<{$location.logo}>' title='<{$location.logo}>'>
         </div>
         <{/if}>
         <div class="col-12 col-md-6 mt-2">

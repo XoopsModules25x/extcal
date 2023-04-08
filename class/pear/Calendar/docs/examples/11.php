@@ -98,7 +98,7 @@ $Day->build($selection);
     <caption style="font-weight: bold;">Your Schedule for <b>Your Schedule for <?php echo date('D nS F Y', $Day->thisDay(true)); ?></b>
     </caption>
     <tr>
-        <th width="5%">Time</th>
+        <th style="width:5%">Time</th>
         <th>Entry</th>
     </tr>
     <?php

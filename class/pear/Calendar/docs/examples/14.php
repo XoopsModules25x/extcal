@@ -58,7 +58,7 @@ $thisDate = new Date($month->thisMonth('timestamp'));
 <html>
 <head>
     <title> Calendar using PEAR::Date Engine </title>
-    <style text="text/css">
+    <style type="text/css">
         table {
             background-color: #c0c0c0;
         }
