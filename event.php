@@ -95,6 +95,7 @@ $xoopsTpl->assign('showEmail', $helper->getConfig('formShowEmail', 1));//
 $xoopsTpl->assign('showAddress', $helper->getConfig('formShowAddress', 1));//
 $xoopsTpl->assign('showFile', $helper->getConfig('formShowFile', 1));//
 $xoopsTpl->assign('showPicture', $helper->getConfig('formShowPicture', 1));//
+$xoopsTpl->assign('showMemberLimit', $helper->getConfig('formShowMemberLimit', 1));//
 
 // Assigning event to the template
 $xoopsTpl->assign('event', $event);
